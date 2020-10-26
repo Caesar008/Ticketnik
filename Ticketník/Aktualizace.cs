@@ -76,6 +76,8 @@ namespace Ticketník
 
                     foreach (NbtTag ncz in tmpZak.RootTag)
                     {
+                        if (vcl.IsCancellationRequested)
+                            return;
                         if (ncz.TagType == NbtTagType.Compound)
                         {
                             if (!zak.RootTag.Contains(ncz.Name))
@@ -116,9 +118,13 @@ namespace Ticketník
                                     ((NbtCompound)zak.RootTag["Terpy"][0]["Custom"]).Add(new NbtList("Task", NbtTagType.String));
                                 foreach (NbtString nbs in (NbtList)tmpZak.RootTag["Terpy"][0]["Custom"]["Task"])
                                 {
+                                    if (vcl.IsCancellationRequested)
+                                        return;
                                     bool nal = false;
                                     foreach (NbtString nbss in (NbtList)zak.RootTag["Terpy"][0]["Custom"]["Task"])
                                     {
+                                        if (vcl.IsCancellationRequested)
+                                            return;
                                         if (nbss.Value == nbs.Value)
                                         {
                                             nal = true;
@@ -133,9 +139,13 @@ namespace Ticketník
                                     ((NbtCompound)zak.RootTag["Terpy"][0]["Custom"]).Add(new NbtList("Terp", NbtTagType.String));
                                 foreach (NbtString nbs in (NbtList)tmpZak.RootTag["Terpy"][0]["Custom"]["Terp"])
                                 {
+                                    if (vcl.IsCancellationRequested)
+                                        return;
                                     bool nal = false;
                                     foreach (NbtString nbss in (NbtList)zak.RootTag["Terpy"][0]["Custom"]["Terp"])
                                     {
+                                        if (vcl.IsCancellationRequested)
+                                            return;
                                         if (nbss.Value == nbs.Value)
                                         {
                                             nal = true;
@@ -150,6 +160,8 @@ namespace Ticketník
                                     ((NbtCompound)zak.RootTag["Terpy"][0]["Custom"]).Add(new NbtCompound("TerpPopis"));
                                 foreach (NbtString nbs in (NbtCompound)tmpZak.RootTag["Terpy"][0]["Custom"]["TerpPopis"])
                                 {
+                                    if (vcl.IsCancellationRequested)
+                                        return;
                                     if (zak.RootTag["Terpy"][0]["Custom"]["TerpPopis"][nbs.Name] == null)
                                     {
                                         ((NbtCompound)zak.RootTag["Terpy"][0]["Custom"]["TerpPopis"]).Add(new NbtString(nbs.Name, nbs.Value));
@@ -162,6 +174,8 @@ namespace Ticketník
                                     ((NbtCompound)zak.RootTag["Terpy"][0]["Custom"]).Add(new NbtCompound("TaskPopis"));
                                 foreach (NbtString nbs in (NbtCompound)tmpZak.RootTag["Terpy"][0]["Custom"]["TaskPopis"])
                                 {
+                                    if (vcl.IsCancellationRequested)
+                                        return;
                                     if (zak.RootTag["Terpy"][0]["Custom"]["TaskPopis"][nbs.Name] == null)
                                     {
                                         ((NbtCompound)zak.RootTag["Terpy"][0]["Custom"]["TaskPopis"]).Add(new NbtString(nbs.Name, nbs.Value));
@@ -182,6 +196,8 @@ namespace Ticketník
                 aktul:
                     if (pokusy < 10)
                     {
+                        if (vcl.IsCancellationRequested)
+                            return;
                         try
                         {
                             pokusy++;
@@ -205,6 +221,8 @@ namespace Ticketník
 
                 foreach (XmlNode Njazyk in updates.DocumentElement.SelectSingleNode("Lang").ChildNodes)
                 {
+                    if (vcl.IsCancellationRequested)
+                        return;
                     if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml"))
                     {
                         string[] jverze = Njazyk.InnerText.Split('.');
@@ -284,7 +302,7 @@ namespace Ticketník
                 Logni("Aktualizace se nezdařila\r\n\r\n" + e.Message, LogMessage.WARNING);
             }
 
-            if (!vlaknoTerp.IsAlive)
+            if (vlaknoTerp != null && vlaknoTerp.IsAlive)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();

@@ -439,8 +439,10 @@ namespace Ticketník
 
         public void CreateTerpTaskFile()
         {
-            while (vlakno != null && vlakno.IsAlive)
+            while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            {
                 Thread.Sleep(50);
+            }
             if (!InvokeRequired)
                 timer_ClearInfo.Stop();
             else
@@ -450,7 +452,9 @@ namespace Ticketník
             if (!terpTaskFileLock)
                 terpTaskFileLock = true;
             else
+            {
                 Thread.Sleep(250);
+            }
             try
             {
                 Logni("Vytvářím terpTask soubor", Form1.LogMessage.INFO);
@@ -491,7 +495,8 @@ namespace Ticketník
                 File.WriteAllText("result.txt", result + output);*/
             }
             terpTaskFileLock = false;
-            if (!vlakno.IsAlive)
+            if (vlakno.Status != System.Threading.Tasks.TaskStatus.Running || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForActivation ||
+                vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForChildrenToComplete || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingToRun)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -502,7 +507,7 @@ namespace Ticketník
 
         public void UpdateTerpTaskFile()
         {
-            while (vlakno != null && vlakno.IsAlive)
+            while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
                 Thread.Sleep(50);
             if (!InvokeRequired)
                 timer_ClearInfo.Stop();
@@ -549,7 +554,7 @@ namespace Ticketník
                             bool found = false;
                             foreach (NbtString mttys in terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Get<NbtList>("Types"))
                             {
-                                if(mttys.Value == mtty)
+                                if (mttys.Value == mtty)
                                 {
                                     found = true;
                                     break;
@@ -596,7 +601,9 @@ namespace Ticketník
             }
             terpTaskFileLock = false;
 
-            if (!vlakno.IsAlive)
+            if (vlakno.Status != System.Threading.Tasks.TaskStatus.Running || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForActivation ||
+                vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForChildrenToComplete || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingToRun ||
+                vlakno.Status != System.Threading.Tasks.TaskStatus.Created)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();

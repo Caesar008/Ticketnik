@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using fNbt;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Linq;
@@ -13,11 +14,11 @@ using System.Linq;
 namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
-    //udělat překlad nových prvků na TicketWindow a udělat je funkční
 
     /*interní changelog 1.7.0.0
     - Načítání Terp a tasků z MyTime
     - Opravena chyba 20-006
+    - Přepracován způsob pouštění aktualizací na pozadí
     */
 
     public partial class Form1 : Form
@@ -37,7 +38,9 @@ namespace Ticketník
         internal SortedDictionary<DateTime, Dictionary<string, List<Ticket>>> poDnech = new SortedDictionary<DateTime, Dictionary<string, List<Ticket>>>();
         internal string vybranyMesic = "leden";
         long maxID = 0;
-        internal Thread vlakno;
+        internal Task vlakno;
+        internal CancellationTokenSource vlaknoCancel;
+        internal CancellationToken vcl;
         internal Thread vlaknoTerp;
         internal Zakaznici list;
         internal byte velikost = 0;
@@ -73,7 +76,10 @@ namespace Ticketník
             převéstNaFormátMilleniumToolStripMenuItem.Visible = false;
             rokVyber.Enabled = false;
             dostupnéJazykyToolStripMenuItem.Visible = false;
-            
+
+            //vytvoření cancelation tokenu
+            vlaknoCancel = new CancellationTokenSource();
+            CancellationToken vcl = vlaknoCancel.Token;
 
             AddColumns();
             canChange = true;
@@ -98,7 +104,7 @@ namespace Ticketník
                 MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            vlakno = new Thread(() => Aktualizace());
+            vlakno = new Task(() => Aktualizace(devtest), vcl);
             vlakno.Start();
 
             //nastavení IE11 pro WebBrowser + nastavení JSON pro IE
@@ -1640,10 +1646,16 @@ namespace Ticketník
                     {
                         ulozeno = true;
                         timer1.Stop();
-                        if (vlakno.IsAlive)
-                            vlakno.Abort(); 
+                        if(vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created || 
+                           vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete || 
+                           vlakno.Status == TaskStatus.WaitingToRun))
+                        {
+                            vlaknoCancel.Cancel();
+                        }
+
                         if (vlaknoTerp.IsAlive)
                             vlaknoTerp.Abort();
+                        vlaknoTerp = null;
 
                     }
                     else if (dr == System.Windows.Forms.DialogResult.Cancel)
@@ -1652,20 +1664,51 @@ namespace Ticketník
                     {
                         uložitToolStripMenuItem_Click(sender, e);
                         timer1.Stop();
-                        if (vlakno.IsAlive)
-                            vlakno.Abort();
+
                         if (vlaknoTerp.IsAlive)
                             vlaknoTerp.Abort();
+                        vlaknoTerp = null;
+
+                        if (vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
+                           vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
+                           vlakno.Status == TaskStatus.WaitingToRun))
+                        {
+                            vlaknoCancel.Cancel();
+                        }
+
                     }
                 }
                 else
                 {
                     uložitToolStripMenuItem_Click(sender, e);
                     timer1.Stop();
-                    if (vlakno.IsAlive)
-                        vlakno.Abort();
+
                     if (vlaknoTerp.IsAlive)
                         vlaknoTerp.Abort();
+                    vlaknoTerp = null;
+
+                    if (vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
+                           vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
+                           vlakno.Status == TaskStatus.WaitingToRun))
+                    {
+                        vlaknoCancel.Cancel();
+                    }
+                }
+            }
+            else
+            {
+                //uložitToolStripMenuItem_Click(sender, e);
+                timer1.Stop();
+
+                if (vlaknoTerp.IsAlive)
+                    vlaknoTerp.Abort();
+                vlaknoTerp = null;
+
+                if (vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
+                       vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
+                       vlakno.Status == TaskStatus.WaitingToRun))
+                {
+                    vlaknoCancel.Cancel();
                 }
             }
         }
@@ -2952,27 +2995,6 @@ namespace Ticketník
         {
             if (e.NewDisplayIndex != 0)
             {
-                /*if (e.Header.Text == jazyk.Header_TicketID)
-                    Properties.Settings.Default.colIDPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_PC)
-                    Properties.Settings.Default.colPCPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Zakaznik)
-                    Properties.Settings.Default.colZakPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Popis)
-                    Properties.Settings.Default.colPopPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Kontakt)
-                    Properties.Settings.Default.colKonPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Terp)
-                    Properties.Settings.Default.colTerpPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Task)
-                    Properties.Settings.Default.colTaskPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Cas)
-                    Properties.Settings.Default.colCasPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Stav)
-                    Properties.Settings.Default.colStavPoradi = e.NewDisplayIndex;
-                else if (e.Header.Text == jazyk.Header_Poznamka)
-                    Properties.Settings.Default.colPozPoradi = e.NewDisplayIndex;
-                */
                 foreach(ColumnHeader ch in ((ListView)tabControl1.Controls["ledenT"].Controls["leden"]).Columns)
                 {
                     if (ch.Text != e.Header.Text && ch.DisplayIndex != 0)
@@ -3128,9 +3150,10 @@ namespace Ticketník
 
         private void vyhledatAktualizaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (vlakno == null || !vlakno.IsAlive)
+            if (vlakno == null || (vlakno.Status != TaskStatus.RanToCompletion || vlakno.Status != TaskStatus.Canceled))
             {
-                vlakno = new Thread(() => Aktualizace(devtest));
+                //vlakno = new Thread(() => Aktualizace(devtest));
+                vlakno = new Task(() => Aktualizace(devtest), vcl);
                 vlakno.Start();
             }
         }
