@@ -63,7 +63,8 @@ namespace Ticketník
             Custom,
             CustomPrescas,
             CustomNahradni,
-            CustomHoliday
+            CustomHoliday,
+            OnlineTerpTask
         }
 
         internal enum TerpKod
@@ -84,7 +85,8 @@ namespace Ticketník
             MobilityProblem = 13,
             MobilityHoliday = 14,
             Custom = 15,
-            CustomHoliday = 16
+            CustomHoliday = 16,
+            OnlineTerp = 17
         }
 
         internal enum TypTicketu
@@ -116,10 +118,11 @@ namespace Ticketník
             Custom = 24,
             CustomPrescas = 25,
             CustomNahradni = 26,
-            CustomOPrazdniny = 27
+            CustomOPrazdniny = 27,
+            OnlineTyp = 28
         }
 
-        public Ticket(long id, string mesic, DateTime datum, DateTime odCas, DateTime doCas, List<DateTime> pauzyOd, List<DateTime> pauzyDo, Stav stav, string ID, string kontakt, string PC, string popis, string poznamky, TypTicketu typTicketu = TypTicketu.Normalni, string zakaznik = "", string customTerp = "", string customTask = "")
+        public Ticket(long id, string mesic, DateTime datum, DateTime odCas, DateTime doCas, List<DateTime> pauzyOd, List<DateTime> pauzyDo, Stav stav, string ID, string kontakt, string PC, string popis, string poznamky, TypTicketu typTicketu = TypTicketu.Normalni, string zakaznik = "", string customTerp = "", string customTask = "", string onlineTyp = "")
         {
             Mesic = mesic;
             Datum = datum;
@@ -138,6 +141,7 @@ namespace Ticketník
             TypPrace = (byte)typTicketu;
             CustomTask = customTask;
             CustomTerp = customTerp;
+            OnlineTyp = onlineTyp;
 
             if (Od > Do && Do.ToString("H:mm") != "0:00")
             {
@@ -146,7 +150,12 @@ namespace Ticketník
             }
 
             //udělat seznam velikostí zákazníků
-            if (typTicketu == TypTicketu.Normalni)
+            if(typTicketu == TypTicketu.OnlineTyp)
+            {
+                Terp = TerpKod.OnlineTerp;
+                TerpT = TerpTyp.OnlineTerpTask;
+            }
+            else if (typTicketu == TypTicketu.Normalni)
             {
                 if (Zakaznici.DejVelikost(zakaznik) == 0)
                 {
@@ -163,7 +172,7 @@ namespace Ticketník
                     Terp = TerpKod.MalyNormal;
                     TerpT = TerpTyp.MalyNormal;
                 }
-                 
+
             }
             else if (typTicketu == TypTicketu.PraceOPrazdniny)
             {
@@ -182,7 +191,7 @@ namespace Ticketník
                     Terp = TerpKod.MalyHolyday;
                     TerpT = TerpTyp.MalyHolyday;
                 }
-                 
+
             }
             else if (typTicketu == TypTicketu.NahradniVolno)
             {
@@ -298,7 +307,7 @@ namespace Ticketník
                 }
 
             }
-            else if(typTicketu == TypTicketu.Enkripce)
+            else if (typTicketu == TypTicketu.Enkripce)
             {
                 Terp = TerpKod.Enkripce;
                 TerpT = TerpTyp.Enkripce;
@@ -406,7 +415,7 @@ namespace Ticketník
                     Terp = TerpKod.StredniProblem;
                 else
                     Terp = TerpKod.MalyProblem;
-                 
+
             }
         }
 
@@ -414,7 +423,7 @@ namespace Ticketník
         {
             NbtCompound ticket = new NbtCompound();
 
-            if(Od > Do && Do.ToString("H:mm") != "0:00")
+            if (Od > Do && Do.ToString("H:mm") != "0:00")
             {
                 Od = Od.AddHours(-12);
                 Do = Do.AddHours(12);
@@ -436,13 +445,14 @@ namespace Ticketník
             ticket.Add(new NbtString("Poznamky", Poznamky));
             ticket.Add(new NbtString("Terp", CustomTerp));
             ticket.Add(new NbtString("Task", CustomTask));
+            ticket.Add(new NbtString("OnlineTyp", OnlineTyp));
             List<byte> poh = new List<byte>();
             List<byte> pom = new List<byte>();
             foreach (DateTime b in PauzyOd)
             {
-                poh.Add((byte)b.Hour); 
+                poh.Add((byte)b.Hour);
                 pom.Add((byte)b.Minute);
-            } 
+            }
             List<byte> pdh = new List<byte>();
             List<byte> pdm = new List<byte>();
             foreach (DateTime b in PauzyDo)
@@ -477,6 +487,7 @@ namespace Ticketník
         internal TerpTyp TerpT { get; set; }
         internal string CustomTerp { get; set; }
         internal string CustomTask { get; set; }
+        internal string OnlineTyp { get; set; }
 
     }
 

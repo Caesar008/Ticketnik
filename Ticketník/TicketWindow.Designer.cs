@@ -61,6 +61,15 @@
             this.zacatek = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.newTerpTaskPanel = new System.Windows.Forms.Panel();
+            this.btn_TicketWindow_SearchTerp = new System.Windows.Forms.Button();
+            this.btn_TicketWindow_UpdateSelected = new System.Windows.Forms.Button();
+            this.lbl_TicketWindow_onlineType = new System.Windows.Forms.Label();
+            this.lbl_TicketWindow_onlineTask = new System.Windows.Forms.Label();
+            this.onlineTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.onlineTaskComboBox = new System.Windows.Forms.ComboBox();
+            this.lbl_TicketWindow_onlineTerp = new System.Windows.Forms.Label();
+            this.onlineTerpDropDown = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.mdm = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -83,22 +92,13 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.ok = new System.Windows.Forms.Button();
             this.datum = new System.Windows.Forms.DateTimePicker();
-            this.newTerpTaskPanel = new System.Windows.Forms.Panel();
-            this.onlineTerpDropDown = new System.Windows.Forms.ComboBox();
-            this.lbl_TicketWindow_onlineTerp = new System.Windows.Forms.Label();
-            this.onlineTaskComboBox = new System.Windows.Forms.ComboBox();
-            this.onlineTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.lbl_TicketWindow_onlineTask = new System.Windows.Forms.Label();
-            this.lbl_TicketWindow_onlineType = new System.Windows.Forms.Label();
-            this.btn_TicketWindow_UpdateSelected = new System.Windows.Forms.Button();
-            this.btn_TicketWindow_SearchTerp = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.newTerpTaskPanel.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -444,6 +444,92 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Rozšířené informace";
             // 
+            // newTerpTaskPanel
+            // 
+            this.newTerpTaskPanel.Controls.Add(this.btn_TicketWindow_SearchTerp);
+            this.newTerpTaskPanel.Controls.Add(this.btn_TicketWindow_UpdateSelected);
+            this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineType);
+            this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineTask);
+            this.newTerpTaskPanel.Controls.Add(this.onlineTypeComboBox);
+            this.newTerpTaskPanel.Controls.Add(this.onlineTaskComboBox);
+            this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineTerp);
+            this.newTerpTaskPanel.Controls.Add(this.onlineTerpDropDown);
+            this.newTerpTaskPanel.Location = new System.Drawing.Point(1, 46);
+            this.newTerpTaskPanel.Name = "newTerpTaskPanel";
+            this.newTerpTaskPanel.Size = new System.Drawing.Size(277, 106);
+            this.newTerpTaskPanel.TabIndex = 18;
+            // 
+            // btn_TicketWindow_SearchTerp
+            // 
+            this.btn_TicketWindow_SearchTerp.Location = new System.Drawing.Point(137, 83);
+            this.btn_TicketWindow_SearchTerp.Name = "btn_TicketWindow_SearchTerp";
+            this.btn_TicketWindow_SearchTerp.Size = new System.Drawing.Size(138, 23);
+            this.btn_TicketWindow_SearchTerp.TabIndex = 7;
+            this.btn_TicketWindow_SearchTerp.Text = "Vyhledat Terp";
+            this.btn_TicketWindow_SearchTerp.UseVisualStyleBackColor = true;
+            // 
+            // btn_TicketWindow_UpdateSelected
+            // 
+            this.btn_TicketWindow_UpdateSelected.Location = new System.Drawing.Point(2, 83);
+            this.btn_TicketWindow_UpdateSelected.Name = "btn_TicketWindow_UpdateSelected";
+            this.btn_TicketWindow_UpdateSelected.Size = new System.Drawing.Size(130, 23);
+            this.btn_TicketWindow_UpdateSelected.TabIndex = 6;
+            this.btn_TicketWindow_UpdateSelected.Text = "Aktualizovat vybrané";
+            this.btn_TicketWindow_UpdateSelected.UseVisualStyleBackColor = true;
+            // 
+            // lbl_TicketWindow_onlineType
+            // 
+            this.lbl_TicketWindow_onlineType.AutoSize = true;
+            this.lbl_TicketWindow_onlineType.Location = new System.Drawing.Point(5, 60);
+            this.lbl_TicketWindow_onlineType.Name = "lbl_TicketWindow_onlineType";
+            this.lbl_TicketWindow_onlineType.Size = new System.Drawing.Size(25, 13);
+            this.lbl_TicketWindow_onlineType.TabIndex = 5;
+            this.lbl_TicketWindow_onlineType.Text = "Typ";
+            // 
+            // lbl_TicketWindow_onlineTask
+            // 
+            this.lbl_TicketWindow_onlineTask.AutoSize = true;
+            this.lbl_TicketWindow_onlineTask.Location = new System.Drawing.Point(5, 33);
+            this.lbl_TicketWindow_onlineTask.Name = "lbl_TicketWindow_onlineTask";
+            this.lbl_TicketWindow_onlineTask.Size = new System.Drawing.Size(31, 13);
+            this.lbl_TicketWindow_onlineTask.TabIndex = 4;
+            this.lbl_TicketWindow_onlineTask.Text = "Task";
+            // 
+            // onlineTypeComboBox
+            // 
+            this.onlineTypeComboBox.FormattingEnabled = true;
+            this.onlineTypeComboBox.Location = new System.Drawing.Point(99, 57);
+            this.onlineTypeComboBox.Name = "onlineTypeComboBox";
+            this.onlineTypeComboBox.Size = new System.Drawing.Size(175, 21);
+            this.onlineTypeComboBox.TabIndex = 3;
+            // 
+            // onlineTaskComboBox
+            // 
+            this.onlineTaskComboBox.FormattingEnabled = true;
+            this.onlineTaskComboBox.Location = new System.Drawing.Point(99, 30);
+            this.onlineTaskComboBox.Name = "onlineTaskComboBox";
+            this.onlineTaskComboBox.Size = new System.Drawing.Size(175, 21);
+            this.onlineTaskComboBox.TabIndex = 2;
+            this.onlineTaskComboBox.SelectedIndexChanged += new System.EventHandler(this.onlineTaskComboBox_SelectedIndexChanged);
+            // 
+            // lbl_TicketWindow_onlineTerp
+            // 
+            this.lbl_TicketWindow_onlineTerp.AutoSize = true;
+            this.lbl_TicketWindow_onlineTerp.Location = new System.Drawing.Point(5, 6);
+            this.lbl_TicketWindow_onlineTerp.Name = "lbl_TicketWindow_onlineTerp";
+            this.lbl_TicketWindow_onlineTerp.Size = new System.Drawing.Size(29, 13);
+            this.lbl_TicketWindow_onlineTerp.TabIndex = 1;
+            this.lbl_TicketWindow_onlineTerp.Text = "Terp";
+            // 
+            // onlineTerpDropDown
+            // 
+            this.onlineTerpDropDown.FormattingEnabled = true;
+            this.onlineTerpDropDown.Location = new System.Drawing.Point(99, 3);
+            this.onlineTerpDropDown.Name = "onlineTerpDropDown";
+            this.onlineTerpDropDown.Size = new System.Drawing.Size(175, 21);
+            this.onlineTerpDropDown.TabIndex = 0;
+            this.onlineTerpDropDown.SelectedIndexChanged += new System.EventHandler(this.onlineTerpDropDown_SelectedIndexChanged);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(6, 130);
@@ -662,90 +748,6 @@
             this.datum.DropDown += new System.EventHandler(this.datum_DropDown);
             this.datum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.datum_KeyDown);
             // 
-            // newTerpTaskPanel
-            // 
-            this.newTerpTaskPanel.Controls.Add(this.btn_TicketWindow_SearchTerp);
-            this.newTerpTaskPanel.Controls.Add(this.btn_TicketWindow_UpdateSelected);
-            this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineType);
-            this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineTask);
-            this.newTerpTaskPanel.Controls.Add(this.onlineTypeComboBox);
-            this.newTerpTaskPanel.Controls.Add(this.onlineTaskComboBox);
-            this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineTerp);
-            this.newTerpTaskPanel.Controls.Add(this.onlineTerpDropDown);
-            this.newTerpTaskPanel.Location = new System.Drawing.Point(1, 46);
-            this.newTerpTaskPanel.Name = "newTerpTaskPanel";
-            this.newTerpTaskPanel.Size = new System.Drawing.Size(277, 106);
-            this.newTerpTaskPanel.TabIndex = 18;
-            // 
-            // onlineTerpDropDown
-            // 
-            this.onlineTerpDropDown.FormattingEnabled = true;
-            this.onlineTerpDropDown.Location = new System.Drawing.Point(99, 3);
-            this.onlineTerpDropDown.Name = "onlineTerpDropDown";
-            this.onlineTerpDropDown.Size = new System.Drawing.Size(121, 21);
-            this.onlineTerpDropDown.TabIndex = 0;
-            // 
-            // lbl_TicketWindow_onlineTerp
-            // 
-            this.lbl_TicketWindow_onlineTerp.AutoSize = true;
-            this.lbl_TicketWindow_onlineTerp.Location = new System.Drawing.Point(5, 6);
-            this.lbl_TicketWindow_onlineTerp.Name = "lbl_TicketWindow_onlineTerp";
-            this.lbl_TicketWindow_onlineTerp.Size = new System.Drawing.Size(29, 13);
-            this.lbl_TicketWindow_onlineTerp.TabIndex = 1;
-            this.lbl_TicketWindow_onlineTerp.Text = "Terp";
-            // 
-            // onlineTaskComboBox
-            // 
-            this.onlineTaskComboBox.FormattingEnabled = true;
-            this.onlineTaskComboBox.Location = new System.Drawing.Point(99, 30);
-            this.onlineTaskComboBox.Name = "onlineTaskComboBox";
-            this.onlineTaskComboBox.Size = new System.Drawing.Size(121, 21);
-            this.onlineTaskComboBox.TabIndex = 2;
-            // 
-            // onlineTypeComboBox
-            // 
-            this.onlineTypeComboBox.FormattingEnabled = true;
-            this.onlineTypeComboBox.Location = new System.Drawing.Point(99, 57);
-            this.onlineTypeComboBox.Name = "onlineTypeComboBox";
-            this.onlineTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.onlineTypeComboBox.TabIndex = 3;
-            // 
-            // lbl_TicketWindow_onlineTask
-            // 
-            this.lbl_TicketWindow_onlineTask.AutoSize = true;
-            this.lbl_TicketWindow_onlineTask.Location = new System.Drawing.Point(5, 33);
-            this.lbl_TicketWindow_onlineTask.Name = "lbl_TicketWindow_onlineTask";
-            this.lbl_TicketWindow_onlineTask.Size = new System.Drawing.Size(31, 13);
-            this.lbl_TicketWindow_onlineTask.TabIndex = 4;
-            this.lbl_TicketWindow_onlineTask.Text = "Task";
-            // 
-            // lbl_TicketWindow_onlineType
-            // 
-            this.lbl_TicketWindow_onlineType.AutoSize = true;
-            this.lbl_TicketWindow_onlineType.Location = new System.Drawing.Point(5, 60);
-            this.lbl_TicketWindow_onlineType.Name = "lbl_TicketWindow_onlineType";
-            this.lbl_TicketWindow_onlineType.Size = new System.Drawing.Size(25, 13);
-            this.lbl_TicketWindow_onlineType.TabIndex = 5;
-            this.lbl_TicketWindow_onlineType.Text = "Typ";
-            // 
-            // btn_TicketWindow_UpdateSelected
-            // 
-            this.btn_TicketWindow_UpdateSelected.Location = new System.Drawing.Point(2, 83);
-            this.btn_TicketWindow_UpdateSelected.Name = "btn_TicketWindow_UpdateSelected";
-            this.btn_TicketWindow_UpdateSelected.Size = new System.Drawing.Size(130, 23);
-            this.btn_TicketWindow_UpdateSelected.TabIndex = 6;
-            this.btn_TicketWindow_UpdateSelected.Text = "Aktualizovat vybrané";
-            this.btn_TicketWindow_UpdateSelected.UseVisualStyleBackColor = true;
-            // 
-            // btn_TicketWindow_SearchTerp
-            // 
-            this.btn_TicketWindow_SearchTerp.Location = new System.Drawing.Point(137, 83);
-            this.btn_TicketWindow_SearchTerp.Name = "btn_TicketWindow_SearchTerp";
-            this.btn_TicketWindow_SearchTerp.Size = new System.Drawing.Size(138, 23);
-            this.btn_TicketWindow_SearchTerp.TabIndex = 7;
-            this.btn_TicketWindow_SearchTerp.Text = "Vyhledat Terp";
-            this.btn_TicketWindow_SearchTerp.UseVisualStyleBackColor = true;
-            // 
             // TicketWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -778,9 +780,9 @@
             this.groupBox6.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
             this.newTerpTaskPanel.ResumeLayout(false);
             this.newTerpTaskPanel.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

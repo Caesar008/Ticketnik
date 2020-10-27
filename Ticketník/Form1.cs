@@ -27,7 +27,7 @@ namespace Ticketník
         //Skryté věci - Report + skryté nastavení
         internal bool devtest = false;
 
-        internal readonly int saveFileVersion = 10100, langVersion = 6;
+        internal readonly int saveFileVersion = 10101, langVersion = 6;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -820,9 +820,6 @@ namespace Ticketník
                                                 tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask));
 
                                             }
-
-
-
                                         }
                                     }
                                 }
@@ -1051,7 +1048,8 @@ namespace Ticketník
                         else
                         {
                             //save file verze 10100, od Ticketníku 1.4.0.0
-
+                            if (file.RootTag.Get<NbtInt>("verze").Value < saveFileVersion)
+                                file.RootTag.Get<NbtInt>("verze").Value = saveFileVersion;
                             this.Text = jazyk.Header_Tickety + ": " + jmenoSouboru.Remove(0, jmenoSouboru.LastIndexOf('\\') + 1).Replace(".tic", "");
                             tickety.Clear();
                             převéstNaFormátMilleniumToolStripMenuItem.Enabled = false;
@@ -1585,7 +1583,7 @@ namespace Ticketník
                 file = new NbtFile();
                 file.RootTag.Add(new NbtCompound("Zakaznici"));
                 file.RootTag.Add(new NbtLong("MaxID", 0));
-                file.RootTag.Add(new NbtInt("verze", 10100));
+                file.RootTag.Add(new NbtInt("verze", saveFileVersion));
                 file.SaveToFile(appdata + "\\Ticketnik\\" + jmenoSouboru + ".tic", NbtCompression.GZip);
                 Properties.Settings.Default.filePath = jmenoSouboru = appdata + "\\Ticketnik\\" + jmenoSouboru + ".tic";
                 Properties.Settings.Default.Save();
@@ -2949,7 +2947,7 @@ namespace Ticketník
             newFile = new NbtFile();
             newFile.RootTag.Add(new NbtCompound("Zakaznici"));
             newFile.RootTag.Add(new NbtLong("MaxID", file.RootTag.Get<NbtLong>("MaxID").Value));
-            newFile.RootTag.Add(new NbtInt("verze", 10100));
+            newFile.RootTag.Add(new NbtInt("verze", saveFileVersion));
 
             foreach(NbtCompound convZak in file.RootTag.Get<NbtCompound>("Zakaznici"))
             {

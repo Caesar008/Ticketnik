@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using fNbt;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Threading;
 
 namespace Ticketník
 {
@@ -65,7 +67,7 @@ namespace Ticketník
             label6.Text = form.jazyk.Windows_Ticket_Konec;
             label5.Text = form.jazyk.Windows_Ticket_Zacatek;
 
-            if (!Properties.Settings.Default.onlineTerp)
+            if (!Properties.Settings.Default.onlineTerp || !File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask"))
                 newTerpTaskPanel.Dispose();
 
             stavTicketu.Items.AddRange(new string[] { form.jazyk.Windows_Ticket_Probiha, form.jazyk.Windows_Ticket_CekaSe, form.jazyk.Windows_Ticket_CekaSeNaOdpoved, form.jazyk.Windows_Ticket_RDP, form.jazyk.Windows_Ticket_Hotovo });
@@ -79,6 +81,22 @@ namespace Ticketník
             {
                 groupBox6.Visible = false;
                 groupBox2.Visible = true;
+            }
+
+            if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
+            {
+                if(form.terpFile != null)
+                {
+                    while (form.terpTaskFileLock)
+                        Thread.Sleep(50);
+                    form.terpTaskFileLock = true;
+                    foreach(NbtCompound onlineTerpy in form.terpFile.RootTag)
+                    {
+                        onlineTerpDropDown.Items.Add(onlineTerpy.Get<NbtString>("Label").Value);
+                    }
+                    onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
+                    form.terpTaskFileLock = false;
+                }
             }
 
             cas.Items.AddRange(new string[] { "30 " + form.jazyk.Windows_Ticket_Minut, "1 " + form.jazyk.Windows_Ticket_Hodina, "1,5 " + form.jazyk.Windows_Ticket_Hodiny, "2 " + form.jazyk.Windows_Ticket_Hodiny, "2,5 " + form.jazyk.Windows_Ticket_Hodiny, "3 " + form.jazyk.Windows_Ticket_Hodiny, "3,5 " + form.jazyk.Windows_Ticket_Hodiny, "4 " + form.jazyk.Windows_Ticket_Hodiny, "4,5 " + form.jazyk.Windows_Ticket_Hodiny, "5 " + form.jazyk.Windows_Ticket_Hodin, "5,5 " + form.jazyk.Windows_Ticket_Hodin, "6 " + form.jazyk.Windows_Ticket_Hodin, "6,5 " + form.jazyk.Windows_Ticket_Hodin, "7 " + form.jazyk.Windows_Ticket_Hodin, "7,5 " + form.jazyk.Windows_Ticket_Hodin, "8 " + form.jazyk.Windows_Ticket_Hodin });
@@ -2666,6 +2684,30 @@ namespace Ticketník
             e.SuppressKeyPress = true;
         }
 
+        private void onlineTerpDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            onlineTaskComboBox.Items.Clear();
+            onlineTaskComboBox.Text = "";
+            onlineTypeComboBox.Items.Clear();
+            onlineTypeComboBox.Text = "";
+            foreach (NbtCompound onlineTasky in form.terpFile.RootTag.Get<NbtCompound>((string)onlineTerpDropDown.SelectedItem).Get<NbtCompound>("Tasks"))
+            {
+                onlineTaskComboBox.Items.Add(onlineTasky.Get<NbtString>("Label").Value);
+            }
+            onlineTaskComboBox.DropDownWidth = ComboWidth(onlineTaskComboBox);
+        }
+
+        private void onlineTaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            onlineTypeComboBox.Items.Clear();
+            onlineTypeComboBox.Text = "";
+            foreach (NbtString onlineTypy in form.terpFile.RootTag.Get<NbtCompound>((string)onlineTerpDropDown.SelectedItem).Get<NbtCompound>("Tasks").Get<NbtCompound>((string)onlineTaskComboBox.SelectedItem).Get<NbtList>("Types"))
+            {
+                onlineTypeComboBox.Items.Add(onlineTypy.Value);
+            }
+            onlineTypeComboBox.DropDownWidth = ComboWidth(onlineTypeComboBox);
+        }
+
         private void search_btn_Click(object sender, EventArgs e)
         {
             Regex reg = new Regex(@"\d+$");
@@ -2684,6 +2726,29 @@ namespace Ticketník
         {
             if (!okClick)
                 ticket.ID = puvodniID;
+        }
+
+        private int ComboWidth(ComboBox cb)
+        {
+            ComboBox senderComboBox = (ComboBox)cb;
+            int width = senderComboBox.DropDownWidth;
+            Graphics g = senderComboBox.CreateGraphics();
+            Font font = senderComboBox.Font;
+            int vertScrollBarWidth =
+                (senderComboBox.Items.Count > senderComboBox.MaxDropDownItems)
+                ? SystemInformation.VerticalScrollBarWidth : 0;
+
+            int newWidth;
+            foreach (string s in ((ComboBox)cb).Items)
+            {
+                newWidth = (int)g.MeasureString(s, font).Width
+                    + vertScrollBarWidth;
+                if (width < newWidth)
+                {
+                    width = newWidth;
+                }
+            }
+            return width;
         }
     }
 }
