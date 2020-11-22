@@ -226,13 +226,13 @@
   <data name="zakaznici" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zakaznici;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mytime_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mytime_template.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="CZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Release\lang\CZ.xml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Newtonsoft_Json" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Release\Newtonsoft.Json.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mytime_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mytime_template.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
