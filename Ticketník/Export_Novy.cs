@@ -301,23 +301,23 @@ namespace Ticketník
                     exportSheet.Cell(row, 6).Value = s.Radek["Pondělí"].Cas.ToString() == "0" ? "" : s.Radek["Pondělí"].Cas.ToString(nfi);
                     exportSheet.Cell(row, 7).Value = s.Radek["Pondělí"].Koment.Replace("\t", " ").Replace("\"", "");
                     //úterý
-                    exportSheet.Cell(row, 8).Value = s.Radek["Úterý"].Cas.ToString() == "0" ? "" : s.Radek["Úterý"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 9).Value = s.Radek["Úterý"].Koment.Replace("\t", " ").Replace("\"", "");
+                    exportSheet.Cell(row, 10).Value = s.Radek["Úterý"].Cas.ToString() == "0" ? "" : s.Radek["Úterý"].Cas.ToString(nfi);
+                    exportSheet.Cell(row, 11).Value = s.Radek["Úterý"].Koment.Replace("\t", " ").Replace("\"", "");
                     //středa
-                    exportSheet.Cell(row, 10).Value = s.Radek["Středa"].Cas.ToString() == "0" ? "" : s.Radek["Středa"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 11).Value = s.Radek["Středa"].Koment.Replace("\t", " ").Replace("\"", "");
+                    exportSheet.Cell(row, 14).Value = s.Radek["Středa"].Cas.ToString() == "0" ? "" : s.Radek["Středa"].Cas.ToString(nfi);
+                    exportSheet.Cell(row, 15).Value = s.Radek["Středa"].Koment.Replace("\t", " ").Replace("\"", "");
                     //čtvrtek
-                    exportSheet.Cell(row, 12).Value = s.Radek["Čtvrtek"].Cas.ToString() == "0" ? "" : s.Radek["Čtvrtek"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 13).Value = s.Radek["Čtvrtek"].Koment.Replace("\t", " ").Replace("\"", "");
+                    exportSheet.Cell(row, 18).Value = s.Radek["Čtvrtek"].Cas.ToString() == "0" ? "" : s.Radek["Čtvrtek"].Cas.ToString(nfi);
+                    exportSheet.Cell(row, 19).Value = s.Radek["Čtvrtek"].Koment.Replace("\t", " ").Replace("\"", "");
                     //pátek
-                    exportSheet.Cell(row, 14).Value = s.Radek["Pátek"].Cas.ToString() == "0" ? "" : s.Radek["Pátek"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 15).Value = s.Radek["Pátek"].Koment.Replace("\t", " ").Replace("\"", "");
+                    exportSheet.Cell(row, 22).Value = s.Radek["Pátek"].Cas.ToString() == "0" ? "" : s.Radek["Pátek"].Cas.ToString(nfi);
+                    exportSheet.Cell(row, 23).Value = s.Radek["Pátek"].Koment.Replace("\t", " ").Replace("\"", "");
                     //sobota
-                    exportSheet.Cell(row, 16).Value = s.Radek["Sobota"].Cas.ToString() == "0" ? "" : s.Radek["Sobota"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 17).Value = s.Radek["Sobota"].Koment.Replace("\t", " ").Replace("\"", "");
+                    exportSheet.Cell(row, 26).Value = s.Radek["Sobota"].Cas.ToString() == "0" ? "" : s.Radek["Sobota"].Cas.ToString(nfi);
+                    exportSheet.Cell(row, 27).Value = s.Radek["Sobota"].Koment.Replace("\t", " ").Replace("\"", "");
                     //neděle
-                    exportSheet.Cell(row, 18).Value = s.Radek["Neděle"].Cas.ToString() == "0" ? "" : s.Radek["Neděle"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 19).Value = s.Radek["Neděle"].Koment.Replace("\t", " ").Replace("\"", "");
+                    exportSheet.Cell(row, 30).Value = s.Radek["Neděle"].Cas.ToString() == "0" ? "" : s.Radek["Neděle"].Cas.ToString(nfi);
+                    exportSheet.Cell(row, 31).Value = s.Radek["Neděle"].Koment.Replace("\t", " ").Replace("\"", "");
 
                     row++;
                 }

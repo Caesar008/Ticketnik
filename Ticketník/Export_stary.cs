@@ -1423,23 +1423,23 @@ namespace Ticketník
                 exportSheet.Cell(row, 6).Value = terpDict[s][0].Split(',')[0];
                 exportSheet.Cell(row, 7).Value = terpDict[s][0].Split(',')[1].Replace("\t", " ").Replace("\"", "");
                 //úterý
-                exportSheet.Cell(row, 8).Value = terpDict[s][1].Split(',')[0];
-                exportSheet.Cell(row, 9).Value = terpDict[s][1].Split(',')[1].Replace("\t", " ").Replace("\"", "");
+                exportSheet.Cell(row, 10).Value = terpDict[s][1].Split(',')[0];
+                exportSheet.Cell(row, 11).Value = terpDict[s][1].Split(',')[1].Replace("\t", " ").Replace("\"", "");
                 //středa
-                exportSheet.Cell(row, 10).Value = terpDict[s][2].Split(',')[0];
-                exportSheet.Cell(row, 11).Value = terpDict[s][2].Split(',')[1].Replace("\t", " ").Replace("\"", "");
+                exportSheet.Cell(row, 14).Value = terpDict[s][2].Split(',')[0];
+                exportSheet.Cell(row, 15).Value = terpDict[s][2].Split(',')[1].Replace("\t", " ").Replace("\"", "");
                 //čtvrtek
-                exportSheet.Cell(row, 12).Value = terpDict[s][3].Split(',')[0];
-                exportSheet.Cell(row, 13).Value = terpDict[s][3].Split(',')[1].Replace("\t", " ").Replace("\"", "");
+                exportSheet.Cell(row, 18).Value = terpDict[s][3].Split(',')[0];
+                exportSheet.Cell(row, 19).Value = terpDict[s][3].Split(',')[1].Replace("\t", " ").Replace("\"", "");
                 //pátek
-                exportSheet.Cell(row, 14).Value = terpDict[s][4].Split(',')[0];
-                exportSheet.Cell(row, 15).Value = terpDict[s][4].Split(',')[1].Replace("\t", " ").Replace("\"", "");
+                exportSheet.Cell(row, 22).Value = terpDict[s][4].Split(',')[0];
+                exportSheet.Cell(row, 23).Value = terpDict[s][4].Split(',')[1].Replace("\t", " ").Replace("\"", "");
                 //sobota
-                exportSheet.Cell(row, 16).Value = terpDict[s][5].Split(',')[0];
-                exportSheet.Cell(row, 17).Value = terpDict[s][5].Split(',')[1].Replace("\t", " ").Replace("\"", "");
+                exportSheet.Cell(row, 26).Value = terpDict[s][5].Split(',')[0];
+                exportSheet.Cell(row, 27).Value = terpDict[s][5].Split(',')[1].Replace("\t", " ").Replace("\"", "");
                 //neděle
-                exportSheet.Cell(row, 18).Value = terpDict[s][6].Split(',')[0];
-                exportSheet.Cell(row, 19).Value = terpDict[s][6].Split(',')[1].Replace("\t", " ").Replace("\"", "");
+                exportSheet.Cell(row, 30).Value = terpDict[s][6].Split(',')[0];
+                exportSheet.Cell(row, 31).Value = terpDict[s][6].Split(',')[1].Replace("\t", " ").Replace("\"", "");
 
                 outputCSV += s.Replace("+", "") + "" + terpDict[s][0] + "," + terpDict[s][1] + "," + terpDict[s][2] + "," + terpDict[s][3] + "," + terpDict[s][4] + "," + terpDict[s][5] + "," + terpDict[s][6] + ",\r\n";
                 row++;
