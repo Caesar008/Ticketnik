@@ -105,7 +105,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "" && tmpNumber != "")
                     {
-                        myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber));
+                        myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber, 1));
                         tmpId = tmpLabel = tmpName = tmpNumber = "";
                     }
                 }
@@ -176,7 +176,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "")
                     {
-                        myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber);
+                        myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber, 1);
                         myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID);
                         tmpId = tmpLabel = tmpName = "";
                     }
@@ -238,7 +238,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "")
                     {
-                        myTimeTaskList.Add(new MyTimeTask(tmpId, tmpLabel, tmpName));
+                        myTimeTaskList.Add(new MyTimeTask(tmpId, tmpLabel, tmpName, 1));
                         tmpId = tmpLabel = tmpName = "";
                     }
                 }
@@ -304,7 +304,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "")
                     {
-                        myTimeTask = new MyTimeTask(tmpId, tmpLabel, tmpName);
+                        myTimeTask = new MyTimeTask(tmpId, tmpLabel, tmpName, 1);
                         tmpId = tmpLabel = tmpName = "";
                     }
                 }
@@ -421,6 +421,7 @@ namespace Ticketník
             catch (Exception ex)
             {
                 Logni("Došlo k chybě při načítání " + e.Url.AbsoluteUri + "\r\n\r\n" + ex.Message, Form1.LogMessage.WARNING);
+                terpLoaderReady = true;
             }
         }
 
@@ -468,6 +469,7 @@ namespace Ticketník
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Name", mtt.Name == null ? "" : mtt.Name));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Number", mtt.Number));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtCompound("Tasks"));
+                    terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtByte("Valid", mtt.Valid?(byte)1:(byte)0));
 
                     foreach (MyTimeTask mtta in mtt.Tasks)
                     {
@@ -476,6 +478,7 @@ namespace Ticketník
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Label", mtta.Label));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Name", mtta.Name == null ? "" : mtta.Name));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtList("Types", NbtTagType.String));
+                        terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtByte("Valid", mtta.Valid?(byte)1:(byte)0));
 
                         foreach (string mtty in mtta.TypeLabels)
                         {
@@ -536,6 +539,7 @@ namespace Ticketník
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Name", mtt.Name == null ? "" : mtt.Name));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Number", mtt.Number));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtCompound("Tasks"));
+                        terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtByte("Valid", mtt.Valid?(byte)1:(byte)0));
                     }
 
                     foreach (MyTimeTask mtta in mtt.Tasks)
@@ -547,6 +551,7 @@ namespace Ticketník
                             terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Label", mtta.Label));
                             terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Name", mtta.Name == null ? "" : mtta.Name));
                             terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtList("Types", NbtTagType.String));
+                            terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtByte("Valid", mtta.Valid?(byte)1:(byte)0));
                         }
 
                         foreach (string mtty in mtta.TypeLabels)
@@ -580,6 +585,7 @@ namespace Ticketník
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Label", customTask.Label));
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Name", customTask.Name == null ? "" : customTask.Name));
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
+                                terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtByte("Valid", customTask.Valid?(byte)1:(byte)0));
                             }
 
                             foreach(string customType in customTask.TypeLabels)
@@ -645,6 +651,7 @@ namespace Ticketník
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Label", customTask.Label));
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Name", customTask.Name == null ? "" : customTask.Name));
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
+                            terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtByte("Valid", customTask.Valid?(byte)1:(byte)0));
                         }
 
                         foreach (string customType in customTask.TypeLabels)
@@ -855,34 +862,38 @@ namespace Ticketník
 
     public class MyTimeTask
     {
-        public MyTimeTask(string id, string label, string name)
+        public MyTimeTask(string id, string label, string name, byte valid)
         {
             ID = id;
             Label = label;
             Name = name;
             TypeLabels = new List<string>();
+            Valid = valid == 1;
         }
         public List<string> TypeLabels { get; set; }
         public string ID { get; }
         public string Label { get; }
         public string Name { get; }
+        public bool Valid { get; }
     }
 
     public class MyTimeTerp
     {
-        public MyTimeTerp(string id, string label, string name, string number)
+        public MyTimeTerp(string id, string label, string name, string number, byte valid)
         {
             ID = id;
             Label = label;
             Name = name;
             Number = number;
             Tasks = new List<MyTimeTask>();
+            Valid = valid == 1;
         }
         public List<MyTimeTask> Tasks { get; set; }
         public string ID { get; }
         public string Label { get; }
         public string Name { get; }
         public string Number { get; }
+        public bool Valid { get; }
     }
 }
 
