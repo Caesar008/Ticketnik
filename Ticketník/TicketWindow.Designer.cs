@@ -502,6 +502,7 @@
             this.onlineTypeComboBox.Name = "onlineTypeComboBox";
             this.onlineTypeComboBox.Size = new System.Drawing.Size(175, 21);
             this.onlineTypeComboBox.TabIndex = 3;
+            this.onlineTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.onlineTypeComboBox_SelectedIndexChanged);
             // 
             // onlineTaskComboBox
             // 

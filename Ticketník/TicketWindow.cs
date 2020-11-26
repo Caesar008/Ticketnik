@@ -35,6 +35,7 @@ namespace Ticketník
             this.form = form;
             this.terpt = terp;
             this.task = task;
+            form.LoadTerptaskFile();
 
             groupBox1.Text = form.jazyk.Windows_Ticket_ZakladniInfo;
             groupBox2.Text = form.jazyk.Windows_Ticket_DobaPrace;
@@ -85,14 +86,15 @@ namespace Ticketník
 
             if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
             {
+                ok.Enabled = false;
                 if(form.terpFile != null)
                 {
                     while (form.terpTaskFileLock)
                         Thread.Sleep(50);
                     form.terpTaskFileLock = true;
-                    foreach(NbtCompound onlineTerpy in form.terpFile.RootTag)
+                    foreach(MyTimeTerp onlineTerpy in form.Terpy.Values)
                     {
-                        onlineTerpDropDown.Items.Add(onlineTerpy.Get<NbtString>("Label").Value);
+                        onlineTerpDropDown.Items.Add(onlineTerpy.Label);
                     }
                     onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
                     form.terpTaskFileLock = false;
@@ -1222,6 +1224,21 @@ namespace Ticketník
                     if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety") == null)
                         form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Add(new NbtList("Tickety", NbtTagType.Compound));
 
+                    if (Properties.Settings.Default.onlineTerp)
+                    {
+                        ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
+                        ticket.Terp = Ticket.TerpKod.OnlineTerp;
+                        foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
+                        {
+                            if (mtt.Label == (string)onlineTaskComboBox.SelectedItem)
+                            {
+                                ticket.CustomTask = mtt.Label;
+                                ticket.CustomTerp = form.Terpy[(string)onlineTerpDropDown.SelectedItem].Number;
+                                ticket.OnlineTyp = (string)onlineTypeComboBox.SelectedItem;
+                                break;
+                            }
+                        }
+                    }
 
                     form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                 }
@@ -1239,6 +1256,21 @@ namespace Ticketník
                     if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety") == null)
                         form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Add(new NbtList("Tickety", NbtTagType.Compound));
 
+                    if (Properties.Settings.Default.onlineTerp)
+                    {
+                        ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
+                        ticket.Terp = Ticket.TerpKod.OnlineTerp;
+                        foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
+                        {
+                            if (mtt.Label == (string)onlineTaskComboBox.SelectedItem)
+                            {
+                                ticket.CustomTask = mtt.Label;
+                                ticket.CustomTerp = form.Terpy[(string)onlineTerpDropDown.SelectedItem].Number;
+                                ticket.OnlineTyp = (string)onlineTypeComboBox.SelectedItem;
+                                break;
+                            }
+                        }
+                    }
 
                     form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                 }
@@ -1321,6 +1353,22 @@ namespace Ticketník
                                 {
                                     ticket.Od = ticket.Od.AddMinutes(1);
                                     ticket.Do = ticket.Do.AddMinutes(1);
+                                }
+
+                                if (Properties.Settings.Default.onlineTerp)
+                                {
+                                    ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
+                                    ticket.Terp = Ticket.TerpKod.OnlineTerp;
+                                    foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
+                                    {
+                                        if (mtt.Label == (string)onlineTaskComboBox.SelectedItem)
+                                        {
+                                            ticket.CustomTask = mtt.Label;
+                                            ticket.CustomTerp = form.Terpy[(string)onlineTerpDropDown.SelectedItem].Number;
+                                            ticket.OnlineTyp = (string)onlineTypeComboBox.SelectedItem;
+                                            break;
+                                        }
+                                    }
                                 }
 
                                 if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
@@ -2690,9 +2738,10 @@ namespace Ticketník
             onlineTaskComboBox.Text = "";
             onlineTypeComboBox.Items.Clear();
             onlineTypeComboBox.Text = "";
-            foreach (NbtCompound onlineTasky in form.terpFile.RootTag.Get<NbtCompound>((string)onlineTerpDropDown.SelectedItem).Get<NbtCompound>("Tasks"))
+            ok.Enabled = false;
+            foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
             {
-                onlineTaskComboBox.Items.Add(onlineTasky.Get<NbtString>("Label").Value);
+                onlineTaskComboBox.Items.Add(mtt.Label);
             }
             onlineTaskComboBox.DropDownWidth = ComboWidth(onlineTaskComboBox);
         }
@@ -2701,11 +2750,25 @@ namespace Ticketník
         {
             onlineTypeComboBox.Items.Clear();
             onlineTypeComboBox.Text = "";
-            foreach (NbtString onlineTypy in form.terpFile.RootTag.Get<NbtCompound>((string)onlineTerpDropDown.SelectedItem).Get<NbtCompound>("Tasks").Get<NbtCompound>((string)onlineTaskComboBox.SelectedItem).Get<NbtList>("Types"))
+            ok.Enabled = false;
+            foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
             {
-                onlineTypeComboBox.Items.Add(onlineTypy.Value);
+                if(mtt.Label == (string)onlineTaskComboBox.SelectedItem)
+                {
+                    foreach(string mtty in mtt.TypeLabels)
+                    {
+                        onlineTypeComboBox.Items.Add(mtty);
+                    }
+                    break;
+                }
             }
             onlineTypeComboBox.DropDownWidth = ComboWidth(onlineTypeComboBox);
+        }
+
+        private void onlineTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if((string)onlineTypeComboBox.SelectedItem != string.Empty)
+                ok.Enabled = true;
         }
 
         private void search_btn_Click(object sender, EventArgs e)

@@ -105,7 +105,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "" && tmpNumber != "")
                     {
-                        myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber, 1));
+                        myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber));
                         tmpId = tmpLabel = tmpName = tmpNumber = "";
                     }
                 }
@@ -176,7 +176,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "")
                     {
-                        myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber, 1);
+                        myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber);
                         myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID);
                         tmpId = tmpLabel = tmpName = "";
                     }
@@ -238,7 +238,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "")
                     {
-                        myTimeTaskList.Add(new MyTimeTask(tmpId, tmpLabel, tmpName, 1));
+                        myTimeTaskList.Add(new MyTimeTask(tmpId, tmpLabel, tmpName));
                         tmpId = tmpLabel = tmpName = "";
                     }
                 }
@@ -304,7 +304,7 @@ namespace Ticketník
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "")
                     {
-                        myTimeTask = new MyTimeTask(tmpId, tmpLabel, tmpName, 1);
+                        myTimeTask = new MyTimeTask(tmpId, tmpLabel, tmpName);
                         tmpId = tmpLabel = tmpName = "";
                     }
                 }
@@ -469,7 +469,6 @@ namespace Ticketník
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Name", mtt.Name == null ? "" : mtt.Name));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Number", mtt.Number));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtCompound("Tasks"));
-                    terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtByte("Valid", mtt.Valid?(byte)1:(byte)0));
 
                     foreach (MyTimeTask mtta in mtt.Tasks)
                     {
@@ -478,7 +477,6 @@ namespace Ticketník
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Label", mtta.Label));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Name", mtta.Name == null ? "" : mtta.Name));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtList("Types", NbtTagType.String));
-                        terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtByte("Valid", mtta.Valid?(byte)1:(byte)0));
 
                         foreach (string mtty in mtta.TypeLabels)
                         {
@@ -489,6 +487,7 @@ namespace Ticketník
 
                 terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
                 Logni("TerpTask soubor vytvořen", Form1.LogMessage.INFO);
+                LoadTerptaskFile();
             }
             catch (Exception e)
             {
@@ -519,9 +518,7 @@ namespace Ticketník
             infoBox.Text = jazyk.Message_TerpUpdate;
 
             //updatovat tasky podle načtení a přidat ty, co původně jsou uložené navíc
-            if (!terpTaskFileLock)
-                terpTaskFileLock = true;
-            else
+            while (terpTaskFileLock)
                 Thread.Sleep(250);
             try
             {
@@ -539,7 +536,6 @@ namespace Ticketník
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Name", mtt.Name == null ? "" : mtt.Name));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Number", mtt.Number));
                         terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtCompound("Tasks"));
-                        terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtByte("Valid", mtt.Valid?(byte)1:(byte)0));
                     }
 
                     foreach (MyTimeTask mtta in mtt.Tasks)
@@ -551,7 +547,6 @@ namespace Ticketník
                             terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Label", mtta.Label));
                             terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtString("Name", mtta.Name == null ? "" : mtta.Name));
                             terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtList("Types", NbtTagType.String));
-                            terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtByte("Valid", mtta.Valid?(byte)1:(byte)0));
                         }
 
                         foreach (string mtty in mtta.TypeLabels)
@@ -585,7 +580,6 @@ namespace Ticketník
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Label", customTask.Label));
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Name", customTask.Name == null ? "" : customTask.Name));
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
-                                terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtByte("Valid", customTask.Valid?(byte)1:(byte)0));
                             }
 
                             foreach(string customType in customTask.TypeLabels)
@@ -599,6 +593,8 @@ namespace Ticketník
 
                 terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip); 
                 Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
+
+                LoadTerptaskFile();
             }
             catch (Exception e)
             {
@@ -620,11 +616,18 @@ namespace Ticketník
 
         public void UpdateTerpTaskFile(string terpNumber)
         {
-            //vzít file jak je a updatovat nebo přidat jen task z parametru
-            if (!terpTaskFileLock)
-                terpTaskFileLock = true;
+            while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+                Thread.Sleep(50);
+            if (!InvokeRequired)
+                timer_ClearInfo.Stop();
             else
+                this.BeginInvoke(new Action(() => timer_ClearInfo.Stop()));
+            infoBox.Text = jazyk.Message_TerpUpdate;
+            //vzít file jak je a updatovat nebo přidat jen task z parametru
+            while (terpTaskFileLock)
                 Thread.Sleep(250);
+            terpTaskFileLock = true;
+
             try
             {
                 Logni("Updatuji terpTask soubor, terp " + terpNumber, Form1.LogMessage.INFO);
@@ -651,7 +654,6 @@ namespace Ticketník
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Label", customTask.Label));
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Name", customTask.Name == null ? "" : customTask.Name));
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
-                            terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtByte("Valid", customTask.Valid?(byte)1:(byte)0));
                         }
 
                         foreach (string customType in customTask.TypeLabels)
@@ -673,7 +675,70 @@ namespace Ticketník
             terpTaskFileLock = false;
         }
 
-        public List<MyTimeTerp> Terpy { get; private set; }
+        public Dictionary<string, MyTimeTerp> Terpy { get; private set; }
+        public void LoadTerptaskFile()
+        {
+            while (terpTaskFileLock)
+                Thread.Sleep(50);
+            if (!terpTaskFileLock)
+            {
+                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask"))
+                {
+                    terpTaskFileLock = true;
+                    terpFile = new NbtFile();
+                    terpFile.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask");
+
+                    foreach (NbtCompound mtt in terpFile.RootTag.Tags)
+                    {
+                        MyTimeTerp myterp = new MyTimeTerp(mtt.Get<NbtString>("ID").Value, mtt.Get<NbtString>("Label").Value, mtt.Get<NbtString>("Name").Value,
+                                mtt.Get<NbtString>("Number").Value);
+
+                        foreach (NbtCompound mtta in mtt.Get<NbtCompound>("Tasks").Tags)
+                        {
+                            MyTimeTask mytask = new MyTimeTask(mtta.Get<NbtString>("ID").Value, mtta.Get<NbtString>("Label").Value, mtta.Get<NbtString>("Name").Value);
+
+                            foreach (NbtString mtty in mtta.Get<NbtList>("Types"))
+                            {
+                                mytask.TypeLabels.Add(mtty.Value);
+                            }
+                            myterp.Tasks.Add(mytask);
+                        }
+
+                        if (!Terpy.ContainsKey(mtt.Get<NbtString>("Label").Value))
+                            Terpy.Add(myterp.Label, myterp);
+                        else
+                            Terpy[myterp.Label] = myterp;
+                    }
+
+                    if (terpFile.RootTag.Get<NbtCompound>("Custom") != null)
+                    {
+                        foreach (NbtCompound customTerpy in terpFile.RootTag.Get<NbtCompound>("Custom").Tags)
+                        {
+                            MyTimeTerp myterp = new MyTimeTerp(customTerpy.Get<NbtString>("ID").Value, customTerpy.Get<NbtString>("Label").Value, customTerpy.Get<NbtString>("Name").Value,
+                                customTerpy.Get<NbtString>("Number").Value);
+
+                            foreach (NbtCompound mtta in customTerpy.Get<NbtCompound>("Tasks").Tags)
+                            {
+                                MyTimeTask mytask = new MyTimeTask(mtta.Get<NbtString>("ID").Value, mtta.Get<NbtString>("Label").Value, mtta.Get<NbtString>("Name").Value);
+
+                                foreach (NbtString mtty in mtta.Get<NbtList>("Types"))
+                                {
+                                    mytask.TypeLabels.Add(mtty.Value);
+                                }
+                                myterp.Tasks.Add(mytask);
+                            }
+
+                            if (!Terpy.ContainsKey(customTerpy.Get<NbtString>("Label").Value))
+                                Terpy.Add(myterp.Label, myterp);
+                            else
+                                Terpy[myterp.Label] = myterp;
+                        }
+                    }
+
+                    terpTaskFileLock = false;
+                }
+            }
+        }
     }
 
     //pro nejnovější IE místo defaultního IE7
@@ -862,38 +927,34 @@ namespace Ticketník
 
     public class MyTimeTask
     {
-        public MyTimeTask(string id, string label, string name, byte valid)
+        public MyTimeTask(string id, string label, string name)
         {
             ID = id;
             Label = label;
             Name = name;
             TypeLabels = new List<string>();
-            Valid = valid == 1;
         }
         public List<string> TypeLabels { get; set; }
         public string ID { get; }
         public string Label { get; }
         public string Name { get; }
-        public bool Valid { get; }
     }
 
     public class MyTimeTerp
     {
-        public MyTimeTerp(string id, string label, string name, string number, byte valid)
+        public MyTimeTerp(string id, string label, string name, string number)
         {
             ID = id;
             Label = label;
             Name = name;
             Number = number;
             Tasks = new List<MyTimeTask>();
-            Valid = valid == 1;
         }
         public List<MyTimeTask> Tasks { get; set; }
         public string ID { get; }
         public string Label { get; }
         public string Name { get; }
         public string Number { get; }
-        public bool Valid { get; }
     }
 }
 

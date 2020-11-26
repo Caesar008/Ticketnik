@@ -132,6 +132,10 @@ namespace Ticketník
                 n.TopMost = true;
                 n.BringToFront();
             }
+
+            Terpy = new Dictionary<string, MyTimeTerp>();
+            //načtení terpů
+            LoadTerptaskFile();
         }
 
         private void NastavSirku()
