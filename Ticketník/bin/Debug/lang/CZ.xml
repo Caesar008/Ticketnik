@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Language name="Čeština" shortcut="CZ" international="Czech" version="6" revision="0">
+	<MainMenuItems>
+		<File en="File">Soubor</File>
+		<Options en="Options">Možnosti</Options>
+		<Source en="Maintenance">Údržba</Source>
+		<About en="About">O programu</About>
+		<Help en="Help">Nápověda</Help>
+		<New en="New">Nový</New>
+		<Open en="Open">Otevřít</Open>
+		<Safe en="Save">Uložit</Safe>
+		<Export en="Export">Exportovat</Export>
+		<Convert en="Convert to Millenium format">Převést na formát Millenium</Convert>
+		<Close en="Close">Ukončit</Close>
+		<Settings en="Settings">Nastavení</Settings>
+		<AddCustomer en="Add customer">Přidat zákazníka</AddCustomer>
+		<EditCustomer en="Edit customer">Upravit zákazníka</EditCustomer>
+		<DeleteCustomer en="Delete customer">Smazat zákazníka</DeleteCustomer>
+		<AddTerp en="Add TERP code">Přidat TERP kód</AddTerp>
+		<EditTerp en="Update TERP codes">Aktualizovat TERP kódy</EditTerp>
+		<DeleteTerp en="Delete TERP code">Smazat TERP kód</DeleteTerp>
+		<Search en="Search">Hledat</Search>
+		<Report en="Crash report">Crash report</Report>
+		<KnownIssues en="Known issues">Známé problémy</KnownIssues>
+		<Changelog en="Changelog">Changelog</Changelog>
+		<FuturePlans en="Future plans">Plány do budoucna</FuturePlans>
+		<Documentation en="Documentation">Dokumentace</Documentation>
+		<Notification en="Notification">Upozornění</Notification>
+		<AvailableLang en="Available languages">Dostupné jazyky</AvailableLang>
+    <SearchForUpdates en="Search for updates">Vyhledat aktualizace</SearchForUpdates>
+	</MainMenuItems>
+	<SideMenuItems>
+		<AddRecord en="Add record">Přidat záznam</AddRecord>
+		<EditRecord en="Edit Record">Upravit záznam</EditRecord>
+		<DeleteRecord en="Delete record">Smazat záznam</DeleteRecord>
+		<AddCustomer en="Add customer">Přidat zákazníka</AddCustomer>
+		<EditCustomer en="Edit customer">Upravit zákazníka</EditCustomer>
+		<DeleteCustomer en="Delete customer">Smazat zákazníka</DeleteCustomer>
+		<Search en="Search">Hledat</Search>
+		<Help en="Help">Nápověda</Help>
+	</SideMenuItems>
+	<Months>
+		<January en="January">Leden</January>
+		<February en="February">Únor</February>
+		<March en="March">Březen</March>
+		<April en="April">Duben</April>
+		<May en="May">Květen</May>
+		<June en="June">Červen</June>
+		<July en="July">Červenec</July>
+		<August en="August">Srpen</August>
+		<September en="September">Září</September>
+		<October en="October">Říjen</October>
+		<November en="November">Listopad</November>
+		<December en="December">Prosinec</December>
+	</Months>
+	<Headers>
+		<PC en="PC">PC</PC>
+		<TicketID en="Ticket ID">ID Ticketu</TicketID>
+		<Customer en="Customer">Zákazník</Customer>
+		<Description en="Description">Popis</Description>
+		<Contact en="Contact">Kontakt</Contact>
+		<Terp en="Terp">Terp</Terp>
+		<Task en="Task">Task</Task>
+		<Time en="Time">Čas</Time>
+		<Status en="Status">Stav</Status>
+		<Note en="Note">Poznámka</Note>
+		<Tickets en="Tickets">Tickety</Tickets>
+		<NotSaved en="not saved">neuloženo</NotSaved>
+	</Headers>
+	<Windows>
+		<NewFile>
+			<FileName en="File name">Jméno souboru</FileName>
+			<NewFile en="New file">Nový soubor</NewFile>
+		</NewFile>
+		<Open>
+			<Open en="Open">Otevřít</Open>
+			<TicketsFile en="Tickets file">Soubor ticketů</TicketsFile>
+		</Open>
+		<Export>
+			<Ticket en="Ticket">Ticket</Ticket>
+			<YouWorkedOn en="you worked on">na kterém jsi pracoval</YouWorkedOn>
+			<NotEnded en="does not have ended time of work. This ticket will be excluded from export. Please, export when ticket will have set end of work and all pauses.">nemá ukončený čas práce. Tento ticket nebude zahrnut v exportu. Prosím exportuj až bude ticket mít zadanou dobu ukončení a všech přestávek.</NotEnded>
+			<Header en="Export to MyTime">Exportovat do MyTime</Header>
+			<Export en="Export">Exportovat</Export>
+			<ThisWeek en="This week">Tento týden</ThisWeek>
+			<LastWeek en="Last week">Minulý týden</LastWeek>
+			<Custom en="Selected date range">Vybrané období</Custom>
+		</Export>
+		<Settings>
+			<Settings en="Settings">Nastavení</Settings>
+			<RunOnStartup en="Run Ticketník on startup">Spouštět Ticketník po startu</RunOnStartup>
+			<Autosave en="Autosave">Automatické ukládání</Autosave>
+			<SaveEvery en="Save every">Uložit každých</SaveEvery>
+			<Minutes en="minutes.">minut.</Minutes>
+			<SimpleTimeSettings en="Simple time settings">Zjednodušené nastavení času</SimpleTimeSettings>
+			<TicketColor en="Colors of tickets">Barvy ticketů</TicketColor>
+			<Change en="Change">Změň</Change>
+			<Done en="Done">Vyřešeno</Done>
+			<Waiting en="Waiting">Čeká se</Waiting>
+			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
+			<RDP en="RDP">RDP</RDP>
+			<InProgress en="In progress">Probíhá</InProgress>
+			<Default en="Default">Default</Default>
+			<ShowTimePerDay en="Show time per day">Zobrazení času za den</ShowTimePerDay>
+			<ShowTotalTime en="Show total time">Zobrazovat celkový čas</ShowTotalTime>
+			<Hodiny en="hours">hodiny</Hodiny>
+			<!-- 2 - 4 hours or 0.5 (section due to Czech language rule) -->
+			<Hodin en="hours">hodin</Hodin>
+			<!-- 5 and more hours (section due to Czech language rule) -->
+			<Over en=">">nad</Over>
+			<Language en="Language">Jazyk</Language>
+			<ChangeLanguage en="Change language">Změnit jazyk</ChangeLanguage>
+			<OnlineTerp en="Primarly use Terps loaded from MyTime">Primárně používat Terpy z MyTime</OnlineTerp>
+		</Settings>
+		<Customer>
+			<Customer en="Customer">Zákazník</Customer>
+			<CustomerSize en="Customer size">Velikost zákazníka</CustomerSize>
+			<Small en="Small">Malá</Small>
+			<Medium en="Medium">Střední</Medium>
+			<Large en="Large">Velká</Large>
+			<Or en="OR (is filled field bellow size of customer\r\nwill be ignored)">NEBO (pokud je vyplněna informace níže, velikost\r\nzákazníka bude ignorována)</Or>
+			<TerpCode en="Terp code">Terp kód</TerpCode>
+		</Customer>
+		<Terp>
+			<NewTerp en="New TERP">Nový TERP</NewTerp>
+			<TerpCode en="Terp code">Terp kód</TerpCode>
+			<Task en="Task">Task</Task>
+			<AddTerp en="Add Terp">Přidat Terp</AddTerp>
+			<AddTask en="Add Task">Přidat Task</AddTask>
+			<EditTerp en="Edit TERP">Upravit TERP</EditTerp>
+			<New en="New">Nový</New>
+			<SafeTerp en="Save Terp">Ulož Terp</SafeTerp>
+			<SafeTask en="Save Task">Ulož Task</SafeTask>
+			<DeleteTerp en="Delete TERP">Smazat TERP</DeleteTerp>
+			<DeleteTerpBtn en="Delete Terp">Smazat Terp</DeleteTerpBtn>
+			<DeleteTask en="Delete Task">Smazat Task</DeleteTask>
+			<AlreadyExists en="already exists.">už existuje.</AlreadyExists>
+			<WasAdded en="was added.">byl přidán.</WasAdded>
+			<Terp en="Terp">Terp</Terp>
+			<Set en="Set">Nastav</Set>
+		</Terp>
+		<Search>
+			<Search en="Search">Hledej</Search>
+			<SearchCriteria en="Search criteria">Kritéria vyhledávání</SearchCriteria>
+			<PC en="PC">PC</PC>
+			<TicketID en="Ticket ID">ID Ticketu</TicketID>
+			<Customer en="Customer">Zákazník</Customer>
+			<Description en="Description">Popis</Description>
+			<Contact en="Contact">Kontakt</Contact>
+			<Note en="Note">Poznámka</Note>
+			<Regex en="Regular expressions were used in search criteria">Ve vyhledávání byly použity regulární výrazy</Regex>
+			<Date en="Date">Datum</Date>
+			<Pause en="Terp | Task">Terp | Task</Pause>
+			<Status en="Status">Stav</Status>
+			<Done en="Done">Vyřešeno</Done>
+			<Waiting en="Waiting">Čeká se</Waiting>
+			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
+			<RDP en="RDP">RDP</RDP>
+			<InProgress en="In progress">Probíhá</InProgress>
+			<SearchCriteriaHelp en="Search by criteria.\r\n\r\nEg.: criterium 'Ticket ID' will be filled. Value of this criteria will be '128'. Program will try to find all tickets with ticket ID containing text '128'.\r\nIf this criterium field will be empty this criterium will be ignored.\r\n\r\nRegular expressions can be used in serach. In this case checkbox 'Regular expressions were used in search criteria' has to be checked. How to use regular expressions in this search and its syntax can be found on https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx">Vyhledávání podle kritérií.\r\n\r\nPř.: vyplněno bude kritérium "ID Ticketu". Hodnota tohoto kritéria bude "128". Program se pokusí najít všechny tickety, jejichž ID Ticketu obsahuje text "128".\r\nV případě, že je pole pro kritérium prázdné, bude toto kritérium ignorováno.\r\n\r\nVe vyhledávání se dají použít i regulární výrazy. V tomto případě je nutné zaškrtnout políčko "Ve vyhledávání byly použity regulární výrazy". Jak používat regulární výrazy v tomto vyhledávání a jaká je syntaxe, si můžeš přečíst na https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx</SearchCriteriaHelp>
+		</Search>
+		<About>
+			<Version en="Version">Verze</Version>
+			<License en="Program for saving tickets for easy managing and overview.\r\n\r\nProgram use fNbt library for work with files, which was written by Matvei 'fragmer' Stefarov.\r\nWorks with files in Named Binary Tag format which was invented by Markus 'Notch' Persson.\r\n\r\nLicense for distribution of fNbt library: https://github.com/fragmer/fNbt/blob/master/docs/LICENSE">Program pro ukládání ticketů pro jejich snadný přehled a správu.\r\n\r\nProgram využívá pro práci se soubory knihovnu fNbt, kterou napsal Matvei "fragmer" Stefarov.\r\nPracuje se soubory formátu Named Binary Tag, který vymyslel Markus "Notch" Persson.\r\n\r\nLicence pro šíření knihovny fNbt: https://github.com/fragmer/fNbt/blob/master/docs/LICENSE</License>
+			<Searching en="Searching for updates">Hledám aktualizace</Searching>
+		</About>
+		<NewTicket>
+			<NewTicket en="New ticket">Nový ticket</NewTicket>
+			<BasicInfo en="Basic information">Základní informace</BasicInfo>
+			<PC en="Computer">Počítač</PC>
+			<TicketID en="Ticket ID">ID Ticketu</TicketID>
+			<Customer en="Customer">Zákazník</Customer>
+			<Description en="Description">Popis</Description>
+			<Contact en="Contact">Kontakt</Contact>
+			<ExtendedInfo en="Additional information">Rozšířené informace</ExtendedInfo>
+			<Status en="Ticket status">Stav ticketu</Status>
+			<Done en="Done">Vyřešeno</Done>
+			<Waiting en="Waiting">Čeká se</Waiting>
+			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
+			<RDP en="RDP">RDP</RDP>
+			<InProgress en="In progress">Probíhá</InProgress>
+			<Normal en="Normal hours">Normální doba</Normal>
+			<Overtime en="Overtime">Přesčas</Overtime>
+			<Holiday en="Holiday">Svátek</Holiday>
+			<CompensLeave en="Compensation leave">Náhradní volno</CompensLeave>
+			<MDM en="MDM">MDM</MDM>
+			<Encryption en="Encryption">Enkrypce</Encryption>
+			<TimeNetto en="Work time netto">Čistě odpracováno</TimeNetto>
+			<Time en="Work time">Odpracováno</Time>
+			<PauseTime en="Pause time total">Celkem doba pauzy</PauseTime>
+			<TerpCode en="TERP code">TERP kód</TerpCode>
+			<CustomTerp en="Custom terp and task">Vlastní terp a task</CustomTerp>
+			<Notes en="Notes">Poznámky</Notes>
+			<TicketTime en="Time spent on ticket">Doba práce na ticketu</TicketTime>
+			<Minutes en="minutes">minut</Minutes>
+			<Hour en="hour">hodina</Hour>
+			<Hodiny en="hours">hodiny</Hodiny>
+			<!-- 2 - 4 hoursor 0.5 (section due to Czech language rule) -->
+			<Hodin en="hours">hodin</Hodin>
+			<!-- 5 and more hours (section due to Czech language rule) -->
+			<Times en="Times">Časy</Times>
+			<Start en="Start">Začátek</Start>
+			<End en="End">Konec</End>
+			<Pauses en="Pauses">Pauzy</Pauses>
+			<Add en="Add">Přidat</Add>
+			<Edit en="Edit">Upravit</Edit>
+			<Delete en="Delete">Smazat</Delete>
+			<From en="From">Od</From>
+			<To en="To">Do</To>
+			<EditTicket en="Edit ticket">Upravit ticket</EditTicket>
+			<Set en="Set">Nastav</Set>
+			<SearchTicket en="Search ticket - read only">Najít ticket - jen pro čtení</SearchTicket>
+			<NormalDescription en="Normal">Normální</NormalDescription>
+			<CompensLeaveDesc en="Comp. leave">Náhr. volno</CompensLeaveDesc>
+			<TicketTerp en="Ticket TERP">Ticket TERP</TicketTerp>
+		</NewTicket>
+		<EditTicket>
+			<EditTicket en="Edit ticket">Upravit ticket</EditTicket>
+		</EditTicket>
+		<Help>
+			<CannotDownload en="Help cannot be downloaded. More info in Error.log.">Nelze stáhnout nápovědu. Více info najdeš v Error.log.</CannotDownload>
+			<NotFound en="Required help page has not been found. Try to update help by pressing ctrl+R.">Požadovaná stránka nápovědy nebyla nalezena. Zkus aktualizovat nápovědu stiskem ctrl+R.</NotFound>
+			<UpdatingHelp en="Updating help">Aktualizuji nápovědu</UpdatingHelp>
+		</Help>
+		<Notification>
+			<Date en="Date">Datum</Date>
+			<Time en="Time">Čas</Time>
+			<Type en="Type">Typ</Type>
+			<Description en="Description">Popis</Description>
+			<Notifications en="Notifications">Upozornění</Notifications>
+			<NewNotification en="New notification">Nové upozornění</NewNotification>
+			<EditNotification en="Edit notification">Upravit upozornění</EditNotification>
+			<DeleteNotification en="Delete notification">Smazat upozornění</DeleteNotification>
+			<DateAndTime en="Date and time">Datum a čas</DateAndTime>
+			<Notification en="Notification">Upozornění</Notification>
+			<RDP en="RDP">RDP</RDP>
+		</Notification>
+		<LanguageManager>
+			<LanguageManager en="Language manager">Správce jazyků</LanguageManager>
+			<Download en="Download">Stáhnout</Download>
+			<Remove en="Remove">Odebrat</Remove>
+			<Language en="Language">Jazyk</Language>
+			<Shortcut en="Shortcut">Zkratka</Shortcut>
+			<Version en="Version">Verze</Version>
+			<NewTranslations en="New translation">Nový překlad</NewTranslations>
+      <EditTranslation en="Edit translation">Upravit překlad</EditTranslation>
+		</LanguageManager>
+	</Windows>
+	<Errors>
+		<CustomerTerpNotImplemented en="This function is not implemented yet. Use standard size settings\r\nof customer and in ticket set custom terp code.">Tato funkce ještě není implementována. Použij standardní nastavení velikost\r\nzákazníka a v ticketu pak nastav custom terp.</CustomerTerpNotImplemented>
+		<CantOpen en="Can't open">Nemohu otevřít</CantOpen>
+		<CantOpenFile en="Can't open file.\r\nMake sure you are connected to Tieto network or VPN or, please, try it later.">Nemohu otevřít soubor.\r\nUjisti se, že jsi v Tieto síti, nebo na VPN, nebo to prosím zkus později.</CantOpenFile>
+		<TicketsVersionNotMatch en="File, which program try to load, is newer than supported by this version of Ticketník.">Soubor, který se program pokouší načíst, je novější verze, než jaká je podporována touto verzí Ticketníku.</TicketsVersionNotMatch>
+		<VersionsDoNotMatch en="Versions does not match">Verze nesouhlasí</VersionsDoNotMatch>
+		<HelpError en="Cannot open help due to error. You will find more in Error.log">Z důvodu chyby nelze otevřít nápovědu. Více najdeš v Error.log</HelpError>
+		<Error en="Error">Chyba</Error>
+		<CannotCloseAndUpdate en="Could not close and update older Ticketnik.exe!\r\nDelete Ticketnik.exe manually and rename _Ticketnik.exe to Ticketnik.exe.">Původní Ticketnik.exe se nepovedlo ukončit a aktualizovat!\r\nRučně smaž Ticketnik.exe a přejmenuj _Ticketnik.exe na Ticketnik.exe.</CannotCloseAndUpdate>
+		<DamagedFile en="Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.">Ticketník zjistil poškozený soubor nastavení.\r\nNastavení musí být resetováno do výchozích hodnot.\r\nProgram bude restartován.\r\n\r\nVeškeré uložené tickety budou zachovány.\r\nBudeš ho jen muset otevřít Soubor -> Otevřít.</DamagedFile>
+		<DamagedSettingsFile en="Damaged settings file">Poškozený soubor nastavení</DamagedSettingsFile>
+		<ErrorOccured en="An error occured during runtime. Inform Pavel J. about this error.">Během běhu programu došlo k chybě. Informuj o této chybě Pavla J.</ErrorOccured>
+		<CriticalError en="Critical error">Kritická chyba</CriticalError>
+		<SearchRegexError en="There's error in regular expression which prevent from searching. Please correct regular expression or try to search without regular expressions.">V regulárním výrazu je vážná chyba znemožňující vyhledávání. Prosím oprav regulární výraz, nebo zkus hledat bez regulárních výrazů.</SearchRegexError>
+		<AlreadyRunning en="Ticketník is already running.">Ticketník je už spuštěn.</AlreadyRunning>
+    <DamagedTicFile en="Tic file is corrupted. Cannot be open.">Soubor .tic je poškozen. Nelze ho otevřít.</DamagedTicFile>
+	</Errors>
+	<Messages>
+		<NewVersionFound en="New version found.\r\nDo you want to download it?">Nalezena novější verze programu.\r\nChcete ji stáhnout?</NewVersionFound>
+		<Update en="Update">Aktializace</Update>
+		<NotSaved en="File is not saved">Soubor není uložen</NotSaved>
+		<WantSafe en="Save changes?">Uložit změny?</WantSafe>
+		<RealyDelete en="Realy delete?">Opravdu smazat?</RealyDelete>
+		<DelCustomer en="Do you realy want to delete customer">Opravdu chceš smazat zákazníka</DelCustomer>
+		<Skipped en="items were skipped">položek bylo přeskočeno</Skipped>
+		<TicketCopy en="Copy of ticket made for paste to new file or text.">Ticket zkopírován pro vložení v novém souboru, nebo do textu.</TicketCopy>
+		<WindowMoved en="Moving window to coordinates 0;0 from reson: window out of visible area">Přesouvám okno na pozici 0;0 z důvodu: okno mimo viditelnou oblast</WindowMoved>
+		<FileZakUpd en="File zakaznici (customers) updated to version">Soubor zakaznici aktualizován na verzi</FileZakUpd>
+		<DateChanged en="Date of ticket has been changed.\r\nDo you want to keep date change?">Datum ticketu bylo změněno.\r\nChcete zachovat změnu data?</DateChanged>
+		<DateChangedWindow en="Date cahnged">Změna data</DateChangedWindow>
+		<CustomerNotImplemented en="This function os not implemented yet. Please use standard customer size settings and set custom TERP in ticket.">Tato funkce ještě není implementovýána. Použij standardní nastavení velikosti zákazníka a v ticketu pak nastav custom terp.</CustomerNotImplemented>
+		<FormatUpgrade en="File has been converted to new format. Old file is backuped as ">Soubor byl převeden na nový formát. Starý soubor byl zálohován jako </FormatUpgrade>
+		<CreateNotification en="Do you want to create RDP notification?">Chcete vytvořit upozornění na RDP?</CreateNotification>
+    <TaskCannotBeEmpty en="Task Cannot be empty">Task nemůže být prázdný</TaskCannotBeEmpty>
+    <LookingForUpdates en="Looking for updates...">Vyhledávám aktualizace...</LookingForUpdates>
+    <UpdateFailed en="Update failed">Aktualizace se nezdařila</UpdateFailed>
+    <UpdateComplete en="Update complete">Aktualizae dokončena</UpdateComplete>
+    <ExportingTickets en="Exporting tickets...">Exportuji tickety...</ExportingTickets>
+    <LookingHelpUpdate en="Looking for Help updates...">Vyhledávám aktualizace nápovědy...</LookingHelpUpdate>
+    <TerpUpdate en="Updating list of Terps and Tasks...">Aktualizuji seznam Terpů a Tasků...</TerpUpdate>
+	</Messages>
+</Language>
