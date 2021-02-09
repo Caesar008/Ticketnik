@@ -69,7 +69,10 @@ namespace Ticketník
             label5.Text = form.jazyk.Windows_Ticket_Zacatek;
 
             if (!Properties.Settings.Default.onlineTerp || !File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask"))
+            {
                 newTerpTaskPanel.Dispose();
+                newTerpTaskPanel = null;
+            }
 
             stavTicketu.Items.AddRange(new string[] { form.jazyk.Windows_Ticket_Probiha, form.jazyk.Windows_Ticket_CekaSe, form.jazyk.Windows_Ticket_CekaSeNaOdpoved, form.jazyk.Windows_Ticket_RDP, form.jazyk.Windows_Ticket_Hotovo });
 
@@ -1224,7 +1227,7 @@ namespace Ticketník
                     if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety") == null)
                         form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Add(new NbtList("Tickety", NbtTagType.Compound));
 
-                    if (Properties.Settings.Default.onlineTerp)
+                    if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
                     {
                         ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
                         ticket.Terp = Ticket.TerpKod.OnlineTerp;
@@ -1256,7 +1259,7 @@ namespace Ticketník
                     if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety") == null)
                         form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Add(new NbtList("Tickety", NbtTagType.Compound));
 
-                    if (Properties.Settings.Default.onlineTerp)
+                    if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
                     {
                         ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
                         ticket.Terp = Ticket.TerpKod.OnlineTerp;
@@ -1355,7 +1358,7 @@ namespace Ticketník
                                     ticket.Do = ticket.Do.AddMinutes(1);
                                 }
 
-                                if (Properties.Settings.Default.onlineTerp)
+                                if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
                                 {
                                     ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
                                     ticket.Terp = Ticket.TerpKod.OnlineTerp;
@@ -2793,25 +2796,29 @@ namespace Ticketník
 
         private int ComboWidth(ComboBox cb)
         {
-            ComboBox senderComboBox = (ComboBox)cb;
-            int width = senderComboBox.DropDownWidth;
-            Graphics g = senderComboBox.CreateGraphics();
-            Font font = senderComboBox.Font;
-            int vertScrollBarWidth =
-                (senderComboBox.Items.Count > senderComboBox.MaxDropDownItems)
-                ? SystemInformation.VerticalScrollBarWidth : 0;
-
-            int newWidth;
-            foreach (string s in ((ComboBox)cb).Items)
+            if (cb != null)
             {
-                newWidth = (int)g.MeasureString(s, font).Width
-                    + vertScrollBarWidth;
-                if (width < newWidth)
+                ComboBox senderComboBox = (ComboBox)cb;
+                int width = senderComboBox.DropDownWidth;
+                Graphics g = senderComboBox.CreateGraphics();
+                Font font = senderComboBox.Font;
+                int vertScrollBarWidth =
+                    (senderComboBox.Items.Count > senderComboBox.MaxDropDownItems)
+                    ? SystemInformation.VerticalScrollBarWidth : 0;
+
+                int newWidth;
+                foreach (string s in ((ComboBox)cb).Items)
                 {
-                    width = newWidth;
+                    newWidth = (int)g.MeasureString(s, font).Width
+                        + vertScrollBarWidth;
+                    if (width < newWidth)
+                    {
+                        width = newWidth;
+                    }
                 }
+                return width;
             }
-            return width;
+            return 60;
         }
     }
 }

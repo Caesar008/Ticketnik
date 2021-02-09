@@ -44,9 +44,10 @@ namespace Ticketník
                 {
                     form.LoadFile();
                 }
-                catch
+                catch (Exception fileEx)
                 {
                     MessageBox.Show("Tic soubor je poškozený. Je třeba ho zkontrolovat ručně v NBT editoru.");
+                    MessageBox.Show(fileEx.Message);
                 }
             }
         }

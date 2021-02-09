@@ -42,7 +42,8 @@ namespace Ticketník
                     catch (Exception e)
                     {
                         Logni("Nelze načíst žádný zdroj aktualizací.\r\n" + e.Message, LogMessage.WARNING);
-                        throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
+                        //why? Lepší je return. throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
+                        return;
                     }
                 }
 
