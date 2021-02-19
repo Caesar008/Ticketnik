@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TicketnikHelp verze="6">
+	<Menu>
+		<Item subitems="false" name="O programu Ticketník" file="o_programu.html" />
+		<Item subitems="true" name="Ovládání programu" file="">
+			<Item subitems="true" name="Základní přehled" file="zakladni_prehled.html">
+                <Item subitems="false" name="Hlavní menu" file="hlavni_menu.html" />
+                <Item subitems="false" name="Ovládací prvky" file="ovladani.html" />
+                <Item subitems="false" name="Seznam ticketů" file="seznam_ticketu.html" />
+			</Item>
+			<Item subitems="false" name="Nastavení programu" file="moznosti.html" />
+			<Item subitems="false" name="Klávesové zkratky" file="klavesove_zkratky.html" />
+			<Item subitems="true" name="Práce s tickety" file="">
+				<Item subitems="false" name="Vytvoření ticketu" file="novy_ticket.html" />
+                <Item subitems="false" name="Vyhledávání" file="hledat.html" />
+                <Item subitems="false" name="Export ticketů" file="export_ticketu.html" />
+			</Item>
+  		</Item>
+        <Item subitems="false" name="Aktualizace programu" file="aktualizace.html" />
+	</Menu>
+</TicketnikHelp>
