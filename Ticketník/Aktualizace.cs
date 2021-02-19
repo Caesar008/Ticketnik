@@ -23,12 +23,37 @@ namespace Ticketník
             {
                 XmlDocument updates = new XmlDocument();
                 //updates.Load(Properties.Settings.Default.updateCesta + "\\ticketnik.xml");
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
 
                 try
                 {
                     //výchozí cesta v síti
                     if (!Properties.Settings.Default.pouzivatZalozniUpdate)
                         updates.Load(Properties.Settings.Default.updateCesta + "\\ticketnik.xml");
+                    else
+                    {
+                        try
+                        {
+                            WebClient wc = new WebClient();
+                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
+                            updates.Load(Path.GetTempPath() + "\\ticketnik.xml");
+                        }
+                        catch (Exception e)
+                        {
+                            if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                            {
+                                try
+                                {
+                                    updates.Load(Properties.Settings.Default.updateCesta + "\\ticketnik.xml");
+                                }
+                                catch { Logni("Nelze načíst aktualizační zdroj v síti.", LogMessage.WARNING); }
+                            }
+                            Logni("Nelze načíst žádný zdroj aktualizací.\r\n" + e.Message, LogMessage.WARNING);
+                            //why? Lepší je return. throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
+                            return;
+                        }
+                    }
                 }
                 catch
                 {
@@ -41,6 +66,14 @@ namespace Ticketník
                     }
                     catch (Exception e)
                     {
+                        if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                        {
+                            try
+                            {
+                                updates.Load(Properties.Settings.Default.updateCesta + "\\ticketnik.xml");
+                            }
+                            catch { Logni("Nelze načíst aktualizační zdroj v síti.", LogMessage.WARNING); }
+                        }
                         Logni("Nelze načíst žádný zdroj aktualizací.\r\n" + e.Message, LogMessage.WARNING);
                         //why? Lepší je return. throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
                         return;
@@ -55,6 +88,18 @@ namespace Ticketník
                         //výchozí cesta v síti
                         if (!Properties.Settings.Default.pouzivatZalozniUpdate)
                             File.Copy(Properties.Settings.Default.updateCesta + "\\zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici", true);
+                        else
+                        {
+                            try
+                            {
+                                WebClient wc = new WebClient();
+                                wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
+                            }
+                            catch (Exception e)
+                            {
+                                Logni("Stažení souboru zakaznici selhalo.\r\n" + e.Message, LogMessage.WARNING);
+                            }
+                        }
                     }
                     catch
                     {
@@ -239,6 +284,18 @@ namespace Ticketník
                                 //výchozí cesta v síti
                                 if (!Properties.Settings.Default.pouzivatZalozniUpdate)
                                     File.Copy(Properties.Settings.Default.updateCesta + "\\lang\\" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml", true);
+                                else
+                                {
+                                    try
+                                    {
+                                        WebClient wc = new WebClient();
+                                        wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Logni("Stažení aktualizací jazyka selhalo.\r\n" + e.Message, LogMessage.WARNING);
+                                    }
+                                }
                             }
                             catch
                             {
@@ -272,6 +329,18 @@ namespace Ticketník
                             //výchozí cesta v síti
                             if (!Properties.Settings.Default.pouzivatZalozniUpdate)
                                 File.Copy(Properties.Settings.Default.updateCesta + "\\Ticketnik.exe", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"), true);
+                            else
+                            {
+                                try
+                                {
+                                    WebClient wc = new WebClient();
+                                    wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.txt", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
+                                }
+                                catch (Exception e)
+                                {
+                                    Logni("Stažení aktualizace programu selhalo.\r\n" + e.Message, LogMessage.WARNING);
+                                }
+                            }
                         }
                         catch
                         {

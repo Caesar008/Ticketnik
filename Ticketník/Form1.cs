@@ -14,11 +14,14 @@ using System.Linq;
 namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
+    //Changelog, errory a další věci udělat stahovatelné z netu
 
     /*interní changelog 1.7.0.0
     - Načítání Terp a tasků z MyTime
     - Opravena chyba 20-006
     - Přepracován způsob pouštění aktualizací na pozadí
+    - Upraven systém aktualizací z netu
+    - Defaultně se updatuje z github jako první, až pak ze sharu
     */
 
     public partial class Form1 : Form
