@@ -25,7 +25,10 @@ namespace Ticketník
 
             cz.AppendText(@" - Načítání terpů a tasků z MyTime
  - Terpy a tasky jsou slinkované
- - Přepracován systém výběru terpů a tasků pro ticket");
+ - Přepracován systém výběru terpů a tasků pro ticket
+ - Updaty se primárně stahují z internetu, až poté se kontrolují na sharu
+ - Výchozí vyhledávání updatů je na Github
+ - Oprava chyb");
 
             en.AppendText("News in version 1.7.0.0\r\n\r\n");
             en.SelectionStart = 0;
@@ -34,7 +37,10 @@ namespace Ticketník
 
             en.AppendText(@" - Loading Terp and Task codes from MyTime
  - Terps and tasks are linked together
- - System for setting terp and task for tickets reworked");
+ - System for setting terp and task for tickets reworked
+ - Updates are primarly downloaded from internet, after that are checked on shared folder
+ - Default search location for updates is Github
+ - Bugfixes");
         }
 
         private void Novinky_FormClosing(object sender, FormClosingEventArgs e)

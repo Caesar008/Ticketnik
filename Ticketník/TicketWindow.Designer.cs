@@ -530,6 +530,7 @@
             this.onlineTerpDropDown.Size = new System.Drawing.Size(175, 21);
             this.onlineTerpDropDown.TabIndex = 0;
             this.onlineTerpDropDown.SelectedIndexChanged += new System.EventHandler(this.onlineTerpDropDown_SelectedIndexChanged);
+            this.onlineTerpDropDown.TextChanged += new System.EventHandler(this.onlineTerpDropDown_TextChanged);
             // 
             // button1
             // 

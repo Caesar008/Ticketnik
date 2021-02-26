@@ -90,6 +90,8 @@ namespace Ticketník
             if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
             {
                 ok.Enabled = false;
+                btn_TicketWindow_SearchTerp.Enabled = false;
+                btn_TicketWindow_UpdateSelected.Enabled = false;
                 if(form.terpFile != null)
                 {
                     while (form.terpTaskFileLock)
@@ -2772,6 +2774,14 @@ namespace Ticketník
         {
             if((string)onlineTypeComboBox.SelectedItem != string.Empty)
                 ok.Enabled = true;
+        }
+
+        private void onlineTerpDropDown_TextChanged(object sender, EventArgs e)
+        {
+            if (onlineTerpDropDown.Text != "")
+                btn_TicketWindow_SearchTerp.Enabled = true;
+            else
+                btn_TicketWindow_SearchTerp.Enabled = false;
         }
 
         private void search_btn_Click(object sender, EventArgs e)
