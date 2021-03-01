@@ -2784,6 +2784,16 @@ namespace Ticketník
                 btn_TicketWindow_SearchTerp.Enabled = false;
         }
 
+        private void btn_TicketWindow_SearchTerp_Click(object sender, EventArgs e)
+        {
+            form.UpdateTerpTaskFile(onlineTerpDropDown.Text);
+        }
+
+        private void btn_TicketWindow_UpdateSelected_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void search_btn_Click(object sender, EventArgs e)
         {
             Regex reg = new Regex(@"\d+$");

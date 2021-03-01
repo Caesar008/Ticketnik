@@ -467,6 +467,7 @@
             this.btn_TicketWindow_SearchTerp.TabIndex = 7;
             this.btn_TicketWindow_SearchTerp.Text = "Vyhledat Terp";
             this.btn_TicketWindow_SearchTerp.UseVisualStyleBackColor = true;
+            this.btn_TicketWindow_SearchTerp.Click += new System.EventHandler(this.btn_TicketWindow_SearchTerp_Click);
             // 
             // btn_TicketWindow_UpdateSelected
             // 
@@ -476,6 +477,7 @@
             this.btn_TicketWindow_UpdateSelected.TabIndex = 6;
             this.btn_TicketWindow_UpdateSelected.Text = "Aktualizovat vybrané";
             this.btn_TicketWindow_UpdateSelected.UseVisualStyleBackColor = true;
+            this.btn_TicketWindow_UpdateSelected.Click += new System.EventHandler(this.btn_TicketWindow_UpdateSelected_Click);
             // 
             // lbl_TicketWindow_onlineType
             // 
