@@ -9,6 +9,8 @@ https://stackoverflow.com/questions/2777878/detect-webbrowser-complete-page-load
 
 Zídkání terpů a tasků a dalších blbostí
 
+moentálně se zasekává vyhledání terpu konkrétního
+
 https://mytime.tieto.com/autocomplete/projects/by_number?mode=my&term=
 Tohle najde všechny moje terpy
 

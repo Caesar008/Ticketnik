@@ -2786,6 +2786,7 @@ namespace Ticketník
 
         private void btn_TicketWindow_SearchTerp_Click(object sender, EventArgs e)
         {
+            form.terpTaskFileLock = false;
             form.UpdateTerpTaskFile(onlineTerpDropDown.Text);
         }
 
