@@ -48,10 +48,12 @@ namespace Ticketník
         public List<MyTimeTerp> GetAllMyTerps()
         {
             terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/by_number?mode=my&term="));
+
             //output += "1\r\n";
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             terpLoaderReady = false;
 
@@ -62,6 +64,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
                 terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/by_number?mode=my&term="));
@@ -69,6 +72,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
                 //output += result;
@@ -125,6 +129,7 @@ namespace Ticketník
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             terpLoaderReady = false;
 
@@ -134,6 +139,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
 
@@ -141,6 +147,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
             }
@@ -192,6 +199,7 @@ namespace Ticketník
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             terpLoaderReady = false;
 
@@ -201,6 +209,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
 
@@ -208,6 +217,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
             }
@@ -258,6 +268,7 @@ namespace Ticketník
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             terpLoaderReady = false;
 
@@ -267,6 +278,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
 
@@ -274,6 +286,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
             }
@@ -320,6 +333,7 @@ namespace Ticketník
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             terpLoaderReady = false;
 
@@ -329,6 +343,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
 
@@ -336,6 +351,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
             }
@@ -365,6 +381,7 @@ namespace Ticketník
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             terpLoaderReady = false;
 
@@ -374,6 +391,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
 
@@ -381,6 +399,7 @@ namespace Ticketník
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
+                    Application.DoEvents();
                 }
                 terpLoaderReady = false;
             }
@@ -640,11 +659,19 @@ namespace Ticketník
                 MyTimeTerp customTerp = GetTerpData(terpNumber);
 
                 //file.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Number", mtt.Number));
-
+                if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label) == null)
+                {
+                    terpFile.RootTag.Get<NbtCompound>("Custom").Add(new NbtCompound(customTerp.Label));
+                    terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Add(new NbtString("ID", customTerp.ID));
+                    terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Add(new NbtString("Label", customTerp.Label));
+                    terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Add(new NbtString("Name", customTerp.Name == null ? "" : customTerp.Name));
+                    terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Add(new NbtString("Number", customTerp.Number));
+                    terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Add(new NbtCompound("Tasks"));
+                }
 
                 foreach (MyTimeTask customTask in customTerp.Tasks)
                 {
-                    if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label) == null)
+                    if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label) == null)
                     {
                         terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Add(new NbtCompound(customTask.Label));
                         terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("ID", customTask.ID));
@@ -653,9 +680,15 @@ namespace Ticketník
                         terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
                     }
 
+
                     foreach (string customType in customTask.TypeLabels)
                     {
-                        if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types")[customType] == null)
+                        List<string> tmpCheck = new List<string>();
+                        foreach(NbtString ns in terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types"))
+                        {
+                            tmpCheck.Add(ns.Name);
+                        }
+                        if (!tmpCheck.Contains(customType))
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types").Add(new NbtString(customType));
                     }
                 }

@@ -71,7 +71,7 @@ namespace Ticketník
                             File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "FastMember.Signed.dll", Properties.Resources.FastMember_Signed);
                         if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "Newtonsoft.Json.dll") || par.Contains("repair"))
                             File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "Newtonsoft.Json.dll", Properties.Resources.Newtonsoft_Json);
-                        
+
                         if (par.Contains("show"))
                             Properties.Settings.Default.umisteni = new System.Drawing.Point(0, 0);
                         else if (par.Contains("default") || Control.ModifierKeys == Keys.Shift)
@@ -164,7 +164,15 @@ namespace Ticketník
                             catch { i++; System.Threading.Thread.Sleep(1000); }
                     }
                     else
-                        MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    {
+                        if(!Application.ProductVersion.Contains("dev"))
+                            MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        else
+                        {
+                            if(DialogResult.Ignore == MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Exclamation))
+                                Application.Run(new Form1());
+                        }
+                    }
                 }
                 catch (System.Configuration.ConfigurationErrorsException ex)
                 {

@@ -104,6 +104,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
@@ -132,6 +133,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(6, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
@@ -141,6 +143,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Location = new System.Drawing.Point(6, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
@@ -166,6 +169,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Location = new System.Drawing.Point(6, 101);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
@@ -214,7 +218,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.SystemColors.Control;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Location = new System.Drawing.Point(6, 127);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(33, 13);
@@ -454,7 +458,7 @@
             this.newTerpTaskPanel.Controls.Add(this.onlineTaskComboBox);
             this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineTerp);
             this.newTerpTaskPanel.Controls.Add(this.onlineTerpDropDown);
-            this.newTerpTaskPanel.Location = new System.Drawing.Point(1, 46);
+            this.newTerpTaskPanel.Location = new System.Drawing.Point(3, 48);
             this.newTerpTaskPanel.Name = "newTerpTaskPanel";
             this.newTerpTaskPanel.Size = new System.Drawing.Size(277, 106);
             this.newTerpTaskPanel.TabIndex = 18;
@@ -482,6 +486,7 @@
             // lbl_TicketWindow_onlineType
             // 
             this.lbl_TicketWindow_onlineType.AutoSize = true;
+            this.lbl_TicketWindow_onlineType.BackColor = System.Drawing.Color.Transparent;
             this.lbl_TicketWindow_onlineType.Location = new System.Drawing.Point(5, 60);
             this.lbl_TicketWindow_onlineType.Name = "lbl_TicketWindow_onlineType";
             this.lbl_TicketWindow_onlineType.Size = new System.Drawing.Size(25, 13);
@@ -491,6 +496,7 @@
             // lbl_TicketWindow_onlineTask
             // 
             this.lbl_TicketWindow_onlineTask.AutoSize = true;
+            this.lbl_TicketWindow_onlineTask.BackColor = System.Drawing.Color.Transparent;
             this.lbl_TicketWindow_onlineTask.Location = new System.Drawing.Point(5, 33);
             this.lbl_TicketWindow_onlineTask.Name = "lbl_TicketWindow_onlineTask";
             this.lbl_TicketWindow_onlineTask.Size = new System.Drawing.Size(31, 13);
@@ -518,6 +524,7 @@
             // lbl_TicketWindow_onlineTerp
             // 
             this.lbl_TicketWindow_onlineTerp.AutoSize = true;
+            this.lbl_TicketWindow_onlineTerp.BackColor = System.Drawing.Color.Transparent;
             this.lbl_TicketWindow_onlineTerp.Location = new System.Drawing.Point(5, 6);
             this.lbl_TicketWindow_onlineTerp.Name = "lbl_TicketWindow_onlineTerp";
             this.lbl_TicketWindow_onlineTerp.Size = new System.Drawing.Size(29, 13);
@@ -547,47 +554,51 @@
             // mdm
             // 
             this.mdm.AutoSize = true;
+            this.mdm.BackColor = System.Drawing.Color.Transparent;
             this.mdm.Location = new System.Drawing.Point(151, 66);
             this.mdm.Name = "mdm";
             this.mdm.Size = new System.Drawing.Size(52, 17);
             this.mdm.TabIndex = 16;
             this.mdm.Text = "MDM";
-            this.mdm.UseVisualStyleBackColor = true;
+            this.mdm.UseVisualStyleBackColor = false;
             this.mdm.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
             this.checkBox1.Location = new System.Drawing.Point(209, 67);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(71, 17);
             this.checkBox1.TabIndex = 15;
             this.checkBox1.Text = "Enkrypce";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.UseVisualStyleBackColor = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // nahradni
             // 
             this.nahradni.AutoSize = true;
+            this.nahradni.BackColor = System.Drawing.Color.Transparent;
             this.nahradni.Location = new System.Drawing.Point(15, 66);
             this.nahradni.Name = "nahradni";
             this.nahradni.Size = new System.Drawing.Size(99, 17);
             this.nahradni.TabIndex = 14;
             this.nahradni.TabStop = true;
             this.nahradni.Text = "Náhradní volno";
-            this.nahradni.UseVisualStyleBackColor = true;
+            this.nahradni.UseVisualStyleBackColor = false;
             this.nahradni.CheckedChanged += new System.EventHandler(this.normalni_CheckedChanged);
             // 
             // volno
             // 
             this.volno.AutoSize = true;
+            this.volno.BackColor = System.Drawing.Color.Transparent;
             this.volno.Location = new System.Drawing.Point(186, 46);
             this.volno.Name = "volno";
             this.volno.Size = new System.Drawing.Size(59, 17);
             this.volno.TabIndex = 13;
             this.volno.TabStop = true;
             this.volno.Text = "Svátek";
-            this.volno.UseVisualStyleBackColor = true;
+            this.volno.UseVisualStyleBackColor = false;
             this.volno.CheckedChanged += new System.EventHandler(this.normalni_CheckedChanged);
             // 
             // popisTypu
@@ -645,6 +656,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Location = new System.Drawing.Point(6, 114);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(104, 13);
@@ -654,6 +666,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Location = new System.Drawing.Point(6, 100);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(72, 13);
@@ -663,6 +676,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Location = new System.Drawing.Point(6, 86);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(96, 13);
@@ -672,30 +686,33 @@
             // normalni
             // 
             this.normalni.AutoSize = true;
+            this.normalni.BackColor = System.Drawing.Color.Transparent;
             this.normalni.Location = new System.Drawing.Point(15, 46);
             this.normalni.Name = "normalni";
             this.normalni.Size = new System.Drawing.Size(95, 17);
             this.normalni.TabIndex = 3;
             this.normalni.TabStop = true;
             this.normalni.Text = "Normální doba";
-            this.normalni.UseVisualStyleBackColor = true;
+            this.normalni.UseVisualStyleBackColor = false;
             this.normalni.CheckedChanged += new System.EventHandler(this.normalni_CheckedChanged);
             // 
             // prescas
             // 
             this.prescas.AutoSize = true;
+            this.prescas.BackColor = System.Drawing.Color.Transparent;
             this.prescas.Location = new System.Drawing.Point(116, 46);
             this.prescas.Name = "prescas";
             this.prescas.Size = new System.Drawing.Size(64, 17);
             this.prescas.TabIndex = 2;
             this.prescas.TabStop = true;
             this.prescas.Text = "Přesčas";
-            this.prescas.UseVisualStyleBackColor = true;
+            this.prescas.UseVisualStyleBackColor = false;
             this.prescas.CheckedChanged += new System.EventHandler(this.normalni_CheckedChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Location = new System.Drawing.Point(6, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 13);
