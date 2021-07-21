@@ -57,7 +57,7 @@ namespace Ticketník
             }
             terpLoaderReady = false;
 
-            if (result.Contains("Access denied") || result.Contains("Navigation to the webpage was canceled") || result.Contains("Your session has expired"))
+            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
                 terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 //output += "2\r\n";
@@ -133,7 +133,7 @@ namespace Ticketník
             }
             terpLoaderReady = false;
 
-            if (result.Contains("Access denied") || result.Contains("Navigation to the webpage was canceled") || result.Contains("Your session has expired"))
+            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
                 terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
@@ -181,7 +181,7 @@ namespace Ticketník
                         tmpNumber = reader.Value.ToString();
                     }
 
-                    if (tmpId != "" && tmpLabel != "" && tmpName != "")
+                    if (tmpId != "" && tmpLabel != "" && tmpName != "" && tmpNumber != "")
                     {
                         myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber);
                         myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID);
@@ -203,7 +203,7 @@ namespace Ticketník
             }
             terpLoaderReady = false;
 
-            if (result.Contains("Access denied") || result.Contains("Navigation to the webpage was canceled") || result.Contains("Your session has expired"))
+            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
                 terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
@@ -272,7 +272,7 @@ namespace Ticketník
             }
             terpLoaderReady = false;
 
-            if (result.Contains("Access denied") || result.Contains("Navigation to the webpage was canceled") || result.Contains("Your session has expired"))
+            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
                 terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
@@ -337,7 +337,7 @@ namespace Ticketník
             }
             terpLoaderReady = false;
 
-            if (result.Contains("Access denied") || result.Contains("Navigation to the webpage was canceled") || result.Contains("Your session has expired"))
+            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
                 terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
@@ -385,7 +385,7 @@ namespace Ticketník
             }
             terpLoaderReady = false;
 
-            if (result.Contains("Access denied") || result.Contains("Navigation to the webpage was canceled"))
+            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
                 terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
@@ -589,10 +589,10 @@ namespace Ticketník
                 {
                     foreach (NbtCompound customTerpy in terpFile.RootTag.Get<NbtCompound>("Custom").Tags)
                     {
-                        MyTimeTerp customTerp = GetTerpData(customTerpy.Get<NbtString>("ID").Value);
+                        MyTimeTerp customTerp = GetTerpData(customTerpy.Get<NbtString>("Number").Value);
                         foreach (MyTimeTask customTask in customTerp.Tasks)
                         {
-                            if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>(customTask.Label) == null)
+                            if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label) == null)
                             {
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Add(new NbtCompound(customTask.Label));
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("ID", customTask.ID));
@@ -601,9 +601,19 @@ namespace Ticketník
                                 terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
                             }
 
-                            foreach(string customType in customTask.TypeLabels)
+                            /*foreach(string customType in customTask.TypeLabels)
                             {
                                 if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types")[customType] == null)
+                                    terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types").Add(new NbtString(customType));
+                            }*/
+                            foreach (string customType in customTask.TypeLabels)
+                            {
+                                List<string> tmpCheck = new List<string>();
+                                foreach (NbtString ns in terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types"))
+                                {
+                                    tmpCheck.Add(ns.Name);
+                                }
+                                if (!tmpCheck.Contains(customType))
                                     terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types").Add(new NbtString(customType));
                             }
                         }
@@ -696,6 +706,8 @@ namespace Ticketník
 
                 terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
                 Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
+
+                LoadTerptaskFile();
             }
             catch (Exception e)
             {
