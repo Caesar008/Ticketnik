@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using fNbt;
 using System.Text.RegularExpressions;
@@ -2779,9 +2774,23 @@ namespace Ticketník
         private void onlineTerpDropDown_TextChanged(object sender, EventArgs e)
         {
             if (onlineTerpDropDown.Text != "")
-                btn_TicketWindow_SearchTerp.Enabled = true;
+            {
+                if (!onlineTerpDropDown.Items.Contains(onlineTerpDropDown.Text))
+                {
+                    btn_TicketWindow_SearchTerp.Enabled = true;
+                    btn_TicketWindow_UpdateSelected.Enabled = false;
+                }
+                else
+                {
+                    btn_TicketWindow_SearchTerp.Enabled = false;
+                    btn_TicketWindow_UpdateSelected.Enabled = true;
+                }
+            }
             else
+            {
                 btn_TicketWindow_SearchTerp.Enabled = false;
+                btn_TicketWindow_UpdateSelected.Enabled = false;
+            }
         }
 
         private void btn_TicketWindow_SearchTerp_Click(object sender, EventArgs e)
@@ -2792,7 +2801,8 @@ namespace Ticketník
 
         private void btn_TicketWindow_UpdateSelected_Click(object sender, EventArgs e)
         {
-
+            form.terpTaskFileLock = false;
+            form.UpdateSelected(form.Terpy[onlineTerpDropDown.Text].Number);
         }
 
         private void search_btn_Click(object sender, EventArgs e)
