@@ -1167,12 +1167,36 @@ namespace Ticketník
             }
         }
 
+        private string DejNewTerp(string oldTerp)
+        {
+            string terp = oldTerp.Split('|')[0];
+            foreach(string mtterp in form.Terpy.Keys)
+            {
+                if(mtterp.StartsWith(terp))
+                {
+                    return mtterp;
+                }
+            }
+            return "";
+        }
+
         private void zakaznik_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(muze)
             {
                 terpKod.Text = DejTerp();
                 ticket.Zakaznik = (string)zakaznik.SelectedItem;
+                string tmpSelected = DejNewTerp(terpKod.Text);
+                foreach (string s in onlineTerpDropDown.Items)
+                {
+                    if (s.StartsWith(tmpSelected + " "))
+                    {
+                        tmpSelected = s;
+                        break;
+                    }
+                }
+                if (onlineTerpDropDown.Items.Contains(tmpSelected))
+                    onlineTerpDropDown.SelectedItem = tmpSelected;
                 Properties.Settings.Default.lastSelected = (string)zakaznik.SelectedItem;
                 Properties.Settings.Default.Save();
             }
@@ -2814,6 +2838,19 @@ namespace Ticketník
                 }
             }
             onlineTypeComboBox.DropDownWidth = ComboWidth(onlineTypeComboBox);
+
+            if(DateTime.Now.DayOfWeek != DayOfWeek.Sunday && DateTime.Now.DayOfWeek != DayOfWeek.Saturday)
+            {
+                foreach (string s in onlineTypeComboBox.Items)
+                {
+                    if (s.ToLower().StartsWith("normal "))
+                    {
+                        onlineTypeComboBox.SelectedItem = s;
+                        break;
+                    }
+                }
+            }
+
         }
 
         private void onlineTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
