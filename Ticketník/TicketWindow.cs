@@ -362,7 +362,51 @@ namespace Ticketník
                             richTextBox1.Text = refer.Poznamky;
                             zacatek.Text = refer.Od.ToString("H:mm");
                             //cas.SelectedIndex = 0;
-                            
+
+                            if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
+                            {
+                                string tmpSelected = refer.CustomTerp;
+                                foreach (string s in onlineTerpDropDown.Items)
+                                {
+                                    if (s.StartsWith(tmpSelected + " "))
+                                    {
+                                        tmpSelected = s;
+                                        break;
+                                    }
+                                }
+                                if(onlineTerpDropDown.Items.Contains(tmpSelected))
+                                    onlineTerpDropDown.SelectedItem = tmpSelected;
+
+                                tmpSelected = refer.CustomTask;
+                                foreach (string s in onlineTaskComboBox.Items)
+                                {
+                                    if (s.StartsWith(tmpSelected + " "))
+                                    {
+                                        tmpSelected = s;
+                                        break;
+                                    }
+                                }
+                                if(onlineTaskComboBox.Items.Contains(tmpSelected))
+                                    onlineTaskComboBox.SelectedItem = tmpSelected;
+
+                                if (refer.TypPrace == (byte)Ticket.TypTicketu.Normalni || refer.TypPrace == (byte)Ticket.TypTicketu.Custom ||
+                                    refer.TypPrace == (byte)Ticket.TypTicketu.Enkripce || refer.TypPrace == (byte)Ticket.TypTicketu.EnkripceProblem ||
+                                    refer.TypPrace == (byte)Ticket.TypTicketu.Mobility || refer.TypPrace == (byte)Ticket.TypTicketu.MobilityProblem ||
+                                    refer.TypPrace == (byte)Ticket.TypTicketu.ProblemTicket)
+                                {
+                                    foreach (string s in onlineTypeComboBox.Items)
+                                    {
+                                        if (s.ToLower().StartsWith("normal "))
+                                        {
+                                            onlineTypeComboBox.SelectedItem = s;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (onlineTypeComboBox.Items.Contains(refer.OnlineTyp))
+                                    onlineTypeComboBox.SelectedItem = refer.OnlineTyp;
+                            }
+
 
                             if (refer.Do.ToString("H:mm") == "0:00")
                                 konec.Text = "";
@@ -1261,6 +1305,7 @@ namespace Ticketník
 
                     if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
                     {
+                        ticket.TypPrace = (byte)Ticket.TypTicketu.OnlineTyp;
                         ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
                         ticket.Terp = Ticket.TerpKod.OnlineTerp;
                         foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
@@ -1360,6 +1405,7 @@ namespace Ticketník
 
                                 if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
                                 {
+                                    ticket.TypPrace = (byte)Ticket.TypTicketu.OnlineTyp;
                                     ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
                                     ticket.Terp = Ticket.TerpKod.OnlineTerp;
                                     foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)

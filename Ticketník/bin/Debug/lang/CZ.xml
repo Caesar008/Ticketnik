@@ -286,5 +286,6 @@
     <ExportingTickets en="Exporting tickets...">Exportuji tickety...</ExportingTickets>
     <LookingHelpUpdate en="Looking for Help updates...">Vyhledávám aktualizace nápovědy...</LookingHelpUpdate>
     <TerpUpdate en="Updating list of Terps and Tasks...">Aktualizuji seznam Terpů a Tasků...</TerpUpdate>
+    <NotRecomended en="Disabling this option is not recommended!">Vypnutí tohoto nastavení není doporučeno!</NotRecomended>
 	</Messages>
 </Language>

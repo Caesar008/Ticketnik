@@ -657,6 +657,13 @@ namespace Ticketník
                 return ReturnPreklad("Messages/LookingHelpUpdate");
             }
         }
+        internal string Message_DisableNotRecommended
+        {
+            get
+            {
+                return ReturnPreklad("Messages/NotRecomended");
+            }
+        }
 
         #endregion
 

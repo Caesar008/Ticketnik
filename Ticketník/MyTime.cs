@@ -510,7 +510,7 @@ namespace Ticketník
                 Logni("TerpTask soubor vytvořen", Form1.LogMessage.INFO);
                 LoadTerptaskFile();
             }
-            catch (ThreadAbortException ta)
+            catch (ThreadAbortException)
             {
                 Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
             }
@@ -632,7 +632,7 @@ namespace Ticketník
 
                 LoadTerptaskFile();
             }
-            catch (ThreadAbortException ta)
+            catch (ThreadAbortException)
             {
                 Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
             }
@@ -733,7 +733,7 @@ namespace Ticketník
                 terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
-            catch(ThreadAbortException ta)
+            catch(ThreadAbortException)
             {
                 Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
             }
@@ -876,7 +876,7 @@ namespace Ticketník
                 terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
-            catch (ThreadAbortException ta)
+            catch (ThreadAbortException)
             {
                 Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
             }

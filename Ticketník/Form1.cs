@@ -739,6 +739,8 @@ namespace Ticketník
                                                     tty = Ticket.TypTicketu.CustomNahradni;
                                                 else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.CustomOPrazdniny)
                                                     tty = Ticket.TypTicketu.CustomOPrazdniny;
+                                                else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.OnlineTyp)
+                                                    tty = Ticket.TypTicketu.OnlineTyp;
                                                 else
                                                     tty = Ticket.TypTicketu.Custom;
                                             }
@@ -776,6 +778,8 @@ namespace Ticketník
                                                     tty = Ticket.TypTicketu.CustomNahradni;
                                                 else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.CustomOPrazdniny)
                                                     tty = Ticket.TypTicketu.CustomOPrazdniny;
+                                                else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.OnlineTyp)
+                                                    tty = Ticket.TypTicketu.OnlineTyp;
                                                 else
                                                     tty = Ticket.TypTicketu.Normalni;
                                             }
@@ -797,11 +801,17 @@ namespace Ticketník
                                                     tty = Ticket.TypTicketu.EnkripceProblemOPrazdniny;
                                                 else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.EnkripcePrescas || tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.EnkripceProblemPrescas)
                                                     tty = Ticket.TypTicketu.EnkripceProblemPrescas;
+                                                else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.OnlineTyp)
+                                                    tty = Ticket.TypTicketu.OnlineTyp;
                                                 else
                                                     tty = Ticket.TypTicketu.ProblemTicket;
                                             }
                                             else
                                                 tty = Ticket.TypTicketu.Normalni;
+
+                                            string onlineTyp = "";
+                                            if (tic["OnlineTyp"] != null)
+                                                onlineTyp = tic["OnlineTyp"].StringValue;
 
                                             if (tickety.ContainsKey(c.Name))
                                             {
@@ -812,7 +822,7 @@ namespace Ticketník
                                                 string ctask = "";
                                                 if (tic["Task"] != null)
                                                     ctask = tic["Task"].StringValue;
-                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask));
+                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask, onlineTyp));
                                             }
                                             else
                                             {
@@ -824,7 +834,7 @@ namespace Ticketník
                                                 if (tic["Task"] != null)
                                                     ctask = tic["Task"].StringValue;
                                                 tickety.Add(c.Name, new List<Ticket>());
-                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask));
+                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask, onlineTyp));
 
                                             }
                                         }
@@ -960,7 +970,7 @@ namespace Ticketník
                                                         if(t.TypPrace == (byte)Ticket.TypTicketu.Prescas || t.TypPrace == (byte)Ticket.TypTicketu.CustomPrescas || 
                                                             t.TypPrace == (byte)Ticket.TypTicketu.EnkripcePrescas || t.TypPrace == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
                                                             t.TypPrace == (byte)Ticket.TypTicketu.MobilityPrescas || t.TypPrace == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
-                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas || t.OnlineTyp.ToLower().Contains("overtime"))
                                                             barvaP = Properties.Settings.Default.prescas;
                                                         else
                                                             barvaP = Properties.Settings.Default.vyreseno;
@@ -1202,6 +1212,8 @@ namespace Ticketník
                                                     tty = Ticket.TypTicketu.CustomNahradni;
                                                 else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.CustomOPrazdniny)
                                                     tty = Ticket.TypTicketu.CustomOPrazdniny;
+                                                else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.OnlineTyp)
+                                                    tty = Ticket.TypTicketu.OnlineTyp;
                                                 else
                                                     tty = Ticket.TypTicketu.Custom;
                                             }
@@ -1239,6 +1251,8 @@ namespace Ticketník
                                                     tty = Ticket.TypTicketu.CustomNahradni;
                                                 else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.CustomOPrazdniny)
                                                     tty = Ticket.TypTicketu.CustomOPrazdniny;
+                                                else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.OnlineTyp)
+                                                    tty = Ticket.TypTicketu.OnlineTyp;
                                                 else
                                                     tty = Ticket.TypTicketu.Normalni;
                                             }
@@ -1260,11 +1274,17 @@ namespace Ticketník
                                                     tty = Ticket.TypTicketu.EnkripceProblemOPrazdniny;
                                                 else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.EnkripcePrescas || tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.EnkripceProblemPrescas)
                                                     tty = Ticket.TypTicketu.EnkripceProblemPrescas;
+                                                else if (tic["Prace"].ByteValue == (byte)Ticket.TypTicketu.OnlineTyp)
+                                                    tty = Ticket.TypTicketu.OnlineTyp;
                                                 else
                                                     tty = Ticket.TypTicketu.ProblemTicket;
                                             }
                                             else
                                                 tty = Ticket.TypTicketu.Normalni;
+
+                                            string onlineTyp = "";
+                                            if (tic["OnlineTyp"] != null)
+                                                onlineTyp = tic["OnlineTyp"].StringValue;
 
                                             if (tickety.ContainsKey(c.Name))
                                             {
@@ -1275,7 +1295,7 @@ namespace Ticketník
                                                 string ctask = "";
                                                 if (tic["Task"] != null)
                                                     ctask = tic["Task"].StringValue;
-                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask));
+                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask, onlineTyp));
                                             }
                                             else
                                             {
@@ -1287,7 +1307,7 @@ namespace Ticketník
                                                 if (tic["Task"] != null)
                                                     ctask = tic["Task"].StringValue;
                                                 tickety.Add(c.Name, new List<Ticket>());
-                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask));
+                                                tickety[c.Name].Add(new Ticket(tic["IDlong"].LongValue, mes["Mesic"].StringValue, den, denOd, denDo, pauzyOd, pauzyDo, st, tic["ID"].StringValue, tic["Kontakt"].StringValue, tic["PC"].StringValue, tic["Popis"].StringValue, tic["Poznamky"].StringValue, tty, c.Name, cterp, ctask, onlineTyp));
 
                                             }
 
@@ -1426,7 +1446,7 @@ namespace Ticketník
                                                         if (t.TypPrace == (byte)Ticket.TypTicketu.Prescas || t.TypPrace == (byte)Ticket.TypTicketu.CustomPrescas ||
                                                             t.TypPrace == (byte)Ticket.TypTicketu.EnkripcePrescas || t.TypPrace == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
                                                             t.TypPrace == (byte)Ticket.TypTicketu.MobilityPrescas || t.TypPrace == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
-                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas || t.OnlineTyp.ToLower().Contains("overtime"))
                                                             barvaP = Properties.Settings.Default.prescas;
                                                         else
                                                             barvaP = Properties.Settings.Default.vyreseno;

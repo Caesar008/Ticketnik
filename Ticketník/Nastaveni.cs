@@ -356,6 +356,8 @@ namespace Ticketník
         {
             if (muze)
             {
+                if (!onlineTerp.Checked)
+                    MessageBox.Show(form.jazyk.Message_DisableNotRecommended);
                 Properties.Settings.Default.onlineTerp = onlineTerp.Checked;
                 Properties.Settings.Default.Save();
             }
