@@ -181,7 +181,7 @@ namespace Ticketník
                         tmpNumber = reader.Value.ToString();
                     }
 
-                    if (tmpId != "" && tmpLabel != "" && (tmpName != "" || !result.Contains("project_name")) && (tmpNumber != "" || !result.Contains("project_number")))
+                    if (tmpId != "" && tmpLabel != "" && tmpName != "" && (tmpNumber != "" || !result.Contains("project_number")))
                     {
                         myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber);
                         myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID);
@@ -462,6 +462,7 @@ namespace Ticketník
             while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
             {
                 Thread.Sleep(50);
+                Application.DoEvents();
             }
             if (!InvokeRequired)
                 timer_ClearInfo.Stop();
@@ -474,6 +475,7 @@ namespace Ticketník
             else
             {
                 Thread.Sleep(250);
+                Application.DoEvents();
             }
             try
             {
@@ -508,6 +510,10 @@ namespace Ticketník
                 Logni("TerpTask soubor vytvořen", Form1.LogMessage.INFO);
                 LoadTerptaskFile();
             }
+            catch (ThreadAbortException ta)
+            {
+                Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
+            }
             catch (Exception e)
             {
                 Logni("Vytváření terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
@@ -529,8 +535,11 @@ namespace Ticketník
         public void UpdateTerpTaskFile()
         {
             while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            {
                 Thread.Sleep(50);
-            if (!InvokeRequired)
+                Application.DoEvents();
+            }
+                if (!InvokeRequired)
                 timer_ClearInfo.Stop();
             else
                 this.BeginInvoke(new Action(() => timer_ClearInfo.Stop()));
@@ -538,8 +547,11 @@ namespace Ticketník
 
             //updatovat tasky podle načtení a přidat ty, co původně jsou uložené navíc
             while (terpTaskFileLock)
+            {
                 Thread.Sleep(250);
-            try
+                Application.DoEvents();
+            }
+                try
             {
                 Logni("Updatuji terpTask soubor", Form1.LogMessage.INFO);
                 terpFile = new NbtFile();
@@ -620,6 +632,10 @@ namespace Ticketník
 
                 LoadTerptaskFile();
             }
+            catch (ThreadAbortException ta)
+            {
+                Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
+            }
             catch (Exception e)
             {
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
@@ -641,15 +657,21 @@ namespace Ticketník
         public void UpdateTerpTaskFile(string terpNumber)
         {
             while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            {
                 Thread.Sleep(50);
-            if (!InvokeRequired)
+                Application.DoEvents();
+            }
+                if (!InvokeRequired)
                 timer_ClearInfo.Stop();
             else
                 this.BeginInvoke(new Action(() => timer_ClearInfo.Stop()));
             infoBox.Text = jazyk.Message_TerpUpdate;
             //vzít file jak je a updatovat nebo přidat jen task z parametru
             while (terpTaskFileLock)
+            {
                 Thread.Sleep(250);
+                Application.DoEvents();
+            }
             terpTaskFileLock = true;
 
             try
@@ -711,6 +733,10 @@ namespace Ticketník
                 terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
+            catch(ThreadAbortException ta)
+            {
+                Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
+            }
             catch (Exception e)
             {
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
@@ -732,15 +758,21 @@ namespace Ticketník
         public void UpdateSelected(string terp)
         {
             while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            {
                 Thread.Sleep(50);
-            if (!InvokeRequired)
+                Application.DoEvents();
+            }
+                if (!InvokeRequired)
                 timer_ClearInfo.Stop();
             else
                 this.BeginInvoke(new Action(() => timer_ClearInfo.Stop()));
             infoBox.Text = jazyk.Message_TerpUpdate;
             while (terpTaskFileLock)
+            {
                 Thread.Sleep(250);
-            terpTaskFileLock = true;
+                Application.DoEvents();
+            }
+                terpTaskFileLock = true;
 
             //tady bude updatování vybraného terpu
             try
@@ -844,6 +876,10 @@ namespace Ticketník
                 terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
+            catch (ThreadAbortException ta)
+            {
+                Logni("Updatování terpTask souboru bylo přerušeno\r\n", Form1.LogMessage.INFO);
+            }
             catch (Exception e)
             {
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
@@ -867,7 +903,10 @@ namespace Ticketník
         public void LoadTerptaskFile()
         {
             while (terpTaskFileLock)
+            {
                 Thread.Sleep(50);
+                Application.DoEvents();
+            }
             if (!terpTaskFileLock)
             {
                 if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask"))

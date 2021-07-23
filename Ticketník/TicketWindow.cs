@@ -90,7 +90,10 @@ namespace Ticketník
                 if(form.terpFile != null)
                 {
                     while (form.terpTaskFileLock)
+                    {
                         Thread.Sleep(50);
+                        Application.DoEvents();
+                    }
                     form.terpTaskFileLock = true;
                     foreach(MyTimeTerp onlineTerpy in form.Terpy.Values)
                     {
@@ -1671,7 +1674,8 @@ namespace Ticketník
             if (e.KeyCode == Keys.Escape)
                 this.Close();
             else if (e.KeyCode == Keys.Enter && e.Modifiers != Keys.Shift)
-                ok_Click(null, null);
+                if(ok.Enabled)
+                    ok_Click(null, null);
         }
 
         private void NovyTerp(string terp)
@@ -2797,12 +2801,40 @@ namespace Ticketník
         {
             form.terpTaskFileLock = false;
             form.UpdateTerpTaskFile(onlineTerpDropDown.Text);
+            string tmpSelected = onlineTerpDropDown.Text;
+            onlineTerpDropDown.Items.Clear();
+            onlineTerpDropDown.Text = "";
+            foreach (MyTimeTerp onlineTerpy in form.Terpy.Values)
+            {
+                onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+            }
+            onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
+
+            foreach(string s in onlineTerpDropDown.Items)
+            {
+                if(s.StartsWith(tmpSelected + " "))
+                {
+                    tmpSelected = s;
+                    break;
+                }
+            }
+
+            onlineTerpDropDown.SelectedItem = tmpSelected;
         }
 
         private void btn_TicketWindow_UpdateSelected_Click(object sender, EventArgs e)
         {
             form.terpTaskFileLock = false;
             form.UpdateSelected(form.Terpy[onlineTerpDropDown.Text].Number);
+            string tmpSelected = onlineTerpDropDown.Text; 
+            onlineTerpDropDown.Items.Clear();
+            onlineTerpDropDown.Text = "";
+            foreach (MyTimeTerp onlineTerpy in form.Terpy.Values)
+            {
+                onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+            }
+            onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
+            onlineTerpDropDown.SelectedItem = tmpSelected;
         }
 
         private void search_btn_Click(object sender, EventArgs e)
