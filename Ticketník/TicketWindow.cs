@@ -1273,6 +1273,7 @@ namespace Ticketník
 
                     if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
                     {
+                        ticket.TypPrace = (byte)Ticket.TypTicketu.OnlineTyp;
                         ticket.TerpT = Ticket.TerpTyp.OnlineTerpTask;
                         ticket.Terp = Ticket.TerpKod.OnlineTerp;
                         foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
