@@ -79,6 +79,8 @@ namespace Ticketník
             převéstNaFormátMilleniumToolStripMenuItem.Visible = false;
             rokVyber.Enabled = false;
             dostupnéJazykyToolStripMenuItem.Visible = false;
+            terpTaskFailedRetry.Tick += TerpTaskFailedRetry_Tick;
+            terpTaskFailedRetry.Interval = 600000;
 
             //vytvoření cancelation tokenu
             vlaknoCancel = new CancellationTokenSource();

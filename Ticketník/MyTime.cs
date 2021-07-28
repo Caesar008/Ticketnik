@@ -16,6 +16,7 @@ namespace Ticketník
         bool terpLoaderReady = false;
         string result = "";
         internal NbtFile terpFile;
+        System.Windows.Forms.Timer terpTaskFailedRetry = new System.Windows.Forms.Timer();
         //string output = "";
 
         public void AktualizujTerpyTasky()
@@ -518,8 +519,7 @@ namespace Ticketník
             {
                 Logni("Vytváření terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
                 Logni("Vytváření terpTask souboru selhalo\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, Form1.LogMessage.ERROR);
-                /*terpFile.SaveToFile("DebugterpTask", NbtCompression.GZip);
-                File.WriteAllText("result.txt", result + output);*/
+                terpTaskFailedRetry.Start();
             }
             terpTaskFileLock = false;
             if (vlakno.Status != System.Threading.Tasks.TaskStatus.Running || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForActivation ||
@@ -640,6 +640,7 @@ namespace Ticketník
             {
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, Form1.LogMessage.ERROR);
+                terpTaskFailedRetry.Start();
             }
             terpTaskFileLock = false;
 
@@ -968,6 +969,12 @@ namespace Ticketník
                     terpTaskFileLock = false;
                 }
             }
+        }
+
+        private void TerpTaskFailedRetry_Tick(object sender, EventArgs e)
+        {
+            terpTaskFailedRetry.Stop();
+            AktualizujTerpyTasky();
         }
     }
 
