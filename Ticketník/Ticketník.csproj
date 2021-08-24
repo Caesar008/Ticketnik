@@ -386,8 +386,11 @@
     <None Include="bin\Release\FastMember.Signed.dll" />
     <Resource Include="bin\Release\lang\CZ.xml" />
     <None Include="bin\Release\Newtonsoft.Json.dll" />
+    <Content Include="bin\Release\Changelog.txt" />
+    <Content Include="bin\Release\Future.txt" />
     <Content Include="bin\Release\Help.xml" />
     <Content Include="bin\Release\jazyky.xml" />
+    <Content Include="bin\Release\known_errors.txt" />
     <Content Include="bin\Release\Ticketnik.exe" />
     <Content Include="bin\Release\ticketnik.xml" />
     <Content Include="ticket-256.ico" />
