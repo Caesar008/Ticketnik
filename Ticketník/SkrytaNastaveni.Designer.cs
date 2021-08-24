@@ -41,9 +41,9 @@
             // 
             // cesta_k_souboru
             // 
-            this.cesta_k_souboru.Location = new System.Drawing.Point(119, 12);
+            this.cesta_k_souboru.Location = new System.Drawing.Point(128, 12);
             this.cesta_k_souboru.Name = "cesta_k_souboru";
-            this.cesta_k_souboru.Size = new System.Drawing.Size(475, 20);
+            this.cesta_k_souboru.Size = new System.Drawing.Size(466, 20);
             this.cesta_k_souboru.TabIndex = 0;
             // 
             // label1
@@ -57,9 +57,9 @@
             // 
             // update_cesta
             // 
-            this.update_cesta.Location = new System.Drawing.Point(119, 38);
+            this.update_cesta.Location = new System.Drawing.Point(128, 38);
             this.update_cesta.Name = "update_cesta";
-            this.update_cesta.Size = new System.Drawing.Size(475, 20);
+            this.update_cesta.Size = new System.Drawing.Size(466, 20);
             this.update_cesta.TabIndex = 2;
             // 
             // label2
@@ -67,15 +67,15 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Update cesta";
+            this.label2.Text = "Update cesta (UNC)";
             // 
             // zalozni_update
             // 
-            this.zalozni_update.Location = new System.Drawing.Point(119, 64);
+            this.zalozni_update.Location = new System.Drawing.Point(128, 64);
             this.zalozni_update.Name = "zalozni_update";
-            this.zalozni_update.Size = new System.Drawing.Size(475, 20);
+            this.zalozni_update.Size = new System.Drawing.Size(466, 20);
             this.zalozni_update.TabIndex = 4;
             // 
             // label3
@@ -83,9 +83,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 67);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.Size = new System.Drawing.Size(110, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Záložní update";
+            this.label3.Text = "Záložní update (URL)";
             // 
             // button1
             // 
