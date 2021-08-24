@@ -1,0 +1,141 @@
+﻿AKTUÁLNĚ ZNÁMÉ CHYBY
+
+#18-004 22.2.2018 1.3.0.8
+- Pokud se tickety exportují v neděli, program exportuje už od nového týdne
+
+#20-004 9.4.2020
+- při aktualizaci se ne vždy spustí aktuální verze - chyba File not found
+
+#20-006 19.5.2020
+- Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
+	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"
+
+-----------------------------------------------------------------------------------------------------------
+OPRAVENÉ CHYBY
+
+#17-001 nahlášeno prosinec 2016 - Opraveno 9.4.2020 (1.6.0.0)
+- špatné/nepřesné exportování času
+- občasné vyexportování 0 hodin
+- normální i custom terpy
+- částečná oprava v 1.1.3.1
+
+#17-002 nahlášeno 17.1, 1.1.1.0 - Opraveno 18.1.2017 - 1.1.1.1
+- hláška o změně data se objeví i když datum změněno nebylo
+- replikace: kliknout na šipku data -> kliknout znovu pro zavření data
+
+#17-003 nahlášeno 26.1.2017 1.1.0.8 (1.1.1.1) - Opraveno 26.1.2017 - 1.1.1.2
+- Import do mytime vrátí chybu o nemožnosti importovat z důvodu úvozovek v popisu ticketu
+
+#17-004 nahlášeno 27.1.2017 1.1.1.2 - Opraveno 27.1.2017 - 1.1.1.3
+- schovaný sloupec ColumnHeader za sloupcem Poznámky v měsíci Leden
+
+#17-005 nahlášeno 27.1.2017 1.1.1.2 - Opraveno 27.1.2017 - 1.1.1.3
+- gramatická chyba v popisu "Encripce". Správně má být "Encrypce"
+
+#17-006 nahlášeno říjen 2015 - Opraveno 27.1.2017 - 1.1.1.3
+- Okno při načtení se otevře na pozici -32000;-32000
+- replikace: minimalizovat Ticketník a pak z task panelu zavřít, nebo při vypnutí PC když je Ticketník minimalizovaný
+
+#17-007 nahlášeno 28.2.2017 - Opraveno 2.3.2017 - 1.1.3.3
+- pád programu při startu, pokud je poškozen config soubor
+
+#17-008 nahlášeno 2.3.2017, od 1.1.3.2 - opraveno 2.3.2017 - 1.1.3.4
+- program zhavaruje při stisku Enter, pokud není vybrán ticket
+
+#17-009 nahlášeno 3.3.2017 - Opraveno 6.3.2017 - 1.1.4.0
+- Po vytvoření ticketu je aktivní tlačítko úpravy a smazání tickeut, i když není označený.
+- To samé i pře přepínání měsíců
+
+#17-010 nahlášeno 14.3.2017 - Opraveno 16.3.2017 - 1.1.4.2
+- pád programu při kopírování ticketu, když není ticket vybrán (ctrl+c i ctrl+shift+c)
+
+#17-011 nahlášeno 22.3.2017 - opraveno 28.3.2017 - 1.1.4.3
+- tlačítko na úpravu a smazání ticketu je aktivní i když není vybrán žádný ticket po zavření okna úpravy ticketu
+
+#17-012 nahlášeno 29.3.2017 - opraveno 29.3.2017 - 1.1.4.5
+- některé úpravy ticketu zůstanou i v případě, že se okno úpravy ticketu zavře křížkem.
+	tato změna není viditelná v seznamu ticketů
+
+#17-013 nahlášeno 19.4.2017 - opraveno 19.4.2017 - 1.2.0.1
+- při úpravě ticketů se nastaví čas 30 minut bez ohledu na předem nastavený čas
+
+#17-014 nahlášeno 3.5.2017 - 1.2.1.0 - opraveno 3.5.2017 - 1.2.1.1
+- součet časů se zobrazuje i několikrát v jednom dni
+
+#17-015 nahlášeno 4.5.2017, 1.2.1.2 - opraveno 4.5.2017 - 1.2.1.3
+- pád programu při použití zkratky pro kopírování na prázdném řádku
+
+#17-016 nahlášeno 9.5.2017 1.2.1.3 - Opraveno 29.5.2017 - 1.3.0.0
+- pád programu při kliknutí na OK v okně úpravy ticketu, pokud bylo zapnuto automatické ukládání
+
+#17-017 nahlášeno 14.5.2017 1.2.1.3 - Opraveno 9.4.2020 (1.6.0.0)
+- Neuložení času ticketu a nemožnost následných úprav ticketu při zavírání ticketu následující den (odpracovaná doba končí následující den)
+
+#17-018 nahlášeno 14.5:2017 1.2.1.3 - Opraveno 29.5.2017 - 1.3.0.0
+- pád programu při mazání ticketu z posledního řádku záznamu
+
+#17-019 nahlášeno 19.5.2017 1.2.1.3 - Opraveno 29.5.2017 - 1.3.0.0
+- pád programu při exportu "poslední týden", pokud předchozí týden je uložen v ticketníku víkend
+
+#17-020 nahlášeno 25.5.2017 1.2.1.3 - Opraveno 29.5.2017 - 1.3.0.0
+- pád programu v případě použití pravého tlačítka myši (kopírování hodnoty buňky) na prázdné buňce
+
+#17-021 nahlášeno 1.6.2017 1.3.0.0 - Opraveno 1.6.2017 - 1.3.0.2
+- program behěm aktualizace nahlásí odmítnutí přístupu k _Ticketnik.exe
+
+#17-022 (5.6.2017 1.3.0.2) - opraveno 5.6.2017 - 1.3.0.3
+- při použití ctrl-R (reload nápovědy) se duplikuje menu
+
+#17-023 (5.6.2017 1.3.0.3) - opraveno 5.6.2017 - 1.3.0.4
+- pád programu při refreshi/aktualizaci nápovědy
+
+#17-024 1.8.2017 1.3.0.7 - opraveno 31.1.2018 (1.4.0.0)
+- Nemožnost úpravy terp kódu a tasku v okně kopírování ticketu
+
+#18-001 25.1.2018 1.1.1.0 (1.3.0.8) - opraveno 31.1.2018 (1.4.0.0)
+- Změna data ticketu může způsobit pád programu
+
+#18-002 13.2.2018 1.4.0.0 - opraveno 4.4.2018 (1.5.0.0)
+- Přu updatu jazyka zmizí název souboru z hlavičky programu
+
+#18-003 21.2.2018 1.4.2.0 - Opraveno 20.11.2018 (1.5.1.0)
+- Kopírování obsahu pravým tlačítkem myši nefunguje správně při přesunutých sloupcích
+
+#18-005 12.3.2018 1.4.0.0 - opraveno 4.4.2018 (1.5.0.0)
+- Pád programu při pokusu otevření ticketu z vyhledávání, pokud je ticket z jiného roku, než zrovna vybraného
+
+#18-006 12.3.2018 1.1.1.0 - opraveno 4.4.2018 (1.5.0.0)
+- Vyhledávání zobrazuje aktuální datum místo data ticketu
+
+#18-007 6.4.2018 ? - opraveno 20.11.2018 (1.5.1.0)
+- úprava popisu ticketu při kopírování neuloží upravený popis
+
+#18-008 6.6.2018 ? - opraveno 6.6.2018 (1.5.0.1)
+- změna zákazníka u vytvořeného ticketu způsobí pád programu
+
+#18-009 20.9.2018 1.5.0.2 - Opraveno 9.4.2020 (1.6.0.0)
+- rozhozené počítání času ticketů při exportu po rychlé opravě ve verzi 1.5.0.2
+
+#18-010 22.11.2018 1.5.1.0 - opraveno 23.11.2018 (1.5.1.1)
+- Export nevyexportuje task, pokud je v custom tascích nastaven pouze task a ne terp.
+
+#18-011 23.11.2018 ? - Opraveno 9.4.2020 (1.6.0.0)
+- Export někdy exportuje některé záznamy vícekrát
+
+#18-012 26.11.2018 1.5.1.1 - opraveno 26.11.2018 (1.5.1.2)
+- Při startu po přihlášení program padá s chybou Access to the path 'C:\WINDOWS\system32\fNbt.dll' is denied.
+
+#19-001 13.5.2019 ? - Opraveno 9.4.2020 (1.6.0.0)
+- Pád programu v případě, že je .tic soubor poškozen
+
+#20-001 3.1.2020 1.5.0.0? - Opraveno 9.4.2020 (1.6.0.0)
+- Pád programu v případě, že je poškozen config soubor - způsobeno systémem jazyků
+
+#20-002 3.4.2020 1.1.4.2 - Opraveno 9.4.2020 (1.6.0.0)
+- Nefunkční kopírování ticketů z vyhledávání
+
+#20-003 9.4.2020 ? - Opraveno 15.4.2020 (1.6.0.2)
+- Kopírování ticketů mění terp kód
+
+#20-005 4.5.2020 ? - Opraveno 23.11.2020 (1.6.0.3)
+- Pád programu při vkládání ID tasků ze schránky na seznamu ticketů

@@ -1,0 +1,18 @@
+﻿Tady je to, co si představuju, že by mohlo v programu být. Některé funkce nemusí být nikdy implementovány.
+
+Potvrzené
+
+- Rozhraní pro tvorbu nového jazka - odloženo na neurčito
+- slinkování terp a task (pro data načtená z MyTime)
+- Načítání dat o terpu a tasku z MyTyme a jejich prpojení
+
+Nepotvrzené
+
+- multiselect
+- funkce zpět a klávesová zkratka ctrl+z
+- možnost Načítání dat o ticketu z SN/TONE
+- nahlašování chyb přímo v programu
+- navrhování nápadů přímo v programu
+- Položka Oblíbené pro často používané záznamy
+- Vyhledávání ticketu v Tone / SN bez nutnosti otevřít daný ticket - zkratka Ctrl+T
+- Kopírování ticketů včetně času a statusu
