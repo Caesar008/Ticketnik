@@ -22,6 +22,7 @@ namespace Ticketník
     - Přepracován způsob pouštění aktualizací na pozadí
     - Upraven systém aktualizací z netu
     - Defaultně se updatuje z github jako první, až pak ze sharu
+    - Při úspěšném otevření souboru se vytvoří záloha s .bak
     */
 
     public partial class Form1 : Form
@@ -1582,6 +1583,7 @@ namespace Ticketník
                 try
                 {
                     LoadFile();
+                    File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
                 }
                 catch
                 {
