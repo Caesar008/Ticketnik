@@ -15,6 +15,7 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
     //Changelog, errory a další věci udělat stahovatelné z netu
+    //předělat doménu na tietoevry
 
     /*interní changelog 1.7.0.0
     - Načítání Terp a tasků z MyTime
