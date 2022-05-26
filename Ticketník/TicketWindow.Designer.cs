@@ -71,8 +71,6 @@
             this.lbl_TicketWindow_onlineTerp = new System.Windows.Forms.Label();
             this.onlineTerpDropDown = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.mdm = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.nahradni = new System.Windows.Forms.RadioButton();
             this.volno = new System.Windows.Forms.RadioButton();
             this.popisTypu = new System.Windows.Forms.Label();
@@ -424,8 +422,6 @@
             // 
             this.groupBox4.Controls.Add(this.newTerpTaskPanel);
             this.groupBox4.Controls.Add(this.button1);
-            this.groupBox4.Controls.Add(this.mdm);
-            this.groupBox4.Controls.Add(this.checkBox1);
             this.groupBox4.Controls.Add(this.nahradni);
             this.groupBox4.Controls.Add(this.volno);
             this.groupBox4.Controls.Add(this.popisTypu);
@@ -458,7 +454,7 @@
             this.newTerpTaskPanel.Controls.Add(this.onlineTaskComboBox);
             this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineTerp);
             this.newTerpTaskPanel.Controls.Add(this.onlineTerpDropDown);
-            this.newTerpTaskPanel.Location = new System.Drawing.Point(3, 48);
+            this.newTerpTaskPanel.Location = new System.Drawing.Point(4, 46);
             this.newTerpTaskPanel.Name = "newTerpTaskPanel";
             this.newTerpTaskPanel.Size = new System.Drawing.Size(277, 106);
             this.newTerpTaskPanel.TabIndex = 18;
@@ -550,30 +546,6 @@
             this.button1.Text = "Vlastní terp a task";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // mdm
-            // 
-            this.mdm.AutoSize = true;
-            this.mdm.BackColor = System.Drawing.Color.Transparent;
-            this.mdm.Location = new System.Drawing.Point(151, 66);
-            this.mdm.Name = "mdm";
-            this.mdm.Size = new System.Drawing.Size(52, 17);
-            this.mdm.TabIndex = 16;
-            this.mdm.Text = "MDM";
-            this.mdm.UseVisualStyleBackColor = false;
-            this.mdm.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.Location = new System.Drawing.Point(209, 67);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(71, 17);
-            this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "Enkrypce";
-            this.checkBox1.UseVisualStyleBackColor = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // nahradni
             // 
@@ -858,9 +830,7 @@
         internal System.Windows.Forms.TextBox popis;
         internal System.Windows.Forms.ListView listView1;
         internal System.Windows.Forms.Button ok;
-        internal System.Windows.Forms.CheckBox checkBox1;
         internal System.Windows.Forms.ComboBox cas;
-        private System.Windows.Forms.CheckBox mdm;
         internal System.Windows.Forms.Label terpKod;
         private System.Windows.Forms.Button search_btn;
         internal System.Windows.Forms.Button button1;

@@ -53,8 +53,6 @@ namespace Ticketník
             prescas.Text = form.jazyk.Windows_Ticket_Prescas;
             volno.Text = form.jazyk.Windows_Ticket_Volno;
             nahradni.Text = form.jazyk.Windows_Ticket_NahradniVolno;
-            mdm.Text = form.jazyk.Windows_Ticket_MDM;
-            checkBox1.Text = form.jazyk.Windows_Ticket_Enkrypce;
             upravit.Text = form.jazyk.Windows_Ticket_Upravit;
             smazat.Text = form.jazyk.Windows_Ticket_Smazat;
             pridat.Text = form.jazyk.Windows_Ticket_Pridat;
@@ -271,89 +269,17 @@ namespace Ticketník
                                 case (byte)Ticket.TypTicketu.ProblemPrescas:
                                     prescas.Checked = true;
                                     break;
-                                case (byte)Ticket.TypTicketu.Enkripce:
-                                    normalni.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.EnkripceNahradniVolno:
-                                    nahradni.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.EnkripceOPrazdniny:
-                                    volno.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.EnkripcePrescas:
-                                    prescas.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.EnkripceProblem:
-                                    normalni.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.EnkripceProblemNahradni:
-                                    nahradni.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.EnkripceProblemOPrazdniny:
-                                    volno.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.EnkripceProblemPrescas:
-                                    prescas.Checked = true;
-                                    checkBox1.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.Mobility:
-                                    normalni.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.MobilityNahradniVolno:
-                                    nahradni.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.MobilityOPrazdniny:
-                                    volno.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.MobilityPrescas:
-                                    prescas.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.MobilityProblem:
-                                    normalni.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.MobilityProblemNahradni:
-                                    nahradni.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.MobilityProblemOPrazdniny:
-                                    volno.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
-                                case (byte)Ticket.TypTicketu.MobilityProblemPrescas:
-                                    prescas.Checked = true;
-                                    mdm.Checked = true;
-                                    break;
                                 case (byte)Ticket.TypTicketu.Custom:
                                     normalni.Checked = true;
-                                    mdm.Enabled = false;
-                                    checkBox1.Enabled = false;
                                     break;
                                 case (byte)Ticket.TypTicketu.CustomNahradni:
                                     nahradni.Checked = true;
-                                    mdm.Enabled = false;
-                                    checkBox1.Enabled = false;
                                     break;
                                 case (byte)Ticket.TypTicketu.CustomOPrazdniny:
                                     volno.Checked = true;
-                                    mdm.Enabled = false;
-                                    checkBox1.Enabled = false;
                                     break;
                                 case (byte)Ticket.TypTicketu.CustomPrescas:
                                     prescas.Checked = true;
-                                    mdm.Enabled = false;
-                                    checkBox1.Enabled = false;
                                     break;
                             }
 
@@ -589,89 +515,17 @@ namespace Ticketník
                             case (byte)Ticket.TypTicketu.ProblemPrescas:
                                 prescas.Checked = true;
                                 break;
-                            case (byte)Ticket.TypTicketu.Enkripce:
-                                normalni.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.EnkripceNahradniVolno:
-                                nahradni.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.EnkripceOPrazdniny:
-                                volno.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.EnkripcePrescas:
-                                prescas.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.EnkripceProblem:
-                                normalni.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.EnkripceProblemNahradni:
-                                nahradni.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.EnkripceProblemOPrazdniny:
-                                volno.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.EnkripceProblemPrescas:
-                                prescas.Checked = true;
-                                checkBox1.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.Mobility:
-                                normalni.Checked = true;
-                                mdm.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.MobilityNahradniVolno:
-                                nahradni.Checked = true;
-                                mdm.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.MobilityOPrazdniny:
-                                volno.Checked = true;
-                                mdm.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.MobilityPrescas:
-                                prescas.Checked = true;
-                                mdm.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.MobilityProblem:
-                                normalni.Checked = true;
-                                mdm.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.MobilityProblemNahradni:
-                                nahradni.Checked = true;
-                                mdm.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.MobilityProblemOPrazdniny:
-                                volno.Checked = true;
-                                mdm.Checked = true;
-                                break;
-                            case (byte)Ticket.TypTicketu.MobilityProblemPrescas:
-                                prescas.Checked = true;
-                                mdm.Checked = true;
-                                break;
                             case (byte)Ticket.TypTicketu.Custom:
                                 normalni.Checked = true;
-                                mdm.Enabled = false;
-                                checkBox1.Enabled = false;
                                 break;
                             case (byte)Ticket.TypTicketu.CustomNahradni:
                                 nahradni.Checked = true;
-                                mdm.Enabled = false;
-                                checkBox1.Enabled = false;
                                 break;
                             case (byte)Ticket.TypTicketu.CustomOPrazdniny:
                                 volno.Checked = true;
-                                mdm.Enabled = false;
-                                checkBox1.Enabled = false;
                                 break;
                             case (byte)Ticket.TypTicketu.CustomPrescas:
                                 prescas.Checked = true;
-                                mdm.Enabled = false;
-                                checkBox1.Enabled = false;
                                 break;
                         }
 
@@ -866,32 +720,25 @@ namespace Ticketník
                 else
                     typ = " | -";
 
-                if (!checkBox1.Checked && !mdm.Checked)
-                {
-                    if (zakaznik.SelectedItem != null && ((string)zakaznik.SelectedItem).Length != 0)
-                        switch (Zakaznici.DejVelikost((string)zakaznik.SelectedItem))
-                        {
-                            case 0:
-                                terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Velky").StringValue;
-                                break;
-                            case 1:
-                                terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Stredni").StringValue;
-                                break;
-                            case 2:
-                                terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Maly").StringValue;
-                                break;
-                            case 127:
-                                ticket.CustomTerp = terp = Zakaznici.GetTerp((string)zakaznik.SelectedItem);
-                                break;
-                            default:
-                                terp = "-";
-                                break;
-                        }
-                }
-                else if (checkBox1.Checked)
-                    terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Encrypce").StringValue;
-                else
-                    terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Mobility").StringValue;
+                if (zakaznik.SelectedItem != null && ((string)zakaznik.SelectedItem).Length != 0)
+                    switch (Zakaznici.DejVelikost((string)zakaznik.SelectedItem))
+                    {
+                        case 0:
+                            terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Velky").StringValue;
+                            break;
+                        case 1:
+                            terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Stredni").StringValue;
+                            break;
+                        case 2:
+                            terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Maly").StringValue;
+                            break;
+                        case 127:
+                            ticket.CustomTerp = terp = Zakaznici.GetTerp((string)zakaznik.SelectedItem);
+                            break;
+                        default:
+                            terp = "-";
+                            break;
+                    }
             }
             else if ((ticket.CustomTerp == "" && terpt == "") || ticket.CustomTerp == Zakaznici.GetTerp(Properties.Settings.Default.lastSelected))
             {
@@ -905,32 +752,25 @@ namespace Ticketník
                 else
                     typ = " | -";
 
-                if (!checkBox1.Checked && !mdm.Checked)
-                {
-                    if (zakaznik.SelectedItem != null && ((string)zakaznik.SelectedItem).Length != 0)
-                        switch (Zakaznici.DejVelikost((string)zakaznik.SelectedItem))
-                        {
-                            case 0:
-                                terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Velky").StringValue;
-                                break;
-                            case 1:
-                                terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Stredni").StringValue;
-                                break;
-                            case 2:
-                                terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Maly").StringValue;
-                                break;
-                            case 127:
-                                ticket.CustomTerp = terp = Zakaznici.GetTerp((string)zakaznik.SelectedItem);
-                                break;
-                            default:
-                                terp = "-";
-                                break;
-                        }
-                }
-                else if (checkBox1.Checked)
-                    terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Encrypce").StringValue;
-                else
-                    terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Mobility").StringValue;
+                if (zakaznik.SelectedItem != null && ((string)zakaznik.SelectedItem).Length != 0)
+                    switch (Zakaznici.DejVelikost((string)zakaznik.SelectedItem))
+                    {
+                        case 0:
+                            terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Velky").StringValue;
+                            break;
+                        case 1:
+                            terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Stredni").StringValue;
+                            break;
+                        case 2:
+                            terp = Zakaznici.Terpy.Get<NbtCompound>("Velikost").Get<NbtInt>("Maly").StringValue;
+                            break;
+                        case 127:
+                            ticket.CustomTerp = terp = Zakaznici.GetTerp((string)zakaznik.SelectedItem);
+                            break;
+                        default:
+                            terp = "-";
+                            break;
+                    }
 
                 ticket.CustomTerp = terp;
             }
@@ -979,8 +819,8 @@ namespace Ticketník
                     checkBox1.Checked = true;
                 }
                 muze = true;*/
-                
-                if(ticket.CustomTerp != "")
+
+                if (ticket.CustomTerp != "")
                 {
                     if (normalni.Checked)
                     {
@@ -1011,7 +851,7 @@ namespace Ticketník
                         popisTypu.Text = form.jazyk.Windows_Ticket_NahradniVolnoPopis;
                     }
                 }
-                else if (!checkBox1.Checked && !mdm.Checked)
+                else
                 {
                     if (idTicketu.Text.StartsWith("INC") || idTicketu.Text.StartsWith("RIT") || idTicketu.Text.StartsWith("ITASK") || idTicketu.Text.StartsWith("RTASK") || idTicketu.Text.StartsWith("TASK"))
                     {
@@ -1058,109 +898,6 @@ namespace Ticketník
                         {
                             ticket.TypPrace = (byte)Ticket.TypTicketu.ProblemNahradniVolno;
                             popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_NahradniVolnoPopis;
-                        }
-                    }
-                }
-                else
-                {
-                    if (checkBox1.Checked)
-                    {
-                        if (idTicketu.Text.StartsWith("INC") || idTicketu.Text.StartsWith("RIT") || idTicketu.Text.StartsWith("ITASK") || idTicketu.Text.StartsWith("RTASK") || idTicketu.Text.StartsWith("TASK"))
-                        {
-                            if (normalni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.Enkripce;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_NormalniPopis;
-                            }
-                            else if (prescas.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.EnkripcePrescas;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_Prescas;
-                            }
-                            else if (volno.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.EnkripceOPrazdniny;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_Volno;
-                            }
-                            else if (nahradni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.EnkripceNahradniVolno;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_NahradniVolnoPopis;
-                            }
-                        }
-                        else if (idTicketu.Text.StartsWith("PRB") || idTicketu.Text.StartsWith("PTASK"))
-                        {
-
-                            if (normalni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.EnkripceProblem;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_NormalniPopis;
-                            }
-                            else if (prescas.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.EnkripceProblemPrescas;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_Prescas;
-                            }
-                            else if (volno.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.EnkripceProblemOPrazdniny;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_Volno;
-                            }
-                            else if (nahradni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.EnkripceProblemNahradni;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_NahradniVolnoPopis;
-                            }
-                        }
-                    }
-                    else if (mdm.Checked)
-                    {
-                        if (idTicketu.Text.StartsWith("INC") || idTicketu.Text.StartsWith("RIT") || idTicketu.Text.StartsWith("ITASK") || idTicketu.Text.StartsWith("RTASK") || idTicketu.Text.StartsWith("TASK"))
-                        {
-                            if (normalni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.Mobility;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_NormalniPopis;
-                            }
-                            else if (prescas.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.MobilityPrescas;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_Prescas;
-                            }
-                            else if (volno.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.MobilityOPrazdniny;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_Volno;
-                            }
-                            else if (nahradni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.MobilityNahradniVolno;
-                                popisTypu.Text = form.jazyk.Windows_Ticket_NahradniVolnoPopis;
-                            }
-                        }
-                        else if (idTicketu.Text.StartsWith("PRB") || idTicketu.Text.StartsWith("PTASK"))
-                        {
-
-                            if (normalni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.MobilityProblem;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_NormalniPopis;
-                            }
-                            else if (prescas.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.MobilityProblemPrescas;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_Prescas;
-                            }
-                            else if (volno.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.MobilityProblemOPrazdniny;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_Volno;
-                            }
-                            else if (nahradni.Checked)
-                            {
-                                ticket.TypPrace = (byte)Ticket.TypTicketu.MobilityProblemNahradni;
-                                popisTypu.Text = "PR " + form.jazyk.Windows_Ticket_NahradniVolnoPopis;
-                            }
                         }
                     }
                 }
@@ -1711,18 +1448,6 @@ namespace Ticketník
             UpdateDoba();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            enkripce = checkBox1.Checked;
-            mobility = mdm.Checked;
-            terpKod.Text = DejTerp();
-            if(checkBox1.Checked)
-                ticket.TypPrace = (byte)Ticket.TypTicketu.Enkripce;
-            if(mdm.Checked)
-                ticket.TypPrace = (byte)Ticket.TypTicketu.Enkripce;
-            normalni_CheckedChanged(sender, e);
-        }
-
         private void cas_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(Properties.Settings.Default.shortTime)
@@ -1850,11 +1575,6 @@ namespace Ticketník
             {
                 if ((terp.terpListTic.Text != "" && terp.taskListTic.Text != "") && terp.terpListTic.Text != null && terp.taskListTic.Text != null)
                 {
-                    mdm.Enabled = false;
-                    mdm.Checked = false;
-                    checkBox1.Enabled = false;
-                    checkBox1.Checked = false;
-
                     task = ticket.CustomTask = terp.taskListTic.Text.Split(new[] { ' ' }, 2)[0];
                     terpt = ticket.CustomTerp = terp.terpListTic.Text.Split(new[] { ' ' }, 2)[0];
 
@@ -1875,9 +1595,6 @@ namespace Ticketník
                 else
                 {
 
-                    mdm.Enabled = true;
-                    checkBox1.Enabled = true;
-
                     if (terp.taskListTic.Text == null || terp.taskListTic.Text == "")
                         ticket.CustomTask = "";
                     else
@@ -1895,10 +1612,6 @@ namespace Ticketník
                         else if (volno.Checked)
                             ticket.TypPrace = (byte)Ticket.TypTicketu.CustomOPrazdniny;
 
-                        mdm.Enabled = false;
-                        mdm.Checked = false;
-                        checkBox1.Enabled = false;
-                        checkBox1.Checked = false;
                     }
 
                     if (terp.terpListTic.Text == null || terp.terpListTic.Text == "")
@@ -1918,10 +1631,6 @@ namespace Ticketník
                         else if (volno.Checked)
                             ticket.TypPrace = (byte)Ticket.TypTicketu.CustomOPrazdniny;
 
-                        mdm.Enabled = false;
-                        mdm.Checked = false;
-                        checkBox1.Enabled = false;
-                        checkBox1.Checked = false;
                     }
                 }
 

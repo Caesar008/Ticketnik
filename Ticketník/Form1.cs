@@ -15,7 +15,6 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
     //Changelog, errory a další věci udělat stahovatelné z netu
-    //předělat doménu na tietoevry
 
     /*interní changelog 1.7.0.0
     - Načítání Terp a tasků z MyTime
@@ -24,6 +23,7 @@ namespace Ticketník
     - Upraven systém aktualizací z netu
     - Defaultně se updatuje z github jako první, až pak ze sharu
     - Při úspěšném otevření souboru se vytvoří záloha s .bak
+    - Zrušen radiobutton Enkrypce a MDM
     */
 
     public partial class Form1 : Form
