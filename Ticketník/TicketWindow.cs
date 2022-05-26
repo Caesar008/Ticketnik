@@ -2928,10 +2928,7 @@ namespace Ticketník
             {
                 Match m = reg.Match(idTicketu.Text);
 
-                if(m.Length < 10)
-                    System.Diagnostics.Process.Start("https://mytone.portal.tieto.com/tone/textsearch.do?sysparm_search=" + idTicketu.Text);
-                else
-                    System.Diagnostics.Process.Start("https://tieto.service-now.com/textsearch.do?sysparm_search=" + idTicketu.Text);
+                System.Diagnostics.Process.Start("https://tieto.service-now.com/textsearch.do?sysparm_search=" + idTicketu.Text);
             }
         }
 

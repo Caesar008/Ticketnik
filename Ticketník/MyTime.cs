@@ -48,7 +48,7 @@ namespace Ticketník
 
         public List<MyTimeTerp> GetAllMyTerps()
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/by_number?mode=my&term="));
+            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term="));
 
             //output += "1\r\n";
             while (!terpLoaderReady)
@@ -60,7 +60,7 @@ namespace Ticketník
 
             if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 //output += "2\r\n";
                 while (!terpLoaderReady)
                 {
@@ -68,7 +68,7 @@ namespace Ticketník
                     Application.DoEvents();
                 }
                 terpLoaderReady = false;
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/by_number?mode=my&term="));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term="));
                 //output += "3\r\n";
                 while (!terpLoaderReady)
                 {
@@ -126,7 +126,7 @@ namespace Ticketník
 
         public MyTimeTerp GetTerpData(string terpID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/by_number?mode=all&term=" + terpID));
+            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID));
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
@@ -136,7 +136,7 @@ namespace Ticketník
 
             if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -144,7 +144,7 @@ namespace Ticketník
                 }
                 terpLoaderReady = false;
 
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/by_number?mode=all&term=" + terpID));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -196,7 +196,7 @@ namespace Ticketník
 
         public List<MyTimeTask> GetTerpTasks(string terpID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term="));
+            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term="));
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
@@ -206,7 +206,7 @@ namespace Ticketník
 
             if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -214,7 +214,7 @@ namespace Ticketník
                 }
                 terpLoaderReady = false;
 
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term="));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term="));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -265,7 +265,7 @@ namespace Ticketník
 
         public MyTimeTask GetTerpTaskData(string terpID, string taskID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID));
+            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID));
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
@@ -275,7 +275,7 @@ namespace Ticketník
 
             if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -283,7 +283,7 @@ namespace Ticketník
                 }
                 terpLoaderReady = false;
 
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -330,7 +330,7 @@ namespace Ticketník
 
         public List<string> GetTerpTaskTypes(string terpID, string taskID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term="));
+            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term="));
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
@@ -340,7 +340,7 @@ namespace Ticketník
 
             if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -348,7 +348,7 @@ namespace Ticketník
                 }
                 terpLoaderReady = false;
 
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term="));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term="));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -378,7 +378,7 @@ namespace Ticketník
 
         public string GetTerpTaskTypeData(string terpID, string taskID, string typeLabel)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel));
+            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel));
             while (!terpLoaderReady)
             {
                 Thread.Sleep(100);
@@ -388,7 +388,7 @@ namespace Ticketník
 
             if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
@@ -396,7 +396,7 @@ namespace Ticketník
                 }
                 terpLoaderReady = false;
 
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tieto.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel));
+                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel));
                 while (!terpLoaderReady)
                 {
                     Thread.Sleep(100);
