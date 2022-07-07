@@ -9,6 +9,9 @@
 #20-006 19.5.2020
 - Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
 	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"
+	
+#22-001 7.7.2022
+- Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
