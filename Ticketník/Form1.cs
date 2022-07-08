@@ -16,7 +16,7 @@ namespace Ticketník
     //udělat tlačítka ve správci jazyka opět viditelná
     //Changelog, errory a další věci udělat stahovatelné z netu
 
-    /*interní changelog 1.7.0.0
+    /*interní changelog 1.7.0.0, možná 2.0.0.0
     - Načítání Terp a tasků z MyTime
     - Opravena chyba 20-006
     - Přepracován způsob pouštění aktualizací na pozadí
@@ -24,6 +24,7 @@ namespace Ticketník
     - Defaultně se updatuje z github jako první, až pak ze sharu
     - Při úspěšném otevření souboru se vytvoří záloha s .bak
     - Zrušen radiobutton Enkrypce a MDM
+    - Updatováno na .NET 4.8
     */
 
     public partial class Form1 : Form

@@ -697,7 +697,6 @@ namespace Ticketník
             ticketWindow.richTextBox1.ReadOnly = true;
             ticketWindow.listView1.Enabled = false;
             ticketWindow.ok.Enabled = false;
-            ticketWindow.checkBox1.Enabled = false;
             ticketWindow.cas.Enabled = false;
             ticketWindow.button1.Enabled = false;
             ticketWindow.datum.Enabled = false;
