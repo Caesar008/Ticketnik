@@ -15,6 +15,8 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
     //Changelog, errory a další věci udělat stahovatelné z netu
+    //úprava zákazníka - výběr terpu má reflektovat nastavení online terpu
+    //překlady v menu a tlačítek nových oken
 
     /*interní changelog 1.7.0.0, možná 2.0.0.0
     - Načítání Terp a tasků z MyTime
