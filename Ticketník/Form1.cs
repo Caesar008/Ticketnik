@@ -84,6 +84,8 @@ namespace Ticketník
             dostupnéJazykyToolStripMenuItem.Visible = false;
             terpTaskFailedRetry.Tick += TerpTaskFailedRetry_Tick;
             terpTaskFailedRetry.Interval = 600000;
+            terpToolStripMenuItem.Visible = přidatTERPKódToolStripMenuItem.Visible = upravitTERPKódToolStripMenuItem.Visible = smazatTERPKódToolStripMenuItem.Visible = !Properties.Settings.Default.onlineTerp; 
+            
 
             //vytvoření cancelation tokenu
             vlaknoCancel = new CancellationTokenSource();
