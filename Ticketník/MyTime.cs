@@ -12,7 +12,7 @@ namespace Ticketník
 {
     public partial class Form1 : Form
     {
-        WebBrowser terpLoaderBrowser = new WebBrowser();
+        public WebBrowser terpLoaderBrowser = new WebBrowser();
         bool terpLoaderReady = false;
         string result = "";
         internal NbtFile terpFile;

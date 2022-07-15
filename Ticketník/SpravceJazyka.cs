@@ -60,7 +60,33 @@ namespace Ticketník
                 {
                     //výchozí cesta v síti
                     if (!Properties.Settings.Default.pouzivatZalozniUpdate)
+                    { 
                         File.Copy(Properties.Settings.Default.updateCesta + "\\jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", true);
+                        form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.updateCesta + "\\jazyky.xml", Form1.LogMessage.INFO);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            WebClient wc = new WebClient();
+                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml");
+                            form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
+                        }
+                        catch (Exception ee)
+                        {
+                            if(Properties.Settings.Default.pouzivatZalozniUpdate)
+                            {
+                                try
+                                {
+                                    File.Copy(Properties.Settings.Default.updateCesta + "\\jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", true);
+                                    form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.updateCesta + "\\jazyky.xml", Form1.LogMessage.INFO);
+                                }
+                                catch { }
+                            }
+                            form.Logni("Vyhledání aktualizací jazyků selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
+                            throw new Exception("Nelze vyhledat žádný update source");
+                        }
+                    }
                 }
                 catch
                 {
@@ -69,9 +95,19 @@ namespace Ticketník
                     {
                         WebClient wc = new WebClient();
                         wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml");
+                        form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
                     }
                     catch (Exception ee)
                     {
+                        if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                        {
+                            try
+                            {
+                                File.Copy(Properties.Settings.Default.updateCesta + "\\jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", true);
+                                form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.updateCesta + "\\jazyky.xml", Form1.LogMessage.INFO);
+                            }
+                            catch { }
+                        }
                         form.Logni("Vyhledání aktualizací jazyků selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
                         throw new Exception("Nelze vyhledat žádný update source");
                     }
@@ -231,7 +267,29 @@ namespace Ticketník
                 try
                 {
                     if (!Properties.Settings.Default.pouzivatZalozniUpdate)
+                    {
                         File.Copy(Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, true);
+                        form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            WebClient wc = new WebClient();
+                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor);
+                            form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
+                        }
+                        catch (Exception ee)
+                        {
+                            try
+                            {
+                                File.Copy(Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, true);
+                                form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
+                            }
+                            catch { }
+                            form.Logni("Stažení jazyka selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
+                        }
+                    }
                 }
                 catch 
                 {
@@ -239,9 +297,19 @@ namespace Ticketník
                     {
                         WebClient wc = new WebClient();
                         wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor);
+                        form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
                     }
                     catch (Exception ee)
                     {
+                        if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                        {
+                            try
+                            {
+                                File.Copy(Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, true);
+                                form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
+                            }
+                            catch { }
+                        }
                         form.Logni("Stažení jazyka selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
                     }
                 }

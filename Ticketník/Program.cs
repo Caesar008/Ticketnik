@@ -266,6 +266,7 @@ namespace Ticketník
                 finally
                 {
                     JednaInstance.UvolniProstredek();
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
                 }
             }
         }

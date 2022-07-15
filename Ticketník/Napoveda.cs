@@ -60,7 +60,30 @@ namespace Ticketník
                     {
                         //výchozí cesta v síti
                         if (!Properties.Settings.Default.pouzivatZalozniUpdate)
+                        {
                             File.Copy(Properties.Settings.Default.updateCesta + "\\help\\Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml", true);
+                            form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\help\\Help.xml", Form1.LogMessage.INFO);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                WebClient wc = new WebClient();
+                                wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml");
+                                form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", Form1.LogMessage.INFO);
+                            }
+                            catch (Exception e)
+                            {
+                                try
+                                {
+                                    File.Copy(Properties.Settings.Default.updateCesta + "\\help\\Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml", true);
+                                    form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\help\\Help.xml", Form1.LogMessage.INFO);
+                                }
+                                catch { }
+                                form.Logni("Nelze vyhledat žádný zdroj aktualizací nápovědy.\r\n" + e.Message, Form1.LogMessage.WARNING);
+                                throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
+                            }
+                        }
                     }
                     catch
                     {
@@ -69,9 +92,19 @@ namespace Ticketník
                         {
                             WebClient wc = new WebClient();
                             wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml");
+                            form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", Form1.LogMessage.INFO);
                         }
                         catch (Exception e)
                         {
+                            if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                            {
+                                try
+                                {
+                                    File.Copy(Properties.Settings.Default.updateCesta + "\\help\\Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml", true);
+                                    form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\help\\Help.xml", Form1.LogMessage.INFO);
+                                }
+                                catch { }
+                            }
                             form.Logni("Nelze vyhledat žádný zdroj aktualizací nápovědy.\r\n" + e.Message, Form1.LogMessage.WARNING);
                             throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
                         }
@@ -96,7 +129,25 @@ namespace Ticketník
                 {
                     //výchozí cesta v síti
                     if (!Properties.Settings.Default.pouzivatZalozniUpdate)
+                    {
                         updates.Load(Properties.Settings.Default.updateCesta + "\\ticketnik.xml");
+                        form.Logni("Vyhledávám aktualizaci nápovědy na " + Properties.Settings.Default.updateCesta + "\\ticketnik.xml", Form1.LogMessage.INFO);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            WebClient wc = new WebClient();
+                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
+                            form.Logni("Vyhledávám aktualizaci nápovědy na " + Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Form1.LogMessage.INFO);
+                            updates.Load(Path.GetTempPath() + "\\ticketnik.xml");
+                        }
+                        catch (Exception e)
+                        {
+                            form.Logni("Vyhledání aktualizací nápovědy selhalo.\r\n" + e.Message, Form1.LogMessage.WARNING);
+                            throw new Exception("Nelze vyhledat žádný update source");
+                        }
+                    }
                 }
                 catch
                 {
@@ -105,10 +156,20 @@ namespace Ticketník
                     {
                         WebClient wc = new WebClient();
                         wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
+                        form.Logni("Vyhledávám aktualizaci nápovědy na " + Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Form1.LogMessage.INFO);
                         updates.Load(Path.GetTempPath() + "\\ticketnik.xml");
                     }
                     catch (Exception e)
                     {
+                        if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                        {
+                            try
+                            {
+                                updates.Load(Properties.Settings.Default.updateCesta + "\\ticketnik.xml");
+                                form.Logni("Vyhledávám aktualizaci nápovědy na " + Properties.Settings.Default.updateCesta + "\\ticketnik.xml", Form1.LogMessage.INFO);
+                            }
+                            catch { }
+                        }
                         form.Logni("Vyhledání aktualizací nápovědy selhalo.\r\n" + e.Message, Form1.LogMessage.WARNING);
                         throw new Exception("Nelze vyhledat žádný update source");
                     }
@@ -196,7 +257,24 @@ namespace Ticketník
             try
             {
                 if (!Properties.Settings.Default.pouzivatZalozniUpdate)
+                {
                     File.Copy(Properties.Settings.Default.updateCesta + "\\help\\Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml", true);
+                    form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\help\\Help.xml", Form1.LogMessage.INFO);
+
+                }
+                else
+                {
+                    try
+                    {
+                        WebClient wc = new WebClient();
+                        wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml");
+                        form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", Form1.LogMessage.INFO);
+                    }
+                    catch (Exception ee)
+                    {
+                        form.Logni("Stažení nápovědy (xml) selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
+                    }
+                }
             }
             catch
             {
@@ -205,9 +283,19 @@ namespace Ticketník
                 {
                     WebClient wc = new WebClient();
                     wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml");
+                    form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/help/Help.xml", Form1.LogMessage.INFO);
                 }
                 catch (Exception ee)
                 {
+                    if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                    {
+                        try
+                        {
+                            File.Copy(Properties.Settings.Default.updateCesta + "\\help\\Help.xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.xml", true);
+                            form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\help\\Help.xml", Form1.LogMessage.INFO);
+                        }
+                        catch { }
+                    }
                     form.Logni("Stažení nápovědy (xml) selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
                 }
             }
@@ -215,18 +303,44 @@ namespace Ticketník
             try
             {
                 if (!Properties.Settings.Default.pouzivatZalozniUpdate)
+                {
                     File.Copy(Properties.Settings.Default.updateCesta + "\\help\\Help.zip", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.zip", true);
+                    form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\help\\Help.zip", Form1.LogMessage.INFO);
+                }
+                else
+                {
+                    try
+                    {
+                        WebClient wc = new WebClient();
+                        wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/help/Help.zip", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.zip");
+                        form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/help/Help.zip", Form1.LogMessage.INFO);
+                    }
+                    catch (Exception ee)
+                    {
+                        form.Logni("Stažení nápovědy (zip) selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
+                    }
+                }
             }
-            catch 
+            catch
             {
                 //backup download z netu
                 try
                 {
                     WebClient wc = new WebClient();
                     wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/help/Help.zip", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.zip");
+                    form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/help/Help.zip", Form1.LogMessage.INFO);
                 }
                 catch (Exception ee)
                 {
+                    if (Properties.Settings.Default.pouzivatZalozniUpdate)
+                    {
+                        try
+                        {
+                            File.Copy(Properties.Settings.Default.updateCesta + "\\help\\Help.zip", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\Help.zip", true);
+                            form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\help\\Help.zip", Form1.LogMessage.INFO);
+                        }
+                        catch { }
+                    }
                     form.Logni("Stažení nápovědy (zip) selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
                 }
             }

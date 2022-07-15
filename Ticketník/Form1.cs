@@ -14,7 +14,7 @@ using System.Linq;
 namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
-    //Changelog, errory a další věci udělat stahovatelné z netu
+    //zkontrolovat stahování helpu
     //úprava zákazníka - výběr terpu má reflektovat nastavení online terpu
     //překlady v menu a tlačítek nových oken
 
@@ -68,6 +68,14 @@ namespace Ticketník
         public Form1()
         {
             CheckLog();
+
+            //při updatu na 1.7 zapnout záložní update pro defaultní stahování z githubu
+            if (Properties.Settings.Default.lastUpdateNotif < 107 && !Properties.Settings.Default.pouzivatZalozniUpdate)
+            {
+                Properties.Settings.Default.pouzivatZalozniUpdate = true;
+                Properties.Settings.Default.ZalozniUpdate = "https://github.com/Caesar008/Ticketnik/raw/master/Ticketn%C3%ADk/bin/Release";
+                Properties.Settings.Default.Save();
+            }
 
             this.Location = Properties.Settings.Default.umisteni;
             
@@ -2541,8 +2549,14 @@ namespace Ticketník
         {
             try
             {
-                //Process.Start("notepad.exe", @"\\10.14.18.19\shareforyou\tools\Ticketnik\known_errors.txt");
-                string text = File.ReadAllText(@"\\10.14.18.19\shareforyou\tools\Ticketnik\known_errors.txt");
+                string text = "";
+                if (!Properties.Settings.Default.onlineTerp)
+                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\known_errors.txt");
+                else
+                {
+                    System.Net.WebClient wc = new System.Net.WebClient();
+                    text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\known_errors.txt");
+                }
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
                 tw.Text = jazyk.Menu_ZnameProblemy;
@@ -2559,8 +2573,14 @@ namespace Ticketník
         {
             try
             {
-                //Process.Start("notepad.exe", @"\\10.14.18.19\shareforyou\tools\Ticketnik\Changelog.txt");
-                string text = File.ReadAllText(@"\\10.14.18.19\shareforyou\tools\Ticketnik\Changelog.txt");
+                string text = "";
+                if (!Properties.Settings.Default.onlineTerp)
+                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Changelog.txt");
+                else
+                {
+                    System.Net.WebClient wc = new System.Net.WebClient();
+                    text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\Changelog.txt");
+                }
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
                 tw.Text = jazyk.Menu_Changelog;
@@ -2577,8 +2597,14 @@ namespace Ticketník
         {
             try
             {
-                //Process.Start("notepad.exe", @"\\10.14.18.19\shareforyou\tools\Ticketnik\Future.txt");
-                string text = File.ReadAllText(@"\\10.14.18.19\shareforyou\tools\Ticketnik\Future.txt");
+                string text = "";
+                if (!Properties.Settings.Default.onlineTerp)
+                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Future.txt");
+                else
+                {
+                    System.Net.WebClient wc = new System.Net.WebClient();
+                    text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\Future.txt");
+                }
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
                 tw.Text = jazyk.Menu_Plany;
