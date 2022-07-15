@@ -146,7 +146,8 @@ namespace Ticketník
                     "Kapacita: " + int.MaxValue.ToString("n0") + "\r\n" +
                     "Min rok: " + roky[0] + "\r\n" +
                     "Max rok: " + roky[max] + "\r\n" +
-                    "Cesta: " + jmenoSouboru
+                    "Cesta: " + jmenoSouboru + "\r\n\r\n" + 
+                    "Konfig: " + System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.Replace("\\" + System.Reflection.Assembly.GetEntryAssembly().GetName().Version + "\\user.config", "").Replace(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Ticketník\\", "")
                     , "Info o souboru", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
             }
