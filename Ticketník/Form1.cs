@@ -17,6 +17,8 @@ namespace Ticketník
     //zkontrolovat stahování helpu
     //úprava zákazníka - výběr terpu má reflektovat nastavení online terpu
     //překlady v menu a tlačítek nových oken
+    //přepsat WebBrowser na HttpClient a povoleným redirecting a default creds
+    //u toho vyřešit zamrzání na TicketWindow když se ještě loaduje
 
     /*interní changelog 1.7.0.0, možná 2.0.0.0
     - Načítání Terp a tasků z MyTime
