@@ -3,21 +3,26 @@ using System.IO;
 using System.Windows.Forms;
 using fNbt;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Win32;
 using System.Security;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http;
 
 namespace Ticketník
 {
     public partial class Form1 : Form
     {
-        public WebBrowser terpLoaderBrowser = new WebBrowser();
-        bool terpLoaderReady = false;
+        public HttpClient terpLoaderClient = new HttpClient(new HttpClientHandler()
+        {
+            AllowAutoRedirect = true,
+            UseDefaultCredentials = true
+        });
         string result = "";
         internal NbtFile terpFile;
         System.Windows.Forms.Timer terpTaskFailedRetry = new System.Windows.Forms.Timer();
-        //string output = "";
 
         public void AktualizujTerpyTasky()
         {
@@ -34,49 +39,23 @@ namespace Ticketník
 
         public void SetIE()
         {
-            Logni("Nastavuji IE11 a JSON", LogMessage.INFO);
+            Logni("Nastavuji IE11", LogMessage.INFO);
             if (!WBEmulator.IsBrowserEmulationSet(this))
             {
                 WBEmulator.SetBrowserEmulationVersion(this);
             }
-            SetIEJson();
-
-            terpLoaderBrowser.DocumentCompleted += TerpLoaderBrowser_DocumentCompleted;
-            terpLoaderBrowser.ScriptErrorsSuppressed = true;
-            terpLoaderBrowser.AllowNavigation = true;
         }
 
-        public List<MyTimeTerp> GetAllMyTerps()
+        public async Task<List<MyTimeTerp>> GetAllMyTerps()
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term="));
-
-            //output += "1\r\n";
-            while (!terpLoaderReady)
+            try
             {
-                Thread.Sleep(100);
-                Application.DoEvents();
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=").ConfigureAwait(false);
             }
-            terpLoaderReady = false;
-
-            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
+            catch
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
-                //output += "2\r\n";
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term="));
-                //output += "3\r\n";
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
-                //output += result;
+                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=").ConfigureAwait(false);
             }
 
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
@@ -118,41 +97,23 @@ namespace Ticketník
 
             for (int i = 0; i < myTimeTerpList.Count; i++)
             {
-                myTimeTerpList[i].Tasks = GetTerpTasks(myTimeTerpList[i].ID);
+                myTimeTerpList[i].Tasks = GetTerpTasks(myTimeTerpList[i].ID).Result;
             }
 
             return myTimeTerpList;
         }
 
-        public MyTimeTerp GetTerpData(string terpID)
+        public async Task<MyTimeTerp> GetTerpData(string terpID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID));
-            while (!terpLoaderReady)
+            try
             {
-                Thread.Sleep(100);
-                Application.DoEvents();
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID).ConfigureAwait(false);
             }
-            terpLoaderReady = false;
-
-            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
+            catch
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
-
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
+                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID).ConfigureAwait(false);
             }
-
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
             string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
             MyTimeTerp myTimeTerp = null;
@@ -185,7 +146,7 @@ namespace Ticketník
                     if (tmpId != "" && tmpLabel != "" && tmpName != "" && (tmpNumber != "" || !result.Contains("project_number")))
                     {
                         myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber);
-                        myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID);
+                        myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID).Result;
                         tmpId = tmpLabel = tmpName = "";
                     }
                 }
@@ -194,35 +155,17 @@ namespace Ticketník
             return myTimeTerp;
         }
 
-        public List<MyTimeTask> GetTerpTasks(string terpID)
+        public async Task<List<MyTimeTask>> GetTerpTasks(string terpID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term="));
-            while (!terpLoaderReady)
+            try
             {
-                Thread.Sleep(100);
-                Application.DoEvents();
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=").ConfigureAwait(false);
             }
-            terpLoaderReady = false;
-
-            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
+            catch
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
-
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term="));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
+                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=").ConfigureAwait(false);
             }
-
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
             string tmpId = "", tmpName = "", tmpLabel = "";
             List<MyTimeTask> myTimeTaskList = new List<MyTimeTask>();
@@ -257,41 +200,23 @@ namespace Ticketník
 
             for (int i = 0; i < myTimeTaskList.Count; i++)
             {
-                myTimeTaskList[i].TypeLabels = GetTerpTaskTypes(terpID, myTimeTaskList[i].ID);
+                myTimeTaskList[i].TypeLabels = GetTerpTaskTypes(terpID, myTimeTaskList[i].ID).Result;
             }
 
             return myTimeTaskList;
         }
 
-        public MyTimeTask GetTerpTaskData(string terpID, string taskID)
+        public async Task<MyTimeTask> GetTerpTaskData(string terpID, string taskID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID));
-            while (!terpLoaderReady)
+            try
             {
-                Thread.Sleep(100);
-                Application.DoEvents();
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID).ConfigureAwait(false);
             }
-            terpLoaderReady = false;
-
-            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
+            catch
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
-
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
+                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID).ConfigureAwait(false);
             }
-
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
             string tmpId = "", tmpName = "", tmpLabel = "";
             MyTimeTask myTimeTask = null;
@@ -323,42 +248,23 @@ namespace Ticketník
                     }
                 }
             }
-            myTimeTask.TypeLabels = GetTerpTaskTypes(terpID, myTimeTask.ID);
+            myTimeTask.TypeLabels = GetTerpTaskTypes(terpID, myTimeTask.ID).Result;
 
             return myTimeTask;
         }
 
-        public List<string> GetTerpTaskTypes(string terpID, string taskID)
+        public async Task<List<string>> GetTerpTaskTypes(string terpID, string taskID)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term="));
-            while (!terpLoaderReady)
+            try
             {
-                Thread.Sleep(100);
-                Application.DoEvents();
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=").ConfigureAwait(false);
             }
-            terpLoaderReady = false;
-
-            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
+            catch
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
-
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term="));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
+                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=").ConfigureAwait(false);
             }
-
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
-            
             List<string> myTimeTerpTaskTypeList = new List<string>();
 
             while (reader.Read())
@@ -376,37 +282,18 @@ namespace Ticketník
             return myTimeTerpTaskTypeList;
         }
 
-        public string GetTerpTaskTypeData(string terpID, string taskID, string typeLabel)
+        public async Task<string> GetTerpTaskTypeData(string terpID, string taskID, string typeLabel)
         {
-            terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel));
-            while (!terpLoaderReady)
+            try
             {
-                Thread.Sleep(100);
-                Application.DoEvents();
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel).ConfigureAwait(false);
             }
-            terpLoaderReady = false;
-
-            if (result.Contains("Access denied") || result.Contains("Your session has expired") || !result.Contains("label"))
+            catch
             {
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in"));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
-
-                terpLoaderBrowser.Navigate(new Uri("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel));
-                while (!terpLoaderReady)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
-                terpLoaderReady = false;
+                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel).ConfigureAwait(false);
             }
-
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
-
             string myTimeTerpTaskType = "";
 
             while (reader.Read())
@@ -424,43 +311,9 @@ namespace Ticketník
             return myTimeTerpTaskType;
         }
 
-        private void TerpLoaderBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            try
-            {
-                if (e.Url.AbsoluteUri == (sender as WebBrowser).Url.AbsoluteUri)
-                {
-                    if ((sender as WebBrowser).Document != null)
-                    {
-                        if ((sender as WebBrowser).Document.Body.All[0].InnerText != null)
-                            result = (sender as WebBrowser).Document.Body.All[0].InnerText.Replace("<span>", "").Replace("</span>", "");
-                    }
-                    terpLoaderReady = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logni("Došlo k chybě při načítání " + e.Url.AbsoluteUri + "\r\n\r\n" + ex.Message, Form1.LogMessage.WARNING);
-                terpLoaderReady = true;
-            }
-        }
-
-        public void SetIEJson()
-        {
-            if (Registry.CurrentUser.OpenSubKey(@"Software\Classes\MIME\Database\Content Type\application/json") == null || Registry.CurrentUser.OpenSubKey(@"Software\Classes\MIME\Database\Content Type\application/json").GetValue("CLSID") == null || Registry.CurrentUser.OpenSubKey(@"Software\Classes\MIME\Database\Content Type\application/json").GetValue("CLSID").ToString() != "{25336920-03F9-11cf-8FD0-00AA00686F13}")
-            {
-                Logni("Nastavuji JSON", LogMessage.INFO);
-                RegistryKey rKey = Registry.CurrentUser.CreateSubKey(@"Software\Classes\MIME\Database\Content Type\application/json");
-                rKey.SetValue("Extension", ".json");
-                rKey.SetValue("CLSID", "{25336920-03F9-11cf-8FD0-00AA00686F13}");
-                rKey.SetValue("Encoding", 0x08000000, RegistryValueKind.DWord);
-                Logni("IE nastaven na čtení JSON, klíč HKCU\\Software\\Classes\\MIME\\Database\\Content Type\\application/json", Form1.LogMessage.INFO);
-            }
-        }
-
         public void CreateTerpTaskFile()
         {
-            while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -483,7 +336,7 @@ namespace Ticketník
                 Logni("Vytvářím terpTask soubor", Form1.LogMessage.INFO);
                 terpFile = new NbtFile(new NbtCompound("Terpy"));
 
-                foreach(MyTimeTerp mtt in GetAllMyTerps())
+                foreach(MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
                     terpFile.RootTag.Add(new NbtCompound(mtt.Label));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("ID", mtt.ID));
@@ -509,6 +362,7 @@ namespace Ticketník
 
                 terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
                 Logni("TerpTask soubor vytvořen", Form1.LogMessage.INFO);
+                terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
             catch (ThreadAbortException)
@@ -522,8 +376,8 @@ namespace Ticketník
                 terpTaskFailedRetry.Start();
             }
             terpTaskFileLock = false;
-            if (vlakno.Status != System.Threading.Tasks.TaskStatus.Running || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForActivation ||
-                vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForChildrenToComplete || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingToRun)
+            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -534,7 +388,7 @@ namespace Ticketník
 
         public void UpdateTerpTaskFile()
         {
-            while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -551,13 +405,15 @@ namespace Ticketník
                 Thread.Sleep(250);
                 Application.DoEvents();
             }
-                try
+            if(!terpTaskFileLock)
+                terpTaskFileLock = true;
+            try
             {
                 Logni("Updatuji terpTask soubor", Form1.LogMessage.INFO);
                 terpFile = new NbtFile();
                 terpFile.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask");
 
-                foreach (MyTimeTerp mtt in GetAllMyTerps())
+                foreach (MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
                     if (terpFile.RootTag.Get<NbtCompound>(mtt.Label) == null)
                     {
@@ -601,7 +457,7 @@ namespace Ticketník
                 {
                     foreach (NbtCompound customTerpy in terpFile.RootTag.Get<NbtCompound>("Custom").Tags)
                     {
-                        MyTimeTerp customTerp = GetTerpData(customTerpy.Get<NbtString>("Number").Value);
+                        MyTimeTerp customTerp = GetTerpData(customTerpy.Get<NbtString>("Number").Value).Result;
                         foreach (MyTimeTask customTask in customTerp.Tasks)
                         {
                             if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label) == null)
@@ -627,9 +483,10 @@ namespace Ticketník
                     }
                 }
 
-                terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip); 
+                terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
                 Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
 
+                terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
             catch (ThreadAbortException)
@@ -644,9 +501,9 @@ namespace Ticketník
             }
             terpTaskFileLock = false;
 
-            if (vlakno.Status != System.Threading.Tasks.TaskStatus.Running || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForActivation ||
-                vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForChildrenToComplete || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingToRun ||
-                vlakno.Status != System.Threading.Tasks.TaskStatus.Created)
+            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
+                vlakno.Status != TaskStatus.Created)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -655,14 +512,14 @@ namespace Ticketník
             }
         }
 
-        public void UpdateTerpTaskFile(string terpNumber)
+        public async void UpdateTerpTaskFile(string terpNumber)
         {
-            while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
             }
-                if (!InvokeRequired)
+            if (!InvokeRequired)
                 timer_ClearInfo.Stop();
             else
                 this.BeginInvoke(new Action(() => timer_ClearInfo.Stop()));
@@ -684,7 +541,7 @@ namespace Ticketník
                 if (terpFile.RootTag.Get<NbtCompound>("Custom") == null)
                     terpFile.RootTag.Add(new NbtCompound("Custom"));
 
-                MyTimeTerp customTerp = GetTerpData(terpNumber);
+                MyTimeTerp customTerp = GetTerpData(terpNumber).Result;
 
                 while (customTerp == null)
                 {
@@ -745,9 +602,9 @@ namespace Ticketník
             }
             terpTaskFileLock = false;
 
-            if (vlakno.Status != System.Threading.Tasks.TaskStatus.Running || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForActivation ||
-                vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForChildrenToComplete || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingToRun ||
-                vlakno.Status != System.Threading.Tasks.TaskStatus.Created)
+            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
+                vlakno.Status != TaskStatus.Created)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -758,7 +615,7 @@ namespace Ticketník
 
         public void UpdateSelected(string terp)
         {
-            while (vlakno != null && vlakno.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
+            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -783,7 +640,7 @@ namespace Ticketník
                 terpFile.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask");
 
 
-                MyTimeTerp customTerp = GetTerpData(terp);
+                MyTimeTerp customTerp = GetTerpData(terp).Result;
 
                 while(customTerp == null)
                 {
@@ -889,9 +746,9 @@ namespace Ticketník
 
             terpTaskFileLock = false;
 
-            if (vlakno.Status != System.Threading.Tasks.TaskStatus.Running || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForActivation ||
-                vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingForChildrenToComplete || vlakno.Status != System.Threading.Tasks.TaskStatus.WaitingToRun ||
-                vlakno.Status != System.Threading.Tasks.TaskStatus.Created)
+            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
+                vlakno.Status != TaskStatus.Created)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();

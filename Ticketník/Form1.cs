@@ -17,8 +17,6 @@ namespace Ticketník
     //zkontrolovat stahování helpu
     //úprava zákazníka - výběr terpu má reflektovat nastavení online terpu
     //překlady v menu a tlačítek nových oken
-    //přepsat WebBrowser na HttpClient a povoleným redirecting a default creds
-    //u toho vyřešit zamrzání na TicketWindow když se ještě loaduje
 
     /*interní changelog 1.7.0.0, možná 2.0.0.0
     - Načítání Terp a tasků z MyTime
@@ -1668,7 +1666,8 @@ namespace Ticketník
         {
             try 
             { 
-                terpLoaderBrowser.Stop();
+                //terpLoaderBrowser.Stop();
+                terpLoaderClient.CancelPendingRequests();
             } 
             catch { }
 
@@ -2022,25 +2021,30 @@ namespace Ticketník
             }
             else
             {
-                TicketWindow ticketWindow = new TicketWindow(this, true);
-                ticketWindow.StartPosition = FormStartPosition.Manual;
-                ticketWindow.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
-                ticketWindow.Text = jazyk.Windows_NovyTicket;
-                ticketWindow.zacatek.Text = DateTime.Now.ToString("H:mm");
-                ticketWindow.idTicketu.Text = copy.Get<NbtString>("ID").Value;
-                ticketWindow.zakaznik.SelectedItem = zakaznikVlozit;
-                ticketWindow.popis.Text = copy.Get<NbtString>("Popis").Value;
-                ticketWindow.richTextBox1.Text = copy.Get<NbtString>("Poznamky").Value;
-                ticketWindow.kontakt.Text = copy.Get<NbtString>("Kontakt").Value;
-                ticketWindow.pocitac.Text = copy.Get<NbtString>("PC").Value;
-                if (copy.Get<NbtString>("Terp") != null)
-                    ticketWindow.terpt = copy.Get<NbtString>("Terp").Value;
-                if (copy.Get<NbtString>("Task") != null)
-                    ticketWindow.task = copy.Get<NbtString>("Task").Value;
-                ticketWindow.terpKod.Text = ticketWindow.DejTerp();
-                ticketWindow.ShowDialog();
-                copy = null;
-                zakaznikVlozit = "";
+                if (!terpTaskFileLock)
+                {
+                    TicketWindow ticketWindow = new TicketWindow(this, true);
+                    ticketWindow.StartPosition = FormStartPosition.Manual;
+                    ticketWindow.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
+                    ticketWindow.Text = jazyk.Windows_NovyTicket;
+                    ticketWindow.zacatek.Text = DateTime.Now.ToString("H:mm");
+                    ticketWindow.idTicketu.Text = copy.Get<NbtString>("ID").Value;
+                    ticketWindow.zakaznik.SelectedItem = zakaznikVlozit;
+                    ticketWindow.popis.Text = copy.Get<NbtString>("Popis").Value;
+                    ticketWindow.richTextBox1.Text = copy.Get<NbtString>("Poznamky").Value;
+                    ticketWindow.kontakt.Text = copy.Get<NbtString>("Kontakt").Value;
+                    ticketWindow.pocitac.Text = copy.Get<NbtString>("PC").Value;
+                    if (copy.Get<NbtString>("Terp") != null)
+                        ticketWindow.terpt = copy.Get<NbtString>("Terp").Value;
+                    if (copy.Get<NbtString>("Task") != null)
+                        ticketWindow.task = copy.Get<NbtString>("Task").Value;
+                    ticketWindow.terpKod.Text = ticketWindow.DejTerp();
+                    ticketWindow.ShowDialog();
+                    copy = null;
+                    zakaznikVlozit = "";
+                }
+                else
+                    MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -2146,21 +2150,31 @@ namespace Ticketník
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            TicketWindow ticketWindow = new TicketWindow(this, true);
-            ticketWindow.StartPosition = FormStartPosition.Manual;
-            ticketWindow.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
-            ticketWindow.Text = jazyk.Windows_NovyTicket;
-            ticketWindow.zacatek.Text = DateTime.Now.ToString("H:mm");
-            ticketWindow.ShowDialog();
+            if (!terpTaskFileLock)
+            {
+                TicketWindow ticketWindow = new TicketWindow(this, true);
+                ticketWindow.StartPosition = FormStartPosition.Manual;
+                ticketWindow.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
+                ticketWindow.Text = jazyk.Windows_NovyTicket;
+                ticketWindow.zacatek.Text = DateTime.Now.ToString("H:mm");
+                ticketWindow.ShowDialog();
+            }
+            else
+                MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         internal void toolStripButton2_Click(object sender, EventArgs e)
         {
-            TicketWindow ticketWindow = new TicketWindow(this, false);
-            ticketWindow.StartPosition = FormStartPosition.Manual;
-            ticketWindow.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
-            ticketWindow.Text = jazyk.Windows_UpravitTicket;
-            ticketWindow.ShowDialog();
+            if (!terpTaskFileLock)
+            {
+                TicketWindow ticketWindow = new TicketWindow(this, false);
+                ticketWindow.StartPosition = FormStartPosition.Manual;
+                ticketWindow.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
+                ticketWindow.Text = jazyk.Windows_UpravitTicket;
+                ticketWindow.ShowDialog();
+            }
+            else
+                MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void zmenZakaznika_Click(object sender, EventArgs e)
@@ -2503,10 +2517,6 @@ namespace Ticketník
                             ticketWindow.richTextBox1.Text = c.Get<NbtString>("Poznamky").Value;
                             ticketWindow.kontakt.Text = c.Get<NbtString>("Kontakt").Value;
                             ticketWindow.pocitac.Text = c.Get<NbtString>("PC").Value;
-                            /*if (c.Get<NbtString>("Terp") != null)
-                                ticketWindow.terpt = c.Get<NbtString>("Terp").Value;
-                            if (c.Get<NbtString>("Task") != null)
-                                ticketWindow.task = c.Get<NbtString>("Task").Value;*/
                             ticketWindow.terpKod.Text = ticketWindow.DejTerp();
                             ticketWindow.ShowDialog();
                         }
@@ -2904,7 +2914,7 @@ namespace Ticketník
                     }
                     DirectoryInfo directory = new DirectoryInfo(appdata + "\\Ticketnik\\Logs");
                     FileInfo[] query = directory.GetFiles("Error*", SearchOption.TopDirectoryOnly);
-                    foreach (FileInfo file in query.OrderByDescending(file => file.CreationTime).Skip(3))
+                    foreach (FileInfo file in query.OrderByDescending(file => file.LastWriteTime).Skip(3))
                     {
                         file.Delete();
                     }
@@ -2923,7 +2933,7 @@ namespace Ticketník
                     }
                     DirectoryInfo directory = new DirectoryInfo(appdata + "\\Ticketnik\\Logs");
                     FileInfo[] query = directory.GetFiles("Ticketnik*", SearchOption.TopDirectoryOnly);
-                    foreach (FileInfo file in query.OrderByDescending(file => file.CreationTime).Skip(3))
+                    foreach (FileInfo file in query.OrderByDescending(file => file.LastWriteTime).Skip(3))
                     {
                         file.Delete();
                     }

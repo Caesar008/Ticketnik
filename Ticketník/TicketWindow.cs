@@ -6,6 +6,7 @@ using fNbt;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ticketník
 {
@@ -812,14 +813,6 @@ namespace Ticketník
             {
                 terpKod.Text = DejTerp();
 
-                /*muze = false;
-
-                if (ticket.TypPrace == (byte)Ticket.TypTicketu.Enkripce)
-                {
-                    checkBox1.Checked = true;
-                }
-                muze = true;*/
-
                 if (ticket.CustomTerp != "")
                 {
                     if (normalni.Checked)
@@ -1018,7 +1011,6 @@ namespace Ticketník
                 }
                 ticket.Popis = popis.Text.Replace(',', ';').Replace("\"", "\'");
                 ticket.IDtick = form.file.RootTag.Get<NbtLong>("MaxID").Value++;
-                //form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtLong>("MaxID").Value = ticket.IDtick;
 
                 if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                 {
