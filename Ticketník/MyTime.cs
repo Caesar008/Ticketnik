@@ -8,7 +8,6 @@ using Microsoft.Win32;
 using System.Security;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Net;
 using System.Net.Http;
 
 namespace Ticketník
@@ -512,7 +511,7 @@ namespace Ticketník
             }
         }
 
-        public async void UpdateTerpTaskFile(string terpNumber)
+        public void UpdateTerpTaskFile(string terpNumber)
         {
             while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
             {

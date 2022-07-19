@@ -18,7 +18,6 @@ namespace Ticketník
         Form1 form;
         DateTime pauzaCelkem = new DateTime();
         bool novy, okClick = false;
-        bool enkripce, mobility = false;
         internal string terpt = "";
         internal string task = "";
         string puvodniID = "";

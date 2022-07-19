@@ -386,11 +386,9 @@ namespace Ticketník
 
                     foreach (Ticket tik in dny[d][t].Keys)
                     {
-                        Zakaznici.Typ typ = Zakaznici.Typ.Normal;
                         switch (t)
                         {
                             case Ticket.TerpTyp.Custom:
-                                typ = Zakaznici.Typ.Normal;
                                 if (!terpDict.ContainsKey(Zakaznici.GetTerp(tik, Zakaznici.Typ.Normal)))
                                     terpDict.Add(Zakaznici.GetTerp(tik, Zakaznici.Typ.Normal), new string[7]);
                                 terpCSV = Zakaznici.GetTerp(tik, Zakaznici.Typ.Normal);
@@ -401,7 +399,6 @@ namespace Ticketník
                                 }
                                 break;
                             case Ticket.TerpTyp.CustomHoliday:
-                                typ = Zakaznici.Typ.Svatek;
                                 if (!terpDict.ContainsKey(Zakaznici.GetTerp(tik, Zakaznici.Typ.Svatek)))
                                     terpDict.Add(Zakaznici.GetTerp(tik, Zakaznici.Typ.Svatek), new string[7]);
                                 terpCSV = Zakaznici.GetTerp(tik, Zakaznici.Typ.Svatek);
@@ -412,7 +409,6 @@ namespace Ticketník
                                 }
                                 break;
                             case Ticket.TerpTyp.CustomNahradni:
-                                typ = Zakaznici.Typ.Nahradni;
                                 if (!terpDict.ContainsKey(Zakaznici.GetTerp(tik, Zakaznici.Typ.Nahradni)))
                                     terpDict.Add(Zakaznici.GetTerp(tik, Zakaznici.Typ.Nahradni), new string[7]);
                                 terpCSV = Zakaznici.GetTerp(tik, Zakaznici.Typ.Nahradni);
@@ -423,7 +419,6 @@ namespace Ticketník
                                 }
                                 break;
                             case Ticket.TerpTyp.CustomPrescas:
-                                typ = Zakaznici.Typ.Prescas;
                                 if (!terpDict.ContainsKey(Zakaznici.GetTerp(tik, Zakaznici.Typ.Prescas)))
                                     terpDict.Add(Zakaznici.GetTerp(tik, Zakaznici.Typ.Prescas), new string[7]);
                                 terpCSV = Zakaznici.GetTerp(tik, Zakaznici.Typ.Prescas);

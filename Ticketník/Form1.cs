@@ -15,6 +15,7 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
     //zkontrolovat stahování helpu
+    //přepsat aktualizace z WebClient na HttpClient
     //úprava zákazníka - výběr terpu má reflektovat nastavení online terpu
     //překlady v menu a tlačítek nových oken
 

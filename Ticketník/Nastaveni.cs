@@ -324,7 +324,7 @@ namespace Ticketník
         {
             if(muze)
             {
-                if(jazyk.SelectedItem == "English (EN)")
+                if((string)jazyk.SelectedItem == "English (EN)")
                 {
                     XmlDocument lang = new XmlDocument();
                     lang.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml");
