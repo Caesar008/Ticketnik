@@ -25,22 +25,22 @@ namespace Ticketník
 
                 //tohler je pro dev verze
                 if (Application.ProductVersion.EndsWith("dev"))
-                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
+                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
 
-                if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang"))
-                    Directory.CreateDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang");
+                if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang"))
+                    Directory.CreateDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang");
 
-                if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang\\CZ.xml"))
-                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
+                if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml"))
+                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
 
                 System.Xml.XmlDocument preklad = new System.Xml.XmlDocument();
                 System.Xml.XmlDocument attPreklad = new System.Xml.XmlDocument();
-                preklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang\\CZ.xml");
+                preklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml");
                 attPreklad.LoadXml(System.Text.Encoding.UTF8.GetString(Properties.Resources.CZ));
 
                 if (int.Parse(preklad.DocumentElement.Attributes.GetNamedItem("version").InnerText) < int.Parse(attPreklad.DocumentElement.Attributes.GetNamedItem("version").InnerText))
                 {
-                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
+                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
                 }
 
                 string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
