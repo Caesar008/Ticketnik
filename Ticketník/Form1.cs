@@ -17,6 +17,7 @@ namespace Ticketník
     //překlady v menu a tlačítek nových oken
     //help
     //v helpu zkusit a href propojit s JS a onClick a volání metody v c# která by nastavila document
+    //https://stackoverflow.com/questions/17540644/handling-click-event-of-web-browser-control
 
     /*interní changelog 1.7.0.0, možná 2.0.0.0
     - Načítání Terp a tasků z MyTime
