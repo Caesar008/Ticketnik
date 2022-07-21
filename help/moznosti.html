@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Nastavení programu</title>
+  </head>
+  <body>
+	<h1>Nastavení programu</h1>
+	<div><img src="{cesta}/help/img/nastaveni.png"></div>
+	<div>
+		<p>Toto okno slouží k nastavení chování a zobrazení programu. možnosti jsou následující:</p>
+		<ul>
+			<li><b><i>Spouštět Ticketník po startu</i></b> - pokud je toto pole zaškrtnuté, Ticketník se bude automaticky spouštět po přihlášení daného uživatele.</li>
+            <li><b><i>Automatické ukládání</i></b> - pokud je toto pole zaškrtlé, ticketník bude jakékoliv změny ukládat v pravidelných intervalech.</li>
+				<ul>
+					<li><b><i>Ukládat každých x minut</i></b> - toto pole slouží k nastavení intervalu automatického ukládání.</li>
+				</ul>
+            <li><b><i>Zjednodušené nastavení času</i></b> - je-li pole zaškrtnuto, v <a href="tic://novy_ticket.html">okně úpravy</a> ticketu bude zobrazen jen rolovací list s výběrem časů 30 minut - 8 hodin rozdělení po 30 minutách.
+			V opačném případě bude zobrazeno podrobné nastavení časů pro daný ticket.</li>
+            <li><b><i>Primárně používat Terpy z MyTime</i></b> - je-li pole zaškrtnuto, Terpy a Tasky se budeou aktualizovat a vyhledávat přímo v MyTime pod účtem přihlášeného uživatele. Dále v <a href="tic://novy_ticket.html">okně úpravy</a>
+            ticketu bude zobrazen jen rolovací list s výběrem dostupných terpů a tasků. Primárně jsou staženy jen Terpy uložené v My Projects, ale dají se vyhledat i další dostupné Terpy.</li>
+			<li><b><i>Barvy ticketů</i></b> - slouží k vlastnímu nastavení barev zvýraznění ticketů pro každý stav. Výchozí nastavení se dá nastavit tlačítkem Default.</li>
+            <li><b><i>Zobrazení času za den</i></b> - slouží k nastavení zobrazení a k vlastnímu nastavení barev zvýraznění času stráveného na ticketech za daný den. Výchozí nastavení se dá nastavit tlačítkem Default.</li>
+            <li><b><i>Jazyk</i></b> - Slouží ke změně jazyka rozhraní ticketníku. Výchozí jazyk je angličtina (EN). V čisté verzi Ticketník podporuje i češtinu.<br>
+			Je možno vytvořit i vlastní překlad. Stačí k tomu použít soubor CZ.xml uložený ve složce lang. Dále je potřeba upravit atributy k informacím o jazyku a soubor uložit pod unikátním názvem, který bude stejný jako zkratka jazyka (př. CZ.xml pro češtinu, FI.xml pro finštinu, ...)</li>
+		</ul>
+	</div>
+  </body>
+</html>

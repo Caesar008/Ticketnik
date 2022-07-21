@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Nový ticket</title>
+  <script type="text/javascript">
+            var picPaths = ['{cesta}/help/img/novy_ticket_nov.png', '{cesta}/help/img/novy_ticket_puv.png','{cesta}/help/img/novy_ticket.png'];
+            var curPic = -1;
+            //preload the images for smooth animation
+            var imgO = new Array();
+            for(i=0; i < picPaths.length; i++) {
+                imgO[i] = new Image();
+                imgO[i].src = picPaths[i];
+            }
+
+            function swapImage() {
+                curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+                imgCont.src = imgO[curPic].src;
+                setTimeout(swapImage,2000);
+            }
+
+            window.onload=function() {
+                imgCont = document.getElementById('prepinej');
+                swapImage();
+            }
+        </script>
+  </head>
+  <body>
+	<h1>Vytvoření nového ticketu</h1>
+	<p>Pro vytvoření nového ticketu je třeba stisknout tlačítko <img src="{cesta}/help/img/addZaznam.png">, nebo stisknout <a href="tic://klavesove_zkratky.html">klávesu</a> Insert. Veškeré změny jsou uloženy stiskem tlačítka OK, nebo klávesou Enter.<br>
+	V případě úpravy ticketu budou pole okna předvyplněná podle úpravy ticketu.<br>
+	Poté se zobrazí následující okno (v závislosti na nastavení <a href="tic://moznosti.html">Zjednodušeného nastavení času</a>):<br>
+	</p>
+    <img src="" id="prepinej">
+	<ul>
+		<li>
+			<b>Základní informace</b>
+			<ul>
+				<li><b><i>Id ticketu</i></b> - pole pro zaznamenání ID ticketu ve formátu TONE/Service Now. Obsah pole je použit při <a href="tic://export_ticketu.html">exportu</a> do MyTime.
+				Vedle pole ticketu je k dispozici vyhledávací tlačítko <img src="{cesta}/help/img/search.png">.	Kliknutím na toto tlačítko se pokusí Ticketník otevřít daný ticket v TONE/Service Now.</li>
+                <li><b><i>Zákazník</i></b> - rolovací seznam všech zákazníků uložených v souboru <i>zakaznici</i>. Obsah pole je použit při <a href="tic://export_ticketu.html">exportu</a> do MyTime.
+				Pokud není nastaven custom terp kód u ticketu, změna výběru zákazníka změní i TERP kód.</li>
+                <li><b><i>Počítač</i></b> - počítač, kterého se ticket týká.</li>
+                <li><b><i>Kontakt</i></b> - kontaktní osoba na straně zákazníka, koncový uživatel, nebo SD.</li>
+                <li><b><i>Popis</i></b> - stručný popis ticketu. Obsah pole je použit při <a href="tic://export_ticketu.html">exportu</a> do MyTime.</li>
+			</ul>
+		</li>
+		<li>
+            <b>Doba práce na ticketu</b> - zobrazeno v případě, že je v <a href="tic://moznosti.html">nastavení</a>> zapnuto Zjednodušené nastavení času.
+			<ul>
+				<li>Při zapnutém Zjednodušeném nastavení času je zobrazen pouze rolovací seznam časů. Časy jsou rozdělené po 30 minutách od 30 minut do 8 hodin. Pole se vyplní samo časem zaokrouhleným nahoru
+				po změně stavu ticketu na "Vyřešeno", pokud před tím nebyl už čas práce ticketu nastavený. Ticketník počítá čas od otevření okna pro vytvoření nového ticketu.</li>
+			</ul>
+		</li>
+        <li>
+            <b>Časy</b> - zobrazeno v případě, že je v <a href="tic://moznosti.html">nastavení</a> vynuto Zjednodušené nastavení času.
+			<ul>
+				<li><b><i>Začátek</i></b> - automaticky vyplněný začátek práce na ticketu. Čas odpovídá času otevření okna pro vytvoření nového ticketu.</li>
+                <li><b><i>Konec</i></b> - určuje ukončení práce na ticketu. Čas konce musí být minimálně 1 minutu po začátku ticketu. Jelikož Ticketník neumí počítat s tickety přecházejícími do dalšího dne, nesmí
+				být čas konce dřív, než čas začátku! V opačném případě nepůjde ticket uložit, nebo vyexportovat! Pole je vyplněno automaticky po změně stavu ticketu na "Vyřešeno".</li>
+                <li><b><i>Pauzy</i></b> - seznam jednotlivých přestávek v práci na ticketu.<br>Novou pauzu lze přidat vyplněním času Od a kliknutím na Přidat. Čas Do lze vypknit také rovnout při přidávání pauzy,
+				ale je možné ho vyplnit i později. Oba údaje, Od i Do, lze upravit dodatečně. <br>Vymazání pauzy ze seznamu se provede vybráním dané pauzy a kliknutím na Smazat.<br>
+				Pauza lze upravit jejím vybráním, přepsáním časů Od a Do a kliknutím na Upravit.
+				</li>
+			</ul>
+		</li>
+        <li>
+            <b>Rozšířené informace</b>
+			<ul>
+				<li><b><i>Stav ticketu</i></b> - výběr jednotlivých stavů <i>Probíhá, Čeká se, Čeká se na odpověď, RDP</i> a <i>Vyřešeno</i>. Na základě stavu se mění zvýraznění ticketu v
+				<a href="tic://seznam_ticketu.html">seznamu ticketů</a>. Stav 'Vyřešeno' zároveň automaticky vyplní čas konce práce na ticketu a na základě toho se doba strávená na ticketu
+				zaokrouhlí na nejbližší vyšší půlhodinu.</li>
+                <li><b><i>Volby</i></b> - nastavení typu ticketu. Není dostupné při použití Terpů z MyTime.<br>
+					<ul>
+						<li><i>Normální doba</i> - označení ticketu pro práci ve standardní dobu během týdne (Normal - CZ)</li>
+                        <li><i>Přesčas</i> - označení ticketu pro práci přes čas během týdne (Overtime weekday/ paid - CZ)</li>
+                        <li><i>Svátek</i> - označení ticketu pro práci během svátku (Bank holiday work CZ - CZ)</li>
+                        <li><i>Náhradní volno</i> - označení ticketu pro práci přes čas během týdne, náhrada ve formě náhradního volna (Compens.leave - buffering - CZ)</li>
+					</ul>
+				</li>
+                <li><b><i>Vlastní terp a task</i></b> - nastavení <a href="tic://hlavni_menu.html">vlastního TERP a TASK</a> kódu z kódů přidaných do programu. Nastavuje se na každý ticket zvlášť. Vepsáním nového kódu je možno přidat nový TERP nebo TASK. Lze k nim přidat i vlastní popis oddělením popisu mezerou od TERP/TASK kódu. Není dostupné při použití Terpů z MyTime.<br></li>
+                <li><b><i>Datum</i></b> - nastavení data pro daný ticket. Ticket lze vytvořit na jakýkoliv den, nebo již existující ticket přesunou na jiné datum.<br></li>
+                <li><b><i>Poznámky</i></b> - vlastní poznámky k danému ticketu. Odřádkování v poznámkách je možné pomocí zkratky Shift+Enter. Jsou určeny jen pro vlastní poznámky k danému ticketu a nikde se nepoužívají.<br></li>
+			</ul>
+		</li>
+	</ul>
+  </body>
+</html>

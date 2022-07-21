@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Vyhledávání</title>
+	<style>
+		td {text-align: center; padding: 5px;}
+	</style>
+  </head>
+  <body>
+	<h1>Vyhledávání ticketů</h1>
+	<p>
+		Vyhledávání ticketů se dá spustit několika způsoby: Možnosti -> Hledat, nebo tlačítkem <img src="{cesta}/help/img/search.png"> v levém menu, nebo zkratkou ctrl+F.<br>
+		Poté se otevře následující okno:
+	</p>
+	<img src="{cesta}/help/img/hledani.png">
+	<p>
+		Vyhledávání ticketů funguje podle kritérií:
+		<ul>
+			<li><b>PC<i></i></b> - vyhledávání ticketů podle jména PC</li>
+            <li><b>ID ticketu<i></i></b> - vyhledávání podle čísla ticketu</li>
+            <li><b>Zákazník<i></i></b> - vyhledávání podle zákazníka</li>
+            <li><b>Kontakt<i></i></b> - vyhledávání podle kontaktu</li>
+            <li><b>Popis<i></i></b> - vyhledávání podle informací v popisu ticketu</li>
+            <li><b>Poznámka<i></i></b> - vyhledávání podle vlastních poznámek</li>
+		</ul>
+		Zůstane-li pole kritéria prázdné, nebude na něj při vyhledávání brán zřetel.<br>
+		Vyhledávání je možné dělat jednoduchým způsobem, kdy hledaný text vepíšeme do vyhledávacího pole a stiskneme tlačítlo Hledat.<br>
+		Vyhledávání podporuje i vyhledávání za pomoci <a href="https://cs.wikipedia.org/wiki/Regul%C3%A1rn%C3%AD_v%C3%BDraz">regulárních výrazů</a>. Syntaxi regulárních výrazí použitých ve vyhledávání
+		Ticketníku lze najít <a href="https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx">zde</a>.
+	</p>
+	<p>
+		<h2>Příklady</h2>
+		Referenční tabulka
+		<table rules="all">
+			<tr>
+       			<td>PC</td><td>ID ticketu</td><td>Zákazník</td><td>popis</td><td>kontakt</td><td>datum</td><td>pauzy</td><td>stav</td><td>poznámka</td>
+			</tr>
+            <tr>
+       			<td>WW3312</td><td>INC1234567</td><td>Tieto</td><td>fu</td><td>Anders</td><td>1.9.2015</td><td>0</td><td>vyřešeno</td><td>nemáme</td>
+			</tr>
+            <tr>
+       			<td>WV2825</td><td>PRB14141</td><td>Tieto</td><td>bu</td><td>Mia</td><td>2.9.2015</td><td>2</td><td>probíhá</td><td>nefunguje</td>
+			</tr>
+            <tr>
+       			<td>W123-L158</td><td>INC2581479</td><td>Volvo</td><td>chu</td><td>Igor</td><td>1.9.2015</td><td>1</td><td>RDP</td><td>Máme, ale nedáme</td>
+			</tr>
+		</table>
+	</p>
+	<p>
+		<h3>Př. 1</h3>
+        Do vyhledávání do pole Zákazník, napíšeme „Tie“. Klikneme na <i>Hledat</i>.<br>Výsledek bude následující:
+        <table rules="all">
+			<tr>
+       			<td>PC</td><td>ID ticketu</td><td>Zákazník</td><td>popis</td><td>kontakt</td><td>datum</td><td>pauzy</td><td>stav</td><td>poznámka</td>
+			</tr>
+            <tr>
+       			<td>WW3312</td><td>INC1234567</td><td><b><font color="LimeGreen">Tie</font></b>to</td><td>fu</td><td>Anders</td><td>1.9.2015</td><td>0</td><td>vyřešeno</td><td>nemáme</td>
+			</tr>
+            <tr>
+       			<td>WV2825</td><td>PRB14141</td><td><b><font color="LimeGreen">Tie</font></b>to</td><td>bu</td><td>Mia</td><td>2.9.2015</td><td>2</td><td>probíhá</td><td>nefunguje</td>
+			</tr>
+		</table>
+	</p>
+    <p>
+		<h3>Př. 2</h3>
+        Do pole Poznámka napíšeme „me“:
+        <table rules="all">
+			<tr>
+       			<td>PC</td><td>ID ticketu</td><td>Zákazník</td><td>popis</td><td>kontakt</td><td>datum</td><td>pauzy</td><td>stav</td><td>poznámka</td>
+			</tr>
+            <tr>
+            <tr>
+       			<td>WW3312</td><td>INC1234567</td><td>Tieto</td><td>fu</td><td>Anders</td><td>1.9.2015</td><td>0</td><td>vyřešeno</td><td>nemá<b><font color="LimeGreen">me</font></b></td>
+			</tr>
+            <tr>
+       			<td>W123-L158</td><td>INC2581479</td><td>Volvo</td><td>chu</td><td>Igor</td><td>1.9.2015</td><td>1</td><td>RDP</td><td>Má<b><font color="LimeGreen">me</font></b>, ale nedá<b><font color="LimeGreen">me</font></b></td>
+			</tr>
+		</table>
+	</p>
+    <p>
+		<h3>Př. 3</h3>
+        Do pole PC napíšeme „12“, do pole Zákazník napíšeme „Tieto“:
+        <table rules="all">
+			<tr>
+       			<td>PC</td><td>ID ticketu</td><td>Zákazník</td><td>popis</td><td>kontakt</td><td>datum</td><td>pauzy</td><td>stav</td><td>poznámka</td>
+			</tr>
+            <tr>
+       			<td>WW33<b><font color="LimeGreen">12</font></b></td><td>INC1234567</td><td><b><font color="LimeGreen">Tieto</font></b></td><td>fu</td><td>Anders</td><td>1.9.2015</td><td>0</td><td>vyřešeno</td><td>nemáme</td>
+			</tr>
+		</table>
+	</p>
+    <p>
+		<h3>Př. 4</h3>
+        Zaškrtneme „Ve vyhledávání byly použity regulární výrazy“, do pole zákazník napíšeme „(\bTi\b|Volvo)“:
+        <table rules="all">
+			<tr>
+       			<td>PC</td><td>ID ticketu</td><td>Zákazník</td><td>popis</td><td>kontakt</td><td>datum</td><td>pauzy</td><td>stav</td><td>poznámka</td>
+			</tr>
+            <tr>
+       			<td>W123-L158</td><td>INC2581479</td><td><b><font color="LimeGreen">Volvo</font></b></td><td>chu</td><td>Igor</td><td>1.9.2015</td><td>1</td><td>RDP</td><td>Máme, ale nedáme</td>
+			</tr>
+		</table>
+	</p>
+    <p>
+		<h3>Př. 5</h3>
+        Zaškrtneme „Ve vyhledávání byly použity regulární výrazy“, do pole zákazník napíšeme „(Ti|Volvo)“:
+        <table rules="all">
+			<tr>
+       			<td>PC</td><td>ID ticketu</td><td>Zákazník</td><td>popis</td><td>kontakt</td><td>datum</td><td>pauzy</td><td>stav</td><td>poznámka</td>
+			</tr>
+            <tr>
+       			<td>WW3312</td><td>INC1234567</td><td><b><font color="LimeGreen">Ti</font></b>eto</td><td>fu</td><td>Anders</td><td>1.9.2015</td><td>0</td><td>vyřešeno</td><td>nemáme</td>
+			</tr>
+            <tr>
+       			<td>WV2825</td><td>PRB14141</td><td><b><font color="LimeGreen">Ti</font></b>eto</td><td>bu</td><td>Mia</td><td>2.9.2015</td><td>2</td><td>probíhá</td><td>nefunguje</td>
+			</tr>
+            <tr>
+       			<td>W123-L158</td><td>INC2581479</td><td><b><font color="LimeGreen">Volvo</font></b></td><td>chu</td><td>Igor</td><td>1.9.2015</td><td>1</td><td>RDP</td><td>Máme, ale nedáme</td>
+			</tr>
+		</table>
+	</p>
+  </body>
+</html>
