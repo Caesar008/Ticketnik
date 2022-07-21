@@ -14,8 +14,6 @@ using System.Linq;
 namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
-    //zkontrolovat stahování helpu
-    //přepsat aktualizace z WebClient na HttpClient - řádek 83
     //překlady v menu a tlačítek nových oken
     //help
 
@@ -25,7 +23,6 @@ namespace Ticketník
     - Přepracován způsob pouštění aktualizací na pozadí
     - Upraven systém aktualizací z netu
     - Defaultně se updatuje z github jako první, až pak ze sharu
-    - Omezení závislosti na IE
     - Při úspěšném otevření souboru se vytvoří záloha s .bak
     - Zrušen radiobutton Enkrypce a MDM
     - Updatováno na .NET 4.8
@@ -56,7 +53,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1050000;
+        internal int program = 1070000;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
