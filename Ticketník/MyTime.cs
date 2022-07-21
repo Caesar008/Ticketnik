@@ -312,7 +312,7 @@ namespace Ticketník
 
         public void CreateTerpTaskFile()
         {
-            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
+            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -375,8 +375,8 @@ namespace Ticketník
                 terpTaskFailedRetry.Start();
             }
             terpTaskFileLock = false;
-            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
-                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun)
+            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun*/!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -387,7 +387,7 @@ namespace Ticketník
 
         public void UpdateTerpTaskFile()
         {
-            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
+            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -500,9 +500,9 @@ namespace Ticketník
             }
             terpTaskFileLock = false;
 
-            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
                 vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
-                vlakno.Status != TaskStatus.Created)
+                vlakno.Status != TaskStatus.Created*/!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -513,7 +513,7 @@ namespace Ticketník
 
         public void UpdateTerpTaskFile(string terpNumber)
         {
-            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
+            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -601,9 +601,9 @@ namespace Ticketník
             }
             terpTaskFileLock = false;
 
-            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
                 vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
-                vlakno.Status != TaskStatus.Created)
+                vlakno.Status != TaskStatus.Created*/!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -614,7 +614,7 @@ namespace Ticketník
 
         public void UpdateSelected(string terp)
         {
-            while (vlakno != null && vlakno.Status != TaskStatus.RanToCompletion)
+            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -745,9 +745,9 @@ namespace Ticketník
 
             terpTaskFileLock = false;
 
-            if (vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
+            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
                 vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
-                vlakno.Status != TaskStatus.Created)
+                vlakno.Status != TaskStatus.Created*/!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();

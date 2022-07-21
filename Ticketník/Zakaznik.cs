@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,12 +29,26 @@ namespace Ticketník
             f.jazyk.Windows_Stredni,
             f.jazyk.Windows_Velka});
 
-            foreach (NbtString ns in Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Terp"))
+            if (!Properties.Settings.Default.onlineTerp || !File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask"))
             {
-                string add = "";
-                if (Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis") != null && Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis")[ns.Value] != null)
-                    add = " " + Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis")[ns.Value].StringValue;
-                comboBox2.Items.Add(ns.Value + add);
+                foreach (NbtString ns in Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Terp"))
+                {
+                    string add = "";
+                    if (Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis") != null && Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis")[ns.Value] != null)
+                        add = " " + Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis")[ns.Value].StringValue;
+                    comboBox2.Items.Add(ns.Value + add);
+                }
+            }
+            else
+            {
+
+                form.terpTaskFileLock = true;
+                foreach (MyTimeTerp onlineTerpy in form.Terpy.Values)
+                {
+                    comboBox2.Items.Add(onlineTerpy.Label);
+                }
+                comboBox2.DropDownWidth = ComboWidth(comboBox2);
+                form.terpTaskFileLock = false;
             }
             comboBox2.Sorted = true;
             comboBox2.DropDownWidth = ComboWidth(comboBox2);
@@ -68,18 +82,6 @@ namespace Ticketník
             if (comboBox1.SelectedItem != null)
             {
                 f.zakaznik = textBox1.Text;
-                /*switch ((string)comboBox1.SelectedItem)
-                {
-                    case f.jazyk.Windows_Mala:
-                        f.velikost = 2;
-                        break;
-                    case f.jazyk.Windows_Stredni:
-                        f.velikost = 1;
-                        break;
-                    case f.jazyk.Windows_Velka:
-                        f.velikost = 0;
-                        break;
-                }*/
 
                 if((string)comboBox1.SelectedItem == f.jazyk.Windows_Mala)
                     f.velikost = 2;

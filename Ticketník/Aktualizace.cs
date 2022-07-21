@@ -6,13 +6,15 @@ using System.Threading;
 using System.Diagnostics;
 using System.Xml;
 using System.Net;
+using System.Net.Http;
 
 namespace Ticketník
 {
     partial class Form1 : Form
     {
-        internal void Aktualizace(bool force = false)
+        internal async void Aktualizace(bool force = false)
         {
+            updateRunning = true;
             if (!InvokeRequired)
                 timer_ClearInfo.Stop();
             else
@@ -38,8 +40,22 @@ namespace Ticketník
                     {
                         try
                         {
-                            WebClient wc = new WebClient();
-                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
+                            //WebClient wc = new WebClient();
+                            //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
+                            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                            {
+                                AllowAutoRedirect = true
+                            }))
+                            {
+                                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml").ConfigureAwait(false))
+                                {
+                                    using (FileStream fs = new FileStream(Path.GetTempPath() + "\\ticketnik.xml", FileMode.Create))
+                                    {
+                                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                    }
+                                }
+                            }
                             updates.Load(Path.GetTempPath() + "\\ticketnik.xml");
                             Logni("Kontroluji updaty na " + Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", LogMessage.INFO);
                         }
@@ -65,8 +81,23 @@ namespace Ticketník
                     //backup download z netu
                     try
                     {
-                        WebClient wc = new WebClient();
-                        wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
+                        //WebClient wc = new WebClient();
+                        //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
+                        using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                        {
+                            AllowAutoRedirect = true
+                        }))
+                        {
+                            using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml").ConfigureAwait(false))
+                            {
+                                using (FileStream fs = new FileStream(Path.GetTempPath() + "\\ticketnik.xml", FileMode.Create))
+                                {
+                                    await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                }
+                            }
+                        }
+
                         updates.Load(Path.GetTempPath() + "\\ticketnik.xml");
                         Logni("Kontroluji updaty na " + Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", LogMessage.INFO);
                     }
@@ -103,9 +134,22 @@ namespace Ticketník
                         {
                             try
                             {
-                                WebClient wc = new WebClient();
-                                wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
+                                //WebClient wc = new WebClient();
+                                //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
+                                using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                                {
+                                    AllowAutoRedirect = true
+                                }))
+                                {
+                                    using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/zakaznici").ConfigureAwait(false))
+                                    {
+                                        using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici", FileMode.Create))
+                                        {
+                                            await result.Content.CopyToAsync(fs).ConfigureAwait(false);
 
+                                        }
+                                    }
+                                }
                                 Logni("Stahuji soubor zakaznici z " + Properties.Settings.Default.ZalozniUpdate + "/zakaznici", LogMessage.INFO);
                             }
                             catch (Exception e)
@@ -119,9 +163,22 @@ namespace Ticketník
                         //backup download na netu
                         try
                         {
-                            WebClient wc = new WebClient();
-                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
+                            //WebClient wc = new WebClient();
+                            //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
+                            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                            {
+                                AllowAutoRedirect = true
+                            }))
+                            {
+                                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/zakaznici").ConfigureAwait(false))
+                                {
+                                    using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici", FileMode.Create))
+                                    {
+                                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
 
+                                    }
+                                }
+                            }
                             Logni("Stahuji soubor zakaznici z " + Properties.Settings.Default.ZalozniUpdate + "/zakaznici", LogMessage.INFO);
                         }
                         catch (Exception e)
@@ -307,8 +364,22 @@ namespace Ticketník
                                 {
                                     try
                                     {
-                                        WebClient wc = new WebClient();
-                                        wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
+                                        //WebClient wc = new WebClient();
+                                        //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
+                                        using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                                        {
+                                            AllowAutoRedirect = true
+                                        }))
+                                        {
+                                            using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml").ConfigureAwait(false))
+                                            {
+                                                using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml", FileMode.Create))
+                                                {
+                                                    await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                                }
+                                            }
+                                        }
                                         Logni("Stahuji soubor jazyka z " + Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", LogMessage.INFO);
                                     }
                                     catch (Exception e)
@@ -322,8 +393,22 @@ namespace Ticketník
                                 //backup download z netu
                                 try
                                 {
-                                    WebClient wc = new WebClient();
-                                    wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
+                                    //WebClient wc = new WebClient();
+                                    //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
+                                    using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                                    {
+                                        AllowAutoRedirect = true
+                                    }))
+                                    {
+                                        using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml").ConfigureAwait(false))
+                                        {
+                                            using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml", FileMode.Create))
+                                            {
+                                                await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                            }
+                                        }
+                                    }
                                     Logni("Stahuji soubor jazyka z " + Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", LogMessage.INFO);
                                 }
                                 catch (Exception e)
@@ -357,8 +442,22 @@ namespace Ticketník
                             {
                                 try
                                 {
-                                    WebClient wc = new WebClient();
-                                    wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.txt", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
+                                    //WebClient wc = new WebClient();
+                                    //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
+                                    using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                                    {
+                                        AllowAutoRedirect = true
+                                    }))
+                                    {
+                                        using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe").ConfigureAwait(false))
+                                        {
+                                            using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"), FileMode.Create))
+                                            {
+                                                await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                            }
+                                        }
+                                    }
                                     Logni("Stahuji Ticketnik z " + Properties.Settings.Default.ZalozniUpdate + "\\Ticketnik.exe", LogMessage.INFO);
                                 }
                                 catch (Exception e)
@@ -372,8 +471,22 @@ namespace Ticketník
                             //backup download z netu
                             try
                             {
-                                WebClient wc = new WebClient();
-                                wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.txt", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
+                                //WebClient wc = new WebClient();
+                                //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
+                                using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                                {
+                                    AllowAutoRedirect = true
+                                }))
+                                {
+                                    using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe").ConfigureAwait(false))
+                                    {
+                                        using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"), FileMode.Create))
+                                        {
+                                            await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                        }
+                                    }
+                                }
                                 Logni("Stahuji Ticketnik z " + Properties.Settings.Default.ZalozniUpdate + "\\Ticketnik.exe", LogMessage.INFO);
                             }
                             catch (Exception e)
@@ -397,8 +510,12 @@ namespace Ticketník
                 infoBox.Text = jazyk.Message_AktualizaceSeNezdarila;
                 Logni("Aktualizace se nezdařila\r\n\r\n" + e.Message, LogMessage.WARNING);
             }
+            finally
+            {
+                updateRunning = false;
+            }
 
-            if (vlaknoTerp != null && vlaknoTerp.IsAlive)
+            if (vlaknoTerp != null && !vlaknoTerp.IsAlive)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();

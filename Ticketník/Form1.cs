@@ -15,9 +15,9 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
     //zkontrolovat stahování helpu
-    //přepsat aktualizace z WebClient na HttpClient
-    //úprava zákazníka - výběr terpu má reflektovat nastavení online terpu
+    //přepsat aktualizace z WebClient na HttpClient - řádek 83
     //překlady v menu a tlačítek nových oken
+    //help
 
     /*interní changelog 1.7.0.0, možná 2.0.0.0
     - Načítání Terp a tasků z MyTime
@@ -25,6 +25,7 @@ namespace Ticketník
     - Přepracován způsob pouštění aktualizací na pozadí
     - Upraven systém aktualizací z netu
     - Defaultně se updatuje z github jako první, až pak ze sharu
+    - Omezení závislosti na IE
     - Při úspěšném otevření souboru se vytvoří záloha s .bak
     - Zrušen radiobutton Enkrypce a MDM
     - Updatováno na .NET 4.8
@@ -47,7 +48,7 @@ namespace Ticketník
         internal SortedDictionary<DateTime, Dictionary<string, List<Ticket>>> poDnech = new SortedDictionary<DateTime, Dictionary<string, List<Ticket>>>();
         internal string vybranyMesic = "leden";
         long maxID = 0;
-        internal Task vlakno;
+        //internal Task vlakno;
         internal CancellationTokenSource vlaknoCancel;
         internal CancellationToken vcl;
         internal Thread vlaknoTerp;
@@ -65,6 +66,7 @@ namespace Ticketník
         internal List<UpozorneniCls> upozorneni = new List<UpozorneniCls>(UpozorneniCls.UpozorneniList);
         internal bool upozozrneniMuze = true;
         internal bool terpTaskFileLock = false;
+        internal bool updateRunning = false;
 
         public Form1()
         {
@@ -125,8 +127,10 @@ namespace Ticketník
                 MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            vlakno = new Task(() => Aktualizace(devtest), vcl);
-            vlakno.Start();
+            /*vlakno = new Task(() => Aktualizace(devtest), vcl);
+            vlakno.RunSynchronously();*/
+            //vlakno.Start();
+            Aktualizace(devtest);
 
             //nastavení IE11 pro WebBrowser + nastavení JSON pro IE
             SetIE();
@@ -1691,9 +1695,9 @@ namespace Ticketník
                     {
                         ulozeno = true;
                         timer1.Stop();
-                        if(vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created || 
+                        if(/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created || 
                            vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete || 
-                           vlakno.Status == TaskStatus.WaitingToRun))
+                           vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
                         {
                             vlaknoCancel.Cancel();
                         }
@@ -1714,9 +1718,9 @@ namespace Ticketník
                             vlaknoTerp.Abort();
                         vlaknoTerp = null;
 
-                        if (vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
+                        if (/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
                            vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
-                           vlakno.Status == TaskStatus.WaitingToRun))
+                           vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
                         {
                             vlaknoCancel.Cancel();
                         }
@@ -1732,9 +1736,9 @@ namespace Ticketník
                         vlaknoTerp.Abort();
                     vlaknoTerp = null;
 
-                    if (vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
+                    if (/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
                            vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
-                           vlakno.Status == TaskStatus.WaitingToRun))
+                           vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
                     {
                         vlaknoCancel.Cancel();
                     }
@@ -1749,9 +1753,9 @@ namespace Ticketník
                     vlaknoTerp.Abort();
                 vlaknoTerp = null;
 
-                if (vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
+                if (/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
                        vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
-                       vlakno.Status == TaskStatus.WaitingToRun))
+                       vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
                 {
                     vlaknoCancel.Cancel();
                 }
@@ -3224,11 +3228,12 @@ namespace Ticketník
 
         private void vyhledatAktualizaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (vlakno == null || (vlakno.Status != TaskStatus.RanToCompletion || vlakno.Status != TaskStatus.Canceled))
+            if (/*vlakno == null || (vlakno.Status != TaskStatus.RanToCompletion || vlakno.Status != TaskStatus.Canceled)*/!updateRunning)
             {
                 //vlakno = new Thread(() => Aktualizace(devtest));
-                vlakno = new Task(() => Aktualizace(devtest), vcl);
-                vlakno.Start();
+                /*vlakno = new Task(() => Aktualizace(devtest), vcl);
+                vlakno.Start();*/
+                Aktualizace(devtest);
             }
         }
     }
