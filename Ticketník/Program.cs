@@ -22,9 +22,13 @@ namespace Ticketník
             }
             else
             {
-
+                string par;
+                if (args.Length < 1)
+                    par = "";
+                else
+                    par = args[0];
                 //tohler je pro dev verze
-                if (Application.ProductVersion.EndsWith("dev"))
+                if (Application.ProductVersion.EndsWith("dev") && !par.Contains("update"))
                     File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
 
                 if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang"))
@@ -49,7 +53,6 @@ namespace Ticketník
 
                 try
                 {
-                    string par;
                     if (args.Length < 1)
                         par = "";
                     else
