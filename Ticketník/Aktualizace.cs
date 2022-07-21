@@ -458,7 +458,7 @@ namespace Ticketník
                                             }
                                         }
                                     }
-                                    Logni("Stahuji Ticketnik z " + Properties.Settings.Default.ZalozniUpdate + "\\Ticketnik.exe", LogMessage.INFO);
+                                    Logni("Stahuji Ticketnik z " + Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe", LogMessage.INFO);
                                 }
                                 catch (Exception e)
                                 {
@@ -487,7 +487,7 @@ namespace Ticketník
                                         }
                                     }
                                 }
-                                Logni("Stahuji Ticketnik z " + Properties.Settings.Default.ZalozniUpdate + "\\Ticketnik.exe", LogMessage.INFO);
+                                Logni("Stahuji Ticketnik z " + Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe", LogMessage.INFO);
                             }
                             catch (Exception e)
                             {

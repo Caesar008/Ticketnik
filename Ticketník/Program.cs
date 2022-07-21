@@ -132,10 +132,10 @@ namespace Ticketník
                             }
                             catch { }
                         }
-                        if (System.IO.File.Exists("_Ticketnik.exe"))
+                        if (System.IO.File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe")))
                         {
                             System.Threading.Thread.Sleep(1000);
-                            System.IO.File.Delete("_Ticketnik.exe");
+                            System.IO.File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
 
                         }
                         Application.Run(new Form1());
@@ -148,9 +148,9 @@ namespace Ticketník
                             {
                                 if (i < 10)
                                 {
-                                    System.IO.File.Copy("_Ticketnik.exe", "Ticketnik.exe", true);
+                                    System.IO.File.Copy(System.Reflection.Assembly.GetEntryAssembly().Location, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "Ticketnik.exe"), true);
                                     //Log.WriteLog("Aktualizace\tHotovo");
-                                    System.Diagnostics.Process.Start("Ticketnik.exe");
+                                    System.Diagnostics.Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "Ticketnik.exe"));
                                     Application.Exit();
                                     return;
                                 }
