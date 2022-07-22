@@ -39,8 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.search_btn = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
             this.popis = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cas = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -213,6 +213,14 @@
             this.search_btn.UseVisualStyleBackColor = true;
             this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
             // 
+            // popis
+            // 
+            this.popis.Location = new System.Drawing.Point(65, 124);
+            this.popis.Name = "popis";
+            this.popis.Size = new System.Drawing.Size(156, 20);
+            this.popis.TabIndex = 8;
+            this.popis.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -222,14 +230,6 @@
             this.label14.Size = new System.Drawing.Size(33, 13);
             this.label14.TabIndex = 9;
             this.label14.Text = "Popis";
-            // 
-            // popis
-            // 
-            this.popis.Location = new System.Drawing.Point(65, 124);
-            this.popis.Name = "popis";
-            this.popis.Size = new System.Drawing.Size(156, 20);
-            this.popis.TabIndex = 8;
-            this.popis.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox2
             // 
@@ -840,9 +840,9 @@
         private System.Windows.Forms.Button btn_TicketWindow_UpdateSelected;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineType;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTask;
-        private System.Windows.Forms.ComboBox onlineTypeComboBox;
-        private System.Windows.Forms.ComboBox onlineTaskComboBox;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTerp;
-        private System.Windows.Forms.ComboBox onlineTerpDropDown;
+        internal System.Windows.Forms.ComboBox onlineTypeComboBox;
+        internal System.Windows.Forms.ComboBox onlineTaskComboBox;
+        internal System.Windows.Forms.ComboBox onlineTerpDropDown;
     }
 }

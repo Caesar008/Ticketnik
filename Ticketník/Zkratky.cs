@@ -43,7 +43,12 @@ namespace Ticketník
             }
             else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
             {
-                Kopirovat();
+                if (!terpTaskFileLock)
+                {
+                    Kopirovat();
+                }
+                else
+                    MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else if (e.KeyCode == Keys.NumPad0 && e.Modifiers == Keys.Control)
             {

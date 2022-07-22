@@ -14,15 +14,8 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.0.0, možná 2.0.0.0
-    - Načítání Terp a tasků z MyTime
-    - Opravena chyba 20-006
-    - Přepracován způsob pouštění aktualizací na pozadí
-    - Upraven systém aktualizací z netu
-    - Defaultně se updatuje z github jako první, až pak ze sharu
-    - Při úspěšném otevření souboru se vytvoří záloha s .bak
-    - Zrušen radiobutton Enkrypce a MDM
-    - Updatováno na .NET 4.8
+    /*interní changelog 1.7.0.1
+    - Opraveno kopírování s online terpem
     */
 
     public partial class Form1 : Form
@@ -50,7 +43,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070000;
+        internal int program = 1070001;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
@@ -2433,6 +2426,27 @@ namespace Ticketník
                                         ticketWindow.pocitac.Text = c.Get<NbtString>("PC").Value;
                                         
                                         ticketWindow.terpKod.Text = ticketWindow.DejTerp();
+                                        if (Properties.Settings.Default.onlineTerp)
+                                        {
+                                            tmpTerp = ticketWindow.terpKod.Text.Split('|')[0].Remove(ticketWindow.terpKod.Text.Split('|')[0].Length - 1); ;
+                                            tmpTask = ticketWindow.terpKod.Text.Split('|')[1].Remove(0, 1);
+                                            foreach (string s in ticketWindow.onlineTerpDropDown.Items)
+                                            {
+                                                if (s.StartsWith(tmpTerp + " - ") || tmpTerp == s)
+                                                {
+                                                    ticketWindow.onlineTerpDropDown.SelectedItem = s;
+                                                    break;
+                                                }
+                                            }
+                                            foreach (string s in ticketWindow.onlineTaskComboBox.Items)
+                                            {
+                                                if (s.StartsWith(tmpTask + " - ")|| tmpTask == s)
+                                                {
+                                                    ticketWindow.onlineTaskComboBox.SelectedItem = s;
+                                                    break;
+                                                }
+                                            }
+                                        }
                                         ticketWindow.ShowDialog();
                                     }
                                     else
@@ -2483,6 +2497,27 @@ namespace Ticketník
                             ticketWindow.kontakt.Text = c.Get<NbtString>("Kontakt").Value;
                             ticketWindow.pocitac.Text = c.Get<NbtString>("PC").Value;
                             ticketWindow.terpKod.Text = ticketWindow.DejTerp();
+                            if (Properties.Settings.Default.onlineTerp)
+                            {
+                                tmpTerp = ticketWindow.terpKod.Text.Split('|')[0].Remove(ticketWindow.terpKod.Text.Split('|')[0].Length-1);
+                                tmpTask = ticketWindow.terpKod.Text.Split('|')[1].Remove(0,1);
+                                foreach (string s in ticketWindow.onlineTerpDropDown.Items)
+                                {
+                                    if (s.StartsWith(tmpTerp + " - ") || tmpTerp == s)
+                                    {
+                                        ticketWindow.onlineTerpDropDown.SelectedItem = s;
+                                        break;
+                                    }
+                                }
+                                foreach (string s in ticketWindow.onlineTaskComboBox.Items)
+                                {
+                                    if (s.StartsWith(tmpTask + " - ") || tmpTask == s)
+                                    {
+                                        ticketWindow.onlineTaskComboBox.SelectedItem = s;
+                                        break;
+                                    }
+                                }
+                            }
                             ticketWindow.ShowDialog();
                         }
                         break;

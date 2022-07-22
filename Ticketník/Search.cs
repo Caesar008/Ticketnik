@@ -721,10 +721,15 @@ namespace Ticketník
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
-            
+
             if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
             {
-                form.Kopirovat(((Tag)listView1.SelectedItems[0].Tag).IDlong, ((Tag)listView1.SelectedItems[0].Tag).Datum, listView1.SelectedItems[0].SubItems[3].Text, false, true);
+                if (!form.terpTaskFileLock)
+                {
+                    form.Kopirovat(((Tag)listView1.SelectedItems[0].Tag).IDlong, ((Tag)listView1.SelectedItems[0].Tag).Datum, listView1.SelectedItems[0].SubItems[3].Text, false, true);
+                }
+                else
+                    MessageBox.Show(form.jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

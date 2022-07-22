@@ -1,4 +1,9 @@
-﻿1.7.0.0 (22.7.2022)
+﻿1.7.0.1 (22.7.2022)
+
+- Opraveno nefunkční vyplnění terpu a tasku při kopírování za použití online terpu
+-----------------------------------
+1.7.0.0 (22.7.2022)
+
 - Načítání Terp a tasků z MyTime
 - Opravena chyba 20-006
 - Přepracován způsob pouštění aktualizací na pozadí
