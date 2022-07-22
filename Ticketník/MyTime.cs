@@ -156,47 +156,52 @@ namespace Ticketník
 
         public async Task<List<MyTimeTask>> GetTerpTasks(string terpID)
         {
-            try
-            {
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=").ConfigureAwait(false);
-            }
-            catch
-            {
-                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=").ConfigureAwait(false);
-            }
-            JsonTextReader reader = new JsonTextReader(new StringReader(result));
-            string tmpId = "", tmpName = "", tmpLabel = "";
+            int page = 1;
             List<MyTimeTask> myTimeTaskList = new List<MyTimeTask>();
-
-            while (reader.Read())
+            while (result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Tasks\",\"data\":null}]")
             {
-                if (reader.Value != null)
+                try
                 {
-                    if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
-                    {
-                        reader.Read();
-                        tmpId = reader.Value.ToString();
-                    }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "task_description")
-                    {
-                        reader.Read();
-                        tmpName = (string)reader.Value;
-                    }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                    {
-                        reader.Read();
-                        tmpLabel = (string)reader.Value;
-                    }
+                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page).ConfigureAwait(false);
+                }
+                catch
+                {
+                    await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page).ConfigureAwait(false);
+                }
 
-                    if (tmpId != "" && tmpLabel != "" && tmpName != "")
+                JsonTextReader reader = new JsonTextReader(new StringReader(result));
+                string tmpId = "", tmpName = "", tmpLabel = "";
+
+                while (reader.Read())
+                {
+                    if (reader.Value != null)
                     {
-                        myTimeTaskList.Add(new MyTimeTask(tmpId, tmpLabel, tmpName));
-                        tmpId = tmpLabel = tmpName = "";
+                        if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
+                        {
+                            reader.Read();
+                            tmpId = reader.Value.ToString();
+                        }
+                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "task_description")
+                        {
+                            reader.Read();
+                            tmpName = (string)reader.Value;
+                        }
+                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
+                        {
+                            reader.Read();
+                            tmpLabel = (string)reader.Value;
+                        }
+
+                        if (tmpId != "" && tmpLabel != "" && tmpName != "")
+                        {
+                            myTimeTaskList.Add(new MyTimeTask(tmpId, tmpLabel, tmpName));
+                            tmpId = tmpLabel = tmpName = "";
+                        }
                     }
                 }
+                page++;
             }
-
             for (int i = 0; i < myTimeTaskList.Count; i++)
             {
                 myTimeTaskList[i].TypeLabels = GetTerpTaskTypes(terpID, myTimeTaskList[i].ID).Result;

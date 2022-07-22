@@ -1,4 +1,8 @@
-﻿1.7.0.4 (22.7.2022)
+﻿1.7.0.5 (22.7.2022)
+
+- Opraveno načítání tasků v případě, že jich bylo tolik, že MyTime je vracel po stránkách
+-----------------------------------
+1.7.0.4 (22.7.2022)
 
 - Opravena chyba v exportu
 -----------------------------------
