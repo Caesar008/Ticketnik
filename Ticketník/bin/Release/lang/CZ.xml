@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language name="Čeština" shortcut="CZ" international="Czech" version="6" revision="0">
+<Language name="Čeština" shortcut="CZ" international="Czech" version="6" revision="1">
 	<MainMenuItems>
 		<File en="File">Soubor</File>
 		<Options en="Options">Možnosti</Options>
@@ -288,7 +288,7 @@
     <TaskCannotBeEmpty en="Task Cannot be empty">Task nemůže být prázdný</TaskCannotBeEmpty>
     <LookingForUpdates en="Looking for updates...">Vyhledávám aktualizace...</LookingForUpdates>
     <UpdateFailed en="Update failed">Aktualizace se nezdařila</UpdateFailed>
-    <UpdateComplete en="Update complete">Aktualizae dokončena</UpdateComplete>
+    <UpdateComplete en="Update complete">Aktualizace dokončena</UpdateComplete>
     <ExportingTickets en="Exporting tickets...">Exportuji tickety...</ExportingTickets>
     <LookingHelpUpdate en="Looking for Help updates...">Vyhledávám aktualizace nápovědy...</LookingHelpUpdate>
     <TerpUpdate en="Updating list of Terps and Tasks...">Aktualizuji seznam Terpů a Tasků...</TerpUpdate>
