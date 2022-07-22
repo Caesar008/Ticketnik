@@ -87,19 +87,26 @@ namespace Ticketník
                                 string den = "";
                                 switch (d.DayOfWeek)
                                 {
-                                    case DayOfWeek.Monday: den = "Pondělí";
-                                            break;
-                                    case DayOfWeek.Tuesday: den = "Úterý";
+                                    case DayOfWeek.Monday:
+                                        den = "Pondělí";
                                         break;
-                                    case DayOfWeek.Wednesday: den = "Středa";
+                                    case DayOfWeek.Tuesday:
+                                        den = "Úterý";
                                         break;
-                                    case DayOfWeek.Thursday: den = "Čtvrtek";
+                                    case DayOfWeek.Wednesday:
+                                        den = "Středa";
                                         break;
-                                    case DayOfWeek.Friday: den = "Pátek";
+                                    case DayOfWeek.Thursday:
+                                        den = "Čtvrtek";
                                         break;
-                                    case DayOfWeek.Saturday: den = "Sobota";
+                                    case DayOfWeek.Friday:
+                                        den = "Pátek";
                                         break;
-                                    case DayOfWeek.Sunday: den = "Neděle";
+                                    case DayOfWeek.Saturday:
+                                        den = "Sobota";
+                                        break;
+                                    case DayOfWeek.Sunday:
+                                        den = "Neděle";
                                         break;
                                 }
 
@@ -134,12 +141,13 @@ namespace Ticketník
                                     t.CustomTask = Zakaznici.Terpy.Get<NbtCompound>("Task").Get<NbtString>("Incident").Value;
 
                                 //přiřazení ticketu ke správnému řádku a dni
-                                for (int i = 0; i< exportRadky.Count; i++)
+                                for (int i = 0; i < exportRadky.Count; i++)
                                 {
                                     if (exportRadky[i].Terp == null)
                                     {
                                         exportRadky[i].Terp = t.CustomTerp;
                                         exportRadky[i].Task = t.CustomTask;
+                                        exportRadky[i].OnlineTyp = t.OnlineTyp;
                                         exportRadky[i].Typ = et;
                                         exportRadky[i].Radek[den].Koment = t.ID + " " + t.Zakaznik + " " + t.Popis + "\r\n";
                                         decimal tCas = hrubyCas.Hour;
@@ -293,7 +301,7 @@ namespace Ticketník
                     //task
                     exportSheet.Cell(row, 3).SetValue(s.Task.Remove(s.Task.IndexOf(" -")));
                     //task name
-                    exportSheet.Cell(row, 4).Value = "TyVisCo";
+                    exportSheet.Cell(row, 4).Value = s.Task.Remove(0, s.Task.IndexOf(" -")+3);//"TyVisCo";
                     //type
                     exportSheet.Cell(row, 5).Value = s.GetTyp();
                     //pondělí (čas, comment)
@@ -357,9 +365,12 @@ namespace Ticketník
         public string Terp { get; set; }
         public string Task { get; set; }
         public ExportTyp Typ { get; set; }
+        public string OnlineTyp { get; set; }
         public string GetTyp()
         {
-            switch(Typ)
+            if(OnlineTyp != null && OnlineTyp != "")
+                return OnlineTyp;
+            switch (Typ)
             {
                 case ExportTyp.Normal: return Zakaznici.Terpy.Get<NbtCompound>("Typ").Get<NbtString>("Normal").Value;
                 case ExportTyp.Compens: return Zakaznici.Terpy.Get<NbtCompound>("Typ").Get<NbtString>("Nahradni").Value;
