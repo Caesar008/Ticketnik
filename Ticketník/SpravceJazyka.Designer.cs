@@ -37,7 +37,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.stahnout = new System.Windows.Forms.Button();
             this.odebrat = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.btn_novy_preklad = new System.Windows.Forms.Button();
             this.upravit = new System.Windows.Forms.Button();
             this.listView1.SuspendLayout();
@@ -58,6 +57,7 @@
             this.listView1.Controls.Add(this.pictureBox1);
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(12, 12);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
@@ -128,10 +128,6 @@
             this.odebrat.UseVisualStyleBackColor = true;
             this.odebrat.Click += new System.EventHandler(this.odebrat_Click);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
             // btn_novy_preklad
             // 
             this.btn_novy_preklad.Location = new System.Drawing.Point(364, 223);
@@ -186,7 +182,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.Button stahnout;
         private System.Windows.Forms.Button odebrat;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btn_novy_preklad;
         private System.Windows.Forms.Button upravit;

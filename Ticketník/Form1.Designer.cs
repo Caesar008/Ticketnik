@@ -66,6 +66,7 @@
             this.sepToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.dostupnéJazykyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vyhledatAktualizaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aktualizovatVšechnyTerpyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenu_Napoveda = new System.Windows.Forms.ToolStripMenuItem();
             this.rokVyber = new System.Windows.Forms.ToolStripComboBox();
@@ -125,7 +126,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
             this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
-            this.aktualizovatVšechnyTerpyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tool.SuspendLayout();
@@ -417,6 +417,13 @@
             this.vyhledatAktualizaceToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.vyhledatAktualizaceToolStripMenuItem.Text = "Vyhledat aktualizace";
             this.vyhledatAktualizaceToolStripMenuItem.Click += new System.EventHandler(this.vyhledatAktualizaceToolStripMenuItem_Click);
+            // 
+            // aktualizovatVšechnyTerpyToolStripMenuItem
+            // 
+            this.aktualizovatVšechnyTerpyToolStripMenuItem.Name = "aktualizovatVšechnyTerpyToolStripMenuItem";
+            this.aktualizovatVšechnyTerpyToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.aktualizovatVšechnyTerpyToolStripMenuItem.Text = "Aktualizovat všechny Terpy";
+            this.aktualizovatVšechnyTerpyToolStripMenuItem.Click += new System.EventHandler(this.aktualizovatVšechnyTerpyToolStripMenuItem_Click);
             // 
             // oProgramuToolStripMenuItem
             // 
@@ -1139,13 +1146,6 @@
             this.timer_ClearInfo.Interval = 5000;
             this.timer_ClearInfo.Tick += new System.EventHandler(this.Timer_ClearInfo_Tick);
             // 
-            // aktualizovatVšechnyTerpyToolStripMenuItem
-            // 
-            this.aktualizovatVšechnyTerpyToolStripMenuItem.Name = "aktualizovatVšechnyTerpyToolStripMenuItem";
-            this.aktualizovatVšechnyTerpyToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.aktualizovatVšechnyTerpyToolStripMenuItem.Text = "Aktualizovat všechny Terpy";
-            this.aktualizovatVšechnyTerpyToolStripMenuItem.Click += new System.EventHandler(this.aktualizovatVšechnyTerpyToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1284,7 +1284,7 @@
         internal System.Windows.Forms.ToolStripMenuItem vyhledatAktualizaceToolStripMenuItem;
         internal System.Windows.Forms.Timer timer_ClearInfo;
         internal System.Windows.Forms.ToolStripLabel infoBox;
-        private System.Windows.Forms.ToolStripMenuItem aktualizovatVšechnyTerpyToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem aktualizovatVšechnyTerpyToolStripMenuItem;
     }
 }
 

@@ -5,10 +5,6 @@
 
 #20-004 9.4.2020
 - při aktualizaci se ne vždy spustí aktuální verze - chyba File not found
-
-#20-006 19.5.2020
-- Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
-	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"
 	
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
@@ -142,3 +138,7 @@ OPRAVENÉ CHYBY
 
 #20-005 4.5.2020 ? - Opraveno 23.11.2020 (1.6.0.3)
 - Pád programu při vkládání ID tasků ze schránky na seznamu ticketů
+
+#20-006 19.5.2020 ? - Opraveno 22.7.2022 (1.7.0.0)
+- Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
+	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"

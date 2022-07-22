@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml;
 using System.Windows.Forms;
 
@@ -88,6 +87,11 @@ namespace Ticketník
             InterniPamet.Add("Windows/NewTicket/NormalDescription", ReturnPreklad("Windows/NewTicket/NormalDescription"));
             InterniPamet.Add("Windows/NewTicket/CompensLeaveDesc", ReturnPreklad("Windows/NewTicket/CompensLeaveDesc"));
             InterniPamet.Add("Windows/NewTicket/TicketTerp", ReturnPreklad("Windows/NewTicket/TicketTerp"));
+            InterniPamet.Add("Windows/NewTicket/TerpOnline", ReturnPreklad("Windows/NewTicket/TerpOnline"));
+            InterniPamet.Add("Windows/NewTicket/TaskOnline", ReturnPreklad("Windows/NewTicket/TaskOnline"));
+            InterniPamet.Add("Windows/NewTicket/TypOnline", ReturnPreklad("Windows/NewTicket/TypOnline"));
+            InterniPamet.Add("Windows/NewTicket/VyhledatTerp", ReturnPreklad("Windows/NewTicket/VyhledatTerp"));
+            InterniPamet.Add("Windows/NewTicket/AktualizovatTerp", ReturnPreklad("Windows/NewTicket/AktualizovatTerp"));
         }
         //překlady
         #region Main Menu
@@ -278,6 +282,13 @@ namespace Ticketník
             get
             {
                 return ReturnPreklad("MainMenuItems/SearchForUpdates");
+            }
+        }
+        internal string Menu_AktualizovatTerpyOnline
+        {
+            get
+            {
+                return ReturnPreklad("MainMenuItems/UpdateTerpOnline");
             }
         }
         #endregion
@@ -673,7 +684,6 @@ namespace Ticketník
         {
             get
             {
-                //return ReturnPreklad("Windows/Settings/InProgress");
                 return InterniPamet["Windows/Settings/InProgress"];
             }
         }
@@ -681,7 +691,6 @@ namespace Ticketník
         {
             get
             {
-                //return ReturnPreklad("Windows/Settings/Waiting");
                 return InterniPamet["Windows/Settings/Waiting"];
             }
         }
@@ -689,7 +698,6 @@ namespace Ticketník
         {
             get
             {
-                //return ReturnPreklad("Windows/Settings/RDP");
                 return InterniPamet["Windows/Settings/RDP"];
             }
         }
@@ -697,7 +705,6 @@ namespace Ticketník
         {
             get
             {
-                //return ReturnPreklad("Windows/Settings/WaitingForResponse");
                 return InterniPamet["Windows/Settings/WaitingForResponse"];
             }
         }
@@ -705,7 +712,6 @@ namespace Ticketník
         {
             get
             {
-                //return ReturnPreklad("Windows/Settings/Done");
                 return InterniPamet["Windows/Settings/Done"];
             }
         }
@@ -1645,6 +1651,41 @@ namespace Ticketník
                 return InterniPamet["Windows/NewTicket/TicketTerp"];
             }
         }
+        internal string Windows_Ticket_TerpOnline
+        {
+            get
+            {
+                return InterniPamet["Windows/NewTicket/TerpOnline"];
+            }
+        }
+        internal string Windows_Ticket_TaskOnline
+        {
+            get
+            {
+                return InterniPamet["Windows/NewTicket/TaskOnline"];
+            }
+        }
+        internal string Windows_Ticket_TypOnline
+        {
+            get
+            {
+                return InterniPamet["Windows/NewTicket/TypOnline"];
+            }
+        }
+        internal string Windows_Ticket_VyhledatTerp
+        {
+            get
+            {
+                return InterniPamet["Windows/NewTicket/VyhledatTerp"];
+            }
+        }
+        internal string Windows_Ticket_AktualizovatTerp
+        {
+            get
+            {
+                return InterniPamet["Windows/NewTicket/AktualizovatTerp"];
+            }
+        }
         internal string Windows_Ticket_ZmenaData
         {
             get
@@ -1894,10 +1935,6 @@ namespace Ticketník
                     return tmpPreklad.DocumentElement.SelectSingleNode(text).Attributes.GetNamedItem("en").InnerText;
                 }
             }
-             
-
-            //Tohle jen pro dočasně na bugfix
-                //return preklad.DocumentElement.SelectSingleNode(text).InnerText;
         }
 
         internal void Reload(Form1 form)
@@ -1949,16 +1986,7 @@ namespace Ticketník
             form.prosinecT.Text = form.jazyk.Month_Prosinec;
             form.upozorněníToolStripMenuItem.Text = form.jazyk.Menu_Upozorneni;
             form.vyhledatAktualizaceToolStripMenuItem.Text = form.jazyk.Menu_HledejAktualizace;
-            /*form.columnHeader1.Text = form.jazyk.Header_PC;
-            form.columnHeader2.Text = form.jazyk.Header_TicketID;
-            form.columnHeader3.Text = form.jazyk.Header_Zakaznik;
-            form.columnHeader4.Text = form.jazyk.Header_Popis;
-            form.columnHeader5.Text = form.jazyk.Header_Kontakt;
-            form.columnHeader6.Text = form.jazyk.Header_Terp;
-            form.columnHeader7.Text = form.jazyk.Header_Task;
-            form.columnHeader8.Text = form.jazyk.Header_Cas;
-            form.columnHeader9.Text = form.jazyk.Header_Stav;
-            form.columnHeader10.Text = form.jazyk.Header_Poznamka;*/
+            form.aktualizovatVšechnyTerpyToolStripMenuItem.Text = form.jazyk.Menu_AktualizovatTerpyOnline;
             foreach (TabPage tp in form.tabControl1.Controls)
             {
                 if (tp.Controls.ContainsKey("leden"))

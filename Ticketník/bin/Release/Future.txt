@@ -3,8 +3,6 @@
 Potvrzené
 
 - Rozhraní pro tvorbu nového jazka - odloženo na neurčito
-- slinkování terp a task (pro data načtená z MyTime)
-- Načítání dat o terpu a tasku z MyTyme a jejich prpojení
 
 Nepotvrzené
 

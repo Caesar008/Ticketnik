@@ -5,7 +5,7 @@
 		<Options en="Options">Možnosti</Options>
 		<Source en="Maintenance">Údržba</Source>
 		<About en="About">O programu</About>
-		<Help en="Help">Nápověda</Help>
+		<Help en="Help (Czech)">Nápověda</Help>
 		<New en="New">Nový</New>
 		<Open en="Open">Otevřít</Open>
 		<Safe en="Save">Uložit</Safe>
@@ -28,6 +28,7 @@
 		<Notification en="Notification">Upozornění</Notification>
 		<AvailableLang en="Available languages">Dostupné jazyky</AvailableLang>
     <SearchForUpdates en="Search for updates">Vyhledat aktualizace</SearchForUpdates>
+    <UpdateTerpOnline en="Update all Terps">Aktualizovat všechny Terpy</UpdateTerpOnline>
 	</MainMenuItems>
 	<SideMenuItems>
 		<AddRecord en="Add record">Přidat záznam</AddRecord>
@@ -37,7 +38,7 @@
 		<EditCustomer en="Edit customer">Upravit zákazníka</EditCustomer>
 		<DeleteCustomer en="Delete customer">Smazat zákazníka</DeleteCustomer>
 		<Search en="Search">Hledat</Search>
-		<Help en="Help">Nápověda</Help>
+		<Help en="Help (Czech)">Nápověda</Help>
 	</SideMenuItems>
 	<Months>
 		<January en="January">Leden</January>
@@ -213,6 +214,11 @@
 			<NormalDescription en="Normal">Normální</NormalDescription>
 			<CompensLeaveDesc en="Comp. leave">Náhr. volno</CompensLeaveDesc>
 			<TicketTerp en="Ticket TERP">Ticket TERP</TicketTerp>
+      <TerpOnline en="Terp">Terp</TerpOnline>
+      <TaskOnline en="Task">Task</TaskOnline>
+      <TypOnline en="Type">Typ</TypOnline>
+      <VyhledatTerp en="Serch for Terp">Vyhledat Terp</VyhledatTerp>
+      <AktualizovatTerp en="Update Terp">Aktualizovat Terp</AktualizovatTerp>
 		</NewTicket>
 		<EditTicket>
 			<EditTicket en="Edit ticket">Upravit ticket</EditTicket>

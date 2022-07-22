@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ticketník
@@ -24,15 +19,10 @@ namespace Ticketník
             this.labelCompanyName.Text = "";
             this.textBoxDescription.Text = form.jazyk.Windows_AboutBox_Popis;
 
-            if (/*form.vlakno == null || (form.vlakno.Status != TaskStatus.Running || form.vlakno.Status != TaskStatus.Created ||
-                           form.vlakno.Status != TaskStatus.WaitingForActivation || form.vlakno.Status != TaskStatus.WaitingForChildrenToComplete ||
-                           form.vlakno.Status != TaskStatus.WaitingToRun)*/!form.updateRunning)
+            if (!form.updateRunning)
             {
-                //form.vlakno = new System.Threading.Thread(() => Upd());
                 form.vlaknoCancel = new System.Threading.CancellationTokenSource();
                 form.vcl = form.vlaknoCancel.Token;
-                //form.vlakno = new Task(() => form.Aktualizace(), form.vcl);
-                //form.vlakno.Start();
                 form.Aktualizace();
             }
         }

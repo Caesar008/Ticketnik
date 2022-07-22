@@ -60,6 +60,11 @@ namespace Ticketník
             label7.Text = form.jazyk.Windows_Ticket_Od;
             label6.Text = form.jazyk.Windows_Ticket_Konec;
             label5.Text = form.jazyk.Windows_Ticket_Zacatek;
+            lbl_TicketWindow_onlineTerp.Text = form.jazyk.Windows_Ticket_TerpOnline;
+            lbl_TicketWindow_onlineTask.Text = form.jazyk.Windows_Ticket_TaskOnline;
+            lbl_TicketWindow_onlineType.Text = form.jazyk.Windows_Ticket_TypOnline;
+            btn_TicketWindow_SearchTerp.Text = form.jazyk.Windows_Ticket_VyhledatTerp;
+            btn_TicketWindow_UpdateSelected.Text = form.jazyk.Windows_Ticket_AktualizovatTerp;
 
             if (!Properties.Settings.Default.onlineTerp || !File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask"))
             {
@@ -103,7 +108,6 @@ namespace Ticketník
             }
 
             cas.Items.AddRange(new string[] { "30 " + form.jazyk.Windows_Ticket_Minut, "1 " + form.jazyk.Windows_Ticket_Hodina, "1,5 " + form.jazyk.Windows_Ticket_Hodiny, "2 " + form.jazyk.Windows_Ticket_Hodiny, "2,5 " + form.jazyk.Windows_Ticket_Hodiny, "3 " + form.jazyk.Windows_Ticket_Hodiny, "3,5 " + form.jazyk.Windows_Ticket_Hodiny, "4 " + form.jazyk.Windows_Ticket_Hodiny, "4,5 " + form.jazyk.Windows_Ticket_Hodiny, "5 " + form.jazyk.Windows_Ticket_Hodin, "5,5 " + form.jazyk.Windows_Ticket_Hodin, "6 " + form.jazyk.Windows_Ticket_Hodin, "6,5 " + form.jazyk.Windows_Ticket_Hodin, "7 " + form.jazyk.Windows_Ticket_Hodin, "7,5 " + form.jazyk.Windows_Ticket_Hodin, "8 " + form.jazyk.Windows_Ticket_Hodin });
-            //cas.SelectedIndex = 0;
 
             foreach (string s in form.list.DejZakazniky().Keys)
             {
@@ -287,7 +291,6 @@ namespace Ticketník
                             kontakt.Text = refer.Kontakt;
                             richTextBox1.Text = refer.Poznamky;
                             zacatek.Text = refer.Od.ToString("H:mm");
-                            //cas.SelectedIndex = 0;
 
                             if (newTerpTaskPanel != null && Properties.Settings.Default.onlineTerp)
                             {
@@ -393,7 +396,6 @@ namespace Ticketník
                                     cas.SelectedItem = "8 " + form.jazyk.Windows_Ticket_Hodin;
                                     break;
                                 default:
-                                    //cas.SelectedItem = "30 minut";
                                     break;
                             }
 
@@ -533,7 +535,6 @@ namespace Ticketník
                         kontakt.Text = refer.Kontakt;
                         richTextBox1.Text = refer.Poznamky;
                         zacatek.Text = refer.Od.ToString("H:mm");
-                        //cas.SelectedIndex = 0;
                         dat = true;
                         datum.Value = refer.Datum;
                         dat = false;
@@ -596,7 +597,6 @@ namespace Ticketník
                                 cas.SelectedItem = "8 " + form.jazyk.Windows_Ticket_Hodin;
                                 break;
                             default:
-                                //cas.SelectedItem = "30 minut";
                                 break;
                         }
 
@@ -696,7 +696,6 @@ namespace Ticketník
                                 cas.SelectedItem = "8 " + form.jazyk.Windows_Ticket_Hodin;
                                 break;
                             default:
-                                //cas.SelectedItem = "30 minut";
                                 break;
                         }
                     }
@@ -1287,7 +1286,6 @@ namespace Ticketník
                     upozorneni.StartPosition = FormStartPosition.Manual;
                     upozorneni.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
                     upozorneni.noveUpozorneni_OnDemand(form, upozorneni, DateTime.Now, form.jazyk.Windows_Upozorneni_RDP, ticket.ID + " " + ticket.Zakaznik + " - " + ticket.Popis);
-                    //upozorneni.ShowDialog();
                     upozorneni.Close();
                     form.upozozrneniMuze = true;
                 }
@@ -1444,7 +1442,6 @@ namespace Ticketník
             if(Properties.Settings.Default.shortTime)
             {
                 string[] casOd = zacatek.Text.Split(':');
-                //string[] casDo = konec.Text.Split(':');
 
                 int hodiny = (cas.SelectedIndex + 1) / 2;
                 int minuty = (cas.SelectedIndex % 2 == 0) ? 30 : 0;

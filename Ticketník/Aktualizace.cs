@@ -24,7 +24,6 @@ namespace Ticketník
             try
             {
                 XmlDocument updates = new XmlDocument();
-                //updates.Load(Properties.Settings.Default.updateCesta + "\\ticketnik.xml");
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
 
@@ -40,8 +39,6 @@ namespace Ticketník
                     {
                         try
                         {
-                            //WebClient wc = new WebClient();
-                            //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
                             using (HttpClient hc = new HttpClient(new HttpClientHandler()
                             {
                                 AllowAutoRedirect = true
@@ -81,8 +78,6 @@ namespace Ticketník
                     //backup download z netu
                     try
                     {
-                        //WebClient wc = new WebClient();
-                        //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/ticketnik.xml", Path.GetTempPath() + "\\ticketnik.xml");
                         using (HttpClient hc = new HttpClient(new HttpClientHandler()
                         {
                             AllowAutoRedirect = true
@@ -120,7 +115,6 @@ namespace Ticketník
 
                 if (verze < int.Parse(updates.DocumentElement.SelectSingleNode("Zakosi").InnerText) || force)
                 {
-                    //DoCommand("copy " + Properties.Settings.Default.updateCesta + "\\zakaznici " + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
                     try
                     {
                         //výchozí cesta v síti
@@ -134,8 +128,6 @@ namespace Ticketník
                         {
                             try
                             {
-                                //WebClient wc = new WebClient();
-                                //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
                                 using (HttpClient hc = new HttpClient(new HttpClientHandler()
                                 {
                                     AllowAutoRedirect = true
@@ -163,8 +155,6 @@ namespace Ticketník
                         //backup download na netu
                         try
                         {
-                            //WebClient wc = new WebClient();
-                            //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/zakaznici", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\_zakaznici");
                             using (HttpClient hc = new HttpClient(new HttpClientHandler()
                             {
                                 AllowAutoRedirect = true
@@ -364,8 +354,6 @@ namespace Ticketník
                                 {
                                     try
                                     {
-                                        //WebClient wc = new WebClient();
-                                        //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
                                         using (HttpClient hc = new HttpClient(new HttpClientHandler()
                                         {
                                             AllowAutoRedirect = true
@@ -393,8 +381,6 @@ namespace Ticketník
                                 //backup download z netu
                                 try
                                 {
-                                    //WebClient wc = new WebClient();
-                                    //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
                                     using (HttpClient hc = new HttpClient(new HttpClientHandler()
                                     {
                                         AllowAutoRedirect = true
@@ -442,8 +428,6 @@ namespace Ticketník
                             {
                                 try
                                 {
-                                    //WebClient wc = new WebClient();
-                                    //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
                                     using (HttpClient hc = new HttpClient(new HttpClientHandler()
                                     {
                                         AllowAutoRedirect = true
@@ -471,8 +455,6 @@ namespace Ticketník
                             //backup download z netu
                             try
                             {
-                                //WebClient wc = new WebClient();
-                                //wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/Ticketnik.exe", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"));
                                 using (HttpClient hc = new HttpClient(new HttpClientHandler()
                                 {
                                     AllowAutoRedirect = true

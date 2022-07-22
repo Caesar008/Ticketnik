@@ -186,7 +186,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.search_btn);
-            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.popis);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.idTicketu);
@@ -196,6 +195,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.pocitac);
             this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(232, 154);

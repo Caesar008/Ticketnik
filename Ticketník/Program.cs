@@ -152,7 +152,6 @@ namespace Ticketník
                                 if (i < 10)
                                 {
                                     System.IO.File.Copy(System.Reflection.Assembly.GetEntryAssembly().Location, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "Ticketnik.exe"), true);
-                                    //Log.WriteLog("Aktualizace\tHotovo");
                                     System.Diagnostics.Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "Ticketnik.exe"));
                                     Application.Exit();
                                     return;
@@ -181,7 +180,6 @@ namespace Ticketník
                 {
                     string filename = ((System.Configuration.ConfigurationErrorsException)ex.InnerException).Filename;
 
-                    //string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                     if (!Directory.Exists(appdata + "\\Ticketnik"))
                     {
                         Directory.CreateDirectory(appdata + "\\Ticketnik");
@@ -205,7 +203,6 @@ namespace Ticketník
                 catch (System.Reflection.TargetInvocationException te)
                 {
                     MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + te.Message + "\r\n\r\n" + te.StackTrace + "\r\n\r\n" + te.InnerException, new Jazyk().Error_KritickaChyba);
-                    //string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
                     if (!Directory.Exists(appdata + "\\Ticketnik"))
                     {
@@ -249,7 +246,6 @@ namespace Ticketník
                     else
                     {
                         MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n\r\n" + e.InnerException, new Jazyk().Error_KritickaChyba);
-                        //string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
                         if (!Directory.Exists(appdata + "\\Ticketnik"))
                         {
@@ -297,7 +293,6 @@ namespace Ticketník
             string userConfig = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
 
             reportFile.RootTag.Add(new fNbt.NbtByteArray("Ticketnik.log", File.ReadAllBytes(ticketniLog)));
-            //MessageBox.Show(reportFile.RootTag.Count.ToString());
             reportFile.RootTag.Add(new fNbt.NbtByteArray("Error.log", File.ReadAllBytes(errorLog)));
             reportFile.RootTag.Add(new fNbt.NbtString("user.config cesta", userConfig));
             reportFile.RootTag.Add(new fNbt.NbtString("Cesta k tic", Properties.Settings.Default.filePath));

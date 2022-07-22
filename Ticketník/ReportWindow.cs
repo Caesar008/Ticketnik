@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Drawing;
 using fNbt;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ticketník
@@ -36,9 +32,7 @@ namespace Ticketník
                 label2.Text = reportFile.RootTag.Get<NbtString>("user.config cesta").Value;
                 label1.Text = reportFile.RootTag.Get<NbtString>("Cesta k tic").Value;
                 File.WriteAllBytes(Path.GetTempPath() + "\\TicketnikCrashFile", reportFile.RootTag.Get<NbtByteArray>("Soubor").Value);
-                /*NbtFile tic = new NbtFile();
-                tic.LoadFromBuffer(reportFile.RootTag.Get<NbtByteArray>("Soubor").Value, 0, reportFile.RootTag.Get<NbtByteArray>("Soubor").Value.Length, NbtCompression.AutoDetect);
-                tic.SaveToFile(Path.GetTempPath() + "\\TicketnikCrashFile", NbtCompression.GZip);*/
+                
                 form.jmenoSouboru = Path.GetTempPath() + "\\TicketnikCrashFile";
                 try
                 {

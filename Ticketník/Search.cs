@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using fNbt;
 using System.Text.RegularExpressions;
@@ -708,14 +702,6 @@ namespace Ticketník
         {
             form.vybranyMesic = fmPuvodni;
             form.posledniVybrany = fiPuvodni;
-            /*foreach (TabPage tp in form.tabControl1.Controls)
-            {
-                if (tp.Controls.ContainsKey(form.vybranyMesic))
-                {
-                    ((ListView)tp.Controls[form.vybranyMesic]).Items[form.posledniVybrany].Selected = true;
-                    //form.LoadFile();
-                }
-            }*/
         }
 
         private void pc_KeyDown(object sender, KeyEventArgs e)

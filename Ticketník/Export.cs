@@ -54,7 +54,6 @@ namespace Ticketník
                 else if (saveFileDialog1.FileName.EndsWith("xlsx"))
                 {
                     File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx", saveFileDialog1.FileName, true);
-                    //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xls");
                 }
             }
         }

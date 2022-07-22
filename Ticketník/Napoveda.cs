@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Xml;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Net.Http;
@@ -33,7 +30,6 @@ namespace Ticketník
             this.label1.Text = form.jazyk.Windows_Help_Updating;
             browser.ObjectForScripting = new ScriptManager(this);
             VytvorMenu(true);
-            //menuTree.SelectedNode = menuTree.Nodes[0];
         }
 
         private async void VytvorMenu(bool first = false)

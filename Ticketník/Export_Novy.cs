@@ -84,7 +84,6 @@ namespace Ticketník
                                 cas = cas.AddHours((t.Do.Hour - t.Od.Hour) - pauzaDohromady.Hour).AddMinutes((t.Do.Minute - t.Od.Minute) - pauzaDohromady.Minute);
                                 hrubyCas = form.RoundUp(cas, TimeSpan.FromMinutes(30));
 
-                                //dny[d][t.TerpT].Add(t, hrubyCas);
                                 string den = "";
                                 switch (d.DayOfWeek)
                                 {

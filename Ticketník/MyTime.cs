@@ -312,7 +312,7 @@ namespace Ticketník
 
         public void CreateTerpTaskFile()
         {
-            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
+            while (updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -375,8 +375,7 @@ namespace Ticketník
                 terpTaskFailedRetry.Start();
             }
             terpTaskFileLock = false;
-            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
-                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun*/!updateRunning)
+            if (!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -387,7 +386,7 @@ namespace Ticketník
 
         public void UpdateTerpTaskFile()
         {
-            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
+            while (updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -500,9 +499,7 @@ namespace Ticketník
             }
             terpTaskFileLock = false;
 
-            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
-                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
-                vlakno.Status != TaskStatus.Created*/!updateRunning)
+            if (!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -513,7 +510,7 @@ namespace Ticketník
 
         public void UpdateTerpTaskFile(string terpNumber)
         {
-            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
+            while (updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -548,7 +545,6 @@ namespace Ticketník
                     Application.DoEvents();
                 }
 
-                //file.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Number", mtt.Number));
                 if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label) == null)
                 {
                     terpFile.RootTag.Get<NbtCompound>("Custom").Add(new NbtCompound(customTerp.Label));
@@ -601,9 +597,7 @@ namespace Ticketník
             }
             terpTaskFileLock = false;
 
-            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
-                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
-                vlakno.Status != TaskStatus.Created*/!updateRunning)
+            if (!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
@@ -614,7 +608,7 @@ namespace Ticketník
 
         public void UpdateSelected(string terp)
         {
-            while (/*vlakno != null && vlakno.Status != TaskStatus.RanToCompletion*/updateRunning)
+            while (updateRunning)
             {
                 Thread.Sleep(50);
                 Application.DoEvents();
@@ -745,9 +739,7 @@ namespace Ticketník
 
             terpTaskFileLock = false;
 
-            if (/*vlakno.Status != TaskStatus.Running || vlakno.Status != TaskStatus.WaitingForActivation ||
-                vlakno.Status != TaskStatus.WaitingForChildrenToComplete || vlakno.Status != TaskStatus.WaitingToRun ||
-                vlakno.Status != TaskStatus.Created*/!updateRunning)
+            if (!updateRunning)
             {
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();

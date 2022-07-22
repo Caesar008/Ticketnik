@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net;
 using System.Drawing;
 using System.Xml;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
 
 namespace Ticketník
 {
@@ -20,6 +18,11 @@ namespace Ticketník
             stahnout.Enabled = false;
             odebrat.Enabled = false;
             upravit.Enabled = false;
+            if(!form.devtest)
+            {
+                btn_novy_preklad.Visible = false;
+                upravit.Visible = false;
+            }
             listView1.SmallImageList = new ImageList();
             listView1.SmallImageList.ColorDepth = ColorDepth.Depth32Bit;
             listView1.SmallImageList.Images.Add(Properties.Resources.green_ball);
@@ -35,10 +38,10 @@ namespace Ticketník
             listView1.Columns[3].Text = form.jazyk.Windows_Spravce_Verze;
             upravit.Text = form.jazyk.Windows_Spravce_UpravitPreklad;
 
-            backgroundWorker1.RunWorkerAsync();
+            UpdateLang();
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private async void UpdateLang()
         {
             if (!InvokeRequired)
             {
@@ -54,7 +57,6 @@ namespace Ticketník
             
             try
             {
-                //File.Copy(Properties.Settings.Default.updateCesta + "\\jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", true);
 
                 try
                 {
@@ -68,8 +70,20 @@ namespace Ticketník
                     {
                         try
                         {
-                            WebClient wc = new WebClient();
-                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml");
+                            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                            {
+                                AllowAutoRedirect = true
+                            }))
+                            {
+                                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml").ConfigureAwait(false))
+                                {
+                                    using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", FileMode.Create))
+                                    {
+                                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                    }
+                                }
+                            }
                             form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
                         }
                         catch (Exception ee)
@@ -84,7 +98,7 @@ namespace Ticketník
                                 catch { }
                             }
                             form.Logni("Vyhledání aktualizací jazyků selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
-                            throw new Exception("Nelze vyhledat žádný update source");
+                            return;// throw new Exception("Nelze vyhledat žádný update source");
                         }
                     }
                 }
@@ -93,8 +107,22 @@ namespace Ticketník
                     //backup download z netu
                     try
                     {
-                        WebClient wc = new WebClient();
-                        wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml");
+                        using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                        {
+                            AllowAutoRedirect = true
+                        }))
+                        {
+                            using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml").ConfigureAwait(false))
+                            {
+                                using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", FileMode.Create))
+                                {
+                                    await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                }
+                            }
+                        }
+                        form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
+
                         form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
                     }
                     catch (Exception ee)
@@ -109,7 +137,7 @@ namespace Ticketník
                             catch { }
                         }
                         form.Logni("Vyhledání aktualizací jazyků selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
-                        throw new Exception("Nelze vyhledat žádný update source");
+                        return;//throw new Exception("Nelze vyhledat žádný update source");
                     }
                 }
 
@@ -260,7 +288,7 @@ namespace Ticketník
             stahnout.Enabled = true;
         }
 
-        private void stahnout_Click(object sender, EventArgs e)
+        private async void stahnout_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
             {
@@ -275,8 +303,22 @@ namespace Ticketník
                     {
                         try
                         {
-                            WebClient wc = new WebClient();
-                            wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor);
+                            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                            {
+                                AllowAutoRedirect = true
+                            }))
+                            {
+                                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor).ConfigureAwait(false))
+                                {
+                                    using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, FileMode.Create))
+                                    {
+                                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                    }
+                                }
+                            }
+                            form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
+
                             form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
                         }
                         catch (Exception ee)
@@ -295,8 +337,20 @@ namespace Ticketník
                 {
                     try
                     {
-                        WebClient wc = new WebClient();
-                        wc.DownloadFile(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor);
+                        using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                        {
+                            AllowAutoRedirect = true
+                        }))
+                        {
+                            using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor).ConfigureAwait(false))
+                            {
+                                using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, FileMode.Create))
+                                {
+                                    await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                }
+                            }
+                        }
                         form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
                     }
                     catch (Exception ee)

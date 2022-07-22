@@ -6,7 +6,6 @@ using System.IO;
 using System.Windows.Forms;
 using fNbt;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Linq;
@@ -14,10 +13,6 @@ using System.Linq;
 namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
-    //překlady v menu a tlačítek nových oken
-    //help
-    //v helpu zkusit a href propojit s JS a onClick a volání metody v c# která by nastavila document
-    //https://stackoverflow.com/questions/17540644/handling-click-event-of-web-browser-control
 
     /*interní changelog 1.7.0.0, možná 2.0.0.0
     - Načítání Terp a tasků z MyTime
@@ -93,11 +88,11 @@ namespace Ticketník
             oddToolStripMenuItem.Visible = false;
             převéstNaFormátMilleniumToolStripMenuItem.Visible = false;
             rokVyber.Enabled = false;
-            dostupnéJazykyToolStripMenuItem.Visible = false;
+            //dostupnéJazykyToolStripMenuItem.Visible = false;
             terpTaskFailedRetry.Tick += TerpTaskFailedRetry_Tick;
             terpTaskFailedRetry.Interval = 600000;
-            terpToolStripMenuItem.Visible = přidatTERPKódToolStripMenuItem.Visible = upravitTERPKódToolStripMenuItem.Visible = smazatTERPKódToolStripMenuItem.Visible = !Properties.Settings.Default.onlineTerp; 
-            
+            terpToolStripMenuItem.Visible = přidatTERPKódToolStripMenuItem.Visible = upravitTERPKódToolStripMenuItem.Visible = smazatTERPKódToolStripMenuItem.Visible = !Properties.Settings.Default.onlineTerp;
+            dokumentaceToolStripMenuItem.Visible = false;
 
             //vytvoření cancelation tokenu
             vlaknoCancel = new CancellationTokenSource();
@@ -125,10 +120,6 @@ namespace Ticketník
                 Logni("Soubor .tic je poškozen. " + jmenoSouboru, LogMessage.WARNING);
                 MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            /*vlakno = new Task(() => Aktualizace(devtest), vcl);
-            vlakno.RunSynchronously();*/
-            //vlakno.Start();
             Aktualizace(devtest);
 
             //nastavení IE11 pro WebBrowser + nastavení JSON pro IE
@@ -894,10 +885,6 @@ namespace Ticketník
                                 ListViewItem empty = new ListViewItem();
                                 int pocetTicetuVeDni = 0;
                                 int celkemDny = 0;
-                                /*foreach (KeyValuePair<string, List<Ticket>> dict in poDnech[dny])
-                                {
-                                    pocetTicetuVeDni += dict.Value.Count;
-                                }*/
                                 int counTic = 0;
 
                                 foreach (KeyValuePair<string, List<Ticket>> dict in poDnech[dny])
@@ -954,7 +941,6 @@ namespace Ticketník
                                             {
                                                 if (den != null)
                                                 {
-                                                    //((ListView)tp.Controls[mesic]).Items.Add(empty); //bývalo
                                                     ((ListView)tp.Controls[mesic]).Items.Add(den);
                                                     den.Tag = new Tag(t.Datum, -1);
                                                     den = null;
@@ -1003,10 +989,7 @@ namespace Ticketník
                                                         break;
                                                 }
 
-                                                //string casDoString = ""; //bývalo
                                                 string[] terpTask = DejTerp(t);
-                                                /*if (t.Do.ToString("H:mm") != "0:00") //bývalo
-                                                    casDoString = t.Do.ToString("H:mm");*/
                                                 ListViewItem lvi = new ListViewItem(new string[] { "", t.PC, t.ID, dict.Key, t.Popis, t.Kontakt, terpTask[0], terpTask[1], Cas(t), stst, t.Poznamky });
                                                 lvi.BackColor = barvaP;
                                                 lvi.ForeColor = ContrastColor(barvaP);
@@ -1111,7 +1094,6 @@ namespace Ticketník
                                 vybranyRok = rokVyber.SelectedItem.ToString();
 
                             rokVyber.Items.Clear();
-                            //if (!rokVyber.Items.Contains(DateTime.Now.Year))
                             rokVyber.Items.Add(DateTime.Now.Year.ToString());
                             rokVyber.Enabled = true;
 
@@ -1370,10 +1352,6 @@ namespace Ticketník
                                 ListViewItem empty = new ListViewItem();
                                 int pocetTicetuVeDni = 0;
                                 int celkemDny = 0;
-                                /*foreach (KeyValuePair<string, List<Ticket>> dict in poDnech[dny])
-                                {
-                                    pocetTicetuVeDni += dict.Value.Count;
-                                }*/
                                 int counTic = 0;
 
                                 foreach (KeyValuePair<string, List<Ticket>> dict in poDnech[dny])
@@ -1430,7 +1408,6 @@ namespace Ticketník
                                             {
                                                 if (den != null)
                                                 {
-                                                    //((ListView)tp.Controls[mesic]).Items.Add(empty); //bývalo
                                                     ((ListView)tp.Controls[mesic]).Items.Add(den);
                                                     den.Tag = new Tag(t.Datum, -1);
                                                     den = null;
@@ -1479,10 +1456,7 @@ namespace Ticketník
                                                         break;
                                                 }
 
-                                                //string casDoString = ""; //bývalo
                                                 string[] terpTask = DejTerp(t);
-                                                /*if (t.Do.ToString("H:mm") != "0:00") //bývalo
-                                                    casDoString = t.Do.ToString("H:mm");*/
                                                 ListViewItem lvi = new ListViewItem(new string[] { "", t.PC, t.ID, dict.Key, t.Popis, t.Kontakt, terpTask[0], terpTask[1], Cas(t), stst, t.Poznamky });
                                                 lvi.BackColor = barvaP;
                                                 lvi.ForeColor = ContrastColor(barvaP);
@@ -1670,7 +1644,6 @@ namespace Ticketník
         {
             try 
             { 
-                //terpLoaderBrowser.Stop();
                 terpLoaderClient.CancelPendingRequests();
             } 
             catch { }
@@ -1694,9 +1667,7 @@ namespace Ticketník
                     {
                         ulozeno = true;
                         timer1.Stop();
-                        if(/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created || 
-                           vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete || 
-                           vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
+                        if(updateRunning)
                         {
                             vlaknoCancel.Cancel();
                         }
@@ -1717,9 +1688,7 @@ namespace Ticketník
                             vlaknoTerp.Abort();
                         vlaknoTerp = null;
 
-                        if (/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
-                           vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
-                           vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
+                        if (updateRunning)
                         {
                             vlaknoCancel.Cancel();
                         }
@@ -1735,9 +1704,7 @@ namespace Ticketník
                         vlaknoTerp.Abort();
                     vlaknoTerp = null;
 
-                    if (/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
-                           vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
-                           vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
+                    if (updateRunning)
                     {
                         vlaknoCancel.Cancel();
                     }
@@ -1745,16 +1712,13 @@ namespace Ticketník
             }
             else
             {
-                //uložitToolStripMenuItem_Click(sender, e);
                 timer1.Stop();
 
                 if (vlaknoTerp.IsAlive)
                     vlaknoTerp.Abort();
                 vlaknoTerp = null;
 
-                if (/*vlakno != null && (vlakno.Status == TaskStatus.Running || vlakno.Status == TaskStatus.Created ||
-                       vlakno.Status == TaskStatus.WaitingForActivation || vlakno.Status == TaskStatus.WaitingForChildrenToComplete ||
-                       vlakno.Status == TaskStatus.WaitingToRun)*/updateRunning)
+                if (updateRunning)
                 {
                     vlaknoCancel.Cancel();
                 }
@@ -2467,10 +2431,7 @@ namespace Ticketník
                                         ticketWindow.richTextBox1.Text = c.Get<NbtString>("Poznamky").Value;
                                         ticketWindow.kontakt.Text = c.Get<NbtString>("Kontakt").Value;
                                         ticketWindow.pocitac.Text = c.Get<NbtString>("PC").Value;
-                                        /*if (c.Get<NbtString>("Terp") != null)
-                                            ticketWindow.terpt = c.Get<NbtString>("Terp").Value;
-                                        if (c.Get<NbtString>("Task") != null)
-                                            ticketWindow.task = c.Get<NbtString>("Task").Value;*/
+                                        
                                         ticketWindow.terpKod.Text = ticketWindow.DejTerp();
                                         ticketWindow.ShowDialog();
                                     }
@@ -2854,7 +2815,6 @@ namespace Ticketník
         {
             if (!helpOpen)
             {
-                //Logni("Otevírám nápovědu.", LogMessage.INFO);
                 try
                 {
                     Napoveda napoveda = new Napoveda(this);
@@ -3006,6 +2966,7 @@ namespace Ticketník
             this.upozorněníToolStripMenuItem.Text = toolStripButton8.Text = jazyk.Menu_Upozorneni;
             this.dostupnéJazykyToolStripMenuItem.Text = jazyk.Menu_DostupneJazyky;
             this.vyhledatAktualizaceToolStripMenuItem.Text = jazyk.Menu_HledejAktualizace;
+            this.aktualizovatVšechnyTerpyToolStripMenuItem.Text = jazyk.Menu_AktualizovatTerpyOnline;
         }
 
         private void rokVyber_SelectedIndexChanged(object sender, EventArgs e)
@@ -3227,11 +3188,8 @@ namespace Ticketník
 
         private void vyhledatAktualizaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (/*vlakno == null || (vlakno.Status != TaskStatus.RanToCompletion || vlakno.Status != TaskStatus.Canceled)*/!updateRunning)
+            if (!updateRunning)
             {
-                //vlakno = new Thread(() => Aktualizace(devtest));
-                /*vlakno = new Task(() => Aktualizace(devtest), vcl);
-                vlakno.Start();*/
                 Aktualizace(devtest);
             }
         }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using fNbt;
 
 namespace Ticketník
@@ -258,22 +256,18 @@ namespace Ticketník
             if(Zakaznici.Terpy.Get<NbtCompound>("Custom") == null)
             {
                 Zakaznici.Terpy.Add(new NbtCompound("Custom"));
-                //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Add(new NbtCompound("Custom"));
             }
             if (Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Terp") == null)
             {
                 Zakaznici.Terpy.Get<NbtCompound>("Custom").Add(new NbtList("Terp", NbtTagType.String));
-                //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Get<NbtCompound>("Custom").Add(new NbtList("Terp", NbtTagType.String));
             }
 
             if (Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Terp").ListType != NbtTagType.String)
             {
                 Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Terp").ListType = NbtTagType.String;
-                //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Get<NbtCompound>("Custom").Get<NbtList>("Terp").ListType = NbtTagType.String;
             }
 
             Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Terp").Add(new NbtString(terpKod));
-            //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Get<NbtCompound>("Custom").Get<NbtList>("Terp").Add(new NbtString(terpKod));
             zak.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\zakaznici", NbtCompression.GZip);
             if (load)
             {
@@ -287,22 +281,18 @@ namespace Ticketník
             if (Zakaznici.Terpy.Get<NbtCompound>("Custom") == null)
             {
                 Zakaznici.Terpy.Add(new NbtCompound("Custom"));
-                //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Add(new NbtCompound("Custom"));
             }
             if (Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Task") == null)
             {
                 Zakaznici.Terpy.Get<NbtCompound>("Custom").Add(new NbtList("Task", NbtTagType.String));
-                //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Get<NbtCompound>("Custom").Add(new NbtList("Task", NbtTagType.String));
             }
 
             if (Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Task").ListType != NbtTagType.String)
             {
                 Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Task").ListType = NbtTagType.String;
-                //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Get<NbtCompound>("Custom").Get<NbtList>("Task").ListType = NbtTagType.String;
             }
 
             Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Task").Add(new NbtString(task));
-            //((NbtCompound)zak.RootTag.Get<NbtList>("Terpy")[0]).Get<NbtCompound>("Custom").Get<NbtList>("Task").Add(new NbtString(task));
             zak.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\zakaznici", NbtCompression.GZip);
             if (load)
             {

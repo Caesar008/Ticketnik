@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using fNbt;
 
 namespace Ticketník
@@ -490,15 +487,5 @@ namespace Ticketník
         internal string OnlineTyp { get; set; }
 
     }
-
-    /*internal class Terptyp
-    {
-        public Terptyp(Ticket.TerpKod terpKod, Ticket.TypTicketu typTicketu)
-        {
-
-        }
-
-        
-    }*/
 
 }

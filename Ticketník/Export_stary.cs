@@ -664,7 +664,7 @@ namespace Ticketník
                                     if (terpDict[s][i] != null)
                                     {
                                         tmp = terpDict[s][i].Split(',');
-                                        terpnuto = double.Parse(tmp[0].Replace(".", System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator))/* / ((double)poctyTicketu[i][t] / (double)customTerpyTime[s])*/;
+                                        terpnuto = double.Parse(tmp[0].Replace(".", System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                                         terpnuto += (customTerpyTime[s] * naTicket) / 60;
                                         spocitanoTicketu += customTerpyTime[s];
 
@@ -1370,13 +1370,6 @@ namespace Ticketník
             Excel.XLWorkbook export = new Excel.XLWorkbook(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx");
             Excel.IXLWorksheet exportSheet = export.Worksheet(1);
 
-            //starý Excel
-            /*Excel.Workbook export = null;
-            Excel.Application exportApp = null;
-            Excel.Worksheet exportSheet = null;
-            exportApp = new Excel.Application();
-            export = exportApp.Workbooks.Open(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xls");
-            exportSheet = export.Sheets[1];*/
 
             int row = 2;
 
@@ -1402,13 +1395,9 @@ namespace Ticketník
 
                 //project
                 exportSheet.Cell(row, 1).Value = s.Replace("+", "").Split(',')[0];
-                //exportSheet.Cells[row, 1] = s.Replace("+", "").Split(',')[0];
                 //project name
                 exportSheet.Cell(row, 2).Value = "najdiSiSam";
                 //task
-                //exportSheet.Cell(row, 3).DataType = Excel.XLDataType.Text;
-                //exportSheet.Cell(row, 3).Style.NumberFormat.Format = "@";
-                //exportSheet.Cell(row, 3).Value = s.Replace("+", "").Split(',')[1];
                 exportSheet.Cell(row, 3).SetValue(s.Replace("+", "").Split(',')[1]);
                 //task name
                 exportSheet.Cell(row, 4).Value = "TyVisCo";
