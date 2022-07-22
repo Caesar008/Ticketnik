@@ -18,19 +18,6 @@ namespace Ticketník
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = "";
             this.textBoxDescription.Text = form.jazyk.Windows_AboutBox_Popis;
-
-            if (!form.updateRunning)
-            {
-                form.vlaknoCancel = new System.Threading.CancellationTokenSource();
-                form.vcl = form.vlaknoCancel.Token;
-                form.Aktualizace();
-            }
-        }
-
-        private void Upd()
-        {
-            form.Aktualizace();
-
         }
 
         #region Assembly Attribute Accessors

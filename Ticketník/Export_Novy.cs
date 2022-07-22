@@ -299,9 +299,15 @@ namespace Ticketník
                     //project name
                     exportSheet.Cell(row, 2).Value = "najdiSiSam";
                     //task
-                    exportSheet.Cell(row, 3).SetValue(s.Task.Remove(s.Task.IndexOf(" -")));
+                    if(s.Task.Contains(" - "))
+                        exportSheet.Cell(row, 3).SetValue(s.Task.Remove(s.Task.IndexOf(" -")));
+                    else
+                        exportSheet.Cell(row, 3).SetValue(s.Task);
                     //task name
-                    exportSheet.Cell(row, 4).Value = s.Task.Remove(0, s.Task.IndexOf(" -")+3);//"TyVisCo";
+                    if (s.Task.Contains(" - "))
+                        exportSheet.Cell(row, 4).Value = s.Task.Remove(0, s.Task.IndexOf(" -")+3);//"TyVisCo";
+                    else
+                        exportSheet.Cell(row, 4).Value = "TyVisCo";
                     //type
                     exportSheet.Cell(row, 5).Value = s.GetTyp();
                     //pondělí (čas, comment)
