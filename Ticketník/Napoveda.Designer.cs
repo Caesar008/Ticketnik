@@ -99,7 +99,6 @@
             this.browser.Name = "browser";
             this.browser.Size = new System.Drawing.Size(700, 551);
             this.browser.TabIndex = 0;
-            this.browser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.browser_Navigating);
             // 
             // Napoveda
             // 

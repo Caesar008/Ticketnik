@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TicketnikHelp verze="6">
+<TicketnikHelp verze="7">
 	<Menu>
 		<Item subitems="false" name="O programu Ticketník" file="o_programu.html" />
 		<Item subitems="true" name="Ovládání programu" file="">
@@ -7,6 +7,7 @@
                 <Item subitems="false" name="Hlavní menu" file="hlavni_menu.html" />
                 <Item subitems="false" name="Ovládací prvky" file="ovladani.html" />
                 <Item subitems="false" name="Seznam ticketů" file="seznam_ticketu.html" />
+                <Item subitems="false" name="Upozornění" file="upozorneni.html" />
 			</Item>
 			<Item subitems="false" name="Nastavení programu" file="moznosti.html" />
 			<Item subitems="false" name="Klávesové zkratky" file="klavesove_zkratky.html" />

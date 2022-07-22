@@ -9,6 +9,7 @@ using System.Net;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 
 namespace Ticketník
 {
@@ -30,11 +31,12 @@ namespace Ticketník
             menuTree.ImageList.Images.Add(Properties.Resources._2book);
             this.Text = form.jazyk.SideMenu_Napoveda;
             this.label1.Text = form.jazyk.Windows_Help_Updating;
-            VytvorMenu();
-
+            browser.ObjectForScripting = new ScriptManager(this);
+            VytvorMenu(true);
+            //menuTree.SelectedNode = menuTree.Nodes[0];
         }
 
-        private async void VytvorMenu()
+        private async void VytvorMenu(bool first = false)
         {
             if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help"))
                 Directory.CreateDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help");
@@ -232,17 +234,17 @@ namespace Ticketník
                 }
                 else
                 {
-                    VytvorMenuPoUpd();
+                    VytvorMenuPoUpd(first);
                 }
             }
             catch (Exception ex)
             {
-                VytvorMenuPoUpd();
+                VytvorMenuPoUpd(first);
                 form.Logni("Nelze ověřit verzi nápovědy\r\n\r\n" + ex.Message, Form1.LogMessage.WARNING);
             }
         }
 
-        private void VytvorMenuPoUpd()
+        private void VytvorMenuPoUpd(bool first = false)
         {
             label1.Visible = false;
             XmlDocument help = new XmlDocument();
@@ -252,6 +254,20 @@ namespace Ticketník
                 PridejNode(menu.SelectNodes("Item"), menuTree.Nodes);
             else
                 this.BeginInvoke(new Action(() => PridejNode(menu.SelectNodes("Item"), menuTree.Nodes)));
+
+            int retry = 0;
+            while(menuTree.Nodes.Count == 0 && retry < 60)
+            {
+                System.Threading.Thread.Sleep(50);
+                retry++;
+            }
+            if (first && menuTree.Nodes.Count > 0)
+            {
+                if (!InvokeRequired)
+                    menuTree.SelectedNode = menuTree.Nodes[0];
+                else
+                    this.BeginInvoke(new Action(() => menuTree.SelectedNode = menuTree.Nodes[0]));
+            }
         }
 
         private void PridejNode(XmlNodeList polozky, TreeNodeCollection uzle)
@@ -489,22 +505,20 @@ namespace Ticketník
             zmena = true;
         }
 
-        private void browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        internal void LoadLink(string url)
         {
             try
             {
-                if (e.Url.ToString().StartsWith("tic://"))
+                if (url.StartsWith("tic://"))
                 {
-                    e.Cancel = true;
-                    string soub = e.Url.ToString().Replace("tic://", "");
-                    Expand(soub.Remove(soub.Length - 1), menuTree.Nodes);
-                    soub = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "\\help\\" + soub.Remove(soub.Length - 1);
+                    string soub = url.Replace("tic://", "");
+                    Expand(soub, menuTree.Nodes);
+                    soub = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\" + soub;
                     browser.DocumentText = File.ReadAllText(soub).Replace("{verze}", Application.ProductVersion).Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace('\\', '/'));
                 }
-                else if (e.Url.ToString().StartsWith("http"))
+                else if (url.StartsWith("http"))
                 {
-                    e.Cancel = true;
-                    System.Diagnostics.Process.Start(e.Url.ToString());
+                    System.Diagnostics.Process.Start(url);
                 }
             }
             catch
@@ -579,6 +593,22 @@ namespace Ticketník
         private void menuTree_KeyUp(object sender, KeyEventArgs e)
         {
             stisk = false;
+        }
+    }
+
+    [ComVisible(true)]
+    public class ScriptManager
+    {
+        private Napoveda mForm;
+
+        public ScriptManager(Napoveda form)
+        {
+            mForm = form;
+        }
+
+        public void LoadLink(string statusID)
+        {
+            mForm.LoadLink(statusID);
         }
     }
 }
