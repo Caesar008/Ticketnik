@@ -291,7 +291,7 @@ namespace Ticketník
                     //project name
                     exportSheet.Cell(row, 2).Value = "najdiSiSam";
                     //task
-                    exportSheet.Cell(row, 3).SetValue(s.Task);
+                    exportSheet.Cell(row, 3).SetValue(s.Task.Remove(s.Task.IndexOf(" -")));
                     //task name
                     exportSheet.Cell(row, 4).Value = "TyVisCo";
                     //type

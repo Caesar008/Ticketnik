@@ -1,4 +1,8 @@
-﻿1.7.0.1 (22.7.2022)
+﻿1.7.0.2 (22.7.2022)
+
+- Opravena chyba v exportu
+-----------------------------------
+1.7.0.1 (22.7.2022)
 
 - Opraveno nefunkční vyplnění terpu a tasku při kopírování za použití online terpu
 -----------------------------------
