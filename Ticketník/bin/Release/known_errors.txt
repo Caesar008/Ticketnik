@@ -135,7 +135,7 @@ OPRAVENÉ CHYBY
 #20-003 9.4.2020 ? - Opraveno 15.4.2020 (1.6.0.2)
 - Kopírování ticketů mění terp kód
 
-#20-004 9.4.2020 ? - Opraveno 25.7.2022 (1.0.7.8)
+#20-004 9.4.2020 ? - Opraveno 25.7.2022 (1.7.0.8)
 - při aktualizaci se ne vždy spustí aktuální verze - chyba File not found
 
 #20-005 4.5.2020 ? - Opraveno 23.11.2020 (1.6.0.3)
