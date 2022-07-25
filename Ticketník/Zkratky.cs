@@ -109,7 +109,7 @@ namespace Ticketník
                 devtest = !devtest;
                 toolStripMenuItem6.Visible = devtest;
                 reportToolStripMenuItem.Visible = devtest;
-                dostupnéJazykyToolStripMenuItem.Visible = devtest;
+                //dostupnéJazykyToolStripMenuItem.Visible = devtest;
                 Logni("Použita vývojová zkratka Ctrl+Shift+Q. DevMode: " + (devtest ? "On" : "Off"), LogMessage.INFO);
             }
             else if (e.KeyCode == Keys.E && e.Modifiers == (Keys.Control | Keys.Shift))
