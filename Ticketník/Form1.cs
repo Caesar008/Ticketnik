@@ -14,7 +14,7 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.0.7
+    /*interní changelog 1.7.0.8
     - Do seznamu bylo přidáváno i "Search in All Projects"
     */
 

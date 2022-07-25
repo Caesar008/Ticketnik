@@ -477,6 +477,13 @@ namespace Ticketník
                             }
                         }
 
+                        int retry = 0;
+                        while(!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe")) && retry < 100)
+                        {
+                            Thread.Sleep(100);
+                            retry++;
+                        }
+
                         Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"), "/update");
                         Logni("Spouštím aktualizaci " + System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe"), LogMessage.INFO);
                         
