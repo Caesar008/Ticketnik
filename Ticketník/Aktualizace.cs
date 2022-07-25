@@ -481,6 +481,7 @@ namespace Ticketník
                         while(!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe")) && retry < 100)
                         {
                             Thread.Sleep(100);
+                            Application.DoEvents();
                             retry++;
                         }
 
