@@ -2,9 +2,6 @@
 
 #18-004 22.2.2018 1.3.0.8
 - Pokud se tickety exportují v neděli, program exportuje už od nového týdne
-
-#20-004 9.4.2020
-- při aktualizaci se ne vždy spustí aktuální verze - chyba File not found
 	
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
@@ -135,6 +132,9 @@ OPRAVENÉ CHYBY
 
 #20-003 9.4.2020 ? - Opraveno 15.4.2020 (1.6.0.2)
 - Kopírování ticketů mění terp kód
+
+#20-004 9.4.2020 ? - Opraveno 25.7.2022 (1.0.7.8)
+- při aktualizaci se ne vždy spustí aktuální verze - chyba File not found
 
 #20-005 4.5.2020 ? - Opraveno 23.11.2020 (1.6.0.3)
 - Pád programu při vkládání ID tasků ze schránky na seznamu ticketů
