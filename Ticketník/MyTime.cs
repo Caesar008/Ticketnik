@@ -47,53 +47,57 @@ namespace Ticketník
 
         public async Task<List<MyTimeTerp>> GetAllMyTerps()
         {
-            try
-            {
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=").ConfigureAwait(false);
-            }
-            catch
-            {
-                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=").ConfigureAwait(false);
-            }
-
-            JsonTextReader reader = new JsonTextReader(new StringReader(result));
-            string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
+            int page = 1;
             List<MyTimeTerp> myTimeTerpList = new List<MyTimeTerp>();
-
-            while (reader.Read())
+            while (result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Projects\",\"tooltip\":\"Search in All Projects\",\"data\":null}]")
             {
-                if (reader.Value != null)
+                try
                 {
-                    if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
-                    {
-                        reader.Read();
-                        tmpId = reader.Value.ToString();
-                    }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
-                    {
-                        reader.Read();
-                        tmpName = (string)reader.Value;
-                    }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                    {
-                        reader.Read();
-                        tmpLabel = (string)reader.Value;
-                    }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
-                    {
-                        reader.Read();
-                        tmpNumber = reader.Value.ToString();
-                    }
+                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
+                }
+                catch
+                {
+                    await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
+                }
 
-                    if (tmpId != "" && tmpLabel != "" && (tmpName != "" || !result.Contains("project_name")) && (tmpNumber != "" || !result.Contains("project_number")))
+                JsonTextReader reader = new JsonTextReader(new StringReader(result));
+                string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
+
+                while (reader.Read())
+                {
+                    if (reader.Value != null)
                     {
-                        myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber));
-                        tmpId = tmpLabel = tmpName = tmpNumber = "";
+                        if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
+                        {
+                            reader.Read();
+                            tmpId = reader.Value.ToString();
+                        }
+                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
+                        {
+                            reader.Read();
+                            tmpName = (string)reader.Value;
+                        }
+                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
+                        {
+                            reader.Read();
+                            tmpLabel = (string)reader.Value;
+                        }
+                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
+                        {
+                            reader.Read();
+                            tmpNumber = reader.Value.ToString();
+                        }
+
+                        if (tmpId != "" && tmpLabel != "" && (tmpName != "" || !result.Contains("project_name")) && (tmpNumber != "" || !result.Contains("project_number")))
+                        {
+                            myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber));
+                            tmpId = tmpLabel = tmpName = tmpNumber = "";
+                        }
                     }
                 }
+                page++;
             }
-
             for (int i = 0; i < myTimeTerpList.Count; i++)
             {
                 myTimeTerpList[i].Tasks = GetTerpTasks(myTimeTerpList[i].ID).Result;

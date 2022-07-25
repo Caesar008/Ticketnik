@@ -14,8 +14,8 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.0.5
-    - Opraveno načítání tasků v případě, že jich bylo tolik, že MyTime je vracel po stránkách
+    /*interní changelog 1.7.0.6
+    - Opraveno načítání terpů v případě, že jich bylo tolik, že MyTime je vracel po stránkách
     */
 
     public partial class Form1 : Form
@@ -43,7 +43,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070005;
+        internal int program = 1070006;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
