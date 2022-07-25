@@ -1,4 +1,6 @@
-﻿AKTUÁLNĚ ZNÁMÉ CHYBY
+﻿Chyby možno reportovat na https://github.com/Caesar008/Ticketnik/issues nebo kontaktujte Pavla Jarkovského
+
+AKTUÁLNĚ ZNÁMÉ CHYBY
 
 #18-004 22.2.2018 1.3.0.8
 - Pokud se tickety exportují v neděli, program exportuje už od nového týdne
