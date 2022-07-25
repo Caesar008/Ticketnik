@@ -91,8 +91,11 @@ namespace Ticketník
 
                         if (tmpId != "" && tmpLabel != "" && (tmpName != "" || !result.Contains("project_name")) && (tmpNumber != "" || !result.Contains("project_number")))
                         {
-                            myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber));
-                            tmpId = tmpLabel = tmpName = tmpNumber = "";
+                            if (tmpLabel != "Search in All Projects")
+                            {
+                                myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber));
+                                tmpId = tmpLabel = tmpName = tmpNumber = "";
+                            }
                         }
                     }
                 }

@@ -1,4 +1,8 @@
-﻿1.7.0.6 (25.7.2022)
+﻿1.7.0.7 (25.7.2022)
+
+- Do seznamu bylo přidáváno i "Search in All Projects"
+-----------------------------------
+1.7.0.6 (25.7.2022)
 
 - Opraveno načítání terpů v případě, že jich bylo tolik, že MyTime je vracel po stránkách
 -----------------------------------
