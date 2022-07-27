@@ -17,7 +17,8 @@ namespace Ticketník
         public HttpClient terpLoaderClient = new HttpClient(new HttpClientHandler()
         {
             AllowAutoRedirect = true,
-            UseDefaultCredentials = true
+            UseDefaultCredentials = true,
+            UseCookies = true
         });
         string result = "";
         internal NbtFile terpFile;
@@ -422,6 +423,7 @@ namespace Ticketník
                 Logni("Updatuji terpTask soubor", Form1.LogMessage.INFO);
                 terpFile = new NbtFile();
                 terpFile.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask");
+
 
                 foreach (MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
