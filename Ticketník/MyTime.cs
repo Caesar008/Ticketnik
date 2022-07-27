@@ -17,8 +17,7 @@ namespace Ticketník
         public HttpClient terpLoaderClient = new HttpClient(new HttpClientHandler()
         {
             AllowAutoRedirect = true,
-            UseDefaultCredentials = true,
-            UseCookies = true
+            UseDefaultCredentials = true
         });
         string result = "";
         internal NbtFile terpFile;
