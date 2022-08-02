@@ -107,6 +107,7 @@ namespace Ticketník
             try
             {
                 LoadFile(true);
+                File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
             }
             catch
             {
