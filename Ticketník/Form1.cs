@@ -14,8 +14,8 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.0.8
-    - Do seznamu bylo přidáváno i "Search in All Projects"
+    /*interní changelog 1.7.0.9
+    - Vytvoření .bak při spuštěníi když byl soubor otevřený i dříve
     */
 
     public partial class Form1 : Form
@@ -43,7 +43,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070008;
+        internal int program = 1070009;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
@@ -107,6 +107,8 @@ namespace Ticketník
             try
             {
                 LoadFile(true);
+                if(jmenoSouboru != null && File.Exists(jmenoSouboru))
+                    File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
             }
             catch
             {
