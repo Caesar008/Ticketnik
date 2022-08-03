@@ -14,8 +14,8 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.0.10
-    - dummy update - nelíbí se defenderu 1.7.0.9
+    /*interní changelog 1.7.0.11
+    - Přesunutí umístění, kde se tvoří záloha - kvůli Defenderu
     */
 
     public partial class Form1 : Form
@@ -107,9 +107,6 @@ namespace Ticketník
             try
             {
                 LoadFile(true);
-                Debug.Write("Defendere naser si!");
-                if(jmenoSouboru != null && File.Exists(jmenoSouboru))
-                    File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
             }
             catch
             {
@@ -1532,6 +1529,7 @@ namespace Ticketník
                     }
                     else
                         MessageBox.Show(jazyk.Error_NovějsiVerze, jazyk.Error_Verze, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
                 }
                 else
                 {
