@@ -14,8 +14,8 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.0.9
-    - Vytvoření .bak při spuštěníi když byl soubor otevřený i dříve
+    /*interní changelog 1.7.0.10
+    - dummy update - nelíbí se defenderu 1.7.0.9
     */
 
     public partial class Form1 : Form
@@ -43,7 +43,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070009;
+        internal int program = 1070010;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
@@ -107,6 +107,7 @@ namespace Ticketník
             try
             {
                 LoadFile(true);
+                Debug.Write("Defendere naser si!");
                 if(jmenoSouboru != null && File.Exists(jmenoSouboru))
                     File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
             }
