@@ -41,7 +41,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Ticketnik.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.93.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -308,7 +309,6 @@
     </Compile>
     <None Include="Resources\mytime_template.xlsx" />
     <None Include="Resources\zakaznici" />
-    <None Include="Ticketnik.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
