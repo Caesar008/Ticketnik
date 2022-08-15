@@ -66,6 +66,7 @@
             this.zmenitJazyk = new System.Windows.Forms.Button();
             this.skryteNastaveni = new System.Windows.Forms.Button();
             this.onlineTerp = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -462,9 +463,9 @@
             // 
             // skryteNastaveni
             // 
-            this.skryteNastaveni.Location = new System.Drawing.Point(223, 341);
+            this.skryteNastaveni.Location = new System.Drawing.Point(220, 107);
             this.skryteNastaveni.Name = "skryteNastaveni";
-            this.skryteNastaveni.Size = new System.Drawing.Size(155, 23);
+            this.skryteNastaveni.Size = new System.Drawing.Size(158, 23);
             this.skryteNastaveni.TabIndex = 9;
             this.skryteNastaveni.Text = "Skrytá nastavení";
             this.skryteNastaveni.UseVisualStyleBackColor = true;
@@ -481,11 +482,22 @@
             this.onlineTerp.UseVisualStyleBackColor = true;
             this.onlineTerp.CheckedChanged += new System.EventHandler(this.onlineTerp_CheckedChanged);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(223, 341);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(155, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Výchozí nastavení";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Nastaveni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 370);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.onlineTerp);
             this.Controls.Add(this.skryteNastaveni);
             this.Controls.Add(this.groupBox3);
@@ -554,5 +566,6 @@
         private System.Windows.Forms.Label prescas;
         private System.Windows.Forms.Button skryteNastaveni;
         private System.Windows.Forms.CheckBox onlineTerp;
+        private System.Windows.Forms.Button button2;
     }
 }

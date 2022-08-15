@@ -14,8 +14,9 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.0.11
-    - Přesunutí umístění, kde se tvoří záloha - kvůli Defenderu
+    /*interní changelog 1.7.1.0
+    - Opravena chyba #22-004
+    - Přidáno tlačítko pro reset do defaultu
     */
 
     public partial class Form1 : Form
@@ -43,7 +44,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070011;
+        internal int program = 1070100;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";

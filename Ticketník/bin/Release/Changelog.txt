@@ -1,5 +1,11 @@
-﻿1.7.0.11 (3.8.2022)
-    - Přesunutí umístění, kde se tvoří záloha - kvůli Defenderu
+﻿1.7.1.0 (15.8.2022)
+
+- Opravena chyba #22-004
+- Přidáno tlačítko pro reset do defaultu
+-----------------------------------
+1.7.0.11 (3.8.2022)
+
+- Přesunutí umístění, kde se tvoří záloha - kvůli Defenderu
 -----------------------------------
 1.7.0.10 (3.8.2022)
 
