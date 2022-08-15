@@ -1,4 +1,4 @@
-﻿Chyby možno reportovat na https://github.com/Caesar008/Ticketnik/issues nebo kontaktujte Pavla Jarkovského
+Chyby možno reportovat na https://github.com/Caesar008/Ticketnik/issues nebo kontaktujte Pavla Jarkovského
 
 AKTUÁLNĚ ZNÁMÉ CHYBY
 
@@ -13,6 +13,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 
 #22-003 15.8.2022
 - Složky a soubory někdy dostávají podtržítko na začátek
+
+#22-004 15.8.2022
+- parametr -default neresetuje Ticketník podle nastavení verze 1.7
 
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
