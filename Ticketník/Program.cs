@@ -79,54 +79,6 @@ namespace Ticketník
                             Properties.Settings.Default.umisteni = new System.Drawing.Point(0, 0);
                         else if (par.Contains("default") || Control.ModifierKeys == Keys.Shift)
                         {
-                            Properties.Settings.Default.filePath = "";
-                            Properties.Settings.Default.lastSelected = "";
-                            Properties.Settings.Default.velikost = new System.Drawing.Size(850, 460);
-                            Properties.Settings.Default.maximized = false;
-                            Properties.Settings.Default.umisteni = new System.Drawing.Point(0, 0);
-                            Properties.Settings.Default.minuty = 5;
-                            Properties.Settings.Default.autosave = false;
-                            Properties.Settings.Default.colPC = 68;
-                            Properties.Settings.Default.colID = 82;
-                            Properties.Settings.Default.colZak = 84;
-                            Properties.Settings.Default.colPop = 92;
-                            Properties.Settings.Default.colKon = 89;
-                            Properties.Settings.Default.colOd = 49;
-                            Properties.Settings.Default.colDo = 49;
-                            Properties.Settings.Default.colPau = 44;
-                            Properties.Settings.Default.colStav = 60;
-                            Properties.Settings.Default.colPoz = 149;
-                            Properties.Settings.Default.shortTime = true;
-                            Properties.Settings.Default.probiha = System.Drawing.Color.FromArgb(255, 255, 160);
-                            Properties.Settings.Default.ceka = System.Drawing.Color.Yellow;
-                            Properties.Settings.Default.odpoved = System.Drawing.Color.Yellow;
-                            Properties.Settings.Default.rdp = System.Drawing.Color.Yellow;
-                            Properties.Settings.Default.vyreseno = System.Drawing.Color.FromArgb(0, 200, 0);
-                            Properties.Settings.Default.prescas = System.Drawing.Color.Fuchsia;
-                            Properties.Settings.Default.updateCesta = @"\\10.14.18.19\Shareforyou\tools\Ticketnik\Update";
-                            Properties.Settings.Default.ZalozniUpdate = "";
-                            Properties.Settings.Default.pouzivatZalozniUpdate = false;
-                            Properties.Settings.Default.NovyExport = true;
-                            Properties.Settings.Default.timeLow = System.Drawing.Color.Red;
-                            Properties.Settings.Default.timeMid = System.Drawing.Color.Orange;
-                            Properties.Settings.Default.timeLong = System.Drawing.Color.Fuchsia;
-                            Properties.Settings.Default.timeOK = System.Drawing.Color.FromArgb(0, 200, 0);
-                            Properties.Settings.Default.pouzivatCasy = true;
-                            Properties.Settings.Default.Jazyk = "";
-                            Properties.Settings.Default.JazykCesta = "";
-                            Properties.Settings.Default.colIDPoradi = 2;
-                            Properties.Settings.Default.colPCPoradi = 1;
-                            Properties.Settings.Default.colZakPoradi = 3;
-                            Properties.Settings.Default.colPopPoradi = 4;
-                            Properties.Settings.Default.colKonPoradi = 5;
-                            Properties.Settings.Default.colTerpPoradi = 6;
-                            Properties.Settings.Default.colTaskPoradi = 7;
-                            Properties.Settings.Default.colCasPoradi = 8;
-                            Properties.Settings.Default.colStavPoradi = 9;
-                            Properties.Settings.Default.colPozPoradi = 10;
-
-                            Properties.Settings.Default.Save();
-
                             try
                             {
                                 Microsoft.Win32.RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey
@@ -134,6 +86,67 @@ namespace Ticketník
                                 registryKey.DeleteValue("Ticketnik");
                             }
                             catch { }
+
+                            string filename = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+                            if (File.Exists(filename))
+                            {
+                                File.Delete(filename);
+                                Properties.Settings.Default.Reload();
+                                System.Diagnostics.Process.Start("Ticketnik.exe");
+                                System.Diagnostics.Process.GetCurrentProcess().Kill();
+                            }
+                            else
+                            {
+                                Properties.Settings.Default.filePath = "";
+                                Properties.Settings.Default.lastSelected = "";
+                                Properties.Settings.Default.velikost = new System.Drawing.Size(850, 460);
+                                Properties.Settings.Default.maximized = false;
+                                Properties.Settings.Default.umisteni = new System.Drawing.Point(0, 0);
+                                Properties.Settings.Default.minuty = 5;
+                                Properties.Settings.Default.autosave = false;
+                                Properties.Settings.Default.colPC = 68;
+                                Properties.Settings.Default.colID = 82;
+                                Properties.Settings.Default.colZak = 84;
+                                Properties.Settings.Default.colPop = 92;
+                                Properties.Settings.Default.colKon = 89;
+                                Properties.Settings.Default.colOd = 49;
+                                Properties.Settings.Default.colDo = 49;
+                                Properties.Settings.Default.colPau = 44;
+                                Properties.Settings.Default.colStav = 60;
+                                Properties.Settings.Default.colPoz = 149;
+                                Properties.Settings.Default.shortTime = true;
+                                Properties.Settings.Default.probiha = System.Drawing.Color.FromArgb(255, 255, 160);
+                                Properties.Settings.Default.ceka = System.Drawing.Color.Yellow;
+                                Properties.Settings.Default.odpoved = System.Drawing.Color.Yellow;
+                                Properties.Settings.Default.rdp = System.Drawing.Color.Yellow;
+                                Properties.Settings.Default.vyreseno = System.Drawing.Color.FromArgb(0, 200, 0);
+                                Properties.Settings.Default.prescas = System.Drawing.Color.Fuchsia;
+                                Properties.Settings.Default.updateCesta = @"\\10.14.18.19\Shareforyou\tools\Ticketnik\Update";
+                                Properties.Settings.Default.ZalozniUpdate = "https://github.com/Caesar008/Ticketnik/raw/master/Ticketn%C3%ADk/bin/Release";
+                                Properties.Settings.Default.pouzivatZalozniUpdate = true;
+                                Properties.Settings.Default.NovyExport = true;
+                                Properties.Settings.Default.timeLow = System.Drawing.Color.Red;
+                                Properties.Settings.Default.timeMid = System.Drawing.Color.Orange;
+                                Properties.Settings.Default.timeLong = System.Drawing.Color.Fuchsia;
+                                Properties.Settings.Default.timeOK = System.Drawing.Color.FromArgb(0, 200, 0);
+                                Properties.Settings.Default.pouzivatCasy = true;
+                                Properties.Settings.Default.Jazyk = "";
+                                Properties.Settings.Default.JazykCesta = "";
+                                Properties.Settings.Default.colIDPoradi = 2;
+                                Properties.Settings.Default.colPCPoradi = 1;
+                                Properties.Settings.Default.colZakPoradi = 3;
+                                Properties.Settings.Default.colPopPoradi = 4;
+                                Properties.Settings.Default.colKonPoradi = 5;
+                                Properties.Settings.Default.colTerpPoradi = 6;
+                                Properties.Settings.Default.colTaskPoradi = 7;
+                                Properties.Settings.Default.colCasPoradi = 8;
+                                Properties.Settings.Default.colStavPoradi = 9;
+                                Properties.Settings.Default.colPozPoradi = 10;
+                                Properties.Settings.Default.onlineTerp = true;
+                                Properties.Settings.Default.lastUpdateNotif = 0;
+
+                                Properties.Settings.Default.Save();
+                            }
                         }
                         if (System.IO.File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "_Ticketnik.exe")))
                         {

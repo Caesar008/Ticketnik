@@ -1145,6 +1145,13 @@ namespace Ticketník
                 return ReturnPreklad("Windows/Settings/Language");
             }
         }
+        internal string Windows_Nastaveni_Reset_Vychozi
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Settings/ResetToDefault");
+            }
+        }
         internal string Windows_Nastaveni_ZmenJazyk
         {
             get

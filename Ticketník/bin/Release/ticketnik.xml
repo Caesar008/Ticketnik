@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Ticketnik>
 	<Zakosi>50</Zakosi>
-	<App>1070011</App>
+	<App>1070100</App>
 	<Help>7</Help>
 	<Lang>
-		<CZ>6.1</CZ>
+		<CZ>6.2</CZ>
 	</Lang>
 </Ticketnik>
