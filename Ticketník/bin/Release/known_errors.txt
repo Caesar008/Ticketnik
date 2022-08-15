@@ -11,6 +11,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-002 27.7.2022
 - Autologin bez VPN nebo Tieto sítě nefunguje - vyžaduje výběr MS accountu
 
+#22-003 15.8.2022
+- Složky a soubory někdy dostávají podtržítko na začátek
+
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
