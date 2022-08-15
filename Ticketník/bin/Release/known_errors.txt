@@ -14,9 +14,6 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-003 15.8.2022
 - Složky a soubory někdy dostávají podtržítko na začátek
 
-#22-004 15.8.2022
-- parametr -default neresetuje Ticketník podle nastavení verze 1.7
-
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
@@ -153,3 +150,6 @@ OPRAVENÉ CHYBY
 #20-006 19.5.2020 ? - Opraveno 22.7.2022 (1.7.0.0)
 - Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
 	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"
+
+#22-004 15.8.2022 - Opraveno 15.8.2022 (1.7.1.0)
+- parametr -default neresetuje Ticketník podle nastavení verze 1.7
