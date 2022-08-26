@@ -349,6 +349,7 @@ namespace Ticketník
 
                 foreach(MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
+                    Logni("Ukládám TERP " + mtt.Number + " - " + mtt.Label, Form1.LogMessage.INFO);
                     terpFile.RootTag.Add(new NbtCompound(mtt.Label));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("ID", mtt.ID));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Label", mtt.Label));
@@ -425,6 +426,7 @@ namespace Ticketník
 
                 foreach (MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
+                    Logni("Updatuji TERP " + mtt.Number + " - " + mtt.Label, Form1.LogMessage.INFO);
                     if (terpFile.RootTag.Get<NbtCompound>(mtt.Label) == null)
                     {
                         terpFile.RootTag.Add(new NbtCompound(mtt.Label));

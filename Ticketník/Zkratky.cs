@@ -142,7 +142,17 @@ namespace Ticketník
                         }
                     }
                     else
+                    {
+                        foreach (NbtCompound zakosi in file.RootTag.Get<NbtCompound>("Zakaznici").Tags)
+                        {
+                            foreach (NbtCompound mesice in zakosi.Tags)
+                            {
+                                pocet += ((NbtList)mesice.Get<NbtList>("Tickety")).Count;
+                            }
+
+                        }
                         roky.Add(0);
+                    }
                     roky.Sort();
                     int max = roky.Count - 1;
                     MessageBox.Show("Verze: " + file.RootTag.Get<NbtInt>("verze").Value + "\r\n" +
