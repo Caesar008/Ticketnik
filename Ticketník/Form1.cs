@@ -44,7 +44,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070100;
+        internal int program = 1070101;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
@@ -2569,6 +2569,7 @@ namespace Ticketník
                 else
                 {
                     System.Net.WebClient wc = new System.Net.WebClient();
+                    wc.Encoding = System.Text.Encoding.UTF8;
                     text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\known_errors.txt");
                 }
                 TextWindow tw = new TextWindow();
@@ -2593,6 +2594,7 @@ namespace Ticketník
                 else
                 {
                     System.Net.WebClient wc = new System.Net.WebClient();
+                    wc.Encoding = System.Text.Encoding.UTF8;
                     text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\Changelog.txt");
                 }
                 TextWindow tw = new TextWindow();
@@ -2617,6 +2619,7 @@ namespace Ticketník
                 else
                 {
                     System.Net.WebClient wc = new System.Net.WebClient();
+                    wc.Encoding = System.Text.Encoding.UTF8;
                     text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\Future.txt");
                 }
                 TextWindow tw = new TextWindow();
