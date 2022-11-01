@@ -1,4 +1,4 @@
-Chyby možno reportovat na https://github.com/Caesar008/Ticketnik/issues nebo kontaktujte Pavla Jarkovského
+Chyby možno reportovat na https://github.com/Caesar008/Ticketnik/issues/new nebo kontaktujte Pavla Jarkovského
 
 AKTUÁLNĚ ZNÁMÉ CHYBY
 
@@ -17,6 +17,8 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-005 20.10.2022
 - V případě vyhledání neotevřeného, nebo neexistujícího terpu dojde z zamrznutí programu
 
+#22-006 1.11.2022
+- V okně ticketu při vyhledávání nesprávně funguje informace o terpu a tasku v případě použití terpu a tasku z MyTime
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
