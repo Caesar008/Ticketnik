@@ -1,3 +1,12 @@
+1.7.1.2 (9.11.2022)
+
+- Přidána dev zkratka pro zastavení updatu souboru terpů a tasků
+- Přidáno tlačítko s odkazem na github pro hlášení problémů
+- Opraveno nenačítání Známých problémů, Plánů do budoucna a Changelogu kvůli přesměrování URL
+- Opravena chyba #22-005
+- Opravena chyba #22-006
+- Opravena chyba #22-007
+-----------------------------------
 1.7.1.1 (6.10.2022)
 
 - Chyba v kódování changelogu, známých problémů a plánů do budoucna

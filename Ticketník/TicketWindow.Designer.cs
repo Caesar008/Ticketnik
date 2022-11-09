@@ -836,13 +836,13 @@
         internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.DateTimePicker datum;
         private System.Windows.Forms.Panel newTerpTaskPanel;
-        private System.Windows.Forms.Button btn_TicketWindow_SearchTerp;
-        private System.Windows.Forms.Button btn_TicketWindow_UpdateSelected;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineType;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTask;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTerp;
         internal System.Windows.Forms.ComboBox onlineTypeComboBox;
         internal System.Windows.Forms.ComboBox onlineTaskComboBox;
         internal System.Windows.Forms.ComboBox onlineTerpDropDown;
+        internal System.Windows.Forms.Button btn_TicketWindow_SearchTerp;
+        internal System.Windows.Forms.Button btn_TicketWindow_UpdateSelected;
     }
 }

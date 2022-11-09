@@ -67,6 +67,8 @@
             this.dostupnéJazykyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vyhledatAktualizaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aktualizovatVšechnyTerpyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dělitelToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.nahlásitProblémToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenu_Napoveda = new System.Windows.Forms.ToolStripMenuItem();
             this.rokVyber = new System.Windows.Forms.ToolStripComboBox();
@@ -366,7 +368,9 @@
             this.sepToolStripMenuItem,
             this.dostupnéJazykyToolStripMenuItem,
             this.vyhledatAktualizaceToolStripMenuItem,
-            this.aktualizovatVšechnyTerpyToolStripMenuItem});
+            this.aktualizovatVšechnyTerpyToolStripMenuItem,
+            this.dělitelToolStripMenuItem,
+            this.nahlásitProblémToolStripMenuItem});
             this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
             this.sourceToolStripMenuItem.Size = new System.Drawing.Size(55, 23);
             this.sourceToolStripMenuItem.Text = "Source";
@@ -424,6 +428,18 @@
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Text = "Aktualizovat všechny Terpy";
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Click += new System.EventHandler(this.aktualizovatVšechnyTerpyToolStripMenuItem_Click);
+            // 
+            // dělitelToolStripMenuItem
+            // 
+            this.dělitelToolStripMenuItem.Name = "dělitelToolStripMenuItem";
+            this.dělitelToolStripMenuItem.Size = new System.Drawing.Size(213, 6);
+            // 
+            // nahlásitProblémToolStripMenuItem
+            // 
+            this.nahlásitProblémToolStripMenuItem.Name = "nahlásitProblémToolStripMenuItem";
+            this.nahlásitProblémToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.nahlásitProblémToolStripMenuItem.Text = "Nahlásit problém";
+            this.nahlásitProblémToolStripMenuItem.Click += new System.EventHandler(this.nahlásitProblémToolStripMenuItem_Click);
             // 
             // oProgramuToolStripMenuItem
             // 
@@ -1285,6 +1301,8 @@
         internal System.Windows.Forms.Timer timer_ClearInfo;
         internal System.Windows.Forms.ToolStripLabel infoBox;
         internal System.Windows.Forms.ToolStripMenuItem aktualizovatVšechnyTerpyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator dělitelToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem nahlásitProblémToolStripMenuItem;
     }
 }
 

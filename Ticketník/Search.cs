@@ -694,6 +694,11 @@ namespace Ticketník
             ticketWindow.cas.Enabled = false;
             ticketWindow.button1.Enabled = false;
             ticketWindow.datum.Enabled = false;
+            ticketWindow.onlineTaskComboBox.Enabled = false;
+            ticketWindow.onlineTerpDropDown.Enabled = false;
+            ticketWindow.onlineTypeComboBox.Enabled = false;
+            ticketWindow.btn_TicketWindow_SearchTerp.Enabled = false;
+            ticketWindow.btn_TicketWindow_UpdateSelected.Enabled = false;
             ticketWindow.ShowDialog();
             form.rokVyber.SelectedItem = puvodniRok;
         }

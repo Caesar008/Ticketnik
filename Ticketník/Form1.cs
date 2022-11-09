@@ -9,14 +9,19 @@ using System.Threading;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Net.Http;
 
 namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.1.0
-    - Opravena chyba #22-004
-    - Přidáno tlačítko pro reset do defaultu
+    /*interní changelog 1.7.1.2
+    - Přidána dev zkratka pro zastavení updatu souboru terpů a tasků
+    - Přidáno tlačítko s odkazem na github pro hlášení problémů
+    - Opraveno nenačítání Známých problémů, Plánů do budoucna a Changelogu kvůli přesměrování URL
+    - Opravena chyba #22-005
+    - Opravena chyba #22-006
+    - Opravena chyba #22-007
     */
 
     public partial class Form1 : Form
@@ -25,7 +30,7 @@ namespace Ticketník
         //Skryté věci - Report + skryté nastavení
         internal bool devtest = false;
 
-        internal readonly int saveFileVersion = 10101, langVersion = 6;
+        internal readonly int saveFileVersion = 10101, langVersion = 7;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -44,7 +49,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070101;
+        internal int program = 1070102;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
@@ -1709,7 +1714,7 @@ namespace Ticketník
             {
                 timer1.Stop();
 
-                if (vlaknoTerp.IsAlive)
+                if (vlaknoTerp != null && vlaknoTerp.IsAlive)
                     vlaknoTerp.Abort();
                 vlaknoTerp = null;
 
@@ -2559,7 +2564,7 @@ namespace Ticketník
             terp.ShowDialog();
         }
 
-        private void knownIssuesToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void knownIssuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -2568,9 +2573,13 @@ namespace Ticketník
                     text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\known_errors.txt");
                 else
                 {
-                    System.Net.WebClient wc = new System.Net.WebClient();
-                    wc.Encoding = System.Text.Encoding.UTF8;
-                    text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\known_errors.txt");
+                    using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                    {
+                        AllowAutoRedirect = true
+                    }))
+                    {
+                        text =await hc.GetStringAsync(Properties.Settings.Default.ZalozniUpdate + @"\known_errors.txt").ConfigureAwait(true);
+                    }
                 }
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
@@ -2584,7 +2593,7 @@ namespace Ticketník
             }
         }
 
-        private void changelogToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void changelogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -2593,9 +2602,13 @@ namespace Ticketník
                     text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Changelog.txt");
                 else
                 {
-                    System.Net.WebClient wc = new System.Net.WebClient();
-                    wc.Encoding = System.Text.Encoding.UTF8;
-                    text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\Changelog.txt");
+                    using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                    {
+                        AllowAutoRedirect = true
+                    }))
+                    {
+                        text = await hc.GetStringAsync(Properties.Settings.Default.ZalozniUpdate + @"\Changelog.txt").ConfigureAwait(true);
+                    }
                 }
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
@@ -2609,7 +2622,7 @@ namespace Ticketník
             }
         }
 
-        private void plányDoBudoucnaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void plányDoBudoucnaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -2618,9 +2631,13 @@ namespace Ticketník
                     text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Future.txt");
                 else
                 {
-                    System.Net.WebClient wc = new System.Net.WebClient();
-                    wc.Encoding = System.Text.Encoding.UTF8;
-                    text = wc.DownloadString(Properties.Settings.Default.ZalozniUpdate + @"\Future.txt");
+                    using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                    {
+                        AllowAutoRedirect = true
+                    }))
+                    {
+                        text = await hc.GetStringAsync(Properties.Settings.Default.ZalozniUpdate + @"\Future.txt").ConfigureAwait(true);
+                    }
                 }
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
@@ -2970,6 +2987,7 @@ namespace Ticketník
             this.dokumentaceToolStripMenuItem.Text = jazyk.Menu_Dokumentace;
             this.oProgramuToolStripMenuItem.Text = jazyk.Menu_About;
             this.toolStripMenu_Napoveda.Text = jazyk.Menu_Help;
+            this.nahlásitProblémToolStripMenuItem.Text = jazyk.Menu_ReportIssue;
             this.toolStripMenu_Napoveda.ToolTipText = jazyk.Menu_Help;
             this.toolStripButton1.Text = jazyk.SideMenu_PridatZaznam;
             this.toolStripButton2.Text = jazyk.SideMenu_UpravitZaznam;
@@ -3224,6 +3242,11 @@ namespace Ticketník
         private void aktualizovatVšechnyTerpyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AktualizujTerpyTasky();
+        }
+
+        private void nahlásitProblémToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/Caesar008/Ticketnik/issues/new");
         }
 
         private void vyhledatAktualizaceToolStripMenuItem_Click(object sender, EventArgs e)

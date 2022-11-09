@@ -76,12 +76,12 @@ namespace Ticketník
                         else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
                         {
                             reader.Read();
-                            tmpName = (string)reader.Value;
+                            tmpName = ((string)reader.Value);
                         }
                         else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
                         {
                             reader.Read();
-                            tmpLabel = (string)reader.Value;
+                            tmpLabel = ((string)reader.Value);
                         }
                         else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
                         {
@@ -136,12 +136,12 @@ namespace Ticketník
                     else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
                     {
                         reader.Read();
-                        tmpName = (string)reader.Value;
+                        tmpName = ((string)reader.Value);
                     }
                     else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
                     {
                         reader.Read();
-                        tmpLabel = (string)reader.Value;
+                        tmpLabel = ((string)reader.Value);
                     }
                     else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
                     {
@@ -349,6 +349,8 @@ namespace Ticketník
 
                 foreach(MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
+                    if (mtt.Label.EndsWith("@"))
+                        continue;
                     Logni("Ukládám TERP " + mtt.Number + " - " + mtt.Label, Form1.LogMessage.INFO);
                     terpFile.RootTag.Add(new NbtCompound(mtt.Label));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("ID", mtt.ID));
@@ -427,6 +429,8 @@ namespace Ticketník
 
                 foreach (MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
+                    if (mtt.Label.EndsWith("@"))
+                        continue;
                     Logni("Updatuji TERP " + mtt.Number + " - " + mtt.Label, Form1.LogMessage.INFO);
                     if (terpFile.RootTag.Get<NbtCompound>(mtt.Label) == null)
                     {
@@ -471,6 +475,8 @@ namespace Ticketník
                     foreach (NbtCompound customTerpy in terpFile.RootTag.Get<NbtCompound>("Custom").Tags)
                     {
                         MyTimeTerp customTerp = GetTerpData(customTerpy.Get<NbtString>("Number").Value).Result;
+                        if (customTerp.Label.EndsWith("@"))
+                            continue;
                         Logni("Updatuji TERP " + customTerp.Number + " - " + customTerp.Label, Form1.LogMessage.INFO);
 
                         foreach (MyTimeTask customTask in customTerp.Tasks)
@@ -556,8 +562,12 @@ namespace Ticketník
 
                 MyTimeTerp customTerp = GetTerpData(terpNumber).Result;
 
+                int timeout = 300;
+
                 while (customTerp == null)
                 {
+                    if (timeout-- == 0)
+                        throw new Exception("Terp search timed out. Terp probably does not exists.");
                     Thread.Sleep(100);
                     Application.DoEvents();
                 }
@@ -652,8 +662,12 @@ namespace Ticketník
 
                 MyTimeTerp customTerp = GetTerpData(terp).Result;
 
+                int timeout = 300;
+
                 while(customTerp == null)
                 {
+                    if (timeout-- == 0)
+                        throw new Exception("Terp search timed out. Terp probably does not exists.");
                     Thread.Sleep(100);
                     Application.DoEvents();
                 }
