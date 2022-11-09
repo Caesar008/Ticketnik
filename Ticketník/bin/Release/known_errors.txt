@@ -13,15 +13,6 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 
 #22-003 15.8.2022
 - Složky a soubory někdy dostávají podtržítko na začátek
-
-#22-005 20.10.2022
-- V případě vyhledání neotevřeného, nebo neexistujícího terpu dojde z zamrznutí programu
-
-#22-006 1.11.2022
-- V okně ticketu při vyhledávání nesprávně funguje informace o terpu a tasku v případě použití terpu a tasku z MyTime
-
-#22-007 9.11.2022
-- Updatování terpu a tasku failuje
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
@@ -161,3 +152,12 @@ OPRAVENÉ CHYBY
 
 #22-004 15.8.2022 - Opraveno 15.8.2022 (1.7.1.0)
 - parametr -default neresetuje Ticketník podle nastavení verze 1.7
+
+#22-005 20.10.2022 - Opraveno 9.11.2022 (1.7.1.2)
+- V případě vyhledání neotevřeného, nebo neexistujícího terpu dojde z zamrznutí programu
+
+#22-006 1.11.2022 - Opraveno 9.11.2022 (1.7.1.2)
+- V okně ticketu při vyhledávání nesprávně funguje informace o terpu a tasku v případě použití terpu a tasku z MyTime
+
+#22-007 9.11.2022 - Opraveno 9.11.2022 (1.7.1.2)
+- Updatování terpu a tasku failuje
