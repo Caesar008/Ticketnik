@@ -19,6 +19,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 
 #22-006 1.11.2022
 - V okně ticketu při vyhledávání nesprávně funguje informace o terpu a tasku v případě použití terpu a tasku z MyTime
+
+#22-007 9.11.2022
+- Updatování terpu a tasku failuje
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
