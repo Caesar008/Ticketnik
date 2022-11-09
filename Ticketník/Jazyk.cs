@@ -102,6 +102,13 @@ namespace Ticketník
                 return ReturnPreklad("MainMenuItems/File");
             }
         }
+        internal string Menu_ReportIssue
+        {
+            get
+            {
+                return ReturnPreklad("MainMenuItems/ReportIssue");
+            }
+        }
         internal string Menu_Moznosti
         {
             get
@@ -1968,6 +1975,7 @@ namespace Ticketník
             form.changelogToolStripMenuItem.Text = form.jazyk.Menu_Changelog;
             form.plányDoBudoucnaToolStripMenuItem.Text = form.jazyk.Menu_Plany;
             form.dokumentaceToolStripMenuItem.Text = form.jazyk.Menu_Dokumentace;
+            form.nahlásitProblémToolStripMenuItem.Text = form.jazyk.Menu_ReportIssue;
             form.oProgramuToolStripMenuItem.Text = form.jazyk.Menu_About;
             form.toolStripMenu_Napoveda.Text = form.jazyk.Menu_Help;
             form.toolStripMenu_Napoveda.ToolTipText = form.jazyk.Menu_Help;

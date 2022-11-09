@@ -166,6 +166,28 @@ namespace Ticketník
                     , "Info o souboru", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
             }
+            else if (e.KeyCode == Keys.U && e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                Logni("Ruším update TerpTask souboru", LogMessage.INFO);
+                try
+                {
+                    terpLoaderClient.CancelPendingRequests();
+                    if (updateRunning)
+                    {
+                        vlaknoCancel.Cancel();
+                    }
+
+                    if (vlaknoTerp != null && vlaknoTerp.IsAlive)
+                        vlaknoTerp.Abort();
+                    vlaknoTerp = null;
+                    updateRunning = false;
+                    terpTaskFileLock = false;
+
+                    infoBox.Text = "";
+                }
+                catch { }
+
+            }
         }
     }
 }
