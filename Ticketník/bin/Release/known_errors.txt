@@ -13,6 +13,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 
 #22-003 15.8.2022
 - Složky a soubory někdy dostávají podtržítko na začátek
+
+#22-008 9.11.2022
+- Nastavení OnlineTerp má vliv i na aktualizace
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
