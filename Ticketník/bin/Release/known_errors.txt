@@ -163,7 +163,7 @@ OPRAVENÉ CHYBY
 - Updatování terpu a tasku failuje
 
 #22-008 9.11.2022 - Opraveno 10.11.2022 (1.7.1.3)
-- Nastavení OnlineTerp má vliv i na aktualizace
+- Nastavení OnlineTerp má vliv i na Info okno (changelog, known errors, plány)
 
 #22-009 10.11.2022 - Opraveno 10.11.2022 (1.7.1.3)
 - Update konkrétního terpu nefunguje správně
