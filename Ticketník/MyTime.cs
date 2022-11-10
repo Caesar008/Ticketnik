@@ -68,25 +68,27 @@ namespace Ticketník
                 {
                     if (reader.Value != null)
                     {
-                        if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
+                        if (tmpId == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
                         {
                             reader.Read();
-                            tmpId = reader.Value.ToString();
+                            if (!((string)reader.Value).EndsWith("@"))
+                                tmpId = reader.Value.ToString();
                         }
-                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
+                        else if (tmpName == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
                         {
                             reader.Read();
                             tmpName = ((string)reader.Value);
                         }
-                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
+                        else if (tmpLabel == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
                         {
                             reader.Read();
                             tmpLabel = ((string)reader.Value);
                         }
-                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
+                        else if (tmpNumber == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
                         {
                             reader.Read();
-                            tmpNumber = reader.Value.ToString();
+                            if (!reader.Value.ToString().EndsWith("@"))
+                                tmpNumber = reader.Value.ToString();
                         }
 
                         if (tmpId != "" && tmpLabel != "" && (tmpName != "" || !result.Contains("project_name")) && (tmpNumber != "" || !result.Contains("project_number")))
@@ -128,25 +130,27 @@ namespace Ticketník
             {
                 if (reader.Value != null)
                 {
-                    if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
+                    if (tmpId == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
                     {
                         reader.Read();
                         tmpId = reader.Value.ToString();
                     }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
+                    else if (tmpName == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
                     {
                         reader.Read();
-                        tmpName = ((string)reader.Value);
+                        if(!((string)reader.Value).EndsWith("@"))
+                            tmpName = ((string)reader.Value);
                     }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
+                    else if (tmpLabel == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
                     {
                         reader.Read();
                         tmpLabel = ((string)reader.Value);
                     }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
+                    else if (tmpNumber == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
                     {
                         reader.Read();
-                        tmpNumber = reader.Value.ToString();
+                        if (!reader.Value.ToString().EndsWith("@"))
+                            tmpNumber = reader.Value.ToString();
                     }
 
                     if (tmpId != "" && tmpLabel != "" && tmpName != "" && (tmpNumber != "" || !result.Contains("project_number")))

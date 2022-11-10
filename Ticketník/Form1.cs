@@ -15,13 +15,9 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.1.2
-    - Přidána dev zkratka pro zastavení updatu souboru terpů a tasků
-    - Přidáno tlačítko s odkazem na github pro hlášení problémů
-    - Opraveno nenačítání Známých problémů, Plánů do budoucna a Changelogu kvůli přesměrování URL
-    - Opravena chyba #22-005
-    - Opravena chyba #22-006
-    - Opravena chyba #22-007
+    /*interní changelog 1.7.1.3
+    - Opravena chyba #22-008
+    - Opravena chyba #22-009
     */
 
     public partial class Form1 : Form
@@ -49,7 +45,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070102;
+        internal int program = 1070103;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
@@ -2569,18 +2565,19 @@ namespace Ticketník
             try
             {
                 string text = "";
-                if (!Properties.Settings.Default.onlineTerp)
-                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\known_errors.txt");
-                else
+                try
                 {
                     using (HttpClient hc = new HttpClient(new HttpClientHandler()
                     {
                         AllowAutoRedirect = true
                     }))
                     {
-                        text =await hc.GetStringAsync(Properties.Settings.Default.ZalozniUpdate + @"\known_errors.txt").ConfigureAwait(true);
+                        text = await hc.GetStringAsync(Properties.Settings.Default.ZalozniUpdate + @"\known_errors.txt").ConfigureAwait(true);
                     }
                 }
+                catch { Logni("Nelze se spojit s GitHub.", LogMessage.INFO); }
+                if (text == "")
+                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\known_errors.txt");
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
                 tw.Text = jazyk.Menu_ZnameProblemy;
@@ -2598,9 +2595,7 @@ namespace Ticketník
             try
             {
                 string text = "";
-                if (!Properties.Settings.Default.onlineTerp)
-                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Changelog.txt");
-                else
+                try
                 {
                     using (HttpClient hc = new HttpClient(new HttpClientHandler()
                     {
@@ -2610,6 +2605,10 @@ namespace Ticketník
                         text = await hc.GetStringAsync(Properties.Settings.Default.ZalozniUpdate + @"\Changelog.txt").ConfigureAwait(true);
                     }
                 }
+                catch { Logni("Nelze se spojit s GitHub.", LogMessage.INFO); }
+                if (text == "")
+                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Changelog.txt");
+                
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
                 tw.Text = jazyk.Menu_Changelog;
@@ -2627,9 +2626,7 @@ namespace Ticketník
             try
             {
                 string text = "";
-                if (!Properties.Settings.Default.onlineTerp)
-                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Future.txt");
-                else
+                try
                 {
                     using (HttpClient hc = new HttpClient(new HttpClientHandler()
                     {
@@ -2639,6 +2636,10 @@ namespace Ticketník
                         text = await hc.GetStringAsync(Properties.Settings.Default.ZalozniUpdate + @"\Future.txt").ConfigureAwait(true);
                     }
                 }
+                catch { Logni("Nelze se spojit s GitHub.", LogMessage.INFO); }
+                if (text == "")
+                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Future.txt");
+                
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
                 tw.Text = jazyk.Menu_Plany;
