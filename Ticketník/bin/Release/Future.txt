@@ -1,8 +1,12 @@
 ﻿Tady je to, co si představuju, že by mohlo v programu být. Některé funkce nemusí být nikdy implementovány.
+Aktuální seznam na https://github.com/Caesar008/Ticketnik/issues
+Položky s label "Enhancement"
 
 Potvrzené
 
 - Rozhraní pro tvorbu nového jazka - odloženo na neurčito
+- Abecední řazení taků
+- vyřazení starých tasků
 
 Nepotvrzené
 
