@@ -15,9 +15,9 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.1.3
-    - Opravena chyba #22-008
-    - Opravena chyba #22-009
+    /*interní changelog 1.7.2.0
+    - Terpy a tasky jsou ve výběru řazeny abecedně
+    - Neplatné terpy a tasky nejsou v okně nového ticketu a úpravy ticketu dostupné
     */
 
     public partial class Form1 : Form
@@ -45,7 +45,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070103;
+        internal int program = 1070200;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";

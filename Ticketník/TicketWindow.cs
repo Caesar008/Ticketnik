@@ -17,7 +17,7 @@ namespace Ticketník
         bool muze = false, dat = false;
         Form1 form;
         DateTime pauzaCelkem = new DateTime();
-        bool novy, okClick = false;
+        bool novy, okClick, _search = false;
         internal string terpt = "";
         internal string task = "";
         string puvodniID = "";
@@ -31,6 +31,7 @@ namespace Ticketník
             this.terpt = terp;
             this.task = task;
             form.LoadTerptaskFile();
+            _search = search;
 
             groupBox1.Text = form.jazyk.Windows_Ticket_ZakladniInfo;
             groupBox2.Text = form.jazyk.Windows_Ticket_DobaPrace;
@@ -100,9 +101,13 @@ namespace Ticketník
                     form.terpTaskFileLock = true;
                     foreach(MyTimeTerp onlineTerpy in form.Terpy.Values)
                     {
-                        onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+                        if(onlineTerpy.LastUpdate == form.TerpFileUpdate && !search)
+                            onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+                        else if(search)
+                            onlineTerpDropDown.Items.Add(onlineTerpy.Label);
                     }
                     onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
+                    onlineTerpDropDown.Sorted = true;
                     form.terpTaskFileLock = false;
                 }
             }
@@ -2557,9 +2562,13 @@ namespace Ticketník
             ok.Enabled = false;
             foreach (MyTimeTask mtt in form.Terpy[(string)onlineTerpDropDown.SelectedItem].Tasks)
             {
-                onlineTaskComboBox.Items.Add(mtt.Label);
+                if(mtt.LastUpdate == form.TerpFileUpdate && !_search)
+                    onlineTaskComboBox.Items.Add(mtt.Label);
+                else if (_search)
+                    onlineTaskComboBox.Items.Add(mtt.Label);
             }
             onlineTaskComboBox.DropDownWidth = ComboWidth(onlineTaskComboBox);
+            onlineTaskComboBox.Sorted = true;
         }
 
         private void onlineTaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -2579,8 +2588,9 @@ namespace Ticketník
                 }
             }
             onlineTypeComboBox.DropDownWidth = ComboWidth(onlineTypeComboBox);
+            onlineTypeComboBox.Sorted = true;
 
-            if(DateTime.Now.DayOfWeek != DayOfWeek.Sunday && DateTime.Now.DayOfWeek != DayOfWeek.Saturday)
+            if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday && DateTime.Now.DayOfWeek != DayOfWeek.Saturday)
             {
                 foreach (string s in onlineTypeComboBox.Items)
                 {
@@ -2631,11 +2641,15 @@ namespace Ticketník
             onlineTerpDropDown.Text = "";
             foreach (MyTimeTerp onlineTerpy in form.Terpy.Values)
             {
-                onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+                if(onlineTerpy.LastUpdate == form.TerpFileUpdate && !_search)
+                    onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+                else if (_search)
+                    onlineTerpDropDown.Items.Add(onlineTerpy.Label);
             }
             onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
+            onlineTerpDropDown.Sorted = true;
 
-            foreach(string s in onlineTerpDropDown.Items)
+            foreach (string s in onlineTerpDropDown.Items)
             {
                 if(s.StartsWith(tmpSelected + " "))
                 {
@@ -2656,9 +2670,13 @@ namespace Ticketník
             onlineTerpDropDown.Text = "";
             foreach (MyTimeTerp onlineTerpy in form.Terpy.Values)
             {
-                onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+                if (onlineTerpy.LastUpdate == form.TerpFileUpdate && !_search)
+                    onlineTerpDropDown.Items.Add(onlineTerpy.Label);
+                else if (_search)
+                    onlineTerpDropDown.Items.Add(onlineTerpy.Label);
             }
             onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
+            onlineTerpDropDown.Sorted = true;
             onlineTerpDropDown.SelectedItem = tmpSelected;
         }
 

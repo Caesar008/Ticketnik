@@ -13,8 +13,11 @@ Nepotvrzené
 - multiselect
 - funkce zpět a klávesová zkratka ctrl+z
 - možnost Načítání dat o ticketu z SN/TONE
-- nahlašování chyb přímo v programu
-- navrhování nápadů přímo v programu
 - Položka Oblíbené pro často používané záznamy
 - Vyhledávání ticketu v Tone / SN bez nutnosti otevřít daný ticket - zkratka Ctrl+T
 - Kopírování ticketů včetně času a statusu
+
+Zamítnuté
+
+- nahlašování chyb přímo v programu (Nahrazeno odkazem na GitHub)
+- navrhování nápadů přímo v programu (Nahrazeno odkazem na GitHub)
