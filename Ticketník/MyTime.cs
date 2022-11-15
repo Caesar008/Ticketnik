@@ -769,7 +769,8 @@ namespace Ticketník
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Label", customTask.Label));
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Name", customTask.Name == null ? "" : customTask.Name));
                             if (terpFile.RootTag.Get<NbtLong>("LastUpdate") != null)
-                                terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtLong>("LastUpdate").Value = terpFile.RootTag.Get<NbtLong>("LastUpdate").Value;
+                                terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtLong("LastUpdate", terpFile.RootTag.Get<NbtLong>("LastUpdate").Value));
+                            
                             terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
                         }
                         else
@@ -822,7 +823,7 @@ namespace Ticketník
                             terpFile.RootTag.Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("ID", customTask.ID));
                             terpFile.RootTag.Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Label", customTask.Label));
                             if (terpFile.RootTag.Get<NbtLong>("LastUpdate") != null)
-                                terpFile.RootTag.Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtLong>("LastUpdate").Value = terpFile.RootTag.Get<NbtLong>("LastUpdate").Value;
+                                terpFile.RootTag.Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtLong("LastUpdate", terpFile.RootTag.Get<NbtLong>("LastUpdate").Value));
                             terpFile.RootTag.Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtString("Name", customTask.Name == null ? "" : customTask.Name));
                             terpFile.RootTag.Get<NbtCompound>(customTerp.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtList("Types", NbtTagType.String));
                         }
