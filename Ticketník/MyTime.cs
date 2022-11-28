@@ -355,13 +355,13 @@ namespace Ticketník
                 Logni("Vytvářím terpTask soubor", Form1.LogMessage.INFO);
                 terpFile = new NbtFile(new NbtCompound("Terpy"));
                 long lastUpd = DateTime.Now.Ticks;
+                terpFile.RootTag.Add(new NbtLong("LastUpdate", lastUpd));
 
                 foreach(MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
                     if (mtt.Label.EndsWith("@"))
                         continue;
                     Logni("Ukládám TERP " + mtt.Number + " - " + mtt.Label, Form1.LogMessage.INFO);
-                    terpFile.RootTag.Add(new NbtLong("LastUpdate", lastUpd));
                     terpFile.RootTag.Add(new NbtCompound(mtt.Label));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("ID", mtt.ID));
                     terpFile.RootTag.Get<NbtCompound>(mtt.Label).Add(new NbtString("Label", mtt.Label));
