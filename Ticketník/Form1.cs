@@ -147,6 +147,7 @@ namespace Ticketník
             LoadTerptaskFile();
         }
 
+
         private void NastavSirku()
         {
             canChange = false;
