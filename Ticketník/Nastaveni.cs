@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Xml;
 using System.Linq;
+using ClosedXML.Excel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Ticketník
 {
@@ -439,11 +441,11 @@ namespace Ticketník
             if (muze)
             {
                 Properties.Settings.Default.motiv = motivVyber.SelectedIndex;
-                List<Color> barvy = Motiv();
+                Dictionary<string, Color> barvy = Motiv();
                 if (motivVyber.SelectedIndex == 0)
                 {
-                    this.BackColor = barvy[0];
-                    this.ForeColor = barvy[1];
+                    this.BackColor = barvy["pozadí"];
+                    this.ForeColor = barvy["text"];
                     foreach (Control c in this.Controls)
                     {
                         SetControlColor(c, 0, barvy);
@@ -451,8 +453,8 @@ namespace Ticketník
                 }
                 else if(motivVyber.SelectedIndex == 1)
                 {
-                    this.BackColor = barvy[0];
-                    this.ForeColor = barvy[1];
+                    this.BackColor = barvy["pozadí"];
+                    this.ForeColor = barvy["text"];
                     foreach (Control c in this.Controls)
                     {
                         SetControlColor(c, 1, barvy);
@@ -465,22 +467,28 @@ namespace Ticketník
             }
         }
 
-        private List<Color> Motiv()
+        private Dictionary<string, Color> Motiv()
         {
-            List<Color> barvy = new List<Color>();
+            Dictionary<string, Color> barvy = new Dictionary<string, Color>();
             if (Properties.Settings.Default.motiv == 0)
             {
-                barvy.Add(SystemColors.Control);
-                barvy.Add(SystemColors.ControlText);
-                barvy.Add(Color.Gainsboro);
-                barvy.Add(SystemColors.Window);
+                barvy.Add("pozadí", SystemColors.Control);
+                barvy.Add("text", SystemColors.ControlText);
+                barvy.Add("rámeček", Color.Gainsboro);
+                barvy.Add("tlačítka", SystemColors.Window);
+                barvy.Add("tlačítkaRámeček", Color.LightGray);
+                barvy.Add("tlačítkaOver", SystemColors.GradientInactiveCaption);
+                barvy.Add("tlačítkaPush", SystemColors.GradientActiveCaption);
             }
             else if (Properties.Settings.Default.motiv == 1)
             {
-                barvy.Add(Color.FromArgb(30, 30, 30));
-                barvy.Add(SystemColors.Control);
-                barvy.Add(Color.FromArgb(70, 70, 70));
-                barvy.Add(Color.FromArgb(70, 70, 70));
+                barvy.Add("pozadí", Color.FromArgb(30, 30, 30));
+                barvy.Add("text", SystemColors.Control);
+                barvy.Add("rámeček", Color.FromArgb(70, 70, 70));
+                barvy.Add("tlačítka", Color.FromArgb(50, 50, 50));
+                barvy.Add("tlačítkaRámeček", Color.DimGray);
+                barvy.Add("tlačítkaOver", Color.FromArgb(70, 70, 100));
+                barvy.Add("tlačítkaPush", Color.FromArgb(90, 90, 120));
             }
             else
             {
@@ -492,7 +500,7 @@ namespace Ticketník
         private void groupBox_Paint(object sender, PaintEventArgs e)
         {
             Graphics gfx = e.Graphics;
-            Pen p = new Pen(Motiv()[2], 1);
+            Pen p = new Pen(Motiv()["rámeček"], 1);
             gfx.DrawLine(p, 0, 6, 0, e.ClipRectangle.Height - 2);
             gfx.DrawLine(p, 0, 6, 6, 6);
             gfx.DrawLine(p, System.Windows.Forms.TextRenderer.MeasureText(((GroupBox)sender).Text, ((GroupBox)sender).Font).Width+4, 6, e.ClipRectangle.Width - 2, 6);
@@ -500,12 +508,12 @@ namespace Ticketník
             gfx.DrawLine(p, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2, 0, e.ClipRectangle.Height - 2);
         }
 
-        private void SetControlColor(Control c, int motiv, List<Color> barvy)
+        private void SetControlColor(Control c, int motiv, Dictionary<string, Color> barvy)
         {
             if (c.GetType() != typeof(Button) && c.GetType() != typeof(ComboBox) && c.GetType() != typeof(NumericUpDown))
             {
-                c.BackColor = barvy[0];
-                c.ForeColor = barvy[1];
+                c.BackColor = barvy["pozadí"];
+                c.ForeColor = barvy["text"];
                 foreach (Control cc in c.Controls)
                 {
                     if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
@@ -515,8 +523,14 @@ namespace Ticketník
             }
             else
             {
-                c.BackColor = barvy[3];
-                c.ForeColor = barvy[1];
+                c.BackColor = barvy["tlačítka"];
+                c.ForeColor = barvy["text"];
+                if(c.GetType() == typeof(Button))
+                {
+                    ((Button)c).FlatAppearance.BorderColor = barvy["tlačítkaRámeček"];
+                    ((Button)c).FlatAppearance.MouseOverBackColor = barvy["tlačítkaOver"];
+                    ((Button)c).FlatAppearance.MouseDownBackColor = barvy["tlačítkaPush"];
+                }
             }
         }
     }

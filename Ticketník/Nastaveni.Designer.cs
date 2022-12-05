@@ -169,13 +169,18 @@
             // 
             // clr_prescas
             // 
+            this.clr_prescas.BackColor = System.Drawing.SystemColors.Window;
+            this.clr_prescas.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.clr_prescas.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.clr_prescas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.clr_prescas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clr_prescas.Location = new System.Drawing.Point(124, 164);
             this.clr_prescas.Name = "clr_prescas";
             this.clr_prescas.Size = new System.Drawing.Size(75, 23);
             this.clr_prescas.TabIndex = 12;
             this.clr_prescas.Tag = "prescas";
             this.clr_prescas.Text = "Změň";
-            this.clr_prescas.UseVisualStyleBackColor = true;
+            this.clr_prescas.UseVisualStyleBackColor = false;
             this.clr_prescas.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // prescas
@@ -189,12 +194,17 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.SystemColors.Window;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(6, 192);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(193, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "Default";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // probiha
@@ -244,57 +254,82 @@
             // 
             // clr_probiha
             // 
+            this.clr_probiha.BackColor = System.Drawing.SystemColors.Window;
+            this.clr_probiha.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.clr_probiha.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.clr_probiha.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.clr_probiha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clr_probiha.Location = new System.Drawing.Point(124, 135);
             this.clr_probiha.Name = "clr_probiha";
             this.clr_probiha.Size = new System.Drawing.Size(75, 23);
             this.clr_probiha.TabIndex = 4;
             this.clr_probiha.Tag = "probiha";
             this.clr_probiha.Text = "Změň";
-            this.clr_probiha.UseVisualStyleBackColor = true;
+            this.clr_probiha.UseVisualStyleBackColor = false;
             this.clr_probiha.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // crl_rdp
             // 
+            this.crl_rdp.BackColor = System.Drawing.SystemColors.Window;
+            this.crl_rdp.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.crl_rdp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.crl_rdp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.crl_rdp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.crl_rdp.Location = new System.Drawing.Point(124, 106);
             this.crl_rdp.Name = "crl_rdp";
             this.crl_rdp.Size = new System.Drawing.Size(75, 23);
             this.crl_rdp.TabIndex = 3;
             this.crl_rdp.Tag = "rdp";
             this.crl_rdp.Text = "Změň";
-            this.crl_rdp.UseVisualStyleBackColor = true;
+            this.crl_rdp.UseVisualStyleBackColor = false;
             this.crl_rdp.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // clr_odpoved
             // 
+            this.clr_odpoved.BackColor = System.Drawing.SystemColors.Window;
+            this.clr_odpoved.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.clr_odpoved.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.clr_odpoved.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.clr_odpoved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clr_odpoved.Location = new System.Drawing.Point(124, 77);
             this.clr_odpoved.Name = "clr_odpoved";
             this.clr_odpoved.Size = new System.Drawing.Size(75, 23);
             this.clr_odpoved.TabIndex = 2;
             this.clr_odpoved.Tag = "odpoved";
             this.clr_odpoved.Text = "Změň";
-            this.clr_odpoved.UseVisualStyleBackColor = true;
+            this.clr_odpoved.UseVisualStyleBackColor = false;
             this.clr_odpoved.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // clr_ceka
             // 
+            this.clr_ceka.BackColor = System.Drawing.SystemColors.Window;
+            this.clr_ceka.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.clr_ceka.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.clr_ceka.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.clr_ceka.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clr_ceka.Location = new System.Drawing.Point(124, 48);
             this.clr_ceka.Name = "clr_ceka";
             this.clr_ceka.Size = new System.Drawing.Size(75, 23);
             this.clr_ceka.TabIndex = 1;
             this.clr_ceka.Tag = "ceka";
             this.clr_ceka.Text = "Změň";
-            this.clr_ceka.UseVisualStyleBackColor = true;
+            this.clr_ceka.UseVisualStyleBackColor = false;
             this.clr_ceka.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // clr_vyreseno
             // 
+            this.clr_vyreseno.BackColor = System.Drawing.SystemColors.Window;
+            this.clr_vyreseno.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.clr_vyreseno.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.clr_vyreseno.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.clr_vyreseno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clr_vyreseno.Location = new System.Drawing.Point(124, 19);
             this.clr_vyreseno.Name = "clr_vyreseno";
             this.clr_vyreseno.Size = new System.Drawing.Size(75, 23);
             this.clr_vyreseno.TabIndex = 0;
             this.clr_vyreseno.Tag = "vyreseno";
             this.clr_vyreseno.Text = "Změň";
-            this.clr_vyreseno.UseVisualStyleBackColor = true;
+            this.clr_vyreseno.UseVisualStyleBackColor = false;
             this.clr_vyreseno.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // colorDialog1
@@ -359,57 +394,82 @@
             // 
             // defaultCasy
             // 
+            this.defaultCasy.BackColor = System.Drawing.SystemColors.Window;
+            this.defaultCasy.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.defaultCasy.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.defaultCasy.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.defaultCasy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.defaultCasy.Location = new System.Drawing.Point(6, 164);
             this.defaultCasy.Name = "defaultCasy";
             this.defaultCasy.Size = new System.Drawing.Size(143, 23);
             this.defaultCasy.TabIndex = 5;
             this.defaultCasy.Tag = "";
             this.defaultCasy.Text = "Default";
-            this.defaultCasy.UseVisualStyleBackColor = true;
+            this.defaultCasy.UseVisualStyleBackColor = false;
             this.defaultCasy.Click += new System.EventHandler(this.defaultCasy_Click);
             // 
             // zmenHigh
             // 
+            this.zmenHigh.BackColor = System.Drawing.SystemColors.Window;
+            this.zmenHigh.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.zmenHigh.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.zmenHigh.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.zmenHigh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.zmenHigh.Location = new System.Drawing.Point(74, 135);
             this.zmenHigh.Name = "zmenHigh";
             this.zmenHigh.Size = new System.Drawing.Size(75, 23);
             this.zmenHigh.TabIndex = 4;
             this.zmenHigh.Tag = "high";
             this.zmenHigh.Text = "Změň";
-            this.zmenHigh.UseVisualStyleBackColor = true;
+            this.zmenHigh.UseVisualStyleBackColor = false;
             this.zmenHigh.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // zmenOK
             // 
+            this.zmenOK.BackColor = System.Drawing.SystemColors.Window;
+            this.zmenOK.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.zmenOK.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.zmenOK.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.zmenOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.zmenOK.Location = new System.Drawing.Point(74, 106);
             this.zmenOK.Name = "zmenOK";
             this.zmenOK.Size = new System.Drawing.Size(75, 23);
             this.zmenOK.TabIndex = 3;
             this.zmenOK.Tag = "ok";
             this.zmenOK.Text = "Změň";
-            this.zmenOK.UseVisualStyleBackColor = true;
+            this.zmenOK.UseVisualStyleBackColor = false;
             this.zmenOK.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // zmenMid
             // 
+            this.zmenMid.BackColor = System.Drawing.SystemColors.Window;
+            this.zmenMid.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.zmenMid.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.zmenMid.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.zmenMid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.zmenMid.Location = new System.Drawing.Point(74, 77);
             this.zmenMid.Name = "zmenMid";
             this.zmenMid.Size = new System.Drawing.Size(75, 23);
             this.zmenMid.TabIndex = 2;
             this.zmenMid.Tag = "mid";
             this.zmenMid.Text = "Změň";
-            this.zmenMid.UseVisualStyleBackColor = true;
+            this.zmenMid.UseVisualStyleBackColor = false;
             this.zmenMid.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // zmenLow
             // 
+            this.zmenLow.BackColor = System.Drawing.SystemColors.Window;
+            this.zmenLow.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.zmenLow.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.zmenLow.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.zmenLow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.zmenLow.Location = new System.Drawing.Point(74, 48);
             this.zmenLow.Name = "zmenLow";
             this.zmenLow.Size = new System.Drawing.Size(75, 23);
             this.zmenLow.TabIndex = 1;
             this.zmenLow.Tag = "low";
             this.zmenLow.Text = "Změň";
-            this.zmenLow.UseVisualStyleBackColor = true;
+            this.zmenLow.UseVisualStyleBackColor = false;
             this.zmenLow.Click += new System.EventHandler(this.clr_vyreseno_Click);
             // 
             // celkovyCasZobrazit
@@ -447,6 +507,7 @@
             // jazyk
             // 
             this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.jazyk.FormattingEnabled = true;
             this.jazyk.Location = new System.Drawing.Point(6, 19);
             this.jazyk.Name = "jazyk";
@@ -456,22 +517,32 @@
             // 
             // zmenitJazyk
             // 
+            this.zmenitJazyk.BackColor = System.Drawing.SystemColors.Window;
+            this.zmenitJazyk.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.zmenitJazyk.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.zmenitJazyk.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.zmenitJazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.zmenitJazyk.Location = new System.Drawing.Point(6, 71);
             this.zmenitJazyk.Name = "zmenitJazyk";
             this.zmenitJazyk.Size = new System.Drawing.Size(146, 23);
             this.zmenitJazyk.TabIndex = 0;
             this.zmenitJazyk.Text = "Změňit jazyk";
-            this.zmenitJazyk.UseVisualStyleBackColor = true;
+            this.zmenitJazyk.UseVisualStyleBackColor = false;
             this.zmenitJazyk.Click += new System.EventHandler(this.zmenitJazyk_Click);
             // 
             // skryteNastaveni
             // 
+            this.skryteNastaveni.BackColor = System.Drawing.SystemColors.Window;
+            this.skryteNastaveni.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.skryteNastaveni.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.skryteNastaveni.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.skryteNastaveni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.skryteNastaveni.Location = new System.Drawing.Point(220, 107);
             this.skryteNastaveni.Name = "skryteNastaveni";
             this.skryteNastaveni.Size = new System.Drawing.Size(158, 23);
             this.skryteNastaveni.TabIndex = 9;
             this.skryteNastaveni.Text = "Skrytá nastavení";
-            this.skryteNastaveni.UseVisualStyleBackColor = true;
+            this.skryteNastaveni.UseVisualStyleBackColor = false;
             this.skryteNastaveni.Click += new System.EventHandler(this.SkryteNastaveni_Click);
             // 
             // onlineTerp
@@ -487,17 +558,23 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.SystemColors.Window;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(223, 341);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(155, 23);
             this.button2.TabIndex = 11;
             this.button2.Text = "Výchozí nastavení";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // motivVyber
             // 
             this.motivVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.motivVyber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.motivVyber.FormattingEnabled = true;
             this.motivVyber.Location = new System.Drawing.Point(64, 130);
             this.motivVyber.Name = "motivVyber";
