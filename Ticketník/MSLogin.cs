@@ -45,7 +45,7 @@ namespace Ticketník
             {
                 new KeyValuePair<string, string>("scope", "openid"),
                 new KeyValuePair<string, string>("redirect_uri", "https%3a%2f%2fmytime.tietoevry.com%2f"),
-                new KeyValuePair<string, string>("client_id", "b78e3b3a-b11c-44ad-9edc-b76f7ed1cd7c")
+                new KeyValuePair<string, string>("client_id", "c8d8a940-d031-4ec1-85f3-79180e45d53f")
                 
             });
             //https://login.microsoftonline.com/cbede638-a3d9-459f-8f4e-24ced73b4e5e/oauth2/token
@@ -103,7 +103,7 @@ namespace Ticketník
                     //c8d8a940-d031-4ec1-85f3-79180e45d53f mytime
 
                     new KeyValuePair<string, string>("device_code", device_code),
-                    new KeyValuePair<string, string>("client_id", "b78e3b3a-b11c-44ad-9edc-b76f7ed1cd7c"),
+                    new KeyValuePair<string, string>("client_id", "c8d8a940-d031-4ec1-85f3-79180e45d53f"),
                     new KeyValuePair<string, string>("grant_type", "device_code")
                 });
 
