@@ -67,6 +67,8 @@
             this.skryteNastaveni = new System.Windows.Forms.Button();
             this.onlineTerp = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.motivVyber = new System.Windows.Forms.ComboBox();
+            this.motiv = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -157,7 +159,7 @@
             this.groupBox1.Controls.Add(this.clr_odpoved);
             this.groupBox1.Controls.Add(this.clr_ceka);
             this.groupBox1.Controls.Add(this.clr_vyreseno);
-            this.groupBox1.Location = new System.Drawing.Point(12, 137);
+            this.groupBox1.Location = new System.Drawing.Point(12, 157);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(205, 221);
             this.groupBox1.TabIndex = 6;
@@ -492,11 +494,31 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // motivVyber
+            // 
+            this.motivVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.motivVyber.FormattingEnabled = true;
+            this.motivVyber.Location = new System.Drawing.Point(51, 130);
+            this.motivVyber.Name = "motivVyber";
+            this.motivVyber.Size = new System.Drawing.Size(166, 21);
+            this.motivVyber.TabIndex = 12;
+            // 
+            // motiv
+            // 
+            this.motiv.AutoSize = true;
+            this.motiv.Location = new System.Drawing.Point(12, 133);
+            this.motiv.Name = "motiv";
+            this.motiv.Size = new System.Drawing.Size(33, 13);
+            this.motiv.TabIndex = 13;
+            this.motiv.Text = "Motiv";
+            // 
             // Nastaveni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 370);
+            this.ClientSize = new System.Drawing.Size(390, 390);
+            this.Controls.Add(this.motiv);
+            this.Controls.Add(this.motivVyber);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.onlineTerp);
             this.Controls.Add(this.skryteNastaveni);
@@ -510,8 +532,8 @@
             this.Controls.Add(this.autosave);
             this.Controls.Add(this.poStartu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(406, 409);
-            this.MinimumSize = new System.Drawing.Size(406, 409);
+            this.MaximumSize = new System.Drawing.Size(406, 429);
+            this.MinimumSize = new System.Drawing.Size(406, 429);
             this.Name = "Nastaveni";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -567,5 +589,7 @@
         private System.Windows.Forms.Button skryteNastaveni;
         private System.Windows.Forms.CheckBox onlineTerp;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox motivVyber;
+        private System.Windows.Forms.Label motiv;
     }
 }

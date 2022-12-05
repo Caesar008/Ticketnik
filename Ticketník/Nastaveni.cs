@@ -314,7 +314,11 @@ namespace Ticketník
             prescas.Text = form.jazyk.Windows_Ticket_Prescas;
             onlineTerp.Text = form.jazyk.Windows_Nastaveni_OnlineTerp;
             button2.Text = form.jazyk.Windows_Nastaveni_Reset_Vychozi;
-            
+            motiv.Text = form.jazyk.Windows_Nastaveni_Theme;
+            motivVyber.Items.Clear();
+            motivVyber.Items.Add(new KeyValuePair<int, string>(0, form.jazyk.Windows_Nastaveni_Svetly));
+            motivVyber.Items.Add(new KeyValuePair<int, string>(1, form.jazyk.Windows_Nastaveni_Tmavy));
+            motivVyber.Items.Add(new KeyValuePair<int, string>(2, form.jazyk.Windows_Nastaveni_PodleSystemu));
         }
 
         private void jazyk_SelectedIndexChanged(object sender, EventArgs e)

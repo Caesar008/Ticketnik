@@ -1173,6 +1173,34 @@ namespace Ticketník
                 return ReturnPreklad("Windows/Settings/OnlineTerp");
             }
         }
+        internal string Windows_Nastaveni_Theme
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Settings/Theme");
+            }
+        }
+        internal string Windows_Nastaveni_Svetly
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Settings/Light");
+            }
+        }
+        internal string Windows_Nastaveni_Tmavy
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Settings/Dark");
+            }
+        }
+        internal string Windows_Nastaveni_PodleSystemu
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Settings/SystemTheme");
+            }
+        }
         internal string Windows_Search_KriteriaHledani
         {
             get
