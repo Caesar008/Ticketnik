@@ -146,6 +146,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.clr_prescas);
             this.groupBox1.Controls.Add(this.prescas);
             this.groupBox1.Controls.Add(this.button1);

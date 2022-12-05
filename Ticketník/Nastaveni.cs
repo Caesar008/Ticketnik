@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Xml;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ticketník
 {
@@ -79,6 +78,9 @@ namespace Ticketník
                 jazyk.SelectedItem = form.jazyk.Jmeno + " (" + form.jazyk.Zkratka + ")";
 
             motivVyber.SelectedIndex = Properties.Settings.Default.motiv;
+            groupBox1.Paint+= new PaintEventHandler(groupBox_Paint);
+            groupBox2.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox3.Paint += new PaintEventHandler(groupBox_Paint);
         }
 
         private void poStartu_CheckedChanged(object sender, EventArgs e)
@@ -118,7 +120,7 @@ namespace Ticketník
 
         private void clr_vyreseno_Click(object sender, EventArgs e)
         {
-            switch ((string)((System.Windows.Forms.Button)sender).Tag)
+            switch ((string)((Button)sender).Tag)
             {
                 case "vyreseno":
                     colorDialog1.Color = Properties.Settings.Default.vyreseno;
@@ -153,7 +155,7 @@ namespace Ticketník
             }
             if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                switch ((string)((System.Windows.Forms.Button)sender).Tag)
+                switch ((string)((Button)sender).Tag)
                 {
                     case "vyreseno":
                         Properties.Settings.Default.vyreseno = colorDialog1.Color;
@@ -437,22 +439,23 @@ namespace Ticketník
             if (muze)
             {
                 Properties.Settings.Default.motiv = motivVyber.SelectedIndex;
+                List<Color> barvy = Motiv();
                 if (motivVyber.SelectedIndex == 0)
                 {
-                    this.BackColor = SystemColors.Control;
-                    this.ForeColor = SystemColors.ControlText;
+                    this.BackColor = barvy[0];
+                    this.ForeColor = barvy[1];
                     foreach (Control c in this.Controls)
                     {
-                        SetControlColor(c, 0);
+                        SetControlColor(c, 0, barvy);
                     }
                 }
                 else if(motivVyber.SelectedIndex == 1)
                 {
-                    this.BackColor = Color.FromArgb(30, 30, 30);
-                    this.ForeColor = SystemColors.Control;
-                    foreach(Control c in this.Controls)
+                    this.BackColor = barvy[0];
+                    this.ForeColor = barvy[1];
+                    foreach (Control c in this.Controls)
                     {
-                        SetControlColor(c, 1);
+                        SetControlColor(c, 1, barvy);
                     }
                 }
                 else
@@ -462,27 +465,48 @@ namespace Ticketník
             }
         }
 
-        private void SetControlColor(Control c, int motiv)
+        private List<Color> Motiv()
         {
-            //na obrysy https://www.codeproject.com/Questions/628477/windows-forms-group-box
-            if (motiv == 0)
+            List<Color> barvy = new List<Color>();
+            if (Properties.Settings.Default.motiv == 0)
             {
-
-                c.BackColor = SystemColors.Control;
-                c.ForeColor = SystemColors.ControlText;
-                foreach (Control cc in c.Controls)
-                {
-                    SetControlColor(cc, 0);
-                }
+                barvy.Add(SystemColors.Control);
+                barvy.Add(SystemColors.ControlText);
+                barvy.Add(Color.Gainsboro);
             }
-            else if (motiv == 1)
+            else if (Properties.Settings.Default.motiv == 1)
             {
-                c.BackColor = Color.FromArgb(30, 30, 30);
-                c.ForeColor = SystemColors.Control;
-                foreach (Control cc in c.Controls)
-                {
-                    SetControlColor(cc, 1);
-                }
+                barvy.Add(Color.FromArgb(30, 30, 30));
+                barvy.Add(SystemColors.Control);
+                barvy.Add(Color.FromArgb(70, 70, 70));
+            }
+            else
+            {
+                //zkontrolovat s registry
+            }
+            return barvy;
+        }
+
+        private void groupBox_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics gfx = e.Graphics;
+            Pen p = new Pen(Motiv()[2], 1);
+            gfx.DrawLine(p, 0, 6, 0, e.ClipRectangle.Height - 2);
+            gfx.DrawLine(p, 0, 6, 6, 6);
+            gfx.DrawLine(p, System.Windows.Forms.TextRenderer.MeasureText(((GroupBox)sender).Text, ((GroupBox)sender).Font).Width+4, 6, e.ClipRectangle.Width - 2, 6);
+            gfx.DrawLine(p, e.ClipRectangle.Width - 1, 6, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2);
+            gfx.DrawLine(p, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2, 0, e.ClipRectangle.Height - 2);
+        }
+
+        private void SetControlColor(Control c, int motiv, List<Color> barvy)
+        {
+            c.BackColor = barvy[0];
+            c.ForeColor = barvy[1];
+            foreach (Control cc in c.Controls)
+            {
+                if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
+                            cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
+                    SetControlColor(cc, motiv, barvy);
             }
         }
     }
