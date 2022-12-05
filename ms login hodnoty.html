@@ -1,0 +1,97 @@
+Form pro login
+<form name="f1" id="i0281" novalidate="novalidate" spellcheck="false" method="post" target="_top" autocomplete="off" data-bind="autoSubmit: forceSubmit, attr: { action: postUrl }, ariaHidden: !!activeDialog(), css: { 'provide-min-height': svr.fUseMinHeight }" action="https://login.microsoftonline.com/cbede638-a3d9-459f-8f4e-24ced73b4e5e/login" class="provide-min-height">
+
+Input jména/účtu
+<input type="email" name="loginfmt" id="i0116" maxlength="113" class="form-control ltr_override input ext-input text-box ext-text-box" aria-required="true" data-report-event="Signin_Email_Phone_Skype" data-report-trigger="click" data-report-value="Email_Phone_Skype_Entry" data-bind="
+                    attr: { lang: svr.fApplyAsciiRegexOnInput ? null : 'en' },
+                    externalCss: {
+                        'input': true,
+                        'text-box': true,
+                        'has-error': usernameTextbox.error },
+                    ariaLabel: tenantBranding.unsafe_userIdLabel || str['CT_PWD_STR_Username_AriaLabel'],
+                    ariaDescribedBy: 'loginHeader' + (pageDescription &amp;&amp; !svr.fHideLoginDesc ? ' loginDescription usernameError' : ' usernameError'),
+                    textInput: usernameTextbox.value,
+                    hasFocusEx: usernameTextbox.focused,
+                    placeholder: $placeholderText" aria-label="someone@example.com" aria-describedby="loginHeader usernameError" placeholder="someone@example.com">
+
+btn další u loginu
+<input type="submit" id="idSIButton9" class="win-button button_primary button ext-button primary ext-primary" data-report-event="Signin_Submit" data-report-trigger="click" data-report-value="Submit" data-bind="
+                attr: primaryButtonAttributes,
+                externalCss: {
+                    'button': true,
+                    'primary': true },
+                value: primaryButtonText() || str['CT_PWD_STR_SignIn_Button_Next'],
+                hasFocus: focusOnPrimaryButton,
+                click: primaryButton_onClick,
+                enable: isPrimaryButtonEnabled,
+                visible: isPrimaryButtonVisible,
+                preventTabbing: primaryButtonPreventTabbing" value="Další">
+
+input hesla po next
+<input name="passwd" type="password" id="i0118" autocomplete="off" class="form-control input ext-input text-box ext-text-box" aria-required="true" data-bind="
+                textInput: passwordTextbox.value,
+                ariaDescribedBy: [
+                    'loginHeader passwordError',
+                    showCredViewBrandingDesc ? 'credViewBrandingDesc' : '',
+                    unsafe_pageDescription ? 'passwordDesc' : ''].join(' '),
+                hasFocusEx: passwordTextbox.focused() &amp;&amp; !showPassword(),
+                placeholder: $placeholderText,
+                ariaLabel: unsafe_passwordAriaLabel,
+                moveOffScreen: showPassword,
+                externalCss: {
+                    'input': true,
+                    'text-box': true,
+                    'has-error': passwordTextbox.error }" aria-describedby="loginHeader passwordError  " placeholder="Heslo" aria-label="Zadejte heslo pro: pavel.jarkovsky@tietoevry.com." tabindex="0">
+
+
+
+input hesla bez next
+<input name="passwd" type="password" id="i0118" autocomplete="off" data-bind="moveOffScreen, textInput: passwordBrowserPrefill" class="moveOffScreen" tabindex="-1" aria-hidden="true">
+
+btn login
+<input type="submit" id="idSIButton9" class="win-button button_primary button ext-button primary ext-primary" data-report-event="Signin_Submit" data-report-trigger="click" data-report-value="Submit" data-bind="
+                attr: primaryButtonAttributes,
+                externalCss: {
+                    'button': true,
+                    'primary': true },
+                value: primaryButtonText() || str['CT_PWD_STR_SignIn_Button_Next'],
+                hasFocus: focusOnPrimaryButton,
+                click: primaryButton_onClick,
+                enable: isPrimaryButtonEnabled,
+                visible: isPrimaryButtonVisible,
+                preventTabbing: primaryButtonPreventTabbing" value="Přihlásit se">
+
+login url
+https://login.microsoftonline.com/cbede638-a3d9-459f-8f4e-24ced73b4e5e/oauth2/authorize?response_type=code&client_id=c8d8a940-d031-4ec1-85f3-79180e45d53f
+
+jeden hidden
+<input type="hidden" id="i0327" data-bind="attr: { name: svr.sFTName }, value: flowToken" name="flowToken" value="AQABAAEAAAD--DLA3VO7QrddgJg7WevrG1OYdmOJyOh4AStRMLdYry3rk7YN4X1jPt3q3kKkzpo28utOnuqmzEDNJ-GjagzonbwUeCp8jgjC6aX8MoH9T37NtOAgA-igsWcOb6Fy1SW6LpY6HJqYqrzOyQAKn-XNIrpGzZ552UZKzluoau7y2T3pAKfYOVwVpzqRhiJ-6A4P-LV48uO-V8K4wpNaqD6l8aPF--iTgJKKPH4JPM2hli8QAFPEcvvbwt35WFmlgeKOdJfjVCCBXNvSI1OJqFkuQ-TvO7g-hmbL8oYetOs3MSOPpA_Uilc8V_fpY09_hzv8mXhl_dmVOiGCc7xBY64545H3aD4YaNVoj1EmcorwHzJ1CE6eLGYfPf6LXonS7WWVFYD0zWy9-hKhwM1BWhcyLs1raj2Ul5GLRfI7L6JrIyLdSBfSbEWrSzlWOji-JH0zzAcF7DrdquqQyd3OCVsttKP_gk9Of2a8Zq0ta8NUQ6IlXb4ZG15pZndIoZBkDMvdnpE20Kr16Kkh6lRP5UIJyKLtzlEGCMQtU3fZv3fwFA2HWCQDZyjpmLQAoGt8YorboWzWp3uACIbQXWUbPL4oIAA">
+
+
+sctx
+
+<input type="hidden" name="request" data-bind="value: svr.sCtx" value="rQQIARAAFc67i9NgAADw9HJXe8ddKQeCi-BwgyipafLlVRD80vTaXtLk0l4fyWBN831J27Tpu7W3CE6Ci9zi6OMPEBF0UVDXG6QOOnR0UYRDR3Hy3H7j7xrJJOn0nisi0ZEATSGaTVEAuylK5DyWEqSUSGPAIY71RrtbiafwI__Y2lFOYomLmZV1exmJ_IhEVmsJA04nLUbBs7aL__MVuec2McI8K1IOiyQKcJJHiR7AFANcjAS2CTCHT8lof4DDNvpGXh44M9xNdpxR0J-Ng8WtSRtP-ng2WiTdfm-5vvZzfZsm07HYVoK4RFwhnm-cf168-3Xv8_KO_varqRFvvhOnGzfM3hjuTw_mfvN6xzDqnY5fCWfzjFye86rnFqo6GIzL7F0fyoWbdDr1KKr8jpIPLkTub-_EiN3NzWT87OrfL6v8hx3iJP4pAk0oQ5iFECoUpWiQrRqCOULIP_CF2vmO3e_2i8OqepjLtAJbDeTcoWtrjGYixZbyPl-jsq0Gx5S447lct7I1dtilzYqqj5V2zU9JWYsOj5xMQx0eH4G23KKNis0s7FGIsAsdIVAKWqvo9lSvNLUYfhLq9Y4SggbM56Cgqa7eDQuB0jRtXqyzZq9QKjd4yszOgQUk3lDV0JAzY80qoqrepH0I_8RfPls9fPL-9Vn-Hw2">
+
+
+původní login
+https://mytime.tietoevry.com/login?terp
+
+token
+<input type="hidden" name="authenticity_token" value="5PkNKkspgNGhrkyKs404s5X29dcx6u51zviIQZwW3nBMDw79qd8w8RU98vow541jjg2KOHFKTcuTmXpxSH4+YQ==">
+
+login form
+<form action="/login" accept-charset="UTF-8" method="post">
+
+post 5+3 a heslo
+login
+password
+
+
+chyba
+
+{"error":"invalid_client","error_description":"AADSTS7000218: The request body must contain the following parameter: 'client_assertion' or 'client_secret'.\r\nTrace ID: e3d7a504-4675-4c13-bf4f-4ea9c24b5d00\r\nCorrelation ID: 873e2f4d-dc5d-44a1-af2f-a74ecdf23725\r\nTimestamp: 2022-12-04 13:23:07Z","error_codes":[7000218],"timestamp":"2022-12-04 13:23:07Z","trace_id":"e3d7a504-4675-4c13-bf4f-4ea9c24b5d00","correlation_id":"873e2f4d-dc5d-44a1-af2f-a74ecdf23725","error_uri":"https://login.microsoftonline.com/error?code=7000218","claims":"{\"access_token\":{\"capolids\":{\"essential\":true,\"values\":[\"26f6760a-262a-4f42-a228-00f43e4c5e8a\"]}}}"}
+
+
+https://login.microsoftonline.com/cbede638-a3d9-459f-8f4e-24ced73b4e5e/oauth2/authorize?response_type=code&client_id=c8d8a940-d031-4ec1-85f3-79180e45d53f&scope=openid&nonce=01c48787-fba3-45c3-99e8-b56553c6c889&redirect_uri=https%3a%2f%2fmytime.tietoevry.com%2f&state=AppProxyState%3a%7b%22InvalidTokenRetry%22%3anull%2c%22IsMsofba%22%3afalse%2c%22OriginalRawUrl%22%3a%22https%3a%5c%2f%5c%2fmytime.tietoevry.com%5c%2f%22%2c%22RequestProfileId%22%3anull%2c%22SessionId%22%3a%22d4c9bc58-b5b8-4b5f-8225-c85f7b561699%22%7d%23EndOfStateParam%23&client-request-id=d4c9bc58-b5b8-4b5f-8225-c85f7b561699
+
+https://login.microsoftonline.com/cbede638-a3d9-459f-8f4e-24ced73b4e5e/oauth2/authorize?response_type=code&client_id=c8d8a940-d031-4ec1-85f3-79180e45d53f&scope=openid&redirect_uri=https%3a%2f%2fmytime.tietoevry.com%2f
