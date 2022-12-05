@@ -473,11 +473,13 @@ namespace Ticketník
                 barvy.Add(SystemColors.Control);
                 barvy.Add(SystemColors.ControlText);
                 barvy.Add(Color.Gainsboro);
+                barvy.Add(SystemColors.Window);
             }
             else if (Properties.Settings.Default.motiv == 1)
             {
                 barvy.Add(Color.FromArgb(30, 30, 30));
                 barvy.Add(SystemColors.Control);
+                barvy.Add(Color.FromArgb(70, 70, 70));
                 barvy.Add(Color.FromArgb(70, 70, 70));
             }
             else
@@ -500,13 +502,21 @@ namespace Ticketník
 
         private void SetControlColor(Control c, int motiv, List<Color> barvy)
         {
-            c.BackColor = barvy[0];
-            c.ForeColor = barvy[1];
-            foreach (Control cc in c.Controls)
+            if (c.GetType() != typeof(Button) && c.GetType() != typeof(ComboBox) && c.GetType() != typeof(NumericUpDown))
             {
-                if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
-                            cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
-                    SetControlColor(cc, motiv, barvy);
+                c.BackColor = barvy[0];
+                c.ForeColor = barvy[1];
+                foreach (Control cc in c.Controls)
+                {
+                    if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
+                                cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
+                        SetControlColor(cc, motiv, barvy);
+                }
+            }
+            else
+            {
+                c.BackColor = barvy[3];
+                c.ForeColor = barvy[1];
             }
         }
     }
