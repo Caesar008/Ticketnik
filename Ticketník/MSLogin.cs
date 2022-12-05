@@ -41,6 +41,8 @@ namespace Ticketník
         {
             //podle tohodle to zkusit https://joonasw.net/view/device-code-flow 
             //tohle taky čeknout https://learn.microsoft.com/en-us/azure/active-directory-b2c/openid-connect
+            //možná zkusit vyhledat GUID outlooku - třeba přes fiddler
+
             HttpContent formContent = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("scope", "openid"),
