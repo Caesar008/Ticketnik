@@ -451,7 +451,6 @@ namespace Ticketník
                 else
                     terpFile.RootTag.Add(new NbtLong("LastUpdate", lastUpd));
 
-
                 foreach (MyTimeTerp mtt in GetAllMyTerps().Result)
                 {
                     if (mtt.Label.EndsWith("@"))
