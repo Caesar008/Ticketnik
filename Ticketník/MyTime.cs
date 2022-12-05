@@ -57,11 +57,7 @@ namespace Ticketník
                 try
                 {
                     result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
-                    if (result.Contains("https://login.microsoftonline.com/jsdisabled"))
-                    {
-                        MSLogin mslLogin = new MSLogin(terpLoaderClient, this);
-                        mslLogin.ShowDialog();
-                    }
+                    
                 }
                 catch
                 {

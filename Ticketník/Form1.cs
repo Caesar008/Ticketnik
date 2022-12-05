@@ -15,8 +15,8 @@ namespace Ticketník
 {
     //udělat tlačítka ve správci jazyka opět viditelná
 
-    /*interní changelog 1.7.2.1
-    - Opravena chyba v updatu terpu
+    /*interní changelog 1.7.3.0
+    - Podpora světlého a tmavého módu
     */
 
     public partial class Form1 : Form
@@ -44,7 +44,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070202;
+        internal int program = 1070300;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";

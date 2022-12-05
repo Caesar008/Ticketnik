@@ -5,6 +5,8 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Xml;
+using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ticketník
 {
@@ -75,6 +77,8 @@ namespace Ticketník
                 jazyk.SelectedItem = "English (EN)";
             else
                 jazyk.SelectedItem = form.jazyk.Jmeno + " (" + form.jazyk.Zkratka + ")";
+
+            motivVyber.SelectedIndex = Properties.Settings.Default.motiv;
         }
 
         private void poStartu_CheckedChanged(object sender, EventArgs e)
@@ -114,7 +118,7 @@ namespace Ticketník
 
         private void clr_vyreseno_Click(object sender, EventArgs e)
         {
-            switch ((string)((Button)sender).Tag)
+            switch ((string)((System.Windows.Forms.Button)sender).Tag)
             {
                 case "vyreseno":
                     colorDialog1.Color = Properties.Settings.Default.vyreseno;
@@ -149,7 +153,7 @@ namespace Ticketník
             }
             if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                switch ((string)((Button)sender).Tag)
+                switch ((string)((System.Windows.Forms.Button)sender).Tag)
                 {
                     case "vyreseno":
                         Properties.Settings.Default.vyreseno = colorDialog1.Color;
@@ -315,10 +319,12 @@ namespace Ticketník
             onlineTerp.Text = form.jazyk.Windows_Nastaveni_OnlineTerp;
             button2.Text = form.jazyk.Windows_Nastaveni_Reset_Vychozi;
             motiv.Text = form.jazyk.Windows_Nastaveni_Theme;
-            motivVyber.Items.Clear();
-            motivVyber.Items.Add(new KeyValuePair<int, string>(0, form.jazyk.Windows_Nastaveni_Svetly));
-            motivVyber.Items.Add(new KeyValuePair<int, string>(1, form.jazyk.Windows_Nastaveni_Tmavy));
-            motivVyber.Items.Add(new KeyValuePair<int, string>(2, form.jazyk.Windows_Nastaveni_PodleSystemu));
+            motivVyber.DataSource = new Dictionary<int, string>(){
+                {0, form.jazyk.Windows_Nastaveni_Svetly },
+                {1, form.jazyk.Windows_Nastaveni_Tmavy},
+                {2, form.jazyk.Windows_Nastaveni_PodleSystemu}}.ToList();
+            motivVyber.ValueMember = "Key";
+            motivVyber.DisplayMember = "Value";
         }
 
         private void jazyk_SelectedIndexChanged(object sender, EventArgs e)
@@ -424,6 +430,60 @@ namespace Ticketník
             }
             catch { }
 
+        }
+
+        private void motivVyber_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (muze)
+            {
+                Properties.Settings.Default.motiv = motivVyber.SelectedIndex;
+                if (motivVyber.SelectedIndex == 0)
+                {
+                    this.BackColor = SystemColors.Control;
+                    this.ForeColor = SystemColors.ControlText;
+                    foreach (Control c in this.Controls)
+                    {
+                        SetControlColor(c, 0);
+                    }
+                }
+                else if(motivVyber.SelectedIndex == 1)
+                {
+                    this.BackColor = Color.FromArgb(30, 30, 30);
+                    this.ForeColor = SystemColors.Control;
+                    foreach(Control c in this.Controls)
+                    {
+                        SetControlColor(c, 1);
+                    }
+                }
+                else
+                {
+                    //zkontrolovat s registry
+                }
+            }
+        }
+
+        private void SetControlColor(Control c, int motiv)
+        {
+            //na obrysy https://www.codeproject.com/Questions/628477/windows-forms-group-box
+            if (motiv == 0)
+            {
+
+                c.BackColor = SystemColors.Control;
+                c.ForeColor = SystemColors.ControlText;
+                foreach (Control cc in c.Controls)
+                {
+                    SetControlColor(cc, 0);
+                }
+            }
+            else if (motiv == 1)
+            {
+                c.BackColor = Color.FromArgb(30, 30, 30);
+                c.ForeColor = SystemColors.Control;
+                foreach (Control cc in c.Controls)
+                {
+                    SetControlColor(cc, 1);
+                }
+            }
         }
     }
 }

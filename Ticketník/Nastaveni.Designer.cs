@@ -498,10 +498,11 @@
             // 
             this.motivVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.motivVyber.FormattingEnabled = true;
-            this.motivVyber.Location = new System.Drawing.Point(51, 130);
+            this.motivVyber.Location = new System.Drawing.Point(64, 130);
             this.motivVyber.Name = "motivVyber";
-            this.motivVyber.Size = new System.Drawing.Size(166, 21);
+            this.motivVyber.Size = new System.Drawing.Size(153, 21);
             this.motivVyber.TabIndex = 12;
+            this.motivVyber.SelectedIndexChanged += new System.EventHandler(this.motivVyber_SelectedIndexChanged);
             // 
             // motiv
             // 
