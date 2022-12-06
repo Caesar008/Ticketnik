@@ -19,6 +19,7 @@ namespace Ticketník
             openFileDialog1.Filter = "Crash report|*.report";
             label1.Text = "";
             label2.Text = "";
+            Motiv.SetMotiv(this);
         }
 
         private void button1_Click(object sender, EventArgs e)

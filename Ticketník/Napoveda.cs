@@ -29,6 +29,7 @@ namespace Ticketník
             this.Text = form.jazyk.SideMenu_Napoveda;
             this.label1.Text = form.jazyk.Windows_Help_Updating;
             browser.ObjectForScripting = new ScriptManager(this);
+            Motiv.SetMotiv(this);
             VytvorMenu(true);
         }
 

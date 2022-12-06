@@ -51,7 +51,14 @@ namespace Ticketník
                 poStartu.Checked = false;
             celkovyCasZobrazit.Checked = Properties.Settings.Default.pouzivatCasy;
             onlineTerp.Checked = Properties.Settings.Default.onlineTerp;
+
+            motivVyber.SelectedIndex = Properties.Settings.Default.motiv;
+            groupBox1.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox2.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox3.Paint += new PaintEventHandler(groupBox_Paint);
             muze = true;
+
+            Motiv.SetMotiv(this);
 
             probiha.BackColor = Properties.Settings.Default.probiha;
             ceka.BackColor = Properties.Settings.Default.ceka;
@@ -78,11 +85,6 @@ namespace Ticketník
                 jazyk.SelectedItem = "English (EN)";
             else
                 jazyk.SelectedItem = form.jazyk.Jmeno + " (" + form.jazyk.Zkratka + ")";
-
-            motivVyber.SelectedIndex = Properties.Settings.Default.motiv;
-            groupBox1.Paint+= new PaintEventHandler(groupBox_Paint);
-            groupBox2.Paint += new PaintEventHandler(groupBox_Paint);
-            groupBox3.Paint += new PaintEventHandler(groupBox_Paint);
         }
 
         private void poStartu_CheckedChanged(object sender, EventArgs e)
@@ -441,97 +443,14 @@ namespace Ticketník
             if (muze)
             {
                 Properties.Settings.Default.motiv = motivVyber.SelectedIndex;
-                Dictionary<string, Color> barvy = Motiv();
-                if (motivVyber.SelectedIndex == 0)
-                {
-                    this.BackColor = barvy["pozadí"];
-                    this.ForeColor = barvy["text"];
-                    foreach (Control c in this.Controls)
-                    {
-                        SetControlColor(c, 0, barvy);
-                    }
-                }
-                else if(motivVyber.SelectedIndex == 1)
-                {
-                    this.BackColor = barvy["pozadí"];
-                    this.ForeColor = barvy["text"];
-                    foreach (Control c in this.Controls)
-                    {
-                        SetControlColor(c, 1, barvy);
-                    }
-                }
-                else
-                {
-                    //zkontrolovat s registry
-                }
+                Motiv.SetMotiv(this);
+                Motiv.SetMotiv(form);
             }
-        }
-
-        private Dictionary<string, Color> Motiv()
-        {
-            Dictionary<string, Color> barvy = new Dictionary<string, Color>();
-            if (Properties.Settings.Default.motiv == 0)
-            {
-                barvy.Add("pozadí", SystemColors.Control);
-                barvy.Add("text", SystemColors.ControlText);
-                barvy.Add("rámeček", Color.Gainsboro);
-                barvy.Add("tlačítka", SystemColors.Window);
-                barvy.Add("tlačítkaRámeček", Color.LightGray);
-                barvy.Add("tlačítkaOver", SystemColors.GradientInactiveCaption);
-                barvy.Add("tlačítkaPush", SystemColors.GradientActiveCaption);
-            }
-            else if (Properties.Settings.Default.motiv == 1)
-            {
-                barvy.Add("pozadí", Color.FromArgb(30, 30, 30));
-                barvy.Add("text", SystemColors.Control);
-                barvy.Add("rámeček", Color.FromArgb(70, 70, 70));
-                barvy.Add("tlačítka", Color.FromArgb(50, 50, 50));
-                barvy.Add("tlačítkaRámeček", Color.DimGray);
-                barvy.Add("tlačítkaOver", Color.FromArgb(70, 70, 100));
-                barvy.Add("tlačítkaPush", Color.FromArgb(90, 90, 120));
-            }
-            else
-            {
-                //zkontrolovat s registry
-            }
-            return barvy;
         }
 
         private void groupBox_Paint(object sender, PaintEventArgs e)
         {
-            Graphics gfx = e.Graphics;
-            Pen p = new Pen(Motiv()["rámeček"], 1);
-            gfx.DrawLine(p, 0, 6, 0, e.ClipRectangle.Height - 2);
-            gfx.DrawLine(p, 0, 6, 6, 6);
-            gfx.DrawLine(p, System.Windows.Forms.TextRenderer.MeasureText(((GroupBox)sender).Text, ((GroupBox)sender).Font).Width+4, 6, e.ClipRectangle.Width - 2, 6);
-            gfx.DrawLine(p, e.ClipRectangle.Width - 1, 6, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2);
-            gfx.DrawLine(p, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2, 0, e.ClipRectangle.Height - 2);
-        }
-
-        private void SetControlColor(Control c, int motiv, Dictionary<string, Color> barvy)
-        {
-            if (c.GetType() != typeof(Button) && c.GetType() != typeof(ComboBox) && c.GetType() != typeof(NumericUpDown))
-            {
-                c.BackColor = barvy["pozadí"];
-                c.ForeColor = barvy["text"];
-                foreach (Control cc in c.Controls)
-                {
-                    if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
-                                cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
-                        SetControlColor(cc, motiv, barvy);
-                }
-            }
-            else
-            {
-                c.BackColor = barvy["tlačítka"];
-                c.ForeColor = barvy["text"];
-                if(c.GetType() == typeof(Button))
-                {
-                    ((Button)c).FlatAppearance.BorderColor = barvy["tlačítkaRámeček"];
-                    ((Button)c).FlatAppearance.MouseOverBackColor = barvy["tlačítkaOver"];
-                    ((Button)c).FlatAppearance.MouseDownBackColor = barvy["tlačítkaPush"];
-                }
-            }
+            Motiv.SetGroupBoxRamecek((GroupBox)sender, e);
         }
     }
 }

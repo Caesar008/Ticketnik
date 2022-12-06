@@ -8,6 +8,7 @@ namespace Ticketník
         public NotificationMessageBox()
         {
             InitializeComponent();
+            Motiv.SetMotiv(this);
         }
 
         public void Set(string text, string hlava, Image image)

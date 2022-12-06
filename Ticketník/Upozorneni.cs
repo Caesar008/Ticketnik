@@ -32,6 +32,7 @@ namespace Ticketník
             listView1.SmallImageList.Images.Add(Properties.Resources.remote);
 
             LoadUpozorneni();
+            Motiv.SetMotiv(this);
         }
 
         private void LoadUpozorneni()

@@ -672,6 +672,14 @@ namespace Ticketník
                 }
             }
             puvodniID = ticket.ID;
+            groupBox1.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox2.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox3.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox4.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox5.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox6.Paint += new PaintEventHandler(groupBox_Paint);
+            
+            Motiv.SetMotiv(this);
         }
 
         private void stavTicketu_SelectedIndexChanged(object sender, EventArgs e)
@@ -2722,6 +2730,11 @@ namespace Ticketník
                 return width;
             }
             return 60;
+        }
+
+        private void groupBox_Paint(object sender, PaintEventArgs e)
+        {
+            Motiv.SetGroupBoxRamecek((GroupBox)sender, e);
         }
     }
 }

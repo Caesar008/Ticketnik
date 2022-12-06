@@ -35,6 +35,7 @@ namespace Ticketník
             lbl_serach.Text = jazyk.Menu_Hledat;
             lbl_settings.Text = jazyk.Menu_Nastaveni;
             lbl_source.Text = jazyk.Menu_Source;
+            Motiv.SetMotiv(this);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

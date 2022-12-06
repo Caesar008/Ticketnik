@@ -15,6 +15,7 @@ namespace Ticketník
             zalozni_update.Text = Properties.Settings.Default.ZalozniUpdate;
             novyExport.Checked = Properties.Settings.Default.NovyExport;
             zalozniUpdateBox.Checked = Properties.Settings.Default.pouzivatZalozniUpdate;
+            Motiv.SetMotiv(this);
         }
 
         private void Button1_Click(object sender, EventArgs e)

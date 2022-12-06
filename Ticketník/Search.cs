@@ -40,6 +40,7 @@ namespace Ticketník
             listView1.Columns[7].Text = form.jazyk.Windows_Search_Pauzy;
             listView1.Columns[8].Text = form.jazyk.Windows_Search_Status;
             listView1.Columns[9].Text = form.jazyk.Windows_Search_Poznamka;
+            Motiv.SetMotiv(this);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

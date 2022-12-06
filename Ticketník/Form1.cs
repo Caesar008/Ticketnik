@@ -44,7 +44,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070300;
+        internal readonly int program = 1070300;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";
@@ -141,6 +141,8 @@ namespace Ticketník
                 n.TopMost = true;
                 n.BringToFront();
             }
+
+            Motiv.SetMotiv(this);
 
             Terpy = new Dictionary<string, MyTimeTerp>();
             //načtení terpů

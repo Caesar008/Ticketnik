@@ -47,6 +47,7 @@ namespace Ticketník
             }
             comboBox2.Sorted = true;
             comboBox2.DropDownWidth = ComboWidth(comboBox2);
+            Motiv.SetMotiv(this);
         }
 
         private int ComboWidth(ComboBox cb)

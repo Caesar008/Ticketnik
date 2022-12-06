@@ -38,6 +38,7 @@ namespace Ticketník
     - After successful file opening backup file with .bak is created
     - Removed radiobutton Encryption and MDM
     - Updated to .NET 4.8");
+            Motiv.SetMotiv(this);
         }
 
         private void Novinky_FormClosing(object sender, FormClosingEventArgs e)

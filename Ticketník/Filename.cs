@@ -12,6 +12,7 @@ namespace Ticketník
             f = form;
             this.label1.Text = form.jazyk.Windows_JmenoSouboru;
             this.Text = form.jazyk.Windows_NovySoubor;
+            Motiv.SetMotiv(this);
         }
 
         private void button2_Click(object sender, EventArgs e)

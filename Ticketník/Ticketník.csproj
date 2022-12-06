@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Jazyk.cs" />
     <Compile Include="JednaInstalnce.cs" />
+    <Compile Include="Motiv.cs" />
     <Compile Include="MyTime.cs">
       <SubType>Form</SubType>
     </Compile>

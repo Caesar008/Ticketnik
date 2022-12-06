@@ -7,6 +7,7 @@ namespace Ticketník
         public TextWindow()
         {
             InitializeComponent();
+            Motiv.SetMotiv(this);
         }
     }
 }

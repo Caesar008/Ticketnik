@@ -16,6 +16,7 @@ namespace Ticketník
                 zakaznik.Items.Add(s);
                 zakaznik.SelectedIndex = 0;
             }
+            Motiv.SetMotiv(this);
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -39,6 +39,7 @@ namespace Ticketník
             upravit.Text = form.jazyk.Windows_Spravce_UpravitPreklad;
 
             UpdateLang();
+            Motiv.SetMotiv(this);
         }
 
         private async void UpdateLang()

@@ -106,7 +106,7 @@ namespace Ticketník
                 terpListTic.DropDownWidth = ComboWidth(terpListTic);
                 taskListTic.DropDownWidth = ComboWidth(taskListTic);
             }
-
+            Motiv.SetMotiv(this);
         }
 
         private int ComboWidth(ComboBox cb)
