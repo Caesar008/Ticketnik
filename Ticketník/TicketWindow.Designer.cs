@@ -127,6 +127,8 @@
             this.zakaznik.Size = new System.Drawing.Size(156, 21);
             this.zakaznik.TabIndex = 2;
             this.zakaznik.SelectedIndexChanged += new System.EventHandler(this.zakaznik_SelectedIndexChanged);
+            this.zakaznik.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.zakaznik.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // label2
             // 
@@ -212,6 +214,8 @@
             this.search_btn.TabIndex = 10;
             this.search_btn.UseVisualStyleBackColor = true;
             this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
+            this.search_btn.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.search_btn.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // popis
             // 
@@ -250,6 +254,8 @@
             this.cas.Size = new System.Drawing.Size(220, 21);
             this.cas.TabIndex = 0;
             this.cas.SelectedIndexChanged += new System.EventHandler(this.cas_SelectedIndexChanged);
+            this.cas.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.cas.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // groupBox3
             // 
@@ -468,6 +474,8 @@
             this.btn_TicketWindow_SearchTerp.Text = "Vyhledat Terp";
             this.btn_TicketWindow_SearchTerp.UseVisualStyleBackColor = true;
             this.btn_TicketWindow_SearchTerp.Click += new System.EventHandler(this.btn_TicketWindow_SearchTerp_Click);
+            this.btn_TicketWindow_SearchTerp.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btn_TicketWindow_SearchTerp.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // btn_TicketWindow_UpdateSelected
             // 
@@ -478,6 +486,8 @@
             this.btn_TicketWindow_UpdateSelected.Text = "Aktualizovat vybrané";
             this.btn_TicketWindow_UpdateSelected.UseVisualStyleBackColor = true;
             this.btn_TicketWindow_UpdateSelected.Click += new System.EventHandler(this.btn_TicketWindow_UpdateSelected_Click);
+            this.btn_TicketWindow_UpdateSelected.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btn_TicketWindow_UpdateSelected.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // lbl_TicketWindow_onlineType
             // 
@@ -507,6 +517,8 @@
             this.onlineTypeComboBox.Size = new System.Drawing.Size(175, 21);
             this.onlineTypeComboBox.TabIndex = 3;
             this.onlineTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.onlineTypeComboBox_SelectedIndexChanged);
+            this.onlineTypeComboBox.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.onlineTypeComboBox.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // onlineTaskComboBox
             // 
@@ -516,6 +528,8 @@
             this.onlineTaskComboBox.Size = new System.Drawing.Size(175, 21);
             this.onlineTaskComboBox.TabIndex = 2;
             this.onlineTaskComboBox.SelectedIndexChanged += new System.EventHandler(this.onlineTaskComboBox_SelectedIndexChanged);
+            this.onlineTaskComboBox.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.onlineTaskComboBox.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // lbl_TicketWindow_onlineTerp
             // 
@@ -536,6 +550,8 @@
             this.onlineTerpDropDown.TabIndex = 0;
             this.onlineTerpDropDown.SelectedIndexChanged += new System.EventHandler(this.onlineTerpDropDown_SelectedIndexChanged);
             this.onlineTerpDropDown.TextChanged += new System.EventHandler(this.onlineTerpDropDown_TextChanged);
+            this.onlineTerpDropDown.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.onlineTerpDropDown.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // button1
             // 
@@ -700,6 +716,8 @@
             this.stavTicketu.Size = new System.Drawing.Size(164, 21);
             this.stavTicketu.TabIndex = 0;
             this.stavTicketu.SelectedIndexChanged += new System.EventHandler(this.stavTicketu_SelectedIndexChanged);
+            this.stavTicketu.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.stavTicketu.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // groupBox5
             // 
@@ -729,6 +747,8 @@
             this.ok.Text = "OK";
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
+            this.ok.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.ok.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // datum
             // 

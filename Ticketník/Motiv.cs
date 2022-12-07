@@ -9,7 +9,7 @@ namespace Ticketník
 {
     internal static class Motiv
     {
-        private static readonly Dictionary<string, Dictionary<string, Color>> barvy = new Dictionary<string, Dictionary<string, Color>>()
+        internal static readonly Dictionary<string, Dictionary<string, Color>> barvy = new Dictionary<string, Dictionary<string, Color>>()
         {
             { "světlý", new Dictionary<string, Color>()
                 {
@@ -19,7 +19,7 @@ namespace Ticketník
                     { "pozadíControl", SystemColors.Window },
                     { "arrow", Color.Black },
                     { "controlRámeček", Color.LightGray },
-                    { "myšOver", SystemColors.GradientInactiveCaption },
+                    { "controlOver", SystemColors.GradientInactiveCaption },
                     { "pozadíControlPush", SystemColors.GradientActiveCaption }
                 }
             },
@@ -31,13 +31,13 @@ namespace Ticketník
                     { "pozadíControl", Color.FromArgb(50, 50, 50) },
                     { "arrow", Color.DimGray },
                     { "controlRámeček", Color.DimGray },
-                    { "myšOver", Color.FromArgb(70, 70, 100) },
+                    { "controlOver", Color.FromArgb(70, 70, 100) },
                     { "pozadíControlPush", Color.FromArgb(90, 90, 120) }
                 }
             }
         };
 
-        private static void SetControlColor(object c)
+        internal static void SetControlColor(object c)
         {
             string sMotiv = "světlý";
             switch(Properties.Settings.Default.motiv)
@@ -55,7 +55,7 @@ namespace Ticketník
                 ((Button)c).ForeColor = barvy[sMotiv]["text"];
                 ((Button)c).FlatStyle = FlatStyle.Flat;
                 ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["controlRámeček"];
-                ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["myšOver"];
+                ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
                 ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
 
             }
@@ -128,6 +128,41 @@ namespace Ticketník
                                 cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
                         SetControlColor(cc);
                 }
+            }
+        }
+
+        internal static void SetControlColorOver(object c)
+        {
+            string sMotiv = "světlý";
+            switch (Properties.Settings.Default.motiv)
+            {
+                case 0:
+                    sMotiv = "světlý";
+                    break;
+                case 1:
+                    sMotiv = "tmavý";
+                    break;
+            }
+
+            if (c.GetType() == typeof(Button))
+            {
+                ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["controlRámeček"];
+                ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
+                ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
+                ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
+
+            }
+            else if (c.GetType() == typeof(CustomControls.ComboBox))
+            {
+                ((CustomControls.ComboBox)c).BorderColor = Color.DodgerBlue;
+                ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["controlOver"];
+                ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["controlOver"];
+                //vynechat dropdown itemy
+            }
+            else if (c.GetType() == typeof(CustomControls.NumericUpDown))
+            {
+                
+
             }
         }
 
