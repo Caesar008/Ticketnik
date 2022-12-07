@@ -164,7 +164,7 @@
             this.clr_prescas.Text = "Změň";
             this.clr_prescas.UseVisualStyleBackColor = false;
             this.clr_prescas.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.clr_prescas.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.clr_prescas.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.clr_prescas.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // prescas
@@ -190,7 +190,7 @@
             this.button1.Text = "Default";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.button1.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.button1.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // probiha
@@ -253,7 +253,7 @@
             this.clr_probiha.Text = "Změň";
             this.clr_probiha.UseVisualStyleBackColor = false;
             this.clr_probiha.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.clr_probiha.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.clr_probiha.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.clr_probiha.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // crl_rdp
@@ -271,7 +271,7 @@
             this.crl_rdp.Text = "Změň";
             this.crl_rdp.UseVisualStyleBackColor = false;
             this.crl_rdp.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.crl_rdp.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.crl_rdp.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.crl_rdp.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // clr_odpoved
@@ -289,7 +289,7 @@
             this.clr_odpoved.Text = "Změň";
             this.clr_odpoved.UseVisualStyleBackColor = false;
             this.clr_odpoved.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.clr_odpoved.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.clr_odpoved.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.clr_odpoved.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // clr_ceka
@@ -307,7 +307,7 @@
             this.clr_ceka.Text = "Změň";
             this.clr_ceka.UseVisualStyleBackColor = false;
             this.clr_ceka.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.clr_ceka.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.clr_ceka.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.clr_ceka.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // clr_vyreseno
@@ -325,7 +325,7 @@
             this.clr_vyreseno.Text = "Změň";
             this.clr_vyreseno.UseVisualStyleBackColor = false;
             this.clr_vyreseno.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.clr_vyreseno.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.clr_vyreseno.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.clr_vyreseno.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // colorDialog1
@@ -403,7 +403,7 @@
             this.defaultCasy.Text = "Default";
             this.defaultCasy.UseVisualStyleBackColor = false;
             this.defaultCasy.Click += new System.EventHandler(this.defaultCasy_Click);
-            this.defaultCasy.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.defaultCasy.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.defaultCasy.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // zmenHigh
@@ -421,7 +421,7 @@
             this.zmenHigh.Text = "Změň";
             this.zmenHigh.UseVisualStyleBackColor = false;
             this.zmenHigh.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.zmenHigh.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.zmenHigh.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenHigh.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // zmenOK
@@ -439,7 +439,7 @@
             this.zmenOK.Text = "Změň";
             this.zmenOK.UseVisualStyleBackColor = false;
             this.zmenOK.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.zmenOK.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.zmenOK.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenOK.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // zmenMid
@@ -457,7 +457,7 @@
             this.zmenMid.Text = "Změň";
             this.zmenMid.UseVisualStyleBackColor = false;
             this.zmenMid.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.zmenMid.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.zmenMid.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenMid.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // zmenLow
@@ -475,7 +475,7 @@
             this.zmenLow.Text = "Změň";
             this.zmenLow.UseVisualStyleBackColor = false;
             this.zmenLow.Click += new System.EventHandler(this.clr_vyreseno_Click);
-            this.zmenLow.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.zmenLow.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenLow.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // celkovyCasZobrazit
@@ -522,7 +522,7 @@
             this.jazyk.Size = new System.Drawing.Size(146, 21);
             this.jazyk.TabIndex = 1;
             this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
-            this.jazyk.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.jazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // zmenitJazyk
@@ -539,7 +539,7 @@
             this.zmenitJazyk.Text = "Změňit jazyk";
             this.zmenitJazyk.UseVisualStyleBackColor = false;
             this.zmenitJazyk.Click += new System.EventHandler(this.zmenitJazyk_Click);
-            this.zmenitJazyk.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.zmenitJazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenitJazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // skryteNastaveni
@@ -556,7 +556,7 @@
             this.skryteNastaveni.Text = "Skrytá nastavení";
             this.skryteNastaveni.UseVisualStyleBackColor = false;
             this.skryteNastaveni.Click += new System.EventHandler(this.SkryteNastaveni_Click);
-            this.skryteNastaveni.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.skryteNastaveni.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.skryteNastaveni.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // onlineTerp
@@ -584,7 +584,7 @@
             this.button2.Text = "Výchozí nastavení";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            this.button2.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.button2.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.button2.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // motiv
@@ -608,7 +608,7 @@
             this.motivVyber.Size = new System.Drawing.Size(153, 21);
             this.motivVyber.TabIndex = 12;
             this.motivVyber.SelectedIndexChanged += new System.EventHandler(this.motivVyber_SelectedIndexChanged);
-            this.motivVyber.MouseEnter += new System.EventHandler(this.comboBox_MouseEnter);
+            this.motivVyber.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.motivVyber.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // numericUpDown1

@@ -214,7 +214,7 @@
             this.search_btn.TabIndex = 10;
             this.search_btn.UseVisualStyleBackColor = true;
             this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
-            this.search_btn.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.search_btn.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.search_btn.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // popis
@@ -474,7 +474,7 @@
             this.btn_TicketWindow_SearchTerp.Text = "Vyhledat Terp";
             this.btn_TicketWindow_SearchTerp.UseVisualStyleBackColor = true;
             this.btn_TicketWindow_SearchTerp.Click += new System.EventHandler(this.btn_TicketWindow_SearchTerp_Click);
-            this.btn_TicketWindow_SearchTerp.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btn_TicketWindow_SearchTerp.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.btn_TicketWindow_SearchTerp.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // btn_TicketWindow_UpdateSelected
@@ -486,7 +486,7 @@
             this.btn_TicketWindow_UpdateSelected.Text = "Aktualizovat vybrané";
             this.btn_TicketWindow_UpdateSelected.UseVisualStyleBackColor = true;
             this.btn_TicketWindow_UpdateSelected.Click += new System.EventHandler(this.btn_TicketWindow_UpdateSelected_Click);
-            this.btn_TicketWindow_UpdateSelected.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.btn_TicketWindow_UpdateSelected.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.btn_TicketWindow_UpdateSelected.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // lbl_TicketWindow_onlineType
@@ -747,7 +747,7 @@
             this.ok.Text = "OK";
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
-            this.ok.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.ok.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.ok.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // datum

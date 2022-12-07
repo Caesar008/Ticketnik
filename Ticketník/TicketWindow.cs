@@ -2747,7 +2747,7 @@ namespace Ticketník
             Motiv.SetControlColor(sender);
         }
 
-        private void btn_MouseEnter(object sender, EventArgs e)
+        private void event_MouseEnter(object sender, EventArgs e)
         {
             ((Button)sender).FlatAppearance.BorderColor = Color.DodgerBlue;
         }

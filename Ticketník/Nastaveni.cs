@@ -454,7 +454,7 @@ namespace Ticketník
             Motiv.SetGroupBoxRamecek((GroupBox)sender, e);
         }
 
-        private void comboBox_MouseEnter(object sender, EventArgs e)
+        private void event_MouseEnter(object sender, EventArgs e)
         {
             Motiv.SetControlColorOver(sender);
         }
@@ -462,11 +462,6 @@ namespace Ticketník
         private void event_MouseLeave(object sender, EventArgs e)
         {
             Motiv.SetControlColor(sender);
-        }
-
-        private void btn_MouseEnter(object sender, EventArgs e)
-        {
-            ((Button)sender).FlatAppearance.BorderColor = Color.DodgerBlue;
         }
     }
 }

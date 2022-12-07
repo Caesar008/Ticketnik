@@ -146,8 +146,7 @@ namespace Ticketník
 
             if (c.GetType() == typeof(Button))
             {
-                ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["controlRámeček"];
-                ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
+                ((Button)c).FlatAppearance.BorderColor = Color.DodgerBlue; //barvy[sMotiv]["controlRámeček"];
                 ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
                 ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
 
@@ -155,14 +154,7 @@ namespace Ticketník
             else if (c.GetType() == typeof(CustomControls.ComboBox))
             {
                 ((CustomControls.ComboBox)c).BorderColor = Color.DodgerBlue;
-                ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["controlOver"];
                 ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["controlOver"];
-                //vynechat dropdown itemy
-            }
-            else if (c.GetType() == typeof(CustomControls.NumericUpDown))
-            {
-                
-
             }
         }
 
