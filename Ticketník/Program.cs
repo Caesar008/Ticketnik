@@ -61,20 +61,7 @@ namespace Ticketník
                     Application.SetCompatibleTextRenderingDefault(false);
                     if (!JednaInstance.Bezi(TimeSpan.FromSeconds(5)) && !par.Contains("update"))
                     {
-                        //když nějaký soubor chybí
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "fNbt.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "fNbt.dll", Properties.Resources.fNbt);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "ClosedXML.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "ClosedXML.dll", Properties.Resources.ClosedXML);
-                        if (!File.Exists(appdata + "\\Ticketnik\\zakaznici") || par.Contains("repair"))
-                            File.WriteAllBytes(appdata + "\\Ticketnik\\zakaznici", Properties.Resources.zakaznici);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "DocumentFormat.OpenXml.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "DocumentFormat.OpenXml.dll", Properties.Resources.DocumentFormat_OpenXml);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "FastMember.Signed.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "FastMember.Signed.dll", Properties.Resources.FastMember_Signed);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "Newtonsoft.Json.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "Newtonsoft.Json.dll", Properties.Resources.Newtonsoft_Json);
-
+                        
                         if (par.Contains("show"))
                             Properties.Settings.Default.umisteni = new System.Drawing.Point(0, 0);
                         else if (par.Contains("default") || Control.ModifierKeys == Keys.Shift)

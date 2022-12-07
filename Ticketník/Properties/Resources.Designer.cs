@@ -143,16 +143,6 @@ namespace Ticketník.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] ClosedXML {
-            get {
-                object obj = ResourceManager.GetObject("ClosedXML", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] CZ {
             get {
                 object obj = ResourceManager.GetObject("CZ", resourceCulture);
@@ -181,42 +171,12 @@ namespace Ticketník.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] DocumentFormat_OpenXml {
-            get {
-                object obj = ResourceManager.GetObject("DocumentFormat_OpenXml", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap editZaznam {
             get {
                 object obj = ResourceManager.GetObject("editZaznam", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] FastMember_Signed {
-            get {
-                object obj = ResourceManager.GetObject("FastMember_Signed", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] fNbt {
-            get {
-                object obj = ResourceManager.GetObject("fNbt", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         
@@ -236,16 +196,6 @@ namespace Ticketník.Properties {
         internal static byte[] mytime_template {
             get {
                 object obj = ResourceManager.GetObject("mytime_template", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Newtonsoft_Json {
-            get {
-                object obj = ResourceManager.GetObject("Newtonsoft_Json", resourceCulture);
                 return ((byte[])(obj));
             }
         }

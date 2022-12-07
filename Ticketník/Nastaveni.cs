@@ -56,6 +56,7 @@ namespace Ticketník
             groupBox1.Paint += new PaintEventHandler(groupBox_Paint);
             groupBox2.Paint += new PaintEventHandler(groupBox_Paint);
             groupBox3.Paint += new PaintEventHandler(groupBox_Paint);
+            
             muze = true;
 
             Motiv.SetMotiv(this);

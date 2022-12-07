@@ -16,10 +16,10 @@ namespace Ticketník
                     { "pozadí", SystemColors.Control },
                     { "text", SystemColors.ControlText },
                     { "rámeček", Color.Gainsboro },
-                    { "tlačítka", SystemColors.Window },
+                    { "pozadíControl", SystemColors.Window },
                     { "tlačítkaRámeček", Color.LightGray },
-                    { "tlačítkaOver", SystemColors.GradientInactiveCaption },
-                    { "tlačítkaPush", SystemColors.GradientActiveCaption }
+                    { "myšOver", SystemColors.GradientInactiveCaption },
+                    { "pozadíControlPush", SystemColors.GradientActiveCaption }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -27,15 +27,15 @@ namespace Ticketník
                     { "pozadí", Color.FromArgb(30, 30, 30) },
                     { "text", SystemColors.Control },
                     { "rámeček", Color.FromArgb(70, 70, 70) },
-                    { "tlačítka", Color.FromArgb(50, 50, 50) },
+                    { "pozadíControl", Color.FromArgb(50, 50, 50) },
                     { "tlačítkaRámeček", Color.DimGray },
-                    { "tlačítkaOver", Color.FromArgb(70, 70, 100) },
-                    { "tlačítkaPush", Color.FromArgb(90, 90, 120) }
+                    { "myšOver", Color.FromArgb(70, 70, 100) },
+                    { "pozadíControlPush", Color.FromArgb(90, 90, 120) }
                 }
             }
         };
 
-        private static void SetControlColor(Control c)
+        private static void SetControlColor(object c)
         {
             string sMotiv = "světlý";
             switch(Properties.Settings.Default.motiv)
@@ -46,12 +46,14 @@ namespace Ticketník
                 case 1: sMotiv = "tmavý";
                     break;
             }
-            if (c.GetType() != typeof(Button) && c.GetType() != typeof(ComboBox) && c.GetType() != typeof(NumericUpDown)
-                && c.GetType() != typeof(ListView) )
+            if (c.GetType() != typeof(Button) && c.GetType() != typeof(ComboBox)
+                && c.GetType() != typeof(NumericUpDown) && c.GetType() != typeof(ListView)
+                && c.GetType() != typeof(MenuStrip) && c.GetType() != typeof(ToolStripDropDownItem)
+                && c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator))
             {
-                c.BackColor = barvy[sMotiv]["pozadí"];
-                c.ForeColor = barvy[sMotiv]["text"];
-                foreach (Control cc in c.Controls)
+                ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                foreach (Control cc in ((Control)c).Controls)
                 {
                     //barvy v nastavení
                     if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
@@ -59,17 +61,67 @@ namespace Ticketník
                         SetControlColor(cc);
                 }
             }
-            else
+            else if (c.GetType() == typeof(Button))
             {
-                c.BackColor = barvy[sMotiv]["tlačítka"];
-                c.ForeColor = barvy[sMotiv]["text"];
-                if (c.GetType() == typeof(Button))
+                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                ((Button)c).FlatStyle = FlatStyle.Flat;
+                ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["tlačítkaRámeček"];
+                ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["myšOver"];
+                ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
+
+            }
+            else if (c.GetType() == typeof(ComboBox))
+            {
+                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                ((ComboBox)c).FlatStyle = FlatStyle.Flat;
+            }
+            else if (c.GetType() == typeof(NumericUpDown))
+            {
+                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+            }
+            else if (c.GetType() == typeof(ListView))
+            {
+                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                ((ListView)c).BorderStyle = BorderStyle.None;
+            }
+            else if (c.GetType() == typeof(MenuStrip))
+            {
+                ((MenuStrip)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
+                foreach (object tsdi in ((MenuStrip)c).Items)
                 {
-                    ((Button)c).FlatStyle = FlatStyle.Flat;
-                    ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["tlačítkaRámeček"];
-                    ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["tlačítkaOver"];
-                    ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["tlačítkaPush"];
+                    if (tsdi.GetType() == typeof(ToolStripMenuItem))
+                    {
+                        SetControlColor(tsdi);
+                    }
                 }
+            }
+            else if (c.GetType() == typeof(ToolStripDropDownItem))
+            {
+                ((ToolStripDropDownItem)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((ToolStripDropDownItem)c).ForeColor = barvy[sMotiv]["text"];
+                foreach (object tsdi in ((ToolStripDropDownItem)c).DropDownItems)
+                {
+                    SetControlColor(tsdi);
+                }
+            }
+            else if (c.GetType() == typeof(ToolStripMenuItem))
+            {
+                ((ToolStripMenuItem)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
+                foreach (object tsdi in ((ToolStripMenuItem)c).DropDownItems)
+                {
+                    SetControlColor(tsdi);
+                }
+            }
+            else if (c.GetType() == typeof(ToolStripSeparator))
+            {
+                ((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];
             }
         }
 
@@ -85,13 +137,16 @@ namespace Ticketník
                     sMotiv = "tmavý";
                     break;
             }
-            Graphics gfx = e.Graphics;
-            Pen p = new Pen(barvy[sMotiv]["rámeček"], 1);
-            gfx.DrawLine(p, 0, 6, 0, e.ClipRectangle.Height - 2);
-            gfx.DrawLine(p, 0, 6, 6, 6);
-            gfx.DrawLine(p, System.Windows.Forms.TextRenderer.MeasureText(groupBox.Text, groupBox.Font).Width + 4, 6, e.ClipRectangle.Width - 2, 6);
-            gfx.DrawLine(p, e.ClipRectangle.Width - 1, 6, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2);
-            gfx.DrawLine(p, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2, 0, e.ClipRectangle.Height - 2);
+            using (Graphics gfx = e.Graphics)
+            {
+                Pen p = new Pen(barvy[sMotiv]["rámeček"], 1);
+                gfx.DrawLine(p, 0, 6, 0, e.ClipRectangle.Height - 2);
+                gfx.DrawLine(p, 0, 6, 6, 6);
+                gfx.DrawLine(p, System.Windows.Forms.TextRenderer.MeasureText(groupBox.Text, groupBox.Font).Width + 4, 6, e.ClipRectangle.Width - 2, 6);
+                gfx.DrawLine(p, e.ClipRectangle.Width - 1, 6, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2);
+                gfx.DrawLine(p, e.ClipRectangle.Width - 1, e.ClipRectangle.Height - 2, 0, e.ClipRectangle.Height - 2);
+
+            }
         }
 
         internal static void SetMotiv(Form form)
@@ -113,7 +168,10 @@ namespace Ticketník
             {
                 SetControlColor(c);
             }
-
+            if(form.MainMenuStrip != null)
+            {
+                SetControlColor(form.MainMenuStrip);
+            }
         }
     }
 }

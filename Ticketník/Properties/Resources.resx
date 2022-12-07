@@ -211,26 +211,11 @@
   <data name="animated_loading" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\ikony\animated_loading.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ClosedXML" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Release\ClosedXML.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="DocumentFormat_OpenXml" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Release\DocumentFormat.OpenXml.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="FastMember_Signed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Release\FastMember.Signed.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="fNbt" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Release\fNbt.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="zakaznici" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zakaznici;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Release\lang\CZ.xml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Newtonsoft_Json" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Release\Newtonsoft.Json.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mytime_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mytime_template.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -653,7 +653,6 @@
             this.ledenT.Controls.Add(this.leden);
             this.ledenT.Location = new System.Drawing.Point(4, 22);
             this.ledenT.Name = "ledenT";
-            this.ledenT.Padding = new System.Windows.Forms.Padding(3);
             this.ledenT.Size = new System.Drawing.Size(770, 356);
             this.ledenT.TabIndex = 0;
             this.ledenT.Text = "Leden";
@@ -682,11 +681,12 @@
             this.leden.GridLines = true;
             this.leden.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.leden.HideSelection = false;
-            this.leden.Location = new System.Drawing.Point(0, 0);
+            this.leden.Location = new System.Drawing.Point(-3, -3);
+            this.leden.Margin = new System.Windows.Forms.Padding(0);
             this.leden.MultiSelect = false;
             this.leden.Name = "leden";
             this.leden.ShowItemToolTips = true;
-            this.leden.Size = new System.Drawing.Size(770, 356);
+            this.leden.Size = new System.Drawing.Size(776, 362);
             this.leden.TabIndex = 0;
             this.leden.UseCompatibleStateImageBehavior = false;
             this.leden.View = System.Windows.Forms.View.Details;
@@ -763,7 +763,6 @@
             this.unorT.Controls.Add(this.unor);
             this.unorT.Location = new System.Drawing.Point(4, 22);
             this.unorT.Name = "unorT";
-            this.unorT.Padding = new System.Windows.Forms.Padding(3);
             this.unorT.Size = new System.Drawing.Size(770, 356);
             this.unorT.TabIndex = 1;
             this.unorT.Text = "Únor";
@@ -780,11 +779,11 @@
             this.unor.GridLines = true;
             this.unor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.unor.HideSelection = false;
-            this.unor.Location = new System.Drawing.Point(0, 0);
+            this.unor.Location = new System.Drawing.Point(-3, -3);
             this.unor.MultiSelect = false;
             this.unor.Name = "unor";
             this.unor.ShowItemToolTips = true;
-            this.unor.Size = new System.Drawing.Size(770, 356);
+            this.unor.Size = new System.Drawing.Size(776, 362);
             this.unor.TabIndex = 1;
             this.unor.UseCompatibleStateImageBehavior = false;
             this.unor.View = System.Windows.Forms.View.Details;
