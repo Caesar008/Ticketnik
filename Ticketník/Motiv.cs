@@ -74,6 +74,7 @@ namespace Ticketník
                 ((CustomControls.NumericUpDown)c).ForeColor = barvy[sMotiv]["text"];
                 ((CustomControls.NumericUpDown)c).ButtonHighlightColor = barvy[sMotiv]["controlRámeček"];
                 ((CustomControls.NumericUpDown)c).BorderColor = barvy[sMotiv]["controlRámeček"];
+                ((CustomControls.NumericUpDown)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadí"];
 
             }
             else if (c.GetType() == typeof(ListView))
