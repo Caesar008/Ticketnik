@@ -17,7 +17,8 @@ namespace Ticketník
                     { "text", SystemColors.ControlText },
                     { "rámeček", Color.Gainsboro },
                     { "pozadíControl", SystemColors.Window },
-                    { "tlačítkaRámeček", Color.LightGray },
+                    { "arrow", Color.Black },
+                    { "controlRámeček", Color.LightGray },
                     { "myšOver", SystemColors.GradientInactiveCaption },
                     { "pozadíControlPush", SystemColors.GradientActiveCaption }
                 }
@@ -28,7 +29,8 @@ namespace Ticketník
                     { "text", SystemColors.Control },
                     { "rámeček", Color.FromArgb(70, 70, 70) },
                     { "pozadíControl", Color.FromArgb(50, 50, 50) },
-                    { "tlačítkaRámeček", Color.DimGray },
+                    { "arrow", Color.DimGray },
+                    { "controlRámeček", Color.DimGray },
                     { "myšOver", Color.FromArgb(70, 70, 100) },
                     { "pozadíControlPush", Color.FromArgb(90, 90, 120) }
                 }
@@ -46,46 +48,38 @@ namespace Ticketník
                 case 1: sMotiv = "tmavý";
                     break;
             }
-            if (c.GetType() != typeof(Button) && c.GetType() != typeof(ComboBox)
-                && c.GetType() != typeof(NumericUpDown) && c.GetType() != typeof(ListView)
-                && c.GetType() != typeof(MenuStrip) && c.GetType() != typeof(ToolStripDropDownItem)
-                && c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator))
+            
+            if (c.GetType() == typeof(Button))
             {
-                ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
-                ((Control)c).ForeColor = barvy[sMotiv]["text"];
-                foreach (Control cc in ((Control)c).Controls)
-                {
-                    //barvy v nastavení
-                    if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
-                                cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
-                        SetControlColor(cc);
-                }
-            }
-            else if (c.GetType() == typeof(Button))
-            {
-                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                ((Button)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((Button)c).ForeColor = barvy[sMotiv]["text"];
                 ((Button)c).FlatStyle = FlatStyle.Flat;
-                ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["tlačítkaRámeček"];
+                ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["controlRámeček"];
                 ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["myšOver"];
                 ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
 
             }
-            else if (c.GetType() == typeof(ComboBox))
+            else if (c.GetType() == typeof(CustomControls.ComboBox))
             {
-                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((Control)c).ForeColor = barvy[sMotiv]["text"];
-                ((ComboBox)c).FlatStyle = FlatStyle.Flat;
+                ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((CustomControls.ComboBox)c).ForeColor = barvy[sMotiv]["text"];
+                ((CustomControls.ComboBox)c).FlatStyle = FlatStyle.Flat;
+                ((CustomControls.ComboBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
+                ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["pozadíControl"];
+                ((CustomControls.ComboBox)c).ArrowColor = barvy[sMotiv]["arrow"];
             }
-            else if (c.GetType() == typeof(NumericUpDown))
+            else if (c.GetType() == typeof(CustomControls.NumericUpDown))
             {
-                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                ((CustomControls.NumericUpDown)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((CustomControls.NumericUpDown)c).ForeColor = barvy[sMotiv]["text"];
+                ((CustomControls.NumericUpDown)c).ButtonHighlightColor = barvy[sMotiv]["controlRámeček"];
+                ((CustomControls.NumericUpDown)c).BorderColor = barvy[sMotiv]["controlRámeček"];
+
             }
             else if (c.GetType() == typeof(ListView))
             {
-                ((Control)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                ((ListView)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((ListView)c).ForeColor = barvy[sMotiv]["text"];
                 ((ListView)c).BorderStyle = BorderStyle.None;
             }
             else if (c.GetType() == typeof(MenuStrip))
@@ -122,6 +116,18 @@ namespace Ticketník
             {
                 ((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
                 ((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];
+            }
+            else
+            {
+                ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                foreach (Control cc in ((Control)c).Controls)
+                {
+                    //barvy v nastavení
+                    if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
+                                cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
+                        SetControlColor(cc);
+                }
             }
         }
 

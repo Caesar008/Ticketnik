@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.idTicketu = new System.Windows.Forms.TextBox();
-            this.zakaznik = new System.Windows.Forms.ComboBox();
+            this.zakaznik = new Ticketník.CustomControls.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pocitac = new System.Windows.Forms.TextBox();
@@ -42,7 +42,7 @@
             this.popis = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cas = new System.Windows.Forms.ComboBox();
+            this.cas = new Ticketník.CustomControls.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.upravit = new System.Windows.Forms.Button();
             this.smazat = new System.Windows.Forms.Button();
@@ -66,10 +66,10 @@
             this.btn_TicketWindow_UpdateSelected = new System.Windows.Forms.Button();
             this.lbl_TicketWindow_onlineType = new System.Windows.Forms.Label();
             this.lbl_TicketWindow_onlineTask = new System.Windows.Forms.Label();
-            this.onlineTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.onlineTaskComboBox = new System.Windows.Forms.ComboBox();
+            this.onlineTypeComboBox = new Ticketník.CustomControls.ComboBox();
+            this.onlineTaskComboBox = new Ticketník.CustomControls.ComboBox();
             this.lbl_TicketWindow_onlineTerp = new System.Windows.Forms.Label();
-            this.onlineTerpDropDown = new System.Windows.Forms.ComboBox();
+            this.onlineTerpDropDown = new Ticketník.CustomControls.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.nahradni = new System.Windows.Forms.RadioButton();
             this.volno = new System.Windows.Forms.RadioButton();
@@ -85,7 +85,7 @@
             this.normalni = new System.Windows.Forms.RadioButton();
             this.prescas = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
-            this.stavTicketu = new System.Windows.Forms.ComboBox();
+            this.stavTicketu = new Ticketník.CustomControls.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.ok = new System.Windows.Forms.Button();
@@ -812,7 +812,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label14;
         internal System.Windows.Forms.TextBox idTicketu;
-        internal System.Windows.Forms.ComboBox zakaznik;
+        internal Ticketník.CustomControls.ComboBox zakaznik;
         internal System.Windows.Forms.TextBox pocitac;
         internal System.Windows.Forms.TextBox kontakt;
         internal System.Windows.Forms.TextBox konec;
@@ -823,14 +823,14 @@
         internal System.Windows.Forms.TextBox pauzaOd;
         internal System.Windows.Forms.RadioButton normalni;
         internal System.Windows.Forms.RadioButton prescas;
-        internal System.Windows.Forms.ComboBox stavTicketu;
+        internal Ticketník.CustomControls.ComboBox stavTicketu;
         internal System.Windows.Forms.RichTextBox richTextBox1;
         internal System.Windows.Forms.RadioButton volno;
         internal System.Windows.Forms.RadioButton nahradni;
         internal System.Windows.Forms.TextBox popis;
         internal System.Windows.Forms.ListView listView1;
         internal System.Windows.Forms.Button ok;
-        internal System.Windows.Forms.ComboBox cas;
+        internal Ticketník.CustomControls.ComboBox cas;
         internal System.Windows.Forms.Label terpKod;
         private System.Windows.Forms.Button search_btn;
         internal System.Windows.Forms.Button button1;
@@ -839,9 +839,9 @@
         private System.Windows.Forms.Label lbl_TicketWindow_onlineType;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTask;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTerp;
-        internal System.Windows.Forms.ComboBox onlineTypeComboBox;
-        internal System.Windows.Forms.ComboBox onlineTaskComboBox;
-        internal System.Windows.Forms.ComboBox onlineTerpDropDown;
+        internal Ticketník.CustomControls.ComboBox onlineTypeComboBox;
+        internal Ticketník.CustomControls.ComboBox onlineTaskComboBox;
+        internal Ticketník.CustomControls.ComboBox onlineTerpDropDown;
         internal System.Windows.Forms.Button btn_TicketWindow_SearchTerp;
         internal System.Windows.Forms.Button btn_TicketWindow_UpdateSelected;
     }

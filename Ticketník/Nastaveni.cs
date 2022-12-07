@@ -7,7 +7,7 @@ using Microsoft.Win32;
 using System.Xml;
 using System.Linq;
 using ClosedXML.Excel;
-using System.Security.Cryptography.X509Certificates;
+using Ticketník.CustomControls;
 
 namespace Ticketník
 {

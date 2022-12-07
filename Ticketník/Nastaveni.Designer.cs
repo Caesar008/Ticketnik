@@ -30,7 +30,6 @@
         {
             this.poStartu = new System.Windows.Forms.CheckBox();
             this.autosave = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -62,17 +61,18 @@
             this.celkovyCasZobrazit = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.jazykPopis = new System.Windows.Forms.Label();
-            this.jazyk = new System.Windows.Forms.ComboBox();
             this.zmenitJazyk = new System.Windows.Forms.Button();
             this.skryteNastaveni = new System.Windows.Forms.Button();
             this.onlineTerp = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.motivVyber = new System.Windows.Forms.ComboBox();
             this.motiv = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.motivVyber = new Ticketník.CustomControls.ComboBox();
+            this.jazyk = new Ticketník.CustomControls.ComboBox();
+            this.numericUpDown1 = new Ticketník.CustomControls.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // poStartu
@@ -96,24 +96,6 @@
             this.autosave.Text = "Automatické ukládání";
             this.autosave.UseVisualStyleBackColor = true;
             this.autosave.CheckedChanged += new System.EventHandler(this.autosave_CheckedChanged);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(121, 58);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            240,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // label1
             // 
@@ -504,17 +486,6 @@
             this.jazykPopis.Text = "Int. jazyk a verze";
             this.jazykPopis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // jazyk
-            // 
-            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.jazyk.FormattingEnabled = true;
-            this.jazyk.Location = new System.Drawing.Point(6, 19);
-            this.jazyk.Name = "jazyk";
-            this.jazyk.Size = new System.Drawing.Size(146, 21);
-            this.jazyk.TabIndex = 1;
-            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
-            // 
             // zmenitJazyk
             // 
             this.zmenitJazyk.BackColor = System.Drawing.SystemColors.Window;
@@ -571,8 +542,19 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // motiv
+            // 
+            this.motiv.AutoSize = true;
+            this.motiv.Location = new System.Drawing.Point(12, 133);
+            this.motiv.Name = "motiv";
+            this.motiv.Size = new System.Drawing.Size(33, 13);
+            this.motiv.TabIndex = 13;
+            this.motiv.Text = "Motiv";
+            // 
             // motivVyber
             // 
+            this.motivVyber.BorderColor = System.Drawing.Color.LightGray;
+            this.motivVyber.ButtonColor = System.Drawing.SystemColors.Window;
             this.motivVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.motivVyber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.motivVyber.FormattingEnabled = true;
@@ -582,14 +564,37 @@
             this.motivVyber.TabIndex = 12;
             this.motivVyber.SelectedIndexChanged += new System.EventHandler(this.motivVyber_SelectedIndexChanged);
             // 
-            // motiv
+            // jazyk
             // 
-            this.motiv.AutoSize = true;
-            this.motiv.Location = new System.Drawing.Point(12, 133);
-            this.motiv.Name = "motiv";
-            this.motiv.Size = new System.Drawing.Size(33, 13);
-            this.motiv.TabIndex = 13;
-            this.motiv.Text = "Motiv";
+            this.jazyk.BorderColor = System.Drawing.Color.LightGray;
+            this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
+            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jazyk.FormattingEnabled = true;
+            this.jazyk.Location = new System.Drawing.Point(6, 19);
+            this.jazyk.Name = "jazyk";
+            this.jazyk.Size = new System.Drawing.Size(146, 21);
+            this.jazyk.TabIndex = 1;
+            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericUpDown1.Location = new System.Drawing.Point(121, 58);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDown1.TabIndex = 2;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // Nastaveni
             // 
@@ -617,11 +622,11 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Nastavení";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -631,7 +636,7 @@
 
         private System.Windows.Forms.CheckBox poStartu;
         private System.Windows.Forms.CheckBox autosave;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private Ticketník.CustomControls.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -660,7 +665,7 @@
         private System.Windows.Forms.Label textMid;
         private System.Windows.Forms.Label textLow;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox jazyk;
+        private Ticketník.CustomControls.ComboBox jazyk;
         private System.Windows.Forms.Button zmenitJazyk;
         private System.Windows.Forms.Label jazykPopis;
         private System.Windows.Forms.Button clr_prescas;
@@ -668,7 +673,7 @@
         private System.Windows.Forms.Button skryteNastaveni;
         private System.Windows.Forms.CheckBox onlineTerp;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox motivVyber;
+        private Ticketník.CustomControls.ComboBox motivVyber;
         private System.Windows.Forms.Label motiv;
     }
 }
