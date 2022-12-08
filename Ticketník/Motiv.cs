@@ -20,7 +20,11 @@ namespace Ticketník
                     { "arrow", Color.Black },
                     { "controlRámeček", Color.LightGray },
                     { "controlOver", SystemColors.GradientInactiveCaption },
-                    { "pozadíControlPush", SystemColors.GradientActiveCaption }
+                    { "pozadíControlPush", SystemColors.GradientActiveCaption },
+                    { "pozadíDisabled", SystemColors.Control },
+                    { "checkBox", SystemColors.Window },
+                    { "checkBoxRámeček", Color.Gray },
+                    { "disabledText", SystemColors.ControlDark }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -32,23 +36,19 @@ namespace Ticketník
                     { "arrow", Color.DimGray },
                     { "controlRámeček", Color.DimGray },
                     { "controlOver", Color.FromArgb(70, 70, 100) },
-                    { "pozadíControlPush", Color.FromArgb(90, 90, 120) }
+                    { "pozadíControlPush", Color.FromArgb(90, 90, 120) },
+                    { "pozadíDisabled", Color.FromArgb(50, 50, 50) },
+                    { "checkBox", Color.FromArgb(50, 50, 50) },
+                    { "checkBoxRámeček", Color.DimGray },
+                    { "disabledText", SystemColors.ControlDarkDark }
                 }
             }
         };
 
         internal static void SetControlColor(object c)
         {
-            string sMotiv = "světlý";
-            switch(Properties.Settings.Default.motiv)
-            { 
-                case 0: 
-                    sMotiv = "světlý";
-                    break;
-                case 1: sMotiv = "tmavý";
-                    break;
-            }
-            
+            string sMotiv = GetMotiv();
+
             if (c.GetType() == typeof(Button))
             {
                 ((Button)c).BackColor = barvy[sMotiv]["pozadíControl"];
@@ -74,7 +74,13 @@ namespace Ticketník
                 ((CustomControls.NumericUpDown)c).ForeColor = barvy[sMotiv]["text"];
                 ((CustomControls.NumericUpDown)c).ButtonHighlightColor = barvy[sMotiv]["controlRámeček"];
                 ((CustomControls.NumericUpDown)c).BorderColor = barvy[sMotiv]["controlRámeček"];
-                ((CustomControls.NumericUpDown)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadí"];
+                ((CustomControls.NumericUpDown)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
+
+            }
+            else if (c.GetType() == typeof(CustomControls.CheckBox))
+            {
+                ((CustomControls.CheckBox)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
+                ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["checkBox"];
 
             }
             else if (c.GetType() == typeof(ListView))
@@ -132,18 +138,22 @@ namespace Ticketník
             }
         }
 
-        internal static void SetControlColorOver(object c)
+        private static string GetMotiv()
         {
-            string sMotiv = "světlý";
             switch (Properties.Settings.Default.motiv)
             {
                 case 0:
-                    sMotiv = "světlý";
-                    break;
+                    return "světlý";
                 case 1:
-                    sMotiv = "tmavý";
-                    break;
+                    return "tmavý";
+                default:
+                    return "světlý";
             }
+        }
+
+        internal static void SetControlColorOver(object c)
+        {
+            string sMotiv = GetMotiv();
 
             if (c.GetType() == typeof(Button))
             {
@@ -161,16 +171,7 @@ namespace Ticketník
 
         internal static void SetGroupBoxRamecek(GroupBox groupBox, PaintEventArgs e)
         {
-            string sMotiv = "světlý";
-            switch (Properties.Settings.Default.motiv)
-            {
-                case 0:
-                    sMotiv = "světlý";
-                    break;
-                case 1:
-                    sMotiv = "tmavý";
-                    break;
-            }
+            string sMotiv = GetMotiv();
             using (Graphics gfx = e.Graphics)
             {
                 Pen p = new Pen(barvy[sMotiv]["rámeček"], 1);
@@ -185,16 +186,7 @@ namespace Ticketník
 
         internal static void SetMotiv(Form form)
         {
-            string sMotiv = "světlý";
-            switch (Properties.Settings.Default.motiv)
-            {
-                case 0:
-                    sMotiv = "světlý";
-                    break;
-                case 1:
-                    sMotiv = "tmavý";
-                    break;
-            }
+            string sMotiv = GetMotiv();
             form.BackColor = barvy[sMotiv]["pozadí"];
             form.ForeColor = barvy[sMotiv]["text"];
 

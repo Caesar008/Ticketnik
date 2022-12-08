@@ -35,8 +35,8 @@
             this.zalozni_update = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.novyExport = new System.Windows.Forms.CheckBox();
-            this.zalozniUpdateBox = new System.Windows.Forms.CheckBox();
+            this.novyExport = new Ticketník.CustomControls.CheckBox();
+            this.zalozniUpdateBox = new Ticketník.CustomControls.CheckBox();
             this.SuspendLayout();
             // 
             // cesta_k_souboru
@@ -150,7 +150,7 @@
         private System.Windows.Forms.TextBox zalozni_update;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox novyExport;
-        private System.Windows.Forms.CheckBox zalozniUpdateBox;
+        private Ticketník.CustomControls.CheckBox novyExport;
+        private Ticketník.CustomControls.CheckBox zalozniUpdateBox;
     }
 }

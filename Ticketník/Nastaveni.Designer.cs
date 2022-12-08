@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.poStartu = new System.Windows.Forms.CheckBox();
-            this.autosave = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.clr_prescas = new System.Windows.Forms.Button();
             this.prescas = new System.Windows.Forms.Label();
@@ -58,44 +55,25 @@
             this.zmenOK = new System.Windows.Forms.Button();
             this.zmenMid = new System.Windows.Forms.Button();
             this.zmenLow = new System.Windows.Forms.Button();
-            this.celkovyCasZobrazit = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.jazykPopis = new System.Windows.Forms.Label();
-            this.jazyk = new Ticketník.CustomControls.ComboBox();
             this.zmenitJazyk = new System.Windows.Forms.Button();
             this.skryteNastaveni = new System.Windows.Forms.Button();
-            this.onlineTerp = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.motiv = new System.Windows.Forms.Label();
             this.motivVyber = new Ticketník.CustomControls.ComboBox();
+            this.onlineTerp = new Ticketník.CustomControls.CheckBox();
+            this.jazyk = new Ticketník.CustomControls.ComboBox();
+            this.celkovyCasZobrazit = new Ticketník.CustomControls.CheckBox();
+            this.checkBox1 = new Ticketník.CustomControls.CheckBox();
             this.numericUpDown1 = new Ticketník.CustomControls.NumericUpDown();
+            this.autosave = new Ticketník.CustomControls.CheckBox();
+            this.poStartu = new Ticketník.CustomControls.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // poStartu
-            // 
-            this.poStartu.AutoSize = true;
-            this.poStartu.Location = new System.Drawing.Point(12, 12);
-            this.poStartu.Name = "poStartu";
-            this.poStartu.Size = new System.Drawing.Size(161, 17);
-            this.poStartu.TabIndex = 0;
-            this.poStartu.Text = "Spouštět Ticketník po startu";
-            this.poStartu.UseVisualStyleBackColor = true;
-            this.poStartu.CheckedChanged += new System.EventHandler(this.poStartu_CheckedChanged);
-            // 
-            // autosave
-            // 
-            this.autosave.AutoSize = true;
-            this.autosave.Location = new System.Drawing.Point(12, 35);
-            this.autosave.Name = "autosave";
-            this.autosave.Size = new System.Drawing.Size(130, 17);
-            this.autosave.TabIndex = 1;
-            this.autosave.Text = "Automatické ukládání";
-            this.autosave.UseVisualStyleBackColor = true;
-            this.autosave.CheckedChanged += new System.EventHandler(this.autosave_CheckedChanged);
             // 
             // label1
             // 
@@ -114,17 +92,6 @@
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "minut.";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 84);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(171, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Zjednodušené nastavení času";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -478,17 +445,6 @@
             this.zmenLow.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenLow.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
-            // celkovyCasZobrazit
-            // 
-            this.celkovyCasZobrazit.AutoSize = true;
-            this.celkovyCasZobrazit.Location = new System.Drawing.Point(6, 19);
-            this.celkovyCasZobrazit.Name = "celkovyCasZobrazit";
-            this.celkovyCasZobrazit.Size = new System.Drawing.Size(140, 17);
-            this.celkovyCasZobrazit.TabIndex = 0;
-            this.celkovyCasZobrazit.Text = "Zobrazovat celkový čas";
-            this.celkovyCasZobrazit.UseVisualStyleBackColor = true;
-            this.celkovyCasZobrazit.CheckedChanged += new System.EventHandler(this.celkovyCasZobrazit_CheckedChanged);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.jazykPopis);
@@ -509,21 +465,6 @@
             this.jazykPopis.TabIndex = 2;
             this.jazykPopis.Text = "Int. jazyk a verze";
             this.jazykPopis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // jazyk
-            // 
-            this.jazyk.BorderColor = System.Drawing.Color.LightGray;
-            this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
-            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.jazyk.FormattingEnabled = true;
-            this.jazyk.Location = new System.Drawing.Point(6, 19);
-            this.jazyk.Name = "jazyk";
-            this.jazyk.Size = new System.Drawing.Size(146, 21);
-            this.jazyk.TabIndex = 1;
-            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
-            this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
-            this.jazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // zmenitJazyk
             // 
@@ -558,17 +499,6 @@
             this.skryteNastaveni.Click += new System.EventHandler(this.SkryteNastaveni_Click);
             this.skryteNastaveni.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.skryteNastaveni.MouseLeave += new System.EventHandler(this.event_MouseLeave);
-            // 
-            // onlineTerp
-            // 
-            this.onlineTerp.AutoSize = true;
-            this.onlineTerp.Location = new System.Drawing.Point(12, 107);
-            this.onlineTerp.Name = "onlineTerp";
-            this.onlineTerp.Size = new System.Drawing.Size(186, 17);
-            this.onlineTerp.TabIndex = 10;
-            this.onlineTerp.Text = "Používat primárně terpy z MyTime";
-            this.onlineTerp.UseVisualStyleBackColor = true;
-            this.onlineTerp.CheckedChanged += new System.EventHandler(this.onlineTerp_CheckedChanged);
             // 
             // button2
             // 
@@ -611,6 +541,57 @@
             this.motivVyber.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.motivVyber.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
+            // onlineTerp
+            // 
+            this.onlineTerp.AutoSize = true;
+            this.onlineTerp.BoxColor = System.Drawing.SystemColors.Window;
+            this.onlineTerp.Location = new System.Drawing.Point(12, 107);
+            this.onlineTerp.Name = "onlineTerp";
+            this.onlineTerp.Size = new System.Drawing.Size(186, 17);
+            this.onlineTerp.TabIndex = 10;
+            this.onlineTerp.Text = "Používat primárně terpy z MyTime";
+            this.onlineTerp.UseVisualStyleBackColor = true;
+            this.onlineTerp.CheckedChanged += new System.EventHandler(this.onlineTerp_CheckedChanged);
+            // 
+            // jazyk
+            // 
+            this.jazyk.BorderColor = System.Drawing.Color.LightGray;
+            this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
+            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jazyk.FormattingEnabled = true;
+            this.jazyk.Location = new System.Drawing.Point(6, 19);
+            this.jazyk.Name = "jazyk";
+            this.jazyk.Size = new System.Drawing.Size(146, 21);
+            this.jazyk.TabIndex = 1;
+            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
+            this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.jazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
+            // 
+            // celkovyCasZobrazit
+            // 
+            this.celkovyCasZobrazit.AutoSize = true;
+            this.celkovyCasZobrazit.BoxColor = System.Drawing.SystemColors.Window;
+            this.celkovyCasZobrazit.Location = new System.Drawing.Point(6, 19);
+            this.celkovyCasZobrazit.Name = "celkovyCasZobrazit";
+            this.celkovyCasZobrazit.Size = new System.Drawing.Size(140, 17);
+            this.celkovyCasZobrazit.TabIndex = 0;
+            this.celkovyCasZobrazit.Text = "Zobrazovat celkový čas";
+            this.celkovyCasZobrazit.UseVisualStyleBackColor = true;
+            this.celkovyCasZobrazit.CheckedChanged += new System.EventHandler(this.celkovyCasZobrazit_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.BoxColor = System.Drawing.SystemColors.Window;
+            this.checkBox1.Location = new System.Drawing.Point(12, 84);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(171, 17);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "Zjednodušené nastavení času";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // numericUpDown1
             // 
             this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -629,6 +610,30 @@
             0,
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // autosave
+            // 
+            this.autosave.AutoSize = true;
+            this.autosave.BoxColor = System.Drawing.SystemColors.Window;
+            this.autosave.Location = new System.Drawing.Point(12, 35);
+            this.autosave.Name = "autosave";
+            this.autosave.Size = new System.Drawing.Size(130, 17);
+            this.autosave.TabIndex = 1;
+            this.autosave.Text = "Automatické ukládání";
+            this.autosave.UseVisualStyleBackColor = true;
+            this.autosave.CheckedChanged += new System.EventHandler(this.autosave_CheckedChanged);
+            // 
+            // poStartu
+            // 
+            this.poStartu.AutoSize = true;
+            this.poStartu.BoxColor = System.Drawing.SystemColors.Window;
+            this.poStartu.Location = new System.Drawing.Point(12, 12);
+            this.poStartu.Name = "poStartu";
+            this.poStartu.Size = new System.Drawing.Size(161, 17);
+            this.poStartu.TabIndex = 0;
+            this.poStartu.Text = "Spouštět Ticketník po startu";
+            this.poStartu.UseVisualStyleBackColor = true;
+            this.poStartu.CheckedChanged += new System.EventHandler(this.poStartu_CheckedChanged);
             // 
             // Nastaveni
             // 
@@ -668,12 +673,12 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox poStartu;
-        private System.Windows.Forms.CheckBox autosave;
+        private Ticketník.CustomControls.CheckBox poStartu;
+        private Ticketník.CustomControls.CheckBox autosave;
         private Ticketník.CustomControls.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private Ticketník.CustomControls.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label probiha;
         private System.Windows.Forms.Label rdp;
@@ -688,7 +693,7 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox celkovyCasZobrazit;
+        private Ticketník.CustomControls.CheckBox celkovyCasZobrazit;
         private System.Windows.Forms.Button defaultCasy;
         private System.Windows.Forms.Button zmenHigh;
         private System.Windows.Forms.Button zmenOK;
@@ -705,7 +710,7 @@
         private System.Windows.Forms.Button clr_prescas;
         private System.Windows.Forms.Label prescas;
         private System.Windows.Forms.Button skryteNastaveni;
-        private System.Windows.Forms.CheckBox onlineTerp;
+        private Ticketník.CustomControls.CheckBox onlineTerp;
         private System.Windows.Forms.Button button2;
         private Ticketník.CustomControls.ComboBox motivVyber;
         private System.Windows.Forms.Label motiv;
