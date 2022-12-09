@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -7,6 +8,12 @@ namespace Ticketník.CustomControls
 {
     public class CheckBox : System.Windows.Forms.CheckBox
     {
+        private Color _borderTemp = Color.Gray;
+        private Color _boxTemp = SystemColors.Window;
+        private Color _checkedTemp = Color.FromArgb(0, 95, 184);
+        private Color _checkMarkTemp = Color.White;
+        private bool _mouseIn = false;
+
         private Color borderColor = Color.Gray;
         [DefaultValue(typeof(Color), "Gray")]
         public Color BorderColor
@@ -21,6 +28,20 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color borderColorMouseOver = Color.DodgerBlue;
+        [DefaultValue(typeof(Color), "DodgerBlue")]
+        public Color BorderColorMouseOver
+        {
+            get { return borderColorMouseOver; }
+            set
+            {
+                if (borderColorMouseOver != value)
+                {
+                    borderColorMouseOver = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color boxColor = SystemColors.Window;
         [DefaultValue(typeof(SystemColors), "Window")]
         public Color BoxColor
@@ -31,6 +52,20 @@ namespace Ticketník.CustomControls
                 if (boxColor != value)
                 {
                     boxColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color boxColorMouseOver = Color.FromArgb(70,70,100);
+        [DefaultValue("#464664")]
+        public Color BoxColorMouseOver
+        {
+            get { return boxColorMouseOver; }
+            set
+            {
+                if (boxColorMouseOver != value)
+                {
+                    boxColorMouseOver = value;
                     Invalidate();
                 }
             }
@@ -62,6 +97,98 @@ namespace Ticketník.CustomControls
                     Invalidate();
                 }
             }
+        }
+        private Color checkMarkColorMouseOver = Color.White;
+        [DefaultValue(typeof(Color), "White")]
+        public Color CheckMarkColorMouseOver
+        {
+            get { return checkMarkColorMouseOver; }
+            set
+            {
+                if (checkMarkColorMouseOver != value)
+                {
+                    checkMarkColorMouseOver = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color checkedColorMouseOver = Color.FromArgb(25, 110, 191);
+        [DefaultValue("#196ebf")]
+        public Color CheckedColorMouseOver
+        {
+            get { return checkedColorMouseOver; }
+            set
+            {
+                if (checkedColorMouseOver != value)
+                {
+                    checkedColorMouseOver = value;
+                    Invalidate();
+                }
+            }
+        }
+        protected override void OnCheckedChanged(EventArgs e)
+        {
+            base.OnCheckedChanged(e);
+            if (Checked)
+            {
+                if(_mouseIn)
+                {
+                    CheckedColor = CheckedColorMouseOver;
+                    CheckMarkColor = CheckMarkColorMouseOver;
+                }
+                else
+                {
+                    CheckedColor = _checkedTemp;
+                    CheckMarkColor = _checkMarkTemp;
+                }
+            }
+            else
+            {
+                if (_mouseIn)
+                {
+                    BoxColor = BoxColorMouseOver;
+                }
+                else
+                {
+                    BoxColor = _boxTemp;
+                }
+            }
+        }
+        protected override void OnMouseEnter(EventArgs eventargs)
+        {
+            _mouseIn = true;
+            base.OnMouseEnter(eventargs);
+            if(Checked)
+            {
+                _checkedTemp = CheckedColor;
+                CheckedColor = CheckedColorMouseOver;
+                _checkMarkTemp = CheckMarkColor;
+                CheckMarkColor = CheckMarkColorMouseOver; 
+                _boxTemp = BoxColor;
+            }
+            else
+            {
+                _boxTemp = BoxColor;
+                _checkedTemp = CheckedColor;
+                _checkMarkTemp = CheckMarkColor;
+                BoxColor = BoxColorMouseOver;
+            }
+            _borderTemp = BorderColor;
+            BorderColor = BorderColorMouseOver;
+        }
+        protected override void OnMouseLeave(EventArgs eventargs)
+        {
+            _mouseIn= false;
+            base.OnMouseLeave(eventargs); if (Checked)
+            {
+                CheckedColor = _checkedTemp;
+                CheckMarkColor = _checkMarkTemp;
+            }
+            else
+            {
+                BoxColor = _boxTemp;
+            }
+            BorderColor = _borderTemp;
         }
         protected override void OnPaint(PaintEventArgs e)
         {

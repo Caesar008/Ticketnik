@@ -84,7 +84,8 @@ namespace Ticketník
                 ((CustomControls.CheckBox)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
                 ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["checkBox"];
                 ((CustomControls.CheckBox)c).CheckedColor = barvy[sMotiv]["checkBoxChecked"];
-
+                ((CustomControls.CheckBox)c).BoxColorMouseOver = barvy[sMotiv]["controlOver"];
+                ((CustomControls.CheckBox)c).CheckedColorMouseOver = barvy[sMotiv]["checkBoxCheckedOver"];
             }
             else if (c.GetType() == typeof(ListView))
             {
@@ -178,12 +179,6 @@ namespace Ticketník
             {
                 ((CustomControls.ComboBox)c).BorderColor = Color.DodgerBlue;
                 ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["controlOver"];
-            }
-            else if (c.GetType() == typeof(CustomControls.CheckBox))
-            {
-                ((CustomControls.CheckBox)c).BorderColor = Color.DodgerBlue;
-                ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["controlOver"];
-                ((CustomControls.CheckBox)c).CheckedColor = barvy[sMotiv]["checkBoxCheckedOver"];
             }
         }
 

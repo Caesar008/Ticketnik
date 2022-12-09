@@ -63,11 +63,6 @@ namespace Ticketník.CustomControls
                 return cp;
             }
         }
-       /* public bool Enabled
-        {
-            get { }
-            set { }
-        }*/
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
