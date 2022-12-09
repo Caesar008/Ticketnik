@@ -55,16 +55,16 @@
             this.zmenOK = new System.Windows.Forms.Button();
             this.zmenMid = new System.Windows.Forms.Button();
             this.zmenLow = new System.Windows.Forms.Button();
+            this.celkovyCasZobrazit = new Ticketník.CustomControls.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.jazykPopis = new System.Windows.Forms.Label();
+            this.jazyk = new Ticketník.CustomControls.ComboBox();
             this.zmenitJazyk = new System.Windows.Forms.Button();
             this.skryteNastaveni = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.motiv = new System.Windows.Forms.Label();
             this.motivVyber = new Ticketník.CustomControls.ComboBox();
             this.onlineTerp = new Ticketník.CustomControls.CheckBox();
-            this.jazyk = new Ticketník.CustomControls.ComboBox();
-            this.celkovyCasZobrazit = new Ticketník.CustomControls.CheckBox();
             this.checkBox1 = new Ticketník.CustomControls.CheckBox();
             this.numericUpDown1 = new Ticketník.CustomControls.NumericUpDown();
             this.autosave = new Ticketník.CustomControls.CheckBox();
@@ -445,6 +445,20 @@
             this.zmenLow.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenLow.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
+            // celkovyCasZobrazit
+            // 
+            this.celkovyCasZobrazit.AutoSize = true;
+            this.celkovyCasZobrazit.BoxColor = System.Drawing.SystemColors.Window;
+            this.celkovyCasZobrazit.Location = new System.Drawing.Point(6, 19);
+            this.celkovyCasZobrazit.Name = "celkovyCasZobrazit";
+            this.celkovyCasZobrazit.Size = new System.Drawing.Size(140, 17);
+            this.celkovyCasZobrazit.TabIndex = 0;
+            this.celkovyCasZobrazit.Text = "Zobrazovat celkový čas";
+            this.celkovyCasZobrazit.UseVisualStyleBackColor = true;
+            this.celkovyCasZobrazit.CheckedChanged += new System.EventHandler(this.celkovyCasZobrazit_CheckedChanged);
+            this.celkovyCasZobrazit.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.celkovyCasZobrazit.MouseLeave += new System.EventHandler(this.event_MouseLeave);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.jazykPopis);
@@ -465,6 +479,21 @@
             this.jazykPopis.TabIndex = 2;
             this.jazykPopis.Text = "Int. jazyk a verze";
             this.jazykPopis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // jazyk
+            // 
+            this.jazyk.BorderColor = System.Drawing.Color.LightGray;
+            this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
+            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jazyk.FormattingEnabled = true;
+            this.jazyk.Location = new System.Drawing.Point(6, 19);
+            this.jazyk.Name = "jazyk";
+            this.jazyk.Size = new System.Drawing.Size(146, 21);
+            this.jazyk.TabIndex = 1;
+            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
+            this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.jazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // zmenitJazyk
             // 
@@ -490,9 +519,9 @@
             this.skryteNastaveni.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.skryteNastaveni.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.skryteNastaveni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.skryteNastaveni.Location = new System.Drawing.Point(220, 107);
+            this.skryteNastaveni.Location = new System.Drawing.Point(226, 107);
             this.skryteNastaveni.Name = "skryteNastaveni";
-            this.skryteNastaveni.Size = new System.Drawing.Size(158, 23);
+            this.skryteNastaveni.Size = new System.Drawing.Size(146, 23);
             this.skryteNastaveni.TabIndex = 9;
             this.skryteNastaveni.Text = "Skrytá nastavení";
             this.skryteNastaveni.UseVisualStyleBackColor = false;
@@ -507,9 +536,9 @@
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(223, 341);
+            this.button2.Location = new System.Drawing.Point(229, 341);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 23);
+            this.button2.Size = new System.Drawing.Size(143, 23);
             this.button2.TabIndex = 11;
             this.button2.Text = "Výchozí nastavení";
             this.button2.UseVisualStyleBackColor = false;
@@ -552,33 +581,8 @@
             this.onlineTerp.Text = "Používat primárně terpy z MyTime";
             this.onlineTerp.UseVisualStyleBackColor = true;
             this.onlineTerp.CheckedChanged += new System.EventHandler(this.onlineTerp_CheckedChanged);
-            // 
-            // jazyk
-            // 
-            this.jazyk.BorderColor = System.Drawing.Color.LightGray;
-            this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
-            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.jazyk.FormattingEnabled = true;
-            this.jazyk.Location = new System.Drawing.Point(6, 19);
-            this.jazyk.Name = "jazyk";
-            this.jazyk.Size = new System.Drawing.Size(146, 21);
-            this.jazyk.TabIndex = 1;
-            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
-            this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
-            this.jazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
-            // 
-            // celkovyCasZobrazit
-            // 
-            this.celkovyCasZobrazit.AutoSize = true;
-            this.celkovyCasZobrazit.BoxColor = System.Drawing.SystemColors.Window;
-            this.celkovyCasZobrazit.Location = new System.Drawing.Point(6, 19);
-            this.celkovyCasZobrazit.Name = "celkovyCasZobrazit";
-            this.celkovyCasZobrazit.Size = new System.Drawing.Size(140, 17);
-            this.celkovyCasZobrazit.TabIndex = 0;
-            this.celkovyCasZobrazit.Text = "Zobrazovat celkový čas";
-            this.celkovyCasZobrazit.UseVisualStyleBackColor = true;
-            this.celkovyCasZobrazit.CheckedChanged += new System.EventHandler(this.celkovyCasZobrazit_CheckedChanged);
+            this.onlineTerp.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.onlineTerp.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // checkBox1
             // 
@@ -591,6 +595,8 @@
             this.checkBox1.Text = "Zjednodušené nastavení času";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.checkBox1.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // numericUpDown1
             // 
@@ -622,6 +628,8 @@
             this.autosave.Text = "Automatické ukládání";
             this.autosave.UseVisualStyleBackColor = true;
             this.autosave.CheckedChanged += new System.EventHandler(this.autosave_CheckedChanged);
+            this.autosave.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.autosave.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // poStartu
             // 
@@ -634,6 +642,8 @@
             this.poStartu.Text = "Spouštět Ticketník po startu";
             this.poStartu.UseVisualStyleBackColor = true;
             this.poStartu.CheckedChanged += new System.EventHandler(this.poStartu_CheckedChanged);
+            this.poStartu.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.poStartu.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // Nastaveni
             // 

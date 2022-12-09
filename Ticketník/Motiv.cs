@@ -81,7 +81,7 @@ namespace Ticketník
             {
                 ((CustomControls.CheckBox)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
                 ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["checkBox"];
-
+                
             }
             else if (c.GetType() == typeof(ListView))
             {
@@ -146,6 +146,15 @@ namespace Ticketník
                     return "světlý";
                 case 1:
                     return "tmavý";
+                case 2:
+                    try
+                    {
+                        return (int)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", -1) == 0 ? "tmavý" : "světlý";
+                    }
+                    catch
+                    {
+                        return "světlý";
+                    }
                 default:
                     return "světlý";
             }
@@ -166,6 +175,11 @@ namespace Ticketník
             {
                 ((CustomControls.ComboBox)c).BorderColor = Color.DodgerBlue;
                 ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["controlOver"];
+            }
+            else if (c.GetType() == typeof(CustomControls.CheckBox))
+            {
+                ((CustomControls.CheckBox)c).BorderColor = Color.DodgerBlue;
+                ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["controlOver"];
             }
         }
 
