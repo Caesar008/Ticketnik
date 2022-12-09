@@ -6,8 +6,6 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Xml;
 using System.Linq;
-using ClosedXML.Excel;
-using Ticketník.CustomControls;
 
 namespace Ticketník
 {

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ticketník
 {
@@ -24,6 +22,8 @@ namespace Ticketník
                     { "pozadíDisabled", SystemColors.Control },
                     { "checkBox", SystemColors.Window },
                     { "checkBoxRámeček", Color.Gray },
+                    { "checkBoxChecked", Color.FromArgb(0, 95, 184) },
+                    { "checkBoxCheckedOver", Color.FromArgb(25, 110, 191) },
                     { "disabledText", SystemColors.ControlDark }
                 }
             },
@@ -40,6 +40,8 @@ namespace Ticketník
                     { "pozadíDisabled", Color.FromArgb(50, 50, 50) },
                     { "checkBox", Color.FromArgb(50, 50, 50) },
                     { "checkBoxRámeček", Color.DimGray },
+                    { "checkBoxChecked", Color.FromArgb(0, 95, 184) },
+                    { "checkBoxCheckedOver", Color.FromArgb(25, 110, 191) },
                     { "disabledText", SystemColors.ControlDarkDark }
                 }
             }
@@ -81,7 +83,8 @@ namespace Ticketník
             {
                 ((CustomControls.CheckBox)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
                 ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["checkBox"];
-                
+                ((CustomControls.CheckBox)c).CheckedColor = barvy[sMotiv]["checkBoxChecked"];
+
             }
             else if (c.GetType() == typeof(ListView))
             {
@@ -180,6 +183,7 @@ namespace Ticketník
             {
                 ((CustomControls.CheckBox)c).BorderColor = Color.DodgerBlue;
                 ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["controlOver"];
+                ((CustomControls.CheckBox)c).CheckedColor = barvy[sMotiv]["checkBoxCheckedOver"];
             }
         }
 

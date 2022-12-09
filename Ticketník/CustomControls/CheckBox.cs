@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ticketník.CustomControls
@@ -40,6 +35,34 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color checkedColor = Color.FromArgb(0, 95, 184);
+        [DefaultValue("#005fb8")]
+        public Color CheckedColor
+        {
+            get { return checkedColor; }
+            set
+            {
+                if (checkedColor != value)
+                {
+                    checkedColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color checkMarkColor = Color.White;
+        [DefaultValue(typeof(Color), "White")]
+        public Color CheckMarkColor
+        {
+            get { return checkMarkColor; }
+            set
+            {
+                if (checkMarkColor != value)
+                {
+                    checkMarkColor = value;
+                    Invalidate();
+                }
+            }
+        }
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -51,12 +74,30 @@ namespace Ticketník.CustomControls
                     if (!Checked)
                     {
                         GraphicsPath gp = new GraphicsPath();
-                        gp.AddRectangle(new Rectangle(0, 1, 12, 12));
+                        gp.AddRectangle(new Rectangle(0, 0, 14, 14));
                         e.Graphics.FillPath(new SolidBrush(BackColor), gp);
                         //vyplnit
                         using (SolidBrush brush = new SolidBrush(BoxColor))
                         {
                             e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
+                        }
+                    }
+                    else
+                    {
+                        GraphicsPath gp = new GraphicsPath();
+                        gp.AddRectangle(new Rectangle(0, 0, 14, 14));
+                        e.Graphics.FillPath(new SolidBrush(BackColor), gp);
+                        //vyplnit
+                        using (SolidBrush brush = new SolidBrush(CheckedColor))
+                        {
+                            e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
+                        }
+                        //udělat checkmark
+                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                        using(Pen chm = new Pen(CheckMarkColor, 1))
+                        {
+                            e.Graphics.DrawLine(chm, 3, 7, 5, 9);
+                            e.Graphics.DrawLine(chm, 5, 9, 9, 5);
                         }
                     }
                     //vytvořit rámeček
