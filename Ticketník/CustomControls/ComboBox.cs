@@ -8,6 +8,10 @@ namespace Ticketník.CustomControls
 {
     public class ComboBox : System.Windows.Forms.ComboBox
     {
+        private Color _borderTemp = Color.Gray;
+        private Color _buttonTemp = Color.LightGray;
+        private Color _arrowTemp = Color.Gray;
+
         private Color borderColor = Color.Gray;
         [DefaultValue(typeof(Color), "Gray")]
         public Color BorderColor
@@ -18,6 +22,48 @@ namespace Ticketník.CustomControls
                 if (borderColor != value)
                 {
                     borderColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color borderColorMouseOver = Color.DodgerBlue;
+        [DefaultValue(typeof(Color), "DodgerBlue")]
+        public Color BorderColorMouseOver
+        {
+            get { return borderColorMouseOver; }
+            set
+            {
+                if (borderColorMouseOver != value)
+                {
+                    borderColorMouseOver = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color buttonColorMouseOver = SystemColors.GradientInactiveCaption;
+        [DefaultValue(typeof(SystemColors), "GradientInactiveCaption")]
+        public Color ButtonColorMouseOver
+        {
+            get { return buttonColorMouseOver; }
+            set
+            {
+                if (buttonColorMouseOver != value)
+                {
+                    buttonColorMouseOver = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color arrowColorMouseOver = Color.DodgerBlue;
+        [DefaultValue(typeof(Color), "DodgerBlue")]
+        public Color ArrowColorMouseOver
+        {
+            get { return arrowColorMouseOver; }
+            set
+            {
+                if (arrowColorMouseOver != value)
+                {
+                    arrowColorMouseOver = value;
                     Invalidate();
                 }
             }
@@ -49,6 +95,23 @@ namespace Ticketník.CustomControls
                     Invalidate();
                 }
             }
+        }
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            _borderTemp = BorderColor;
+            BorderColor = BorderColorMouseOver;
+            _buttonTemp = ButtonColor;
+            ButtonColor = ButtonColorMouseOver;
+            _arrowTemp = ArrowColor;
+            ArrowColor = ArrowColorMouseOver;
+        }
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            BorderColor = _borderTemp;
+            ButtonColor = _buttonTemp;
+            ArrowColor = _arrowTemp;
         }
         protected override void WndProc(ref Message m)
         {

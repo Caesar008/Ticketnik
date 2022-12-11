@@ -93,6 +93,9 @@
     <Compile Include="CustomControls\NumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomControls\RadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Export.cs">
       <SubType>Form</SubType>
     </Compile>
