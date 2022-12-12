@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,6 @@ namespace Ticketník.CustomControls
     public class RadioButton : System.Windows.Forms.RadioButton
     {
         //celé 13 i s rámečkem, vnitřní 5
-        private Color _borderTemp = Color.Gray;
-        private Color _boxTemp = SystemColors.Window;
-        private Color _checkedTemp = Color.LimeGreen;
         private bool _mouseIn = false;
 
         private Color borderColor = Color.Gray;
@@ -104,56 +102,40 @@ namespace Ticketník.CustomControls
         protected override void OnCheckedChanged(EventArgs e)
         {
             base.OnCheckedChanged(e);
-            if (Checked)
-            {
-                if (_mouseIn)
-                {
-                    CheckedColor = CheckedColorMouseOver;
-                    BoxColor = BoxColorMouseOver;
-                }
-                else
-                {
-                    CheckedColor = _checkedTemp;
-                    BoxColor = _boxTemp;
-                }
-            }
-            else
-            {
-                if (_mouseIn)
-                {
-                    BoxColor = BoxColorMouseOver;
-                }
-                else
-                {
-                    BoxColor = _boxTemp;
-                }
-            }
+            Invalidate();
         }
         protected override void OnMouseEnter(EventArgs eventargs)
         {
             _mouseIn = true;
             base.OnMouseEnter(eventargs);
-            _checkedTemp = CheckedColor;
-            CheckedColor = CheckedColorMouseOver;
-            _boxTemp = BoxColor;
-            BoxColor = BoxColorMouseOver;
-            _boxTemp = BoxColor;
-            _checkedTemp = CheckedColor;
-            BoxColor = BoxColorMouseOver;
-            _borderTemp = BorderColor;
-            BorderColor = BorderColorMouseOver;
+            Invalidate();
         }
         protected override void OnMouseLeave(EventArgs eventargs)
         {
             _mouseIn = false;
-            base.OnMouseLeave(eventargs); 
-            CheckedColor = _checkedTemp;
-            BoxColor = _boxTemp;
-            BorderColor = _borderTemp;
+            base.OnMouseLeave(eventargs);
+            Invalidate();
         }
-        protected override void OnPaint(PaintEventArgs pevent)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(pevent);
+            base.OnPaint(e);
+            if (FlatStyle == FlatStyle.Standard)
+            {
+                using (Pen p = new Pen(_mouseIn ? BorderColorMouseOver : BorderColor, 1))
+                {
+                    //vymazat původní
+                    GraphicsPath gp = new GraphicsPath();
+                    gp.AddEllipse(0, 1, 13, 13);
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    e.Graphics.FillEllipse(new SolidBrush(BackColor), -1, 1, 14, 14);
+                    //vyplnit
+                    e.Graphics.FillEllipse(new SolidBrush(_mouseIn ? BoxColorMouseOver : BoxColor), 0, 1, 13, 13);
+                    //rámeček
+                    e.Graphics.DrawPath(p, gp);
+                    if (Checked)
+                        e.Graphics.FillEllipse(new SolidBrush(_mouseIn ? CheckedColorMouseOver : CheckedColor), 3, 4, 7, 7);
+                }
+            }
         }
     }
 }

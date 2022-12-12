@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.idTicketu = new System.Windows.Forms.TextBox();
+            this.idTicketu = new Ticketník.CustomControls.TextBox();
             this.zakaznik = new Ticketník.CustomControls.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pocitac = new System.Windows.Forms.TextBox();
-            this.kontakt = new System.Windows.Forms.TextBox();
+            this.pocitac = new Ticketník.CustomControls.TextBox();
+            this.kontakt = new Ticketník.CustomControls.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.search_btn = new System.Windows.Forms.Button();
-            this.popis = new System.Windows.Forms.TextBox();
+            this.popis = new Ticketník.CustomControls.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cas = new Ticketník.CustomControls.ComboBox();
@@ -48,17 +48,17 @@
             this.smazat = new System.Windows.Forms.Button();
             this.pridat = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.pauzaDo = new System.Windows.Forms.TextBox();
-            this.pauzaOd = new System.Windows.Forms.TextBox();
+            this.pauzaDo = new Ticketník.CustomControls.TextBox();
+            this.pauzaOd = new Ticketník.CustomControls.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.konec = new System.Windows.Forms.TextBox();
+            this.konec = new Ticketník.CustomControls.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.zacatek = new System.Windows.Forms.TextBox();
+            this.zacatek = new Ticketník.CustomControls.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.newTerpTaskPanel = new System.Windows.Forms.Panel();
@@ -71,8 +71,8 @@
             this.lbl_TicketWindow_onlineTerp = new System.Windows.Forms.Label();
             this.onlineTerpDropDown = new Ticketník.CustomControls.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.nahradni = new System.Windows.Forms.RadioButton();
-            this.volno = new System.Windows.Forms.RadioButton();
+            this.nahradni = new Ticketník.CustomControls.RadioButton();
+            this.volno = new Ticketník.CustomControls.RadioButton();
             this.popisTypu = new System.Windows.Forms.Label();
             this.terpKod = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -82,8 +82,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.normalni = new System.Windows.Forms.RadioButton();
-            this.prescas = new System.Windows.Forms.RadioButton();
+            this.normalni = new Ticketník.CustomControls.RadioButton();
+            this.prescas = new Ticketník.CustomControls.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
             this.stavTicketu = new Ticketník.CustomControls.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -120,6 +120,7 @@
             // 
             // zakaznik
             // 
+            this.zakaznik.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.zakaznik.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.zakaznik.FormattingEnabled = true;
             this.zakaznik.Location = new System.Drawing.Point(65, 45);
@@ -247,6 +248,7 @@
             // 
             // cas
             // 
+            this.cas.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cas.FormattingEnabled = true;
             this.cas.Location = new System.Drawing.Point(6, 19);
@@ -511,6 +513,7 @@
             // 
             // onlineTypeComboBox
             // 
+            this.onlineTypeComboBox.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.onlineTypeComboBox.FormattingEnabled = true;
             this.onlineTypeComboBox.Location = new System.Drawing.Point(99, 57);
             this.onlineTypeComboBox.Name = "onlineTypeComboBox";
@@ -522,6 +525,7 @@
             // 
             // onlineTaskComboBox
             // 
+            this.onlineTaskComboBox.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.onlineTaskComboBox.FormattingEnabled = true;
             this.onlineTaskComboBox.Location = new System.Drawing.Point(99, 30);
             this.onlineTaskComboBox.Name = "onlineTaskComboBox";
@@ -543,6 +547,7 @@
             // 
             // onlineTerpDropDown
             // 
+            this.onlineTerpDropDown.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.onlineTerpDropDown.FormattingEnabled = true;
             this.onlineTerpDropDown.Location = new System.Drawing.Point(99, 3);
             this.onlineTerpDropDown.Name = "onlineTerpDropDown";
@@ -567,6 +572,10 @@
             // 
             this.nahradni.AutoSize = true;
             this.nahradni.BackColor = System.Drawing.Color.Transparent;
+            this.nahradni.BoxColor = System.Drawing.SystemColors.Window;
+            this.nahradni.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
+            this.nahradni.CheckedColor = System.Drawing.Color.LimeGreen;
+            this.nahradni.CheckedColorMouseOver = System.Drawing.Color.LimeGreen;
             this.nahradni.Location = new System.Drawing.Point(15, 66);
             this.nahradni.Name = "nahradni";
             this.nahradni.Size = new System.Drawing.Size(99, 17);
@@ -580,6 +589,10 @@
             // 
             this.volno.AutoSize = true;
             this.volno.BackColor = System.Drawing.Color.Transparent;
+            this.volno.BoxColor = System.Drawing.SystemColors.Window;
+            this.volno.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
+            this.volno.CheckedColor = System.Drawing.Color.LimeGreen;
+            this.volno.CheckedColorMouseOver = System.Drawing.Color.LimeGreen;
             this.volno.Location = new System.Drawing.Point(186, 46);
             this.volno.Name = "volno";
             this.volno.Size = new System.Drawing.Size(59, 17);
@@ -675,6 +688,10 @@
             // 
             this.normalni.AutoSize = true;
             this.normalni.BackColor = System.Drawing.Color.Transparent;
+            this.normalni.BoxColor = System.Drawing.SystemColors.Window;
+            this.normalni.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
+            this.normalni.CheckedColor = System.Drawing.Color.LimeGreen;
+            this.normalni.CheckedColorMouseOver = System.Drawing.Color.LimeGreen;
             this.normalni.Location = new System.Drawing.Point(15, 46);
             this.normalni.Name = "normalni";
             this.normalni.Size = new System.Drawing.Size(95, 17);
@@ -688,6 +705,10 @@
             // 
             this.prescas.AutoSize = true;
             this.prescas.BackColor = System.Drawing.Color.Transparent;
+            this.prescas.BoxColor = System.Drawing.SystemColors.Window;
+            this.prescas.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
+            this.prescas.CheckedColor = System.Drawing.Color.LimeGreen;
+            this.prescas.CheckedColorMouseOver = System.Drawing.Color.LimeGreen;
             this.prescas.Location = new System.Drawing.Point(116, 46);
             this.prescas.Name = "prescas";
             this.prescas.Size = new System.Drawing.Size(64, 17);
@@ -709,6 +730,7 @@
             // 
             // stavTicketu
             // 
+            this.stavTicketu.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.stavTicketu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.stavTicketu.FormattingEnabled = true;
             this.stavTicketu.Location = new System.Drawing.Point(114, 19);
@@ -828,26 +850,26 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox5;
-        internal System.Windows.Forms.TextBox zacatek;
+        internal Ticketník.CustomControls.TextBox zacatek;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label14;
-        internal System.Windows.Forms.TextBox idTicketu;
+        internal Ticketník.CustomControls.TextBox idTicketu;
         internal Ticketník.CustomControls.ComboBox zakaznik;
-        internal System.Windows.Forms.TextBox pocitac;
-        internal System.Windows.Forms.TextBox kontakt;
-        internal System.Windows.Forms.TextBox konec;
+        internal Ticketník.CustomControls.TextBox pocitac;
+        internal Ticketník.CustomControls.TextBox kontakt;
+        internal Ticketník.CustomControls.TextBox konec;
         internal System.Windows.Forms.Button upravit;
         internal System.Windows.Forms.Button smazat;
         internal System.Windows.Forms.Button pridat;
-        internal System.Windows.Forms.TextBox pauzaDo;
-        internal System.Windows.Forms.TextBox pauzaOd;
-        internal System.Windows.Forms.RadioButton normalni;
-        internal System.Windows.Forms.RadioButton prescas;
+        internal Ticketník.CustomControls.TextBox pauzaDo;
+        internal Ticketník.CustomControls.TextBox pauzaOd;
+        internal Ticketník.CustomControls.RadioButton normalni;
+        internal Ticketník.CustomControls.RadioButton prescas;
         internal Ticketník.CustomControls.ComboBox stavTicketu;
         internal System.Windows.Forms.RichTextBox richTextBox1;
-        internal System.Windows.Forms.RadioButton volno;
-        internal System.Windows.Forms.RadioButton nahradni;
-        internal System.Windows.Forms.TextBox popis;
+        internal Ticketník.CustomControls.RadioButton volno;
+        internal Ticketník.CustomControls.RadioButton nahradni;
+        internal Ticketník.CustomControls.TextBox popis;
         internal System.Windows.Forms.ListView listView1;
         internal System.Windows.Forms.Button ok;
         internal Ticketník.CustomControls.ComboBox cas;

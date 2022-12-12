@@ -8,10 +8,6 @@ namespace Ticketník.CustomControls
 {
     public class CheckBox : System.Windows.Forms.CheckBox
     {
-        private Color _borderTemp = Color.Gray;
-        private Color _boxTemp = SystemColors.Window;
-        private Color _checkedTemp = Color.FromArgb(0, 95, 184);
-        private Color _checkMarkTemp = Color.White;
         private bool _mouseIn = false;
 
         private Color borderColor = Color.Gray;
@@ -129,73 +125,26 @@ namespace Ticketník.CustomControls
         protected override void OnCheckedChanged(EventArgs e)
         {
             base.OnCheckedChanged(e);
-            if (Checked)
-            {
-                if(_mouseIn)
-                {
-                    CheckedColor = CheckedColorMouseOver;
-                    CheckMarkColor = CheckMarkColorMouseOver;
-                }
-                else
-                {
-                    CheckedColor = _checkedTemp;
-                    CheckMarkColor = _checkMarkTemp;
-                }
-            }
-            else
-            {
-                if (_mouseIn)
-                {
-                    BoxColor = BoxColorMouseOver;
-                }
-                else
-                {
-                    BoxColor = _boxTemp;
-                }
-            }
+            Invalidate();
         }
         protected override void OnMouseEnter(EventArgs eventargs)
         {
             _mouseIn = true;
             base.OnMouseEnter(eventargs);
-            if(Checked)
-            {
-                _checkedTemp = CheckedColor;
-                CheckedColor = CheckedColorMouseOver;
-                _checkMarkTemp = CheckMarkColor;
-                CheckMarkColor = CheckMarkColorMouseOver; 
-                _boxTemp = BoxColor;
-            }
-            else
-            {
-                _boxTemp = BoxColor;
-                _checkedTemp = CheckedColor;
-                _checkMarkTemp = CheckMarkColor;
-                BoxColor = BoxColorMouseOver;
-            }
-            _borderTemp = BorderColor;
-            BorderColor = BorderColorMouseOver;
+            Invalidate();
         }
         protected override void OnMouseLeave(EventArgs eventargs)
         {
             _mouseIn= false;
-            base.OnMouseLeave(eventargs); if (Checked)
-            {
-                CheckedColor = _checkedTemp;
-                CheckMarkColor = _checkMarkTemp;
-            }
-            else
-            {
-                BoxColor = _boxTemp;
-            }
-            BorderColor = _borderTemp;
+            base.OnMouseLeave(eventargs);
+            Invalidate();
         }
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            if(FlatStyle == FlatStyle.Standard)
+            if (FlatStyle == FlatStyle.Standard)
             {
-                using (Pen p = new Pen(BorderColor, 1))
+                using (Pen p = new Pen(_mouseIn ? BorderColorMouseOver : BorderColor, 1))
                 {
                     //vymazat původní čtverec
                     if (!Checked)
@@ -204,7 +153,7 @@ namespace Ticketník.CustomControls
                         gp.AddRectangle(new Rectangle(0, 0, 14, 14));
                         e.Graphics.FillPath(new SolidBrush(BackColor), gp);
                         //vyplnit
-                        using (SolidBrush brush = new SolidBrush(BoxColor))
+                        using (SolidBrush brush = new SolidBrush(_mouseIn ? BoxColorMouseOver : BoxColor))
                         {
                             e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
                         }
@@ -215,22 +164,23 @@ namespace Ticketník.CustomControls
                         gp.AddRectangle(new Rectangle(0, 0, 14, 14));
                         e.Graphics.FillPath(new SolidBrush(BackColor), gp);
                         //vyplnit
-                        using (SolidBrush brush = new SolidBrush(CheckedColor))
+                        using (SolidBrush brush = new SolidBrush(_mouseIn ? CheckedColorMouseOver : CheckedColor))
                         {
                             e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
                         }
                         //udělat checkmark
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                        using(Pen chm = new Pen(CheckMarkColor, 1))
+                        using (Pen chm = new Pen(_mouseIn ? CheckMarkColorMouseOver : CheckMarkColor, 1))
                         {
                             e.Graphics.DrawLine(chm, 3, 7, 5, 9);
                             e.Graphics.DrawLine(chm, 5, 9, 9, 5);
                         }
                     }
                     //vytvořit rámeček
-                    e.Graphics.SmoothingMode= SmoothingMode.AntiAlias;
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.DrawPath(p, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
                 }
+
             }
         }
         private static GraphicsPath RoundedRect(Rectangle bounds, int radius1, int radius2, int radius3, int radius4)

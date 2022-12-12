@@ -8,9 +8,7 @@ namespace Ticketník.CustomControls
 {
     public class ComboBox : System.Windows.Forms.ComboBox
     {
-        private Color _borderTemp = Color.Gray;
-        private Color _buttonTemp = Color.LightGray;
-        private Color _arrowTemp = Color.Gray;
+        private bool _mouseIn = false;
 
         private Color borderColor = Color.Gray;
         [DefaultValue(typeof(Color), "Gray")]
@@ -98,20 +96,15 @@ namespace Ticketník.CustomControls
         }
         protected override void OnMouseEnter(EventArgs e)
         {
+            _mouseIn= true;
             base.OnMouseEnter(e);
-            _borderTemp = BorderColor;
-            BorderColor = BorderColorMouseOver;
-            _buttonTemp = ButtonColor;
-            ButtonColor = ButtonColorMouseOver;
-            _arrowTemp = ArrowColor;
-            ArrowColor = ArrowColorMouseOver;
+            Invalidate();
         }
         protected override void OnMouseLeave(EventArgs e)
         {
+            _mouseIn= false;
             base.OnMouseLeave(e);
-            BorderColor = _borderTemp;
-            ButtonColor = _buttonTemp;
-            ArrowColor = _arrowTemp;
+            Invalidate();
         }
         protected override void WndProc(ref Message m)
         {
@@ -121,12 +114,12 @@ namespace Ticketník.CustomControls
                 var dropDownButtonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
                 var outerBorder = new Rectangle(clientRect.Location,
                     new Size(clientRect.Width - 1, clientRect.Height - 1));
-                var innerBorder = new Rectangle(outerBorder.X + 1, outerBorder.Y + 1,
-                    outerBorder.Width - dropDownButtonWidth - 2, outerBorder.Height - 2);
+                var innerBorder = new Rectangle(outerBorder.X + 2, outerBorder.Y + 2,
+                    outerBorder.Width - dropDownButtonWidth - 3, outerBorder.Height - 3);
                 var innerInnerBorder = new Rectangle(innerBorder.X + 1, innerBorder.Y + 1,
                     innerBorder.Width - 2, innerBorder.Height - 2);
-                var dropDownRect = new Rectangle(innerBorder.Right + 1, innerBorder.Y,
-                    dropDownButtonWidth, innerBorder.Height + 1);
+                var dropDownRect = new Rectangle(innerBorder.Right + 1, innerBorder.Y - 1,
+                    dropDownButtonWidth, innerBorder.Height + 2);
                 if (RightToLeft == RightToLeft.Yes)
                 {
                     innerBorder.X = clientRect.Width - innerBorder.Right;
@@ -135,9 +128,9 @@ namespace Ticketník.CustomControls
                     dropDownRect.Width += 1;
                 }
                 var innerBorderColor = Enabled ? BackColor : SystemColors.Control;
-                var outerBorderColor = Enabled ? BorderColor : SystemColors.ControlDark; 
-                var arrowColor = Enabled ? ArrowColor : SystemColors.ControlDark;
-                var buttonColor = Enabled ? ButtonColor : SystemColors.Control;
+                var outerBorderColor = Enabled ? (_mouseIn ? BorderColorMouseOver : BorderColor) : SystemColors.ControlDark; 
+                var arrowColor = Enabled ? (_mouseIn ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark;
+                var buttonColor = Enabled ? (_mouseIn ? ButtonColorMouseOver : ButtonColor) : SystemColors.Control;
                 var middle = new Point(dropDownRect.Left + dropDownRect.Width / 2,
                     dropDownRect.Top + dropDownRect.Height / 2);
                 var arrow = new Point[]
@@ -177,10 +170,10 @@ namespace Ticketník.CustomControls
                     {
                         g.FillPolygon(b, arrow);
                     }
-                    using (var p = new Pen(innerBorderColor))
+                    using (var p = new Pen(innerBorderColor, 2))
                     {
                         g.DrawRectangle(p, innerBorder);
-                        g.DrawRectangle(p, innerInnerBorder);
+                        //g.DrawRectangle(p, innerInnerBorder);
                     }
                     using (var p = new Pen(outerBorderColor))
                     {

@@ -33,17 +33,17 @@
             this.checkBox1 = new Ticketník.CustomControls.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.poznamka = new System.Windows.Forms.TextBox();
-            this.kontakt = new System.Windows.Forms.TextBox();
+            this.poznamka = new Ticketník.CustomControls.TextBox();
+            this.kontakt = new Ticketník.CustomControls.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.popis = new System.Windows.Forms.TextBox();
+            this.popis = new Ticketník.CustomControls.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.zakaznik = new System.Windows.Forms.TextBox();
+            this.zakaznik = new Ticketník.CustomControls.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.TextBox();
+            this.id = new Ticketník.CustomControls.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pc = new System.Windows.Forms.TextBox();
+            this.pc = new Ticketník.CustomControls.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -352,17 +352,17 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox poznamka;
-        private System.Windows.Forms.TextBox kontakt;
+        private Ticketník.CustomControls.TextBox poznamka;
+        private Ticketník.CustomControls.TextBox kontakt;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox popis;
+        private Ticketník.CustomControls.TextBox popis;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox zakaznik;
+        private Ticketník.CustomControls.TextBox zakaznik;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox id;
+        private Ticketník.CustomControls.TextBox id;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox pc;
+        private Ticketník.CustomControls.TextBox pc;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -22,6 +22,20 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color arrowColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black")]
+        public Color ArrowColor
+        {
+            get { return arrowColor; }
+            set
+            {
+                if (arrowColor != value)
+                {
+                    arrowColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color buttonHighlightColor = Color.LightGray;
         [DefaultValue(typeof(Color), "LightGray")]
         public Color ButtonHighlightColor
@@ -165,8 +179,8 @@ namespace Ticketník.CustomControls
                                     });
                             }
                         }
-                        g.FillPolygon(Brushes.Black, GetUpArrow(r1));
-                        g.FillPolygon(Brushes.Black, GetDownArrow(r2));
+                        g.FillPolygon(new SolidBrush(((NumericUpDown)updown.Parent).ArrowColor), GetUpArrow(r1));
+                        g.FillPolygon(new SolidBrush(((NumericUpDown)updown.Parent).ArrowColor), GetDownArrow(r2));
                     }
                     m.Result = (IntPtr)1;
                     base.WndProc(ref m);

@@ -50,7 +50,7 @@ namespace Ticketník
         internal static void SetControlColor(object c)
         {
             string sMotiv = GetMotiv();
-
+            
             if (c.GetType() == typeof(Button))
             {
                 ((Button)c).BackColor = barvy[sMotiv]["pozadíControl"];
@@ -76,9 +76,10 @@ namespace Ticketník
             {
                 ((CustomControls.NumericUpDown)c).BackColor = barvy[sMotiv]["pozadíControl"];
                 ((CustomControls.NumericUpDown)c).ForeColor = barvy[sMotiv]["text"];
-                ((CustomControls.NumericUpDown)c).ButtonHighlightColor = barvy[sMotiv]["controlRámeček"];
+                ((CustomControls.NumericUpDown)c).ButtonHighlightColor = barvy[sMotiv]["controlOver"];
                 ((CustomControls.NumericUpDown)c).BorderColor = barvy[sMotiv]["controlRámeček"];
                 ((CustomControls.NumericUpDown)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
+                ((CustomControls.NumericUpDown)c).ArrowColor = barvy[sMotiv]["arrow"];
 
             }
             else if (c.GetType() == typeof(CustomControls.CheckBox))
@@ -88,6 +89,20 @@ namespace Ticketník
                 ((CustomControls.CheckBox)c).CheckedColor = barvy[sMotiv]["checkBoxChecked"];
                 ((CustomControls.CheckBox)c).BoxColorMouseOver = barvy[sMotiv]["controlOver"];
                 ((CustomControls.CheckBox)c).CheckedColorMouseOver = barvy[sMotiv]["checkBoxCheckedOver"];
+            }
+            else if (c.GetType() == typeof(CustomControls.RadioButton))
+            {
+                ((CustomControls.RadioButton)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
+                ((CustomControls.RadioButton)c).BoxColor = barvy[sMotiv]["checkBox"];
+                ((CustomControls.RadioButton)c).BoxColorMouseOver = barvy[sMotiv]["controlOver"];
+            }
+            else if (c.GetType() == typeof(CustomControls.TextBox))
+            {
+                ((CustomControls.TextBox)c).BorderStyle = BorderStyle.FixedSingle;
+                ((CustomControls.TextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((CustomControls.TextBox)c).ForeColor = barvy[sMotiv]["text"];
+                ((CustomControls.TextBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
+                ((CustomControls.TextBox)c).BorderColorMouseOver = Color.DodgerBlue;
             }
             else if (c.GetType() == typeof(ListView))
             {
@@ -134,10 +149,15 @@ namespace Ticketník
             {
                 ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
                 ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                
+            }
+
+            if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) && c.GetType() != typeof(ToolStripDropDownItem))
+            {
                 foreach (Control cc in ((Control)c).Controls)
                 {
                     //barvy v nastavení
-                    if (cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
+                    if (cc.GetType() != typeof(Label) && cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
                                 cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
                         SetControlColor(cc);
                 }

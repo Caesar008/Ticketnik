@@ -34,7 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new Ticketník.CustomControls.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new Ticketník.CustomControls.TextBox();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -134,6 +134,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         internal Ticketník.CustomControls.ComboBox comboBox1;
-        internal System.Windows.Forms.TextBox textBox1;
+        internal Ticketník.CustomControls.TextBox textBox1;
     }
 }

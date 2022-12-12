@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cesta_k_souboru = new System.Windows.Forms.TextBox();
+            this.cesta_k_souboru = new Ticketník.CustomControls.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.update_cesta = new System.Windows.Forms.TextBox();
+            this.update_cesta = new Ticketník.CustomControls.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.zalozni_update = new System.Windows.Forms.TextBox();
+            this.zalozni_update = new Ticketník.CustomControls.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.novyExport = new Ticketník.CustomControls.CheckBox();
@@ -143,11 +143,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox cesta_k_souboru;
+        private Ticketník.CustomControls.TextBox cesta_k_souboru;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox update_cesta;
+        private Ticketník.CustomControls.TextBox update_cesta;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox zalozni_update;
+        private Ticketník.CustomControls.TextBox zalozni_update;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private Ticketník.CustomControls.CheckBox novyExport;

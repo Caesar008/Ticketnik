@@ -680,6 +680,7 @@ namespace Ticketník
             groupBox6.Paint += new PaintEventHandler(groupBox_Paint);
             
             Motiv.SetMotiv(this);
+            Motiv.SetControlColor(prescas);
         }
 
         private void stavTicketu_SelectedIndexChanged(object sender, EventArgs e)
