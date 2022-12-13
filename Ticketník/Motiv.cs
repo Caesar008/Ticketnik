@@ -98,7 +98,7 @@ namespace Ticketník
             }
             else if (c.GetType() == typeof(CustomControls.TextBox))
             {
-                ((CustomControls.TextBox)c).BorderStyle = BorderStyle.FixedSingle;
+                //((CustomControls.TextBox)c).BorderStyle = BorderStyle.FixedSingle;
                 ((CustomControls.TextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
                 ((CustomControls.TextBox)c).ForeColor = barvy[sMotiv]["text"];
                 ((CustomControls.TextBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
