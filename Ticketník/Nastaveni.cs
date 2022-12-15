@@ -296,7 +296,7 @@ namespace Ticketník
             checkBox1.Text = form.jazyk.Windows_Nastaveni_ZjednodusenyCas;
             this.Text = form.jazyk.Windows_Nastaveni_Nastaveni;
             groupBox1.Text = form.jazyk.Windows_Nastaveni_BarvyTicketu;
-            clr_ceka.Text = clr_odpoved.Text = clr_probiha.Text = clr_vyreseno.Text = crl_rdp.Text = zmenHigh.Text = zmenLow.Text = zmenMid.Text = zmenOK.Text = form.jazyk.Windows_Nastaveni_Zmen;
+            clr_ceka.Text = clr_odpoved.Text = clr_probiha.Text = clr_vyreseno.Text = crl_rdp.Text = clr_prescas.Text = zmenHigh.Text = zmenLow.Text = zmenMid.Text = zmenOK.Text = form.jazyk.Windows_Nastaveni_Zmen;
             vyreseno.Text = form.jazyk.Windows_Nastaveni_Vyreseno;
             ceka.Text = form.jazyk.Windows_Nastaveni_CekaSe;
             odpoved.Text = form.jazyk.Windows_Nastaveni_CekaSeNaOdpoved;
