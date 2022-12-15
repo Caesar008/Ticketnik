@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
@@ -78,7 +73,7 @@ namespace Ticketník.CustomControls
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
-            if (m.Msg == WM_NCPAINT)
+            if (m.Msg == Messages.OnFramePaint)
             {
                 var dc = GetWindowDC(Handle);
                 using (Pen p = new Pen((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor, 1))
@@ -114,6 +109,5 @@ namespace Ticketník.CustomControls
         private static extern IntPtr GetWindowDC(IntPtr hwnd);
         [DllImport("user32.dll")]
         static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC); 
-        private const int WM_NCPAINT = 0x85;
     }
 }
