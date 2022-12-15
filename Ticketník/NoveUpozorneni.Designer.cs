@@ -30,7 +30,7 @@
         {
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new Ticketník.CustomControls.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new Ticketník.CustomControls.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -129,7 +129,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private Ticketník.CustomControls.Button button1;
         internal System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

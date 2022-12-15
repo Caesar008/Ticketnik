@@ -148,7 +148,7 @@ namespace Ticketník.CustomControls
             }
             protected override void WndProc(ref Message m)
             {
-                if (m.Msg == 0xF /*WM_PAINT*/ && ((NumericUpDown)updown.Parent).BorderStyle == BorderStyle.FixedSingle)
+                if (m.Msg == Messages.OnPaint && ((NumericUpDown)updown.Parent).BorderStyle == BorderStyle.FixedSingle)
                 {
                     var s = new PAINTSTRUCT();
                     IntBeginPaint(updown.Handle, ref s);
@@ -186,7 +186,7 @@ namespace Ticketník.CustomControls
                     base.WndProc(ref m);
                     IntEndPaint(updown.Handle, ref s);
                 }
-                else if (m.Msg == 0x0014/*WM_ERASEBKGND*/)
+                else if (m.Msg == Messages.OnEraseBackground)
                 {
                     using (var g = Graphics.FromHdcInternal(m.WParam))
                         g.FillRectangle(Brushes.White, updown.ClientRectangle);

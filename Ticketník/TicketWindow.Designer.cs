@@ -38,15 +38,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.search_btn = new System.Windows.Forms.Button();
+            this.search_btn = new Ticketník.CustomControls.Button();
             this.popis = new Ticketník.CustomControls.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cas = new Ticketník.CustomControls.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.upravit = new System.Windows.Forms.Button();
-            this.smazat = new System.Windows.Forms.Button();
-            this.pridat = new System.Windows.Forms.Button();
+            this.upravit = new Ticketník.CustomControls.Button();
+            this.smazat = new Ticketník.CustomControls.Button();
+            this.pridat = new Ticketník.CustomControls.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pauzaDo = new Ticketník.CustomControls.TextBox();
             this.pauzaOd = new Ticketník.CustomControls.TextBox();
@@ -62,15 +62,15 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.newTerpTaskPanel = new System.Windows.Forms.Panel();
-            this.btn_TicketWindow_SearchTerp = new System.Windows.Forms.Button();
-            this.btn_TicketWindow_UpdateSelected = new System.Windows.Forms.Button();
+            this.btn_TicketWindow_SearchTerp = new Ticketník.CustomControls.Button();
+            this.btn_TicketWindow_UpdateSelected = new Ticketník.CustomControls.Button();
             this.lbl_TicketWindow_onlineType = new System.Windows.Forms.Label();
             this.lbl_TicketWindow_onlineTask = new System.Windows.Forms.Label();
             this.onlineTypeComboBox = new Ticketník.CustomControls.ComboBox();
             this.onlineTaskComboBox = new Ticketník.CustomControls.ComboBox();
             this.lbl_TicketWindow_onlineTerp = new System.Windows.Forms.Label();
             this.onlineTerpDropDown = new Ticketník.CustomControls.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new Ticketník.CustomControls.Button();
             this.nahradni = new Ticketník.CustomControls.RadioButton();
             this.volno = new Ticketník.CustomControls.RadioButton();
             this.popisTypu = new System.Windows.Forms.Label();
@@ -88,7 +88,7 @@
             this.stavTicketu = new Ticketník.CustomControls.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.ok = new System.Windows.Forms.Button();
+            this.ok = new Ticketník.CustomControls.Button();
             this.datum = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -462,14 +462,14 @@
             this.newTerpTaskPanel.Controls.Add(this.onlineTaskComboBox);
             this.newTerpTaskPanel.Controls.Add(this.lbl_TicketWindow_onlineTerp);
             this.newTerpTaskPanel.Controls.Add(this.onlineTerpDropDown);
-            this.newTerpTaskPanel.Location = new System.Drawing.Point(4, 46);
+            this.newTerpTaskPanel.Location = new System.Drawing.Point(3, 46);
             this.newTerpTaskPanel.Name = "newTerpTaskPanel";
             this.newTerpTaskPanel.Size = new System.Drawing.Size(277, 106);
             this.newTerpTaskPanel.TabIndex = 18;
             // 
             // btn_TicketWindow_SearchTerp
             // 
-            this.btn_TicketWindow_SearchTerp.Location = new System.Drawing.Point(137, 83);
+            this.btn_TicketWindow_SearchTerp.Location = new System.Drawing.Point(137, 82);
             this.btn_TicketWindow_SearchTerp.Name = "btn_TicketWindow_SearchTerp";
             this.btn_TicketWindow_SearchTerp.Size = new System.Drawing.Size(138, 23);
             this.btn_TicketWindow_SearchTerp.TabIndex = 7;
@@ -481,7 +481,7 @@
             // 
             // btn_TicketWindow_UpdateSelected
             // 
-            this.btn_TicketWindow_UpdateSelected.Location = new System.Drawing.Point(2, 83);
+            this.btn_TicketWindow_UpdateSelected.Location = new System.Drawing.Point(2, 82);
             this.btn_TicketWindow_UpdateSelected.Name = "btn_TicketWindow_UpdateSelected";
             this.btn_TicketWindow_UpdateSelected.Size = new System.Drawing.Size(130, 23);
             this.btn_TicketWindow_UpdateSelected.TabIndex = 6;
@@ -495,7 +495,7 @@
             // 
             this.lbl_TicketWindow_onlineType.AutoSize = true;
             this.lbl_TicketWindow_onlineType.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_TicketWindow_onlineType.Location = new System.Drawing.Point(5, 60);
+            this.lbl_TicketWindow_onlineType.Location = new System.Drawing.Point(3, 60);
             this.lbl_TicketWindow_onlineType.Name = "lbl_TicketWindow_onlineType";
             this.lbl_TicketWindow_onlineType.Size = new System.Drawing.Size(25, 13);
             this.lbl_TicketWindow_onlineType.TabIndex = 5;
@@ -505,7 +505,7 @@
             // 
             this.lbl_TicketWindow_onlineTask.AutoSize = true;
             this.lbl_TicketWindow_onlineTask.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_TicketWindow_onlineTask.Location = new System.Drawing.Point(5, 33);
+            this.lbl_TicketWindow_onlineTask.Location = new System.Drawing.Point(3, 33);
             this.lbl_TicketWindow_onlineTask.Name = "lbl_TicketWindow_onlineTask";
             this.lbl_TicketWindow_onlineTask.Size = new System.Drawing.Size(31, 13);
             this.lbl_TicketWindow_onlineTask.TabIndex = 4;
@@ -515,7 +515,7 @@
             // 
             this.onlineTypeComboBox.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.onlineTypeComboBox.FormattingEnabled = true;
-            this.onlineTypeComboBox.Location = new System.Drawing.Point(99, 57);
+            this.onlineTypeComboBox.Location = new System.Drawing.Point(100, 57);
             this.onlineTypeComboBox.Name = "onlineTypeComboBox";
             this.onlineTypeComboBox.Size = new System.Drawing.Size(175, 21);
             this.onlineTypeComboBox.TabIndex = 3;
@@ -527,7 +527,7 @@
             // 
             this.onlineTaskComboBox.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.onlineTaskComboBox.FormattingEnabled = true;
-            this.onlineTaskComboBox.Location = new System.Drawing.Point(99, 30);
+            this.onlineTaskComboBox.Location = new System.Drawing.Point(100, 30);
             this.onlineTaskComboBox.Name = "onlineTaskComboBox";
             this.onlineTaskComboBox.Size = new System.Drawing.Size(175, 21);
             this.onlineTaskComboBox.TabIndex = 2;
@@ -539,7 +539,7 @@
             // 
             this.lbl_TicketWindow_onlineTerp.AutoSize = true;
             this.lbl_TicketWindow_onlineTerp.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_TicketWindow_onlineTerp.Location = new System.Drawing.Point(5, 6);
+            this.lbl_TicketWindow_onlineTerp.Location = new System.Drawing.Point(3, 6);
             this.lbl_TicketWindow_onlineTerp.Name = "lbl_TicketWindow_onlineTerp";
             this.lbl_TicketWindow_onlineTerp.Size = new System.Drawing.Size(29, 13);
             this.lbl_TicketWindow_onlineTerp.TabIndex = 1;
@@ -549,7 +549,7 @@
             // 
             this.onlineTerpDropDown.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.onlineTerpDropDown.FormattingEnabled = true;
-            this.onlineTerpDropDown.Location = new System.Drawing.Point(99, 3);
+            this.onlineTerpDropDown.Location = new System.Drawing.Point(100, 3);
             this.onlineTerpDropDown.Name = "onlineTerpDropDown";
             this.onlineTerpDropDown.Size = new System.Drawing.Size(175, 21);
             this.onlineTerpDropDown.TabIndex = 0;
@@ -560,7 +560,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 130);
+            this.button1.Location = new System.Drawing.Point(6, 129);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 23);
             this.button1.TabIndex = 17;
@@ -858,9 +858,9 @@
         internal Ticketník.CustomControls.TextBox pocitac;
         internal Ticketník.CustomControls.TextBox kontakt;
         internal Ticketník.CustomControls.TextBox konec;
-        internal System.Windows.Forms.Button upravit;
-        internal System.Windows.Forms.Button smazat;
-        internal System.Windows.Forms.Button pridat;
+        internal Ticketník.CustomControls.Button upravit;
+        internal Ticketník.CustomControls.Button smazat;
+        internal Ticketník.CustomControls.Button pridat;
         internal Ticketník.CustomControls.TextBox pauzaDo;
         internal Ticketník.CustomControls.TextBox pauzaOd;
         internal Ticketník.CustomControls.RadioButton normalni;
@@ -871,11 +871,11 @@
         internal Ticketník.CustomControls.RadioButton nahradni;
         internal Ticketník.CustomControls.TextBox popis;
         internal System.Windows.Forms.ListView listView1;
-        internal System.Windows.Forms.Button ok;
+        internal Ticketník.CustomControls.Button ok;
         internal Ticketník.CustomControls.ComboBox cas;
         internal System.Windows.Forms.Label terpKod;
-        private System.Windows.Forms.Button search_btn;
-        internal System.Windows.Forms.Button button1;
+        private Ticketník.CustomControls.Button search_btn;
+        internal Ticketník.CustomControls.Button button1;
         internal System.Windows.Forms.DateTimePicker datum;
         private System.Windows.Forms.Panel newTerpTaskPanel;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineType;
@@ -884,7 +884,7 @@
         internal Ticketník.CustomControls.ComboBox onlineTypeComboBox;
         internal Ticketník.CustomControls.ComboBox onlineTaskComboBox;
         internal Ticketník.CustomControls.ComboBox onlineTerpDropDown;
-        internal System.Windows.Forms.Button btn_TicketWindow_SearchTerp;
-        internal System.Windows.Forms.Button btn_TicketWindow_UpdateSelected;
+        internal Ticketník.CustomControls.Button btn_TicketWindow_SearchTerp;
+        internal Ticketník.CustomControls.Button btn_TicketWindow_UpdateSelected;
     }
 }

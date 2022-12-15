@@ -51,15 +51,16 @@ namespace Ticketník
         {
             string sMotiv = GetMotiv();
             
-            if (c.GetType() == typeof(Button))
+            if (c.GetType() == typeof(CustomControls.Button))
             {
-                ((Button)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((Button)c).ForeColor = barvy[sMotiv]["text"];
-                ((Button)c).FlatStyle = FlatStyle.Flat;
-                ((Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["controlRámeček"];
-                ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
-                ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
-
+                ((CustomControls.Button)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((CustomControls.Button)c).ForeColor = barvy[sMotiv]["text"];
+                ((CustomControls.Button)c).FlatStyle = FlatStyle.Flat;
+                ((CustomControls.Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["controlRámeček"];
+                ((CustomControls.Button)c).FlatAppearance.BorderSize = 1;
+                ((CustomControls.Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
+                ((CustomControls.Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
+                ((CustomControls.Button)c).BorderColorMouseOver = Color.DodgerBlue;
             }
             else if (c.GetType() == typeof(CustomControls.ComboBox))
             {

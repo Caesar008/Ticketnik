@@ -33,7 +33,7 @@
             this.radioButton3 = new Ticketník.CustomControls.RadioButton();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new Ticketník.CustomControls.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
@@ -135,7 +135,7 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Button button1;
+        private Ticketník.CustomControls.Button button1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

@@ -35,7 +35,7 @@
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelCompanyName = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.RichTextBox();
-            this.okButton = new System.Windows.Forms.Button();
+            this.okButton = new Ticketník.CustomControls.Button();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -187,6 +187,6 @@
         private System.Windows.Forms.Label labelCopyright;
         private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.RichTextBox textBoxDescription;
-        private System.Windows.Forms.Button okButton;
+        private Ticketník.CustomControls.Button okButton;
     }
 }

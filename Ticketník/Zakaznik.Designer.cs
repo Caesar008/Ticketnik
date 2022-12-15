@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new Ticketník.CustomControls.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new Ticketník.CustomControls.Button();
+            this.button2 = new Ticketník.CustomControls.Button();
             this.comboBox1 = new Ticketník.CustomControls.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -156,8 +156,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private Ticketník.CustomControls.Button button1;
+        private Ticketník.CustomControls.Button button2;
         private System.Windows.Forms.Label label2;
         internal Ticketník.CustomControls.TextBox textBox1;
         internal Ticketník.CustomControls.ComboBox comboBox1;

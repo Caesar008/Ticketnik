@@ -75,19 +75,6 @@ namespace Ticketník.CustomControls
             base.OnMouseLeave(e);
             Invalidate();
         }
-
-        /*protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            if(BorderStyle == BorderStyle.FixedSingle)
-            {
-                using (Pen p = new Pen((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor))
-                {
-                    e.Graphics.DrawRectangle(p, 0, 0, Width-1, Height-1);
-                }
-            }
-        }
-        */
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);

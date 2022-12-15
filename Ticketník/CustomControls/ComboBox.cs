@@ -108,7 +108,7 @@ namespace Ticketník.CustomControls
         }
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_PAINT && DropDownStyle != ComboBoxStyle.Simple)
+            if (m.Msg == Messages.OnPaint && DropDownStyle != ComboBoxStyle.Simple)
             {
                 var clientRect = ClientRectangle;
                 var dropDownButtonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
@@ -188,7 +188,6 @@ namespace Ticketník.CustomControls
                 base.WndProc(ref m);
         }
 
-        private const int WM_PAINT = 0xF;
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {

@@ -28,28 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bterp = new System.Windows.Forms.Button();
-            this.btask = new System.Windows.Forms.Button();
+            this.bterp = new Ticketník.CustomControls.Button();
+            this.btask = new Ticketník.CustomControls.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new Ticketník.CustomControls.TextBox();
             this.textBox2 = new Ticketník.CustomControls.TextBox();
             this.upravitPan = new System.Windows.Forms.Panel();
-            this.novyTaskB = new System.Windows.Forms.Button();
+            this.novyTaskB = new Ticketník.CustomControls.Button();
             this.novyTask = new Ticketník.CustomControls.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.staryTask = new Ticketník.CustomControls.ComboBox();
-            this.novyTerpB = new System.Windows.Forms.Button();
+            this.novyTerpB = new Ticketník.CustomControls.Button();
             this.novyTerp = new Ticketník.CustomControls.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.staryTerp = new Ticketník.CustomControls.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.smazatTask = new System.Windows.Forms.Button();
-            this.smazatTerp = new System.Windows.Forms.Button();
+            this.smazatTask = new Ticketník.CustomControls.Button();
+            this.smazatTerp = new Ticketník.CustomControls.Button();
             this.taskList = new Ticketník.CustomControls.ComboBox();
             this.terpList = new Ticketník.CustomControls.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new Ticketník.CustomControls.Button();
             this.taskListTic = new Ticketník.CustomControls.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -345,30 +345,30 @@
 
         #endregion
 
-        private System.Windows.Forms.Button bterp;
-        private System.Windows.Forms.Button btask;
+        private Ticketník.CustomControls.Button bterp;
+        private Ticketník.CustomControls.Button btask;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private Ticketník.CustomControls.TextBox textBox1;
         private Ticketník.CustomControls.TextBox textBox2;
         private System.Windows.Forms.Panel upravitPan;
-        private System.Windows.Forms.Button novyTerpB;
+        private Ticketník.CustomControls.Button novyTerpB;
         private Ticketník.CustomControls.TextBox novyTerp;
         private System.Windows.Forms.Label label3;
         private Ticketník.CustomControls.ComboBox staryTerp;
-        private System.Windows.Forms.Button novyTaskB;
+        private Ticketník.CustomControls.Button novyTaskB;
         private Ticketník.CustomControls.TextBox novyTask;
         private System.Windows.Forms.Label label4;
         private Ticketník.CustomControls.ComboBox staryTask;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button smazatTask;
-        private System.Windows.Forms.Button smazatTerp;
+        private Ticketník.CustomControls.Button smazatTask;
+        private Ticketník.CustomControls.Button smazatTerp;
         private Ticketník.CustomControls.ComboBox taskList;
         private Ticketník.CustomControls.ComboBox terpList;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private Ticketník.CustomControls.Button button1;
         internal Ticketník.CustomControls.ComboBox taskListTic;
         internal Ticketník.CustomControls.ComboBox terpListTic;
     }

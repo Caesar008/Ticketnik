@@ -363,7 +363,7 @@
             this.languageManager = new System.Windows.Forms.TabPage();
             this.errors = new System.Windows.Forms.TabPage();
             this.messages = new System.Windows.Forms.TabPage();
-            this.save = new System.Windows.Forms.Button();
+            this.save = new Ticketník.CustomControls.Button();
             this.settings_onlineTerp = new Ticketník.CustomControls.TextBox();
             this.lbl_settings_onlineTerp = new System.Windows.Forms.Label();
             this.tabList.SuspendLayout();
@@ -3597,7 +3597,7 @@
         private Ticketník.CustomControls.TextBox mainMenu_options;
         private Ticketník.CustomControls.TextBox mainMenu_file;
         private System.Windows.Forms.Label lbl_File;
-        private System.Windows.Forms.Button save;
+        private Ticketník.CustomControls.Button save;
         private System.Windows.Forms.Label lbl_documentation;
         private Ticketník.CustomControls.TextBox mainMenu_documentation;
         private System.Windows.Forms.Label lbl_notification;
