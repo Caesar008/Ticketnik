@@ -33,6 +33,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.clr_prescas = new Ticketník.CustomControls.Button();
             this.prescas = new System.Windows.Forms.Label();
+            this.button1 = new Ticketník.CustomControls.Button();
             this.probiha = new System.Windows.Forms.Label();
             this.rdp = new System.Windows.Forms.Label();
             this.odpoved = new System.Windows.Forms.Label();
@@ -54,17 +55,16 @@
             this.zmenOK = new Ticketník.CustomControls.Button();
             this.zmenMid = new Ticketník.CustomControls.Button();
             this.zmenLow = new Ticketník.CustomControls.Button();
+            this.celkovyCasZobrazit = new Ticketník.CustomControls.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.jazykPopis = new System.Windows.Forms.Label();
+            this.jazyk = new Ticketník.CustomControls.ComboBox();
             this.zmenitJazyk = new Ticketník.CustomControls.Button();
             this.skryteNastaveni = new Ticketník.CustomControls.Button();
             this.button2 = new Ticketník.CustomControls.Button();
             this.motiv = new System.Windows.Forms.Label();
             this.motivVyber = new Ticketník.CustomControls.ComboBox();
             this.onlineTerp = new Ticketník.CustomControls.CheckBox();
-            this.jazyk = new Ticketník.CustomControls.ComboBox();
-            this.celkovyCasZobrazit = new Ticketník.CustomControls.CheckBox();
-            this.button1 = new Ticketník.CustomControls.Button();
             this.checkBox1 = new Ticketník.CustomControls.CheckBox();
             this.numericUpDown1 = new Ticketník.CustomControls.NumericUpDown();
             this.autosave = new Ticketník.CustomControls.CheckBox();
@@ -142,6 +142,22 @@
             this.prescas.TabIndex = 11;
             this.prescas.Text = "Přesčas";
             this.prescas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Window;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button1.Location = new System.Drawing.Point(6, 192);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(193, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Default";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.button1.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // probiha
             // 
@@ -428,6 +444,23 @@
             this.zmenLow.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.zmenLow.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
+            // celkovyCasZobrazit
+            // 
+            this.celkovyCasZobrazit.AutoSize = true;
+            this.celkovyCasZobrazit.BoxColor = System.Drawing.SystemColors.Window;
+            this.celkovyCasZobrazit.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
+            this.celkovyCasZobrazit.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(184)))));
+            this.celkovyCasZobrazit.CheckedColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(110)))), ((int)(((byte)(191)))));
+            this.celkovyCasZobrazit.Location = new System.Drawing.Point(6, 19);
+            this.celkovyCasZobrazit.Name = "celkovyCasZobrazit";
+            this.celkovyCasZobrazit.Size = new System.Drawing.Size(140, 17);
+            this.celkovyCasZobrazit.TabIndex = 0;
+            this.celkovyCasZobrazit.Text = "Zobrazovat celkový čas";
+            this.celkovyCasZobrazit.UseVisualStyleBackColor = true;
+            this.celkovyCasZobrazit.CheckedChanged += new System.EventHandler(this.celkovyCasZobrazit_CheckedChanged);
+            this.celkovyCasZobrazit.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.celkovyCasZobrazit.MouseLeave += new System.EventHandler(this.event_MouseLeave);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.jazykPopis);
@@ -449,10 +482,26 @@
             this.jazykPopis.Text = "Int. jazyk a verze";
             this.jazykPopis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // jazyk
+            // 
+            this.jazyk.BorderColor = System.Drawing.Color.LightGray;
+            this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
+            this.jazyk.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jazyk.FormattingEnabled = true;
+            this.jazyk.Location = new System.Drawing.Point(6, 19);
+            this.jazyk.Name = "jazyk";
+            this.jazyk.Size = new System.Drawing.Size(146, 21);
+            this.jazyk.TabIndex = 1;
+            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
+            this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
+            this.jazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
+            // 
             // zmenitJazyk
             // 
-            this.zmenitJazyk.BackColor = System.Drawing.SystemColors.Window;
-            this.zmenitJazyk.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.zmenitJazyk.BackColor = System.Drawing.Color.Gainsboro;
+            this.zmenitJazyk.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.zmenitJazyk.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.zmenitJazyk.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.zmenitJazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -541,55 +590,6 @@
             this.onlineTerp.CheckedChanged += new System.EventHandler(this.onlineTerp_CheckedChanged);
             this.onlineTerp.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.onlineTerp.MouseLeave += new System.EventHandler(this.event_MouseLeave);
-            // 
-            // jazyk
-            // 
-            this.jazyk.BorderColor = System.Drawing.Color.LightGray;
-            this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
-            this.jazyk.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.jazyk.FormattingEnabled = true;
-            this.jazyk.Location = new System.Drawing.Point(6, 19);
-            this.jazyk.Name = "jazyk";
-            this.jazyk.Size = new System.Drawing.Size(146, 21);
-            this.jazyk.TabIndex = 1;
-            this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
-            this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
-            this.jazyk.MouseLeave += new System.EventHandler(this.event_MouseLeave);
-            // 
-            // celkovyCasZobrazit
-            // 
-            this.celkovyCasZobrazit.AutoSize = true;
-            this.celkovyCasZobrazit.BoxColor = System.Drawing.SystemColors.Window;
-            this.celkovyCasZobrazit.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
-            this.celkovyCasZobrazit.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(184)))));
-            this.celkovyCasZobrazit.CheckedColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(110)))), ((int)(((byte)(191)))));
-            this.celkovyCasZobrazit.Location = new System.Drawing.Point(6, 19);
-            this.celkovyCasZobrazit.Name = "celkovyCasZobrazit";
-            this.celkovyCasZobrazit.Size = new System.Drawing.Size(140, 17);
-            this.celkovyCasZobrazit.TabIndex = 0;
-            this.celkovyCasZobrazit.Text = "Zobrazovat celkový čas";
-            this.celkovyCasZobrazit.UseVisualStyleBackColor = true;
-            this.celkovyCasZobrazit.CheckedChanged += new System.EventHandler(this.celkovyCasZobrazit_CheckedChanged);
-            this.celkovyCasZobrazit.MouseEnter += new System.EventHandler(this.event_MouseEnter);
-            this.celkovyCasZobrazit.MouseLeave += new System.EventHandler(this.event_MouseLeave);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Window;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button1.Location = new System.Drawing.Point(6, 192);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Default";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.event_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // checkBox1
             // 

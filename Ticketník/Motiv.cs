@@ -11,26 +11,28 @@ namespace Ticketník
         {
             { "světlý", new Dictionary<string, Color>()
                 {
-                    { "pozadí", SystemColors.Control },
-                    { "text", SystemColors.ControlText },
+                    { "pozadí", Color.FromArgb(240, 240, 240)/*SystemColors.Control*/ },
+                    { "text", Color.Black/*SystemColors.ControlText*/ },
                     { "rámeček", Color.Gainsboro },
-                    { "pozadíControl", SystemColors.Window },
+                    { "pozadíControl", Color.White/*SystemColors.Window*/ },
                     { "arrow", Color.Black },
                     { "controlRámeček", Color.LightGray },
-                    { "controlOver", SystemColors.GradientInactiveCaption },
-                    { "pozadíControlPush", SystemColors.GradientActiveCaption },
-                    { "pozadíDisabled", SystemColors.Control },
-                    { "checkBox", SystemColors.Window },
+                    { "controlOver", Color.FromArgb(215, 228, 242)/*SystemColors.GradientInactiveCaption*/ },
+                    { "pozadíControlPush", Color.FromArgb(185, 209, 234)/*SystemColors.GradientActiveCaption*/ },
+                    { "pozadíDisabled", Color.FromArgb(240, 240, 240)/*SystemColors.Control*/ },
+                    { "checkBox", Color.White/*SystemColors.Window*/ },
                     { "checkBoxRámeček", Color.Gray },
                     { "checkBoxChecked", Color.FromArgb(0, 95, 184) },
                     { "checkBoxCheckedOver", Color.FromArgb(25, 110, 191) },
-                    { "disabledText", SystemColors.ControlDark }
+                    { "disabledText", Color.FromArgb(160,160,160)/*SystemColors.ControlDark*/ },
+                    { "button", Color.Gainsboro },
+                    { "buttonBorder", Color.DarkGray }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
                 {
                     { "pozadí", Color.FromArgb(30, 30, 30) },
-                    { "text", SystemColors.Control },
+                    { "text", Color.FromArgb(240, 240, 240)/*SystemColors.Control*/ },
                     { "rámeček", Color.FromArgb(70, 70, 70) },
                     { "pozadíControl", Color.FromArgb(50, 50, 50) },
                     { "arrow", Color.DimGray },
@@ -42,7 +44,9 @@ namespace Ticketník
                     { "checkBoxRámeček", Color.DimGray },
                     { "checkBoxChecked", Color.FromArgb(0, 95, 184) },
                     { "checkBoxCheckedOver", Color.FromArgb(25, 110, 191) },
-                    { "disabledText", SystemColors.ControlDarkDark }
+                    { "disabledText", Color.FromArgb(105, 105, 105 ) /*SystemColors.ControlDarkDark*/},
+                    { "button", Color.FromArgb(50, 50, 50) },
+                    { "buttonBorder", Color.DimGray }
                 }
             }
         };
@@ -53,10 +57,10 @@ namespace Ticketník
             
             if (c.GetType() == typeof(CustomControls.Button))
             {
-                ((CustomControls.Button)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((CustomControls.Button)c).BackColor = barvy[sMotiv]["button"];
                 ((CustomControls.Button)c).ForeColor = barvy[sMotiv]["text"];
                 ((CustomControls.Button)c).FlatStyle = FlatStyle.Flat;
-                ((CustomControls.Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["controlRámeček"];
+                ((CustomControls.Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["buttonBorder"];
                 ((CustomControls.Button)c).FlatAppearance.BorderSize = 1;
                 ((CustomControls.Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
                 ((CustomControls.Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
@@ -64,11 +68,12 @@ namespace Ticketník
             }
             else if (c.GetType() == typeof(CustomControls.ComboBox))
             {
+                //((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["button"];
                 ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
                 ((CustomControls.ComboBox)c).ForeColor = barvy[sMotiv]["text"];
                 ((CustomControls.ComboBox)c).FlatStyle = FlatStyle.Flat;
-                ((CustomControls.ComboBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
-                ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["pozadíControl"];
+                ((CustomControls.ComboBox)c).BorderColor = barvy[sMotiv]["buttonBorder"];
+                ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["button"];
                 ((CustomControls.ComboBox)c).ArrowColor = barvy[sMotiv]["arrow"];
                 ((CustomControls.ComboBox)c).BorderColorMouseOver = Color.DodgerBlue;
                 ((CustomControls.ComboBox)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
