@@ -5,6 +5,39 @@ using System.Windows.Forms;
 
 namespace Ticketník
 {
+    public class Paleta : ProfessionalColorTable
+    {
+        public override Color MenuBorder
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("buttonBorder");
+            }
+        }
+
+        public override Color MenuStripGradientBegin
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+
+        public override Color MenuStripGradientEnd
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("checkBox");
+            }
+        }
+        public override Color ToolStripDropDownBackground
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("checkBox");
+            }
+        }
+    }
     internal static class Motiv
     {
         internal static readonly Dictionary<string, Dictionary<string, Color>> barvy = new Dictionary<string, Dictionary<string, Color>>()
@@ -118,38 +151,45 @@ namespace Ticketník
             }
             else if (c.GetType() == typeof(MenuStrip))
             {
-                ((MenuStrip)c).BackColor = barvy[sMotiv]["pozadí"];
                 ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
-                foreach (object tsdi in ((MenuStrip)c).Items)
-                {
-                    if (tsdi.GetType() == typeof(ToolStripMenuItem))
-                    {
-                        SetControlColor(tsdi);
-                    }
-                }
+                /* ((MenuStrip)c).BackColor = barvy[sMotiv]["pozadí"];
+                 ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
+                 foreach (object tsdi in ((MenuStrip)c).Items)
+                 {
+                     if (tsdi.GetType() == typeof(ToolStripMenuItem))
+                     {
+                         SetControlColor(tsdi);
+                     }
+                 }*/
             }
             else if (c.GetType() == typeof(ToolStripDropDownItem))
             {
-                ((ToolStripDropDownItem)c).BackColor = barvy[sMotiv]["pozadí"];
                 ((ToolStripDropDownItem)c).ForeColor = barvy[sMotiv]["text"];
+                /*((ToolStripDropDownItem)c).BackColor = barvy[sMotiv]["pozadí"];
                 foreach (object tsdi in ((ToolStripDropDownItem)c).DropDownItems)
                 {
                     SetControlColor(tsdi);
-                }
+                }*/
             }
             else if (c.GetType() == typeof(ToolStripMenuItem))
             {
-                ((ToolStripMenuItem)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
+                /*((ToolStripMenuItem)c).BackColor = barvy[sMotiv]["pozadí"];
                 ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
                 foreach (object tsdi in ((ToolStripMenuItem)c).DropDownItems)
                 {
                     SetControlColor(tsdi);
-                }
+                }*/
             }
             else if (c.GetType() == typeof(ToolStripSeparator))
             {
-                ((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
-                ((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];
+                /*((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];*/
+            }
+            else if (c.GetType() == typeof(ToolStripComboBox))
+            {
+                /*((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];*/
             }
             else
             {
@@ -158,7 +198,7 @@ namespace Ticketník
                 
             }
 
-            if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) && c.GetType() != typeof(ToolStripDropDownItem))
+            if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) && c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox))
             {
                 foreach (Control cc in ((Control)c).Controls)
                 {
@@ -168,6 +208,12 @@ namespace Ticketník
                         SetControlColor(cc);
                 }
             }
+        }
+
+        internal static Color GetMenuBarvy(string barva)
+        {
+            string sMotiv = Motiv.GetMotiv();
+            return barvy[sMotiv][barva];
         }
 
         private static string GetMotiv()
