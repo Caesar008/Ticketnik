@@ -181,6 +181,7 @@
             // 
             // novýToolStripMenuItem
             // 
+            this.novýToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("novýToolStripMenuItem.Image")));
             this.novýToolStripMenuItem.Name = "novýToolStripMenuItem";
             this.novýToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.novýToolStripMenuItem.Text = "Nový";
@@ -193,6 +194,7 @@
             // 
             // načístToolStripMenuItem
             // 
+            this.načístToolStripMenuItem.Image = global::Ticketník.Properties.Resources.open;
             this.načístToolStripMenuItem.Name = "načístToolStripMenuItem";
             this.načístToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.načístToolStripMenuItem.Text = "Otevřít";
@@ -200,6 +202,7 @@
             // 
             // uložitToolStripMenuItem
             // 
+            this.uložitToolStripMenuItem.Image = global::Ticketník.Properties.Resources.save;
             this.uložitToolStripMenuItem.Name = "uložitToolStripMenuItem";
             this.uložitToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.uložitToolStripMenuItem.Text = "Uložit";
@@ -212,6 +215,7 @@
             // 
             // exportovatToolStripMenuItem
             // 
+            this.exportovatToolStripMenuItem.Image = global::Ticketník.Properties.Resources.export;
             this.exportovatToolStripMenuItem.Name = "exportovatToolStripMenuItem";
             this.exportovatToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.exportovatToolStripMenuItem.Text = "Exportovat";
@@ -224,6 +228,7 @@
             // 
             // převéstNaFormátMilleniumToolStripMenuItem
             // 
+            this.převéstNaFormátMilleniumToolStripMenuItem.Image = global::Ticketník.Properties.Resources.millenium;
             this.převéstNaFormátMilleniumToolStripMenuItem.Name = "převéstNaFormátMilleniumToolStripMenuItem";
             this.převéstNaFormátMilleniumToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.převéstNaFormátMilleniumToolStripMenuItem.Text = "Převést na formát Millenium";
@@ -236,6 +241,7 @@
             // 
             // ukončitToolStripMenuItem
             // 
+            this.ukončitToolStripMenuItem.Image = global::Ticketník.Properties.Resources.off;
             this.ukončitToolStripMenuItem.Name = "ukončitToolStripMenuItem";
             this.ukončitToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.ukončitToolStripMenuItem.Text = "Zavřít";
@@ -265,6 +271,7 @@
             // 
             // nastaveníToolStripMenuItem
             // 
+            this.nastaveníToolStripMenuItem.Image = global::Ticketník.Properties.Resources.settings;
             this.nastaveníToolStripMenuItem.Name = "nastaveníToolStripMenuItem";
             this.nastaveníToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.nastaveníToolStripMenuItem.Text = "Nastavení";
@@ -277,6 +284,7 @@
             // 
             // upozorněníToolStripMenuItem
             // 
+            this.upozorněníToolStripMenuItem.Image = global::Ticketník.Properties.Resources.bell_16;
             this.upozorněníToolStripMenuItem.Name = "upozorněníToolStripMenuItem";
             this.upozorněníToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.upozorněníToolStripMenuItem.Text = "Upozornění";
@@ -289,6 +297,7 @@
             // 
             // přidatZákazníkaToolStripMenuItem
             // 
+            this.přidatZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.addZak;
             this.přidatZákazníkaToolStripMenuItem.Name = "přidatZákazníkaToolStripMenuItem";
             this.přidatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.přidatZákazníkaToolStripMenuItem.Text = "Přidat zákazníka";
@@ -296,6 +305,7 @@
             // 
             // upravitZákazníkaToolStripMenuItem
             // 
+            this.upravitZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.zmenZak;
             this.upravitZákazníkaToolStripMenuItem.Name = "upravitZákazníkaToolStripMenuItem";
             this.upravitZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.upravitZákazníkaToolStripMenuItem.Text = "Upravit zákazníka";
@@ -303,6 +313,7 @@
             // 
             // smazatZákazníkaToolStripMenuItem
             // 
+            this.smazatZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.delZak;
             this.smazatZákazníkaToolStripMenuItem.Name = "smazatZákazníkaToolStripMenuItem";
             this.smazatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.smazatZákazníkaToolStripMenuItem.Text = "Smazat zákazníka";
@@ -315,6 +326,7 @@
             // 
             // přidatTERPKódToolStripMenuItem
             // 
+            this.přidatTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.addZaznam;
             this.přidatTERPKódToolStripMenuItem.Name = "přidatTERPKódToolStripMenuItem";
             this.přidatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.přidatTERPKódToolStripMenuItem.Text = "Přidat TERP kód";
@@ -322,6 +334,7 @@
             // 
             // upravitTERPKódToolStripMenuItem
             // 
+            this.upravitTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.editZaznam;
             this.upravitTERPKódToolStripMenuItem.Name = "upravitTERPKódToolStripMenuItem";
             this.upravitTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.upravitTERPKódToolStripMenuItem.Text = "Aktualizovat TERP kódy";
@@ -329,6 +342,7 @@
             // 
             // smazatTERPKódToolStripMenuItem
             // 
+            this.smazatTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.delZaznam;
             this.smazatTERPKódToolStripMenuItem.Name = "smazatTERPKódToolStripMenuItem";
             this.smazatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.smazatTERPKódToolStripMenuItem.Text = "Smazat TERP kód";
@@ -341,6 +355,7 @@
             // 
             // hledatToolStripMenuItem
             // 
+            this.hledatToolStripMenuItem.Image = global::Ticketník.Properties.Resources.search;
             this.hledatToolStripMenuItem.Name = "hledatToolStripMenuItem";
             this.hledatToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.hledatToolStripMenuItem.Text = "Hledat";
@@ -353,6 +368,7 @@
             // 
             // reportToolStripMenuItem
             // 
+            this.reportToolStripMenuItem.Image = global::Ticketník.Properties.Resources.crash;
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.reportToolStripMenuItem.Text = "Crash report";

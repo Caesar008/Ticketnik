@@ -422,6 +422,16 @@
     <Content Include="bin\Release\known_errors.txt" />
     <Content Include="bin\Release\Ticketnik.exe" />
     <Content Include="bin\Release\ticketnik.xml" />
+    <None Include="ikony\newFile.png" />
+    <None Include="ikony\settings.png" />
+    <None Include="ikony\crash.png" />
+    <None Include="ikony\millenium.png" />
+    <None Include="ikony\open.png" />
+    <None Include="ikony\save.png" />
+    <None Include="ikony\export.png" />
+    <None Include="ikony\off.png" />
+    <None Include="ikony\exportW.png" />
+    <None Include="ikony\offW.png" />
     <Content Include="ticket-256.ico" />
   </ItemGroup>
   <ItemGroup>

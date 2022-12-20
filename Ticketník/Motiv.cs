@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Ticketník.Properties;
 
 namespace Ticketník
 {
@@ -35,6 +36,27 @@ namespace Ticketník
             get
             {
                 return Motiv.GetMenuBarvy("checkBox");
+            }
+        }
+        public override Color ImageMarginGradientBegin
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+        public override Color ImageMarginGradientEnd
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+        public override Color ImageMarginGradientMiddle
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
             }
         }
     }
@@ -152,34 +174,34 @@ namespace Ticketník
             else if (c.GetType() == typeof(MenuStrip))
             {
                 ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
-                /* ((MenuStrip)c).BackColor = barvy[sMotiv]["pozadí"];
-                 ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
+                // ((MenuStrip)c).BackColor = barvy[sMotiv]["pozadí"];
+                // ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
                  foreach (object tsdi in ((MenuStrip)c).Items)
                  {
-                     if (tsdi.GetType() == typeof(ToolStripMenuItem))
+                     if (tsdi.GetType() == typeof(ToolStripMenuItem) || tsdi.GetType() == typeof(ToolStripComboBox))
                      {
                          SetControlColor(tsdi);
                      }
-                 }*/
+                 }
             }
             else if (c.GetType() == typeof(ToolStripDropDownItem))
             {
                 ((ToolStripDropDownItem)c).ForeColor = barvy[sMotiv]["text"];
-                /*((ToolStripDropDownItem)c).BackColor = barvy[sMotiv]["pozadí"];
+                //((ToolStripDropDownItem)c).BackColor = barvy[sMotiv]["pozadí"];
                 foreach (object tsdi in ((ToolStripDropDownItem)c).DropDownItems)
                 {
                     SetControlColor(tsdi);
-                }*/
+                }
             }
             else if (c.GetType() == typeof(ToolStripMenuItem))
             {
                 ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
-                /*((ToolStripMenuItem)c).BackColor = barvy[sMotiv]["pozadí"];
+                //((ToolStripMenuItem)c).BackColor = barvy[sMotiv]["pozadí"];
                 ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
                 foreach (object tsdi in ((ToolStripMenuItem)c).DropDownItems)
                 {
                     SetControlColor(tsdi);
-                }*/
+                }
             }
             else if (c.GetType() == typeof(ToolStripSeparator))
             {
@@ -188,8 +210,8 @@ namespace Ticketník
             }
             else if (c.GetType() == typeof(ToolStripComboBox))
             {
-                /*((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
-                ((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];*/
+                ((ToolStripComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((ToolStripComboBox)c).ForeColor = barvy[sMotiv]["text"];
             }
             else
             {
@@ -198,7 +220,8 @@ namespace Ticketník
                 
             }
 
-            if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) && c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox))
+            if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) &&
+                c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox))
             {
                 foreach (Control cc in ((Control)c).Controls)
                 {
@@ -271,6 +294,20 @@ namespace Ticketník
             string sMotiv = GetMotiv();
             form.BackColor = barvy[sMotiv]["pozadí"];
             form.ForeColor = barvy[sMotiv]["text"];
+
+            if(form.GetType() == typeof(Form1))
+            {
+                if(sMotiv == "světlý")
+                {
+                    ((Form1)form).exportovatToolStripMenuItem.Image = Resources.export;
+                    ((Form1)form).ukončitToolStripMenuItem.Image = Resources.off;
+                }
+                else
+                {
+                    ((Form1)form).exportovatToolStripMenuItem.Image = Resources.exportW;
+                    ((Form1)form).ukončitToolStripMenuItem.Image = Resources.offW;
+                }
+            }
 
             foreach (Control c in form.Controls)
             {
