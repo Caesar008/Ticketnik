@@ -75,6 +75,7 @@ namespace Ticketník
 
             InitializeComponent();
             menu.Renderer = new ToolStripProfessionalRenderer(new Paleta());
+            tool.Renderer = new MySR();
             infoBox.Text = "";
             SetJazyk();
 

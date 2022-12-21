@@ -298,6 +298,7 @@ namespace Ticketník
 
         void Setlang()
         {
+            int selectedMotiv = motivVyber.SelectedIndex;
             poStartu.Text = form.jazyk.Windows_Nastaveni_PoStratu;
             autosave.Text = form.jazyk.Windows_Nastaveni_Autosave;
             label1.Text = form.jazyk.Windows_Nastaveni_UkladatKazdych;
@@ -328,6 +329,7 @@ namespace Ticketník
                 {0, form.jazyk.Windows_Nastaveni_Svetly },
                 {1, form.jazyk.Windows_Nastaveni_Tmavy},
                 {2, form.jazyk.Windows_Nastaveni_PodleSystemu}}.ToList();
+            motivVyber.SelectedIndex = selectedMotiv;
             motivVyber.ValueMember = "Key";
             motivVyber.DisplayMember = "Value";
         }

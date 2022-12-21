@@ -484,7 +484,7 @@
             // infoBox
             // 
             this.infoBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.infoBox.Enabled = false;
+            this.infoBox.ForeColor = System.Drawing.Color.DarkGray;
             this.infoBox.Name = "infoBox";
             this.infoBox.Size = new System.Drawing.Size(48, 20);
             this.infoBox.Text = "InfoBox";
@@ -534,7 +534,7 @@
             this.toolStripButton1.Image = global::Ticketník.Properties.Resources.addZaznam;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(40, 20);
+            this.toolStripButton1.Size = new System.Drawing.Size(41, 20);
             this.toolStripButton1.Text = "Přidat záznam";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -545,7 +545,7 @@
             this.toolStripButton2.Image = global::Ticketník.Properties.Resources.editZaznam;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(40, 20);
+            this.toolStripButton2.Size = new System.Drawing.Size(41, 20);
             this.toolStripButton2.Text = "Upravit záznam";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -556,14 +556,14 @@
             this.toolStripButton3.Image = global::Ticketník.Properties.Resources.delZaznam;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(40, 20);
+            this.toolStripButton3.Size = new System.Drawing.Size(41, 20);
             this.toolStripButton3.Text = "Smazat záznkam";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripButton5
             // 
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(40, 6);
+            this.toolStripButton5.Size = new System.Drawing.Size(41, 6);
             // 
             // toolStripButton4
             // 
@@ -571,7 +571,7 @@
             this.toolStripButton4.Image = global::Ticketník.Properties.Resources.addZak;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(40, 20);
+            this.toolStripButton4.Size = new System.Drawing.Size(41, 20);
             this.toolStripButton4.Text = "Přidat zákazníka";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
@@ -581,7 +581,7 @@
             this.zmenZakaznika.Image = global::Ticketník.Properties.Resources.zmenZak;
             this.zmenZakaznika.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zmenZakaznika.Name = "zmenZakaznika";
-            this.zmenZakaznika.Size = new System.Drawing.Size(40, 20);
+            this.zmenZakaznika.Size = new System.Drawing.Size(41, 20);
             this.zmenZakaznika.Text = "Upravit zákazníka";
             this.zmenZakaznika.Click += new System.EventHandler(this.zmenZakaznika_Click);
             // 
@@ -591,14 +591,14 @@
             this.toolStripButton6.Image = global::Ticketník.Properties.Resources.delZak;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(40, 20);
+            this.toolStripButton6.Size = new System.Drawing.Size(41, 20);
             this.toolStripButton6.Text = "Smazat zákazníka";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // separator
             // 
             this.separator.Name = "separator";
-            this.separator.Size = new System.Drawing.Size(40, 6);
+            this.separator.Size = new System.Drawing.Size(41, 6);
             // 
             // toolStripButton8
             // 
@@ -606,14 +606,15 @@
             this.toolStripButton8.Image = global::Ticketník.Properties.Resources.bell_16;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(40, 20);
+            this.toolStripButton8.Size = new System.Drawing.Size(41, 20);
             this.toolStripButton8.Text = "Upozornění";
             this.toolStripButton8.Click += new System.EventHandler(this.upozorněníToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
+            this.toolStripSeparator1.BackColor = System.Drawing.Color.IndianRed;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(40, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(41, 6);
             // 
             // hledat
             // 
@@ -621,14 +622,14 @@
             this.hledat.Image = global::Ticketník.Properties.Resources.search;
             this.hledat.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.hledat.Name = "hledat";
-            this.hledat.Size = new System.Drawing.Size(40, 20);
+            this.hledat.Size = new System.Drawing.Size(41, 20);
             this.hledat.Text = "Hledat";
             this.hledat.Click += new System.EventHandler(this.hledat_Click);
             // 
             // toolStripButton7
             // 
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(40, 6);
+            this.toolStripButton7.Size = new System.Drawing.Size(41, 6);
             // 
             // toolStripButton_Napoveda
             // 
@@ -636,7 +637,7 @@
             this.toolStripButton_Napoveda.Image = global::Ticketník.Properties.Resources._1490188396_Help_book_3d;
             this.toolStripButton_Napoveda.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_Napoveda.Name = "toolStripButton_Napoveda";
-            this.toolStripButton_Napoveda.Size = new System.Drawing.Size(40, 20);
+            this.toolStripButton_Napoveda.Size = new System.Drawing.Size(41, 20);
             this.toolStripButton_Napoveda.Text = "Nápověda";
             this.toolStripButton_Napoveda.Click += new System.EventHandler(this.toolStripMenu_Napoveda_Click);
             // 

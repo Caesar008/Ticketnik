@@ -59,6 +59,99 @@ namespace Ticketník
                 return Motiv.GetMenuBarvy("pozadí");
             }
         }
+        public override Color MenuItemPressedGradientBegin
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadíControlPush");
+            }
+        }
+        public override Color MenuItemPressedGradientEnd
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadíControlPush");
+            }
+        }
+        public override Color MenuItemPressedGradientMiddle
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadíControlPush");
+            }
+        }
+        public override Color MenuItemSelected
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("controlOver");
+            }
+        }
+        public override Color MenuItemSelectedGradientBegin
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("controlOver");
+            }
+        }
+        public override Color MenuItemSelectedGradientEnd
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("controlOver");
+            }
+        }
+        public override Color SeparatorDark
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("buttonBorder");
+            }
+        }
+        public override Color SeparatorLight
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+        public override Color ToolStripGradientBegin
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+        public override Color ToolStripGradientEnd
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+        public override Color ToolStripGradientMiddle
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+        public override Color ToolStripBorder
+        {
+            get
+            {
+                return Motiv.GetMenuBarvy("pozadí");
+            }
+        }
+    }
+    public class MySR : ToolStripSystemRenderer
+    {
+        public MySR() { }
+
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
+        {
+            //base.OnRenderToolStripBorder(e);
+        }
     }
     internal static class Motiv
     {
@@ -205,13 +298,26 @@ namespace Ticketník
             }
             else if (c.GetType() == typeof(ToolStripSeparator))
             {
-                /*((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
-                ((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];*/
+                //((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
+                //((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];
             }
             else if (c.GetType() == typeof(ToolStripComboBox))
             {
                 ((ToolStripComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
                 ((ToolStripComboBox)c).ForeColor = barvy[sMotiv]["text"];
+            }
+            else if (c.GetType() == typeof(ToolStripLabel))
+            {
+                ((ToolStripLabel)c).ForeColor = barvy[sMotiv]["disabledText"];
+            }
+            else if (c.GetType() == typeof(ToolStrip))
+            {
+                ((ToolStrip)c).BackColor = barvy[sMotiv]["pozadí"];
+                foreach(object tsdi in ((ToolStrip)c).Items)
+                {
+                    if(tsdi.GetType() != typeof(ToolStripButton))
+                        SetControlColor(tsdi);
+                }
             }
             else
             {
