@@ -5,8 +5,7 @@ Položky s label "Enhancement"
 Potvrzené
 
 - Rozhraní pro tvorbu nového jazka - odloženo na neurčito
-- Abecední řazení taků
-- vyřazení starých tasků
+- Podpora tmavého režimu - ruční nastavení i detekce podle nastavení systému. V přípravě pro 1.8.
 
 Nepotvrzené
 
