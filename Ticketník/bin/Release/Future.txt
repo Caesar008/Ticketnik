@@ -4,7 +4,6 @@ Položky s label "Enhancement"
 
 Potvrzené
 
-- Rozhraní pro tvorbu nového jazka - odloženo na neurčito
 - Podpora tmavého režimu - ruční nastavení i detekce podle nastavení systému. V přípravě pro 1.8.
 
 Nepotvrzené
@@ -20,3 +19,4 @@ Zamítnuté
 
 - nahlašování chyb přímo v programu (Nahrazeno odkazem na GitHub)
 - navrhování nápadů přímo v programu (Nahrazeno odkazem na GitHub)
+- Rozhraní pro tvorbu nového jazka - příliš složité a komplikované. Dá se vytvořit přepsáním původního CZ.xml
