@@ -26,7 +26,8 @@ namespace Ticketník
         //Skryté věci - Report + skryté nastavení
         internal bool devtest = false;
 
-        internal readonly int saveFileVersion = 10101, langVersion = 7;
+        internal readonly int saveFileVersion = 10101, langVersion = 8;
+        internal readonly int program = 1080000;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -45,7 +46,6 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal readonly int program = 1080000;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";

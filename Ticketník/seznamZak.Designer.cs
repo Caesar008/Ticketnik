@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.zakaznik = new System.Windows.Forms.ComboBox();
+            this.button1 = new Ticketník.CustomControls.Button();
+            this.zakaznik = new Ticketník.CustomControls.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -74,7 +74,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox zakaznik;
+        private Ticketník.CustomControls.Button button1;
+        private Ticketník.CustomControls.ComboBox zakaznik;
     }
 }

@@ -17,12 +17,6 @@ namespace Ticketník
             this.form = form;
             stahnout.Enabled = false;
             odebrat.Enabled = false;
-            upravit.Enabled = false;
-            if(!form.devtest)
-            {
-                btn_novy_preklad.Visible = false;
-                upravit.Visible = false;
-            }
             listView1.SmallImageList = new ImageList();
             listView1.SmallImageList.ColorDepth = ColorDepth.Depth32Bit;
             listView1.SmallImageList.Images.Add(Properties.Resources.green_ball);
@@ -32,11 +26,9 @@ namespace Ticketník
             this.Text = form.jazyk.Windows_Spravce_Spravce;
             stahnout.Text = form.jazyk.Windows_Spravce_Stahnout;
             odebrat.Text = form.jazyk.Windows_Spravce_Odebrat;
-            btn_novy_preklad.Text = form.jazyk.Windows_Spravce_NovyPreklad;
             listView1.Columns[1].Text = form.jazyk.Windows_Spravce_Jazyk;
             listView1.Columns[2].Text = form.jazyk.Windows_Spravce_Zkratka;
             listView1.Columns[3].Text = form.jazyk.Windows_Spravce_Verze;
-            upravit.Text = form.jazyk.Windows_Spravce_UpravitPreklad;
 
             UpdateLang();
             Motiv.SetMotiv(this);
@@ -241,20 +233,17 @@ namespace Ticketník
                     if (((Tag)listView1.SelectedItems[0].Tag).Soubor != "CZ.xml")
                         odebrat.Enabled = true;
                     stahnout.Enabled = false;
-                    upravit.Enabled = true;
                 }
                 else
                 {
                     odebrat.Enabled = false;
                     stahnout.Enabled = true;
-                    upravit.Enabled = false;
                 }
             }
             else
             {
                 odebrat.Enabled = false;
                 stahnout.Enabled = false;
-                upravit.Enabled = false;
             }
         }
 
@@ -374,19 +363,6 @@ namespace Ticketník
             }
             stahnout.Enabled = false;
             odebrat.Enabled = true;
-        }
-
-        private void btn_novy_preklad_Click(object sender, EventArgs e)
-        {
-            Preklad preklad = new Preklad();
-            preklad.StartPosition = FormStartPosition.Manual;
-            preklad.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
-            preklad.ShowDialog();
-        }
-
-        private void upravit_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

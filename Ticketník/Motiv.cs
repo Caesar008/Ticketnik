@@ -319,6 +319,11 @@ namespace Ticketník
                         SetControlColor(tsdi);
                 }
             }
+            else if (c.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                ((RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
+            }
             else
             {
                 ((Control)c).BackColor = barvy[sMotiv]["pozadí"];

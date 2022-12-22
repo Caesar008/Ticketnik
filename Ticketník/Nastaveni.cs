@@ -427,6 +427,7 @@ namespace Ticketník
             Properties.Settings.Default.colPozPoradi = 10;
             Properties.Settings.Default.onlineTerp = true;
             Properties.Settings.Default.lastUpdateNotif = 0;
+            Properties.Settings.Default.motiv = 2;
 
             Properties.Settings.Default.Save();
             try
@@ -436,7 +437,7 @@ namespace Ticketník
                 registryKey.DeleteValue("Ticketnik");
             }
             catch { }
-
+            Motiv.SetMotiv(this);
         }
 
         private void motivVyber_SelectedIndexChanged(object sender, EventArgs e)

@@ -152,12 +152,6 @@
       <DependentUpon>Novinky.cs</DependentUpon>
     </Compile>
     <Compile Include="Pouzivani.cs" />
-    <Compile Include="Preklad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Preklad.Designer.cs">
-      <DependentUpon>Preklad.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -268,9 +262,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novinky.resx">
       <DependentUpon>Novinky.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Preklad.resx">
-      <DependentUpon>Preklad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportWindow.resx">
       <DependentUpon>ReportWindow.cs</DependentUpon>

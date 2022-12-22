@@ -34,9 +34,9 @@
             this.slDatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.slCas = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.slPopis = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.noveUpozorneni = new System.Windows.Forms.Button();
-            this.upravitUpozorneni = new System.Windows.Forms.Button();
-            this.smazatUpozorneni = new System.Windows.Forms.Button();
+            this.noveUpozorneni = new Ticketník.CustomControls.Button();
+            this.upravitUpozorneni = new Ticketník.CustomControls.Button();
+            this.smazatUpozorneni = new Ticketník.CustomControls.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -143,8 +143,8 @@
         private System.Windows.Forms.ColumnHeader slCas;
         private System.Windows.Forms.ColumnHeader slTyp;
         private System.Windows.Forms.ColumnHeader slPopis;
-        private System.Windows.Forms.Button noveUpozorneni;
-        private System.Windows.Forms.Button upravitUpozorneni;
-        private System.Windows.Forms.Button smazatUpozorneni;
+        private Ticketník.CustomControls.Button noveUpozorneni;
+        private Ticketník.CustomControls.Button upravitUpozorneni;
+        private Ticketník.CustomControls.Button smazatUpozorneni;
     }
 }
