@@ -43,6 +43,7 @@ namespace Ticketník.CustomControls
             base.OnMouseLeave(eventargs);
             Invalidate();
         }
+        
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -50,14 +51,26 @@ namespace Ticketník.CustomControls
             {
                 var dc = GetWindowDC(Handle);
 
-                //umazat starý rámeček a kousek pozdí
+                //umazat starý rámeček a kousek pozdí, umístění obrázku když je na střed
                 using (Pen p = new Pen(BackgroundColor, FlatAppearance.BorderSize + 1))
                 {
                     using (Graphics g = Graphics.FromHdc(dc))
                     {
                         g.SmoothingMode = SmoothingMode.None;
+                        //překreslení obrázku
+                        if (Image != null)
+                        {
+                            using (SolidBrush b = new SolidBrush(_mouseIn ? FlatAppearance.MouseOverBackColor : BackColor))
+                            {
+                                g.FillRectangle(b, new Rectangle(1, 1, Width - 2, Height - 2));
+                            }
+                            if(ImageAlign == ContentAlignment.MiddleCenter)
+                                g.DrawImage(Image, (Width/2) - (Image.Width / 2), (Height / 2) - (Image.Height / 2));
+                        }
+                        //mazání rámečku
                         g.DrawPath(p, RoundedRect(new Rectangle(0, 0, Width - 1, Height - 1), 3, 3, 3, 3));
                         g.DrawRectangle(p, new Rectangle(0, 0, Width - 1, Height - 1));
+                        
                     }
                 }
                 //kulatý rámeček
