@@ -71,7 +71,6 @@
             this.nahlásitProblémToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenu_Napoveda = new System.Windows.Forms.ToolStripMenuItem();
-            this.rokVyber = new System.Windows.Forms.ToolStripComboBox();
             this.infoBox = new System.Windows.Forms.ToolStripLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tool = new System.Windows.Forms.ToolStrip();
@@ -128,6 +127,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
             this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
+            this.rokVyber = new Ticketník.CustomControls.ComboBox();
+            this.rokVyberO = new Ticketník.CustomControls.ComboBox();
             this.menu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tool.SuspendLayout();
@@ -154,11 +155,10 @@
             this.sourceToolStripMenuItem,
             this.oProgramuToolStripMenuItem,
             this.toolStripMenu_Napoveda,
-            this.rokVyber,
             this.infoBox});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(834, 27);
+            this.menu.Size = new System.Drawing.Size(834, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -176,7 +176,7 @@
             this.oddToolStripMenuItem,
             this.ukončitToolStripMenuItem});
             this.souborToolStripMenuItem.Name = "souborToolStripMenuItem";
-            this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 23);
+            this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.souborToolStripMenuItem.Text = "Soubor";
             // 
             // novýToolStripMenuItem
@@ -266,7 +266,7 @@
             this.toolStripMenuItem6,
             this.reportToolStripMenuItem});
             this.možnostiToolStripMenuItem.Name = "možnostiToolStripMenuItem";
-            this.možnostiToolStripMenuItem.Size = new System.Drawing.Size(68, 23);
+            this.možnostiToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.možnostiToolStripMenuItem.Text = "Možnosti";
             // 
             // nastaveníToolStripMenuItem
@@ -388,7 +388,7 @@
             this.dělitelToolStripMenuItem,
             this.nahlásitProblémToolStripMenuItem});
             this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
-            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(55, 23);
+            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.sourceToolStripMenuItem.Text = "Source";
             // 
             // knownIssuesToolStripMenuItem
@@ -460,33 +460,24 @@
             // oProgramuToolStripMenuItem
             // 
             this.oProgramuToolStripMenuItem.Name = "oProgramuToolStripMenuItem";
-            this.oProgramuToolStripMenuItem.Size = new System.Drawing.Size(84, 23);
+            this.oProgramuToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.oProgramuToolStripMenuItem.Text = "O programu";
             this.oProgramuToolStripMenuItem.Click += new System.EventHandler(this.oProgramuToolStripMenuItem_Click);
             // 
             // toolStripMenu_Napoveda
             // 
             this.toolStripMenu_Napoveda.Name = "toolStripMenu_Napoveda";
-            this.toolStripMenu_Napoveda.Size = new System.Drawing.Size(73, 23);
+            this.toolStripMenu_Napoveda.Size = new System.Drawing.Size(73, 20);
             this.toolStripMenu_Napoveda.Text = "Nápověda";
             this.toolStripMenu_Napoveda.ToolTipText = "Nápověda";
             this.toolStripMenu_Napoveda.Click += new System.EventHandler(this.toolStripMenu_Napoveda_Click);
-            // 
-            // rokVyber
-            // 
-            this.rokVyber.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.rokVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.rokVyber.DropDownWidth = 60;
-            this.rokVyber.Name = "rokVyber";
-            this.rokVyber.Size = new System.Drawing.Size(75, 23);
-            this.rokVyber.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
             // 
             // infoBox
             // 
             this.infoBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.infoBox.ForeColor = System.Drawing.Color.DarkGray;
             this.infoBox.Name = "infoBox";
-            this.infoBox.Size = new System.Drawing.Size(48, 20);
+            this.infoBox.Size = new System.Drawing.Size(48, 17);
             this.infoBox.Text = "InfoBox";
             // 
             // panel1
@@ -534,7 +525,7 @@
             this.toolStripButton1.Image = global::Ticketník.Properties.Resources.addZaznam;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(41, 20);
+            this.toolStripButton1.Size = new System.Drawing.Size(40, 20);
             this.toolStripButton1.Text = "Přidat záznam";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -545,7 +536,7 @@
             this.toolStripButton2.Image = global::Ticketník.Properties.Resources.editZaznam;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(41, 20);
+            this.toolStripButton2.Size = new System.Drawing.Size(40, 20);
             this.toolStripButton2.Text = "Upravit záznam";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -556,14 +547,14 @@
             this.toolStripButton3.Image = global::Ticketník.Properties.Resources.delZaznam;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(41, 20);
+            this.toolStripButton3.Size = new System.Drawing.Size(40, 20);
             this.toolStripButton3.Text = "Smazat záznkam";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripButton5
             // 
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(41, 6);
+            this.toolStripButton5.Size = new System.Drawing.Size(40, 6);
             // 
             // toolStripButton4
             // 
@@ -571,7 +562,7 @@
             this.toolStripButton4.Image = global::Ticketník.Properties.Resources.addZak;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(41, 20);
+            this.toolStripButton4.Size = new System.Drawing.Size(40, 20);
             this.toolStripButton4.Text = "Přidat zákazníka";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
@@ -581,7 +572,7 @@
             this.zmenZakaznika.Image = global::Ticketník.Properties.Resources.zmenZak;
             this.zmenZakaznika.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zmenZakaznika.Name = "zmenZakaznika";
-            this.zmenZakaznika.Size = new System.Drawing.Size(41, 20);
+            this.zmenZakaznika.Size = new System.Drawing.Size(40, 20);
             this.zmenZakaznika.Text = "Upravit zákazníka";
             this.zmenZakaznika.Click += new System.EventHandler(this.zmenZakaznika_Click);
             // 
@@ -591,14 +582,14 @@
             this.toolStripButton6.Image = global::Ticketník.Properties.Resources.delZak;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(41, 20);
+            this.toolStripButton6.Size = new System.Drawing.Size(40, 20);
             this.toolStripButton6.Text = "Smazat zákazníka";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // separator
             // 
             this.separator.Name = "separator";
-            this.separator.Size = new System.Drawing.Size(41, 6);
+            this.separator.Size = new System.Drawing.Size(40, 6);
             // 
             // toolStripButton8
             // 
@@ -606,7 +597,7 @@
             this.toolStripButton8.Image = global::Ticketník.Properties.Resources.bell_16;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(41, 20);
+            this.toolStripButton8.Size = new System.Drawing.Size(40, 20);
             this.toolStripButton8.Text = "Upozornění";
             this.toolStripButton8.Click += new System.EventHandler(this.upozorněníToolStripMenuItem_Click);
             // 
@@ -614,7 +605,7 @@
             // 
             this.toolStripSeparator1.BackColor = System.Drawing.Color.IndianRed;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(41, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(40, 6);
             // 
             // hledat
             // 
@@ -622,14 +613,14 @@
             this.hledat.Image = global::Ticketník.Properties.Resources.search;
             this.hledat.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.hledat.Name = "hledat";
-            this.hledat.Size = new System.Drawing.Size(41, 20);
+            this.hledat.Size = new System.Drawing.Size(40, 20);
             this.hledat.Text = "Hledat";
             this.hledat.Click += new System.EventHandler(this.hledat_Click);
             // 
             // toolStripButton7
             // 
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(41, 6);
+            this.toolStripButton7.Size = new System.Drawing.Size(40, 6);
             // 
             // toolStripButton_Napoveda
             // 
@@ -637,7 +628,7 @@
             this.toolStripButton_Napoveda.Image = global::Ticketník.Properties.Resources._1490188396_Help_book_3d;
             this.toolStripButton_Napoveda.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_Napoveda.Name = "toolStripButton_Napoveda";
-            this.toolStripButton_Napoveda.Size = new System.Drawing.Size(41, 20);
+            this.toolStripButton_Napoveda.Size = new System.Drawing.Size(40, 20);
             this.toolStripButton_Napoveda.Text = "Nápověda";
             this.toolStripButton_Napoveda.Click += new System.EventHandler(this.toolStripMenu_Napoveda_Click);
             // 
@@ -1178,14 +1169,38 @@
             this.timer_ClearInfo.Interval = 5000;
             this.timer_ClearInfo.Tick += new System.EventHandler(this.Timer_ClearInfo_Tick);
             // 
+            // rokVyber
+            // 
+            this.rokVyber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rokVyber.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.rokVyber.FormattingEnabled = true;
+            this.rokVyber.Location = new System.Drawing.Point(762, 1);
+            this.rokVyber.Name = "rokVyber";
+            this.rokVyber.Size = new System.Drawing.Size(60, 21);
+            this.rokVyber.TabIndex = 4;
+            this.rokVyber.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
+            // 
+            // rokVyberO
+            // 
+            this.rokVyberO.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.rokVyberO.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.rokVyberO.DropDownWidth = 60;
+            this.rokVyberO.Location = new System.Drawing.Point(700, 0);
+            this.rokVyberO.Name = "rokVyberO";
+            this.rokVyberO.Size = new System.Drawing.Size(75, 21);
+            this.rokVyberO.TabIndex = 3;
+            this.rokVyberO.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 421);
+            this.Controls.Add(this.rokVyber);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menu);
+            this.Controls.Add(this.rokVyberO);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu;
@@ -1303,7 +1318,7 @@
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenu_Napoveda;
         internal System.Windows.Forms.ToolStripSeparator toolStripButton7;
         internal System.Windows.Forms.ToolStripButton toolStripButton_Napoveda;
-        internal System.Windows.Forms.ToolStripComboBox rokVyber;
+        internal Ticketník.CustomControls.ComboBox rokVyberO;
         internal System.Windows.Forms.ToolStripSeparator oddToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem převéstNaFormátMilleniumToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator upoToolStripMenuItem;
@@ -1319,6 +1334,7 @@
         internal System.Windows.Forms.ToolStripMenuItem aktualizovatVšechnyTerpyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator dělitelToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem nahlásitProblémToolStripMenuItem;
+        internal CustomControls.ComboBox rokVyber;
     }
 }
 

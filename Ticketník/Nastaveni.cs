@@ -298,6 +298,8 @@ namespace Ticketník
 
         void Setlang()
         {
+            this.SuspendLayout();
+            form.SuspendLayout();
             int selectedMotiv = motivVyber.SelectedIndex;
             poStartu.Text = form.jazyk.Windows_Nastaveni_PoStratu;
             autosave.Text = form.jazyk.Windows_Nastaveni_Autosave;
@@ -332,6 +334,9 @@ namespace Ticketník
             motivVyber.SelectedIndex = selectedMotiv;
             motivVyber.ValueMember = "Key";
             motivVyber.DisplayMember = "Value";
+            this.ResumeLayout();
+            form.ResumeLayout();
+            Motiv.SetMotiv(this);
         }
 
         private void jazyk_SelectedIndexChanged(object sender, EventArgs e)

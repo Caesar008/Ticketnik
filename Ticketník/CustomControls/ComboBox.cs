@@ -128,9 +128,9 @@ namespace Ticketník.CustomControls
                     dropDownRect.Width += 1;
                 }
                 var innerBorderColor = Enabled ? BackColor : SystemColors.Control;
-                var outerBorderColor = Enabled ? (_mouseIn ? BorderColorMouseOver : BorderColor) : SystemColors.ControlDark; 
-                var arrowColor = Enabled ? (_mouseIn ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark;
-                var buttonColor = Enabled ? (_mouseIn ? ButtonColorMouseOver : ButtonColor) : SystemColors.Control;
+                var outerBorderColor = Enabled ? ((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor) : SystemColors.ControlDark; 
+                var arrowColor = Enabled ? ((_mouseIn || this.Focused) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark;
+                var buttonColor = Enabled ? ((_mouseIn || this.Focused) ? ButtonColorMouseOver : ButtonColor) : SystemColors.Control;
                 var middle = new Point(dropDownRect.Left + dropDownRect.Width / 2,
                     dropDownRect.Top + dropDownRect.Height / 2);
                 var arrow = new Point[]

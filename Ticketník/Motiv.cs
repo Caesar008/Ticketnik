@@ -8,145 +8,37 @@ namespace Ticketník
 {
     public class Paleta : ProfessionalColorTable
     {
-        public override Color MenuBorder
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("buttonBorder");
-            }
-        }
+        public override Color MenuBorder => Motiv.GetMenuBarvy("buttonBorder");
 
-        public override Color MenuStripGradientBegin
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
+        public override Color MenuStripGradientBegin => Motiv.GetMenuBarvy("pozadí");
 
-        public override Color MenuStripGradientEnd
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("checkBox");
-            }
-        }
-        public override Color ToolStripDropDownBackground
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("checkBox");
-            }
-        }
-        public override Color ImageMarginGradientBegin
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
-        public override Color ImageMarginGradientEnd
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
-        public override Color ImageMarginGradientMiddle
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
-        public override Color MenuItemPressedGradientBegin
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadíControlPush");
-            }
-        }
-        public override Color MenuItemPressedGradientEnd
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadíControlPush");
-            }
-        }
-        public override Color MenuItemPressedGradientMiddle
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadíControlPush");
-            }
-        }
-        public override Color MenuItemSelected
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("controlOver");
-            }
-        }
-        public override Color MenuItemSelectedGradientBegin
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("controlOver");
-            }
-        }
-        public override Color MenuItemSelectedGradientEnd
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("controlOver");
-            }
-        }
-        public override Color SeparatorDark
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("buttonBorder");
-            }
-        }
-        public override Color SeparatorLight
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
-        public override Color ToolStripGradientBegin
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
-        public override Color ToolStripGradientEnd
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
-        public override Color ToolStripGradientMiddle
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
-        public override Color ToolStripBorder
-        {
-            get
-            {
-                return Motiv.GetMenuBarvy("pozadí");
-            }
-        }
+        public override Color MenuStripGradientEnd => Motiv.GetMenuBarvy("checkBox");
+        public override Color ToolStripDropDownBackground => Motiv.GetMenuBarvy("checkBox");
+        public override Color ImageMarginGradientBegin => Motiv.GetMenuBarvy("pozadí");
+        public override Color ImageMarginGradientEnd => Motiv.GetMenuBarvy("pozadí");
+        public override Color ImageMarginGradientMiddle => Motiv.GetMenuBarvy("pozadí");
+        public override Color MenuItemPressedGradientBegin => Motiv.GetMenuBarvy("pozadíControlPush");
+        public override Color MenuItemPressedGradientEnd => Motiv.GetMenuBarvy("pozadíControlPush"); 
+        public override Color MenuItemPressedGradientMiddle => Motiv.GetMenuBarvy("pozadíControlPush");
+        public override Color MenuItemSelected => Motiv.GetMenuBarvy("controlOver");
+        public override Color MenuItemSelectedGradientBegin => Motiv.GetMenuBarvy("controlOver");
+        public override Color MenuItemSelectedGradientEnd => Motiv.GetMenuBarvy("controlOver");
+        public override Color SeparatorDark => Motiv.GetMenuBarvy("buttonBorder");
+        public override Color SeparatorLight => Motiv.GetMenuBarvy("pozadí");
+        public override Color ToolStripGradientBegin => Motiv.GetMenuBarvy("pozadí");
+        public override Color ToolStripGradientEnd => Motiv.GetMenuBarvy("pozadí");
+        public override Color ToolStripGradientMiddle => Motiv.GetMenuBarvy("pozadí");
+        public override Color ToolStripBorder => Motiv.GetMenuBarvy("pozadí");
+        public override Color ButtonPressedGradientBegin => Motiv.GetMenuBarvy("pozadíControlPush");
+        public override Color ButtonPressedGradientEnd => Motiv.GetMenuBarvy("pozadíControlPush");
+        public override Color ButtonPressedGradientMiddle => Motiv.GetMenuBarvy("pozadíControlPush");
+        public override Color ButtonSelectedGradientBegin => Motiv.GetMenuBarvy("controlOver");
+        public override Color ButtonSelectedGradientEnd => Motiv.GetMenuBarvy("controlOver");
+        public override Color ButtonSelectedGradientMiddle => Motiv.GetMenuBarvy("controlOver");
     }
-    public class MySR : ToolStripSystemRenderer
+    public class MySR : ToolStripProfessionalRenderer
     {
-        public MySR() { }
+        public MySR(ProfessionalColorTable professionalColorTable) : base(professionalColorTable) { }
 
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
         {
@@ -187,7 +79,7 @@ namespace Ticketník
                     { "controlRámeček", Color.DimGray },
                     { "controlOver", Color.FromArgb(70, 70, 100) },
                     { "pozadíControlPush", Color.FromArgb(90, 90, 120) },
-                    { "pozadíDisabled", Color.FromArgb(50, 50, 50) },
+                    { "pozadíDisabled", Color.FromArgb(30, 30, 30) },
                     { "checkBox", Color.FromArgb(50, 50, 50) },
                     { "checkBoxRámeček", Color.DimGray },
                     { "checkBoxChecked", Color.FromArgb(0, 95, 184) },
@@ -202,7 +94,7 @@ namespace Ticketník
         internal static void SetControlColor(object c)
         {
             string sMotiv = GetMotiv();
-            
+
             if (c.GetType() == typeof(CustomControls.Button))
             {
                 ((CustomControls.Button)c).BackColor = barvy[sMotiv]["button"];
@@ -269,13 +161,13 @@ namespace Ticketník
                 ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
                 // ((MenuStrip)c).BackColor = barvy[sMotiv]["pozadí"];
                 // ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
-                 foreach (object tsdi in ((MenuStrip)c).Items)
-                 {
-                     if (tsdi.GetType() == typeof(ToolStripMenuItem) || tsdi.GetType() == typeof(ToolStripComboBox))
-                     {
-                         SetControlColor(tsdi);
-                     }
-                 }
+                foreach (object tsdi in ((MenuStrip)c).Items)
+                {
+                    if (tsdi.GetType() == typeof(ToolStripMenuItem) || tsdi.GetType() == typeof(ToolStripComboBox))
+                    {
+                        SetControlColor(tsdi);
+                    }
+                }
             }
             else if (c.GetType() == typeof(ToolStripDropDownItem))
             {
@@ -296,11 +188,6 @@ namespace Ticketník
                     SetControlColor(tsdi);
                 }
             }
-            else if (c.GetType() == typeof(ToolStripSeparator))
-            {
-                //((ToolStripSeparator)c).BackColor = barvy[sMotiv]["pozadí"];
-                //((ToolStripSeparator)c).ForeColor = barvy[sMotiv]["text"];
-            }
             else if (c.GetType() == typeof(ToolStripComboBox))
             {
                 ((ToolStripComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
@@ -313,9 +200,9 @@ namespace Ticketník
             else if (c.GetType() == typeof(ToolStrip))
             {
                 ((ToolStrip)c).BackColor = barvy[sMotiv]["pozadí"];
-                foreach(object tsdi in ((ToolStrip)c).Items)
+                foreach (object tsdi in ((ToolStrip)c).Items)
                 {
-                    if(tsdi.GetType() != typeof(ToolStripButton))
+                    if (tsdi.GetType() != typeof(ToolStripButton))
                         SetControlColor(tsdi);
                 }
             }
@@ -326,13 +213,19 @@ namespace Ticketník
             }
             else
             {
-                ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
-                ((Control)c).ForeColor = barvy[sMotiv]["text"];
-                
+                string typ = c.GetType().ToString();
+                if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) &&
+                c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox) &&
+                !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+")/* != "System.Windows.Forms.UpDownBase+UpDownButtons" || c.GetType().ToString() != "System.Windows.Forms.UpDownBase+UpDownEdit"*/)
+                {
+                    ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
+                    ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                }
             }
 
             if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) &&
-                c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox))
+                c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox) &&
+                !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+"))
             {
                 foreach (Control cc in ((Control)c).Controls)
                 {
@@ -402,6 +295,7 @@ namespace Ticketník
 
         internal static void SetMotiv(Form form)
         {
+            form.SuspendLayout();
             string sMotiv = GetMotiv();
             form.BackColor = barvy[sMotiv]["pozadí"];
             form.ForeColor = barvy[sMotiv]["text"];
@@ -428,6 +322,7 @@ namespace Ticketník
             {
                 SetControlColor(form.MainMenuStrip);
             }
+            form.ResumeLayout();
         }
     }
 }
