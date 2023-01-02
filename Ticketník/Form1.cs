@@ -13,8 +13,6 @@ using System.Net.Http;
 
 namespace Ticketník
 {
-    //udělat tlačítka ve správci jazyka opět viditelná
-
     /*interní changelog 1.8.0.0
     - Podpora světlého a tmavého módu
     - Zmenšení velikosti exe vynecháním knihoven
