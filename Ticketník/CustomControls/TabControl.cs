@@ -77,7 +77,7 @@ namespace Ticketník.CustomControls
                 Size headers = MeasureHeaders(TabPages);
                 Rectangle allHeaders = new Rectangle(0, 0, headers.Width+2, headers.Height);
                 var dc = GetWindowDC(handle);
-                using (Pen p = new Pen(Color.Violet, 1))
+                using (Pen p = new Pen(HeaderBorderColor, 1))
                 {
                     using (SolidBrush b = new SolidBrush(this.FindForm().BackColor))
                     {
@@ -92,19 +92,39 @@ namespace Ticketník.CustomControls
                                 if (SelectedIndex != index)
                                 {
                                     Size header = MeasureHeader(TabPages[index]);
-                                    Rectangle headerRect = new Rectangle(HeaderOffset(TabPages, index), 2,
-                                        header.Width,header.Height);
+                                    Rectangle headerRect = GetTabRect(index);/*new Rectangle(HeaderOffset(TabPages, index), 2,
+                                        header.Width,header.Height);*/
                                     if (index == TabPages.Count - 1)
                                         headerRect.Width -= 2;
-                                    g.DrawPath(p, RoundedRect(headerRect, 1, 1, 1, 1));
+                                    using (SolidBrush abr = new SolidBrush(HeaderBackColor))
+                                    {
+                                        GraphicsPath headerRectFill = RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
+                                            headerRect.Width, headerRect.Height -1), 1, 1, 0, 0);
+                                        g.FillPath(abr, headerRectFill);
+                                        TextRenderer.DrawText(g, TabPages[index].Text, TabPages[index].Font, new Point(headerRect.X+2, headerRect.Y+2), this.FindForm().ForeColor);
+                                    }
+                                    g.DrawPath(p, RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
+                                            headerRect.Width, headerRect.Height - 1), 1, 1, 1, 1));
                                 }
                                 index++;
                             }
                             //a teď vybraný do popředí
                             Size headerSel = MeasureHeader(SelectedTab);
-                            Rectangle headerRectSel = new Rectangle(HeaderOffset(TabPages, SelectedIndex) - 2,0, 
-                                headerSel.Width + 4 , headerSel.Height + 4);
-                            g.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 1, 1));
+                            Rectangle tabRect = GetTabRect(SelectedIndex);
+                            Rectangle headerRectSel = new Rectangle(tabRect.X-2,tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 2);
+                            Rectangle bottom = new Rectangle(headerRectSel.X+1, headerSel.Height+1, headerRectSel.Width-1, 3);
+                            using (SolidBrush abr = new SolidBrush(HeaderActiveBackColor))
+                            {
+                                GraphicsPath headerRectSelFill = RoundedRect(new Rectangle(tabRect.X - 2, tabRect.Y - 2, 
+                                    headerSel.Width + 4, headerSel.Height + 3), 1, 1, 0, 0);
+                                g.FillPath(abr, headerRectSelFill);
+                                g.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
+                                //tady pak umazat sposdní čáru
+
+                                g.SmoothingMode = SmoothingMode.None;
+                                g.FillRectangle(abr, bottom);
+                                TextRenderer.DrawText(g, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), this.FindForm().ForeColor);
+                            }
                         }
                     }
                 }

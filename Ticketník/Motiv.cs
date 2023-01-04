@@ -220,6 +220,13 @@ namespace Ticketník
                     ((RichTextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
                     ((RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
                 }
+                else if (c.GetType() == typeof(CustomControls.TabControl))
+                {
+                    ((CustomControls.TabControl)c).HeaderBackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.TabControl)c).HeaderBorderColor = barvy[sMotiv]["controlRámeček"];
+                    ((CustomControls.TabControl)c).HeaderActiveBackColor = barvy[sMotiv]["rámeček"];
+                    ((CustomControls.TabControl)c).ForeColor = barvy[sMotiv]["text"];
+                }
                 else
                 {
                     string typ = c.GetType().ToString();
