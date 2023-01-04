@@ -9,9 +9,7 @@ namespace Ticketník
     public class Paleta : ProfessionalColorTable
     {
         public override Color MenuBorder => Motiv.GetMenuBarvy("buttonBorder");
-
         public override Color MenuStripGradientBegin => Motiv.GetMenuBarvy("pozadí");
-
         public override Color MenuStripGradientEnd => Motiv.GetMenuBarvy("checkBox");
         public override Color ToolStripDropDownBackground => Motiv.GetMenuBarvy("checkBox");
         public override Color ImageMarginGradientBegin => Motiv.GetMenuBarvy("pozadí");
@@ -91,149 +89,159 @@ namespace Ticketník
             }
         };
 
-        internal static void SetControlColor(object c)
+        internal static void SetWindowControlColor(object c)
         {
             string sMotiv = GetMotiv();
+            if (c.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
+            }
+        }
 
-            if (c.GetType() == typeof(CustomControls.Button))
-            {
-                ((CustomControls.Button)c).BackColor = barvy[sMotiv]["button"];
-                ((CustomControls.Button)c).ForeColor = barvy[sMotiv]["text"];
-                ((CustomControls.Button)c).FlatStyle = FlatStyle.Flat;
-                ((CustomControls.Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["buttonBorder"];
-                ((CustomControls.Button)c).FlatAppearance.BorderSize = 1;
-                ((CustomControls.Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
-                ((CustomControls.Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
-                ((CustomControls.Button)c).BorderColorMouseOver = Color.DodgerBlue;
-            }
-            else if (c.GetType() == typeof(CustomControls.ComboBox))
-            {
-                //((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["button"];
-                ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((CustomControls.ComboBox)c).ForeColor = barvy[sMotiv]["text"];
-                ((CustomControls.ComboBox)c).FlatStyle = FlatStyle.Flat;
-                ((CustomControls.ComboBox)c).BorderColor = barvy[sMotiv]["buttonBorder"];
-                ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["button"];
-                ((CustomControls.ComboBox)c).ArrowColor = barvy[sMotiv]["arrow"];
-                ((CustomControls.ComboBox)c).BorderColorMouseOver = Color.DodgerBlue;
-                ((CustomControls.ComboBox)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
-            }
-            else if (c.GetType() == typeof(CustomControls.NumericUpDown))
-            {
-                ((CustomControls.NumericUpDown)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((CustomControls.NumericUpDown)c).ForeColor = barvy[sMotiv]["text"];
-                ((CustomControls.NumericUpDown)c).ButtonHighlightColor = barvy[sMotiv]["controlOver"];
-                ((CustomControls.NumericUpDown)c).BorderColor = barvy[sMotiv]["controlRámeček"];
-                ((CustomControls.NumericUpDown)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
-                ((CustomControls.NumericUpDown)c).ArrowColor = barvy[sMotiv]["arrow"];
+        internal static Color GetColorForObject(string typ)
+        {
+            return barvy[GetMotiv()][typ];
+        }
 
-            }
-            else if (c.GetType() == typeof(CustomControls.CheckBox))
+        internal static void SetControlColor(object c)
+        {
+            if (!(((c as Control)?.Tag as string)?.StartsWith("CustomColor") ?? false))
             {
-                ((CustomControls.CheckBox)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
-                ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["checkBox"];
-                ((CustomControls.CheckBox)c).CheckedColor = barvy[sMotiv]["checkBoxChecked"];
-                ((CustomControls.CheckBox)c).BoxColorMouseOver = barvy[sMotiv]["controlOver"];
-                ((CustomControls.CheckBox)c).CheckedColorMouseOver = barvy[sMotiv]["checkBoxCheckedOver"];
-            }
-            else if (c.GetType() == typeof(CustomControls.RadioButton))
-            {
-                ((CustomControls.RadioButton)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
-                ((CustomControls.RadioButton)c).BoxColor = barvy[sMotiv]["checkBox"];
-                ((CustomControls.RadioButton)c).BoxColorMouseOver = barvy[sMotiv]["controlOver"];
-            }
-            else if (c.GetType() == typeof(CustomControls.TextBox))
-            {
-                //((CustomControls.TextBox)c).BorderStyle = BorderStyle.FixedSingle;
-                ((CustomControls.TextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((CustomControls.TextBox)c).ForeColor = barvy[sMotiv]["text"];
-                ((CustomControls.TextBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
-                ((CustomControls.TextBox)c).BorderColorMouseOver = Color.DodgerBlue;
-            }
-            else if (c.GetType() == typeof(ListView))
-            {
-                ((ListView)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((ListView)c).ForeColor = barvy[sMotiv]["text"];
-                ((ListView)c).BorderStyle = BorderStyle.None;
-            }
-            else if (c.GetType() == typeof(MenuStrip))
-            {
-                ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
-                // ((MenuStrip)c).BackColor = barvy[sMotiv]["pozadí"];
-                // ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
-                foreach (object tsdi in ((MenuStrip)c).Items)
+                string sMotiv = GetMotiv();
+
+                if (c.GetType() == typeof(CustomControls.Button))
                 {
-                    if (tsdi.GetType() == typeof(ToolStripMenuItem) || tsdi.GetType() == typeof(ToolStripComboBox))
+                    ((CustomControls.Button)c).BackColor = barvy[sMotiv]["button"];
+                    ((CustomControls.Button)c).ForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.Button)c).FlatStyle = FlatStyle.Flat;
+                    ((CustomControls.Button)c).FlatAppearance.BorderColor = barvy[sMotiv]["buttonBorder"];
+                    ((CustomControls.Button)c).FlatAppearance.BorderSize = 1;
+                    ((CustomControls.Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
+                    ((CustomControls.Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
+                    ((CustomControls.Button)c).BorderColorMouseOver = Color.DodgerBlue;
+                }
+                else if (c.GetType() == typeof(CustomControls.ComboBox))
+                {
+                    ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.ComboBox)c).ForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.ComboBox)c).FlatStyle = FlatStyle.Flat;
+                    ((CustomControls.ComboBox)c).BorderColor = barvy[sMotiv]["buttonBorder"];
+                    ((CustomControls.ComboBox)c).ButtonColor = barvy[sMotiv]["button"];
+                    ((CustomControls.ComboBox)c).ArrowColor = barvy[sMotiv]["arrow"];
+                    ((CustomControls.ComboBox)c).BorderColorMouseOver = Color.DodgerBlue;
+                    ((CustomControls.ComboBox)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
+                }
+                else if (c.GetType() == typeof(CustomControls.NumericUpDown))
+                {
+                    ((CustomControls.NumericUpDown)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.NumericUpDown)c).ForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.NumericUpDown)c).ButtonHighlightColor = barvy[sMotiv]["controlOver"];
+                    ((CustomControls.NumericUpDown)c).BorderColor = barvy[sMotiv]["controlRámeček"];
+                    ((CustomControls.NumericUpDown)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
+                    ((CustomControls.NumericUpDown)c).ArrowColor = barvy[sMotiv]["arrow"];
+
+                }
+                else if (c.GetType() == typeof(CustomControls.CheckBox))
+                {
+                    ((CustomControls.CheckBox)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
+                    ((CustomControls.CheckBox)c).BoxColor = barvy[sMotiv]["checkBox"];
+                    ((CustomControls.CheckBox)c).CheckedColor = barvy[sMotiv]["checkBoxChecked"];
+                    ((CustomControls.CheckBox)c).BoxColorMouseOver = barvy[sMotiv]["controlOver"];
+                    ((CustomControls.CheckBox)c).CheckedColorMouseOver = barvy[sMotiv]["checkBoxCheckedOver"];
+                }
+                else if (c.GetType() == typeof(CustomControls.RadioButton))
+                {
+                    ((CustomControls.RadioButton)c).BorderColor = barvy[sMotiv]["checkBoxRámeček"];
+                    ((CustomControls.RadioButton)c).BoxColor = barvy[sMotiv]["checkBox"];
+                    ((CustomControls.RadioButton)c).BoxColorMouseOver = barvy[sMotiv]["controlOver"];
+                }
+                else if (c.GetType() == typeof(CustomControls.TextBox))
+                {
+                    ((CustomControls.TextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.TextBox)c).ForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.TextBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
+                    ((CustomControls.TextBox)c).BorderColorMouseOver = Color.DodgerBlue;
+                }
+                else if (c.GetType() == typeof(ListView))
+                {
+                    ((ListView)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((ListView)c).ForeColor = barvy[sMotiv]["text"];
+                    ((ListView)c).BorderStyle = BorderStyle.None;
+                }
+                else if (c.GetType() == typeof(MenuStrip))
+                {
+                    ((MenuStrip)c).ForeColor = barvy[sMotiv]["text"];
+                    foreach (object tsdi in ((MenuStrip)c).Items)
+                    {
+                        if (tsdi.GetType() == typeof(ToolStripMenuItem) || tsdi.GetType() == typeof(ToolStripComboBox))
+                        {
+                            SetControlColor(tsdi);
+                        }
+                    }
+                }
+                else if (c.GetType() == typeof(ToolStripDropDownItem))
+                {
+                    ((ToolStripDropDownItem)c).ForeColor = barvy[sMotiv]["text"];
+                    foreach (object tsdi in ((ToolStripDropDownItem)c).DropDownItems)
                     {
                         SetControlColor(tsdi);
                     }
                 }
-            }
-            else if (c.GetType() == typeof(ToolStripDropDownItem))
-            {
-                ((ToolStripDropDownItem)c).ForeColor = barvy[sMotiv]["text"];
-                //((ToolStripDropDownItem)c).BackColor = barvy[sMotiv]["pozadí"];
-                foreach (object tsdi in ((ToolStripDropDownItem)c).DropDownItems)
+                else if (c.GetType() == typeof(ToolStripMenuItem))
                 {
-                    SetControlColor(tsdi);
-                }
-            }
-            else if (c.GetType() == typeof(ToolStripMenuItem))
-            {
-                ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
-                //((ToolStripMenuItem)c).BackColor = barvy[sMotiv]["pozadí"];
-                ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
-                foreach (object tsdi in ((ToolStripMenuItem)c).DropDownItems)
-                {
-                    SetControlColor(tsdi);
-                }
-            }
-            else if (c.GetType() == typeof(ToolStripComboBox))
-            {
-                ((ToolStripComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((ToolStripComboBox)c).ForeColor = barvy[sMotiv]["text"];
-            }
-            else if (c.GetType() == typeof(ToolStripLabel))
-            {
-                ((ToolStripLabel)c).ForeColor = barvy[sMotiv]["disabledText"];
-            }
-            else if (c.GetType() == typeof(ToolStrip))
-            {
-                ((ToolStrip)c).BackColor = barvy[sMotiv]["pozadí"];
-                foreach (object tsdi in ((ToolStrip)c).Items)
-                {
-                    if (tsdi.GetType() != typeof(ToolStripButton))
+                    ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
+                    ((ToolStripMenuItem)c).ForeColor = barvy[sMotiv]["text"];
+                    foreach (object tsdi in ((ToolStripMenuItem)c).DropDownItems)
+                    {
                         SetControlColor(tsdi);
+                    }
                 }
-            }
-            else if (c.GetType() == typeof(RichTextBox))
-            {
-                ((RichTextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                ((RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
-            }
-            else
-            {
-                string typ = c.GetType().ToString();
-                if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) &&
-                c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox) &&
-                !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+")/* != "System.Windows.Forms.UpDownBase+UpDownButtons" || c.GetType().ToString() != "System.Windows.Forms.UpDownBase+UpDownEdit"*/)
+                else if (c.GetType() == typeof(ToolStripComboBox))
                 {
-                    ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
-                    ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                    ((ToolStripComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((ToolStripComboBox)c).ForeColor = barvy[sMotiv]["text"];
                 }
-            }
+                else if (c.GetType() == typeof(ToolStripLabel))
+                {
+                    ((ToolStripLabel)c).ForeColor = barvy[sMotiv]["disabledText"];
+                }
+                else if (c.GetType() == typeof(ToolStrip))
+                {
+                    ((ToolStrip)c).BackColor = barvy[sMotiv]["pozadí"];
+                    foreach (object tsdi in ((ToolStrip)c).Items)
+                    {
+                        if (tsdi.GetType() != typeof(ToolStripButton))
+                            SetControlColor(tsdi);
+                    }
+                }
+                else if (c.GetType() == typeof(RichTextBox))
+                {
+                    ((RichTextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
+                }
+                else
+                {
+                    string typ = c.GetType().ToString();
+                    if (c as Control != null && !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+"))
+                    {
+                        ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
+                        ((Control)c).ForeColor = barvy[sMotiv]["text"];
+                    }
+                }
 
-            if (c.GetType() != typeof(ToolStripMenuItem) && c.GetType() != typeof(ToolStripSeparator) &&
-                c.GetType() != typeof(ToolStripDropDownItem) && c.GetType() != typeof(ToolStripComboBox) &&
-                !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+"))
-            {
-                foreach (Control cc in ((Control)c).Controls)
+                if (c as Control != null && !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+"))
                 {
-                    //barvy v nastavení
-                    if (cc.GetType() != typeof(Label) && cc.Name != "vyreseno" && cc.Name != "ceka" && cc.Name != "odpoved" && cc.Name != "rdp" && cc.Name != "probiha" &&
-                                cc.Name != "prescas" && cc.Name != "textLow" && cc.Name != "textMid" && cc.Name != "textHigh" && cc.Name != "textOK")
+                    foreach (Control cc in ((Control)c).Controls)
+                    {
+                        //barvy v nastavení
                         SetControlColor(cc);
+                    }
                 }
+            }
+            else if ((c as Control)?.Tag as string == "CustomColor:Window")
+            {
+                SetWindowControlColor(c);
             }
         }
 
@@ -313,7 +321,7 @@ namespace Ticketník
                     ((Form1)form).ukončitToolStripMenuItem.Image = Resources.offW;
                 }
             }
-
+            
             foreach (Control c in form.Controls)
             {
                 SetControlColor(c);

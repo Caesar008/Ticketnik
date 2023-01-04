@@ -97,6 +97,9 @@
     <Compile Include="CustomControls\RadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomControls\TabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>

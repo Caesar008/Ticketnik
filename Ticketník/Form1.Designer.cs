@@ -87,7 +87,7 @@
             this.hledat = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Napoveda = new System.Windows.Forms.ToolStripButton();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl1 = new Ticketník.CustomControls.TabControl();
             this.ledenT = new System.Windows.Forms.TabPage();
             this.leden = new System.Windows.Forms.ListView();
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -658,13 +658,13 @@
             // 
             // ledenT
             // 
+            this.ledenT.BackColor = System.Drawing.Color.IndianRed;
             this.ledenT.Controls.Add(this.leden);
             this.ledenT.Location = new System.Drawing.Point(4, 22);
             this.ledenT.Name = "ledenT";
             this.ledenT.Size = new System.Drawing.Size(770, 356);
             this.ledenT.TabIndex = 0;
             this.ledenT.Text = "Leden";
-            this.ledenT.UseVisualStyleBackColor = true;
             // 
             // leden
             // 
@@ -1294,7 +1294,7 @@
         internal System.Windows.Forms.OpenFileDialog openFileDialog1;
         internal System.Windows.Forms.ColumnHeader columnHeader11;
         internal System.Windows.Forms.ToolStripButton zmenZakaznika;
-        internal System.Windows.Forms.TabControl tabControl1;
+        internal Ticketník.CustomControls.TabControl tabControl1;
         internal System.Windows.Forms.ToolStripMenuItem upravitZákazníkaToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem smazatZákazníkaToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;

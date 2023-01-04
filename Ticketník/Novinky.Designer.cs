@@ -42,6 +42,7 @@
             this.cz.ReadOnly = true;
             this.cz.Size = new System.Drawing.Size(380, 426);
             this.cz.TabIndex = 0;
+            this.cz.Tag = "CustomColor:Window";
             this.cz.Text = "";
             // 
             // en
@@ -55,6 +56,7 @@
             this.en.ReadOnly = true;
             this.en.Size = new System.Drawing.Size(380, 426);
             this.en.TabIndex = 1;
+            this.en.Tag = "CustomColor:Window";
             this.en.Text = "";
             // 
             // Novinky

@@ -12,9 +12,11 @@ namespace Ticketník.CustomControls
         public const int WM_PAINT = 0xF;
         public const int WM_NCPAINT = 0x85;
         public const int WM_ERASEBKGND = 0x0014;
+        public const int WM_DRAWITEM = 0x002B;
 
-        public static int OnPaint { get { return WM_PAINT; } }
-        public static int OnFramePaint {  get { return WM_NCPAINT; } }
-        public static int OnEraseBackground { get { return WM_ERASEBKGND; } }
+        public static int OnPaint => WM_PAINT;
+        public static int OnFramePaint => WM_NCPAINT;
+        public static int OnEraseBackground => WM_ERASEBKGND;
+        public static int OnDrawItem => WM_DRAWITEM;
     }
 }

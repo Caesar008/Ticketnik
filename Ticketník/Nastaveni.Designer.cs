@@ -139,6 +139,7 @@
             this.prescas.Name = "prescas";
             this.prescas.Size = new System.Drawing.Size(112, 23);
             this.prescas.TabIndex = 11;
+            this.prescas.Tag = "CustomColor";
             this.prescas.Text = "Přesčas";
             this.prescas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -164,6 +165,7 @@
             this.probiha.Name = "probiha";
             this.probiha.Size = new System.Drawing.Size(112, 23);
             this.probiha.TabIndex = 9;
+            this.probiha.Tag = "CustomColor";
             this.probiha.Text = "Probíhá";
             this.probiha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -173,6 +175,7 @@
             this.rdp.Name = "rdp";
             this.rdp.Size = new System.Drawing.Size(112, 23);
             this.rdp.TabIndex = 8;
+            this.rdp.Tag = "CustomColor";
             this.rdp.Text = "RDP";
             this.rdp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -182,6 +185,7 @@
             this.odpoved.Name = "odpoved";
             this.odpoved.Size = new System.Drawing.Size(112, 23);
             this.odpoved.TabIndex = 7;
+            this.odpoved.Tag = "CustomColor";
             this.odpoved.Text = "Čeká se na odpověď";
             this.odpoved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -191,6 +195,7 @@
             this.ceka.Name = "ceka";
             this.ceka.Size = new System.Drawing.Size(112, 23);
             this.ceka.TabIndex = 6;
+            this.ceka.Tag = "CustomColor";
             this.ceka.Text = "Čeká se";
             this.ceka.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -200,6 +205,7 @@
             this.vyreseno.Name = "vyreseno";
             this.vyreseno.Size = new System.Drawing.Size(112, 23);
             this.vyreseno.TabIndex = 5;
+            this.vyreseno.Tag = "CustomColor";
             this.vyreseno.Text = "Vyřešeno";
             this.vyreseno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -323,6 +329,7 @@
             this.textHigh.Name = "textHigh";
             this.textHigh.Size = new System.Drawing.Size(63, 23);
             this.textHigh.TabIndex = 9;
+            this.textHigh.Tag = "CustomColor";
             this.textHigh.Text = "nad 8 hodin";
             this.textHigh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -332,6 +339,7 @@
             this.textOK.Name = "textOK";
             this.textOK.Size = new System.Drawing.Size(63, 23);
             this.textOK.TabIndex = 8;
+            this.textOK.Tag = "CustomColor";
             this.textOK.Text = "8 hodin";
             this.textOK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -341,6 +349,7 @@
             this.textMid.Name = "textMid";
             this.textMid.Size = new System.Drawing.Size(63, 23);
             this.textMid.TabIndex = 7;
+            this.textMid.Tag = "CustomColor";
             this.textMid.Text = "4 - 8 hodin";
             this.textMid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -350,6 +359,7 @@
             this.textLow.Name = "textLow";
             this.textLow.Size = new System.Drawing.Size(63, 23);
             this.textLow.TabIndex = 6;
+            this.textLow.Tag = "CustomColor";
             this.textLow.Text = "0 - 4 hodiny";
             this.textLow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
