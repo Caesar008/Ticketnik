@@ -63,12 +63,6 @@ namespace Ticketník.CustomControls
             }
         }
 
-        /*protected override void OnSelected(TabControlEventArgs e)
-        {
-            base.OnSelected(e);
-            Refresh();
-        }*/
-
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -104,8 +98,7 @@ namespace Ticketník.CustomControls
                                 if (SelectedIndex != index)
                                 {
                                     Size header = MeasureHeader(TabPages[index]);
-                                    Rectangle headerRect = GetTabRect(index);/*new Rectangle(HeaderOffset(TabPages, index), 2,
-                                        header.Width,header.Height);*/
+                                    Rectangle headerRect = GetTabRect(index);
                                     if (index == TabPages.Count - 1)
                                         headerRect.Width -= 2;
                                     using (SolidBrush abr = new SolidBrush(HeaderBackColor))
@@ -127,7 +120,6 @@ namespace Ticketník.CustomControls
                             Size headerSel = MeasureHeader(SelectedTab);
                             Rectangle tabRect = GetTabRect(SelectedIndex);
                             Rectangle headerRectSel = new Rectangle(tabRect.X-2,tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 3);
-                            //Rectangle bottom = new Rectangle(headerRectSel.X+1, headerSel.Height+1, headerRectSel.Width-1, 3);
                             using (SolidBrush abr = new SolidBrush(HeaderActiveBackColor))
                             {
                                 GraphicsPath headerRectSelFill = RoundedRect(new Rectangle(tabRect.X - 2, tabRect.Y - 2, 
@@ -138,12 +130,8 @@ namespace Ticketník.CustomControls
 
                                 g.SmoothingMode = SmoothingMode.AntiAlias;
                                 g.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
-                                //tady pak umazat sposdní čáru
-                                /*
                                 g.SmoothingMode = SmoothingMode.None;
-                                g.FillRectangle(abr, bottom);*/
-                                g.SmoothingMode = SmoothingMode.None;
-                                TextRenderer.DrawText(g, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), this.FindForm().ForeColor);
+                                TextRenderer.DrawText(g, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), Parent.ForeColor);
                             }
                         }
                     }
@@ -162,43 +150,8 @@ namespace Ticketník.CustomControls
 
         private static Size MeasureHeaders(TabPageCollection pages)
         {
-            /*int width = 0;
-            int height = 0;
-            foreach(TabPage tp in pages)
-            {
-                Size s = MeasureHeader(tp);
-                width += s.Width;
-                if(height < s.Height)
-                    height = s.Height;
-            }
-
-            return new Size(width+(pages.Count-1), height+3);*/
             Rectangle tr = ((TabControl)pages[pages.Count-1].Parent).GetTabRect(pages.Count - 1);
             return new Size(tr.X + tr.Width, tr.Y + tr.Height);
-        }
-
-        private static Size MeasureHeadersFull(TabPageCollection pages)
-        {
-            int width = 0;
-            int height = 0;
-            foreach (TabPage tp in pages)
-            {
-                Size s = MeasureHeader(tp);
-                width += s.Width;
-                if (height < s.Height)
-                    height = s.Height + 2;
-            }
-            return new Size(width + (pages.Count - 1), height + 3);
-        }
-
-        private static int HeaderOffset(TabPageCollection pages,int index)
-        {
-            int x = 2;
-            for(int i = 0; i < index; i++)
-            {
-                x += MeasureHeader(pages[i]).Width+1;
-            }
-            return x;
         }
 
         private static GraphicsPath RoundedRect(Rectangle bounds, int radius1, int radius2, int radius3, int radius4)
@@ -262,7 +215,7 @@ namespace Ticketník.CustomControls
             }
 
             
-
+            //nechci spodní čáru. Začátek je tak posunut od jiného rohu
             //path.CloseFigure();
             return path;
         }
