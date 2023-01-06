@@ -64,7 +64,9 @@ namespace Ticketník
                     { "checkBoxCheckedOver", Color.FromArgb(25, 110, 191) },
                     { "disabledText", Color.FromArgb(160,160,160)/*SystemColors.ControlDark*/ },
                     { "button", Color.Gainsboro },
-                    { "buttonBorder", Color.DarkGray }
+                    { "buttonBorder", Color.DarkGray },
+                    { "tabPozadí", Color.FromArgb(244, 244, 244) },
+                    { "tabPozadíAktivní", Color.White }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -84,7 +86,9 @@ namespace Ticketník
                     { "checkBoxCheckedOver", Color.FromArgb(25, 110, 191) },
                     { "disabledText", Color.FromArgb(105, 105, 105 ) /*SystemColors.ControlDarkDark*/},
                     { "button", Color.FromArgb(50, 50, 50) },
-                    { "buttonBorder", Color.DimGray }
+                    { "buttonBorder", Color.DimGray },
+                    { "tabPozadí", Color.FromArgb(50, 50, 50) },
+                    { "tabPozadíAktivní",Color.FromArgb(70, 70, 70) }
                 }
             }
         };
@@ -222,9 +226,9 @@ namespace Ticketník
                 }
                 else if (c.GetType() == typeof(CustomControls.TabControl))
                 {
-                    ((CustomControls.TabControl)c).HeaderBackColor = barvy[sMotiv]["pozadíControl"];
-                    ((CustomControls.TabControl)c).HeaderBorderColor = barvy[sMotiv]["controlRámeček"];
-                    ((CustomControls.TabControl)c).HeaderActiveBackColor = barvy[sMotiv]["rámeček"];
+                    ((CustomControls.TabControl)c).HeaderBackColor = barvy[sMotiv]["tabPozadí"];
+                    ((CustomControls.TabControl)c).BorderColor = barvy[sMotiv]["controlRámeček"];
+                    ((CustomControls.TabControl)c).HeaderActiveBackColor = barvy[sMotiv]["tabPozadíAktivní"];
                     ((CustomControls.TabControl)c).ForeColor = barvy[sMotiv]["text"];
                 }
                 else

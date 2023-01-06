@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,16 +18,16 @@ namespace Ticketník.CustomControls
     {
         private bool _mouseIn = false;
 
-        private Color headerBorderColor = Color.Gray;
+        private Color borderColor = Color.Gray;
         [DefaultValue(typeof(Color), "Gray")]
-        public Color HeaderBorderColor
+        public Color BorderColor
         {
-            get { return headerBorderColor; }
+            get { return borderColor; }
             set
             {
-                if (headerBorderColor != value)
+                if (borderColor != value)
                 {
-                    headerBorderColor = value;
+                    borderColor = value;
                     Invalidate();
                 }
             }
@@ -77,12 +78,23 @@ namespace Ticketník.CustomControls
                 Size headers = MeasureHeaders(TabPages);
                 Rectangle allHeaders = new Rectangle(0, 0, headers.Width+2, headers.Height);
                 var dc = GetWindowDC(handle);
-                using (Pen p = new Pen(HeaderBorderColor, 1))
+                using (Pen p = new Pen(BorderColor, 1))
                 {
-                    using (SolidBrush b = new SolidBrush(this.FindForm().BackColor))
+                    using (SolidBrush b = new SolidBrush(Parent.BackColor))
                     {
                         using (Graphics g = Graphics.FromHdc(dc))
                         {
+                            //rámeček celý
+                            Rectangle tabCR = new Rectangle(0, MeasureHeaders(TabPages).Height, this.Width-1, this.Height - MeasureHeaders(TabPages).Height - 1);
+                            g.DrawRectangle(p, tabCR);
+                            using(Pen v = new Pen(HeaderActiveBackColor, 1))
+                                {
+                                //vnitřní vyplnění
+                                Rectangle tabCRIn = new Rectangle(1, MeasureHeaders(TabPages).Height+1, this.Width - 3, this.Height - MeasureHeaders(TabPages).Height - 3);
+                                g.DrawRectangle(v, tabCRIn);
+                            }
+
+                            //taby
                             int index = 0;
                             g.FillRectangle(b, allHeaders);
                             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -99,30 +111,38 @@ namespace Ticketník.CustomControls
                                     using (SolidBrush abr = new SolidBrush(HeaderBackColor))
                                     {
                                         GraphicsPath headerRectFill = RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
-                                            headerRect.Width, headerRect.Height -1), 1, 1, 0, 0);
+                                            headerRect.Width, headerRect.Height), 1, 1, 0, 0);
+
+                                        g.SmoothingMode = SmoothingMode.None;
                                         g.FillPath(abr, headerRectFill);
                                         TextRenderer.DrawText(g, TabPages[index].Text, TabPages[index].Font, new Point(headerRect.X+2, headerRect.Y+2), this.FindForm().ForeColor);
                                     }
+                                    g.SmoothingMode = SmoothingMode.AntiAlias;
                                     g.DrawPath(p, RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
-                                            headerRect.Width, headerRect.Height - 1), 1, 1, 1, 1));
+                                            headerRect.Width, headerRect.Height), 1, 1, 0, 0));
                                 }
                                 index++;
                             }
                             //a teď vybraný do popředí
                             Size headerSel = MeasureHeader(SelectedTab);
                             Rectangle tabRect = GetTabRect(SelectedIndex);
-                            Rectangle headerRectSel = new Rectangle(tabRect.X-2,tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 2);
-                            Rectangle bottom = new Rectangle(headerRectSel.X+1, headerSel.Height+1, headerRectSel.Width-1, 3);
+                            Rectangle headerRectSel = new Rectangle(tabRect.X-2,tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 3);
+                            //Rectangle bottom = new Rectangle(headerRectSel.X+1, headerSel.Height+1, headerRectSel.Width-1, 3);
                             using (SolidBrush abr = new SolidBrush(HeaderActiveBackColor))
                             {
                                 GraphicsPath headerRectSelFill = RoundedRect(new Rectangle(tabRect.X - 2, tabRect.Y - 2, 
-                                    headerSel.Width + 4, headerSel.Height + 3), 1, 1, 0, 0);
-                                g.FillPath(abr, headerRectSelFill);
-                                g.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
-                                //tady pak umazat sposdní čáru
+                                    headerSel.Width + 4, headerSel.Height + 4), 1, 1, 0, 0);
 
                                 g.SmoothingMode = SmoothingMode.None;
-                                g.FillRectangle(abr, bottom);
+                                g.FillPath(abr, headerRectSelFill);
+
+                                g.SmoothingMode = SmoothingMode.AntiAlias;
+                                g.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
+                                //tady pak umazat sposdní čáru
+                                /*
+                                g.SmoothingMode = SmoothingMode.None;
+                                g.FillRectangle(abr, bottom);*/
+                                g.SmoothingMode = SmoothingMode.None;
                                 TextRenderer.DrawText(g, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), this.FindForm().ForeColor);
                             }
                         }
@@ -142,7 +162,7 @@ namespace Ticketník.CustomControls
 
         private static Size MeasureHeaders(TabPageCollection pages)
         {
-            int width = 0;
+            /*int width = 0;
             int height = 0;
             foreach(TabPage tp in pages)
             {
@@ -151,7 +171,10 @@ namespace Ticketník.CustomControls
                 if(height < s.Height)
                     height = s.Height;
             }
-            return new Size(width+(pages.Count-1), height+3);
+
+            return new Size(width+(pages.Count-1), height+3);*/
+            Rectangle tr = ((TabControl)pages[pages.Count-1].Parent).GetTabRect(pages.Count - 1);
+            return new Size(tr.X + tr.Width, tr.Y + tr.Height);
         }
 
         private static Size MeasureHeadersFull(TabPageCollection pages)
@@ -191,6 +214,19 @@ namespace Ticketník.CustomControls
             Rectangle arc4 = new Rectangle(bounds.Location, new Size(diameter4, diameter4));
             GraphicsPath path = new GraphicsPath();
 
+            // bottom left arc 
+            arc4.X = bounds.Right - diameter4;
+            arc4.Y = bounds.Bottom - diameter4;
+            arc4.X = bounds.Left;
+            if (radius4 == 0)
+            {
+                path.AddLine(arc4.Location, arc4.Location);
+            }
+            else
+            {
+                path.AddArc(arc4, 90, 90);
+            }
+
             // top left arc  
             if (radius1 == 0)
             {
@@ -211,7 +247,7 @@ namespace Ticketník.CustomControls
             {
                 path.AddArc(arc2, 270, 90);
             }
-
+            
             // bottom right arc  
 
             arc3.X = bounds.Right - diameter3;
@@ -225,20 +261,9 @@ namespace Ticketník.CustomControls
                 path.AddArc(arc3, 0, 90);
             }
 
-            // bottom left arc 
-            arc4.X = bounds.Right - diameter4;
-            arc4.Y = bounds.Bottom - diameter4;
-            arc4.X = bounds.Left;
-            if (radius4 == 0)
-            {
-                path.AddLine(arc4.Location, arc4.Location);
-            }
-            else
-            {
-                path.AddArc(arc4, 90, 90);
-            }
+            
 
-            path.CloseFigure();
+            //path.CloseFigure();
             return path;
         }
 
