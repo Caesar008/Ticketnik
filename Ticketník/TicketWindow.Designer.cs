@@ -1,4 +1,6 @@
-﻿namespace Ticketník
+﻿using System.Windows.Forms;
+
+namespace Ticketník
 {
     partial class TicketWindow
     {
@@ -89,7 +91,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.ok = new Ticketník.CustomControls.Button();
-            this.datum = new System.Windows.Forms.DateTimePicker();
+            this.datum = new Ticketník.CustomControls.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -876,7 +878,7 @@
         internal System.Windows.Forms.Label terpKod;
         private Ticketník.CustomControls.Button search_btn;
         internal Ticketník.CustomControls.Button button1;
-        internal System.Windows.Forms.DateTimePicker datum;
+        internal Ticketník.CustomControls.DateTimePicker datum;
         private System.Windows.Forms.Panel newTerpTaskPanel;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineType;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTask;

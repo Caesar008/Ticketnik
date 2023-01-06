@@ -138,6 +138,7 @@ namespace Ticketník.CustomControls
                 }
                 ReleaseDC(handle, dc);
             }
+
         }
 
         private static Size MeasureHeader(TabPage page)

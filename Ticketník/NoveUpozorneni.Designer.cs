@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new Ticketník.CustomControls.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new Ticketník.CustomControls.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -130,7 +130,7 @@
 
         private System.Windows.Forms.Label label1;
         private Ticketník.CustomControls.Button button1;
-        internal System.Windows.Forms.DateTimePicker dateTimePicker1;
+        internal Ticketník.CustomControls.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         internal Ticketník.CustomControls.ComboBox comboBox1;

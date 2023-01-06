@@ -231,6 +231,16 @@ namespace Ticketník
                     ((CustomControls.TabControl)c).HeaderActiveBackColor = barvy[sMotiv]["tabPozadíAktivní"];
                     ((CustomControls.TabControl)c).ForeColor = barvy[sMotiv]["text"];
                 }
+                else if (c.GetType() == typeof(CustomControls.DateTimePicker))
+                {
+                    ((CustomControls.DateTimePicker)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.DateTimePicker)c).ForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.DateTimePicker)c).BorderColor = barvy[sMotiv]["buttonBorder"];
+                    ((CustomControls.DateTimePicker)c).ButtonColor = barvy[sMotiv]["button"];
+                    ((CustomControls.DateTimePicker)c).ArrowColor = barvy[sMotiv]["arrow"];
+                    ((CustomControls.DateTimePicker)c).BorderColorMouseOver = Color.DodgerBlue;
+                    ((CustomControls.DateTimePicker)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
+                }
                 else
                 {
                     string typ = c.GetType().ToString();

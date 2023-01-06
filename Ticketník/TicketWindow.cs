@@ -2752,7 +2752,6 @@ namespace Ticketník
         {
             ((Button)sender).FlatAppearance.BorderColor = Color.DodgerBlue;
         }
-
         protected override CreateParams CreateParams
         {
             get
