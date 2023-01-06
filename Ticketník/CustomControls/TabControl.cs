@@ -18,7 +18,7 @@ namespace Ticketník.CustomControls
     {
         private bool _mouseIn = false;
 
-        private Color borderColor = Color.Gray;
+        private Color borderColor = Color.LightGray;
         [DefaultValue(typeof(Color), "Gray")]
         public Color BorderColor
         {
@@ -33,8 +33,8 @@ namespace Ticketník.CustomControls
             }
         }
 
-        private Color headerBackColor = SystemColors.Control;
-        [DefaultValue(typeof(SystemColors), "Control")]
+        private Color headerBackColor = Color.FromArgb(244, 244, 244);
+        [DefaultValue("#F4F4F4")]
         public Color HeaderBackColor
         {
             get { return headerBackColor; }

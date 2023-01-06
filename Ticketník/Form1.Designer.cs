@@ -649,6 +649,7 @@
             this.tabControl1.Controls.Add(this.rijenT);
             this.tabControl1.Controls.Add(this.listopadT);
             this.tabControl1.Controls.Add(this.prosinecT);
+            this.tabControl1.HeaderBackColor = System.Drawing.SystemColors.Control;
             this.tabControl1.Location = new System.Drawing.Point(44, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1173,6 +1174,7 @@
             // 
             this.rokVyber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rokVyber.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.rokVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.rokVyber.FormattingEnabled = true;
             this.rokVyber.Location = new System.Drawing.Point(762, 1);
             this.rokVyber.Name = "rokVyber";
