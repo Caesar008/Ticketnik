@@ -112,6 +112,19 @@ namespace Ticketník.CustomControls
             base.OnMouseLeave(eventargs);
             Invalidate();
         }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            _mouseIn = true;
+            base.OnGotFocus(e);
+            Invalidate();
+        }
+        protected override void OnLostFocus(EventArgs e)
+        {
+            _mouseIn = false;
+            base.OnLostFocus(e);
+            Invalidate();
+        }
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

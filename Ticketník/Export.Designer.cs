@@ -31,8 +31,8 @@
             this.radioButton1 = new Ticketník.CustomControls.RadioButton();
             this.radioButton2 = new Ticketník.CustomControls.RadioButton();
             this.radioButton3 = new Ticketník.CustomControls.RadioButton();
-            this.dateTimePicker1 = new Ticketník.CustomControls.DateTimePicker();
-            this.dateTimePicker2 = new Ticketník.CustomControls.DateTimePicker();
+            this.dateTimePicker1 = new Ticketník.CustomControls.DatePicker();
+            this.dateTimePicker2 = new Ticketník.CustomControls.DatePicker();
             this.button1 = new Ticketník.CustomControls.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
@@ -133,8 +133,8 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
-        private Ticketník.CustomControls.DateTimePicker dateTimePicker1;
-        private Ticketník.CustomControls.DateTimePicker dateTimePicker2;
+        private Ticketník.CustomControls.DatePicker dateTimePicker1;
+        private Ticketník.CustomControls.DatePicker dateTimePicker2;
         private Ticketník.CustomControls.Button button1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }

@@ -125,9 +125,9 @@ namespace Ticketník.CustomControls
             base.OnMouseLeave(e);
             Invalidate();
         }
-        protected override void WndProc(ref Message m)
+        /*protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (m.Msg == Messages.OnPaint)
+            if (e.Button == MouseButtons.Left)
             {
                 var clientRect = ClientRectangle;
                 var dropDownButtonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
@@ -135,10 +135,36 @@ namespace Ticketník.CustomControls
                     new Size(clientRect.Width - 1, clientRect.Height - 1));
                 var innerBorder = new Rectangle(outerBorder.X + 2, outerBorder.Y + 2,
                     outerBorder.Width - dropDownButtonWidth - 3, outerBorder.Height - 3);
-                var innerInnerBorder = new Rectangle(innerBorder.X + 1, innerBorder.Y + 1,
-                    innerBorder.Width - 2, innerBorder.Height - 2);
                 var dropDownRect = new Rectangle(innerBorder.Right + 1, innerBorder.Y - 1,
                     dropDownButtonWidth, innerBorder.Height + 2);
+
+                if (e.Location != dropDownRect.Location)
+                {
+                    MouseEventArgs me = new MouseEventArgs(e.Button, e.Clicks, dropDownRect.Right - dropDownRect.Width / 2, dropDownRect.Top - dropDownRect.Height / 2, e.Delta);
+                    base.OnMouseDown(me);
+                }
+                else
+                    base.OnMouseDown(e);
+            }
+            else
+                base.OnMouseDown(e);
+        }*/
+
+        protected override void WndProc(ref Message m)
+        {
+            var clientRect = ClientRectangle;
+            var dropDownButtonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
+            var outerBorder = new Rectangle(clientRect.Location,
+                new Size(clientRect.Width - 1, clientRect.Height - 1));
+            var innerBorder = new Rectangle(outerBorder.X + 2, outerBorder.Y + 2,
+                outerBorder.Width - dropDownButtonWidth - 3, outerBorder.Height - 3);
+            var innerInnerBorder = new Rectangle(innerBorder.X + 1, innerBorder.Y + 1,
+                innerBorder.Width - 2, innerBorder.Height - 2);
+            var dropDownRect = new Rectangle(innerBorder.Right + 1, innerBorder.Y - 1,
+                dropDownButtonWidth, innerBorder.Height + 2);
+
+            if (m.Msg == Messages.OnPaint)
+            {
                 if (RightToLeft == RightToLeft.Yes)
                 {
                     innerBorder.X = clientRect.Width - innerBorder.Right;
@@ -189,7 +215,7 @@ namespace Ticketník.CustomControls
                     {
                         g.FillPolygon(b, arrow);
                     }
-                    using (var p = new Pen(innerBorderColor, 2))
+                    /*using (var p = new Pen(innerBorderColor, 2))
                     {
                         g.DrawRectangle(p, innerBorder);
                         //g.DrawRectangle(p, innerInnerBorder);
@@ -197,12 +223,12 @@ namespace Ticketník.CustomControls
                         {
                             g.FillRectangle(b, innerBorder);
                         }
-                    }
+                    }*/
                     using (var p = new Pen(outerBorderColor))
                     {
                         g.DrawRectangle(p, outerBorder);
                     }
-                    TextRenderer.DrawText(g, Text, Font, new Point (3, 3) ,ForeColor);
+                    //TextRenderer.DrawText(g, Text, Font, new Point(3, 3), ForeColor);*/
                 }
                 if (shoulEndPaint)
                     EndPaint(Handle, ref ps);
@@ -210,6 +236,44 @@ namespace Ticketník.CustomControls
             }
             else
                 base.WndProc(ref m);
+        }
+
+        protected override void OnDropDown(EventArgs e)
+        {
+            var hWnd = SendMessage(this.Handle, Messages.GetMonthCalendar, 0, 0);
+            if (hWnd != IntPtr.Zero)
+            {
+                SetWindowTheme(hWnd, String.Empty, String.Empty);
+                Graphics g = Graphics.FromHwnd(hWnd);
+                //g.DrawRectangle
+                TextRenderer.DrawText(g, "test", Font, new Point(3, 3), Color.Violet);
+            }
+            else
+                base.OnDropDown(e);
+        }
+
+        /*protected override void OnHandleCreated(EventArgs e)
+        {
+            //SetWindowTheme(this.Handle, "", "");
+            base.OnHandleCreated(e);
+        }*/
+
+        public enum MontControlIndexes : int
+        {
+
+            MCSC_TEXT = 1,
+            MCSC_TITLEBK = 2,
+            MCSC_TITLETEXT = 3,
+            MCSC_MONTHBK = 4,
+            MCSC_TRAILINGTEXT = 5
+        }
+
+        public enum MonCalView : int
+        {
+            MCMV_MONTH = 0,
+            MCMV_YEAR = 1,
+            MCMV_DECADE = 2,
+            MCMV_CENTURY = 3
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -248,7 +312,11 @@ namespace Ticketník.CustomControls
         public static extern int SelectClipRgn(IntPtr hDC, IntPtr hRgn);
 
         [DllImport("user32.dll")]
-        public static extern int GetUpdateRgn(IntPtr hwnd, IntPtr hrgn, bool fErase);
+        public static extern int GetUpdateRgn(IntPtr hwnd, IntPtr hrgn, bool fErase); 
+        [DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("uxtheme.dll")]
+        private static extern int SetWindowTheme(IntPtr hWnd, string appname, string idlist);
         public enum RegionFlags
         {
             ERROR = 0,
@@ -261,16 +329,6 @@ namespace Ticketník.CustomControls
 
         [DllImport("gdi32.dll")]
         private static extern IntPtr CreateRectRgn(int x1, int y1, int x2, int y2);
-    }
-    public static class Extensions
-    {
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern int SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
-
-        public static void Open(this CustomControls.DateTimePicker obj)
-        {
-            SendMessage(obj.Handle, Messages.WM_SYSKEYDOWN, (int)Keys.Down, 0);
-        }
     }
 }
 

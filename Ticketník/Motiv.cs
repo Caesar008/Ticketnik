@@ -231,15 +231,16 @@ namespace Ticketník
                     ((CustomControls.TabControl)c).HeaderActiveBackColor = barvy[sMotiv]["tabPozadíAktivní"];
                     ((CustomControls.TabControl)c).ForeColor = barvy[sMotiv]["text"];
                 }
-                else if (c.GetType() == typeof(CustomControls.DateTimePicker))
+                else if (c.GetType() == typeof(CustomControls.DatePicker))
                 {
-                    ((CustomControls.DateTimePicker)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                    ((CustomControls.DateTimePicker)c).ForeColor = barvy[sMotiv]["text"];
-                    ((CustomControls.DateTimePicker)c).BorderColor = barvy[sMotiv]["buttonBorder"];
-                    ((CustomControls.DateTimePicker)c).ButtonColor = barvy[sMotiv]["button"];
-                    ((CustomControls.DateTimePicker)c).ArrowColor = barvy[sMotiv]["arrow"];
-                    ((CustomControls.DateTimePicker)c).BorderColorMouseOver = Color.DodgerBlue;
-                    ((CustomControls.DateTimePicker)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
+                    //((CustomControls.DatePicker)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.DatePicker)c).ForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.DatePicker)c).BorderColor = barvy[sMotiv]["buttonBorder"];
+                    ((CustomControls.DatePicker)c).ButtonColor = barvy[sMotiv]["button"];
+                    ((CustomControls.DatePicker)c).ArrowColor = barvy[sMotiv]["arrow"];
+                    ((CustomControls.DatePicker)c).BorderColorMouseOver = Color.DodgerBlue;
+                    ((CustomControls.DatePicker)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
+                    ((CustomControls.DatePicker)c).BackColor = barvy[sMotiv]["pozadíControl"];
                 }
                 else
                 {
