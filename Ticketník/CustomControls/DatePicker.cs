@@ -264,11 +264,15 @@ namespace Ticketník.CustomControls
                 string den = new DateTime(Value.Ticks).ToString("d");
                 string mesic = new DateTime(Value.Ticks).ToString("MMMM");
                 string rok = new DateTime(Value.Ticks).ToString("yyyy");
+                if(Format == DateTimePickerFormat.Custom)
+                {
+                    denName = "";
+                }
                 using (Pen p = new Pen(Enabled ? ((Focused || _mouseIn) ? BorderColorMouseOver : BorderColor) : SystemColors.ControlDark))
                 {
                     //text
                     //jméno dne
-                    if (denNameSize.Width <= area.Width - 22 && denNameSize.Height <= area.Height-2)
+                    if (denNameSize.Width <= area.Width - 22 && denNameSize.Height <= area.Height-2 && denName != "")
                     {
                         TextRenderer.DrawText(g, denName, Font, new Point(1, (Height /2)-(denNameSize.Height/2)-1), ForeColor);
                     }
