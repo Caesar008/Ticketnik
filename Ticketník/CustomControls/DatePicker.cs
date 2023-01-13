@@ -19,12 +19,16 @@ namespace Ticketník.CustomControls
         private bool _dayEdit = false;
         private bool _monthEdit = false;
         private bool _yearEdit = false;
+        private bool _hourEdit = false;
+        private bool _minuteEdit = false;
 
         private Rectangle dropDown;
         private Rectangle denNameRect;
         private Rectangle denRect;
         private Rectangle mesicRect;
         private Rectangle rokRect;
+        private Rectangle minutyRect;
+        private Rectangle hodinyRect;
 
         private Color backColor = Color.White;
         [DefaultValue(typeof(Color), "White"), Browsable(true),
@@ -317,6 +321,8 @@ namespace Ticketník.CustomControls
             _dayEdit = false;
             _monthEdit = false;
             _yearEdit = false;
+            _minuteEdit= false;
+            _hourEdit= false;
 
             base.OnMouseClick(e);
             if (denRect != null && denRect.Contains(e.Location))
@@ -330,6 +336,14 @@ namespace Ticketník.CustomControls
             else if (rokRect != null && rokRect.Contains(e.Location))
             {
                 _yearEdit = true;
+            }
+            else if (minutyRect != null && minutyRect.Contains(e.Location))
+            {
+                _minuteEdit = true;
+            }
+            else if (hodinyRect != null && hodinyRect.Contains(e.Location))
+            {
+                _hourEdit = true;
             }
 
             else if (dropDown != null && dropDown.Contains(e.Location))
@@ -372,7 +386,7 @@ namespace Ticketník.CustomControls
                 {
                     denName = "";
                 }
-                using (Pen p = new Pen(Enabled ? ((Focused || _mouseIn) ? BorderColorMouseOver : BorderColor) : BorderColorDisabled))
+                using (Pen p = new Pen(Enabled ? ((Focused || _mouseIn || _dayEdit || _monthEdit || _yearEdit) ? BorderColorMouseOver : BorderColor) : BorderColorDisabled))
                 {
                     //text
                     //jméno dne
