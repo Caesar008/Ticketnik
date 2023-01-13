@@ -21,6 +21,9 @@ namespace Ticketník.CustomControls
         private bool _yearEdit = false;
         private bool _hourEdit = false;
         private bool _minuteEdit = false;
+        private bool _keyDown = false;
+
+        private int _keybuffer = -1;
 
         private Rectangle dropDown;
         private Rectangle denNameRect;
@@ -316,6 +319,24 @@ namespace Ticketník.CustomControls
             Invalidate();
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if(!_keyDown)
+            {
+                _keyDown = true;
+                switch(e.KeyCode)
+                {
+                }
+            }
+
+        }
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            base.OnKeyUp(e);
+            _keyDown = false;
+        }
+
         protected override void OnMouseClick(MouseEventArgs e)
         {
             _dayEdit = false;
@@ -323,6 +344,7 @@ namespace Ticketník.CustomControls
             _yearEdit = false;
             _minuteEdit= false;
             _hourEdit= false;
+            _keybuffer = -1;
 
             base.OnMouseClick(e);
             if (denRect != null && denRect.Contains(e.Location))
