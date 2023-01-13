@@ -345,7 +345,6 @@ namespace Ticketník.CustomControls
             {
                 _hourEdit = true;
             }
-
             else if (dropDown != null && dropDown.Contains(e.Location))
             {
                 //otevřít výběr dne

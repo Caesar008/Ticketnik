@@ -13,6 +13,7 @@ namespace Ticketník
         public Export(Form1 form)
         {
             this.form = form;
+            DoubleBuffered = true;
             InitializeComponent();
             dateTimePicker1.MaxDate = DateTime.Today;
             dateTimePicker2.MaxDate = DateTime.Today;
