@@ -189,7 +189,7 @@ namespace Ticketník.CustomControls
             }
         }
         private DateTime maxDate = DateTime.MaxValue;
-        [DefaultValue(typeof(DateTime), "31.12.9999"),
+        [DefaultValue(typeof(DateTime), "31.12.9998"),
             Description("Sets max date available in calendar"), Category("Data")]
         public DateTime MaxDate
         {
@@ -205,7 +205,7 @@ namespace Ticketník.CustomControls
             }
         }
         private DateTime minDate = DateTime.MinValue;
-        [DefaultValue(typeof(DateTime), "1.1.0001"),
+        [DefaultValue(typeof(DateTime), "1.1.1753"),
             Description("Sets min date available in calendar"), Category("Data")]
         public DateTime MinDate
         {
