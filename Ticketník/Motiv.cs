@@ -267,6 +267,10 @@ namespace Ticketník
             {
                 SetWindowControlColor(c);
             }
+            else if ((c as Control)?.Tag as string == "CustomColor:Ignore")
+            {
+                //do nothing
+            }
         }
 
         internal static Color GetMenuBarvy(string barva)
@@ -329,6 +333,7 @@ namespace Ticketník
         {
             form.SuspendLayout();
             string sMotiv = GetMotiv();
+
             form.BackColor = barvy[sMotiv]["pozadí"];
             form.ForeColor = barvy[sMotiv]["text"];
 

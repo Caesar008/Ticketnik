@@ -58,9 +58,16 @@ namespace Ticketník.CustomControls
                 this.MaximumSize = new System.Drawing.Size(146, 158);
                 this.BorderColor = borderColor;
                 this.BackgroundColor= backColor;
+                this.Tag = "CustomColor:Ignore";
             }
 
-            protected override bool ShowWithoutActivation => true;
+            protected override void OnLostFocus(EventArgs e)
+            {
+                base.OnLostFocus(e);
+                this.Hide();
+            }
+
+            //protected override bool ShowWithoutActivation => true;
 
             protected override void OnPaint(PaintEventArgs e)
             {
@@ -68,7 +75,7 @@ namespace Ticketník.CustomControls
                 using (Graphics g = e.Graphics)
                 {
                     Rectangle drawArea = new Rectangle(0, 0, Width - 1, Height - 1);
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    
                     using (SolidBrush b = new SolidBrush(BackgroundColor))
                     {
                         g.FillPath(b, RoundedRect(drawArea, 3, 3, 3, 3));
@@ -77,6 +84,7 @@ namespace Ticketník.CustomControls
                     {
                         g.DrawPath(p, RoundedRect(drawArea, 3, 3, 3, 3));
                     }
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
                 }
             }
 

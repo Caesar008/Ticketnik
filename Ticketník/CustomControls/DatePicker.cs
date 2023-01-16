@@ -48,7 +48,7 @@ namespace Ticketník.CustomControls
                 {
                     backColor = value;
                     if (calendar != null)
-                        calendar.BackColor = value;
+                        calendar.BackgroundColor = value;
                     Invalidate();
                 }
             }
@@ -326,11 +326,11 @@ namespace Ticketník.CustomControls
             _mouseIn = _dayEdit = _monthEdit = _yearEdit = false;
             base.OnLostFocus(e);
             Invalidate();
-            if (calendar != null && _calendarOpen)
+            /*if (calendar != null && _calendarOpen)
             {
                 calendar.Hide();
                 _calendarOpen = false;
-            }
+            }*/
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -360,11 +360,11 @@ namespace Ticketník.CustomControls
             _hourEdit= false;
             _keybuffer = "";
 
-            if(calendar != null && _calendarOpen)
+           /* if(calendar != null && _calendarOpen)
             {
                 calendar.Hide();
                 _calendarOpen= false;
-            }
+            }*/
 
             base.OnMouseClick(e);
             if (denRect != null && denRect.Contains(e.Location))
@@ -389,19 +389,19 @@ namespace Ticketník.CustomControls
             }
             else if (dropDown != null && dropDown.Contains(e.Location))
             {
-                if (!_calendarOpen)
-                {
+                //if (!_calendarOpen)
+                //{
                     //otevřít výběr dne
                     calendar.BorderColor = this.BorderColor;
                     calendar.BackgroundColor = this.BackColor;
                     calendar.Show();
                     calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
                     
-                    this.Focus();
+                    //this.Focus();
                     calendar.BringToFront();
-                }
-                else
-                    calendar.Hide();
+                //}
+                //else
+                //    calendar.Hide();
 
                 _calendarOpen = !_calendarOpen;
             }
