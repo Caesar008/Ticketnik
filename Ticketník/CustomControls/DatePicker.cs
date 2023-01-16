@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Ticketník.CustomControls
 {
-    internal class DatePicker : System.Windows.Forms.Control
+    internal partial class DatePicker : System.Windows.Forms.Control
     {
         private bool _mouseIn = false;
         private bool _dayEdit = false;
@@ -22,8 +22,9 @@ namespace Ticketník.CustomControls
         private bool _hourEdit = false;
         private bool _minuteEdit = false;
         private bool _keyDown = false;
+        private bool _calendarOpen = false;
 
-        private int _keybuffer = -1;
+        private string _keybuffer = "";
 
         private Rectangle dropDown;
         private Rectangle denNameRect;
@@ -33,10 +34,12 @@ namespace Ticketník.CustomControls
         private Rectangle minutyRect;
         private Rectangle hodinyRect;
 
+        private Calendar calendar;
+
         private Color backColor = Color.White;
         [DefaultValue(typeof(Color), "White"), Browsable(true),
             Description("Bacground color of DatePicker"), Category("Appearance")]
-        /*public override Color BackColor
+        public override Color BackColor
         {
             get { return backColor; }
             set
@@ -44,10 +47,12 @@ namespace Ticketník.CustomControls
                 if (backColor != value)
                 {
                     backColor = value;
+                    if (calendar != null)
+                        calendar.BackColor = value;
                     Invalidate();
                 }
             }
-        }*/
+        }
         private Color foreColorDisabled = SystemColors.ControlDark;
         [DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color ForeColorDisabled
@@ -74,6 +79,8 @@ namespace Ticketník.CustomControls
                 if (borderColor != value)
                 {
                     borderColor = value;
+                    if (calendar != null)
+                        calendar.BorderColor = value;
                     Invalidate();
                 }
             }
@@ -263,6 +270,7 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+
         private EventHandler onCloseUp;
         private EventHandler onValueChanged;
         private EventHandler onDropDown;
@@ -291,6 +299,7 @@ namespace Ticketník.CustomControls
         public DatePicker():base()
         {
             Value = DateTime.Today;
+            calendar = new Calendar(BorderColor, BackColor);
         }
 
         protected override void OnMouseEnter(EventArgs e)
@@ -317,6 +326,11 @@ namespace Ticketník.CustomControls
             _mouseIn = _dayEdit = _monthEdit = _yearEdit = false;
             base.OnLostFocus(e);
             Invalidate();
+            if (calendar != null && _calendarOpen)
+            {
+                calendar.Hide();
+                _calendarOpen = false;
+            }
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -344,7 +358,13 @@ namespace Ticketník.CustomControls
             _yearEdit = false;
             _minuteEdit= false;
             _hourEdit= false;
-            _keybuffer = -1;
+            _keybuffer = "";
+
+            if(calendar != null && _calendarOpen)
+            {
+                calendar.Hide();
+                _calendarOpen= false;
+            }
 
             base.OnMouseClick(e);
             if (denRect != null && denRect.Contains(e.Location))
@@ -369,7 +389,21 @@ namespace Ticketník.CustomControls
             }
             else if (dropDown != null && dropDown.Contains(e.Location))
             {
-                //otevřít výběr dne
+                if (!_calendarOpen)
+                {
+                    //otevřít výběr dne
+                    calendar.BorderColor = this.BorderColor;
+                    calendar.BackgroundColor = this.BackColor;
+                    calendar.Show();
+                    calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
+                    
+                    this.Focus();
+                    calendar.BringToFront();
+                }
+                else
+                    calendar.Hide();
+
+                _calendarOpen = !_calendarOpen;
             }
 
             Invalidate();
