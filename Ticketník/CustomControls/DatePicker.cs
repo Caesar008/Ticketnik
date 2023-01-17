@@ -481,18 +481,6 @@ namespace Ticketník.CustomControls
             _mouseDOwn= false;
         }
 
-        protected override void OnMouseClick(MouseEventArgs e)
-        {
-
-           /* if(calendar != null && _calendarOpen)
-            {
-                calendar.Hide();
-                _calendarOpen= false;
-            }*/
-
-            base.OnMouseClick(e);
-        }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
