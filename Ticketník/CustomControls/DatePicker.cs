@@ -22,7 +22,7 @@ namespace Ticketník.CustomControls
         private bool _hourEdit = false;
         private bool _minuteEdit = false;
         private bool _keyDown = false;
-        private bool _calendarOpen = false;
+        private bool _mouseDOwn = false;
 
         private string _keybuffer = "";
 
@@ -35,6 +35,8 @@ namespace Ticketník.CustomControls
         private Rectangle hodinyRect;
 
         private Calendar calendar;
+
+        protected DateTime lastFocusLost = DateTime.Now;
 
         private Color backColor = Color.White;
         [DefaultValue(typeof(Color), "White"), Browsable(true),
@@ -366,6 +368,11 @@ namespace Ticketník.CustomControls
             calendar = new Calendar(MonthBorderColor, MonthBackColor);
         }
 
+        private void DatePicker_DropDown(object sender, EventArgs e)
+        {
+            
+        }
+
         protected override void OnMouseEnter(EventArgs e)
         {
             _mouseIn = true;
@@ -415,14 +422,67 @@ namespace Ticketník.CustomControls
             _keyDown = false;
         }
 
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            if (!_mouseDOwn)
+            {
+                _mouseDOwn = true;
+                _dayEdit = false;
+                _monthEdit = false;
+                _yearEdit = false;
+                _minuteEdit = false;
+                _hourEdit = false;
+                _keybuffer = "";
+
+                base.OnMouseDown(e);
+                if (denRect != null && denRect.Contains(e.Location))
+                {
+                    _dayEdit = true;
+                }
+                else if (mesicRect != null && mesicRect.Contains(e.Location))
+                {
+                    _monthEdit = true;
+                }
+                else if (rokRect != null && rokRect.Contains(e.Location))
+                {
+                    _yearEdit = true;
+                }
+                else if (minutyRect != null && minutyRect.Contains(e.Location))
+                {
+                    _minuteEdit = true;
+                }
+                else if (hodinyRect != null && hodinyRect.Contains(e.Location))
+                {
+                    _hourEdit = true;
+                }
+                else if (dropDown != null && dropDown.Contains(e.Location))
+                {
+                    if (lastFocusLost.AddMilliseconds(10) < DateTime.Now)
+                    {
+                        calendar.BorderColor = this.BorderColor;
+                        calendar.BackgroundColor = this.BackColor;
+                        calendar.Show();
+                        calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
+                        calendar.Parent = this;
+
+                        //this.Focus();
+                        calendar.BringToFront();
+                        calendar.IsOpen = true;
+                    }
+                }
+
+                Invalidate();
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            _mouseDOwn= false;
+        }
+
         protected override void OnMouseClick(MouseEventArgs e)
         {
-            _dayEdit = false;
-            _monthEdit = false;
-            _yearEdit = false;
-            _minuteEdit= false;
-            _hourEdit= false;
-            _keybuffer = "";
 
            /* if(calendar != null && _calendarOpen)
             {
@@ -431,46 +491,6 @@ namespace Ticketník.CustomControls
             }*/
 
             base.OnMouseClick(e);
-            if (denRect != null && denRect.Contains(e.Location))
-            {
-                _dayEdit = true;
-            }
-            else if (mesicRect != null && mesicRect.Contains(e.Location))
-            {
-                _monthEdit = true;
-            }
-            else if (rokRect != null && rokRect.Contains(e.Location))
-            {
-                _yearEdit = true;
-            }
-            else if (minutyRect != null && minutyRect.Contains(e.Location))
-            {
-                _minuteEdit = true;
-            }
-            else if (hodinyRect != null && hodinyRect.Contains(e.Location))
-            {
-                _hourEdit = true;
-            }
-            else if (dropDown != null && dropDown.Contains(e.Location))
-            {
-                //if (!_calendarOpen)
-                //{
-                    //otevřít výběr dne
-                    calendar.BorderColor = this.BorderColor;
-                    calendar.BackgroundColor = this.BackColor;
-                    calendar.Show();
-                    calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
-                    
-                    //this.Focus();
-                    calendar.BringToFront();
-                //}
-                //else
-                //    calendar.Hide();
-
-                _calendarOpen = !_calendarOpen;
-            }
-
-            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)

@@ -15,6 +15,8 @@ namespace Ticketník.CustomControls
     {
         protected sealed class Calendar : System.Windows.Forms.Form
         {
+            Rectangle header;
+
             private Color borderColor = Color.Gray;
             public Color BorderColor
             {
@@ -288,6 +290,39 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
+
+            DatePicker dp;
+            public DatePicker Parent
+            {
+                get { return dp; }
+                set { dp = value; }
+            }
+
+            private bool isOpen = false;
+            public bool IsOpen
+            {
+                get { return isOpen; }
+                set { isOpen= value; }
+            }
+
+            public enum View
+            {
+                Days = 1,
+                Months = 2,
+                Decades = 3,
+                Centuries = 4
+            }
+            private View view = Calendar.View.Days;
+            public View CurrentView
+            {
+                get { return view; }
+                set
+                {
+                    if (value != view)
+                        view = value;
+                    Invalidate();
+                }
+            }
             public Calendar(Color borderColor, Color backColor)
             {
                 this.MinimizeBox= false;
@@ -310,8 +345,27 @@ namespace Ticketník.CustomControls
 
             protected override void OnLostFocus(EventArgs e)
             {
-                base.OnLostFocus(e);
-                this.Hide();
+                //base.OnLostFocus(e);
+                //this.Hide();
+                CurrentView = View.Days;
+                ActualDate = SelectedDate;
+                if (Parent != null)
+                {
+                    this.Hide();
+                    this.isOpen = false;
+                    Parent.lastFocusLost = DateTime.Now;
+                }
+            }
+
+            protected override void OnMouseClick(MouseEventArgs e)
+            {
+                base.OnMouseClick(e);
+                if(e.Button == MouseButtons.Left)
+                {
+                    if (header != null && header.Contains(e.Location) && (int)CurrentView < 4)
+                            CurrentView++;
+                    Invalidate();
+                }
             }
 
             //protected override bool ShowWithoutActivation => true;
@@ -319,7 +373,9 @@ namespace Ticketník.CustomControls
             protected override void OnPaint(PaintEventArgs e)
             {
                 //base.OnPaint(e);
-                Rectangle header = new Rectangle(1, 1, Width-2, 29);
+                header = new Rectangle(1, 1, Width - 2, 29);
+
+                
 
                 using (Graphics g = e.Graphics)
                 {
@@ -339,7 +395,14 @@ namespace Ticketník.CustomControls
                     {
                         g.FillPath(b, RoundedRect(header, 3, 3, 0, 0));
                     }
-                    string mr = actualDate.ToString("MMMM yyyy");
+                    string mr = "";
+                    switch(CurrentView)
+                    {
+                        case View.Days: mr = actualDate.ToString("MMMM yyyy"); break;
+                        case View.Months: mr = actualDate.ToString("yyyy"); break;
+                        case View.Decades: mr = actualDate.Year / 10 * 10 + " - " + (actualDate.Year / 10) + 9; break;
+                        case View.Centuries: mr = actualDate.Year / 100 * 100 + " - " + (actualDate.Year / 100) + 99; break;
+                    }
                     Size mrSize = TextRenderer.MeasureText(mr, Font);
                     TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2)+header.Location.X, 15 - (mrSize.Height / 2)+header.Location.Y), HeaderForeColor);
                 }
