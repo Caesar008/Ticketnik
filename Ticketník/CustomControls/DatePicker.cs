@@ -47,8 +47,6 @@ namespace Ticketník.CustomControls
                 if (backColor != value)
                 {
                     backColor = value;
-                    if (calendar != null)
-                        calendar.BackgroundColor = value;
                     Invalidate();
                 }
             }
@@ -79,8 +77,40 @@ namespace Ticketník.CustomControls
                 if (borderColor != value)
                 {
                     borderColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthBorderColor = Color.Gray;
+        [DefaultValue(typeof(Color), "Gray"),
+            Description("Border color of selector"), Category("Appearance")]
+        public Color MonthBorderColor
+        {
+            get { return monthBorderColor; }
+            set
+            {
+                if (monthBorderColor != value)
+                {
+                    monthBorderColor = value;
                     if (calendar != null)
                         calendar.BorderColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthBackColor = Color.White;
+        [DefaultValue(typeof(Color), "White"), Browsable(true),
+            Description("Bacground color of selector"), Category("Appearance")]
+        public Color MonthBackColor
+        {
+            get { return monthBackColor; }
+            set
+            {
+                if (monthBackColor != value)
+                {
+                    monthBackColor = value;
+                    if (calendar != null)
+                        calendar.BackgroundColor = value;
                     Invalidate();
                 }
             }
@@ -299,7 +329,7 @@ namespace Ticketník.CustomControls
         public DatePicker():base()
         {
             Value = DateTime.Today;
-            calendar = new Calendar(BorderColor, BackColor);
+            calendar = new Calendar(MonthBorderColor, MonthBackColor);
         }
 
         protected override void OnMouseEnter(EventArgs e)

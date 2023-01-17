@@ -41,6 +41,227 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
+            private Color headerColor = SystemColors.Control;
+            public Color HeaderColor
+            {
+                get { return headerColor; }
+                set
+                {
+                    if (headerColor != value)
+                    {
+                        headerColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color dayHeaderColor = SystemColors.Control;
+            public Color DayHeaderColor
+            {
+                get { return dayHeaderColor; }
+                set
+                {
+                    if (dayHeaderColor != value)
+                    {
+                        dayHeaderColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color dayListColor = SystemColors.Control;
+            public Color DayListColor
+            {
+                get { return dayListColor; }
+                set
+                {
+                    if (dayListColor != value)
+                    {
+                        dayListColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color todayButtonColor = SystemColors.Control;
+            public Color TodayButtonColor
+            {
+                get { return todayButtonColor; }
+                set
+                {
+                    if (todayButtonColor != value)
+                    {
+                        todayButtonColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color headerForeColor = Color.Black;
+            public Color HeaderForeColor
+            {
+                get { return headerForeColor; }
+                set
+                {
+                    if (headerForeColor != value)
+                    {
+                        headerForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color dayHeaderForeColor = Color.Black;
+            public Color DayHeaderForeColor
+            {
+                get { return dayHeaderForeColor; }
+                set
+                {
+                    if (dayHeaderForeColor != value)
+                    {
+                        dayHeaderForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color dayListForeColor = Color.Black;
+            public Color DayListForeColor
+            {
+                get { return dayListForeColor; }
+                set
+                {
+                    if (dayListForeColor != value)
+                    {
+                        dayListForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color todayButtonForeColor = Color.Black;
+            public Color TodayButtonForeColor
+            {
+                get { return todayButtonForeColor; }
+                set
+                {
+                    if (todayButtonForeColor != value)
+                    {
+                        todayButtonForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color trailingForeColor = Color.Gray;
+            public Color TrailingForeColor
+            {
+                get { return trailingForeColor; }
+                set
+                {
+                    if (trailingForeColor != value)
+                    {
+                        trailingForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color buttonArrowColor = Color.Gray;
+            public Color ButtonArrowColor
+            {
+                get { return buttonArrowColor; }
+                set
+                {
+                    if (buttonArrowColor != value)
+                    {
+                        buttonArrowColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color buttonBackColor = Color.Gray;
+            public Color ButtonBackColor
+            {
+                get { return buttonBackColor; }
+                set
+                {
+                    if (buttonBackColor != value)
+                    {
+                        buttonBackColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color buttonBorderColor = Color.Gray;
+            public Color ButtonBorderColor
+            {
+                get { return buttonBorderColor; }
+                set
+                {
+                    if (buttonBorderColor != value)
+                    {
+                        buttonBorderColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color separatorColor = Color.Gray;
+            public Color SeparatorColor
+            {
+                get { return separatorColor; }
+                set
+                {
+                    if (separatorColor != value)
+                    {
+                        separatorColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color buttonMoseOverColor = Color.FromArgb(229, 243, 255);
+            public Color ButonMouseOverColor
+            {
+                get { return buttonMoseOverColor; }
+                set
+                {
+                    if (buttonMoseOverColor != value)
+                    {
+                        buttonMoseOverColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color selectMouseOverColor = Color.FromArgb(229, 243, 255);
+            public Color SelectMouseOverColor
+            {
+                get { return selectMouseOverColor; }
+                set
+                {
+                    if (selectMouseOverColor != value)
+                    {
+                        selectMouseOverColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color selectedColor = Color.FromArgb(204, 232, 255);
+            public Color SelectedColor
+            {
+                get { return selectedColor; }
+                set
+                {
+                    if (selectedColor != value)
+                    {
+                        selectedColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color todayButtonBackColor = SystemColors.Control;
+            public Color TodayButtonBackColor
+            {
+                get { return todayButtonBackColor; }
+                set
+                {
+                    if (todayButtonBackColor != value)
+                    {
+                        todayButtonBackColor = value;
+                        Invalidate();
+                    }
+                }
+            }
             public Calendar(Color borderColor, Color backColor)
             {
                 this.MinimizeBox= false;
@@ -86,6 +307,20 @@ namespace Ticketník.CustomControls
                     }
                     g.SmoothingMode = SmoothingMode.AntiAlias;
                 }
+
+                //měsíc/rok - 146*30
+                //hlavička dnů 146*13 - 13. řádek je dělící čára
+                //dny 146*90, 6 řádků dnů, jeden den má 20*15
+                //položka dnes 146*20
+
+                //rok mřížka 4*3
+                //měsíce 35*35
+
+                //desetiletí stejné jako měsíce.první a poslední je trailing z xxx9 a xxx0
+
+                //stejně řešeno i století
+
+                //animace je řešena do aktuálního čtverce výběru, cca 1s
             }
 
             private static GraphicsPath RoundedRect(Rectangle bounds, int radius1, int radius2, int radius3, int radius4)
