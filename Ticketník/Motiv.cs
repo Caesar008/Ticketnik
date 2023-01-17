@@ -236,15 +236,18 @@ namespace Ticketník
                     //((CustomControls.DatePicker)c).BackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).ForeColor = barvy[sMotiv]["text"];
                     ((CustomControls.DatePicker)c).BorderColor = barvy[sMotiv]["buttonBorder"];
-                    ((CustomControls.DatePicker)c).MonthBorderColor = barvy[sMotiv]["buttonBorder"];
                     ((CustomControls.DatePicker)c).ButtonColor = barvy[sMotiv]["button"];
                     ((CustomControls.DatePicker)c).ArrowColor = barvy[sMotiv]["arrow"];
                     ((CustomControls.DatePicker)c).BorderColorMouseOver = Color.DodgerBlue;
                     ((CustomControls.DatePicker)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
                     ((CustomControls.DatePicker)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                    ((CustomControls.DatePicker)c).MonthBackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).ButtonColorDisabled = barvy[sMotiv]["pozadíDisabled"];
                     ((CustomControls.DatePicker)c).BorderColorDisabled = barvy[sMotiv]["buttonBorder"];
+
+                    ((CustomControls.DatePicker)c).MonthBorderColor = barvy[sMotiv]["buttonBorder"];
+                    ((CustomControls.DatePicker)c).MonthBackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.DatePicker)c).MonthHeaderBackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.DatePicker)c).MonthHeaderForeColor = barvy[sMotiv]["text"];
                 }
                 else
                 {

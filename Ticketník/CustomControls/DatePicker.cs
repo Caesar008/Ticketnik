@@ -115,6 +115,40 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color monthHeaderBackColor = Color.White;
+        [DefaultValue(typeof(Color), "White"), Browsable(true),
+            Description("Bacground color of selector header"), Category("Appearance")]
+        public Color MonthHeaderBackColor
+        {
+            get { return monthHeaderBackColor; }
+            set
+            {
+                if (monthHeaderBackColor != value)
+                {
+                    monthHeaderBackColor = value;
+                    if (calendar != null)
+                        calendar.HeaderColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthHeaderForeColor = Color.White;
+        [DefaultValue(typeof(Color), "White"), Browsable(true),
+            Description("Bacground color of selector header"), Category("Appearance")]
+        public Color MonthHeaderForeColor
+        {
+            get { return monthHeaderForeColor; }
+            set
+            {
+                if (monthHeaderForeColor != value)
+                {
+                    monthHeaderForeColor = value;
+                    if (calendar != null)
+                        calendar.HeaderForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color borderColorDisabled = SystemColors.ControlDark;
         [DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color BorderColorDisabled

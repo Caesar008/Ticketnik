@@ -28,7 +28,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color backColor = SystemColors.Control;
+            private Color backColor = Color.White;
             public Color BackgroundColor
             {
                 get { return backColor; }
@@ -41,7 +41,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color headerColor = SystemColors.Control;
+            private Color headerColor = Color.White;
             public Color HeaderColor
             {
                 get { return headerColor; }
@@ -54,7 +54,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color dayHeaderColor = SystemColors.Control;
+            private Color dayHeaderColor = Color.White;
             public Color DayHeaderColor
             {
                 get { return dayHeaderColor; }
@@ -67,7 +67,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color dayListColor = SystemColors.Control;
+            private Color dayListColor = Color.White;
             public Color DayListColor
             {
                 get { return dayListColor; }
@@ -80,7 +80,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color todayButtonColor = SystemColors.Control;
+            private Color todayButtonColor = Color.White;
             public Color TodayButtonColor
             {
                 get { return todayButtonColor; }
@@ -158,7 +158,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color buttonArrowColor = Color.Gray;
+            private Color buttonArrowColor = Color.Black;
             public Color ButtonArrowColor
             {
                 get { return buttonArrowColor; }
@@ -171,7 +171,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color buttonBackColor = Color.Gray;
+            private Color buttonBackColor = Color.White;
             public Color ButtonBackColor
             {
                 get { return buttonBackColor; }
@@ -184,7 +184,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color buttonBorderColor = Color.Gray;
+            private Color buttonBorderColor = Color.White;
             public Color ButtonBorderColor
             {
                 get { return buttonBorderColor; }
@@ -262,6 +262,32 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
+            private DateTime actualDate = DateTime.Now;
+            public DateTime ActualDate
+            {
+                get { return actualDate; }
+                set
+                {
+                    if (actualDate != value)
+                    {
+                        actualDate = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private DateTime selectedDate = DateTime.Now;
+            public DateTime SelectedDate
+            {
+                get { return selectedDate; }
+                set
+                {
+                    if (selectedDate != value)
+                    {
+                        selectedDate = value;
+                        Invalidate();
+                    }
+                }
+            }
             public Calendar(Color borderColor, Color backColor)
             {
                 this.MinimizeBox= false;
@@ -293,6 +319,8 @@ namespace Ticketník.CustomControls
             protected override void OnPaint(PaintEventArgs e)
             {
                 //base.OnPaint(e);
+                Rectangle header = new Rectangle(1, 1, Width-2, 29);
+
                 using (Graphics g = e.Graphics)
                 {
                     Rectangle drawArea = new Rectangle(0, 0, Width - 1, Height - 1);
@@ -305,7 +333,15 @@ namespace Ticketník.CustomControls
                     {
                         g.DrawPath(p, RoundedRect(drawArea, 3, 3, 3, 3));
                     }
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                    //header
+                    using (SolidBrush b = new SolidBrush(HeaderColor))
+                    {
+                        g.FillPath(b, RoundedRect(header, 3, 3, 0, 0));
+                    }
+                    string mr = actualDate.ToString("MMMM yyyy");
+                    Size mrSize = TextRenderer.MeasureText(mr, Font);
+                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2)+header.Location.X, 15 - (mrSize.Height / 2)+header.Location.Y), HeaderForeColor);
                 }
 
                 //měsíc/rok - 146*30
