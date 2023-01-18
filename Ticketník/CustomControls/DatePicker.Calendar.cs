@@ -228,6 +228,33 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
+            private Color buttonBorderMouseOverColor = Color.DodgerBlue;
+                public Color ButonBorderMouseOverColor
+            {
+                get { return buttonBorderMouseOverColor; }
+                set
+                {
+                    if (buttonBorderMouseOverColor != value)
+                    {
+                        buttonBorderMouseOverColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+
+            private Color arrowMouseOverColor = Color.DodgerBlue;
+            public Color ArrowMouseOverColor
+            {
+                get { return arrowMouseOverColor; }
+                set
+                {
+                    if (arrowMouseOverColor != value)
+                    {
+                        arrowMouseOverColor = value;
+                        Invalidate();
+                    }
+                }
+            }
             private Color selectMouseOverColor = Color.FromArgb(229, 243, 255);
             public Color SelectMouseOverColor
             {

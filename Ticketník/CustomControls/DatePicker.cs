@@ -153,7 +153,7 @@ namespace Ticketník.CustomControls
         }
         private Color monthButtonForeColor = Color.Black;
         [DefaultValue(typeof(Color), "Black"), Browsable(true),
-            Description("Bacground color of arrow inside month navigating buttons"), Category("Appearance")]
+            Description("Color of arrow inside month navigating buttons"), Category("Appearance")]
         public Color MonthButtonForeColor
         {
             get { return monthButtonForeColor; }
@@ -198,6 +198,57 @@ namespace Ticketník.CustomControls
                     monthButtonBorderColor = value;
                     if (calendar != null)
                         calendar.ButtonBorderColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthButtonMouseOverColor = Color.White;
+        [DefaultValue(typeof(Color), "White"), Browsable(true),
+            Description("Bacground color of border of month navigating buttons when mouse is over"), Category("Appearance")]
+        public Color MonthButtonMouseOverColor
+        {
+            get { return monthButtonMouseOverColor; }
+            set
+            {
+                if (monthButtonMouseOverColor != value)
+                {
+                    monthButtonMouseOverColor = value;
+                    if (calendar != null)
+                        calendar.ButonMouseOverColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthButtonBorderMouseOverColor = Color.DodgerBlue;
+        [DefaultValue(typeof(Color), "DodgerBlue"), Browsable(true),
+            Description("Bacground color of border of month navigating buttons when mouse is over"), Category("Appearance")]
+        public Color MonthButtonBorderMouseOverColor
+        {
+            get { return monthButtonBorderMouseOverColor; }
+            set
+            {
+                if (monthButtonBorderMouseOverColor != value)
+                {
+                    monthButtonBorderMouseOverColor = value;
+                    if (calendar != null)
+                        calendar.ButonBorderMouseOverColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthButtonMouseOverForeColor = Color.DodgerBlue;
+        [DefaultValue(typeof(Color), "DodgerBlue"), Browsable(true),
+            Description("Color of arrow in month navigating buttons when mouse is over"), Category("Appearance")]
+        public Color MonthButtonMouseOverForeColor
+        {
+            get { return monthButtonMouseOverForeColor; }
+            set
+            {
+                if (monthButtonMouseOverForeColor != value)
+                {
+                    monthButtonMouseOverForeColor = value;
+                    if (calendar != null)
+                        calendar.ArrowMouseOverColor = value;
                     Invalidate();
                 }
             }
