@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace Ticketník.CustomControls
 {
@@ -16,6 +17,8 @@ namespace Ticketník.CustomControls
         protected sealed class Calendar : System.Windows.Forms.Form
         {
             Rectangle header;
+            Rectangle buttonL;
+            Rectangle buttonR;
 
             private Color borderColor = Color.Gray;
             public Color BorderColor
@@ -373,30 +376,66 @@ namespace Ticketník.CustomControls
             protected override void OnPaint(PaintEventArgs e)
             {
                 //base.OnPaint(e);
-                header = new Rectangle(1, 1, Width - 2, 29);
-
-                
+                header = new Rectangle(16, 1, Width - 32, 29);
+                buttonL = new Rectangle(1, 1, 14, 28);
+                buttonR = new Rectangle(Width - 16, 1, 14, 28);
 
                 using (Graphics g = e.Graphics)
                 {
                     Rectangle drawArea = new Rectangle(0, 0, Width - 1, Height - 1);
-                    
+                    Point middleL = new Point(buttonL.Left + buttonL.Width / 2,
+                    buttonL.Top + buttonL.Height / 2);
+                    Point middleR = new Point(buttonR.Left + buttonR.Width / 2,
+                    buttonR.Top + buttonR.Height / 2);
+                    Point[] arrowL = new Point[]
+                    {
+                        new Point(middleL.X + 2, middleL.Y - 4),
+                        new Point(middleL.X + 2, middleL.Y + 4),
+                        new Point(middleL.X - 2, middleL.Y)
+                    };
+                    Point[] arrowR = new Point[]
+                    {
+                        new Point(middleR.X - 1, middleR.Y - 4),
+                        new Point(middleR.X - 1, middleR.Y + 4),
+                        new Point(middleR.X + 3, middleR.Y)
+                    };
+
                     using (SolidBrush b = new SolidBrush(BackgroundColor))
                     {
                         g.FillPath(b, RoundedRect(drawArea, 3, 3, 3, 3));
-                    }
-                    using (Pen p = new Pen(BorderColor, 1))
-                    {
-                        g.DrawPath(p, RoundedRect(drawArea, 3, 3, 3, 3));
                     }
 
                     //header
                     using (SolidBrush b = new SolidBrush(HeaderColor))
                     {
-                        g.FillPath(b, RoundedRect(header, 3, 3, 0, 0));
+                        g.FillRectangle(b, header);
                     }
+
+                    //rámeček
+                    using (Pen p = new Pen(BorderColor, 1))
+                    {
+                        g.DrawPath(p, RoundedRect(drawArea, 3, 3, 3, 3));
+                    }
+
+                    //tlačítka
+                    using (SolidBrush b = new SolidBrush(ButtonBackColor))
+                    {
+                        g.FillPath(b, RoundedRect(buttonL, 2, 0, 0, 0));
+                        g.FillPath(b, RoundedRect(buttonR, 0, 2, 0, 0));
+                    }
+                    using (Pen pb = new Pen(ButtonBorderColor, 1))
+                    {
+                        g.DrawPath(pb, RoundedRect(buttonL, 2, 0, 0, 0));
+                        g.DrawPath(pb, RoundedRect(buttonR, 0, 2, 0, 0));
+                    }
+                    using (SolidBrush b = new SolidBrush(ButtonArrowColor))
+                    {
+                        g.FillPolygon(b, arrowR);
+                        g.FillPolygon(b, arrowL);
+                    }
+
                     string mr = "";
-                    switch(CurrentView)
+                    switch (CurrentView)
                     {
                         case View.Days: mr = actualDate.ToString("MMMM yyyy"); break;
                         case View.Months: mr = actualDate.ToString("yyyy"); break;
@@ -404,7 +443,7 @@ namespace Ticketník.CustomControls
                         case View.Centuries: mr = actualDate.Year / 100 * 100 + " - " + (actualDate.Year / 100) + 99; break;
                     }
                     Size mrSize = TextRenderer.MeasureText(mr, Font);
-                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2)+header.Location.X, 15 - (mrSize.Height / 2)+header.Location.Y), HeaderForeColor);
+                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), HeaderForeColor);
                 }
 
                 //měsíc/rok - 146*30

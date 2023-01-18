@@ -248,6 +248,9 @@ namespace Ticketník
                     ((CustomControls.DatePicker)c).MonthBackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).MonthHeaderBackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).MonthHeaderForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.DatePicker)c).MonthButtonColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.DatePicker)c).MonthButtonBorderColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.DatePicker)c).MonthButtonForeColor = barvy[sMotiv]["arrow"];
                 }
                 else
                 {

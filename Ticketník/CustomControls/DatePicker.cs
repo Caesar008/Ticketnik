@@ -151,6 +151,57 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color monthButtonForeColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black"), Browsable(true),
+            Description("Bacground color of arrow inside month navigating buttons"), Category("Appearance")]
+        public Color MonthButtonForeColor
+        {
+            get { return monthButtonForeColor; }
+            set
+            {
+                if (monthButtonForeColor != value)
+                {
+                    monthButtonForeColor = value;
+                    if (calendar != null)
+                        calendar.ButtonArrowColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthButtonColor = Color.White;
+        [DefaultValue(typeof(Color), "White"), Browsable(true),
+            Description("Bacground color month navigating buttons"), Category("Appearance")]
+        public Color MonthButtonColor
+        {
+            get { return monthButtonColor; }
+            set
+            {
+                if (monthButtonColor != value)
+                {
+                    monthButtonColor = value;
+                    if (calendar != null)
+                        calendar.ButtonBackColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthButtonBorderColor = Color.White;
+        [DefaultValue(typeof(Color), "White"), Browsable(true),
+            Description("Bacground color of border of month navigating buttons"), Category("Appearance")]
+        public Color MonthButtonBorderColor
+        {
+            get { return monthButtonBorderColor; }
+            set
+            {
+                if (monthButtonBorderColor != value)
+                {
+                    monthButtonBorderColor = value;
+                    if (calendar != null)
+                        calendar.ButtonBorderColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color borderColorDisabled = SystemColors.ControlDark;
         [DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color BorderColorDisabled
