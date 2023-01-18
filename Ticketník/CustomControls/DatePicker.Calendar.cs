@@ -20,6 +20,10 @@ namespace Ticketník.CustomControls
             Rectangle buttonL;
             Rectangle buttonR;
 
+            bool _mouseInLB = false;
+            bool _mouseInRB = false;
+            bool _mouseInHeader = false;
+
             private Color borderColor = Color.Gray;
             public Color BorderColor
             {
@@ -55,6 +59,19 @@ namespace Ticketník.CustomControls
                     if (headerColor != value)
                     {
                         headerColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color headerMouseOverColor = Color.White;
+            public Color HeaderMouseOverColor
+            {
+                get { return headerMouseOverColor; }
+                set
+                {
+                    if (headerMouseOverColor != value)
+                    {
+                        headerMouseOverColor = value;
                         Invalidate();
                     }
                 }
@@ -107,6 +124,19 @@ namespace Ticketník.CustomControls
                     if (headerForeColor != value)
                     {
                         headerForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color headerMouseOverForeColor = Color.DodgerBlue;
+            public Color HeaderMouseOverForeColor
+            {
+                get { return headerMouseOverForeColor; }
+                set
+                {
+                    if (headerMouseOverForeColor != value)
+                    {
+                        headerMouseOverForeColor = value;
                         Invalidate();
                     }
                 }
@@ -394,6 +424,63 @@ namespace Ticketník.CustomControls
                 {
                     if (header != null && header.Contains(e.Location) && (int)CurrentView < 4)
                             CurrentView++;
+                    else if (buttonL != null && buttonL.Contains(e.Location))
+                    {
+                        switch(CurrentView)
+                        {
+                            case View.Days: ActualDate = ActualDate.AddMonths(-1); break;
+                            case View.Months: ActualDate = ActualDate.AddYears(-1); break;
+                            case View.Decades: ActualDate = ActualDate.AddYears(-10); break;
+                            case View.Centuries: ActualDate = ActualDate.AddYears(-100); break;
+                        }
+                    }
+                    else if (buttonR != null && buttonR.Contains(e.Location))
+                    {
+                        switch (CurrentView)
+                        {
+                            case View.Days: ActualDate = ActualDate.AddMonths(1); break;
+                            case View.Months: ActualDate = ActualDate.AddYears(1); break;
+                            case View.Decades: ActualDate = ActualDate.AddYears(10); break;
+                            case View.Centuries: ActualDate = ActualDate.AddYears(100); break;
+                        }
+                    }
+                    Invalidate();
+                }
+            }
+
+            protected override void OnMouseMove(MouseEventArgs e)
+            {
+                base.OnMouseMove(e);
+                if (buttonL.Contains(e.Location) && !_mouseInLB)
+                {
+                    _mouseInLB = true;
+                    Invalidate();
+                }
+                else if (_mouseInLB && !buttonL.Contains(e.Location))
+                {
+                    _mouseInLB = false;
+                    Invalidate();
+                }
+
+                if (buttonR.Contains(e.Location) && !_mouseInRB)
+                {
+                    _mouseInRB = true;
+                    Invalidate();
+                }
+                else if (_mouseInRB && !buttonR.Contains(e.Location))
+                {
+                    _mouseInRB = false;
+                    Invalidate();
+                }
+
+                if (header.Contains(e.Location) && !_mouseInHeader)
+                {
+                    _mouseInHeader = true;
+                    Invalidate();
+                }
+                else if (_mouseInHeader && !header.Contains(e.Location))
+                {
+                    _mouseInHeader = false;
                     Invalidate();
                 }
             }
@@ -433,7 +520,7 @@ namespace Ticketník.CustomControls
                     }
 
                     //header
-                    using (SolidBrush b = new SolidBrush(HeaderColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInHeader ? HeaderMouseOverColor : HeaderColor))
                     {
                         g.FillRectangle(b, header);
                     }
@@ -445,32 +532,41 @@ namespace Ticketník.CustomControls
                     }
 
                     //tlačítka
-                    using (SolidBrush b = new SolidBrush(ButtonBackColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInLB ? buttonMoseOverColor : ButtonBackColor))
                     {
                         g.FillPath(b, RoundedRect(buttonL, 2, 0, 0, 0));
-                        g.FillPath(b, RoundedRect(buttonR, 0, 2, 0, 0));
                     }
-                    using (Pen pb = new Pen(ButtonBorderColor, 1))
+                    using (Pen pb = new Pen(_mouseInLB ? buttonBorderMouseOverColor : ButtonBorderColor, 1))
                     {
                         g.DrawPath(pb, RoundedRect(buttonL, 2, 0, 0, 0));
+                    }
+                    using (SolidBrush b = new SolidBrush(_mouseInLB ? ArrowMouseOverColor : ButtonArrowColor))
+                    {
+                        g.FillPolygon(b, arrowL);
+                    }
+                    using (SolidBrush b = new SolidBrush(_mouseInRB ? buttonMoseOverColor : ButtonBackColor))
+                    {
+                        g.FillPath(b, RoundedRect(buttonR, 0, 2, 0, 0));
+                    }
+                    using (Pen pb = new Pen(_mouseInRB ? buttonBorderMouseOverColor : ButtonBorderColor, 1))
+                    {
                         g.DrawPath(pb, RoundedRect(buttonR, 0, 2, 0, 0));
                     }
-                    using (SolidBrush b = new SolidBrush(ButtonArrowColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInRB ? ArrowMouseOverColor : ButtonArrowColor))
                     {
                         g.FillPolygon(b, arrowR);
-                        g.FillPolygon(b, arrowL);
                     }
 
                     string mr = "";
                     switch (CurrentView)
                     {
-                        case View.Days: mr = actualDate.ToString("MMMM yyyy"); break;
-                        case View.Months: mr = actualDate.ToString("yyyy"); break;
-                        case View.Decades: mr = actualDate.Year / 10 * 10 + " - " + (actualDate.Year / 10) + 9; break;
-                        case View.Centuries: mr = actualDate.Year / 100 * 100 + " - " + (actualDate.Year / 100) + 99; break;
+                        case View.Days: mr = ActualDate.ToString("MMMM yyyy"); break;
+                        case View.Months: mr = ActualDate.ToString("yyyy"); break;
+                        case View.Decades: mr = ActualDate.Year / 10 * 10 + " - " + (ActualDate.Year / 10) + 9; break;
+                        case View.Centuries: mr = ActualDate.Year / 100 * 100 + " - " + (ActualDate.Year / 100) + 99; break;
                     }
                     Size mrSize = TextRenderer.MeasureText(mr, Font);
-                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), HeaderForeColor);
+                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), _mouseInHeader ? HeaderMouseOverForeColor : HeaderForeColor);
                 }
 
                 //měsíc/rok - 146*30
@@ -550,6 +646,17 @@ namespace Ticketník.CustomControls
 
                 path.CloseFigure();
                 return path;
+            }
+
+
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    CreateParams cp = base.CreateParams;
+                    cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                    return cp;
+                }
             }
         }
     }

@@ -134,6 +134,23 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color monthHeaderMouseOverBackColor = Color.FromArgb(229, 243, 255);
+        [DefaultValue(typeof(Color), "#e5f3ff"), Browsable(true),
+            Description("Bacground color of selector header when mouse is over"), Category("Appearance")]
+        public Color MonthHeaderMouseOverBackColor
+        {
+            get { return monthHeaderMouseOverBackColor; }
+            set
+            {
+                if (monthHeaderMouseOverBackColor != value)
+                {
+                    monthHeaderMouseOverBackColor = value;
+                    if (calendar != null)
+                        calendar.HeaderMouseOverColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color monthHeaderForeColor = Color.White;
         [DefaultValue(typeof(Color), "White"), Browsable(true),
             Description("Bacground color of selector header"), Category("Appearance")]
@@ -147,6 +164,23 @@ namespace Ticketník.CustomControls
                     monthHeaderForeColor = value;
                     if (calendar != null)
                         calendar.HeaderForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthHeaderMouseOverForeColor = Color.DodgerBlue;
+        [DefaultValue(typeof(Color), "DodgerBlue"), Browsable(true),
+            Description("Bacground color of selector header when mouse is over"), Category("Appearance")]
+        public Color MonthHeaderMouseOverForeColor
+        {
+            get { return monthHeaderMouseOverForeColor; }
+            set
+            {
+                if (monthHeaderMouseOverForeColor != value)
+                {
+                    monthHeaderMouseOverForeColor = value;
+                    if (calendar != null)
+                        calendar.HeaderMouseOverForeColor = value;
                     Invalidate();
                 }
             }
