@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Reflection;
+using System.Globalization;
 
 namespace Ticketník.CustomControls
 {
@@ -514,6 +515,7 @@ namespace Ticketník.CustomControls
                         new Point(middleR.X + 3, middleR.Y)
                     };
 
+                    //pozadí
                     using (SolidBrush b = new SolidBrush(BackgroundColor))
                     {
                         g.FillPath(b, RoundedRect(drawArea, 3, 3, 3, 3));
@@ -524,6 +526,17 @@ namespace Ticketník.CustomControls
                     {
                         g.FillRectangle(b, header);
                     }
+
+                    string mr = "";
+                    switch (CurrentView)
+                    {
+                        case View.Days: mr = ActualDate.ToString("MMMM yyyy"); break;
+                        case View.Months: mr = ActualDate.ToString("yyyy"); break;
+                        case View.Decades: mr = ActualDate.Year / 10 * 10 + " - " + (ActualDate.Year / 10) + 9; break;
+                        case View.Centuries: mr = ActualDate.Year / 100 * 100 + " - " + (ActualDate.Year / 100) + 99; break;
+                    }
+                    Size mrSize = TextRenderer.MeasureText(mr, Font);
+                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), _mouseInHeader ? HeaderMouseOverForeColor : HeaderForeColor);
 
                     //rámeček
                     using (Pen p = new Pen(BorderColor, 1))
@@ -557,16 +570,28 @@ namespace Ticketník.CustomControls
                         g.FillPolygon(b, arrowR);
                     }
 
-                    string mr = "";
-                    switch (CurrentView)
-                    {
-                        case View.Days: mr = ActualDate.ToString("MMMM yyyy"); break;
-                        case View.Months: mr = ActualDate.ToString("yyyy"); break;
-                        case View.Decades: mr = ActualDate.Year / 10 * 10 + " - " + (ActualDate.Year / 10) + 9; break;
-                        case View.Centuries: mr = ActualDate.Year / 100 * 100 + " - " + (ActualDate.Year / 100) + 99; break;
-                    }
-                    Size mrSize = TextRenderer.MeasureText(mr, Font);
-                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), _mouseInHeader ? HeaderMouseOverForeColor : HeaderForeColor);
+                    //názvy dnů - ještě posunout na střed rect ty názvy
+                    Rectangle poRect = new Rectangle(2, header.Bottom, 20, 15);
+                    string po = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Monday);
+                    TextRenderer.DrawText(g, po, Font, poRect, DayHeaderForeColor);
+                    Rectangle utRect = new Rectangle(poRect.Right, header.Bottom, 20, 15);
+                    string ut = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Tuesday);
+                    TextRenderer.DrawText(g, ut, Font, utRect, DayHeaderForeColor);
+                    Rectangle stRect = new Rectangle(utRect.Right, header.Bottom, 20, 15);
+                    string st = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Wednesday);
+                    TextRenderer.DrawText(g, st, Font, stRect, DayHeaderForeColor);
+                    Rectangle ctRect = new Rectangle(stRect.Right, header.Bottom, 20, 15);
+                    string ct = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Thursday);
+                    TextRenderer.DrawText(g, ct, Font, ctRect, DayHeaderForeColor);
+                    Rectangle paRect = new Rectangle(ctRect.Right, header.Bottom, 20, 15);
+                    string pa = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Friday);
+                    TextRenderer.DrawText(g, pa, Font, paRect, DayHeaderForeColor);
+                    Rectangle soRect = new Rectangle(paRect.Right, header.Bottom, 20, 15);
+                    string so = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Saturday);
+                    TextRenderer.DrawText(g, so, Font, soRect, DayHeaderForeColor);
+                    Rectangle neRect = new Rectangle(soRect.Right, header.Bottom, 20, 15);
+                    string ne = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Sunday);
+                    TextRenderer.DrawText(g, ne, Font, neRect, DayHeaderForeColor);
                 }
 
                 //měsíc/rok - 146*30
@@ -655,6 +680,7 @@ namespace Ticketník.CustomControls
                 {
                     CreateParams cp = base.CreateParams;
                     cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                    //cp.ClassStyle |= 0x00020000; //Win32Message.CS_DROPSHADOW
                     return cp;
                 }
             }

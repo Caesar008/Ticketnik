@@ -117,6 +117,23 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color dayHeaderForeColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black"), Browsable(true),
+            Description("Color of day names text"), Category("Appearance")]
+        public Color MonthDayHeaderForeColor
+        {
+            get { return dayHeaderForeColor; }
+            set
+            {
+                if (dayHeaderForeColor != value)
+                {
+                    dayHeaderForeColor = value;
+                    if (calendar != null)
+                        calendar.DayHeaderForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color monthHeaderBackColor = Color.White;
         [DefaultValue(typeof(Color), "White"), Browsable(true),
             Description("Bacground color of selector header"), Category("Appearance")]
@@ -638,8 +655,8 @@ namespace Ticketník.CustomControls
                 string den = new DateTime(Value.Ticks).ToString("%d") + ".";
                 Size denSize = TextRenderer.MeasureText(den, Font);
                 denRect = new Rectangle(new Point(denNameRect.Right, denNameRect.Top), denSize);
-                DateTimeFormatInfo info = CultureInfo.GetCultureInfo(CultureInfo.CurrentCulture.Name).DateTimeFormat;
-                string mesic = info.MonthGenitiveNames[new DateTime(Value.Ticks).Month - 1];
+                //DateTimeFormatInfo info = CultureInfo.GetCultureInfo(CultureInfo.CurrentCulture.Name).DateTimeFormat;
+                string mesic = DateTimeFormatInfo.CurrentInfo.MonthGenitiveNames[new DateTime(Value.Ticks).Month - 1];
                 Size mesicSize = TextRenderer.MeasureText(mesic, Font);
                 mesicRect = new Rectangle(new Point(denRect.Right, denRect.Top), mesicSize);
                 string rok = new DateTime(Value.Ticks).ToString("yyyy");

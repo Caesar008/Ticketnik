@@ -66,7 +66,8 @@ namespace Ticketník
                     { "button", Color.Gainsboro },
                     { "buttonBorder", Color.DarkGray },
                     { "tabPozadí", Color.FromArgb(244, 244, 244) },
-                    { "tabPozadíAktivní", Color.White }
+                    { "tabPozadíAktivní", Color.White },
+                    { "dayHeaderText",Color.FromArgb(55, 55, 55) }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -88,7 +89,8 @@ namespace Ticketník
                     { "button", Color.FromArgb(50, 50, 50) },
                     { "buttonBorder", Color.DimGray },
                     { "tabPozadí", Color.FromArgb(50, 50, 50) },
-                    { "tabPozadíAktivní",Color.FromArgb(70, 70, 70) }
+                    { "tabPozadíAktivní",Color.FromArgb(70, 70, 70) },
+                    { "dayHeaderText",Color.FromArgb(200, 200, 200) }
                 }
             }
         };
@@ -256,6 +258,7 @@ namespace Ticketník
                     ((CustomControls.DatePicker)c).MonthButtonMouseOverColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).MonthHeaderMouseOverBackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).MonthHeaderMouseOverForeColor = Color.FromArgb(154, 210, 255);
+                    ((CustomControls.DatePicker)c).MonthDayHeaderForeColor = barvy[sMotiv]["dayHeaderText"];
                 }
                 else
                 {
