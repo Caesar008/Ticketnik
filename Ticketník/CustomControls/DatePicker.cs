@@ -407,6 +407,23 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color monthSeparatorColor = Color.Gainsboro;
+        [DefaultValue(typeof(Color), "Gainsboro"),
+            Description("Color of dropdown button"), Category("Appearance")]
+        public Color MonthSeparatorColor
+        {
+            get { return monthSeparatorColor; }
+            set
+            {
+                if (monthSeparatorColor != value)
+                {
+                    monthSeparatorColor = value;
+                    if (calendar != null)
+                        calendar.SeparatorColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private DateTime maxDate = DateTime.MaxValue;
         [DefaultValue(typeof(DateTime), "31.12.9998"),
             Description("Sets max date available in calendar"), Category("Data")]

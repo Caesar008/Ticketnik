@@ -571,27 +571,33 @@ namespace Ticketník.CustomControls
                     }
 
                     //názvy dnů - ještě posunout na střed rect ty názvy
-                    Rectangle poRect = new Rectangle(2, header.Bottom, 20, 15);
+                    Rectangle poRect = new Rectangle(3, header.Bottom, 20, 13);
                     string po = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Monday);
-                    TextRenderer.DrawText(g, po, Font, poRect, DayHeaderForeColor);
-                    Rectangle utRect = new Rectangle(poRect.Right, header.Bottom, 20, 15);
+                    TextRenderer.DrawText(g, po, Font, poRect, DayHeaderForeColor, TextFormatFlags.Right);
+                    Rectangle utRect = new Rectangle(poRect.Right, header.Bottom, 20, 13);
                     string ut = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Tuesday);
-                    TextRenderer.DrawText(g, ut, Font, utRect, DayHeaderForeColor);
-                    Rectangle stRect = new Rectangle(utRect.Right, header.Bottom, 20, 15);
+                    TextRenderer.DrawText(g, ut, Font, utRect, DayHeaderForeColor, TextFormatFlags.Right);
+                    Rectangle stRect = new Rectangle(utRect.Right, header.Bottom, 20, 13);
                     string st = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Wednesday);
-                    TextRenderer.DrawText(g, st, Font, stRect, DayHeaderForeColor);
-                    Rectangle ctRect = new Rectangle(stRect.Right, header.Bottom, 20, 15);
+                    TextRenderer.DrawText(g, st, Font, stRect, DayHeaderForeColor, TextFormatFlags.Right);
+                    Rectangle ctRect = new Rectangle(stRect.Right, header.Bottom, 20, 13);
                     string ct = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Thursday);
-                    TextRenderer.DrawText(g, ct, Font, ctRect, DayHeaderForeColor);
-                    Rectangle paRect = new Rectangle(ctRect.Right, header.Bottom, 20, 15);
+                    TextRenderer.DrawText(g, ct, Font, ctRect, DayHeaderForeColor, TextFormatFlags.Right);
+                    Rectangle paRect = new Rectangle(ctRect.Right, header.Bottom, 20, 13);
                     string pa = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Friday);
-                    TextRenderer.DrawText(g, pa, Font, paRect, DayHeaderForeColor);
-                    Rectangle soRect = new Rectangle(paRect.Right, header.Bottom, 20, 15);
+                    TextRenderer.DrawText(g, pa, Font, paRect, DayHeaderForeColor, TextFormatFlags.Right);
+                    Rectangle soRect = new Rectangle(paRect.Right, header.Bottom, 20, 13);
                     string so = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Saturday);
-                    TextRenderer.DrawText(g, so, Font, soRect, DayHeaderForeColor);
-                    Rectangle neRect = new Rectangle(soRect.Right, header.Bottom, 20, 15);
+                    TextRenderer.DrawText(g, so, Font, soRect, DayHeaderForeColor, TextFormatFlags.Right);
+                    Rectangle neRect = new Rectangle(soRect.Right, header.Bottom, 20, 13);
                     string ne = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Sunday);
-                    TextRenderer.DrawText(g, ne, Font, neRect, DayHeaderForeColor);
+                    TextRenderer.DrawText(g, ne, Font, neRect, DayHeaderForeColor, TextFormatFlags.Right);
+
+                    //dělící čára
+                    using (Pen ps = new Pen(SeparatorColor, 1))
+                    {
+                        g.DrawLine(ps, 1, poRect.Bottom+1, Width - 2, poRect.Bottom+1);
+                    }
                 }
 
                 //měsíc/rok - 146*30
