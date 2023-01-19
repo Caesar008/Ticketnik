@@ -253,6 +253,74 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color monthTodayButtonBackColor = Color.White;
+        [DefaultValue(typeof(Color), "White"), Browsable(true),
+            Description("Bacground color of month today button"), Category("Appearance")]
+        public Color MonthTodayButtonBackColor
+        {
+            get { return monthTodayButtonBackColor; }
+            set
+            {
+                if (monthTodayButtonBackColor != value)
+                {
+                    monthTodayButtonBackColor = value;
+                    if (calendar != null)
+                        calendar.TodayButtonBackColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthTodayButtonColor = Color.FromArgb(0, 102, 204);
+        [DefaultValue(typeof(Color), "0, 102, 204"), Browsable(true),
+            Description("Color of rectangle inside month today button"), Category("Appearance")]
+        public Color MonthTodayButtonColor
+        {
+            get { return monthTodayButtonColor; }
+            set
+            {
+                if (monthTodayButtonColor != value)
+                {
+                    monthTodayButtonColor = value;
+                    if (calendar != null)
+                        calendar.TodayButtonColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthTodayButtonForeColor = Color.FromArgb(0, 102, 204);
+        [DefaultValue(typeof(Color), "0, 102, 204"), Browsable(true),
+            Description("Fore color of month today button"), Category("Appearance")]
+        public Color MonthTodayButtonForeColor
+        {
+            get { return monthTodayButtonForeColor; }
+            set
+            {
+                if (monthTodayButtonForeColor != value)
+                {
+                    monthTodayButtonForeColor = value;
+                    if (calendar != null)
+                        calendar.TodayButtonForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthTodayButtonMouseOverForeColor = Color.FromArgb(0, 102, 204);
+        [DefaultValue(typeof(Color), "0, 102, 204"), Browsable(true),
+            Description("Fore color of month today button"), Category("Appearance")]
+        public Color MonthTodayButtonMouseOverForeColor
+        {
+            get { return monthTodayButtonMouseOverForeColor; }
+            set
+            {
+                if (monthTodayButtonMouseOverForeColor != value)
+                {
+                    monthTodayButtonMouseOverForeColor = value;
+                    if (calendar != null)
+                        calendar.TodayButtonMouseOverForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color monthButtonMouseOverColor = Color.White;
         [DefaultValue(typeof(Color), "White"), Browsable(true),
             Description("Bacground color of border of month navigating buttons when mouse is over"), Category("Appearance")]

@@ -260,6 +260,10 @@ namespace Ticketník
                     ((CustomControls.DatePicker)c).MonthHeaderMouseOverForeColor = Color.FromArgb(154, 210, 255);
                     ((CustomControls.DatePicker)c).MonthDayHeaderForeColor = barvy[sMotiv]["dayHeaderText"];
                     ((CustomControls.DatePicker)c).MonthSeparatorColor = barvy[sMotiv]["controlRámeček"];
+                    ((CustomControls.DatePicker)c).MonthTodayButtonColor = Color.FromArgb(0, 102, 204);
+                    ((CustomControls.DatePicker)c).MonthTodayButtonBackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.DatePicker)c).MonthTodayButtonForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.DatePicker)c).MonthTodayButtonMouseOverForeColor = Color.FromArgb(154, 210, 255);
                 }
                 else
                 {

@@ -20,10 +20,12 @@ namespace Ticketník.CustomControls
             Rectangle header;
             Rectangle buttonL;
             Rectangle buttonR;
+            Rectangle todayRect;
 
             bool _mouseInLB = false;
             bool _mouseInRB = false;
             bool _mouseInHeader = false;
+            bool _mouseInTB = false;
 
             private Color borderColor = Color.Gray;
             public Color BorderColor
@@ -103,7 +105,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color todayButtonColor = Color.White;
+            private Color todayButtonColor = Color.FromArgb(0, 102, 204);
             public Color TodayButtonColor
             {
                 get { return todayButtonColor; }
@@ -177,6 +179,19 @@ namespace Ticketník.CustomControls
                     if (todayButtonForeColor != value)
                     {
                         todayButtonForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color todayButtonMouseOverForeColor = Color.Black;
+            public Color TodayButtonMouseOverForeColor
+            {
+                get { return todayButtonMouseOverForeColor; }
+                set
+                {
+                    if (todayButtonMouseOverForeColor != value)
+                    {
+                        todayButtonMouseOverForeColor = value;
                         Invalidate();
                     }
                 }
@@ -445,6 +460,11 @@ namespace Ticketník.CustomControls
                             case View.Centuries: ActualDate = ActualDate.AddYears(100); break;
                         }
                     }
+                    else if (todayRect != null && todayRect.Contains(e.Location))
+                    {
+                        CurrentView = View.Days;
+                        actualDate = DateTime.Today;
+                    }
                     Invalidate();
                 }
             }
@@ -484,6 +504,16 @@ namespace Ticketník.CustomControls
                     _mouseInHeader = false;
                     Invalidate();
                 }
+                if (todayRect.Contains(e.Location) && !_mouseInTB)
+                {
+                    _mouseInTB = true;
+                    Invalidate();
+                }
+                else if (_mouseInTB && !todayRect.Contains(e.Location))
+                {
+                    _mouseInTB = false;
+                    Invalidate();
+                }
             }
 
             //protected override bool ShowWithoutActivation => true;
@@ -494,6 +524,7 @@ namespace Ticketník.CustomControls
                 header = new Rectangle(16, 1, Width - 32, 29);
                 buttonL = new Rectangle(1, 1, 14, 28);
                 buttonR = new Rectangle(Width - 16, 1, 14, 28);
+                todayRect = new Rectangle(1, Height - 22, Width - 3, 20);
 
                 using (Graphics g = e.Graphics)
                 {
@@ -570,40 +601,61 @@ namespace Ticketník.CustomControls
                         g.FillPolygon(b, arrowR);
                     }
 
-                    //názvy dnů - ještě posunout na střed rect ty názvy
-                    Rectangle poRect = new Rectangle(3, header.Bottom, 20, 13);
-                    string po = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Monday);
-                    TextRenderer.DrawText(g, po, Font, poRect, DayHeaderForeColor, TextFormatFlags.Right);
-                    Rectangle utRect = new Rectangle(poRect.Right, header.Bottom, 20, 13);
-                    string ut = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Tuesday);
-                    TextRenderer.DrawText(g, ut, Font, utRect, DayHeaderForeColor, TextFormatFlags.Right);
-                    Rectangle stRect = new Rectangle(utRect.Right, header.Bottom, 20, 13);
-                    string st = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Wednesday);
-                    TextRenderer.DrawText(g, st, Font, stRect, DayHeaderForeColor, TextFormatFlags.Right);
-                    Rectangle ctRect = new Rectangle(stRect.Right, header.Bottom, 20, 13);
-                    string ct = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Thursday);
-                    TextRenderer.DrawText(g, ct, Font, ctRect, DayHeaderForeColor, TextFormatFlags.Right);
-                    Rectangle paRect = new Rectangle(ctRect.Right, header.Bottom, 20, 13);
-                    string pa = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Friday);
-                    TextRenderer.DrawText(g, pa, Font, paRect, DayHeaderForeColor, TextFormatFlags.Right);
-                    Rectangle soRect = new Rectangle(paRect.Right, header.Bottom, 20, 13);
-                    string so = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Saturday);
-                    TextRenderer.DrawText(g, so, Font, soRect, DayHeaderForeColor, TextFormatFlags.Right);
-                    Rectangle neRect = new Rectangle(soRect.Right, header.Bottom, 20, 13);
-                    string ne = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Sunday);
-                    TextRenderer.DrawText(g, ne, Font, neRect, DayHeaderForeColor, TextFormatFlags.Right);
-
-                    //dělící čára
-                    using (Pen ps = new Pen(SeparatorColor, 1))
+                    if (CurrentView == View.Days)
                     {
-                        g.DrawLine(ps, 1, poRect.Bottom+1, Width - 2, poRect.Bottom+1);
+                        //názvy dnů - ještě posunout na střed rect ty názvy
+                        Rectangle poRect = new Rectangle(3, header.Bottom, 20, 13);
+                        string po = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Monday);
+                        TextRenderer.DrawText(g, po, Font, poRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        Rectangle utRect = new Rectangle(poRect.Right, header.Bottom, 20, 13);
+                        string ut = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Tuesday);
+                        TextRenderer.DrawText(g, ut, Font, utRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        Rectangle stRect = new Rectangle(utRect.Right, header.Bottom, 20, 13);
+                        string st = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Wednesday);
+                        TextRenderer.DrawText(g, st, Font, stRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        Rectangle ctRect = new Rectangle(stRect.Right, header.Bottom, 20, 13);
+                        string ct = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Thursday);
+                        TextRenderer.DrawText(g, ct, Font, ctRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        Rectangle paRect = new Rectangle(ctRect.Right, header.Bottom, 20, 13);
+                        string pa = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Friday);
+                        TextRenderer.DrawText(g, pa, Font, paRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        Rectangle soRect = new Rectangle(paRect.Right, header.Bottom, 20, 13);
+                        string so = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Saturday);
+                        TextRenderer.DrawText(g, so, Font, soRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        Rectangle neRect = new Rectangle(soRect.Right, header.Bottom, 20, 13);
+                        string ne = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Sunday);
+                        TextRenderer.DrawText(g, ne, Font, neRect, DayHeaderForeColor, TextFormatFlags.Right);
+
+                        //dělící čára
+                        using (Pen ps = new Pen(SeparatorColor, 1))
+                        {
+                            g.DrawLine(ps, 1, poRect.Bottom + 1, Width - 2, poRect.Bottom + 1);
+                        }
                     }
+
+                    //tlačítko Dnes
+                    Rectangle todayBlueRect = new Rectangle(todayRect.Width / 2 - 5, todayRect.Top + 4, 17, 12);
+                    using (SolidBrush b = new SolidBrush(TodayButtonBackColor))
+                    {
+                        g.FillPath(b, RoundedRect(todayRect, 0, 0, 2, 2));
+                    }
+                    string datumDnes = DateTime.Now.ToString("%d.M.yyyy");
+                    Size datumDnesVelikost = TextRenderer.MeasureText(datumDnes, Font);
+                    todayBlueRect.X -= (datumDnesVelikost.Width / 2);
+                    int centerV = todayRect.Top + (todayRect.Height / 2) - datumDnesVelikost.Height / 2;
+                    int centerH = todayRect.Right - (todayRect.Width / 2) - datumDnesVelikost.Width / 2;
+                    TextRenderer.DrawText(g, datumDnes, Font, new Point(centerH + 13, centerV),
+                        _mouseInTB ? TodayButtonMouseOverForeColor : TodayButtonForeColor);
+
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.DrawPath(new Pen(TodayButtonColor, 1), RoundedRect(todayBlueRect, 2, 2, 2, 2));
+                    g.SmoothingMode = SmoothingMode.None;
                 }
 
                 //měsíc/rok - 146*30
                 //hlavička dnů 146*13 - 13. řádek je dělící čára
                 //dny 146*90, 6 řádků dnů, jeden den má 20*15
-                //položka dnes 146*20
+                //položka dnes 146*20, čtvereček 18*13
 
                 //rok mřížka 4*3
                 //měsíce 35*35
