@@ -516,57 +516,96 @@ namespace Ticketník.CustomControls
             protected override void OnMouseMove(MouseEventArgs e)
             {
                 base.OnMouseMove(e);
-                if (buttonL.Contains(e.Location) && !_mouseInLB)
+                if (buttonL.Contains(e.Location))
                 {
-                    _mouseInLB = true;
-                    _mouseInTB = false;
-                    _mouseInRB = false;
-                    _mouseInHeader = false;
-                    _mouseInCal = -1;
-                    Invalidate();
+                    if (!_mouseInLB)
+                    {
+                        _mouseInLB = true;
+                        _mouseInTB = false;
+                        _mouseInRB = false;
+                        _mouseInHeader = false;
+                        _mouseInCal = -1;
+                        Invalidate();
+                    }
                 }
-                else if (buttonR.Contains(e.Location) && !_mouseInRB)
+                else if (buttonR.Contains(e.Location))
                 {
-                    _mouseInRB = true;
-                    _mouseInTB = false;
-                    _mouseInLB = false;
-                    _mouseInHeader = false;
-                    _mouseInCal = -1;
-                    Invalidate();
+                    if (!_mouseInRB)
+                    {
+                        _mouseInRB = true;
+                        _mouseInTB = false;
+                        _mouseInLB = false;
+                        _mouseInHeader = false;
+                        _mouseInCal = -1;
+                        Invalidate();
+                    }
                 }
-                else if (header.Contains(e.Location) && !_mouseInHeader)
+                else if (header.Contains(e.Location))
                 {
-                    _mouseInHeader = true;
-                    _mouseInTB = false;
-                    _mouseInRB = false;
-                    _mouseInLB = false;
-                    _mouseInCal = -1;
-                    Invalidate();
+                    if (!_mouseInHeader)
+                    {
+                        _mouseInHeader = true;
+                        _mouseInTB = false;
+                        _mouseInRB = false;
+                        _mouseInLB = false;
+                        _mouseInCal = -1;
+                        Invalidate();
+                    }
                 }
-                else if (todayRect.Contains(e.Location) && !_mouseInTB)
+                else if (todayRect.Contains(e.Location))
                 {
-                    _mouseInTB = true;
-                    _mouseInHeader = false;
-                    _mouseInRB = false;
-                    _mouseInLB = false;
-                    _mouseInCal = -1;
-                    Invalidate();
+                    if (!_mouseInTB)
+                    {
+                        _mouseInTB = true;
+                        _mouseInHeader = false;
+                        _mouseInRB = false;
+                        _mouseInLB = false;
+                        _mouseInCal = -1;
+                        Invalidate();
+                    }
                 }
                 else if (CurrentView == View.Days)
                 {
-                    for(int i = 0; i < dny.Count(); i++)
+                    for (int i = 0; i < dny.Count(); i++)
                     //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
                     {
                         Rectangle referenceRect = new Rectangle(dny[i].Key.Left + 3, dny[i].Key.Top + poRect.Bottom + 3, dny[i].Key.Width, dny[i].Key.Height);
-                        if(referenceRect.Contains(e.Location) && _mouseInCal != i)
+                        if (referenceRect.Contains(e.Location))
                         {
-                            _mouseInCal = i;
-                            _mouseInHeader = false;
-                            _mouseInTB = false;
-                            _mouseInRB = false;
-                            _mouseInLB = false;
-                            Invalidate();
+                            if (_mouseInCal != i)
+                            {
+                                _mouseInCal = i;
+                                _mouseInHeader = false;
+                                _mouseInTB = false;
+                                _mouseInRB = false;
+                                _mouseInLB = false;
+                                Invalidate();
+                            }
+                            return;
                         }
+                    }
+
+                    if (_mouseInCal != -1 || _mouseInHeader || _mouseInLB || _mouseInRB || _mouseInTB)
+                    {
+                        _mouseInCal = -1;
+                        _mouseInHeader = false;
+                        _mouseInTB = false;
+                        _mouseInRB = false;
+                        _mouseInLB = false;
+                        Invalidate();
+                        return;
+                    }
+                }
+                else
+                {
+                    if (_mouseInCal != -1 || _mouseInHeader || _mouseInLB || _mouseInRB || _mouseInTB)
+                    {
+                        _mouseInCal = -1;
+                        _mouseInHeader = false;
+                        _mouseInTB = false;
+                        _mouseInRB = false;
+                        _mouseInLB = false;
+                        Invalidate();
                     }
                 }
             }
