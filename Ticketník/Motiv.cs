@@ -67,7 +67,10 @@ namespace Ticketník
                     { "buttonBorder", Color.DarkGray },
                     { "tabPozadí", Color.FromArgb(244, 244, 244) },
                     { "tabPozadíAktivní", Color.White },
-                    { "dayHeaderText",Color.FromArgb(55, 55, 55) }
+                    { "dayHeaderText",Color.FromArgb(55, 55, 55) },
+                    { "vybranýDen",Color.FromArgb(204, 232, 255) },
+                    { "najetýDen",Color.FromArgb(229, 243, 255) },
+                    { "vybranýDenRám",Color.DodgerBlue }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -90,7 +93,10 @@ namespace Ticketník
                     { "buttonBorder", Color.DimGray },
                     { "tabPozadí", Color.FromArgb(50, 50, 50) },
                     { "tabPozadíAktivní",Color.FromArgb(70, 70, 70) },
-                    { "dayHeaderText",Color.FromArgb(200, 200, 200) }
+                    { "dayHeaderText",Color.FromArgb(200, 200, 200) },
+                    { "vybranýDen",Color.DodgerBlue },
+                    { "najetýDen",Color.FromArgb(229, 243, 255) },
+                    { "vybranýDenRám",Color.Blue }
                 }
             }
         };
@@ -254,16 +260,20 @@ namespace Ticketník
                     ((CustomControls.DatePicker)c).MonthButtonBorderColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).MonthButtonForeColor = barvy[sMotiv]["arrow"];
                     ((CustomControls.DatePicker)c).MonthButtonBorderMouseOverColor = barvy[sMotiv]["pozadíControl"];
-                    ((CustomControls.DatePicker)c).MonthButtonMouseOverForeColor = Color.FromArgb(154, 210, 255);
+                    ((CustomControls.DatePicker)c).MonthButtonMouseOverForeColor = Color.DodgerBlue;//Color.FromArgb(154, 210, 255);
                     ((CustomControls.DatePicker)c).MonthButtonMouseOverColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).MonthHeaderMouseOverBackColor = barvy[sMotiv]["pozadíControl"];
-                    ((CustomControls.DatePicker)c).MonthHeaderMouseOverForeColor = Color.FromArgb(154, 210, 255);
+                    ((CustomControls.DatePicker)c).MonthHeaderMouseOverForeColor = Color.DodgerBlue;//Color.FromArgb(154, 210, 255);
                     ((CustomControls.DatePicker)c).MonthDayHeaderForeColor = barvy[sMotiv]["dayHeaderText"];
                     ((CustomControls.DatePicker)c).MonthSeparatorColor = barvy[sMotiv]["controlRámeček"];
                     ((CustomControls.DatePicker)c).MonthTodayButtonColor = Color.FromArgb(0, 102, 204);
                     ((CustomControls.DatePicker)c).MonthTodayButtonBackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DatePicker)c).MonthTodayButtonForeColor = barvy[sMotiv]["text"];
-                    ((CustomControls.DatePicker)c).MonthTodayButtonMouseOverForeColor = Color.FromArgb(154, 210, 255);
+                    ((CustomControls.DatePicker)c).MonthTodayButtonMouseOverForeColor = Color.DodgerBlue;//Color.FromArgb(154, 210, 255);
+                    ((CustomControls.DatePicker)c).MonthForeColor = barvy[sMotiv]["text"];
+                    ((CustomControls.DatePicker)c).MonthTrailintForeColor = Color.DarkGray;
+                    ((CustomControls.DatePicker)c).MonthSelectedDayBorderColor = barvy[sMotiv]["vybranýDenRám"];
+                    ((CustomControls.DatePicker)c).MonthSelectedColor = barvy[sMotiv]["vybranýDen"];
                 }
                 else
                 {

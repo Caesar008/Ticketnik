@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Drawing;
 using System.Linq;
-using System.Security.Principal;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +26,9 @@ namespace Ticketník.CustomControls
             bool _mouseInRB = false;
             bool _mouseInHeader = false;
             bool _mouseInTB = false;
+
+            Rectangle[] dny = new Rectangle[42];
+            Rectangle[] mesice = new Rectangle[12];
 
             private Color borderColor = Color.Gray;
             public Color BorderColor
@@ -91,7 +94,7 @@ namespace Ticketník.CustomControls
                         Invalidate();
                     }
                 }
-            }
+            }/*
             private Color dayListColor = Color.White;
             public Color DayListColor
             {
@@ -104,7 +107,7 @@ namespace Ticketník.CustomControls
                         Invalidate();
                     }
                 }
-            }
+            }*/
             private Color todayButtonColor = Color.FromArgb(0, 102, 204);
             public Color TodayButtonColor
             {
@@ -157,7 +160,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color dayListForeColor = Color.Black;
+            /*private Color dayListForeColor = Color.Black;
             public Color DayListForeColor
             {
                 get { return dayListForeColor; }
@@ -169,7 +172,7 @@ namespace Ticketník.CustomControls
                         Invalidate();
                     }
                 }
-            }
+            }*/
             private Color todayButtonForeColor = Color.Black;
             public Color TodayButtonForeColor
             {
@@ -196,6 +199,19 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
+            private Color selectedDayBorderColor = Color.DodgerBlue;
+            public Color SelectedDayBorderColor
+            {
+                get { return selectedDayBorderColor; }
+                set
+                {
+                    if (selectedDayBorderColor != value)
+                    {
+                        selectedDayBorderColor = value;
+                        Invalidate();
+                    }
+                }
+            }
             private Color trailingForeColor = Color.Gray;
             public Color TrailingForeColor
             {
@@ -205,6 +221,19 @@ namespace Ticketník.CustomControls
                     if (trailingForeColor != value)
                     {
                         trailingForeColor = value;
+                        Invalidate();
+                    }
+                }
+            }
+            private Color selectedMouseOverForeColor = Color.DodgerBlue;
+            public Color SelectedMouseOverForeColor
+            {
+                get { return selectedMouseOverForeColor; }
+                set
+                {
+                    if (selectedMouseOverForeColor != value)
+                    {
+                        selectedMouseOverForeColor = value;
                         Invalidate();
                     }
                 }
@@ -371,7 +400,7 @@ namespace Ticketník.CustomControls
             public DatePicker Parent
             {
                 get { return dp; }
-                set { dp = value; }
+                internal set { dp = value; }
             }
 
             private bool isOpen = false;
@@ -417,6 +446,18 @@ namespace Ticketník.CustomControls
                 this.BorderColor = borderColor;
                 this.BackgroundColor= backColor;
                 this.Tag = "CustomColor:Ignore";
+                for(int i = 0; i<42;i++)
+                {
+                    int radek = (i / 7) * 15;
+                    int sloupec = (i % 7) * 20;
+                    dny[i] = new Rectangle(sloupec,radek, 19, 14);
+                }
+                for (int i = 0; i < 12; i++)
+                {
+                    int radek = (i / 4) * 35;
+                    int sloupec = (i % 4) * 35;
+                    mesice[i] = new Rectangle(sloupec, radek, 34, 34);
+                }
             }
 
             protected override void OnLostFocus(EventArgs e)
@@ -576,11 +617,11 @@ namespace Ticketník.CustomControls
                     }
 
                     //tlačítka
-                    using (SolidBrush b = new SolidBrush(_mouseInLB ? buttonMoseOverColor : ButtonBackColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInLB ? ButonMouseOverColor : ButtonBackColor))
                     {
                         g.FillPath(b, RoundedRect(buttonL, 2, 0, 0, 0));
                     }
-                    using (Pen pb = new Pen(_mouseInLB ? buttonBorderMouseOverColor : ButtonBorderColor, 1))
+                    using (Pen pb = new Pen(_mouseInLB ? ButonBorderMouseOverColor : ButtonBorderColor, 1))
                     {
                         g.DrawPath(pb, RoundedRect(buttonL, 2, 0, 0, 0));
                     }
@@ -588,11 +629,11 @@ namespace Ticketník.CustomControls
                     {
                         g.FillPolygon(b, arrowL);
                     }
-                    using (SolidBrush b = new SolidBrush(_mouseInRB ? buttonMoseOverColor : ButtonBackColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInRB ? ButonMouseOverColor : ButtonBackColor))
                     {
                         g.FillPath(b, RoundedRect(buttonR, 0, 2, 0, 0));
                     }
-                    using (Pen pb = new Pen(_mouseInRB ? buttonBorderMouseOverColor : ButtonBorderColor, 1))
+                    using (Pen pb = new Pen(_mouseInRB ? ButonBorderMouseOverColor : ButtonBorderColor, 1))
                     {
                         g.DrawPath(pb, RoundedRect(buttonR, 0, 2, 0, 0));
                     }
@@ -630,6 +671,36 @@ namespace Ticketník.CustomControls
                         using (Pen ps = new Pen(SeparatorColor, 1))
                         {
                             g.DrawLine(ps, 1, poRect.Bottom + 1, Width - 2, poRect.Bottom + 1);
+                        }
+
+                        //dny
+                        DateTime tmp = new DateTime(ActualDate.Year, ActualDate.Month, 1);
+
+                        int prvniDenMesice = ((int)tmp.DayOfWeek + 6) % 7;
+                        if (prvniDenMesice == 0)
+                            prvniDenMesice = 7;
+                        tmp = tmp.AddDays(-prvniDenMesice);
+                        foreach (Rectangle kp in dny)
+                        {
+                            g.SmoothingMode = SmoothingMode.AntiAlias;
+                            if (tmp.Day == SelectedDate.Day && tmp.Month == SelectedDate.Month && tmp.Year == SelectedDate.Year)
+                            {
+                                using (SolidBrush b = new SolidBrush(SelectedColor))
+                                {
+                                    g.FillPath(b, RoundedRect(new Rectangle(kp.Left + 3, kp.Top + poRect.Bottom + 3, kp.Width, kp.Height), 2, 2, 2, 2));
+                                    }
+                                using(Pen p = new Pen(SelectedDayBorderColor, 1))
+                                {
+                                    g.DrawPath(p, RoundedRect(new Rectangle(kp.Left + 3, kp.Top + poRect.Bottom + 3, kp.Width, kp.Height), 2, 2, 2, 2));
+                                }
+                            }
+                            g.SmoothingMode = SmoothingMode.None;
+                            string datum = tmp.ToString("%d");
+                            Size ds = TextRenderer.MeasureText(datum, Font);
+                            TextRenderer.DrawText(g, datum, Font, new Point(kp.Left + 13 - (ds.Width / 2), kp.Top + 10 - (ds.Height / 2) + poRect.Bottom),
+                                ActualDate.Month == tmp.Month ? ForeColor : TrailingForeColor);
+                            
+                            tmp = tmp.AddDays(1);
                         }
                     }
 

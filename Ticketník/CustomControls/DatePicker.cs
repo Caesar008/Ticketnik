@@ -304,6 +304,108 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color monthForeColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black"), Browsable(true),
+            Description("Fore color of calendar"), Category("Appearance")]
+        public Color MonthForeColor
+        {
+            get { return monthForeColor; }
+            set
+            {
+                if (monthForeColor != value)
+                {
+                    monthForeColor = value;
+                    if (calendar != null)
+                        calendar.ForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthSelectedMouseOverForeColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black"), Browsable(true),
+            Description("Fore color of calendar"), Category("Appearance")]
+        public Color MonthSelectedMouseOverForeColor
+        {
+            get { return monthSelectedMouseOverForeColor; }
+            set
+            {
+                if (monthSelectedMouseOverForeColor != value)
+                {
+                    monthSelectedMouseOverForeColor = value;
+                    if (calendar != null)
+                        calendar.SelectedMouseOverForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthSelectedDayBorderColor = Color.DodgerBlue;
+        [DefaultValue(typeof(Color), "DodgerBlue"), Browsable(true),
+            Description("Fore color of calendar"), Category("Appearance")]
+        public Color MonthSelectedDayBorderColor
+        {
+            get { return monthSelectedDayBorderColor; }
+            set
+            {
+                if (monthSelectedDayBorderColor != value)
+                {
+                    monthSelectedDayBorderColor = value;
+                    if (calendar != null)
+                        calendar.SelectedDayBorderColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthSelectedColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black"), Browsable(true),
+            Description("Fore color of calendar"), Category("Appearance")]
+        public Color MonthSelectedColor
+        {
+            get { return monthSelectedColor; }
+            set
+            {
+                if (monthSelectedColor != value)
+                {
+                    monthSelectedColor = value;
+                    if (calendar != null)
+                        calendar.SelectedColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthSelectMouseOverColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black"), Browsable(true),
+            Description("Fore color of calendar"), Category("Appearance")]
+        public Color MonthSelectMouseOverColor
+        {
+            get { return monthSelectMouseOverColor; }
+            set
+            {
+                if (monthSelectMouseOverColor != value)
+                {
+                    monthSelectMouseOverColor = value;
+                    if (calendar != null)
+                        calendar.SelectMouseOverColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color monthTrailingForeColor = Color.Black;
+        [DefaultValue(typeof(Color), "Black"), Browsable(true),
+            Description("Fore color of calendar trailing"), Category("Appearance")]
+        public Color MonthTrailintForeColor
+        {
+            get { return monthTrailingForeColor; }
+            set
+            {
+                if (monthTrailingForeColor != value)
+                {
+                    monthTrailingForeColor = value;
+                    if (calendar != null)
+                        calendar.TrailingForeColor = value;
+                    Invalidate();
+                }
+            }
+        }
         private Color monthTodayButtonMouseOverForeColor = Color.FromArgb(0, 102, 204);
         [DefaultValue(typeof(Color), "0, 102, 204"), Browsable(true),
             Description("Fore color of month today button"), Category("Appearance")]
