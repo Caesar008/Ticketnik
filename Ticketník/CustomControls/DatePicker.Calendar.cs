@@ -21,14 +21,17 @@ namespace Ticketník.CustomControls
             Rectangle buttonL;
             Rectangle buttonR;
             Rectangle todayRect;
+            Rectangle poRect;
 
             bool _mouseInLB = false;
             bool _mouseInRB = false;
             bool _mouseInHeader = false;
             bool _mouseInTB = false;
 
-            Rectangle[] dny = new Rectangle[42];
-            Rectangle[] mesice = new Rectangle[12];
+            int _mouseInCal = -1;
+
+            KeyValuePair<Rectangle,DateTime?>[] dny = new KeyValuePair<Rectangle, DateTime?>[42];
+            KeyValuePair<Rectangle, DateTime?>[] mesice = new KeyValuePair<Rectangle, DateTime?>[12];
 
             private Color borderColor = Color.Gray;
             public Color BorderColor
@@ -290,15 +293,15 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color buttonMoseOverColor = Color.FromArgb(229, 243, 255);
+            private Color buttonMouseOverColor = Color.White;//Color.FromArgb(229, 243, 255);
             public Color ButonMouseOverColor
             {
-                get { return buttonMoseOverColor; }
+                get { return buttonMouseOverColor; }
                 set
                 {
-                    if (buttonMoseOverColor != value)
+                    if (buttonMouseOverColor != value)
                     {
-                        buttonMoseOverColor = value;
+                        buttonMouseOverColor = value;
                         Invalidate();
                     }
                 }
@@ -356,7 +359,7 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            private Color todayButtonBackColor = SystemColors.Control;
+            private Color todayButtonBackColor = Color.White;
             public Color TodayButtonBackColor
             {
                 get { return todayButtonBackColor; }
@@ -450,13 +453,13 @@ namespace Ticketník.CustomControls
                 {
                     int radek = (i / 7) * 15;
                     int sloupec = (i % 7) * 20;
-                    dny[i] = new Rectangle(sloupec,radek, 19, 14);
+                    dny[i] = new KeyValuePair<Rectangle, DateTime?>(new Rectangle(sloupec,radek, 19, 14), null);
                 }
                 for (int i = 0; i < 12; i++)
                 {
                     int radek = (i / 4) * 35;
                     int sloupec = (i % 4) * 35;
-                    mesice[i] = new Rectangle(sloupec, radek, 34, 34);
+                    mesice[i] = new KeyValuePair<Rectangle, DateTime?>(new Rectangle(sloupec, radek, 34, 34), null);
                 }
             }
 
@@ -516,44 +519,55 @@ namespace Ticketník.CustomControls
                 if (buttonL.Contains(e.Location) && !_mouseInLB)
                 {
                     _mouseInLB = true;
+                    _mouseInTB = false;
+                    _mouseInRB = false;
+                    _mouseInHeader = false;
+                    _mouseInCal = -1;
                     Invalidate();
                 }
-                else if (_mouseInLB && !buttonL.Contains(e.Location))
-                {
-                    _mouseInLB = false;
-                    Invalidate();
-                }
-
-                if (buttonR.Contains(e.Location) && !_mouseInRB)
+                else if (buttonR.Contains(e.Location) && !_mouseInRB)
                 {
                     _mouseInRB = true;
+                    _mouseInTB = false;
+                    _mouseInLB = false;
+                    _mouseInHeader = false;
+                    _mouseInCal = -1;
                     Invalidate();
                 }
-                else if (_mouseInRB && !buttonR.Contains(e.Location))
-                {
-                    _mouseInRB = false;
-                    Invalidate();
-                }
-
-                if (header.Contains(e.Location) && !_mouseInHeader)
+                else if (header.Contains(e.Location) && !_mouseInHeader)
                 {
                     _mouseInHeader = true;
+                    _mouseInTB = false;
+                    _mouseInRB = false;
+                    _mouseInLB = false;
+                    _mouseInCal = -1;
                     Invalidate();
                 }
-                else if (_mouseInHeader && !header.Contains(e.Location))
-                {
-                    _mouseInHeader = false;
-                    Invalidate();
-                }
-                if (todayRect.Contains(e.Location) && !_mouseInTB)
+                else if (todayRect.Contains(e.Location) && !_mouseInTB)
                 {
                     _mouseInTB = true;
+                    _mouseInHeader = false;
+                    _mouseInRB = false;
+                    _mouseInLB = false;
+                    _mouseInCal = -1;
                     Invalidate();
                 }
-                else if (_mouseInTB && !todayRect.Contains(e.Location))
+                else if (CurrentView == View.Days)
                 {
-                    _mouseInTB = false;
-                    Invalidate();
+                    for(int i = 0; i < dny.Count(); i++)
+                    //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
+                    {
+                        Rectangle referenceRect = new Rectangle(dny[i].Key.Left + 3, dny[i].Key.Top + poRect.Bottom + 3, dny[i].Key.Width, dny[i].Key.Height);
+                        if(referenceRect.Contains(e.Location) && _mouseInCal != i)
+                        {
+                            _mouseInCal = i;
+                            _mouseInHeader = false;
+                            _mouseInTB = false;
+                            _mouseInRB = false;
+                            _mouseInLB = false;
+                            Invalidate();
+                        }
+                    }
                 }
             }
 
@@ -645,7 +659,7 @@ namespace Ticketník.CustomControls
                     if (CurrentView == View.Days)
                     {
                         //názvy dnů - ještě posunout na střed rect ty názvy
-                        Rectangle poRect = new Rectangle(3, header.Bottom, 20, 13);
+                        poRect = new Rectangle(3, header.Bottom, 20, 13);
                         string po = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Monday);
                         TextRenderer.DrawText(g, po, Font, poRect, DayHeaderForeColor, TextFormatFlags.Right);
                         Rectangle utRect = new Rectangle(poRect.Right, header.Bottom, 20, 13);
@@ -680,24 +694,33 @@ namespace Ticketník.CustomControls
                         if (prvniDenMesice == 0)
                             prvniDenMesice = 7;
                         tmp = tmp.AddDays(-prvniDenMesice);
-                        foreach (Rectangle kp in dny)
+                        for(int ii = 0; ii < dny.Count(); ii++)
+                        //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
                         {
+                            dny[ii] = new KeyValuePair<Rectangle, DateTime?>(dny[ii].Key, tmp);
                             g.SmoothingMode = SmoothingMode.AntiAlias;
                             if (tmp.Day == SelectedDate.Day && tmp.Month == SelectedDate.Month && tmp.Year == SelectedDate.Year)
                             {
                                 using (SolidBrush b = new SolidBrush(SelectedColor))
                                 {
-                                    g.FillPath(b, RoundedRect(new Rectangle(kp.Left + 3, kp.Top + poRect.Bottom + 3, kp.Width, kp.Height), 2, 2, 2, 2));
-                                    }
+                                    g.FillPath(b, RoundedRect(new Rectangle(dny[ii].Key.Left + 3, dny[ii].Key.Top + poRect.Bottom + 3, dny[ii].Key.Width, dny[ii].Key.Height), 2, 2, 2, 2));
+                                }
                                 using(Pen p = new Pen(SelectedDayBorderColor, 1))
                                 {
-                                    g.DrawPath(p, RoundedRect(new Rectangle(kp.Left + 3, kp.Top + poRect.Bottom + 3, kp.Width, kp.Height), 2, 2, 2, 2));
+                                    g.DrawPath(p, RoundedRect(new Rectangle(dny[ii].Key.Left + 3, dny[ii].Key.Top + poRect.Bottom + 3, dny[ii].Key.Width, dny[ii].Key.Height), 2, 2, 2, 2));
+                                }
+                            }
+                            else if (ii == _mouseInCal)
+                            {
+                                using (SolidBrush b = new SolidBrush(SelectMouseOverColor))
+                                {
+                                    g.FillPath(b, RoundedRect(new Rectangle(dny[ii].Key.Left + 3, dny[ii].Key.Top + poRect.Bottom + 3, dny[ii].Key.Width, dny[ii].Key.Height), 2, 2, 2, 2));
                                 }
                             }
                             g.SmoothingMode = SmoothingMode.None;
                             string datum = tmp.ToString("%d");
                             Size ds = TextRenderer.MeasureText(datum, Font);
-                            TextRenderer.DrawText(g, datum, Font, new Point(kp.Left + 13 - (ds.Width / 2), kp.Top + 10 - (ds.Height / 2) + poRect.Bottom),
+                            TextRenderer.DrawText(g, datum, Font, new Point(dny[ii].Key.Left + 13 - (ds.Width / 2), dny[ii].Key.Top + 10 - (ds.Height / 2) + poRect.Bottom),
                                 ActualDate.Month == tmp.Month ? ForeColor : TrailingForeColor);
                             
                             tmp = tmp.AddDays(1);

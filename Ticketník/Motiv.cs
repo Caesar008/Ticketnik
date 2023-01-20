@@ -69,7 +69,7 @@ namespace Ticketník
                     { "tabPozadíAktivní", Color.White },
                     { "dayHeaderText",Color.FromArgb(55, 55, 55) },
                     { "vybranýDen",Color.FromArgb(204, 232, 255) },
-                    { "najetýDen",Color.FromArgb(229, 243, 255) },
+                    { "najetýDen",Color.FromArgb(220, 235, 255) },
                     { "vybranýDenRám",Color.DodgerBlue }
                 }
             },
@@ -95,7 +95,7 @@ namespace Ticketník
                     { "tabPozadíAktivní",Color.FromArgb(70, 70, 70) },
                     { "dayHeaderText",Color.FromArgb(200, 200, 200) },
                     { "vybranýDen",Color.DodgerBlue },
-                    { "najetýDen",Color.FromArgb(229, 243, 255) },
+                    { "najetýDen",Color.FromArgb(45, 90, 150) },
                     { "vybranýDenRám",Color.Blue }
                 }
             }
@@ -274,6 +274,7 @@ namespace Ticketník
                     ((CustomControls.DatePicker)c).MonthTrailintForeColor = Color.DarkGray;
                     ((CustomControls.DatePicker)c).MonthSelectedDayBorderColor = barvy[sMotiv]["vybranýDenRám"];
                     ((CustomControls.DatePicker)c).MonthSelectedColor = barvy[sMotiv]["vybranýDen"];
+                    ((CustomControls.DatePicker)c).MonthSelectMouseOverColor = barvy[sMotiv]["najetýDen"];
                 }
                 else
                 {

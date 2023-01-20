@@ -425,7 +425,7 @@ namespace Ticketník.CustomControls
         }
         private Color monthButtonMouseOverColor = Color.White;
         [DefaultValue(typeof(Color), "White"), Browsable(true),
-            Description("Bacground color of border of month navigating buttons when mouse is over"), Category("Appearance")]
+            Description("Bacground color of month navigating buttons when mouse is over"), Category("Appearance")]
         public Color MonthButtonMouseOverColor
         {
             get { return monthButtonMouseOverColor; }
