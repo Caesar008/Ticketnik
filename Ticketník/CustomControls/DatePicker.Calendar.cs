@@ -614,6 +614,7 @@ namespace Ticketník.CustomControls
 
             protected override void OnPaint(PaintEventArgs e)
             {
+                //udělat double bouffered !!!!!!
                 //base.OnPaint(e);
                 header = new Rectangle(16, 1, Width - 32, 29);
                 buttonL = new Rectangle(1, 1, 14, 28);
