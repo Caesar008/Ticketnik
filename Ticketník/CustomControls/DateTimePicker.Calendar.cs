@@ -13,7 +13,7 @@ using System.Globalization;
 
 namespace Ticketník.CustomControls
 {
-    internal partial class DatePicker
+    internal partial class DateTimePicker
     {
         protected sealed class Calendar : System.Windows.Forms.Form
         {
@@ -400,8 +400,8 @@ namespace Ticketník.CustomControls
                 }
             }
 
-            DatePicker dp;
-            public DatePicker Parent
+            DateTimePicker dp;
+            public DateTimePicker Parent
             {
                 get { return dp; }
                 internal set { dp = value; }
