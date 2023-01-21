@@ -607,8 +607,9 @@ namespace Ticketník.CustomControls
                         _mouseInHeader = false;
                         _mouseInTB = false;
                         _mouseInRB = false;
-                        _mouseInLB = false;
-                        Invalidate(_lastActiveRect);
+                        _mouseInLB = false; 
+                        if (_lastActiveRect != null)
+                            Invalidate(_lastActiveRect);
                         return;
                     }
                 }
@@ -621,7 +622,8 @@ namespace Ticketník.CustomControls
                         _mouseInTB = false;
                         _mouseInRB = false;
                         _mouseInLB = false;
-                        Invalidate(_lastActiveRect);
+                        if (_lastActiveRect != null)
+                            Invalidate(_lastActiveRect);
                     }
                 }
             }
