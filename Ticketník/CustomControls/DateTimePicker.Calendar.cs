@@ -28,6 +28,7 @@ namespace Ticketník.CustomControls
             bool _mouseInRB = false;
             bool _mouseInHeader = false;
             bool _mouseInTB = false;
+            bool _mouseDown = false;
 
             int _mouseInCal = -1;
 
@@ -478,40 +479,65 @@ namespace Ticketník.CustomControls
                 }
             }
 
-            protected override void OnMouseClick(MouseEventArgs e)
+            protected override void OnMouseDown(MouseEventArgs e)
             {
-                base.OnMouseClick(e);
-                if(e.Button == MouseButtons.Left)
+                base.OnMouseDown(e);
+                if(!_mouseDown)
                 {
-                    if (header != null && header.Contains(e.Location) && (int)CurrentView < 4)
+                    _mouseDown = true;
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        if (header != null && header.Contains(e.Location) && (int)CurrentView < 4)
                             CurrentView++;
-                    else if (buttonL != null && buttonL.Contains(e.Location))
-                    {
-                        switch(CurrentView)
+                        else if (buttonL != null && buttonL.Contains(e.Location))
                         {
-                            case View.Days: ActualDate = ActualDate.AddMonths(-1); break;
-                            case View.Months: ActualDate = ActualDate.AddYears(-1); break;
-                            case View.Decades: ActualDate = ActualDate.AddYears(-10); break;
-                            case View.Centuries: ActualDate = ActualDate.AddYears(-100); break;
+                            switch (CurrentView)
+                            {
+                                case View.Days: ActualDate = ActualDate.AddMonths(-1); break;
+                                case View.Months: ActualDate = ActualDate.AddYears(-1); break;
+                                case View.Decades: ActualDate = ActualDate.AddYears(-10); break;
+                                case View.Centuries: ActualDate = ActualDate.AddYears(-100); break;
+                            }
                         }
-                    }
-                    else if (buttonR != null && buttonR.Contains(e.Location))
-                    {
-                        switch (CurrentView)
+                        else if (buttonR != null && buttonR.Contains(e.Location))
                         {
-                            case View.Days: ActualDate = ActualDate.AddMonths(1); break;
-                            case View.Months: ActualDate = ActualDate.AddYears(1); break;
-                            case View.Decades: ActualDate = ActualDate.AddYears(10); break;
-                            case View.Centuries: ActualDate = ActualDate.AddYears(100); break;
+                            switch (CurrentView)
+                            {
+                                case View.Days: ActualDate = ActualDate.AddMonths(1); break;
+                                case View.Months: ActualDate = ActualDate.AddYears(1); break;
+                                case View.Decades: ActualDate = ActualDate.AddYears(10); break;
+                                case View.Centuries: ActualDate = ActualDate.AddYears(100); break;
+                            }
                         }
+                        else if (todayRect != null && todayRect.Contains(e.Location))
+                        {
+                            CurrentView = View.Days;
+                            actualDate = SelectedDate = DateTime.Today;
+                            ValueChanged?.Invoke(this, EventArgs.Empty);
+                        }
+                        else if (CurrentView == View.Days)
+                        {
+                            for (int i = 0; i < dny.Count(); i++)
+                            //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
+                            {
+                                Rectangle referenceRect = new Rectangle(dny[i].Key.Left + 3, dny[i].Key.Top + poRect.Bottom + 3, dny[i].Key.Width, dny[i].Key.Height);
+                                if (referenceRect.Contains(e.Location))
+                                {
+                                    ActualDate = SelectedDate = (DateTime)dny[i].Value;
+                                    ValueChanged?.Invoke(this, EventArgs.Empty);
+                                    break;
+                                }
+                            }
+                        }
+                        Invalidate();
                     }
-                    else if (todayRect != null && todayRect.Contains(e.Location))
-                    {
-                        CurrentView = View.Days;
-                        actualDate = DateTime.Today;
-                    }
-                    Invalidate();
                 }
+            }
+            protected override void OnMouseUp(MouseEventArgs e)
+            {
+                base.OnMouseUp(e);
+                if(_mouseDown)
+                    _mouseDown= false;
             }
 
             protected override void OnMouseMove(MouseEventArgs e)
@@ -883,6 +909,7 @@ namespace Ticketník.CustomControls
                 return path;
             }
 
+            internal event EventHandler ValueChanged;
 
             protected override CreateParams CreateParams
             {

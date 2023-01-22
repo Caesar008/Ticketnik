@@ -706,6 +706,13 @@ namespace Ticketník.CustomControls
         {
             Value = DateTime.Today;
             calendar = new Calendar(MonthBorderColor, MonthBackColor);
+            calendar.ValueChanged += Calendar_ValueChanged;
+        }
+
+        private void Calendar_ValueChanged(object sender, EventArgs e)
+        {
+            this.Value = calendar.SelectedDate;
+            Invalidate();
         }
 
         private void DateTimePicker_DropDown(object sender, EventArgs e)
