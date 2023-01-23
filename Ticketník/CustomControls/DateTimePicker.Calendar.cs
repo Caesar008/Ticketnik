@@ -511,9 +511,12 @@ namespace Ticketník.CustomControls
                         }
                         else if (todayRect != null && todayRect.Contains(e.Location))
                         {
-                            CurrentView = View.Days;
-                            actualDate = SelectedDate = DateTime.Today;
-                            ValueChanged?.Invoke(this, EventArgs.Empty);
+                            if (SelectedDate.Day != DateTime.Today.Day || SelectedDate.Month != DateTime.Today.Month || SelectedDate.Year != DateTime.Today.Year)
+                            {
+                                CurrentView = View.Days;
+                                actualDate = SelectedDate = DateTime.Today;
+                                ValueChanged?.Invoke(this, EventArgs.Empty);
+                            }
                         }
                         else if (CurrentView == View.Days)
                         {
@@ -523,8 +526,11 @@ namespace Ticketník.CustomControls
                                 Rectangle referenceRect = new Rectangle(dny[i].Key.Left + 3, dny[i].Key.Top + poRect.Bottom + 3, dny[i].Key.Width, dny[i].Key.Height);
                                 if (referenceRect.Contains(e.Location))
                                 {
-                                    ActualDate = SelectedDate = (DateTime)dny[i].Value;
-                                    ValueChanged?.Invoke(this, EventArgs.Empty);
+                                    if (SelectedDate.Day != ((DateTime)dny[i].Value).Day || SelectedDate.Month != ((DateTime)dny[i].Value).Month || SelectedDate.Year != ((DateTime)dny[i].Value).Year)
+                                    {
+                                        ActualDate = SelectedDate = (DateTime)dny[i].Value;
+                                        ValueChanged?.Invoke(this, EventArgs.Empty);
+                                    }
                                     break;
                                 }
                             }
@@ -655,6 +661,21 @@ namespace Ticketník.CustomControls
             }
 
             //protected override bool ShowWithoutActivation => true;
+
+            protected override void OnVisibleChanged(EventArgs e)
+            {
+                base.OnVisibleChanged(e);
+                if(!this.Visible)
+                {
+                    _mouseInLB = false;
+                    _mouseInRB = false;
+                    _mouseInHeader = false;
+                    _mouseInTB = false;
+                    _mouseDown = false;
+
+                    _mouseInCal = -1;
+                }
+            }
 
             protected override void OnPaint(PaintEventArgs e)
             {
