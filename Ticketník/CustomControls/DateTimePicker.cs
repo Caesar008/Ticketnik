@@ -23,7 +23,7 @@ namespace Ticketník.CustomControls
         private bool _minuteEdit = false;
         private bool _keyDown = false;
         private bool _mouseDOwn = false;
-        private bool _userChanged = false;
+        private bool _dateChanging = false;
 
         private string _keybuffer = "";
 
@@ -611,7 +611,7 @@ namespace Ticketník.CustomControls
                 }
             }
         }
-        private DateTime minDate = DateTime.MinValue;
+        private DateTime minDate = new DateTime(1753, 1, 1);
         [DefaultValue(typeof(DateTime), "1.1.1753"),
             Description("Sets min date available in calendar"), Category("Data")]
         public DateTime MinDate
@@ -619,31 +619,55 @@ namespace Ticketník.CustomControls
             get { return minDate; }
             set
             {
-                if (minDate != value)
+                if (minDate != value && value.Year < 1753)
                 {
-                    minDate = value;
+                    if(value.Year < 1753)
+                        minDate = new DateTime(1753, value.Month, value.Day, value.Hour, value.Minute, value.Second);
+                    else
+                        minDate = value;
                     if(Value < minDate)
                         Value = minDate;
                 }
             }
         }
         private DateTime _value;
+        private DateTime _TmpValue;
         [Description("Value of DateTimePicker"), Category("Data")]
         public DateTime Value
         {
-            get { return _value != null ? _value : DateTime.Today; }
+            get { 
+                if(!_dateChanging)
+                    return _value != null ? _value : DateTime.Today;
+                return _TmpValue != null ? _TmpValue : _value;
+            }
             set
             {
-                if (_value != value)
+                if (_dateChanging)
                 {
-                    if (value <= MaxDate || value >= MinDate)
-                        _value = value;
-                    else if (value > maxDate)
-                        _value = MaxDate;
-                    else if(value < minDate)
-                        _value = MinDate;
-                    Invalidate();
+                    if (_TmpValue != value)
+                    {
+                        if (value <= MaxDate || value >= MinDate)
+                            _TmpValue = value;
+                        else if (value > maxDate)
+                            _TmpValue = MaxDate;
+                        else if (value < minDate)
+                            _TmpValue = MinDate;
+                        Invalidate();
+                    }
+                }
+                else
+                {
+                    if (_value != value)
+                    {
+                        if (value <= MaxDate || value >= MinDate)
+                            _TmpValue = _value = value;
+                        else if (value > maxDate)
+                            _TmpValue = _value = MaxDate;
+                        else if (value < minDate)
+                            _TmpValue = _value = MinDate;
+                        Invalidate();
                         ValueChanged?.Invoke(this, EventArgs.Empty);
+                    }
                 }
             }
         }
@@ -718,7 +742,7 @@ namespace Ticketník.CustomControls
         }
         protected override void OnLostFocus(EventArgs e)
         {
-            _mouseIn = _dayEdit = _monthEdit = _yearEdit = false;
+            _keyDown = _dateChanging = _mouseIn = _dayEdit = _monthEdit = _yearEdit = false;
             base.OnLostFocus(e);
             Invalidate();
             /*if (calendar != null && _calendarOpen)
@@ -747,23 +771,121 @@ namespace Ticketník.CustomControls
                     case Keys.NumPad7: value = 7; break;
                     case Keys.NumPad8: value = 8; break;
                     case Keys.NumPad9: value = 9; break;
+                    case Keys.Enter: value = 254; break;
                     default: value = 10; break;
                 }
             }
-            if(value != 10)
+            if(value < 10)
             {
                 if(_dayEdit)
                 {
                     if(_keybuffer.Length==0 && value != 0)
                     {
-                        _userChanged= true;
+                        _dateChanging = true;
                         _keybuffer = value.ToString();
+                        Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
                     }
                     else if (_keybuffer.Length==1)
                     {
-                        
+                        if (int.Parse(_keybuffer + value.ToString()) <= DateTime.DaysInMonth(Value.Year, Value.Month))
+                        {
+                            _dateChanging = true;
+                            _keybuffer = _keybuffer + value.ToString();
+                            Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
+                        }
+                        else
+                        {
+                            if (value != 0)
+                            {
+                                _dateChanging = true;
+                                _keybuffer = value.ToString();
+                                Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (value != 0)
+                        {
+                            _dateChanging = true;
+                            _keybuffer = value.ToString();
+                            Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
+                        }
                     }
                 }
+                if (_monthEdit)
+                {
+                    if (_keybuffer.Length == 0 && value != 0)
+                    {
+                        _dateChanging = true;
+                        _keybuffer = value.ToString();
+                        Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
+                    }
+                    else if (_keybuffer.Length == 1)
+                    {
+                        if (int.Parse(_keybuffer + value.ToString()) <= 12)
+                        {
+                            _dateChanging = true;
+                            _keybuffer = _keybuffer + value.ToString();
+                            Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
+                        }
+                        else
+                        {
+                            if (value != 0)
+                            {
+                                _dateChanging = true;
+                                _keybuffer = value.ToString();
+                                Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (value != 0)
+                        {
+                            _dateChanging = true;
+                            _keybuffer = value.ToString();
+                            Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
+                        }
+                    }
+                }
+                if (_yearEdit)
+                {
+                    if (_keybuffer.Length == 0 && value != 0)
+                    {
+                        _dateChanging = true;
+                        _keybuffer = value.ToString();
+                        Value = new DateTime(int.Parse(_keybuffer), Value.Month, Value.Day, Value.Hour, Value.Minute, Value.Second);
+                    }
+                    else if (_keybuffer.Length < 4)
+                    {
+                        _dateChanging = true;
+                        _keybuffer = _keybuffer + value.ToString();
+                        Value = new DateTime(int.Parse(_keybuffer), Value.Month, Value.Day, Value.Hour, Value.Minute, Value.Second);
+                    }
+                    else
+                    {
+                        if (value != 0)
+                        {
+                            _dateChanging = true;
+                            _keybuffer = value.ToString();
+                            Value = new DateTime(int.Parse(_keybuffer), Value.Month, Value.Day, Value.Hour, Value.Minute, Value.Second);
+                        }
+                    }
+                }
+                Invalidate();
+            }
+            else if (value == 254)
+            {
+                DateTime tmpDateTime = Value;
+                if (tmpDateTime.Year < MinDate.Year)
+                    tmpDateTime = new DateTime(MinDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
+                else if(tmpDateTime.Year > MaxDate.Year)
+                    tmpDateTime = new DateTime(MaxDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
+                _dateChanging = false;
+                _keybuffer = "";
+                Value = tmpDateTime;
+                calendar.ActualDate = calendar.SelectedDate = tmpDateTime;
             }
         }
         protected override void OnKeyUp(KeyEventArgs e)
@@ -785,6 +907,7 @@ namespace Ticketník.CustomControls
                 _keybuffer = "";
 
                 base.OnMouseDown(e);
+                this.Focus();
                 if (denRect != null && denRect.Contains(e.Location))
                 {
                     _dayEdit = true;
