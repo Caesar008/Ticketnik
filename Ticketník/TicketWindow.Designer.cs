@@ -776,10 +776,18 @@ namespace Ticketník
             // 
             // datum
             // 
+            this.datum.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
+            this.datum.ButtonColorDisabled = System.Drawing.SystemColors.Control;
+            this.datum.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.datum.CustomFormat = null;
+            this.datum.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.datum.Location = new System.Drawing.Point(250, 343);
+            this.datum.MaxDate = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            this.datum.MinDate = new System.DateTime(((long)(0)));
             this.datum.Name = "datum";
-            this.datum.Size = new System.Drawing.Size(160, 20);
+            this.datum.Size = new System.Drawing.Size(180, 20);
             this.datum.TabIndex = 14;
+            this.datum.Value = new System.DateTime(2023, 1, 25, 0, 0, 0, 0);
             this.datum.CloseUp += new System.EventHandler(this.datum_CloseUp);
             this.datum.ValueChanged += new System.EventHandler(this.datum_ValueChanged);
             this.datum.DropDown += new System.EventHandler(this.datum_DropDown);

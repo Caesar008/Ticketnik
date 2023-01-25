@@ -23,6 +23,7 @@ namespace Ticketník.CustomControls
         private bool _minuteEdit = false;
         private bool _keyDown = false;
         private bool _mouseDOwn = false;
+        private bool _userChanged = false;
 
         private string _keybuffer = "";
 
@@ -642,8 +643,7 @@ namespace Ticketník.CustomControls
                     else if(value < minDate)
                         _value = MinDate;
                     Invalidate();
-                    if(onValueChanged != null)
-                        onValueChanged(this, EventArgs.Empty);
+                        ValueChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -677,30 +677,12 @@ namespace Ticketník.CustomControls
             }
         }
 
-        private EventHandler onCloseUp;
-        private EventHandler onValueChanged;
-        private EventHandler onDropDown;
         [Category("Action")]
-        public event EventHandler CloseUp
-        {
-            add { onCloseUp += value; }
-            remove { onCloseUp -= value; }
-        }
+        public event EventHandler CloseUp;
         [Category("Action")]
-        public event EventHandler ValueChanged
-        {
-            add { onValueChanged += value;}
-            remove { onValueChanged -= value; }
-        }
+        public event EventHandler ValueChanged;
         [Category("Action")]
-        public event EventHandler DropDown
-        {
-            add { onDropDown += value; }
-            remove
-            {
-                onDropDown -= value;
-            }
-        }
+        public event EventHandler DropDown;
 
         public DateTimePicker():base()
         {
@@ -713,11 +695,6 @@ namespace Ticketník.CustomControls
         {
             this.Value = calendar.SelectedDate;
             Invalidate();
-        }
-
-        private void DateTimePicker_DropDown(object sender, EventArgs e)
-        {
-            
         }
 
         protected override void OnMouseEnter(EventArgs e)
@@ -754,14 +731,40 @@ namespace Ticketník.CustomControls
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
+            byte value = 10;
             if(!_keyDown)
             {
                 _keyDown = true;
-                switch(e.KeyCode)
+                switch (e.KeyCode)
                 {
+                    case Keys.NumPad0: value = 0; break;
+                    case Keys.NumPad1: value = 1; break;
+                    case Keys.NumPad2: value = 2; break;
+                    case Keys.NumPad3: value = 3; break;
+                    case Keys.NumPad4: value = 4; break;
+                    case Keys.NumPad5: value = 5; break;
+                    case Keys.NumPad6: value = 6; break;
+                    case Keys.NumPad7: value = 7; break;
+                    case Keys.NumPad8: value = 8; break;
+                    case Keys.NumPad9: value = 9; break;
+                    default: value = 10; break;
                 }
             }
-
+            if(value != 10)
+            {
+                if(_dayEdit)
+                {
+                    if(_keybuffer.Length==0 && value != 0)
+                    {
+                        _userChanged= true;
+                        _keybuffer = value.ToString();
+                    }
+                    else if (_keybuffer.Length==1)
+                    {
+                        
+                    }
+                }
+            }
         }
         protected override void OnKeyUp(KeyEventArgs e)
         {
@@ -815,6 +818,7 @@ namespace Ticketník.CustomControls
                         //this.Focus();
                         calendar.BringToFront();
                         calendar.IsOpen = true;
+                        DropDown?.Invoke(this, EventArgs.Empty);
                     }
                 }
 

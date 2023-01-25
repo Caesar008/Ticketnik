@@ -22,6 +22,7 @@ namespace Ticketník.CustomControls
             Rectangle buttonR;
             Rectangle todayRect;
             Rectangle poRect;
+            Rectangle r1;
             Rectangle _lastActiveRect;
 
             bool _mouseInLB = false;
@@ -476,6 +477,7 @@ namespace Ticketník.CustomControls
                     this.Hide();
                     this.isOpen = false;
                     Parent.lastFocusLost = DateTime.Now;
+                    Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
                 }
             }
 
@@ -511,10 +513,10 @@ namespace Ticketník.CustomControls
                         }
                         else if (todayRect != null && todayRect.Contains(e.Location))
                         {
-                            if (SelectedDate.Day != DateTime.Today.Day || SelectedDate.Month != DateTime.Today.Month || SelectedDate.Year != DateTime.Today.Year)
+                            if (CurrentView != View.Days || (SelectedDate.Day != DateTime.Today.Day || SelectedDate.Month != DateTime.Today.Month || SelectedDate.Year != DateTime.Today.Year))
                             {
                                 CurrentView = View.Days;
-                                actualDate = SelectedDate = DateTime.Today;
+                                ActualDate = SelectedDate = DateTime.Today;
                                 ValueChanged?.Invoke(this, EventArgs.Empty);
                             }
                         }
@@ -531,6 +533,26 @@ namespace Ticketník.CustomControls
                                         ActualDate = SelectedDate = (DateTime)dny[i].Value;
                                         ValueChanged?.Invoke(this, EventArgs.Empty);
                                     }
+                                    break;
+                                }
+                            }
+                        }
+                        else if (CurrentView == View.Months || CurrentView == View.Decades || CurrentView == View.Centuries)
+                        {
+                            for (int i = 0; i < mesice.Count(); i++)
+                            //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
+                            {
+                                Rectangle referenceRect = new Rectangle(mesice[i].Key.Left + 3, mesice[i].Key.Top + header.Bottom + 1, mesice[i].Key.Width, mesice[i].Key.Height);
+                                if (referenceRect.Contains(e.Location))
+                                {
+                                    _mouseInCal = -1;
+                                    _mouseInHeader = false;
+                                    _mouseInTB = false;
+                                    _mouseInRB = false;
+                                    _mouseInLB = false;
+                                    ActualDate = (DateTime)mesice[i].Value;
+                                    CurrentView -= 1;
+
                                     break;
                                 }
                             }
@@ -645,6 +667,42 @@ namespace Ticketník.CustomControls
                         return;
                     }
                 }
+                else if (CurrentView == View.Months || CurrentView == View.Decades || CurrentView == View.Centuries)
+                {
+                    for (int i = 0; i < mesice.Count(); i++)
+                    //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
+                    {
+                        Rectangle referenceRect = new Rectangle(mesice[i].Key.Left + 3, mesice[i].Key.Top + header.Bottom + 1, mesice[i].Key.Width, mesice[i].Key.Height);
+                        if (referenceRect.Contains(e.Location))
+                        {
+                            if (_mouseInCal != i)
+                            {
+                                _mouseInCal = i;
+                                _mouseInHeader = false;
+                                _mouseInTB = false;
+                                _mouseInRB = false;
+                                _mouseInLB = false;
+                                Invalidate(referenceRect);
+                                if (_lastActiveRect != null)
+                                    Invalidate(_lastActiveRect);
+                                _lastActiveRect = referenceRect;
+                            }
+                            return;
+                        }
+                    }
+
+                    if (_mouseInCal != -1 || _mouseInHeader || _mouseInLB || _mouseInRB || _mouseInTB)
+                    {
+                        _mouseInCal = -1;
+                        _mouseInHeader = false;
+                        _mouseInTB = false;
+                        _mouseInRB = false;
+                        _mouseInLB = false;
+                        if (_lastActiveRect != null)
+                            Invalidate(_lastActiveRect);
+                        return;
+                    }
+                }
                 else
                 {
                     if (_mouseInCal != -1 || _mouseInHeader || _mouseInLB || _mouseInRB || _mouseInTB)
@@ -680,6 +738,7 @@ namespace Ticketník.CustomControls
             protected override void OnPaint(PaintEventArgs e)
             {
                 //udělat double bouffered !!!!!!
+                //Doubloe buffered grafika divně problikává, zůstávám u composited.
                 //base.OnPaint(e);
                 header = new Rectangle(16, 1, Width - 33, 28);
                 buttonL = new Rectangle(1, 1, 14, 28);
@@ -829,6 +888,87 @@ namespace Ticketník.CustomControls
                                 ActualDate.Month == tmp.Month ? ForeColor : TrailingForeColor);
                             
                             tmp = tmp.AddDays(1);
+                        }
+                    }
+                    else
+                    {
+                        int year = 0;
+                        int modifier = 0;
+                        switch(CurrentView)
+                        {
+                            case View.Months: year = ActualDate.Year; break;
+                            case View.Decades: year = ActualDate.Year - (ActualDate.Year % 10) - 1; modifier = 1; break;
+                            case View.Centuries: year = ActualDate.Year - (ActualDate.Year % 100) - 1; modifier = 10; break;
+                            default: year = ActualDate.Year; break;
+                        }
+                        DateTime tmp = new DateTime(year, 1, 1);
+                        for (int ii = 0; ii < mesice.Count(); ii++)
+                        //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
+                        {
+                            mesice[ii] = new KeyValuePair<Rectangle, DateTime?>(mesice[ii].Key, tmp);
+
+                            if (CurrentView == View.Months)
+                            {
+                                g.SmoothingMode = SmoothingMode.AntiAlias;
+                                if (tmp.Month == SelectedDate.Month && tmp.Year == SelectedDate.Year)
+                                {
+                                    using (SolidBrush b = new SolidBrush(SelectedColor))
+                                    {
+                                        g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
+                                    }
+                                    using (Pen p = new Pen(SelectedDayBorderColor, 1))
+                                    {
+                                        g.DrawPath(p, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
+                                    }
+                                }
+                                else if (ii == _mouseInCal)
+                                {
+                                    using (SolidBrush b = new SolidBrush(SelectMouseOverColor))
+                                    {
+                                        g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
+                                    }
+                                }
+                                g.SmoothingMode = SmoothingMode.None;
+                                string datum = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(tmp.Month);//tmp.ToString("%d");
+                                Size ds = TextRenderer.MeasureText(datum, Font);
+                                TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
+                                    ForeColor);
+
+                                tmp = tmp.AddMonths(1);
+                            }
+                            else
+                            {
+                                g.SmoothingMode = SmoothingMode.AntiAlias;
+                                if (tmp.Year - (tmp.Year % modifier) == SelectedDate.Year - (SelectedDate.Year % modifier))
+                                {
+                                    using (SolidBrush b = new SolidBrush(SelectedColor))
+                                    {
+                                        g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
+                                    }
+                                    using (Pen p = new Pen(SelectedDayBorderColor, 1))
+                                    {
+                                        g.DrawPath(p, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
+                                    }
+                                }
+                                else if (ii == _mouseInCal)
+                                {
+                                    using (SolidBrush b = new SolidBrush(SelectMouseOverColor))
+                                    {
+                                        g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
+                                    }
+                                }
+                                g.SmoothingMode = SmoothingMode.None;
+                                string datum = tmp.Year.ToString();
+                                if(CurrentView == View.Centuries || CurrentView == View.Centuries)
+                                {
+                                    datum = tmp.Year / 10 * modifier + " -\r\n" + (tmp.Year / modifier) + 9;
+                                }
+                                Size ds = TextRenderer.MeasureText(datum, Font);
+                                TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
+                                    (ii == 0 || ii == 11) ? TrailingForeColor : ForeColor);
+
+                                tmp = tmp.AddYears(modifier);
+                            }
                         }
                     }
 
