@@ -141,8 +141,34 @@ namespace Ticketník.CustomControls
                     }
                 }
                 ReleaseDC(handle, dc);
+                
+            }
+
+            //tohle je kvůli scrollbarům
+            if (needRefresh)
+            {
+                this.SuspendLayout();
+                foreach (TabPage tp in this.TabPages)
+                {
+                    tp.SuspendLayout();
+                    foreach (Control c in tp.Controls)
+                    {
+                        c.Refresh();
+                        needRefresh = false;
+                    }
+                    tp.ResumeLayout();
+                }
+                this.ResumeLayout();
             }
         }
+
+        protected override void OnSelectedIndexChanged(EventArgs e)
+        {
+            base.OnSelectedIndexChanged(e);
+            needRefresh = true;
+        }
+
+        private bool needRefresh = false;
 
         private static Size MeasureHeader(TabPage page)
         {
