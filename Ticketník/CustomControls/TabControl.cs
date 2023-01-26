@@ -153,8 +153,10 @@ namespace Ticketník.CustomControls
                     tp.SuspendLayout();
                     foreach (Control c in tp.Controls)
                     {
+                        c.SuspendLayout();
                         c.Refresh();
                         needRefresh = false;
+                        c.ResumeLayout();
                     }
                     tp.ResumeLayout();
                 }
