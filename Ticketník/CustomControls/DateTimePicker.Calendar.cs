@@ -539,19 +539,19 @@ namespace Ticketník.CustomControls
                                     }
                                     break;
                                 case View.Months:
-                                    if (ActualDate.Year < Parent.MinDate.Year)
+                                    if (ActualDate.Year < Parent.MaxDate.Year)
                                     {
                                         ActualDate = ActualDate.AddYears(1);
                                     }
                                     break;
                                 case View.Decades:
-                                    if (ActualDate.Year < Parent.MinDate.Year)
+                                    if (ActualDate.Year < Parent.MaxDate.Year)
                                     {
                                         ActualDate = ActualDate.AddYears(10);
                                     }
                                     break;
                                 case View.Centuries:
-                                    if (ActualDate.Year < Parent.MinDate.Year)
+                                    if (ActualDate.Year < Parent.MaxDate.Year)
                                     {
                                         ActualDate = ActualDate.AddYears(100);
                                     }
@@ -792,6 +792,9 @@ namespace Ticketník.CustomControls
                 buttonR = new Rectangle(Width - 16, 1, 14, 28);
                 todayRect = new Rectangle(1, Height - 22, Width - 3, 20);
 
+                DateTime refMinDate = new DateTime(Parent.MinDate.Year, Parent.MinDate.Month, Parent.MinDate.Day);
+                DateTime refMaxDate = new DateTime(Parent.MaxDate.Year, Parent.MaxDate.Month, Parent.MaxDate.Day);
+
                 using (Graphics g = e.Graphics)
                 {
                     Rectangle drawArea = new Rectangle(0, 0, Width - 1, Height - 1);
@@ -908,6 +911,11 @@ namespace Ticketník.CustomControls
                         for (int ii = 0; ii < dny.Count(); ii++)
                         //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
                         {
+                            if (tmp < refMinDate || tmp > refMaxDate)
+                            {
+                                tmp = tmp.AddDays(1);
+                                continue;
+                            }
                             dny[ii] = new KeyValuePair<Rectangle, DateTime?>(dny[ii].Key, tmp);
                             g.SmoothingMode = SmoothingMode.AntiAlias;
                             if (tmp.Day == SelectedDate.Day && tmp.Month == SelectedDate.Month && tmp.Year == SelectedDate.Year)
@@ -955,6 +963,14 @@ namespace Ticketník.CustomControls
                         for (int ii = 0; ii < mesice.Count(); ii++)
                         //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
                         {
+                            if (tmp < refMinDate || tmp > refMaxDate)
+                            {
+                                if(CurrentView == View.Months)
+                                    tmp = tmp.AddMonths(1);
+                                else
+                                    tmp = tmp.AddYears(modifier);
+                                continue;
+                            }
                             mesice[ii] = new KeyValuePair<Rectangle, DateTime?>(mesice[ii].Key, tmp);
 
                             if (CurrentView == View.Months)
@@ -983,10 +999,10 @@ namespace Ticketník.CustomControls
                                 Size ds = TextRenderer.MeasureText(datum, Font);
                                 if (tmp < Parent.MaxDate && tmp > Parent.MinDate)
                                 {
-                                TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
-                                ForeColor);
+                                    TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
+                                    ForeColor);
 
-                                tmp = tmp.AddMonths(1);
+                                    tmp = tmp.AddMonths(1);
                                 }
                             }
                             else
@@ -1017,14 +1033,12 @@ namespace Ticketník.CustomControls
                                     datum = tmp.Year / modifier * modifier + " -\r\n" + (tmp.Year / modifier) + 9;
                                 }
                                 Size ds = TextRenderer.MeasureText(datum, Font);
-                                if (tmp < Parent.MaxDate && tmp > Parent.MinDate)
-                                {
-                                    TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
-                                    (ii == 0 || ii == 11) ? TrailingForeColor : ForeColor);
+                                TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
+                                (ii == 0 || ii == 11) ? TrailingForeColor : ForeColor);
 
-                                    if (tmp.Year > Parent.MinDate.Year && tmp.Year < Parent.MaxDate.Year)
-                                        tmp = tmp.AddYears(modifier);
-                                }
+                                if (tmp.Year > Parent.MinDate.Year && tmp.Year < Parent.MaxDate.Year)
+                                    tmp = tmp.AddYears(modifier);
+
                             }
                         }
 
