@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Ticketník.CustomControls
 {
@@ -588,8 +589,8 @@ namespace Ticketník.CustomControls
                 }
             }
         }
-        private DateTime maxDate = DateTime.MaxValue;
-        [DefaultValue(typeof(DateTime), "31.12.9998"),
+        private DateTime maxDate = new DateTime(8999, 12, 31);
+        [DefaultValue(typeof(DateTime), "31.12.8999"),
             Description("Sets max date available in calendar"), Category("Data")]
         public DateTime MaxDate
         {
@@ -598,7 +599,10 @@ namespace Ticketník.CustomControls
             {
                 if (maxDate != value)
                 {
-                    maxDate = value;
+                    if(value.Year > 8999)
+                        maxDate = new DateTime(8999, 12, 31);
+                    else
+                        maxDate = value;
                     if(Value > maxDate)
                         Value = maxDate;
                 }
@@ -612,10 +616,10 @@ namespace Ticketník.CustomControls
             get { return minDate; }
             set
             {
-                if (minDate != value && value.Year < 1753)
+                if (minDate != value)
                 {
                     if(value.Year < 1753)
-                        minDate = new DateTime(1753, value.Month, value.Day, value.Hour, value.Minute, value.Second);
+                        minDate = new DateTime(1753, 1, 1);
                     else
                         minDate = value;
                     if(Value < minDate)
@@ -953,8 +957,8 @@ namespace Ticketník.CustomControls
             base.OnPaint(e);
             using (Graphics g = e.Graphics)
             {
-                Rectangle area = new Rectangle(0, 0, Width -1, Height - 1);
-                dropDown = new Rectangle(Width -18, area.X +1, 17, Height-2);
+                Rectangle area = new Rectangle(0, 0, Width - 1, Height - 1);
+                dropDown = new Rectangle(Width - 18, area.X + 1, 17, Height - 2);
                 Point middle = new Point(dropDown.Left + dropDown.Width / 2,
                     dropDown.Top + dropDown.Height / 2);
                 Point[] arrow = new Point[]
@@ -976,69 +980,76 @@ namespace Ticketník.CustomControls
                 string rok = new DateTime(Value.Ticks).ToString("yyyy");
                 Size rokSize = TextRenderer.MeasureText(rok, Font);
                 rokRect = new Rectangle(new Point(mesicRect.Right, mesicRect.Top), rokSize);
-                if (Format == DateTimePickerFormat.Custom)
-                {
-                    denName = "";
-                }
                 using (Pen p = new Pen(Enabled ? ((Focused || _mouseIn || _dayEdit || _monthEdit || _yearEdit) ? BorderColorMouseOver : BorderColor) : BorderColorDisabled))
                 {
                     //text
                     //jméno dne
-                    if (denNameRect.Right <= area.Width - 20 && denNameRect.Bottom <= area.Height - 2 && denName != "")
+                    if (Format == DateTimePickerFormat.Long)
                     {
-
-                        TextRenderer.DrawText(g, denName, Font, denNameRect, Enabled ? ForeColor : ForeColorDisabled);
-
-                    }
-
-                    //den
-                    if (denRect.Right <= area.Width - 20 && denRect.Bottom <= area.Height - 2 && den != "")
-                    {
-                        if (Enabled && _dayEdit)
+                        if (denNameRect.Right <= area.Width - 20 && denNameRect.Bottom <= area.Height - 2 && denName != "")
                         {
-                            using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
-                            {
-                                g.FillRectangle(bb, denRect);
-                                TextRenderer.DrawText(g, den, Font, denRect, Color.White);
-                            }
-                        }
-                        else
-                            TextRenderer.DrawText(g, den, Font, denRect, Enabled ? ForeColor : ForeColorDisabled);
-                    }
 
-                    //jméno měsíce
-                    if (mesicRect.Right <= area.Width - 20 && mesicRect.Bottom <= area.Height - 2 && mesic != "")
-                    {
-                        if (Enabled && _monthEdit)
-                        {
-                            using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
-                            {
-                                g.FillRectangle(bb, mesicRect); 
-                                TextRenderer.DrawText(g, mesic, Font, mesicRect, Color.White);
-                            }
-                        }
-                        else
-                            TextRenderer.DrawText(g, mesic, Font, mesicRect, Enabled ? ForeColor : ForeColorDisabled);
-                    }
+                            TextRenderer.DrawText(g, denName, Font, denNameRect, Enabled ? ForeColor : ForeColorDisabled);
 
-                    //rok
-                    if (rokRect.Right <= area.Width - 20 && rokRect.Bottom <= area.Height - 2 && rok != "")
-                    {
-                        if (Enabled && _yearEdit)
-                        {
-                            using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
-                            {
-                                g.FillRectangle(bb, rokRect);
-                                TextRenderer.DrawText(g, rok, Font, rokRect, Color.White);
-                            }
                         }
-                        else
-                            TextRenderer.DrawText(g, rok, Font, rokRect, Enabled ? ForeColor : ForeColorDisabled);
+
+                        //den
+                        if (denRect.Right <= area.Width - 20 && denRect.Bottom <= area.Height - 2 && den != "")
+                        {
+                            if (Enabled && _dayEdit)
+                            {
+                                using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                {
+                                    g.FillRectangle(bb, denRect);
+                                    TextRenderer.DrawText(g, den, Font, denRect, Color.White);
+                                }
+                            }
+                            else
+                                TextRenderer.DrawText(g, den, Font, denRect, Enabled ? ForeColor : ForeColorDisabled);
+                        }
+
+                        //jméno měsíce
+                        if (mesicRect.Right <= area.Width - 20 && mesicRect.Bottom <= area.Height - 2 && mesic != "")
+                        {
+                            if (Enabled && _monthEdit)
+                            {
+                                using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                {
+                                    g.FillRectangle(bb, mesicRect);
+                                    TextRenderer.DrawText(g, mesic, Font, mesicRect, Color.White);
+                                }
+                            }
+                            else
+                                TextRenderer.DrawText(g, mesic, Font, mesicRect, Enabled ? ForeColor : ForeColorDisabled);
+                        }
+
+                        //rok
+                        if (rokRect.Right <= area.Width - 20 && rokRect.Bottom <= area.Height - 2 && rok != "")
+                        {
+                            if (Enabled && _yearEdit)
+                            {
+                                using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                {
+                                    g.FillRectangle(bb, rokRect);
+                                    TextRenderer.DrawText(g, rok, Font, rokRect, Color.White);
+                                }
+                            }
+                            else
+                                TextRenderer.DrawText(g, rok, Font, rokRect, Enabled ? ForeColor : ForeColorDisabled);
+                        }
+                    }
+                    else if (Format == DateTimePickerFormat.Custom)
+                    {
+                        List<string> castiFormatu = new List<string>();
+                        for(int i = 0; i< CustomFormat.Length; i++)
+                        {
+                            //tady musim pořešit čtení a rozdělení na části znaky a pak formát jednotlivých částí data
+                        }
                     }
 
                     //dropdown button
                     using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || this.Focused) ? ButtonColorMouseOver : ButtonColor) : ButtonColorDisabled))
-                    {  
+                    {
                         g.FillRectangle(b, dropDown);
                     }
                     //dropdown arrow
@@ -1049,6 +1060,7 @@ namespace Ticketník.CustomControls
                     //rámeček
                     g.DrawRectangle(p, area);
                 }
+
             }
         }
     }

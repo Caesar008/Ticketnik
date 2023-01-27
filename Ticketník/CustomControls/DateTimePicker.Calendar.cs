@@ -511,13 +511,13 @@ namespace Ticketník.CustomControls
                                     } 
                                     break;
                                 case View.Decades:
-                                    if (ActualDate.Year > Parent.MinDate.Year)
+                                    if (ActualDate.Year - (ActualDate.Year % 10) > Parent.MinDate.Year - (Parent.MinDate.Year % 10))
                                     {
                                         ActualDate = ActualDate.AddYears(-10);
                                     }
                                     break;
                                 case View.Centuries:
-                                    if (ActualDate.Year > Parent.MinDate.Year)
+                                    if (ActualDate.Year - (ActualDate.Year % 100) > Parent.MinDate.Year - (Parent.MinDate.Year % 100))
                                     {
                                         ActualDate = ActualDate.AddYears(-100);
                                     }
@@ -545,13 +545,13 @@ namespace Ticketník.CustomControls
                                     }
                                     break;
                                 case View.Decades:
-                                    if (ActualDate.Year < Parent.MaxDate.Year)
+                                    if (ActualDate.Year - (ActualDate.Year % 10) < Parent.MaxDate.Year - (Parent.MaxDate.Year % 10))
                                     {
                                         ActualDate = ActualDate.AddYears(10);
                                     }
                                     break;
                                 case View.Centuries:
-                                    if (ActualDate.Year < Parent.MaxDate.Year)
+                                    if (ActualDate.Year - (ActualDate.Year % 100) < Parent.MaxDate.Year - (Parent.MaxDate.Year % 100)/*ActualDate.Year < Parent.MaxDate.Year*/)
                                     {
                                         ActualDate = ActualDate.AddYears(100);
                                     }
@@ -592,14 +592,16 @@ namespace Ticketník.CustomControls
                                 Rectangle referenceRect = new Rectangle(mesice[i].Key.Left + 3, mesice[i].Key.Top + header.Bottom + 1, mesice[i].Key.Width, mesice[i].Key.Height);
                                 if (referenceRect.Contains(e.Location))
                                 {
-                                    _mouseInCal = -1;
-                                    _mouseInHeader = false;
-                                    _mouseInTB = false;
-                                    _mouseInRB = false;
-                                    _mouseInLB = false;
-                                    ActualDate = (DateTime)mesice[i].Value;
-                                    CurrentView -= 1;
-
+                                    if (mesice[i].Value != null)
+                                    {
+                                        _mouseInCal = -1;
+                                        _mouseInHeader = false;
+                                        _mouseInTB = false;
+                                        _mouseInRB = false;
+                                        _mouseInLB = false;
+                                        ActualDate = (DateTime)mesice[i].Value;
+                                        CurrentView -= 1;
+                                    }
                                     break;
                                 }
                             }
@@ -828,12 +830,22 @@ namespace Ticketník.CustomControls
                     }
 
                     string mr = "";
+                    int minY;
                     switch (CurrentView)
                     {
                         case View.Days: mr = ActualDate.ToString("MMMM yyyy"); break;
                         case View.Months: mr = ActualDate.ToString("yyyy"); break;
-                        case View.Decades: mr = ActualDate.Year / 10 * 10 + " - " + (ActualDate.Year / 10) + 9; break;
-                        case View.Centuries: mr = ActualDate.Year / 100 * 100 + " - " + (ActualDate.Year / 100) + 99; break;
+                        case View.Decades:
+                            minY = ActualDate.Year / 10 * 10;
+                            if (minY < refMinDate.Year)
+                                minY = refMinDate.Year;
+                            mr = minY + " - " + (ActualDate.Year / 10) + 9; 
+                            break;
+                        case View.Centuries:
+                            minY = ActualDate.Year / 100 * 100;
+                            if (minY < refMinDate.Year)
+                                minY = refMinDate.Year;
+                            mr = minY + " - " + (ActualDate.Year / 100) + 99; break;
                     }
                     Size mrSize = TextRenderer.MeasureText(mr, Font);
                     TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), _mouseInHeader ? HeaderMouseOverForeColor : HeaderForeColor);
@@ -913,6 +925,7 @@ namespace Ticketník.CustomControls
                         {
                             if (tmp < refMinDate || tmp > refMaxDate)
                             {
+                                dny[ii] = new KeyValuePair<Rectangle, DateTime?>(dny[ii].Key, null);
                                 tmp = tmp.AddDays(1);
                                 continue;
                             }
@@ -939,13 +952,10 @@ namespace Ticketník.CustomControls
                             g.SmoothingMode = SmoothingMode.None;
                             string datum = tmp.ToString("%d");
                             Size ds = TextRenderer.MeasureText(datum, Font);
-                            if (tmp < Parent.MaxDate || tmp > Parent.MinDate)
-                            {
-                                TextRenderer.DrawText(g, datum, Font, new Point(dny[ii].Key.Left + 13 - (ds.Width / 2), dny[ii].Key.Top + 10 - (ds.Height / 2) + poRect.Bottom),
-                                    ActualDate.Month == tmp.Month ? ForeColor : TrailingForeColor);
+                            TextRenderer.DrawText(g, datum, Font, new Point(dny[ii].Key.Left + 13 - (ds.Width / 2), dny[ii].Key.Top + 10 - (ds.Height / 2) + poRect.Bottom),
+                                ActualDate.Month == tmp.Month ? ForeColor : TrailingForeColor);
 
-                                tmp = tmp.AddDays(1);
-                            }
+                            tmp = tmp.AddDays(1);
                         }
                     }
                     else
@@ -965,7 +975,8 @@ namespace Ticketník.CustomControls
                         {
                             if (tmp < refMinDate || tmp > refMaxDate)
                             {
-                                if(CurrentView == View.Months)
+                                mesice[ii] = new KeyValuePair<Rectangle, DateTime?>(mesice[ii].Key, null);
+                                if (CurrentView == View.Months)
                                     tmp = tmp.AddMonths(1);
                                 else
                                     tmp = tmp.AddYears(modifier);
@@ -997,7 +1008,7 @@ namespace Ticketník.CustomControls
                                 g.SmoothingMode = SmoothingMode.None;
                                 string datum = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(tmp.Month);//tmp.ToString("%d");
                                 Size ds = TextRenderer.MeasureText(datum, Font);
-                                if (tmp < Parent.MaxDate && tmp > Parent.MinDate)
+                                if (tmp <= refMaxDate && tmp >= refMinDate)
                                 {
                                     TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
                                     ForeColor);
@@ -1028,15 +1039,18 @@ namespace Ticketník.CustomControls
                                 }
                                 g.SmoothingMode = SmoothingMode.None;
                                 string datum = tmp.Year.ToString();
-                                if (CurrentView == View.Centuries || CurrentView == View.Centuries)
+                                if (CurrentView == View.Centuries)
                                 {
-                                    datum = tmp.Year / modifier * modifier + " -\r\n" + (tmp.Year / modifier) + 9;
+                                    minY = tmp.Year / modifier * modifier;
+                                    if (minY < refMinDate.Year)
+                                        minY = refMinDate.Year;
+                                    datum = minY + " -\r\n" + (tmp.Year / modifier) + 9;
                                 }
                                 Size ds = TextRenderer.MeasureText(datum, Font);
                                 TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
                                 (ii == 0 || ii == 11) ? TrailingForeColor : ForeColor);
 
-                                if (tmp.Year > Parent.MinDate.Year && tmp.Year < Parent.MaxDate.Year)
+                                if (tmp >= refMinDate && tmp <= refMaxDate)
                                     tmp = tmp.AddYears(modifier);
 
                             }
