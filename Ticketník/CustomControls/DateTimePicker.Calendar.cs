@@ -563,7 +563,8 @@ namespace Ticketník.CustomControls
                             if (CurrentView != View.Days || (SelectedDate.Day != DateTime.Today.Day || SelectedDate.Month != DateTime.Today.Month || SelectedDate.Year != DateTime.Today.Year))
                             {
                                 CurrentView = View.Days;
-                                ActualDate = SelectedDate = DateTime.Today;
+                                ActualDate = SelectedDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day,
+                                    Parent.Value.Hour, Parent.Value.Minute, Parent.Value.Second, Parent.Value.Millisecond);//DateTime.Today;
                                 ValueChanged?.Invoke(this, EventArgs.Empty);
                             }
                         }

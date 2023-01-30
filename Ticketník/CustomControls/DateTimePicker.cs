@@ -739,7 +739,7 @@ namespace Ticketník.CustomControls
         }
         protected override void OnLostFocus(EventArgs e)
         {
-            _keyDown = _dateChanging = _mouseIn = _dayEdit = _monthEdit = _yearEdit = false;
+            _keyDown = _dateChanging = _mouseIn = _dayEdit = _monthEdit = _yearEdit = _minuteEdit = _hourEdit = false;
             base.OnLostFocus(e);
             Invalidate();
             /*if (calendar != null && _calendarOpen)
@@ -753,7 +753,7 @@ namespace Ticketník.CustomControls
         {
             base.OnKeyDown(e);
             byte value = 10;
-            if(!_keyDown)
+            if (!_keyDown)
             {
                 _keyDown = true;
                 switch (e.KeyCode)
@@ -772,33 +772,21 @@ namespace Ticketník.CustomControls
                     default: value = 10; break;
                 }
             }
-            if(value < 10)
+            if (value < 10)
             {
-                if(_dayEdit)
+                if (_dayEdit)
                 {
-                    if(_keybuffer.Length==0 && value != 0)
+                    if (_keybuffer.Length == 0 && value != 0)
                     {
                         _dateChanging = true;
                         _keybuffer = value.ToString();
                         Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
                     }
-                    else if (_keybuffer.Length==1)
+                    else if (int.Parse(_keybuffer + value.ToString()) <= DateTime.DaysInMonth(Value.Year, Value.Month))
                     {
-                        if (int.Parse(_keybuffer + value.ToString()) <= DateTime.DaysInMonth(Value.Year, Value.Month))
-                        {
-                            _dateChanging = true;
-                            _keybuffer = _keybuffer + value.ToString();
-                            Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
-                        }
-                        else
-                        {
-                            if (value != 0)
-                            {
-                                _dateChanging = true;
-                                _keybuffer = value.ToString();
-                                Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
-                            }
-                        }
+                        _dateChanging = true;
+                        _keybuffer = _keybuffer + value.ToString();
+                        Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
                     }
                     else
                     {
@@ -809,6 +797,7 @@ namespace Ticketník.CustomControls
                             Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
                         }
                     }
+                
                 }
                 if (_monthEdit)
                 {
@@ -816,25 +805,17 @@ namespace Ticketník.CustomControls
                     {
                         _dateChanging = true;
                         _keybuffer = value.ToString();
-                        Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
+                        Value = new DateTime(Value.Year, int.Parse(_keybuffer), 
+                            Value.Day > DateTime.DaysInMonth(Value.Year,int.Parse(_keybuffer)) ? DateTime.DaysInMonth(Value.Year,int.Parse(_keybuffer)) : Value.Day, 
+                            Value.Hour, Value.Minute, Value.Second);
                     }
-                    else if (_keybuffer.Length == 1)
+                    else if (int.Parse(_keybuffer + value.ToString()) <= 12)
                     {
-                        if (int.Parse(_keybuffer + value.ToString()) <= 12)
-                        {
-                            _dateChanging = true;
-                            _keybuffer = _keybuffer + value.ToString();
-                            Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
-                        }
-                        else
-                        {
-                            if (value != 0)
-                            {
-                                _dateChanging = true;
-                                _keybuffer = value.ToString();
-                                Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
-                            }
-                        }
+                        _dateChanging = true;
+                        _keybuffer = _keybuffer + value.ToString();
+                        Value = new DateTime(Value.Year, int.Parse(_keybuffer),
+                            Value.Day > DateTime.DaysInMonth(Value.Year, int.Parse(_keybuffer)) ? DateTime.DaysInMonth(Value.Year, int.Parse(_keybuffer)) : Value.Day,
+                            Value.Hour, Value.Minute, Value.Second);
                     }
                     else
                     {
@@ -842,9 +823,12 @@ namespace Ticketník.CustomControls
                         {
                             _dateChanging = true;
                             _keybuffer = value.ToString();
-                            Value = new DateTime(Value.Year, int.Parse(_keybuffer), Value.Day, Value.Hour, Value.Minute, Value.Second);
+                            Value = new DateTime(Value.Year, int.Parse(_keybuffer),
+                            Value.Day > DateTime.DaysInMonth(Value.Year, int.Parse(_keybuffer)) ? DateTime.DaysInMonth(Value.Year, int.Parse(_keybuffer)) : Value.Day,
+                            Value.Hour, Value.Minute, Value.Second);
                         }
                     }
+
                 }
                 if (_yearEdit)
                 {
@@ -870,6 +854,39 @@ namespace Ticketník.CustomControls
                         }
                     }
                 }
+                if (_hourEdit)
+                {
+                    if (int.Parse(_keybuffer + value.ToString()) < 60)
+                    {
+                        _dateChanging = true;
+                        _keybuffer = _keybuffer + value.ToString();
+                        Value = new DateTime(Value.Year, Value.Month, Value.Day, int.Parse(_keybuffer), Value.Minute, Value.Second);
+                    }
+                    else
+                    {
+                        _dateChanging = true;
+                        _keybuffer = value.ToString();
+                        Value = new DateTime(Value.Year, Value.Month, Value.Day, int.Parse(_keybuffer), Value.Minute, Value.Second);
+
+                    }
+
+                }
+                if (_minuteEdit)
+                {
+                    if (int.Parse(_keybuffer + value.ToString()) < 60)
+                    {
+                        _dateChanging = true;
+                        _keybuffer = _keybuffer + value.ToString();
+                        Value = new DateTime(Value.Year, Value.Month, Value.Day, Value.Hour, int.Parse(_keybuffer), Value.Second);
+                    }
+                    else
+                    {
+                        _dateChanging = true;
+                        _keybuffer = value.ToString();
+                        Value = new DateTime(Value.Year, Value.Month, Value.Day, Value.Hour, int.Parse(_keybuffer), Value.Second);
+
+                    }
+                }
                 Invalidate();
             }
             else if (value == 254)
@@ -877,7 +894,7 @@ namespace Ticketník.CustomControls
                 DateTime tmpDateTime = Value;
                 if (tmpDateTime.Year < MinDate.Year)
                     tmpDateTime = new DateTime(MinDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
-                else if(tmpDateTime.Year > MaxDate.Year)
+                else if (tmpDateTime.Year > MaxDate.Year)
                     tmpDateTime = new DateTime(MaxDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
                 _dateChanging = false;
                 _keybuffer = "";
@@ -902,6 +919,7 @@ namespace Ticketník.CustomControls
                 _minuteEdit = false;
                 _hourEdit = false;
                 _keybuffer = "";
+                _dateChanging = false;
 
                 base.OnMouseDown(e);
                 this.Focus();
@@ -941,7 +959,6 @@ namespace Ticketník.CustomControls
                         DropDown?.Invoke(this, EventArgs.Empty);
                     }
                 }
-
                 Invalidate();
             }
         }
@@ -984,7 +1001,7 @@ namespace Ticketník.CustomControls
                 {
                     //text
                     //jméno dne
-                    if (Format == DateTimePickerFormat.Long)
+                    if (Format == DateTimePickerFormat.Long || Format == 0)
                     {
                         if (denNameRect.Right <= area.Width - 20 && denNameRect.Bottom <= area.Height - 2 && denName != "")
                         {
@@ -1040,10 +1057,133 @@ namespace Ticketník.CustomControls
                     }
                     else if (Format == DateTimePickerFormat.Custom)
                     {
-                        List<string> castiFormatu = new List<string>();
-                        for(int i = 0; i< CustomFormat.Length; i++)
+                        List<CustomFormatStruct> castiFormatu = new List<CustomFormatStruct>();
+                        CustomFormatStruct formatPart = new CustomFormatStruct();
+                        formatPart.format = "";
+                        string last = "";
+                        string dtFormatLetters = "dMfFghHKmstyz";
+                        
+                        int i = 0;
+                        while ( i< CustomFormat.Length)
                         {
+                            string substr = CustomFormat.Substring(i, 1);
                             //tady musim pořešit čtení a rozdělení na části znaky a pak formát jednotlivých částí data
+                            if (substr == "%")
+                            {
+                                formatPart.format = "%";
+                                substr = CustomFormat.Substring(++i, 1);
+                            }
+                            else
+                            {
+                                if (dtFormatLetters.Contains(substr))
+                                {
+                                    while ((last == substr || last == "") && i < CustomFormat.Length)
+                                    {
+                                        switch (substr)
+                                        {
+                                            //tohle není komplet seznam, jsou tam jen co používám já
+                                            case "d": formatPart.format += "d"; formatPart.rectTyp = RectTyp.Den; break;
+                                            case "M": formatPart.format += "M"; formatPart.rectTyp = RectTyp.Mesic; break;
+                                            case "h": formatPart.format += "h"; formatPart.rectTyp = RectTyp.Hodina; break;
+                                            case "H": formatPart.format += "H"; formatPart.rectTyp = RectTyp.Hodina; break;
+                                            case "m": formatPart.format += "m"; formatPart.rectTyp = RectTyp.Minuta; break;
+                                            case "s": formatPart.format += "s"; formatPart.rectTyp = RectTyp.Vterina; break;
+                                            case "y": formatPart.format += "y"; formatPart.rectTyp = RectTyp.Rok; break;
+                                            default: formatPart.format += substr; formatPart.rectTyp = RectTyp.DatumOstatni; break;
+                                        }
+                                        last = substr;
+                                        if (i+1 < customFormat.Length)
+                                            substr = CustomFormat.Substring(++i, 1);
+                                        else
+                                            i++;
+                                    }
+
+                                    formatPart.data = Value.ToString(formatPart.format);
+
+                                }
+                                else
+                                {
+                                    last = "";
+                                    while (!dtFormatLetters.Contains(substr) && i < CustomFormat.Length)
+                                    {
+                                        formatPart.data += substr;
+                                        formatPart.rectTyp = RectTyp.Ostatni;
+                                        if (i+1 < customFormat.Length)
+                                            substr = CustomFormat.Substring(++i, 1);
+                                        else
+                                            i++;
+                                    }
+                                }
+
+                                Size dataDim = TextRenderer.MeasureText(formatPart.data, Font);
+                                int prvni = castiFormatu.Count > 0 ? castiFormatu[castiFormatu.Count - 1].rect.Right : 4;
+                                formatPart.rect = new Rectangle(prvni, (Height / 2) - (dataDim.Height / 2) - 1, dataDim.Width-6, dataDim.Height);
+                                switch(formatPart.rectTyp)
+                                {
+                                    case RectTyp.Rok: rokRect = formatPart.rect; break;
+                                    case RectTyp.Mesic: mesicRect = formatPart.rect; break;
+                                    case RectTyp.Den: denRect = formatPart.rect; break;
+                                    case RectTyp.Hodina: hodinyRect = formatPart.rect; break;
+                                    case RectTyp.Minuta: minutyRect = formatPart.rect; break;
+                                }
+                                castiFormatu.Add(formatPart);
+                                formatPart = new CustomFormatStruct();
+                                formatPart.format = "";
+                            }
+                        }
+
+                        foreach(CustomFormatStruct cfs in castiFormatu)
+                        {
+                            if (cfs.rect.Right <= area.Width - 20 && cfs.rect.Bottom <= area.Height - 2 && rok != "")
+                            {
+                                if (Enabled && (_yearEdit||_monthEdit||_dayEdit||_hourEdit||_minuteEdit))
+                                {
+                                    if (_yearEdit && cfs.rectTyp == RectTyp.Rok)
+                                    {
+                                        using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                        {
+                                            g.FillRectangle(bb, rokRect);
+                                            TextRenderer.DrawText(g, cfs.data, Font, rokRect, Color.White);
+                                        }
+                                    }
+                                    else if (_monthEdit && cfs.rectTyp == RectTyp.Mesic)
+                                    {
+                                        using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                        {
+                                            g.FillRectangle(bb, mesicRect);
+                                            TextRenderer.DrawText(g, cfs.data, Font, mesicRect, Color.White);
+                                        }
+                                    }
+                                    else if (_dayEdit && cfs.rectTyp == RectTyp.Den)
+                                    {
+                                        using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                        {
+                                            g.FillRectangle(bb, denRect);
+                                            TextRenderer.DrawText(g, cfs.data, Font, denRect, Color.White);
+                                        }
+                                    }
+                                    else if (_hourEdit && cfs.rectTyp == RectTyp.Hodina)
+                                    {
+                                        using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                        {
+                                            g.FillRectangle(bb, hodinyRect);
+                                            TextRenderer.DrawText(g, cfs.data, Font, hodinyRect, Color.White);
+                                        }
+                                    }
+                                    else if (_minuteEdit && cfs.rectTyp == RectTyp.Minuta)
+                                    {
+                                        using (SolidBrush bb = new SolidBrush(Color.FromArgb(0, 120, 215)))
+                                        {
+                                            g.FillRectangle(bb, minutyRect);
+                                            TextRenderer.DrawText(g, cfs.data, Font, minutyRect, Color.White);
+                                        }
+                                    }
+                                    else
+                                        TextRenderer.DrawText(g, cfs.data, Font, cfs.rect, Enabled ? ForeColor : ForeColorDisabled);
+                                }
+                                else
+                                    TextRenderer.DrawText(g, cfs.data, Font, cfs.rect, Enabled ? ForeColor : ForeColorDisabled);
+                            }
                         }
                     }
 
@@ -1062,6 +1202,25 @@ namespace Ticketník.CustomControls
                 }
 
             }
+        }
+
+        private enum RectTyp
+        {
+            Den,
+            Mesic,
+            Rok,
+            Hodina,
+            Minuta,
+            Vterina,
+            DatumOstatni,
+            Ostatni
+        }
+        private struct CustomFormatStruct
+        {
+            public Rectangle rect;
+            public RectTyp rectTyp;
+            public string format;
+            public string data;
         }
     }
 }
