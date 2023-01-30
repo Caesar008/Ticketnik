@@ -576,10 +576,13 @@ namespace Ticketník.CustomControls
                                 Rectangle referenceRect = new Rectangle(dny[i].Key.Left + 3, dny[i].Key.Top + poRect.Bottom + 3, dny[i].Key.Width, dny[i].Key.Height);
                                 if (referenceRect.Contains(e.Location))
                                 {
-                                    if (SelectedDate.Day != ((DateTime)dny[i].Value).Day || SelectedDate.Month != ((DateTime)dny[i].Value).Month || SelectedDate.Year != ((DateTime)dny[i].Value).Year)
+                                    if (dny[i].Value != null)
                                     {
-                                        ActualDate = SelectedDate = (DateTime)dny[i].Value;
-                                        ValueChanged?.Invoke(this, EventArgs.Empty);
+                                        if (SelectedDate.Day != ((DateTime)dny[i].Value).Day || SelectedDate.Month != ((DateTime)dny[i].Value).Month || SelectedDate.Year != ((DateTime)dny[i].Value).Year)
+                                        {
+                                            ActualDate = SelectedDate = (DateTime)dny[i].Value;
+                                            ValueChanged?.Invoke(this, EventArgs.Empty);
+                                        }
                                     }
                                     break;
                                 }
@@ -970,7 +973,7 @@ namespace Ticketník.CustomControls
                             case View.Centuries: year = ActualDate.Year - (ActualDate.Year % 100) - 1; modifier = 10; break;
                             default: year = ActualDate.Year; break;
                         }
-                        DateTime tmp = new DateTime(year, 1, 1);
+                        DateTime tmp = new DateTime(year, 1, 31);
                         for (int ii = 0; ii < mesice.Count(); ii++)
                         //foreach (KeyValuePair<Rectangle, DateTime?> kp in dny)
                         {
