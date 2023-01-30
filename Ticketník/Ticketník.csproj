@@ -432,6 +432,7 @@
     <None Include="ikony\off.png" />
     <None Include="ikony\exportW.png" />
     <None Include="ikony\offW.png" />
+    <None Include="ikony\about.png" />
     <Content Include="ticket-256.ico" />
   </ItemGroup>
   <ItemGroup>

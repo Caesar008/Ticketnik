@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Resources;
 using System.Windows.Forms;
 using Ticketník.Properties;
 
@@ -381,6 +382,14 @@ namespace Ticketník
                     ((Form1)form).exportovatToolStripMenuItem.Image = Resources.exportW;
                     ((Form1)form).ukončitToolStripMenuItem.Image = Resources.offW;
                 }
+            }
+            else if (form.GetType() == typeof(AboutBox1))
+            {
+                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutBox1));
+                if (sMotiv == "světlý")
+                    ((AboutBox1)form).logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
+                else
+                    ((AboutBox1)form).logoPictureBox.Image = Properties.Resources.about;
             }
             
             foreach (Control c in form.Controls)
