@@ -193,10 +193,10 @@ namespace Ticketník
                         if (tp.Controls.ContainsKey(form.vybranyMesic))
                         {
                             Ticket refer = null;
-                            Dictionary<string, List<Ticket>> tempD = form.poDnech[((Tag)((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).Datum];
-                            foreach (Ticket t in tempD[((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text])
+                            Dictionary<string, List<Ticket>> tempD = form.poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).Datum];
+                            foreach (Ticket t in tempD[((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text])
                             {
-                                long id = ((Tag)((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).IDlong;
+                                long id = ((Tag)((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).IDlong;
 
                                 if (t.IDtick == id)
                                 {
@@ -207,7 +207,7 @@ namespace Ticketník
                             NbtCompound referC = null;
                             if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                             {
-                                foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety"))
+                                foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety"))
                                 {
                                     if (c.Get<NbtLong>("IDlong").Value == refer.IDtick)
                                     {
@@ -218,7 +218,7 @@ namespace Ticketník
                             }
                             else
                             {
-                                foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety"))
+                                foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety"))
                                 {
                                     if (c.Get<NbtLong>("IDlong").Value == refer.IDtick)
                                     {
@@ -1156,13 +1156,13 @@ namespace Ticketník
                     {
                         Ticket refer = null;
 
-                        if (((ListView)tp.Controls[form.vybranyMesic]).SelectedItems.Count == 0)
-                            ((ListView)tp.Controls[form.vybranyMesic]).Items[lastSelected].Selected = true;
+                        if (((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems.Count == 0)
+                            ((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).Items[lastSelected].Selected = true;
 
-                        Dictionary<string, List<Ticket>> tempD = form.poDnech[((Tag)((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).Datum];
-                        foreach (Ticket t in tempD[((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text])
+                        Dictionary<string, List<Ticket>> tempD = form.poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).Datum];
+                        foreach (Ticket t in tempD[((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text])
                         {
-                            long id = ((Tag)((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).IDlong;
+                            long id = ((Tag)((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].Tag).IDlong;
 
                             if (t.IDtick == id)
                             {
@@ -1173,15 +1173,15 @@ namespace Ticketník
 
                         NbtList list;
                         if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
-                            list = form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety");
+                            list = form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety");
                         else
-                            list = form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety");
+                            list = form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety");
 
                         foreach (NbtCompound c in list)
                         {
                             if (c.Get<NbtLong>("IDlong").Value == refer.IDtick)
                             {
-                                string zakaznik = ((ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text;
+                                string zakaznik = ((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedItems[0].SubItems[3].Text;
                                 int index;
 
                                 if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
@@ -1311,11 +1311,11 @@ namespace Ticketník
                                         form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(zakaznik).Get<NbtCompound>(form.vybranyMesic).Get<NbtList>("Tickety").RemoveAt(index);
                                     }
                                 }
-                                lastSelected = form.posledniVybrany = ((ListView)tp.Controls[form.vybranyMesic]).SelectedIndices[0];
+                                lastSelected = form.posledniVybrany = ((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedIndices[0];
                                 break;
                             }
                         }
-                        lastSelected = form.posledniVybrany = ((ListView)tp.Controls[form.vybranyMesic]).SelectedIndices[0];
+                        lastSelected = form.posledniVybrany = ((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).SelectedIndices[0];
                         break;
                     }
                 }

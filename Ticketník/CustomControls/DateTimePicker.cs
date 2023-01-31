@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Ticketník.CustomControls
 {
@@ -919,7 +920,18 @@ namespace Ticketník.CustomControls
                 _minuteEdit = false;
                 _hourEdit = false;
                 _keybuffer = "";
-                _dateChanging = false;
+                if (_dateChanging)
+                {
+                    DateTime tmpDateTime = Value;
+                    if (tmpDateTime.Year < MinDate.Year)
+                        tmpDateTime = new DateTime(MinDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
+                    else if (tmpDateTime.Year > MaxDate.Year)
+                        tmpDateTime = new DateTime(MaxDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
+                    _dateChanging = false;
+                    _keybuffer = "";
+                    Value = tmpDateTime;
+                    calendar.ActualDate = calendar.SelectedDate = tmpDateTime;
+                }
 
                 base.OnMouseDown(e);
                 this.Focus();

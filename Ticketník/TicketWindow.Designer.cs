@@ -53,7 +53,7 @@ namespace Ticketník
             this.pauzaDo = new Ticketník.CustomControls.TextBox();
             this.pauzaOd = new Ticketník.CustomControls.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView1 = new Ticketník.CustomControls.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -880,7 +880,7 @@ namespace Ticketník
         internal Ticketník.CustomControls.RadioButton volno;
         internal Ticketník.CustomControls.RadioButton nahradni;
         internal Ticketník.CustomControls.TextBox popis;
-        internal System.Windows.Forms.ListView listView1;
+        internal Ticketník.CustomControls.ListView listView1;
         internal Ticketník.CustomControls.Button ok;
         internal Ticketník.CustomControls.ComboBox cas;
         internal System.Windows.Forms.Label terpKod;

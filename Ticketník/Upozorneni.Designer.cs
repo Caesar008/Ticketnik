@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Upozorneni));
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView1 = new Ticketník.CustomControls.ListView();
             this.slTyp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.slDatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.slCas = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -138,7 +138,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private Ticketník.CustomControls.ListView listView1;
         private System.Windows.Forms.ColumnHeader slDatum;
         private System.Windows.Forms.ColumnHeader slCas;
         private System.Windows.Forms.ColumnHeader slTyp;

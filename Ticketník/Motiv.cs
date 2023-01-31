@@ -71,7 +71,10 @@ namespace Ticketník
                     { "dayHeaderText",Color.FromArgb(55, 55, 55) },
                     { "vybranýDen",Color.FromArgb(204, 232, 255) },
                     { "najetýDen",Color.FromArgb(220, 235, 255) },
-                    { "vybranýDenRám",Color.DodgerBlue }
+                    { "pozadíListView",Color.White },
+                    { "pozadíListViewHeader",Color.White },
+                    { "textListViewHeader",Color.Black },
+                    { "listViewSeparator",Color.LightGray }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -97,7 +100,11 @@ namespace Ticketník
                     { "dayHeaderText",Color.FromArgb(200, 200, 200) },
                     { "vybranýDen",Color.DodgerBlue },
                     { "najetýDen",Color.FromArgb(45, 90, 150) },
-                    { "vybranýDenRám",Color.Blue }
+                    { "vybranýDenRám",Color.Blue },
+                    { "pozadíListView",Color.FromArgb(50, 50, 50) },
+                    { "pozadíListViewHeader",Color.FromArgb(70, 70, 70) },
+                    { "textListViewHeader",Color.FromArgb(240, 240, 240) },
+                    { "listViewSeparator",Color.LightGray }
                 }
             }
         };
@@ -176,11 +183,14 @@ namespace Ticketník
                     ((CustomControls.TextBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
                     ((CustomControls.TextBox)c).BorderColorMouseOver = Color.DodgerBlue;
                 }
-                else if (c.GetType() == typeof(ListView))
+                else if (c.GetType() == typeof(Ticketník.CustomControls.ListView))
                 {
-                    ((ListView)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                    ((ListView)c).ForeColor = barvy[sMotiv]["text"];
-                    ((ListView)c).BorderStyle = BorderStyle.None;
+                    ((Ticketník.CustomControls.ListView)c).BackColor = barvy[sMotiv]["pozadíListView"];
+                    ((Ticketník.CustomControls.ListView)c).ForeColor = barvy[sMotiv]["text"];
+                    ((Ticketník.CustomControls.ListView)c).BorderStyle = BorderStyle.None;
+                    ((Ticketník.CustomControls.ListView)c).HeaderBackColor = barvy[sMotiv]["pozadíListViewHeader"];
+                    ((Ticketník.CustomControls.ListView)c).HeaderForeColor = barvy[sMotiv]["textListViewHeader"];
+                    ((Ticketník.CustomControls.ListView)c).HeaderSeparatorColor = barvy[sMotiv]["listViewSeparator"]; 
                 }
                 else if (c.GetType() == typeof(MenuStrip))
                 {

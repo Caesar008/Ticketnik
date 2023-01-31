@@ -2034,183 +2034,183 @@ namespace Ticketník
             {
                 if (tp.Controls.ContainsKey("leden"))
                 {
-                    ((ListView)tp.Controls["leden"]).BeginUpdate();
-                    ((ListView)tp.Controls["leden"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["leden"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["leden"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["leden"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["leden"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["leden"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["leden"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["leden"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["leden"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["leden"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["leden"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("unor"))
                 {
-                    ((ListView)tp.Controls["unor"]).BeginUpdate();
-                    ((ListView)tp.Controls["unor"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["unor"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["unor"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["unor"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["unor"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["unor"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["unor"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["unor"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["unor"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["unor"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["unor"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("brezen"))
                 {
-                    ((ListView)tp.Controls["brezen"]).BeginUpdate();
-                    ((ListView)tp.Controls["brezen"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["brezen"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["brezen"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["brezen"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["brezen"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["brezen"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["brezen"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["brezen"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["brezen"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["brezen"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["brezen"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("duben"))
                 {
-                    ((ListView)tp.Controls["duben"]).BeginUpdate();
-                    ((ListView)tp.Controls["duben"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["duben"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["duben"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["duben"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["duben"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["duben"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["duben"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["duben"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["duben"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["duben"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["duben"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("kveten"))
                 {
-                    ((ListView)tp.Controls["kveten"]).BeginUpdate();
-                    ((ListView)tp.Controls["kveten"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["kveten"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["kveten"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["kveten"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["kveten"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["kveten"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["kveten"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["kveten"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["kveten"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["kveten"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["kveten"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("cerven"))
                 {
-                    ((ListView)tp.Controls["cerven"]).BeginUpdate();
-                    ((ListView)tp.Controls["cerven"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["cerven"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["cerven"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["cerven"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["cerven"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["cerven"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["cerven"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["cerven"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["cerven"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["cerven"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["cerven"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("cervenec"))
                 {
-                    ((ListView)tp.Controls["cervenec"]).BeginUpdate();
-                    ((ListView)tp.Controls["cervenec"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["cervenec"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["cervenec"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["cervenec"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["cervenec"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["cervenec"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["cervenec"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["cervenec"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["cervenec"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["cervenec"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["cervenec"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("srpen"))
                 {
-                    ((ListView)tp.Controls["srpen"]).BeginUpdate();
-                    ((ListView)tp.Controls["srpen"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["srpen"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["srpen"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["srpen"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["srpen"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["srpen"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["srpen"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["srpen"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["srpen"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["srpen"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["srpen"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("zari"))
                 {
-                    ((ListView)tp.Controls["zari"]).BeginUpdate();
-                    ((ListView)tp.Controls["zari"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["zari"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["zari"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["zari"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["zari"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["zari"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["zari"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["zari"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["zari"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["zari"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["zari"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("rijen"))
                 {
-                    ((ListView)tp.Controls["rijen"]).BeginUpdate();
-                    ((ListView)tp.Controls["rijen"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["rijen"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["rijen"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["rijen"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["rijen"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["rijen"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["rijen"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["rijen"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["rijen"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["rijen"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["rijen"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("listopad"))
                 {
-                    ((ListView)tp.Controls["listopad"]).BeginUpdate();
-                    ((ListView)tp.Controls["listopad"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["listopad"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["listopad"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["listopad"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["listopad"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["listopad"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["listopad"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["listopad"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["listopad"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["listopad"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["listopad"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("prosinec"))
                 {
-                    ((ListView)tp.Controls["prosinec"]).BeginUpdate();
-                    ((ListView)tp.Controls["prosinec"]).Columns[1].Text = form.jazyk.Header_PC;
-                    ((ListView)tp.Controls["prosinec"]).Columns[2].Text = form.jazyk.Header_TicketID;
-                    ((ListView)tp.Controls["prosinec"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
-                    ((ListView)tp.Controls["prosinec"]).Columns[4].Text = form.jazyk.Header_Popis;
-                    ((ListView)tp.Controls["prosinec"]).Columns[5].Text = form.jazyk.Header_Kontakt;
-                    ((ListView)tp.Controls["prosinec"]).Columns[6].Text = form.jazyk.Header_Terp;
-                    ((ListView)tp.Controls["prosinec"]).Columns[7].Text = form.jazyk.Header_Task;
-                    ((ListView)tp.Controls["prosinec"]).Columns[8].Text = form.jazyk.Header_Cas;
-                    ((ListView)tp.Controls["prosinec"]).Columns[9].Text = form.jazyk.Header_Stav;
-                    ((ListView)tp.Controls["prosinec"]).Columns[10].Text = form.jazyk.Header_Poznamka;
-                    ((ListView)tp.Controls["prosinec"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[1].Text = form.jazyk.Header_PC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[2].Text = form.jazyk.Header_TicketID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[3].Text = form.jazyk.Header_Zakaznik;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[4].Text = form.jazyk.Header_Popis;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[5].Text = form.jazyk.Header_Kontakt;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[6].Text = form.jazyk.Header_Terp;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[7].Text = form.jazyk.Header_Task;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[8].Text = form.jazyk.Header_Cas;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[9].Text = form.jazyk.Header_Stav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[10].Text = form.jazyk.Header_Poznamka;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).EndUpdate();
                 }
             }
 

@@ -158,303 +158,303 @@ namespace Ticketník
             {
                 if (tp.Controls.ContainsKey("leden"))
                 {
-                    ((ListView)tp.Controls["leden"]).BeginUpdate();
-                    ((ListView)tp.Controls["leden"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["leden"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["leden"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["leden"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["leden"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["leden"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["leden"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["leden"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["leden"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["leden"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["leden"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["leden"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["leden"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("unor"))
                 {
-                    ((ListView)tp.Controls["unor"]).BeginUpdate();
-                    ((ListView)tp.Controls["unor"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["unor"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["unor"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["unor"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["unor"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["unor"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["unor"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["unor"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["unor"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["unor"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["unor"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["unor"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["unor"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("brezen"))
                 {
-                    ((ListView)tp.Controls["brezen"]).BeginUpdate();
-                    ((ListView)tp.Controls["brezen"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["brezen"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["brezen"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["brezen"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["brezen"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["brezen"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["brezen"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["brezen"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["brezen"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["brezen"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["brezen"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["brezen"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["brezen"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("duben"))
                 {
-                    ((ListView)tp.Controls["duben"]).BeginUpdate();
-                    ((ListView)tp.Controls["duben"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["duben"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["duben"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["duben"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["duben"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["duben"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["duben"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["duben"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["duben"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["duben"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["duben"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["duben"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["duben"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("kveten"))
                 {
-                    ((ListView)tp.Controls["kveten"]).BeginUpdate();
-                    ((ListView)tp.Controls["kveten"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["kveten"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["kveten"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["kveten"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["kveten"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["kveten"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["kveten"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["kveten"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["kveten"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["kveten"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["kveten"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["kveten"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["kveten"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("cerven"))
                 {
-                    ((ListView)tp.Controls["cerven"]).BeginUpdate();
-                    ((ListView)tp.Controls["cerven"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["cerven"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["cerven"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["cerven"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["cerven"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["cerven"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["cerven"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["cerven"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["cerven"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["cerven"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["cerven"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["cerven"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["cerven"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("cervenec"))
                 {
-                    ((ListView)tp.Controls["cervenec"]).BeginUpdate();
-                    ((ListView)tp.Controls["cervenec"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["cervenec"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["cervenec"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["cervenec"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["cervenec"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["cervenec"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["cervenec"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["cervenec"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["cervenec"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["cervenec"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["cervenec"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["cervenec"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["cervenec"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("srpen"))
                 {
-                    ((ListView)tp.Controls["srpen"]).BeginUpdate();
-                    ((ListView)tp.Controls["srpen"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["srpen"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["srpen"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["srpen"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["srpen"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["srpen"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["srpen"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["srpen"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["srpen"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["srpen"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["srpen"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["srpen"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["srpen"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("zari"))
                 {
-                    ((ListView)tp.Controls["zari"]).BeginUpdate();
-                    ((ListView)tp.Controls["zari"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["zari"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["zari"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["zari"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["zari"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["zari"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["zari"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["zari"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["zari"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["zari"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["zari"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["zari"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["zari"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("rijen"))
                 {
-                    ((ListView)tp.Controls["rijen"]).BeginUpdate();
-                    ((ListView)tp.Controls["rijen"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["rijen"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["rijen"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["rijen"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["rijen"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["rijen"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["rijen"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["rijen"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["rijen"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["rijen"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["rijen"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["rijen"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["rijen"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("listopad"))
                 {
-                    ((ListView)tp.Controls["listopad"]).BeginUpdate();
-                    ((ListView)tp.Controls["listopad"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["listopad"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["listopad"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["listopad"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["listopad"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["listopad"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["listopad"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["listopad"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["listopad"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["listopad"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["listopad"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["listopad"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["listopad"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).EndUpdate();
                 }
                 if (tp.Controls.ContainsKey("prosinec"))
                 {
-                    ((ListView)tp.Controls["prosinec"]).BeginUpdate();
-                    ((ListView)tp.Controls["prosinec"]).Columns[1].Width = Properties.Settings.Default.colPC;
-                    ((ListView)tp.Controls["prosinec"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[2].Width = Properties.Settings.Default.colID;
-                    ((ListView)tp.Controls["prosinec"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[3].Width = Properties.Settings.Default.colZak;
-                    ((ListView)tp.Controls["prosinec"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[4].Width = Properties.Settings.Default.colPop;
-                    ((ListView)tp.Controls["prosinec"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[5].Width = Properties.Settings.Default.colKon;
-                    ((ListView)tp.Controls["prosinec"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[6].Width = Properties.Settings.Default.colOd;
-                    ((ListView)tp.Controls["prosinec"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[7].Width = Properties.Settings.Default.colDo;
-                    ((ListView)tp.Controls["prosinec"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[8].Width = Properties.Settings.Default.colPau;
-                    ((ListView)tp.Controls["prosinec"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[9].Width = Properties.Settings.Default.colStav;
-                    ((ListView)tp.Controls["prosinec"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
-                    ((ListView)tp.Controls["prosinec"]).Columns[10].Width = Properties.Settings.Default.colPoz;
-                    ((ListView)tp.Controls["prosinec"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
-                    ((ListView)tp.Controls["prosinec"]).EndUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).BeginUpdate();
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[1].Width = Properties.Settings.Default.colPC;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[1].DisplayIndex = Properties.Settings.Default.colPCPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[2].Width = Properties.Settings.Default.colID;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[2].DisplayIndex = Properties.Settings.Default.colIDPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[3].Width = Properties.Settings.Default.colZak;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[3].DisplayIndex = Properties.Settings.Default.colZakPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[4].Width = Properties.Settings.Default.colPop;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[4].DisplayIndex = Properties.Settings.Default.colPopPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[5].Width = Properties.Settings.Default.colKon;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[5].DisplayIndex = Properties.Settings.Default.colKonPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[6].Width = Properties.Settings.Default.colOd;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[6].DisplayIndex = Properties.Settings.Default.colTerpPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[7].Width = Properties.Settings.Default.colDo;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[7].DisplayIndex = Properties.Settings.Default.colTaskPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[8].Width = Properties.Settings.Default.colPau;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[8].DisplayIndex = Properties.Settings.Default.colCasPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[9].Width = Properties.Settings.Default.colStav;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[9].DisplayIndex = Properties.Settings.Default.colStavPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[10].Width = Properties.Settings.Default.colPoz;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[10].DisplayIndex = Properties.Settings.Default.colPozPoradi;
+                    ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).EndUpdate();
                 }
             }
             canChange = true;
@@ -636,7 +636,7 @@ namespace Ticketník
 
                             foreach (TabPage tp in tabControl1.Controls)
                             {
-                                ((ListView)tp.Controls[0]).Items.Clear();
+                                ((Ticketník.CustomControls.ListView)tp.Controls[0]).Items.Clear();
                             }
 
                             zakaznici.Clear();
@@ -939,7 +939,7 @@ namespace Ticketník
                                             {
                                                 if (den != null)
                                                 {
-                                                    ((ListView)tp.Controls[mesic]).Items.Add(den);
+                                                    ((Ticketník.CustomControls.ListView)tp.Controls[mesic]).Items.Add(den);
                                                     den.Tag = new Tag(t.Datum, -1);
                                                     den = null;
                                                 }
@@ -992,7 +992,7 @@ namespace Ticketník
                                                 lvi.BackColor = barvaP;
                                                 lvi.ForeColor = ContrastColor(barvaP);
                                                 lvi.Tag = new Tag(t.Datum, t.IDtick);
-                                                ((ListView)tp.Controls[mesic]).Items.Add(lvi);
+                                                ((Ticketník.CustomControls.ListView)tp.Controls[mesic]).Items.Add(lvi);
                                                 string[] casy = Cas(t).Split(':');
                                                 veDniCelkem = veDniCelkem.AddHours(double.Parse(casy[0]));
                                                 veDniCelkem = veDniCelkem.AddMinutes(double.Parse(casy[1]));
@@ -1019,7 +1019,7 @@ namespace Ticketník
                                                     }
                                                     else
                                                         empty = new ListViewItem(new string[] { "", "", "", "", "", "", "", "", "", "", "" });
-                                                    ((ListView)tp.Controls[mesic]).Items.Add(empty);
+                                                    ((Ticketník.CustomControls.ListView)tp.Controls[mesic]).Items.Add(empty);
                                                     empty.Tag = new Tag(t.Datum, -1);
                                                 }
 
@@ -1035,29 +1035,29 @@ namespace Ticketník
                             if (first)
                             {
                                 tabControl1.SelectedIndex = (DateTime.Now.Month - 1);
-                                if (((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
+                                if (((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
                                 {
-                                    ((ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((ListView)tabControl1.SelectedTab.Controls[0]).Items[((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1];
-                                    ((ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
+                                    ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items[((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1];
+                                    ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
                                 }
 
                                 vybranyMesic = tabControl1.SelectedTab.Name.Replace("T", "");
                             }
                             else
                             {
-                                if (((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
+                                if (((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
                                 {
                                     try
                                     {
-                                        ((ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
-                                        ((ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
+                                        ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
+                                        ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
                                     }
                                     catch
                                     {
                                         try
                                         {
-                                            ((ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
-                                            ((ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(posledniVybrany);
+                                            ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
+                                            ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(posledniVybrany);
                                         }
                                         catch { }
                                     }
@@ -1077,7 +1077,7 @@ namespace Ticketník
 
                             foreach (TabPage tp in tabControl1.Controls)
                             {
-                                ((ListView)tp.Controls[0]).Items.Clear();
+                                ((Ticketník.CustomControls.ListView)tp.Controls[0]).Items.Clear();
                             }
 
                             zakaznici.Clear();
@@ -1406,7 +1406,7 @@ namespace Ticketník
                                             {
                                                 if (den != null)
                                                 {
-                                                    ((ListView)tp.Controls[mesic]).Items.Add(den);
+                                                    ((Ticketník.CustomControls.ListView)tp.Controls[mesic]).Items.Add(den);
                                                     den.Tag = new Tag(t.Datum, -1);
                                                     den = null;
                                                 }
@@ -1459,7 +1459,7 @@ namespace Ticketník
                                                 lvi.BackColor = barvaP;
                                                 lvi.ForeColor = ContrastColor(barvaP);
                                                 lvi.Tag = new Tag(t.Datum, t.IDtick);
-                                                ((ListView)tp.Controls[mesic]).Items.Add(lvi);
+                                                ((Ticketník.CustomControls.ListView)tp.Controls[mesic]).Items.Add(lvi);
                                                 string[] casy = Cas(t).Split(':');
                                                 veDniCelkem = veDniCelkem.AddHours(double.Parse(casy[0]));
                                                 veDniCelkem = veDniCelkem.AddMinutes(double.Parse(casy[1]));
@@ -1486,7 +1486,7 @@ namespace Ticketník
                                                     }
                                                     else
                                                         empty = new ListViewItem(new string[] { "", "", "", "", "", "", "", "", "", "", "" });
-                                                    ((ListView)tp.Controls[mesic]).Items.Add(empty);
+                                                    ((Ticketník.CustomControls.ListView)tp.Controls[mesic]).Items.Add(empty);
                                                     empty.Tag = new Tag(t.Datum, -1);
                                                 }
 
@@ -1502,29 +1502,29 @@ namespace Ticketník
                             if (first)
                             {
                                 tabControl1.SelectedIndex = (DateTime.Now.Month - 1);
-                                if (((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
+                                if (((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
                                 {
-                                    ((ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((ListView)tabControl1.SelectedTab.Controls[0]).Items[((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1];
-                                    ((ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
+                                    ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items[((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1];
+                                    ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
                                 }
 
                                 vybranyMesic = tabControl1.SelectedTab.Name.Replace("T", "");
                             }
                             else
                             {
-                                if (((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
+                                if (((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count != 0)
                                 {
                                     try
                                     {
-                                        ((ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
-                                        ((ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
+                                        ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
+                                        ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items.Count - 1);
                                     }
                                     catch
                                     {
                                         try
                                         {
-                                            ((ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
-                                            ((ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(posledniVybrany);
+                                            ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).TopItem = ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).Items[posledniVybrany];
+                                            ((Ticketník.CustomControls.ListView)tabControl1.SelectedTab.Controls[0]).EnsureVisible(posledniVybrany);
                                         }
                                         catch { }
                                     }
@@ -1738,7 +1738,7 @@ namespace Ticketník
 
         internal void leden_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (((ListView)sender).SelectedIndices.Count != 0 && ((Tag)((ListView)sender).SelectedItems[0].Tag).IDlong != -1)
+            if (((Ticketník.CustomControls.ListView)sender).SelectedIndices.Count != 0 && ((Tag)((Ticketník.CustomControls.ListView)sender).SelectedItems[0].Tag).IDlong != -1)
             {
                 toolStripButton2.Enabled = true;
                 toolStripButton3.Enabled = true;
@@ -1748,8 +1748,8 @@ namespace Ticketník
                 toolStripButton2.Enabled = false;
                 toolStripButton3.Enabled = false;
             }
-            if (((ListView)sender).SelectedIndices.Count != 0)
-                posledniVybrany = ((ListView)sender).SelectedIndices[0];
+            if (((Ticketník.CustomControls.ListView)sender).SelectedIndices.Count != 0)
+                posledniVybrany = ((Ticketník.CustomControls.ListView)sender).SelectedIndices[0];
         }
 
         //mazání značek dnů
@@ -1761,10 +1761,10 @@ namespace Ticketník
                 if (tp.Controls.ContainsKey(vybranyMesic))
                 {
                     Ticket refer = null;
-                    Dictionary<string, List<Ticket>> tempD = poDnech[((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum];
-                    foreach (Ticket t in tempD[((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text])
+                    Dictionary<string, List<Ticket>> tempD = poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum];
+                    foreach (Ticket t in tempD[((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text])
                     {
-                        long id = ((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong;
+                        long id = ((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong;
 
                         if (t.IDtick == id)
                         {
@@ -1775,7 +1775,7 @@ namespace Ticketník
                     NbtCompound referC = null;
                     if (file.RootTag.Get<NbtInt>("verze").Value < 10100)
                     {
-                        foreach (NbtCompound c in file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety"))
+                        foreach (NbtCompound c in file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety"))
                         {
                             if (c.Get<NbtLong>("IDlong").Value == refer.IDtick)
                             {
@@ -1786,7 +1786,7 @@ namespace Ticketník
                     }
                     else
                     {
-                        foreach (NbtCompound c in file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(rokVyber.SelectedItem.ToString()).Get<NbtCompound>(((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety"))
+                        foreach (NbtCompound c in file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(rokVyber.SelectedItem.ToString()).Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety"))
                         {
                             if (c.Get<NbtLong>("IDlong").Value == refer.IDtick)
                             {
@@ -1798,41 +1798,41 @@ namespace Ticketník
 
                     if (refer != null)
                     {
-                        int index = poDnech[((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum][((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text].IndexOf(refer);
-                        poDnech[((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum][((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text].RemoveAt(index);
-                        if (poDnech[((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum][((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text].Count == 0)
-                            poDnech[((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum].Remove(((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text);
+                        int index = poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum][((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text].IndexOf(refer);
+                        poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum][((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text].RemoveAt(index);
+                        if (poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum][((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text].Count == 0)
+                            poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum].Remove(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text);
                     }
                     if (referC != null)
                     {
                         if (file.RootTag.Get<NbtInt>("verze").Value < 10100)
-                            file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety").Remove(referC);
+                            file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety").Remove(referC);
                         else
-                            file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(rokVyber.SelectedItem.ToString()).Get<NbtCompound>(((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety").Remove(referC);
+                            file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(rokVyber.SelectedItem.ToString()).Get<NbtCompound>(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text).Get<NbtCompound>(vybranyMesic).Get<NbtList>("Tickety").Remove(referC);
                     }
-                    Tag ta = (Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag;
+                    Tag ta = (Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag;
                     int i1 = -1, i2 = -1;
                     int zbyva = 0;
-                    if ((zbyva = poDnech[((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum].Count) == 0)
+                    if ((zbyva = poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum].Count) == 0)
                     {
-                        foreach (ListViewItem lvi in ((ListView)tp.Controls[vybranyMesic]).Items)
+                        foreach (ListViewItem lvi in ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items)
                         {
                             if (((Tag)lvi.Tag).Datum == ta.Datum && ((Tag)lvi.Tag).IDlong == -1)
                             {
                                 if (i1 == -1)
-                                    i1 = ((ListView)tp.Controls[vybranyMesic]).Items.IndexOf(lvi);
+                                    i1 = ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items.IndexOf(lvi);
                                 else
-                                    i2 = ((ListView)tp.Controls[vybranyMesic]).Items.IndexOf(lvi);
+                                    i2 = ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items.IndexOf(lvi);
 
                             }
                         }
                     }
 
-                    ((ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(((ListView)tp.Controls[vybranyMesic]).SelectedIndices[0]);
+                    ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices[0]);
                     if (zbyva == 0)
                     {
-                        ((ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(i2 - 1);
-                        ((ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(i1);
+                        ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(i2 - 1);
+                        ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(i1);
                     }
                     break;
                 }
@@ -2022,12 +2022,12 @@ namespace Ticketník
             {
                 if (tp.Controls.ContainsKey(vybranyMesic))
                 {
-                    if (((ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count == 0)
+                    if (((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count == 0)
                     {
                         toolStripButton2.Enabled = false;
                         toolStripButton3.Enabled = false;
                     }
-                    else if (((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong == -1)
+                    else if (((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong == -1)
                     {
                         toolStripButton2.Enabled = false;
                         toolStripButton3.Enabled = false;
@@ -2071,7 +2071,7 @@ namespace Ticketník
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
-                            selected = ((ListView)tp.Controls[vybranyMesic]).SelectedIndices[0];
+                            selected = ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices[0];
                         }
                     }
                     this.BeginInvoke(new Action(() => uložitToolStripMenuItem_Click(sender, e)));
@@ -2081,7 +2081,7 @@ namespace Ticketník
                         {
                             if (tp.Controls.ContainsKey(vybranyMesic))
                             {
-                                this.BeginInvoke(new Action(() => ((ListView)tp.Controls[vybranyMesic]).Items[selected].Selected = true));
+                                this.BeginInvoke(new Action(() => ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items[selected].Selected = true));
                             }
                         }
 
@@ -2094,8 +2094,8 @@ namespace Ticketník
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
-                            if (((ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count > 0)
-                                selected = ((ListView)tp.Controls[vybranyMesic]).SelectedIndices[0];
+                            if (((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count > 0)
+                                selected = ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices[0];
                         }
                     }
                     uložitToolStripMenuItem_Click(sender, e);
@@ -2105,7 +2105,7 @@ namespace Ticketník
                         {
                             if (tp.Controls.ContainsKey(vybranyMesic))
                             {
-                                ((ListView)tp.Controls[vybranyMesic]).Items[selected].Selected = true;
+                                ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items[selected].Selected = true;
                             }
                         }
 
@@ -2205,7 +2205,7 @@ namespace Ticketník
 
         private void leden_DoubleClick(object sender, EventArgs e)
         {
-            if (((ListView)sender).SelectedIndices.Count != 0 && ((Tag)((ListView)sender).SelectedItems[0].Tag).IDlong != -1)
+            if (((Ticketník.CustomControls.ListView)sender).SelectedIndices.Count != 0 && ((Tag)((Ticketník.CustomControls.ListView)sender).SelectedItems[0].Tag).IDlong != -1)
             {
                 toolStripButton2_Click(sender, e);
             }
@@ -2249,7 +2249,7 @@ namespace Ticketník
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
-                            sirka = ((ListView)tp.Controls[vybranyMesic]).Columns[e.ColumnIndex].Width;
+                            sirka = ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Columns[e.ColumnIndex].Width;
                             break;
                         }
                     }
@@ -2302,51 +2302,51 @@ namespace Ticketník
                     {
                         if (tp.Controls.ContainsKey("leden"))
                         {
-                            ((ListView)tp.Controls["leden"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["leden"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("unor"))
                         {
-                            ((ListView)tp.Controls["unor"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["unor"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("brezen"))
                         {
-                            ((ListView)tp.Controls["brezen"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["brezen"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("duben"))
                         {
-                            ((ListView)tp.Controls["duben"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["duben"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("kveten"))
                         {
-                            ((ListView)tp.Controls["kveten"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["kveten"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("cerven"))
                         {
-                            ((ListView)tp.Controls["cerven"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["cerven"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("cervenec"))
                         {
-                            ((ListView)tp.Controls["cervenec"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["cervenec"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("srpen"))
                         {
-                            ((ListView)tp.Controls["srpen"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["srpen"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("zari"))
                         {
-                            ((ListView)tp.Controls["zari"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["zari"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("rijen"))
                         {
-                            ((ListView)tp.Controls["rijen"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["rijen"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("listopad"))
                         {
-                            ((ListView)tp.Controls["listopad"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["listopad"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                         if (tp.Controls.ContainsKey("prosinec"))
                         {
-                            ((ListView)tp.Controls["prosinec"]).Columns[e.ColumnIndex].Width = sirka;
+                            ((Ticketník.CustomControls.ListView)tp.Controls["prosinec"]).Columns[e.ColumnIndex].Width = sirka;
                         }
                     }
                 }
@@ -2355,7 +2355,7 @@ namespace Ticketník
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
-                            ((ListView)tp.Controls[vybranyMesic]).Columns[e.ColumnIndex].Width = 0;
+                            ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Columns[e.ColumnIndex].Width = 0;
                             break;
                         }
                     }
@@ -2371,19 +2371,19 @@ namespace Ticketník
                 {
                     if (tp.Controls.ContainsKey(vybranyMesic))
                     {
-                        if (((ListView)tp.Controls[vybranyMesic]).SelectedItems.Count != 0)
+                        if (((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems.Count != 0)
                         {
-                            if (((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong == -1)
+                            if (((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong == -1)
                                 return;
                             Ticket refer = null;
                             Dictionary<string, List<Ticket>> tempD;
                             if (dt.CompareTo(new DateTime()) == 0)
-                                tempD = poDnech[((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum];
+                                tempD = poDnech[((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).Datum];
                             else
                                 tempD = poDnech[dt];
                             string txt;
                             if (text == "")
-                                txt = ((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text;
+                                txt = ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].SubItems[3].Text;
                             else
                                 txt = text;
                             foreach (Ticket t in tempD[txt])
@@ -2392,7 +2392,7 @@ namespace Ticketník
                                 if (idt != -2)
                                     id = idt;
                                 else
-                                    id = ((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong;
+                                    id = ((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong;
 
                                 if (t.IDtick == id)
                                 {
@@ -2895,11 +2895,11 @@ namespace Ticketník
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                if (((Tag)((ListView)sender).SelectedItems[0].Tag).IDlong != -1)
+                if (((Tag)((Ticketník.CustomControls.ListView)sender).SelectedItems[0].Tag).IDlong != -1)
                 {
                     try
                     {
-                        ListViewHitTestInfo click = ((ListView)sender).HitTest(e.X, e.Y);
+                        ListViewHitTestInfo click = ((Ticketník.CustomControls.ListView)sender).HitTest(e.X, e.Y);
                         if (Control.ModifierKeys == Keys.Shift)
                             Clipboard.SetText(Clipboard.GetText() + "\t" + click.SubItem.Text);
                         else if (Control.ModifierKeys == Keys.Control)
@@ -3095,7 +3095,7 @@ namespace Ticketník
         {
             if (e.NewDisplayIndex != 0)
             {
-                foreach(ColumnHeader ch in ((ListView)tabControl1.Controls["ledenT"].Controls["leden"]).Columns)
+                foreach(ColumnHeader ch in ((Ticketník.CustomControls.ListView)tabControl1.Controls["ledenT"].Controls["leden"]).Columns)
                 {
                     if (ch.Text != e.Header.Text && ch.DisplayIndex != 0)
                     {

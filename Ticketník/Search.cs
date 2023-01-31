@@ -648,7 +648,7 @@ namespace Ticketník
                 {
                     if (tp.Controls.ContainsKey(form.vybranyMesic))
                     {
-                        foreach (ListViewItem lvi in ((ListView)tp.Controls[form.vybranyMesic]).Items)
+                        foreach (ListViewItem lvi in ((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).Items)
                         {
                             
                             if(((Tag)lvi.Tag).Compare((Tag)listView1.SelectedItems[0].Tag))

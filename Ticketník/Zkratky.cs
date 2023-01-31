@@ -69,7 +69,7 @@ namespace Ticketník
                 {
                     if (tp.Controls.ContainsKey(vybranyMesic))
                     {
-                        if (((ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count != 0 && ((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong != -1)
+                        if (((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count != 0 && ((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong != -1)
                             toolStripButton2_Click(sender, e);
                         break;
                     }
