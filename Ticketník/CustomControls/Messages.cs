@@ -31,6 +31,7 @@ namespace Ticketník.CustomControls
         private const int MCM_FIRST = 0x1000;
         public const int MCM_GETCURRENTVIEW = MCM_FIRST + 22;
         public const int MCM_SETCURRENTVIEW = MCM_FIRST + 32;
+        public const int TCM_ADJUSTRECT = (0x1300 + 40);
 
         public static int OnPaint => WM_PAINT;
         public static int OnFramePaint => WM_NCPAINT;
@@ -41,5 +42,6 @@ namespace Ticketník.CustomControls
         public static int GetMonthCalendar => DTM_GETMONTHCAL;
         public static int SetCurrentView => MCM_SETCURRENTVIEW;
         public static int SetCalColor => DTM_SETMCCOLOR;
+        public static int TabControlAdjustRectangle => TCM_ADJUSTRECT;
     }
 }

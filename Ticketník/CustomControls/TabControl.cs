@@ -81,6 +81,7 @@ namespace Ticketník.CustomControls
                                     //vnitřní vyplnění
                                     Rectangle tabCRIn = new Rectangle(1, MeasureHeaders(TabPages).Height + 1, this.Width - 3, this.Height - MeasureHeaders(TabPages).Height - 3);
                                     bg.Graphics.DrawRectangle(v, tabCRIn);
+                                    bg.Graphics.DrawLine(v, 0, MeasureHeaders(TabPages).Height, this.Width - 3, this.Height - MeasureHeaders(TabPages).Height - 3);
                                 }
 
                                 //taby
@@ -128,6 +129,10 @@ namespace Ticketník.CustomControls
                                     bg.Graphics.SmoothingMode = SmoothingMode.None;
                                     TextRenderer.DrawText(bg.Graphics, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), Parent.ForeColor);
                                 }
+                                using (SolidBrush test = new SolidBrush(Color.Violet))
+                                {
+                                    bg.Graphics.FillRectangle(test, this.Bounds);
+                                }
                                 bg.Render();
                             }
                         }
@@ -135,6 +140,15 @@ namespace Ticketník.CustomControls
                 }
                 ReleaseDC(handle, dc);
                 
+            } 
+            else if (m.Msg == Messages.TabControlAdjustRectangle)
+            {
+                RECT rc = (RECT)m.GetLParam(typeof(RECT));
+                rc.Left -= 3;
+                rc.Right += 3;
+                rc.Top -= 2;
+                rc.Bottom += 3;
+                Marshal.StructureToPtr(rc, m.LParam, true);
             }
 
             //tohle je kvůli scrollbarům
@@ -156,6 +170,8 @@ namespace Ticketník.CustomControls
                 this.ResumeLayout();
             }
         }
+
+        internal struct RECT { public int Left, Top, Right, Bottom; }
 
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
