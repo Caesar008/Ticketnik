@@ -919,19 +919,7 @@ namespace Ticketník.CustomControls
                 _minuteEdit = false;
                 _hourEdit = false;
                 _keybuffer = "";
-
-                if(_dateChanging)
-                {
-                    DateTime tmpDateTime = Value;
-                    if (tmpDateTime.Year < MinDate.Year)
-                        tmpDateTime = new DateTime(MinDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
-                    else if (tmpDateTime.Year > MaxDate.Year)
-                        tmpDateTime = new DateTime(MaxDate.Year, tmpDateTime.Month, tmpDateTime.Day, tmpDateTime.Hour, tmpDateTime.Minute, tmpDateTime.Second);
-                    _dateChanging = false;
-                    _keybuffer = "";
-                    Value = tmpDateTime;
-                    calendar.ActualDate = calendar.SelectedDate = tmpDateTime;
-                }
+                _dateChanging = false;
 
                 base.OnMouseDown(e);
                 this.Focus();
