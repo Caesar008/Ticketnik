@@ -706,7 +706,6 @@
             this.leden.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.leden.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.leden.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.leden.VScrollBarVisibilityChanged += Leden_VScrollBarVisibilityChanged;
             // 
             // columnHeader11
             // 

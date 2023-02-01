@@ -60,6 +60,20 @@ namespace Ticketník.CustomControls
             }
         }
 
+        private HeaderTrailingSpaceFill headerFill = HeaderTrailingSpaceFill.FillDummyColumn;
+        [DefaultValue(HeaderTrailingSpaceFill.FillDummyColumn)]
+        public HeaderTrailingSpaceFill HeaderFillMethod
+        {
+            get { return headerFill; }
+            set { headerFill = value; Invalidate(); }
+        }
+
+        public enum HeaderTrailingSpaceFill
+        {
+            FillDummyColumn,
+            ExtendLastColumn
+        }
+
         public ListView() : base()
         {
             OwnerDraw = true;
