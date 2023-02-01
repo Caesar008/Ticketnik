@@ -31,7 +31,9 @@ namespace Ticketník
             button1.Text = form.jazyk.Windows_Search_Hledej;
             richTextBox1.Text = form.jazyk.Windows_Search_HledaniNapoveda;
             this.Text = form.jazyk.Windows_Search_Hledej;
+            listView1.Columns[0].Tag = "Separator:NoLeft,NoRight";
             listView1.Columns[1].Text = form.jazyk.Windows_Search_PC;
+            listView1.Columns[1].Tag = "Separator:NoLeft";
             listView1.Columns[2].Text = form.jazyk.Windows_Search_IDTicketu;
             listView1.Columns[3].Text = form.jazyk.Windows_Search_Zakaznik;
             listView1.Columns[4].Text = form.jazyk.Windows_Search_Popis;
