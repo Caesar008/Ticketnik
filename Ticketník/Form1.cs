@@ -3273,6 +3273,15 @@ namespace Ticketník
                 Aktualizace(devtest);
             }
         }
+
+        private void Leden_VScrollBarVisibilityChanged(object sender, EventArgs e)
+        {
+            if(((CustomControls.ListView)sender).VScrollBarVisible)
+            {
+                
+            }
+        }
+
         protected override CreateParams CreateParams
         {
             get
