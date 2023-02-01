@@ -154,6 +154,12 @@ namespace Ticketník.CustomControls
             VScrollBarVisible = (wndStyle & Messages.VerticalSrollbar) != 0;
         }
 
+        protected override void OnDrawSubItem(DrawListViewSubItemEventArgs e)
+        {
+            e.DrawDefault= true;
+            base.OnDrawSubItem(e);
+        }
+
         protected override void OnDrawItem(DrawListViewItemEventArgs e)
         {
             e.DrawDefault = true;

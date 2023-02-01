@@ -76,9 +76,10 @@ namespace Ticketník.CustomControls
                             g.DrawLine(p, Width - 1, 0 + headers.Height - 1, Width - 1, Height - 1);
                             g.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
 
-                            if (!headers.IsEmpty)
+
+                            using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, allHeaders))
                             {
-                                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, allHeaders))
+                                if (!headers.IsEmpty)
                                 {
                                     //taby
                                     int index = 0;
@@ -125,10 +126,6 @@ namespace Ticketník.CustomControls
                                         bg.Graphics.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
                                         bg.Graphics.SmoothingMode = SmoothingMode.None;
                                         TextRenderer.DrawText(bg.Graphics, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), Parent.ForeColor);
-                                    }
-                                    using (SolidBrush test = new SolidBrush(Color.Violet))
-                                    {
-                                        bg.Graphics.FillRectangle(test, this.Bounds);
                                     }
                                     bg.Render();
                                 }
