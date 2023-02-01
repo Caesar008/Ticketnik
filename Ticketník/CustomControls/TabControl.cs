@@ -71,69 +71,67 @@ namespace Ticketník.CustomControls
                     {
                         using (Graphics g = Graphics.FromHdc(dc))
                         {
-                            using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, allHeaders))
+                            g.DrawLine(p, 0, 0 + headers.Height - 1, 0, Height - 1);
+                            g.DrawLine(p, 0, Height - 1, Width - 1, Height - 1);
+                            g.DrawLine(p, Width - 1, 0 + headers.Height - 1, Width - 1, Height - 1);
+                            g.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
+
+                            if (!headers.IsEmpty)
                             {
-                                //rámeček celý
-                                Rectangle tabCR = new Rectangle(0, MeasureHeaders(TabPages).Height, this.Width - 1, this.Height - MeasureHeaders(TabPages).Height - 1);
-                                bg.Graphics.DrawRectangle(p, tabCR);
-                                using (Pen v = new Pen(HeaderActiveBackColor, 1))
+                                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, allHeaders))
                                 {
-                                    //vnitřní vyplnění
-                                    Rectangle tabCRIn = new Rectangle(1, MeasureHeaders(TabPages).Height + 1, this.Width - 3, this.Height - MeasureHeaders(TabPages).Height - 3);
-                                    bg.Graphics.DrawRectangle(v, tabCRIn);
-                                    bg.Graphics.DrawLine(v, 0, MeasureHeaders(TabPages).Height, this.Width - 3, this.Height - MeasureHeaders(TabPages).Height - 3);
-                                }
-
-                                //taby
-                                int index = 0;
-                                bg.Graphics.FillRectangle(b, allHeaders);
-                                bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                                //vykreslit vzadu
-                                foreach (TabPage tp in TabPages)
-                                {
-                                    if (SelectedIndex != index)
-                                    {
-                                        Size header = MeasureHeader(TabPages[index]);
-                                        Rectangle headerRect = GetTabRect(index);
-                                        if (index == TabPages.Count - 1)
-                                            headerRect.Width -= 2;
-                                        using (SolidBrush abr = new SolidBrush(HeaderBackColor))
-                                        {
-                                            GraphicsPath headerRectFill = RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
-                                                headerRect.Width, headerRect.Height), 1, 1, 0, 0);
-
-                                            bg.Graphics.SmoothingMode = SmoothingMode.None;
-                                            bg.Graphics.FillPath(abr, headerRectFill);
-                                            TextRenderer.DrawText(bg.Graphics, TabPages[index].Text, TabPages[index].Font, new Point(headerRect.X + 2, headerRect.Y + 2), this.FindForm().ForeColor);
-                                        }
-                                        bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                                        bg.Graphics.DrawPath(p, RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
-                                                headerRect.Width, headerRect.Height), 1, 1, 0, 0));
-                                    }
-                                    index++;
-                                }
-                                //a teď vybraný do popředí
-                                Size headerSel = MeasureHeader(SelectedTab);
-                                Rectangle tabRect = GetTabRect(SelectedIndex);
-                                Rectangle headerRectSel = new Rectangle(tabRect.X - 2, tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 3);
-                                using (SolidBrush abr = new SolidBrush(HeaderActiveBackColor))
-                                {
-                                    GraphicsPath headerRectSelFill = RoundedRect(new Rectangle(tabRect.X - 2, tabRect.Y - 2,
-                                        headerSel.Width + 4, headerSel.Height + 4), 1, 1, 0, 0);
-
-                                    bg.Graphics.SmoothingMode = SmoothingMode.None;
-                                    bg.Graphics.FillPath(abr, headerRectSelFill);
-
+                                    //taby
+                                    int index = 0;
+                                    bg.Graphics.FillRectangle(b, allHeaders);
+                                    bg.Graphics.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
                                     bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                                    bg.Graphics.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
-                                    bg.Graphics.SmoothingMode = SmoothingMode.None;
-                                    TextRenderer.DrawText(bg.Graphics, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), Parent.ForeColor);
+                                    //vykreslit vzadu
+                                    foreach (TabPage tp in TabPages)
+                                    {
+                                        if (SelectedIndex != index)
+                                        {
+                                            Size header = MeasureHeader(TabPages[index]);
+                                            Rectangle headerRect = GetTabRect(index);
+                                            if (index == TabPages.Count - 1)
+                                                headerRect.Width -= 2;
+                                            using (SolidBrush abr = new SolidBrush(HeaderBackColor))
+                                            {
+                                                GraphicsPath headerRectFill = RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
+                                                    headerRect.Width, headerRect.Height), 1, 1, 0, 0);
+
+                                                bg.Graphics.SmoothingMode = SmoothingMode.None;
+                                                bg.Graphics.FillPath(abr, headerRectFill);
+                                                TextRenderer.DrawText(bg.Graphics, TabPages[index].Text, TabPages[index].Font, new Point(headerRect.X + 2, headerRect.Y + 2), this.FindForm().ForeColor);
+                                            }
+                                            bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                                            bg.Graphics.DrawPath(p, RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
+                                                    headerRect.Width, headerRect.Height), 1, 1, 0, 0));
+                                        }
+                                        index++;
+                                    }
+                                    //a teď vybraný do popředí
+                                    Size headerSel = MeasureHeader(SelectedTab);
+                                    Rectangle tabRect = GetTabRect(SelectedIndex);
+                                    Rectangle headerRectSel = new Rectangle(tabRect.X - 2, tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 3);
+                                    using (SolidBrush abr = new SolidBrush(HeaderActiveBackColor))
+                                    {
+                                        GraphicsPath headerRectSelFill = RoundedRect(new Rectangle(tabRect.X - 2, tabRect.Y - 2,
+                                            headerSel.Width + 4, headerSel.Height + 4), 1, 1, 0, 0);
+
+                                        bg.Graphics.SmoothingMode = SmoothingMode.None;
+                                        bg.Graphics.FillPath(abr, headerRectSelFill);
+
+                                        bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                                        bg.Graphics.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
+                                        bg.Graphics.SmoothingMode = SmoothingMode.None;
+                                        TextRenderer.DrawText(bg.Graphics, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), Parent.ForeColor);
+                                    }
+                                    using (SolidBrush test = new SolidBrush(Color.Violet))
+                                    {
+                                        bg.Graphics.FillRectangle(test, this.Bounds);
+                                    }
+                                    bg.Render();
                                 }
-                                using (SolidBrush test = new SolidBrush(Color.Violet))
-                                {
-                                    bg.Graphics.FillRectangle(test, this.Bounds);
-                                }
-                                bg.Render();
                             }
                         }
                     }

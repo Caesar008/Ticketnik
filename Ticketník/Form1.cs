@@ -96,6 +96,7 @@ namespace Ticketník
             AddColumns();
             canChange = true;
             NastavSirku();
+            SetTagy();
             list = new Zakaznici(this);
             if (!Directory.Exists(appdata + "\\Ticketnik"))
             {
@@ -148,6 +149,18 @@ namespace Ticketník
             Terpy = new Dictionary<string, MyTimeTerp>();
             //načtení terpů
             LoadTerptaskFile();
+        }
+
+        private void SetTagy()
+        {
+            foreach (TabPage tp in tabControl1.Controls)
+            {
+                foreach (CustomControls.ListView lv in tp.Controls)
+                {
+                    lv.Columns[0].Tag = "Separator:NoLeft,NoRight";
+                    lv.Columns[1].Tag = "Separator:NoLeft";
+                }
+            }
         }
 
 

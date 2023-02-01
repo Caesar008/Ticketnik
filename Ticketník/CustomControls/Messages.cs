@@ -31,7 +31,11 @@ namespace Ticketník.CustomControls
         private const int MCM_FIRST = 0x1000;
         public const int MCM_GETCURRENTVIEW = MCM_FIRST + 22;
         public const int MCM_SETCURRENTVIEW = MCM_FIRST + 32;
-        public const int TCM_ADJUSTRECT = (0x1300 + 40);
+        public const int TCM_ADJUSTRECT = (0x1300 + 40); 
+        public const int LVM_GETHEADER = 0x1000 + 31;
+        public const int GWL_STYLE = -16;
+        public const int WS_VSCROLL = 0x00200000;
+        public const int WS_HSCROLL = 0x00100000;
 
         public static int OnPaint => WM_PAINT;
         public static int OnFramePaint => WM_NCPAINT;
@@ -43,5 +47,8 @@ namespace Ticketník.CustomControls
         public static int SetCurrentView => MCM_SETCURRENTVIEW;
         public static int SetCalColor => DTM_SETMCCOLOR;
         public static int TabControlAdjustRectangle => TCM_ADJUSTRECT;
+        public static int ListViewGetHrader => LVM_GETHEADER;
+        public static int VerticalSrollbar => WS_VSCROLL;
+        public static int HorizontalScrollbar => WS_HSCROLL;
     }
 }

@@ -96,6 +96,9 @@
     <Compile Include="CustomControls\DateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomControls\ListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\Messages.cs" />
     <Compile Include="CustomControls\NumericUpDown.cs">
       <SubType>Component</SubType>

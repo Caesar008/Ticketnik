@@ -662,9 +662,9 @@
             // 
             this.ledenT.BackColor = System.Drawing.Color.IndianRed;
             this.ledenT.Controls.Add(this.leden);
-            this.ledenT.Location = new System.Drawing.Point(4, 22);
+            this.ledenT.Location = new System.Drawing.Point(1, 20);
             this.ledenT.Name = "ledenT";
-            this.ledenT.Size = new System.Drawing.Size(770, 356);
+            this.ledenT.Size = new System.Drawing.Size(776, 361);
             this.ledenT.TabIndex = 0;
             this.ledenT.Text = "Leden";
             // 
@@ -691,7 +691,7 @@
             this.leden.GridLines = true;
             this.leden.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.leden.HideSelection = false;
-            this.leden.Location = new System.Drawing.Point(-3, -3);
+            this.leden.Location = new System.Drawing.Point(0, 0);
             this.leden.Margin = new System.Windows.Forms.Padding(0);
             this.leden.MultiSelect = false;
             this.leden.Name = "leden";
@@ -709,6 +709,7 @@
             // 
             // columnHeader11
             // 
+            this.columnHeader11.Tag = "Separator:NoLeft,NoRight";
             this.columnHeader11.Text = "It is a dark time for the Rebellion. Although the Death Star has been destroyed, " +
     "Imperial troops have driven the Rebel forces from their hidden base and pursued " +
     "them across the galaxy.";
@@ -716,6 +717,7 @@
             // 
             // columnHeader1
             // 
+            this.columnHeader1.Tag = "Separator:NoLeft";
             this.columnHeader1.Text = "Počítač";
             this.columnHeader1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader1.Width = 68;
@@ -772,9 +774,9 @@
             // unorT
             // 
             this.unorT.Controls.Add(this.unor);
-            this.unorT.Location = new System.Drawing.Point(4, 22);
+            this.unorT.Location = new System.Drawing.Point(1, 20);
             this.unorT.Name = "unorT";
-            this.unorT.Size = new System.Drawing.Size(770, 356);
+            this.unorT.Size = new System.Drawing.Size(776, 361);
             this.unorT.TabIndex = 1;
             this.unorT.Text = "Únor";
             this.unorT.UseVisualStyleBackColor = true;
@@ -790,7 +792,7 @@
             this.unor.GridLines = true;
             this.unor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.unor.HideSelection = false;
-            this.unor.Location = new System.Drawing.Point(-3, -3);
+            this.unor.Location = new System.Drawing.Point(0, 0);
             this.unor.MultiSelect = false;
             this.unor.Name = "unor";
             this.unor.OwnerDraw = true;
@@ -808,9 +810,9 @@
             // brezenT
             // 
             this.brezenT.Controls.Add(this.brezen);
-            this.brezenT.Location = new System.Drawing.Point(4, 22);
+            this.brezenT.Location = new System.Drawing.Point(1, 20);
             this.brezenT.Name = "brezenT";
-            this.brezenT.Size = new System.Drawing.Size(770, 356);
+            this.brezenT.Size = new System.Drawing.Size(776, 361);
             this.brezenT.TabIndex = 2;
             this.brezenT.Text = "Březen";
             this.brezenT.UseVisualStyleBackColor = true;
@@ -826,7 +828,7 @@
             this.brezen.GridLines = true;
             this.brezen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.brezen.HideSelection = false;
-            this.brezen.Location = new System.Drawing.Point(-3, -3);
+            this.brezen.Location = new System.Drawing.Point(0, 0);
             this.brezen.MultiSelect = false;
             this.brezen.Name = "brezen";
             this.brezen.OwnerDraw = true;
@@ -844,9 +846,9 @@
             // dubenT
             // 
             this.dubenT.Controls.Add(this.duben);
-            this.dubenT.Location = new System.Drawing.Point(4, 22);
+            this.dubenT.Location = new System.Drawing.Point(1, 20);
             this.dubenT.Name = "dubenT";
-            this.dubenT.Size = new System.Drawing.Size(770, 356);
+            this.dubenT.Size = new System.Drawing.Size(776, 361);
             this.dubenT.TabIndex = 3;
             this.dubenT.Text = "Duben";
             this.dubenT.UseVisualStyleBackColor = true;
@@ -862,7 +864,7 @@
             this.duben.GridLines = true;
             this.duben.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.duben.HideSelection = false;
-            this.duben.Location = new System.Drawing.Point(-3, -3);
+            this.duben.Location = new System.Drawing.Point(0, 0);
             this.duben.MultiSelect = false;
             this.duben.Name = "duben";
             this.duben.OwnerDraw = true;
@@ -880,9 +882,9 @@
             // kvetenT
             // 
             this.kvetenT.Controls.Add(this.kveten);
-            this.kvetenT.Location = new System.Drawing.Point(4, 22);
+            this.kvetenT.Location = new System.Drawing.Point(1, 20);
             this.kvetenT.Name = "kvetenT";
-            this.kvetenT.Size = new System.Drawing.Size(770, 356);
+            this.kvetenT.Size = new System.Drawing.Size(776, 361);
             this.kvetenT.TabIndex = 4;
             this.kvetenT.Text = "Květen";
             this.kvetenT.UseVisualStyleBackColor = true;
@@ -898,7 +900,7 @@
             this.kveten.GridLines = true;
             this.kveten.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.kveten.HideSelection = false;
-            this.kveten.Location = new System.Drawing.Point(-3, -3);
+            this.kveten.Location = new System.Drawing.Point(0, 0);
             this.kveten.MultiSelect = false;
             this.kveten.Name = "kveten";
             this.kveten.OwnerDraw = true;
@@ -916,9 +918,9 @@
             // cervenT
             // 
             this.cervenT.Controls.Add(this.cerven);
-            this.cervenT.Location = new System.Drawing.Point(4, 22);
+            this.cervenT.Location = new System.Drawing.Point(1, 20);
             this.cervenT.Name = "cervenT";
-            this.cervenT.Size = new System.Drawing.Size(770, 356);
+            this.cervenT.Size = new System.Drawing.Size(776, 361);
             this.cervenT.TabIndex = 5;
             this.cervenT.Text = "Červen";
             this.cervenT.UseVisualStyleBackColor = true;
@@ -934,7 +936,7 @@
             this.cerven.GridLines = true;
             this.cerven.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cerven.HideSelection = false;
-            this.cerven.Location = new System.Drawing.Point(-3, -3);
+            this.cerven.Location = new System.Drawing.Point(0, 0);
             this.cerven.MultiSelect = false;
             this.cerven.Name = "cerven";
             this.cerven.OwnerDraw = true;
@@ -952,9 +954,9 @@
             // cervenecT
             // 
             this.cervenecT.Controls.Add(this.cervenec);
-            this.cervenecT.Location = new System.Drawing.Point(4, 22);
+            this.cervenecT.Location = new System.Drawing.Point(1, 20);
             this.cervenecT.Name = "cervenecT";
-            this.cervenecT.Size = new System.Drawing.Size(770, 356);
+            this.cervenecT.Size = new System.Drawing.Size(776, 361);
             this.cervenecT.TabIndex = 6;
             this.cervenecT.Text = "Červenec";
             this.cervenecT.UseVisualStyleBackColor = true;
@@ -970,7 +972,7 @@
             this.cervenec.GridLines = true;
             this.cervenec.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cervenec.HideSelection = false;
-            this.cervenec.Location = new System.Drawing.Point(-3, -3);
+            this.cervenec.Location = new System.Drawing.Point(0, 0);
             this.cervenec.MultiSelect = false;
             this.cervenec.Name = "cervenec";
             this.cervenec.OwnerDraw = true;
@@ -988,9 +990,9 @@
             // srpenT
             // 
             this.srpenT.Controls.Add(this.srpen);
-            this.srpenT.Location = new System.Drawing.Point(4, 22);
+            this.srpenT.Location = new System.Drawing.Point(1, 20);
             this.srpenT.Name = "srpenT";
-            this.srpenT.Size = new System.Drawing.Size(770, 356);
+            this.srpenT.Size = new System.Drawing.Size(776, 361);
             this.srpenT.TabIndex = 7;
             this.srpenT.Text = "Srpen";
             this.srpenT.UseVisualStyleBackColor = true;
@@ -1006,7 +1008,7 @@
             this.srpen.GridLines = true;
             this.srpen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.srpen.HideSelection = false;
-            this.srpen.Location = new System.Drawing.Point(-3, -3);
+            this.srpen.Location = new System.Drawing.Point(0, 0);
             this.srpen.MultiSelect = false;
             this.srpen.Name = "srpen";
             this.srpen.OwnerDraw = true;
@@ -1024,9 +1026,9 @@
             // zariT
             // 
             this.zariT.Controls.Add(this.zari);
-            this.zariT.Location = new System.Drawing.Point(4, 22);
+            this.zariT.Location = new System.Drawing.Point(1, 20);
             this.zariT.Name = "zariT";
-            this.zariT.Size = new System.Drawing.Size(770, 356);
+            this.zariT.Size = new System.Drawing.Size(776, 361);
             this.zariT.TabIndex = 8;
             this.zariT.Text = "Září";
             this.zariT.UseVisualStyleBackColor = true;
@@ -1042,7 +1044,7 @@
             this.zari.GridLines = true;
             this.zari.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.zari.HideSelection = false;
-            this.zari.Location = new System.Drawing.Point(-3, -3);
+            this.zari.Location = new System.Drawing.Point(0, 0);
             this.zari.MultiSelect = false;
             this.zari.Name = "zari";
             this.zari.OwnerDraw = true;
@@ -1060,9 +1062,9 @@
             // rijenT
             // 
             this.rijenT.Controls.Add(this.rijen);
-            this.rijenT.Location = new System.Drawing.Point(4, 22);
+            this.rijenT.Location = new System.Drawing.Point(1, 20);
             this.rijenT.Name = "rijenT";
-            this.rijenT.Size = new System.Drawing.Size(770, 356);
+            this.rijenT.Size = new System.Drawing.Size(776, 361);
             this.rijenT.TabIndex = 9;
             this.rijenT.Text = "Říjen";
             this.rijenT.UseVisualStyleBackColor = true;
@@ -1078,7 +1080,7 @@
             this.rijen.GridLines = true;
             this.rijen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.rijen.HideSelection = false;
-            this.rijen.Location = new System.Drawing.Point(-3, -3);
+            this.rijen.Location = new System.Drawing.Point(0, 0);
             this.rijen.MultiSelect = false;
             this.rijen.Name = "rijen";
             this.rijen.OwnerDraw = true;
@@ -1096,9 +1098,9 @@
             // listopadT
             // 
             this.listopadT.Controls.Add(this.listopad);
-            this.listopadT.Location = new System.Drawing.Point(4, 22);
+            this.listopadT.Location = new System.Drawing.Point(1, 20);
             this.listopadT.Name = "listopadT";
-            this.listopadT.Size = new System.Drawing.Size(770, 356);
+            this.listopadT.Size = new System.Drawing.Size(776, 361);
             this.listopadT.TabIndex = 10;
             this.listopadT.Text = "Listopad";
             this.listopadT.UseVisualStyleBackColor = true;
@@ -1114,7 +1116,7 @@
             this.listopad.GridLines = true;
             this.listopad.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listopad.HideSelection = false;
-            this.listopad.Location = new System.Drawing.Point(-3, -3);
+            this.listopad.Location = new System.Drawing.Point(0, 0);
             this.listopad.MultiSelect = false;
             this.listopad.Name = "listopad";
             this.listopad.OwnerDraw = true;
@@ -1132,9 +1134,9 @@
             // prosinecT
             // 
             this.prosinecT.Controls.Add(this.prosinec);
-            this.prosinecT.Location = new System.Drawing.Point(4, 22);
+            this.prosinecT.Location = new System.Drawing.Point(1, 20);
             this.prosinecT.Name = "prosinecT";
-            this.prosinecT.Size = new System.Drawing.Size(770, 356);
+            this.prosinecT.Size = new System.Drawing.Size(776, 361);
             this.prosinecT.TabIndex = 11;
             this.prosinecT.Text = "Prosinec";
             this.prosinecT.UseVisualStyleBackColor = true;
@@ -1150,7 +1152,7 @@
             this.prosinec.GridLines = true;
             this.prosinec.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.prosinec.HideSelection = false;
-            this.prosinec.Location = new System.Drawing.Point(-3, -3);
+            this.prosinec.Location = new System.Drawing.Point(0, 0);
             this.prosinec.MultiSelect = false;
             this.prosinec.Name = "prosinec";
             this.prosinec.OwnerDraw = true;
