@@ -706,6 +706,7 @@
             this.leden.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.leden.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.leden.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.leden.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // columnHeader11
             // 
@@ -806,6 +807,7 @@
             this.unor.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.unor.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.unor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.unor.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // brezenT
             // 
@@ -842,6 +844,7 @@
             this.brezen.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.brezen.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.brezen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.brezen.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // dubenT
             // 
@@ -878,6 +881,7 @@
             this.duben.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.duben.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.duben.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.duben.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // kvetenT
             // 
@@ -914,6 +918,7 @@
             this.kveten.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.kveten.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.kveten.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.kveten.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // cervenT
             // 
@@ -950,6 +955,7 @@
             this.cerven.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.cerven.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.cerven.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.cerven.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // cervenecT
             // 
@@ -986,6 +992,7 @@
             this.cervenec.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.cervenec.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.cervenec.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.cervenec.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // srpenT
             // 
@@ -1022,6 +1029,7 @@
             this.srpen.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.srpen.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.srpen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.srpen.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // zariT
             // 
@@ -1058,6 +1066,7 @@
             this.zari.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.zari.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.zari.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.zari.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // rijenT
             // 
@@ -1094,6 +1103,7 @@
             this.rijen.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.rijen.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.rijen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.rijen.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // listopadT
             // 
@@ -1130,6 +1140,7 @@
             this.listopad.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.listopad.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.listopad.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.listopad.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // prosinecT
             // 
@@ -1166,6 +1177,7 @@
             this.prosinec.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.prosinec.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.prosinec.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
+            this.prosinec.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // openFileDialog1
             // 

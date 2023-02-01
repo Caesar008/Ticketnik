@@ -151,11 +151,40 @@ namespace Ticketník.CustomControls
             TextRenderer.DrawText(e.Graphics, e.Header.Text, Font, e.Bounds, HeaderForeColor);
         }
 
+        public int HeaderWidth
+        {
+            get 
+            {
+                int w = 0;
+                foreach (ColumnHeader ch in Columns)
+                {
+                    w+= ch.Width;
+                }
+                return w;
+            }
+        }
+
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
-            if(m.Msg == Messages.OnPaint)
+            if (m.Msg == Messages.OnPaint)
+            {
                 GetVisibleScrollbars(Handle);
+                if(HeaderFillMethod == HeaderTrailingSpaceFill.ExtendLastColumn)
+                {
+                    if(HeaderWidth < Width - (VScrollBarVisible ? 17 : 0))
+                    {
+                        if(Columns.Count > 0)
+                        {
+                            Columns[Columns.Count - 1].Width += Width - HeaderWidth - (VScrollBarVisible ? 17 : 0);
+                        }
+                    }
+                }
+                else if (HeaderFillMethod == HeaderTrailingSpaceFill.FillDummyColumn)
+                {
+                    //zatím nemáme, pro ticketník nedůležité
+                }
+            }
         }
 
         [DllImport("user32.dll", SetLastError = true)]
