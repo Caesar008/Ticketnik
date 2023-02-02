@@ -102,6 +102,7 @@ namespace Ticketník.CustomControls
 
                                                 bg.Graphics.SmoothingMode = SmoothingMode.None;
                                                 bg.Graphics.FillPath(abr, headerRectFill);
+                                                bg.Graphics.DrawLine(p, 0, 0 + headerRect.Height+1, Width - 1, headerRect.Height+1);
                                                 TextRenderer.DrawText(bg.Graphics, TabPages[index].Text, TabPages[index].Font, new Point(headerRect.X + 2, headerRect.Y + 2), this.FindForm().ForeColor);
                                             }
                                             bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
