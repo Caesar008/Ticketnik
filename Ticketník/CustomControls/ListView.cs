@@ -74,9 +74,20 @@ namespace Ticketník.CustomControls
             ExtendLastColumn
         }
 
+        Label fillColl = new Label()
+        {
+            AutoSize = false,
+            Location = new Point(0, 0),
+            Width = 0
+        } ;
+
         public ListView() : base()
         {
             OwnerDraw = true;
+            //pro nc space, protože WM_cnpaint strašně bliká a zatěžuje cpu
+            fillColl.BackColor = HeaderBackColor;
+            Controls.Add(fillColl) ;
+            DoubleBuffered = true;
         }
 
         [Category("Action")]
@@ -96,7 +107,6 @@ namespace Ticketník.CustomControls
                 if (hScrollVisible != value)
                 {
                     hScrollVisible = value;
-
                     HScrollBarVisibilityChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -115,7 +125,60 @@ namespace Ticketník.CustomControls
                     vScrollVisible = value;
 
                     VScrollBarVisibilityChanged?.Invoke(this, EventArgs.Empty);
+                    FillHeaderSpace();
                 }
+            }
+        }
+
+        bool canCallSizeChange = true;
+        bool canCallColumnChange = true;
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            if (canCallSizeChange)
+            {
+                canCallColumnChange= false;
+                FillHeaderSpace();
+            }
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            if (canCallSizeChange)
+            {
+                FillHeaderSpace();
+                canCallColumnChange = true;
+            }
+        }
+
+        protected override void OnClientSizeChanged(EventArgs e)
+        {
+            base.OnClientSizeChanged(e);
+            if (canCallSizeChange)
+            {
+                FillHeaderSpace();
+                canCallColumnChange = true;
+            }
+        }
+
+        protected override void OnColumnWidthChanged(ColumnWidthChangedEventArgs e)
+        {
+            base.OnColumnWidthChanged(e);
+            if (canCallColumnChange)
+            {
+                FillHeaderSpace();
+                canCallSizeChange = true;
+            }
+        }
+        protected override void OnColumnWidthChanging(ColumnWidthChangingEventArgs e)
+        {
+            base.OnColumnWidthChanging(e);
+            if (canCallColumnChange)
+            {
+                canCallSizeChange = false;
+                FillHeaderSpace(true);
             }
         }
 
@@ -158,9 +221,33 @@ namespace Ticketník.CustomControls
                 int w = 0;
                 foreach (ColumnHeader ch in Columns)
                 {
-                    w+= ch.Width;
+                    w += ch.Width;
                 }
                 return w;
+            }
+        }
+
+        private void FillHeaderSpace(bool forceDummy = false)
+        {
+            if (HeaderFillMethod == HeaderTrailingSpaceFill.ExtendLastColumn && !forceDummy)
+            {
+                fillColl.Width = 0;
+                fillColl.Location = new Point(0, 0);
+                fillColl.BackColor = HeaderBackColor;
+                if (Columns.Count > 0)
+                {
+                    if (HeaderWidth < Width - (VScrollBarVisible ? 17 : 0) || (HeaderWidth <= Width && VScrollBarVisible && HeaderWidth > Width-17))
+                    {
+                        Columns[Columns.Count - 1].Width += Width - HeaderWidth - (VScrollBarVisible ? 17 : 0);
+
+                    }
+                }
+            }
+            else if (HeaderFillMethod == HeaderTrailingSpaceFill.FillDummyColumn || forceDummy)
+            {
+                fillColl.Location = new Point(HeaderWidth+1, 0);
+                fillColl.Width = Width - HeaderWidth - (VScrollBarVisible ? 17 : 0);
+                fillColl.BackColor = HeaderBackColor;
             }
         }
 
@@ -170,20 +257,6 @@ namespace Ticketník.CustomControls
             if (m.Msg == Messages.OnPaint)
             {
                 GetVisibleScrollbars(Handle);
-                if(HeaderFillMethod == HeaderTrailingSpaceFill.ExtendLastColumn)
-                {
-                    if(HeaderWidth < Width - (VScrollBarVisible ? 17 : 0))
-                    {
-                        if(Columns.Count > 0)
-                        {
-                            Columns[Columns.Count - 1].Width += Width - HeaderWidth - (VScrollBarVisible ? 17 : 0);
-                        }
-                    }
-                }
-                else if (HeaderFillMethod == HeaderTrailingSpaceFill.FillDummyColumn)
-                {
-                    //zatím nemáme, pro ticketník nedůležité
-                }
             }
         }
 

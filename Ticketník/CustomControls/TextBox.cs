@@ -89,28 +89,25 @@ namespace Ticketník.CustomControls
             if (m.Msg == Messages.OnFramePaint)
             {
                 var dc = GetWindowDC(Handle);
-                using (Pen p = new Pen((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor, 1))
+                using (Graphics g = Graphics.FromHdc(dc))
                 {
-                    using (Graphics g = Graphics.FromHdc(dc))
+                    using (Pen p = new Pen((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor, 1))
                     {
                         g.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
+
                     }
-                }
-                //inner box
-                using (Pen p = new Pen(BackColor, 1))
-                {
-                    using (Graphics g = Graphics.FromHdc(dc))
+                    //inner box
+                    using (Pen p = new Pen(BackColor, 1))
                     {
                         g.DrawRectangle(p, 1, 1, Width - 3, Height - 3);
-                    }
-                }
-                //zvýrazněný řádek jako na W11
 
-                using (Pen p = new Pen(this.Focused ? BorderColorMouseOver : BackColor, 1))
-                {
-                    using (Graphics g = Graphics.FromHdc(dc))
+                    }
+                    //zvýrazněný řádek jako na W11
+
+                    using (Pen p = new Pen(this.Focused ? BorderColorMouseOver : BackColor, 1))
                     {
-                        g.DrawLine(p, 1, Height -2, Width - 2, Height - 2);
+                        g.DrawLine(p, 1, Height - 2, Width - 2, Height - 2);
+
                     }
                 }
 
