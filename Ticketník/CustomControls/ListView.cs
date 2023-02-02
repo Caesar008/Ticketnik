@@ -211,7 +211,15 @@ namespace Ticketník.CustomControls
                 if (!separatorTag.Contains("NoBottom"))
                     e.Graphics.DrawLine(p, e.Bounds.Left, e.Bounds.Bottom - 1, e.Bounds.Right, e.Bounds.Bottom - 1);
             }
-            TextRenderer.DrawText(e.Graphics, e.Header.Text, Font, e.Bounds, HeaderForeColor);
+            //TextRenderer.DrawText(e.Graphics, e.Header.Text, Font, e.Bounds, HeaderForeColor);
+            TextFormatFlags tf = TextFormatFlags.Default;
+            switch (e.Header.TextAlign)
+            {
+                case HorizontalAlignment.Center: tf = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter; break;
+                case HorizontalAlignment.Left: tf = TextFormatFlags.Left | TextFormatFlags.VerticalCenter; break;
+                case HorizontalAlignment.Right: tf = TextFormatFlags.Right | TextFormatFlags.VerticalCenter; break;
+            }
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, Font, e.Bounds, HeaderForeColor, tf);
         }
 
         public int HeaderWidth
