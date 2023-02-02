@@ -246,8 +246,11 @@ namespace Ticketník.CustomControls
                 {
                     if (HeaderWidth < Width - (VScrollBarVisible ? 17 : 0) || (HeaderWidth <= Width && VScrollBarVisible && HeaderWidth > Width-17))
                     {
-                        Columns[Columns.Count - 1].Width += Width - HeaderWidth - (VScrollBarVisible ? 17 : 0);
-
+                        foreach (ColumnHeader ch in Columns)
+                        {
+                            if(ch.DisplayIndex == Columns.Count-1)
+                                ch.Width += Width - HeaderWidth - (VScrollBarVisible ? 17 : 0);
+                        }
                     }
                 }
             }
