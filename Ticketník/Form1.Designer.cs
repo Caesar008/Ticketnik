@@ -183,20 +183,20 @@
             // 
             this.novýToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("novýToolStripMenuItem.Image")));
             this.novýToolStripMenuItem.Name = "novýToolStripMenuItem";
-            this.novýToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.novýToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.novýToolStripMenuItem.Text = "Nový";
             this.novýToolStripMenuItem.Click += new System.EventHandler(this.novýToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(201, 6);
             // 
             // načístToolStripMenuItem
             // 
             this.načístToolStripMenuItem.Image = global::Ticketník.Properties.Resources.open;
             this.načístToolStripMenuItem.Name = "načístToolStripMenuItem";
-            this.načístToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.načístToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.načístToolStripMenuItem.Text = "Otevřít";
             this.načístToolStripMenuItem.Click += new System.EventHandler(this.načístToolStripMenuItem_Click);
             // 
@@ -204,46 +204,46 @@
             // 
             this.uložitToolStripMenuItem.Image = global::Ticketník.Properties.Resources.save;
             this.uložitToolStripMenuItem.Name = "uložitToolStripMenuItem";
-            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.uložitToolStripMenuItem.Text = "Uložit";
             this.uložitToolStripMenuItem.Click += new System.EventHandler(this.uložitToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(201, 6);
             // 
             // exportovatToolStripMenuItem
             // 
             this.exportovatToolStripMenuItem.Image = global::Ticketník.Properties.Resources.export;
             this.exportovatToolStripMenuItem.Name = "exportovatToolStripMenuItem";
-            this.exportovatToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.exportovatToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.exportovatToolStripMenuItem.Text = "Exportovat";
             this.exportovatToolStripMenuItem.Click += new System.EventHandler(this.exportovatToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(201, 6);
             // 
             // převéstNaFormátMilleniumToolStripMenuItem
             // 
             this.převéstNaFormátMilleniumToolStripMenuItem.Image = global::Ticketník.Properties.Resources.millenium;
             this.převéstNaFormátMilleniumToolStripMenuItem.Name = "převéstNaFormátMilleniumToolStripMenuItem";
-            this.převéstNaFormátMilleniumToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.převéstNaFormátMilleniumToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.převéstNaFormátMilleniumToolStripMenuItem.Text = "Převést na formát Millenium";
             this.převéstNaFormátMilleniumToolStripMenuItem.Click += new System.EventHandler(this.převéstNaFormátMilleniumToolStripMenuItem_Click);
             // 
             // oddToolStripMenuItem
             // 
             this.oddToolStripMenuItem.Name = "oddToolStripMenuItem";
-            this.oddToolStripMenuItem.Size = new System.Drawing.Size(221, 6);
+            this.oddToolStripMenuItem.Size = new System.Drawing.Size(201, 6);
             // 
             // ukončitToolStripMenuItem
             // 
             this.ukončitToolStripMenuItem.Image = global::Ticketník.Properties.Resources.off;
             this.ukončitToolStripMenuItem.Name = "ukončitToolStripMenuItem";
-            this.ukončitToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.ukončitToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.ukončitToolStripMenuItem.Text = "Zavřít";
             this.ukončitToolStripMenuItem.Click += new System.EventHandler(this.ukončitToolStripMenuItem_Click);
             // 
@@ -273,7 +273,7 @@
             // 
             this.nastaveníToolStripMenuItem.Image = global::Ticketník.Properties.Resources.settings;
             this.nastaveníToolStripMenuItem.Name = "nastaveníToolStripMenuItem";
-            this.nastaveníToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.nastaveníToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.nastaveníToolStripMenuItem.Text = "Nastavení";
             this.nastaveníToolStripMenuItem.Click += new System.EventHandler(this.nastaveníToolStripMenuItem_Click);
             // 
@@ -286,7 +286,7 @@
             // 
             this.upozorněníToolStripMenuItem.Image = global::Ticketník.Properties.Resources.bell_16;
             this.upozorněníToolStripMenuItem.Name = "upozorněníToolStripMenuItem";
-            this.upozorněníToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.upozorněníToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.upozorněníToolStripMenuItem.Text = "Upozornění";
             this.upozorněníToolStripMenuItem.Click += new System.EventHandler(this.upozorněníToolStripMenuItem_Click);
             // 
@@ -299,7 +299,7 @@
             // 
             this.přidatZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.addZak;
             this.přidatZákazníkaToolStripMenuItem.Name = "přidatZákazníkaToolStripMenuItem";
-            this.přidatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.přidatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.přidatZákazníkaToolStripMenuItem.Text = "Přidat zákazníka";
             this.přidatZákazníkaToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
@@ -307,7 +307,7 @@
             // 
             this.upravitZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.zmenZak;
             this.upravitZákazníkaToolStripMenuItem.Name = "upravitZákazníkaToolStripMenuItem";
-            this.upravitZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.upravitZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.upravitZákazníkaToolStripMenuItem.Text = "Upravit zákazníka";
             this.upravitZákazníkaToolStripMenuItem.Click += new System.EventHandler(this.zmenZakaznika_Click);
             // 
@@ -315,7 +315,7 @@
             // 
             this.smazatZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.delZak;
             this.smazatZákazníkaToolStripMenuItem.Name = "smazatZákazníkaToolStripMenuItem";
-            this.smazatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.smazatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.smazatZákazníkaToolStripMenuItem.Text = "Smazat zákazníka";
             this.smazatZákazníkaToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
@@ -328,7 +328,7 @@
             // 
             this.přidatTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.addZaznam;
             this.přidatTERPKódToolStripMenuItem.Name = "přidatTERPKódToolStripMenuItem";
-            this.přidatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.přidatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.přidatTERPKódToolStripMenuItem.Text = "Přidat TERP kód";
             this.přidatTERPKódToolStripMenuItem.Click += new System.EventHandler(this.přidatTERPKódToolStripMenuItem_Click);
             // 
@@ -336,7 +336,7 @@
             // 
             this.upravitTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.editZaznam;
             this.upravitTERPKódToolStripMenuItem.Name = "upravitTERPKódToolStripMenuItem";
-            this.upravitTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.upravitTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.upravitTERPKódToolStripMenuItem.Text = "Aktualizovat TERP kódy";
             this.upravitTERPKódToolStripMenuItem.Click += new System.EventHandler(this.upravitTERPKódToolStripMenuItem_Click);
             // 
@@ -344,7 +344,7 @@
             // 
             this.smazatTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.delZaznam;
             this.smazatTERPKódToolStripMenuItem.Name = "smazatTERPKódToolStripMenuItem";
-            this.smazatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.smazatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.smazatTERPKódToolStripMenuItem.Text = "Smazat TERP kód";
             this.smazatTERPKódToolStripMenuItem.Click += new System.EventHandler(this.smazatTERPKódToolStripMenuItem_Click);
             // 
@@ -357,7 +357,7 @@
             // 
             this.hledatToolStripMenuItem.Image = global::Ticketník.Properties.Resources.search;
             this.hledatToolStripMenuItem.Name = "hledatToolStripMenuItem";
-            this.hledatToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.hledatToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.hledatToolStripMenuItem.Text = "Hledat";
             this.hledatToolStripMenuItem.Click += new System.EventHandler(this.hledat_Click);
             // 
@@ -370,7 +370,7 @@
             // 
             this.reportToolStripMenuItem.Image = global::Ticketník.Properties.Resources.crash;
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
-            this.reportToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.reportToolStripMenuItem.Text = "Crash report";
             this.reportToolStripMenuItem.Click += new System.EventHandler(this.reportToolStripMenuItem_Click);
             // 
@@ -394,28 +394,28 @@
             // knownIssuesToolStripMenuItem
             // 
             this.knownIssuesToolStripMenuItem.Name = "knownIssuesToolStripMenuItem";
-            this.knownIssuesToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.knownIssuesToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.knownIssuesToolStripMenuItem.Text = "Známé problémy";
             this.knownIssuesToolStripMenuItem.Click += new System.EventHandler(this.knownIssuesToolStripMenuItem_Click);
             // 
             // changelogToolStripMenuItem
             // 
             this.changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.changelogToolStripMenuItem.Text = "Changelog";
             this.changelogToolStripMenuItem.Click += new System.EventHandler(this.changelogToolStripMenuItem_Click);
             // 
             // plányDoBudoucnaToolStripMenuItem
             // 
             this.plányDoBudoucnaToolStripMenuItem.Name = "plányDoBudoucnaToolStripMenuItem";
-            this.plányDoBudoucnaToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.plányDoBudoucnaToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.plányDoBudoucnaToolStripMenuItem.Text = "Plány do budoucna";
             this.plányDoBudoucnaToolStripMenuItem.Click += new System.EventHandler(this.plányDoBudoucnaToolStripMenuItem_Click);
             // 
             // dokumentaceToolStripMenuItem
             // 
             this.dokumentaceToolStripMenuItem.Name = "dokumentaceToolStripMenuItem";
-            this.dokumentaceToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.dokumentaceToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.dokumentaceToolStripMenuItem.Text = "Dokumentace";
             this.dokumentaceToolStripMenuItem.Click += new System.EventHandler(this.dokumentaceToolStripMenuItem_Click);
             // 
@@ -427,21 +427,21 @@
             // dostupnéJazykyToolStripMenuItem
             // 
             this.dostupnéJazykyToolStripMenuItem.Name = "dostupnéJazykyToolStripMenuItem";
-            this.dostupnéJazykyToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.dostupnéJazykyToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.dostupnéJazykyToolStripMenuItem.Text = "Dostupné jazyky";
             this.dostupnéJazykyToolStripMenuItem.Click += new System.EventHandler(this.dostupnéJazykyToolStripMenuItem_Click);
             // 
             // vyhledatAktualizaceToolStripMenuItem
             // 
             this.vyhledatAktualizaceToolStripMenuItem.Name = "vyhledatAktualizaceToolStripMenuItem";
-            this.vyhledatAktualizaceToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.vyhledatAktualizaceToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.vyhledatAktualizaceToolStripMenuItem.Text = "Vyhledat aktualizace";
             this.vyhledatAktualizaceToolStripMenuItem.Click += new System.EventHandler(this.vyhledatAktualizaceToolStripMenuItem_Click);
             // 
             // aktualizovatVšechnyTerpyToolStripMenuItem
             // 
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Name = "aktualizovatVšechnyTerpyToolStripMenuItem";
-            this.aktualizovatVšechnyTerpyToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.aktualizovatVšechnyTerpyToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Text = "Aktualizovat všechny Terpy";
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Click += new System.EventHandler(this.aktualizovatVšechnyTerpyToolStripMenuItem_Click);
             // 
@@ -453,7 +453,7 @@
             // nahlásitProblémToolStripMenuItem
             // 
             this.nahlásitProblémToolStripMenuItem.Name = "nahlásitProblémToolStripMenuItem";
-            this.nahlásitProblémToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.nahlásitProblémToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.nahlásitProblémToolStripMenuItem.Text = "Nahlásit problém";
             this.nahlásitProblémToolStripMenuItem.Click += new System.EventHandler(this.nahlásitProblémToolStripMenuItem_Click);
             // 
@@ -696,10 +696,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ledenT.BackColor = System.Drawing.Color.Orange;
             this.ledenT.Controls.Add(this.leden);
-            this.ledenT.Location = new System.Drawing.Point(1, 22);
+            this.ledenT.Location = new System.Drawing.Point(1, 20);
             this.ledenT.Margin = new System.Windows.Forms.Padding(0);
             this.ledenT.Name = "ledenT";
-            this.ledenT.Size = new System.Drawing.Size(776, 359);
+            this.ledenT.Size = new System.Drawing.Size(776, 361);
             this.ledenT.TabIndex = 0;
             this.ledenT.Text = "Leden";
             // 
@@ -733,7 +733,7 @@
             this.leden.Name = "leden";
             this.leden.OwnerDraw = true;
             this.leden.ShowItemToolTips = true;
-            this.leden.Size = new System.Drawing.Size(776, 359);
+            this.leden.Size = new System.Drawing.Size(776, 361);
             this.leden.TabIndex = 0;
             this.leden.UseCompatibleStateImageBehavior = false;
             this.leden.View = System.Windows.Forms.View.Details;
@@ -813,10 +813,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.unorT.Controls.Add(this.unor);
-            this.unorT.Location = new System.Drawing.Point(1, 22);
+            this.unorT.Location = new System.Drawing.Point(1, 20);
             this.unorT.Margin = new System.Windows.Forms.Padding(0);
             this.unorT.Name = "unorT";
-            this.unorT.Size = new System.Drawing.Size(776, 359);
+            this.unorT.Size = new System.Drawing.Size(776, 361);
             this.unorT.TabIndex = 1;
             this.unorT.Text = "Únor";
             // 
@@ -837,7 +837,7 @@
             this.unor.Name = "unor";
             this.unor.OwnerDraw = true;
             this.unor.ShowItemToolTips = true;
-            this.unor.Size = new System.Drawing.Size(776, 359);
+            this.unor.Size = new System.Drawing.Size(776, 361);
             this.unor.TabIndex = 1;
             this.unor.UseCompatibleStateImageBehavior = false;
             this.unor.View = System.Windows.Forms.View.Details;
@@ -853,10 +853,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.brezenT.Controls.Add(this.brezen);
-            this.brezenT.Location = new System.Drawing.Point(1, 22);
+            this.brezenT.Location = new System.Drawing.Point(1, 20);
             this.brezenT.Margin = new System.Windows.Forms.Padding(0);
             this.brezenT.Name = "brezenT";
-            this.brezenT.Size = new System.Drawing.Size(776, 359);
+            this.brezenT.Size = new System.Drawing.Size(776, 361);
             this.brezenT.TabIndex = 2;
             this.brezenT.Text = "Březen";
             // 
@@ -877,7 +877,7 @@
             this.brezen.Name = "brezen";
             this.brezen.OwnerDraw = true;
             this.brezen.ShowItemToolTips = true;
-            this.brezen.Size = new System.Drawing.Size(776, 359);
+            this.brezen.Size = new System.Drawing.Size(776, 361);
             this.brezen.TabIndex = 1;
             this.brezen.UseCompatibleStateImageBehavior = false;
             this.brezen.View = System.Windows.Forms.View.Details;
@@ -893,10 +893,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dubenT.Controls.Add(this.duben);
-            this.dubenT.Location = new System.Drawing.Point(1, 22);
+            this.dubenT.Location = new System.Drawing.Point(1, 20);
             this.dubenT.Margin = new System.Windows.Forms.Padding(0);
             this.dubenT.Name = "dubenT";
-            this.dubenT.Size = new System.Drawing.Size(776, 359);
+            this.dubenT.Size = new System.Drawing.Size(776, 361);
             this.dubenT.TabIndex = 3;
             this.dubenT.Text = "Duben";
             // 
@@ -917,7 +917,7 @@
             this.duben.Name = "duben";
             this.duben.OwnerDraw = true;
             this.duben.ShowItemToolTips = true;
-            this.duben.Size = new System.Drawing.Size(776, 359);
+            this.duben.Size = new System.Drawing.Size(776, 361);
             this.duben.TabIndex = 1;
             this.duben.UseCompatibleStateImageBehavior = false;
             this.duben.View = System.Windows.Forms.View.Details;
@@ -933,10 +933,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kvetenT.Controls.Add(this.kveten);
-            this.kvetenT.Location = new System.Drawing.Point(1, 22);
+            this.kvetenT.Location = new System.Drawing.Point(1, 20);
             this.kvetenT.Margin = new System.Windows.Forms.Padding(0);
             this.kvetenT.Name = "kvetenT";
-            this.kvetenT.Size = new System.Drawing.Size(776, 359);
+            this.kvetenT.Size = new System.Drawing.Size(776, 361);
             this.kvetenT.TabIndex = 4;
             this.kvetenT.Text = "Květen";
             // 
@@ -957,7 +957,7 @@
             this.kveten.Name = "kveten";
             this.kveten.OwnerDraw = true;
             this.kveten.ShowItemToolTips = true;
-            this.kveten.Size = new System.Drawing.Size(776, 359);
+            this.kveten.Size = new System.Drawing.Size(776, 361);
             this.kveten.TabIndex = 1;
             this.kveten.UseCompatibleStateImageBehavior = false;
             this.kveten.View = System.Windows.Forms.View.Details;
@@ -973,10 +973,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cervenT.Controls.Add(this.cerven);
-            this.cervenT.Location = new System.Drawing.Point(1, 22);
+            this.cervenT.Location = new System.Drawing.Point(1, 20);
             this.cervenT.Margin = new System.Windows.Forms.Padding(0);
             this.cervenT.Name = "cervenT";
-            this.cervenT.Size = new System.Drawing.Size(776, 359);
+            this.cervenT.Size = new System.Drawing.Size(776, 361);
             this.cervenT.TabIndex = 5;
             this.cervenT.Text = "Červen";
             // 
@@ -997,7 +997,7 @@
             this.cerven.Name = "cerven";
             this.cerven.OwnerDraw = true;
             this.cerven.ShowItemToolTips = true;
-            this.cerven.Size = new System.Drawing.Size(776, 359);
+            this.cerven.Size = new System.Drawing.Size(776, 361);
             this.cerven.TabIndex = 1;
             this.cerven.UseCompatibleStateImageBehavior = false;
             this.cerven.View = System.Windows.Forms.View.Details;
@@ -1013,10 +1013,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cervenecT.Controls.Add(this.cervenec);
-            this.cervenecT.Location = new System.Drawing.Point(1, 22);
+            this.cervenecT.Location = new System.Drawing.Point(1, 20);
             this.cervenecT.Margin = new System.Windows.Forms.Padding(0);
             this.cervenecT.Name = "cervenecT";
-            this.cervenecT.Size = new System.Drawing.Size(776, 359);
+            this.cervenecT.Size = new System.Drawing.Size(776, 361);
             this.cervenecT.TabIndex = 6;
             this.cervenecT.Text = "Červenec";
             // 
@@ -1037,7 +1037,7 @@
             this.cervenec.Name = "cervenec";
             this.cervenec.OwnerDraw = true;
             this.cervenec.ShowItemToolTips = true;
-            this.cervenec.Size = new System.Drawing.Size(776, 359);
+            this.cervenec.Size = new System.Drawing.Size(776, 361);
             this.cervenec.TabIndex = 1;
             this.cervenec.UseCompatibleStateImageBehavior = false;
             this.cervenec.View = System.Windows.Forms.View.Details;
@@ -1053,10 +1053,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.srpenT.Controls.Add(this.srpen);
-            this.srpenT.Location = new System.Drawing.Point(1, 22);
+            this.srpenT.Location = new System.Drawing.Point(1, 20);
             this.srpenT.Margin = new System.Windows.Forms.Padding(0);
             this.srpenT.Name = "srpenT";
-            this.srpenT.Size = new System.Drawing.Size(776, 359);
+            this.srpenT.Size = new System.Drawing.Size(776, 361);
             this.srpenT.TabIndex = 7;
             this.srpenT.Text = "Srpen";
             // 
@@ -1077,7 +1077,7 @@
             this.srpen.Name = "srpen";
             this.srpen.OwnerDraw = true;
             this.srpen.ShowItemToolTips = true;
-            this.srpen.Size = new System.Drawing.Size(776, 359);
+            this.srpen.Size = new System.Drawing.Size(776, 361);
             this.srpen.TabIndex = 1;
             this.srpen.UseCompatibleStateImageBehavior = false;
             this.srpen.View = System.Windows.Forms.View.Details;
@@ -1093,10 +1093,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.zariT.Controls.Add(this.zari);
-            this.zariT.Location = new System.Drawing.Point(1, 22);
+            this.zariT.Location = new System.Drawing.Point(1, 20);
             this.zariT.Margin = new System.Windows.Forms.Padding(0);
             this.zariT.Name = "zariT";
-            this.zariT.Size = new System.Drawing.Size(776, 359);
+            this.zariT.Size = new System.Drawing.Size(776, 361);
             this.zariT.TabIndex = 8;
             this.zariT.Text = "Září";
             // 
@@ -1117,7 +1117,7 @@
             this.zari.Name = "zari";
             this.zari.OwnerDraw = true;
             this.zari.ShowItemToolTips = true;
-            this.zari.Size = new System.Drawing.Size(776, 359);
+            this.zari.Size = new System.Drawing.Size(776, 361);
             this.zari.TabIndex = 1;
             this.zari.UseCompatibleStateImageBehavior = false;
             this.zari.View = System.Windows.Forms.View.Details;
@@ -1133,10 +1133,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rijenT.Controls.Add(this.rijen);
-            this.rijenT.Location = new System.Drawing.Point(1, 22);
+            this.rijenT.Location = new System.Drawing.Point(1, 20);
             this.rijenT.Margin = new System.Windows.Forms.Padding(0);
             this.rijenT.Name = "rijenT";
-            this.rijenT.Size = new System.Drawing.Size(776, 359);
+            this.rijenT.Size = new System.Drawing.Size(776, 361);
             this.rijenT.TabIndex = 9;
             this.rijenT.Text = "Říjen";
             // 
@@ -1157,7 +1157,7 @@
             this.rijen.Name = "rijen";
             this.rijen.OwnerDraw = true;
             this.rijen.ShowItemToolTips = true;
-            this.rijen.Size = new System.Drawing.Size(776, 359);
+            this.rijen.Size = new System.Drawing.Size(776, 361);
             this.rijen.TabIndex = 1;
             this.rijen.UseCompatibleStateImageBehavior = false;
             this.rijen.View = System.Windows.Forms.View.Details;
@@ -1173,10 +1173,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listopadT.Controls.Add(this.listopad);
-            this.listopadT.Location = new System.Drawing.Point(1, 22);
+            this.listopadT.Location = new System.Drawing.Point(1, 20);
             this.listopadT.Margin = new System.Windows.Forms.Padding(0);
             this.listopadT.Name = "listopadT";
-            this.listopadT.Size = new System.Drawing.Size(776, 359);
+            this.listopadT.Size = new System.Drawing.Size(776, 361);
             this.listopadT.TabIndex = 10;
             this.listopadT.Text = "Listopad";
             // 
@@ -1197,7 +1197,7 @@
             this.listopad.Name = "listopad";
             this.listopad.OwnerDraw = true;
             this.listopad.ShowItemToolTips = true;
-            this.listopad.Size = new System.Drawing.Size(776, 359);
+            this.listopad.Size = new System.Drawing.Size(776, 361);
             this.listopad.TabIndex = 1;
             this.listopad.UseCompatibleStateImageBehavior = false;
             this.listopad.View = System.Windows.Forms.View.Details;
@@ -1213,10 +1213,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.prosinecT.Controls.Add(this.prosinec);
-            this.prosinecT.Location = new System.Drawing.Point(1, 22);
+            this.prosinecT.Location = new System.Drawing.Point(1, 20);
             this.prosinecT.Margin = new System.Windows.Forms.Padding(0);
             this.prosinecT.Name = "prosinecT";
-            this.prosinecT.Size = new System.Drawing.Size(776, 359);
+            this.prosinecT.Size = new System.Drawing.Size(776, 361);
             this.prosinecT.TabIndex = 11;
             this.prosinecT.Text = "Prosinec";
             // 
@@ -1237,7 +1237,7 @@
             this.prosinec.Name = "prosinec";
             this.prosinec.OwnerDraw = true;
             this.prosinec.ShowItemToolTips = true;
-            this.prosinec.Size = new System.Drawing.Size(776, 359);
+            this.prosinec.Size = new System.Drawing.Size(776, 361);
             this.prosinec.TabIndex = 1;
             this.prosinec.UseCompatibleStateImageBehavior = false;
             this.prosinec.View = System.Windows.Forms.View.Details;

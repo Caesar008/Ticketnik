@@ -143,8 +143,8 @@ namespace Ticketník.CustomControls
             }
         }
 
-        private int headerHight = 20;
-        [DefaultValue(20)]
+        private int headerHight = 18;
+        [DefaultValue(18)]
         public int HeaderHight
         {
             get { return headerHight; }
@@ -164,8 +164,6 @@ namespace Ticketník.CustomControls
             TabPages.Parent = this;
             ControlAdded += TabControl_ControlAdded;
             ControlRemoved += TabControl_ControlRemoved;
-            //SizeChanged += TabControl_SizeChanged;
-            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
         private void TabControl_SizeChanged(object sender, EventArgs e)
