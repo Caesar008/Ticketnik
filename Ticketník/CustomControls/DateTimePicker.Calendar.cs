@@ -403,7 +403,7 @@ namespace Ticketník.CustomControls
             }
 
             DateTimePicker dp;
-            public DateTimePicker Parent
+            new public DateTimePicker Parent
             {
                 get { return dp; }
                 internal set { dp = value; }

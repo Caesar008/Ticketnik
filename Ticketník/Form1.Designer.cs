@@ -87,8 +87,13 @@
             this.hledat = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Napoveda = new System.Windows.Forms.ToolStripButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
+            this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
+            this.rokVyber = new Ticketník.CustomControls.ComboBox();
             this.tabControl1 = new Ticketník.CustomControls.TabControl();
-            this.ledenT = new System.Windows.Forms.TabPage();
+            this.ledenT = new Ticketník.CustomControls.TabPage();
             this.leden = new Ticketník.CustomControls.ListView();
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -101,33 +106,28 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.unorT = new System.Windows.Forms.TabPage();
+            this.unorT = new Ticketník.CustomControls.TabPage();
             this.unor = new Ticketník.CustomControls.ListView();
-            this.brezenT = new System.Windows.Forms.TabPage();
+            this.brezenT = new Ticketník.CustomControls.TabPage();
             this.brezen = new Ticketník.CustomControls.ListView();
-            this.dubenT = new System.Windows.Forms.TabPage();
+            this.dubenT = new Ticketník.CustomControls.TabPage();
             this.duben = new Ticketník.CustomControls.ListView();
-            this.kvetenT = new System.Windows.Forms.TabPage();
+            this.kvetenT = new Ticketník.CustomControls.TabPage();
             this.kveten = new Ticketník.CustomControls.ListView();
-            this.cervenT = new System.Windows.Forms.TabPage();
+            this.cervenT = new Ticketník.CustomControls.TabPage();
             this.cerven = new Ticketník.CustomControls.ListView();
-            this.cervenecT = new System.Windows.Forms.TabPage();
+            this.cervenecT = new Ticketník.CustomControls.TabPage();
             this.cervenec = new Ticketník.CustomControls.ListView();
-            this.srpenT = new System.Windows.Forms.TabPage();
+            this.srpenT = new Ticketník.CustomControls.TabPage();
             this.srpen = new Ticketník.CustomControls.ListView();
-            this.zariT = new System.Windows.Forms.TabPage();
+            this.zariT = new Ticketník.CustomControls.TabPage();
             this.zari = new Ticketník.CustomControls.ListView();
-            this.rijenT = new System.Windows.Forms.TabPage();
+            this.rijenT = new Ticketník.CustomControls.TabPage();
             this.rijen = new Ticketník.CustomControls.ListView();
-            this.listopadT = new System.Windows.Forms.TabPage();
+            this.listopadT = new Ticketník.CustomControls.TabPage();
             this.listopad = new Ticketník.CustomControls.ListView();
-            this.prosinecT = new System.Windows.Forms.TabPage();
+            this.prosinecT = new Ticketník.CustomControls.TabPage();
             this.prosinec = new Ticketník.CustomControls.ListView();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
-            this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
-            this.rokVyber = new Ticketník.CustomControls.ComboBox();
             this.rokVyberO = new Ticketník.CustomControls.ComboBox();
             this.menu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -632,6 +632,36 @@
             this.toolStripButton_Napoveda.Text = "Nápověda";
             this.toolStripButton_Napoveda.Click += new System.EventHandler(this.toolStripMenu_Napoveda_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timerUpozorneni
+            // 
+            this.timerUpozorneni.Interval = 1000;
+            this.timerUpozorneni.Tick += new System.EventHandler(this.timerUpozorneni_Tick);
+            // 
+            // timer_ClearInfo
+            // 
+            this.timer_ClearInfo.Interval = 5000;
+            this.timer_ClearInfo.Tick += new System.EventHandler(this.Timer_ClearInfo_Tick);
+            // 
+            // rokVyber
+            // 
+            this.rokVyber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rokVyber.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.rokVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.rokVyber.FormattingEnabled = true;
+            this.rokVyber.Location = new System.Drawing.Point(762, 1);
+            this.rokVyber.Name = "rokVyber";
+            this.rokVyber.Size = new System.Drawing.Size(60, 21);
+            this.rokVyber.TabIndex = 4;
+            this.rokVyber.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
+            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -654,17 +684,22 @@
             this.tabControl1.Location = new System.Drawing.Point(44, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.SelectedTab = this.ledenT;
             this.tabControl1.Size = new System.Drawing.Size(778, 382);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
             // 
             // ledenT
             // 
-            this.ledenT.BackColor = System.Drawing.Color.IndianRed;
+            this.ledenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ledenT.BackColor = System.Drawing.Color.Orange;
             this.ledenT.Controls.Add(this.leden);
-            this.ledenT.Location = new System.Drawing.Point(1, 20);
+            this.ledenT.Location = new System.Drawing.Point(1, 22);
+            this.ledenT.Margin = new System.Windows.Forms.Padding(0);
             this.ledenT.Name = "ledenT";
-            this.ledenT.Size = new System.Drawing.Size(776, 361);
+            this.ledenT.Size = new System.Drawing.Size(776, 359);
             this.ledenT.TabIndex = 0;
             this.ledenT.Text = "Leden";
             // 
@@ -689,6 +724,7 @@
             this.columnHeader10});
             this.leden.FullRowSelect = true;
             this.leden.GridLines = true;
+            this.leden.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.leden.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.leden.HideSelection = false;
             this.leden.Location = new System.Drawing.Point(0, 0);
@@ -697,7 +733,7 @@
             this.leden.Name = "leden";
             this.leden.OwnerDraw = true;
             this.leden.ShowItemToolTips = true;
-            this.leden.Size = new System.Drawing.Size(776, 362);
+            this.leden.Size = new System.Drawing.Size(776, 359);
             this.leden.TabIndex = 0;
             this.leden.UseCompatibleStateImageBehavior = false;
             this.leden.View = System.Windows.Forms.View.Details;
@@ -706,7 +742,6 @@
             this.leden.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.leden.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.leden.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.leden.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // columnHeader11
             // 
@@ -770,17 +805,20 @@
             // columnHeader10
             // 
             this.columnHeader10.Text = "Poznámka";
-            this.columnHeader10.Width = 149;
+            this.columnHeader10.Width = 159;
             // 
             // unorT
             // 
+            this.unorT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.unorT.Controls.Add(this.unor);
-            this.unorT.Location = new System.Drawing.Point(1, 20);
+            this.unorT.Location = new System.Drawing.Point(1, 22);
+            this.unorT.Margin = new System.Windows.Forms.Padding(0);
             this.unorT.Name = "unorT";
-            this.unorT.Size = new System.Drawing.Size(776, 361);
+            this.unorT.Size = new System.Drawing.Size(776, 359);
             this.unorT.TabIndex = 1;
             this.unorT.Text = "Únor";
-            this.unorT.UseVisualStyleBackColor = true;
             // 
             // unor
             // 
@@ -791,6 +829,7 @@
             this.unor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.unor.FullRowSelect = true;
             this.unor.GridLines = true;
+            this.unor.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.unor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.unor.HideSelection = false;
             this.unor.Location = new System.Drawing.Point(0, 0);
@@ -798,7 +837,7 @@
             this.unor.Name = "unor";
             this.unor.OwnerDraw = true;
             this.unor.ShowItemToolTips = true;
-            this.unor.Size = new System.Drawing.Size(776, 362);
+            this.unor.Size = new System.Drawing.Size(776, 359);
             this.unor.TabIndex = 1;
             this.unor.UseCompatibleStateImageBehavior = false;
             this.unor.View = System.Windows.Forms.View.Details;
@@ -807,17 +846,19 @@
             this.unor.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.unor.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.unor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.unor.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // brezenT
             // 
+            this.brezenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.brezenT.Controls.Add(this.brezen);
-            this.brezenT.Location = new System.Drawing.Point(1, 20);
+            this.brezenT.Location = new System.Drawing.Point(1, 22);
+            this.brezenT.Margin = new System.Windows.Forms.Padding(0);
             this.brezenT.Name = "brezenT";
-            this.brezenT.Size = new System.Drawing.Size(776, 361);
+            this.brezenT.Size = new System.Drawing.Size(776, 359);
             this.brezenT.TabIndex = 2;
             this.brezenT.Text = "Březen";
-            this.brezenT.UseVisualStyleBackColor = true;
             // 
             // brezen
             // 
@@ -828,6 +869,7 @@
             this.brezen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.brezen.FullRowSelect = true;
             this.brezen.GridLines = true;
+            this.brezen.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.brezen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.brezen.HideSelection = false;
             this.brezen.Location = new System.Drawing.Point(0, 0);
@@ -835,7 +877,7 @@
             this.brezen.Name = "brezen";
             this.brezen.OwnerDraw = true;
             this.brezen.ShowItemToolTips = true;
-            this.brezen.Size = new System.Drawing.Size(776, 362);
+            this.brezen.Size = new System.Drawing.Size(776, 359);
             this.brezen.TabIndex = 1;
             this.brezen.UseCompatibleStateImageBehavior = false;
             this.brezen.View = System.Windows.Forms.View.Details;
@@ -844,17 +886,19 @@
             this.brezen.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.brezen.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.brezen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.brezen.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // dubenT
             // 
+            this.dubenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dubenT.Controls.Add(this.duben);
-            this.dubenT.Location = new System.Drawing.Point(1, 20);
+            this.dubenT.Location = new System.Drawing.Point(1, 22);
+            this.dubenT.Margin = new System.Windows.Forms.Padding(0);
             this.dubenT.Name = "dubenT";
-            this.dubenT.Size = new System.Drawing.Size(776, 361);
+            this.dubenT.Size = new System.Drawing.Size(776, 359);
             this.dubenT.TabIndex = 3;
             this.dubenT.Text = "Duben";
-            this.dubenT.UseVisualStyleBackColor = true;
             // 
             // duben
             // 
@@ -865,6 +909,7 @@
             this.duben.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.duben.FullRowSelect = true;
             this.duben.GridLines = true;
+            this.duben.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.duben.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.duben.HideSelection = false;
             this.duben.Location = new System.Drawing.Point(0, 0);
@@ -872,7 +917,7 @@
             this.duben.Name = "duben";
             this.duben.OwnerDraw = true;
             this.duben.ShowItemToolTips = true;
-            this.duben.Size = new System.Drawing.Size(776, 362);
+            this.duben.Size = new System.Drawing.Size(776, 359);
             this.duben.TabIndex = 1;
             this.duben.UseCompatibleStateImageBehavior = false;
             this.duben.View = System.Windows.Forms.View.Details;
@@ -881,17 +926,19 @@
             this.duben.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.duben.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.duben.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.duben.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // kvetenT
             // 
+            this.kvetenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.kvetenT.Controls.Add(this.kveten);
-            this.kvetenT.Location = new System.Drawing.Point(1, 20);
+            this.kvetenT.Location = new System.Drawing.Point(1, 22);
+            this.kvetenT.Margin = new System.Windows.Forms.Padding(0);
             this.kvetenT.Name = "kvetenT";
-            this.kvetenT.Size = new System.Drawing.Size(776, 361);
+            this.kvetenT.Size = new System.Drawing.Size(776, 359);
             this.kvetenT.TabIndex = 4;
             this.kvetenT.Text = "Květen";
-            this.kvetenT.UseVisualStyleBackColor = true;
             // 
             // kveten
             // 
@@ -902,6 +949,7 @@
             this.kveten.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.kveten.FullRowSelect = true;
             this.kveten.GridLines = true;
+            this.kveten.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.kveten.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.kveten.HideSelection = false;
             this.kveten.Location = new System.Drawing.Point(0, 0);
@@ -909,7 +957,7 @@
             this.kveten.Name = "kveten";
             this.kveten.OwnerDraw = true;
             this.kveten.ShowItemToolTips = true;
-            this.kveten.Size = new System.Drawing.Size(776, 362);
+            this.kveten.Size = new System.Drawing.Size(776, 359);
             this.kveten.TabIndex = 1;
             this.kveten.UseCompatibleStateImageBehavior = false;
             this.kveten.View = System.Windows.Forms.View.Details;
@@ -918,17 +966,19 @@
             this.kveten.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.kveten.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.kveten.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.kveten.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // cervenT
             // 
+            this.cervenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cervenT.Controls.Add(this.cerven);
-            this.cervenT.Location = new System.Drawing.Point(1, 20);
+            this.cervenT.Location = new System.Drawing.Point(1, 22);
+            this.cervenT.Margin = new System.Windows.Forms.Padding(0);
             this.cervenT.Name = "cervenT";
-            this.cervenT.Size = new System.Drawing.Size(776, 361);
+            this.cervenT.Size = new System.Drawing.Size(776, 359);
             this.cervenT.TabIndex = 5;
             this.cervenT.Text = "Červen";
-            this.cervenT.UseVisualStyleBackColor = true;
             // 
             // cerven
             // 
@@ -939,6 +989,7 @@
             this.cerven.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cerven.FullRowSelect = true;
             this.cerven.GridLines = true;
+            this.cerven.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.cerven.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cerven.HideSelection = false;
             this.cerven.Location = new System.Drawing.Point(0, 0);
@@ -946,7 +997,7 @@
             this.cerven.Name = "cerven";
             this.cerven.OwnerDraw = true;
             this.cerven.ShowItemToolTips = true;
-            this.cerven.Size = new System.Drawing.Size(776, 362);
+            this.cerven.Size = new System.Drawing.Size(776, 359);
             this.cerven.TabIndex = 1;
             this.cerven.UseCompatibleStateImageBehavior = false;
             this.cerven.View = System.Windows.Forms.View.Details;
@@ -955,17 +1006,19 @@
             this.cerven.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.cerven.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.cerven.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.cerven.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // cervenecT
             // 
+            this.cervenecT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cervenecT.Controls.Add(this.cervenec);
-            this.cervenecT.Location = new System.Drawing.Point(1, 20);
+            this.cervenecT.Location = new System.Drawing.Point(1, 22);
+            this.cervenecT.Margin = new System.Windows.Forms.Padding(0);
             this.cervenecT.Name = "cervenecT";
-            this.cervenecT.Size = new System.Drawing.Size(776, 361);
+            this.cervenecT.Size = new System.Drawing.Size(776, 359);
             this.cervenecT.TabIndex = 6;
             this.cervenecT.Text = "Červenec";
-            this.cervenecT.UseVisualStyleBackColor = true;
             // 
             // cervenec
             // 
@@ -976,6 +1029,7 @@
             this.cervenec.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cervenec.FullRowSelect = true;
             this.cervenec.GridLines = true;
+            this.cervenec.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.cervenec.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cervenec.HideSelection = false;
             this.cervenec.Location = new System.Drawing.Point(0, 0);
@@ -983,7 +1037,7 @@
             this.cervenec.Name = "cervenec";
             this.cervenec.OwnerDraw = true;
             this.cervenec.ShowItemToolTips = true;
-            this.cervenec.Size = new System.Drawing.Size(776, 362);
+            this.cervenec.Size = new System.Drawing.Size(776, 359);
             this.cervenec.TabIndex = 1;
             this.cervenec.UseCompatibleStateImageBehavior = false;
             this.cervenec.View = System.Windows.Forms.View.Details;
@@ -992,17 +1046,19 @@
             this.cervenec.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.cervenec.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.cervenec.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.cervenec.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // srpenT
             // 
+            this.srpenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.srpenT.Controls.Add(this.srpen);
-            this.srpenT.Location = new System.Drawing.Point(1, 20);
+            this.srpenT.Location = new System.Drawing.Point(1, 22);
+            this.srpenT.Margin = new System.Windows.Forms.Padding(0);
             this.srpenT.Name = "srpenT";
-            this.srpenT.Size = new System.Drawing.Size(776, 361);
+            this.srpenT.Size = new System.Drawing.Size(776, 359);
             this.srpenT.TabIndex = 7;
             this.srpenT.Text = "Srpen";
-            this.srpenT.UseVisualStyleBackColor = true;
             // 
             // srpen
             // 
@@ -1013,6 +1069,7 @@
             this.srpen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.srpen.FullRowSelect = true;
             this.srpen.GridLines = true;
+            this.srpen.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.srpen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.srpen.HideSelection = false;
             this.srpen.Location = new System.Drawing.Point(0, 0);
@@ -1020,7 +1077,7 @@
             this.srpen.Name = "srpen";
             this.srpen.OwnerDraw = true;
             this.srpen.ShowItemToolTips = true;
-            this.srpen.Size = new System.Drawing.Size(776, 362);
+            this.srpen.Size = new System.Drawing.Size(776, 359);
             this.srpen.TabIndex = 1;
             this.srpen.UseCompatibleStateImageBehavior = false;
             this.srpen.View = System.Windows.Forms.View.Details;
@@ -1029,17 +1086,19 @@
             this.srpen.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.srpen.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.srpen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.srpen.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // zariT
             // 
+            this.zariT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.zariT.Controls.Add(this.zari);
-            this.zariT.Location = new System.Drawing.Point(1, 20);
+            this.zariT.Location = new System.Drawing.Point(1, 22);
+            this.zariT.Margin = new System.Windows.Forms.Padding(0);
             this.zariT.Name = "zariT";
-            this.zariT.Size = new System.Drawing.Size(776, 361);
+            this.zariT.Size = new System.Drawing.Size(776, 359);
             this.zariT.TabIndex = 8;
             this.zariT.Text = "Září";
-            this.zariT.UseVisualStyleBackColor = true;
             // 
             // zari
             // 
@@ -1050,6 +1109,7 @@
             this.zari.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.zari.FullRowSelect = true;
             this.zari.GridLines = true;
+            this.zari.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.zari.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.zari.HideSelection = false;
             this.zari.Location = new System.Drawing.Point(0, 0);
@@ -1057,7 +1117,7 @@
             this.zari.Name = "zari";
             this.zari.OwnerDraw = true;
             this.zari.ShowItemToolTips = true;
-            this.zari.Size = new System.Drawing.Size(776, 362);
+            this.zari.Size = new System.Drawing.Size(776, 359);
             this.zari.TabIndex = 1;
             this.zari.UseCompatibleStateImageBehavior = false;
             this.zari.View = System.Windows.Forms.View.Details;
@@ -1066,17 +1126,19 @@
             this.zari.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.zari.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.zari.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.zari.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // rijenT
             // 
+            this.rijenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rijenT.Controls.Add(this.rijen);
-            this.rijenT.Location = new System.Drawing.Point(1, 20);
+            this.rijenT.Location = new System.Drawing.Point(1, 22);
+            this.rijenT.Margin = new System.Windows.Forms.Padding(0);
             this.rijenT.Name = "rijenT";
-            this.rijenT.Size = new System.Drawing.Size(776, 361);
+            this.rijenT.Size = new System.Drawing.Size(776, 359);
             this.rijenT.TabIndex = 9;
             this.rijenT.Text = "Říjen";
-            this.rijenT.UseVisualStyleBackColor = true;
             // 
             // rijen
             // 
@@ -1087,6 +1149,7 @@
             this.rijen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rijen.FullRowSelect = true;
             this.rijen.GridLines = true;
+            this.rijen.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.rijen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.rijen.HideSelection = false;
             this.rijen.Location = new System.Drawing.Point(0, 0);
@@ -1094,7 +1157,7 @@
             this.rijen.Name = "rijen";
             this.rijen.OwnerDraw = true;
             this.rijen.ShowItemToolTips = true;
-            this.rijen.Size = new System.Drawing.Size(776, 362);
+            this.rijen.Size = new System.Drawing.Size(776, 359);
             this.rijen.TabIndex = 1;
             this.rijen.UseCompatibleStateImageBehavior = false;
             this.rijen.View = System.Windows.Forms.View.Details;
@@ -1103,17 +1166,19 @@
             this.rijen.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.rijen.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.rijen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.rijen.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // listopadT
             // 
+            this.listopadT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listopadT.Controls.Add(this.listopad);
-            this.listopadT.Location = new System.Drawing.Point(1, 20);
+            this.listopadT.Location = new System.Drawing.Point(1, 22);
+            this.listopadT.Margin = new System.Windows.Forms.Padding(0);
             this.listopadT.Name = "listopadT";
-            this.listopadT.Size = new System.Drawing.Size(776, 361);
+            this.listopadT.Size = new System.Drawing.Size(776, 359);
             this.listopadT.TabIndex = 10;
             this.listopadT.Text = "Listopad";
-            this.listopadT.UseVisualStyleBackColor = true;
             // 
             // listopad
             // 
@@ -1124,6 +1189,7 @@
             this.listopad.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listopad.FullRowSelect = true;
             this.listopad.GridLines = true;
+            this.listopad.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.listopad.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listopad.HideSelection = false;
             this.listopad.Location = new System.Drawing.Point(0, 0);
@@ -1131,7 +1197,7 @@
             this.listopad.Name = "listopad";
             this.listopad.OwnerDraw = true;
             this.listopad.ShowItemToolTips = true;
-            this.listopad.Size = new System.Drawing.Size(776, 362);
+            this.listopad.Size = new System.Drawing.Size(776, 359);
             this.listopad.TabIndex = 1;
             this.listopad.UseCompatibleStateImageBehavior = false;
             this.listopad.View = System.Windows.Forms.View.Details;
@@ -1140,17 +1206,19 @@
             this.listopad.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.listopad.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.listopad.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.listopad.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // prosinecT
             // 
+            this.prosinecT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.prosinecT.Controls.Add(this.prosinec);
-            this.prosinecT.Location = new System.Drawing.Point(1, 20);
+            this.prosinecT.Location = new System.Drawing.Point(1, 22);
+            this.prosinecT.Margin = new System.Windows.Forms.Padding(0);
             this.prosinecT.Name = "prosinecT";
-            this.prosinecT.Size = new System.Drawing.Size(776, 361);
+            this.prosinecT.Size = new System.Drawing.Size(776, 359);
             this.prosinecT.TabIndex = 11;
             this.prosinecT.Text = "Prosinec";
-            this.prosinecT.UseVisualStyleBackColor = true;
             // 
             // prosinec
             // 
@@ -1161,6 +1229,7 @@
             this.prosinec.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.prosinec.FullRowSelect = true;
             this.prosinec.GridLines = true;
+            this.prosinec.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.prosinec.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.prosinec.HideSelection = false;
             this.prosinec.Location = new System.Drawing.Point(0, 0);
@@ -1168,7 +1237,7 @@
             this.prosinec.Name = "prosinec";
             this.prosinec.OwnerDraw = true;
             this.prosinec.ShowItemToolTips = true;
-            this.prosinec.Size = new System.Drawing.Size(776, 362);
+            this.prosinec.Size = new System.Drawing.Size(776, 359);
             this.prosinec.TabIndex = 1;
             this.prosinec.UseCompatibleStateImageBehavior = false;
             this.prosinec.View = System.Windows.Forms.View.Details;
@@ -1177,37 +1246,6 @@
             this.prosinec.SelectedIndexChanged += new System.EventHandler(this.leden_SelectedIndexChanged);
             this.prosinec.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.prosinec.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
-            this.prosinec.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timerUpozorneni
-            // 
-            this.timerUpozorneni.Interval = 1000;
-            this.timerUpozorneni.Tick += new System.EventHandler(this.timerUpozorneni_Tick);
-            // 
-            // timer_ClearInfo
-            // 
-            this.timer_ClearInfo.Interval = 5000;
-            this.timer_ClearInfo.Tick += new System.EventHandler(this.Timer_ClearInfo_Tick);
-            // 
-            // rokVyber
-            // 
-            this.rokVyber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rokVyber.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.rokVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.rokVyber.FormattingEnabled = true;
-            this.rokVyber.Location = new System.Drawing.Point(762, 1);
-            this.rokVyber.Name = "rokVyber";
-            this.rokVyber.Size = new System.Drawing.Size(60, 21);
-            this.rokVyber.TabIndex = 4;
-            this.rokVyber.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
             // 
             // rokVyberO
             // 
@@ -1246,6 +1284,7 @@
             this.tool.ResumeLayout(false);
             this.tool.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabControl1.PerformLayout();
             this.ledenT.ResumeLayout(false);
             this.unorT.ResumeLayout(false);
             this.brezenT.ResumeLayout(false);
@@ -1286,29 +1325,29 @@
         internal System.Windows.Forms.ToolStripButton toolStripButton4;
         internal System.Windows.Forms.ToolStripButton toolStripButton6;
         internal System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
-        internal System.Windows.Forms.TabPage ledenT;
+        internal Ticketník.CustomControls.TabPage ledenT;
         internal Ticketník.CustomControls.ListView leden;
-        internal System.Windows.Forms.TabPage unorT;
+        internal Ticketník.CustomControls.TabPage unorT;
         internal Ticketník.CustomControls.ListView unor;
-        internal System.Windows.Forms.TabPage brezenT;
+        internal Ticketník.CustomControls.TabPage brezenT;
         internal Ticketník.CustomControls.ListView brezen;
-        internal System.Windows.Forms.TabPage dubenT;
+        internal Ticketník.CustomControls.TabPage dubenT;
         internal Ticketník.CustomControls.ListView duben;
-        internal System.Windows.Forms.TabPage kvetenT;
+        internal Ticketník.CustomControls.TabPage kvetenT;
         internal Ticketník.CustomControls.ListView kveten;
-        internal System.Windows.Forms.TabPage cervenT;
+        internal Ticketník.CustomControls.TabPage cervenT;
         internal Ticketník.CustomControls.ListView cerven;
-        internal System.Windows.Forms.TabPage cervenecT;
+        internal Ticketník.CustomControls.TabPage cervenecT;
         internal Ticketník.CustomControls.ListView cervenec;
-        internal System.Windows.Forms.TabPage srpenT;
+        internal Ticketník.CustomControls.TabPage srpenT;
         internal Ticketník.CustomControls.ListView srpen;
-        internal System.Windows.Forms.TabPage zariT;
+        internal Ticketník.CustomControls.TabPage zariT;
         internal Ticketník.CustomControls.ListView zari;
-        internal System.Windows.Forms.TabPage rijenT;
+        internal Ticketník.CustomControls.TabPage rijenT;
         internal Ticketník.CustomControls.ListView rijen;
-        internal System.Windows.Forms.TabPage listopadT;
+        internal Ticketník.CustomControls.TabPage listopadT;
         internal Ticketník.CustomControls.ListView listopad;
-        internal System.Windows.Forms.TabPage prosinecT;
+        internal Ticketník.CustomControls.TabPage prosinecT;
         internal Ticketník.CustomControls.ListView prosinec;
         internal System.Windows.Forms.ColumnHeader columnHeader1;
         internal System.Windows.Forms.ColumnHeader columnHeader2;

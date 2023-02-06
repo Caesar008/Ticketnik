@@ -153,7 +153,7 @@ namespace Ticketník
 
         private void SetTagy()
         {
-            foreach (TabPage tp in tabControl1.Controls)
+            foreach (CustomControls.TabPage tp in tabControl1.Controls)
             {
                 foreach (CustomControls.ListView lv in tp.Controls)
                 {
@@ -167,7 +167,7 @@ namespace Ticketník
         private void NastavSirku()
         {
             canChange = false;
-            foreach (TabPage tp in tabControl1.Controls)
+            foreach (CustomControls.TabPage tp in tabControl1.Controls)
             {
                 if (tp.Controls.ContainsKey("leden"))
                 {
@@ -647,7 +647,7 @@ namespace Ticketník
                             převéstNaFormátMilleniumToolStripMenuItem.Visible = true;
                             oddToolStripMenuItem.Visible = true;
 
-                            foreach (TabPage tp in tabControl1.Controls)
+                            foreach (CustomControls.TabPage tp in tabControl1.Controls)
                             {
                                 ((Ticketník.CustomControls.ListView)tp.Controls[0]).Items.Clear();
                             }
@@ -905,7 +905,7 @@ namespace Ticketník
                                     foreach (Ticket t in dict.Value)
                                     {
                                         counTic++;
-                                        foreach (TabPage tp in tabControl1.Controls)
+                                        foreach (CustomControls.TabPage tp in tabControl1.Controls)
                                         {
                                             string mesic = "";
                                             switch (t.Mesic)
@@ -1088,7 +1088,7 @@ namespace Ticketník
                             převéstNaFormátMilleniumToolStripMenuItem.Visible = false;
                             oddToolStripMenuItem.Visible = false;
 
-                            foreach (TabPage tp in tabControl1.Controls)
+                            foreach (CustomControls.TabPage tp in tabControl1.Controls)
                             {
                                 ((Ticketník.CustomControls.ListView)tp.Controls[0]).Items.Clear();
                             }
@@ -1372,7 +1372,7 @@ namespace Ticketník
                                     foreach (Ticket t in dict.Value)
                                     {
                                         counTic++;
-                                        foreach (TabPage tp in tabControl1.Controls)
+                                        foreach (CustomControls.TabPage tp in tabControl1.Controls)
                                         {
                                             string mesic = "";
                                             switch (t.Mesic)
@@ -1769,7 +1769,7 @@ namespace Ticketník
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
 
-            foreach (TabPage tp in tabControl1.Controls)
+            foreach (CustomControls.TabPage tp in tabControl1.Controls)
             {
                 if (tp.Controls.ContainsKey(vybranyMesic))
                 {
@@ -2031,7 +2031,7 @@ namespace Ticketník
         private void tabControl1_TabIndexChanged(object sender, EventArgs e)
         {
             vybranyMesic = tabControl1.SelectedTab.Name.Replace("T", "");
-            foreach (TabPage tp in tabControl1.Controls)
+            foreach (CustomControls.TabPage tp in tabControl1.Controls)
             {
                 if (tp.Controls.ContainsKey(vybranyMesic))
                 {
@@ -2080,7 +2080,7 @@ namespace Ticketník
                 if (InvokeRequired)
                 {
                     int selected = -1;
-                    foreach (TabPage tp in tabControl1.Controls)
+                    foreach (CustomControls.TabPage tp in tabControl1.Controls)
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
@@ -2090,7 +2090,7 @@ namespace Ticketník
                     this.BeginInvoke(new Action(() => uložitToolStripMenuItem_Click(sender, e)));
                     if (selected != -1)
                     {
-                        foreach (TabPage tp in tabControl1.Controls)
+                        foreach (CustomControls.TabPage tp in tabControl1.Controls)
                         {
                             if (tp.Controls.ContainsKey(vybranyMesic))
                             {
@@ -2103,7 +2103,7 @@ namespace Ticketník
                 else
                 {
                     int selected = -1;
-                    foreach (TabPage tp in tabControl1.Controls)
+                    foreach (CustomControls.TabPage tp in tabControl1.Controls)
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
@@ -2114,7 +2114,7 @@ namespace Ticketník
                     uložitToolStripMenuItem_Click(sender, e);
                     if (selected != -1)
                     {
-                        foreach (TabPage tp in tabControl1.Controls)
+                        foreach (CustomControls.TabPage tp in tabControl1.Controls)
                         {
                             if (tp.Controls.ContainsKey(vybranyMesic))
                             {
@@ -2258,7 +2258,7 @@ namespace Ticketník
                 if (e.ColumnIndex != 0)
                 {
                     int sirka = 0;
-                    foreach (TabPage tp in tabControl1.Controls)
+                    foreach (CustomControls.TabPage tp in tabControl1.Controls)
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
@@ -2311,7 +2311,7 @@ namespace Ticketník
                             break;
                     }
 
-                    foreach (TabPage tp in tabControl1.Controls)
+                    foreach (CustomControls.TabPage tp in tabControl1.Controls)
                     {
                         if (tp.Controls.ContainsKey("leden"))
                         {
@@ -2364,7 +2364,7 @@ namespace Ticketník
                     }
                 }
                 else
-                    foreach (TabPage tp in tabControl1.Controls)
+                    foreach (CustomControls.TabPage tp in tabControl1.Controls)
                     {
                         if (tp.Controls.ContainsKey(vybranyMesic))
                         {
@@ -2380,7 +2380,7 @@ namespace Ticketník
         {
             if (!search)
             {
-                foreach (TabPage tp in tabControl1.Controls)
+                foreach (CustomControls.TabPage tp in tabControl1.Controls)
                 {
                     if (tp.Controls.ContainsKey(vybranyMesic))
                     {
@@ -3274,7 +3274,7 @@ namespace Ticketník
             }
         }
 
-        protected override CreateParams CreateParams
+        /*protected override CreateParams CreateParams
         {
             get
             {
@@ -3282,6 +3282,6 @@ namespace Ticketník
                 cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
                 return cp;
             }
-        }
+        }*/
     }
 }

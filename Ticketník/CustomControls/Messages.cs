@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +33,9 @@ namespace Ticketník.CustomControls
         private const int MCM_FIRST = 0x1000;
         public const int MCM_GETCURRENTVIEW = MCM_FIRST + 22;
         public const int MCM_SETCURRENTVIEW = MCM_FIRST + 32;
-        public const int TCM_ADJUSTRECT = (0x1300 + 40); 
+        public const int TCM_ADJUSTRECT = (0x1300 + 40);
+        public const int TCM_GETITEMRECT = (0x1300 + 10);
+        public const int TCM_GETCURSEL = (0x1300 + 11);
         public const int LVM_GETHEADER = 0x1000 + 31;
         public const int LVM_SCROLL = 0x1000 + 20;
         public const int GWL_STYLE = -16;
@@ -40,6 +44,8 @@ namespace Ticketník.CustomControls
         public const int WM_HSCROLL = 0x0114;
         public const int WM_VSCROLL = 0x0115;
         public const int WM_WINDOWPOSCHANGING = 0x46;
+        public const int WM_MOUSELEAVE = 0x02A3;
+        public const int WM_WINDOWPOSCHANGED = 0x0047;
 
         public static int OnPaint => WM_PAINT;
         public static int OnFramePaint => WM_NCPAINT;
@@ -56,5 +62,22 @@ namespace Ticketník.CustomControls
         public static int HorizontalScrollbar => WS_HSCROLL;
         public static int OnHorizontalScroll => WM_HSCROLL;
         public static int OnVerticalScroll => WM_VSCROLL;
+
+        private static int wmMouseEnterMessage = -1;
+        public static int WM_MOUSEENTER
+        {
+            get
+            {
+                if (wmMouseEnterMessage == -1)
+                {
+                    wmMouseEnterMessage = RegisterWindowMessage("WinFormsMouseEnter");
+                }
+                return wmMouseEnterMessage;
+            }
+        }
+
+        [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [ResourceExposure(ResourceScope.None)]
+        public static extern int RegisterWindowMessage(string msg);
     }
 }

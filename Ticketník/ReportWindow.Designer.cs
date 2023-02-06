@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new Ticketník.CustomControls.TabPage();
             this.ticketni_log_text = new System.Windows.Forms.RichTextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new Ticketník.CustomControls.TabPage();
             this.error_log_text = new System.Windows.Forms.RichTextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new Ticketník.CustomControls.TabPage();
             this.user_config_file = new System.Windows.Forms.RichTextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new Ticketník.CustomControls.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new Ticketník.CustomControls.Button();
@@ -67,7 +67,7 @@
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.Controls.Add(this.ticketni_log_text);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            //this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(538, 447);
@@ -89,7 +89,7 @@
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.Controls.Add(this.error_log_text);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            //this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(538, 447);
@@ -111,7 +111,7 @@
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage4.Controls.Add(this.user_config_file);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            //this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(538, 447);
             this.tabPage4.TabIndex = 3;
@@ -131,7 +131,7 @@
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.button1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            //this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(538, 447);
             this.tabPage3.TabIndex = 2;
@@ -195,16 +195,16 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private Ticketník.CustomControls.TabPage tabPage1;
         private System.Windows.Forms.RichTextBox ticketni_log_text;
-        private System.Windows.Forms.TabPage tabPage2;
+        private Ticketník.CustomControls.TabPage tabPage2;
         private System.Windows.Forms.RichTextBox error_log_text;
-        private System.Windows.Forms.TabPage tabPage3;
+        private Ticketník.CustomControls.TabPage tabPage3;
         private Ticketník.CustomControls.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabPage tabPage4;
+        private Ticketník.CustomControls.TabPage tabPage4;
         private System.Windows.Forms.RichTextBox user_config_file;
     }
 }

@@ -109,6 +109,9 @@
     <Compile Include="CustomControls\TabControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomControls\TabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>

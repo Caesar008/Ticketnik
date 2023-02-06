@@ -1,16 +1,24 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
+using System.Collections.Generic;
 using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Security.Principal;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using static System.Windows.Forms.TabControl;
+using System.Collections;
+using System.Runtime.Remoting.Messaging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ticketník.CustomControls
 {
-    public class TabControl : System.Windows.Forms.TabControl
+    internal class TabControl : System.Windows.Forms.Control
     {
-        private bool _mouseIn = false;
-
         private Color borderColor = Color.LightGray;
         [DefaultValue(typeof(Color), "Gray")]
         public Color BorderColor
@@ -56,139 +64,317 @@ namespace Ticketník.CustomControls
             }
         }
 
-        protected override void WndProc(ref Message m)
+        bool _mouseDown = false;
+
+        protected override void OnMouseDown(MouseEventArgs e)
         {
-            base.WndProc(ref m);
-            if (m.Msg == Messages.OnPaint)
+            //base.OnMouseDown(e);
+            if (!_mouseDown)
             {
-                var handle = Handle;
-                Size headers = MeasureHeaders(TabPages);
-                Rectangle allHeaders = new Rectangle(0, 0, headers.Width+2, headers.Height);
-                var dc = GetWindowDC(handle);
-                using (Pen p = new Pen(BorderColor, 1))
+                _mouseDown = true;
+                for (int i = 0; i < TabPages.Count; i++)
                 {
-                    using (SolidBrush b = new SolidBrush(Parent.BackColor))
+                    if (GetTabRect(i).Contains(e.Location))
                     {
-                        using (Graphics g = Graphics.FromHdc(dc))
+                        SelectedIndex = i;
+                        selectedTab = TabPages[SelectedIndex];
+                        break;
+                    }
+                }
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            _mouseDown = false;
+        }
+
+        private TabPage selectedTab = null;
+        public TabPage SelectedTab
+        {
+            get { return selectedTab; }
+            set
+            {
+                if (selectedTab != value)
+                {
+                    selectedTab = value;
+                    for (int i = 0; i < TabPages.Count; i++)
+                    {
+                        if (TabPages[i] == selectedTab)
                         {
-                            g.DrawLine(p, 0, 0 + headers.Height - 1, 0, Height - 1);
-                            g.DrawLine(p, 0, Height - 1, Width - 1, Height - 1);
-                            g.DrawLine(p, Width - 1, 0 + headers.Height - 1, Width - 1, Height - 1);
-                            g.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
+                            selectedIndex = i;
+                            TabPages[i].Visible = true;
+                            SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+                            Size headers = MeasureHeaders(TabPages);
+                            Rectangle allHeaders = new Rectangle(0, 0, headers.Width + 3, headers.Height);
+                            Invalidate(allHeaders);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
+        private int selectedIndex = -1;
+        public int SelectedIndex
+        {
+            get { return selectedIndex; }
+            set
+            {
+                if (value >= 0 && value < TabPages.Count)
+                {
+                    selectedIndex = value;
+                    selectedTab = TabPages[value];
+                    TabPages[selectedIndex].Visible = true;
+                    //int tmpI = 0;
+                    for (int i = 0; i < TabPages.Count; i++)
+                    {
+                        if (i != selectedIndex)
+                        {
+                            TabPages[i].Visible = false;
+                        }
+                    }
+                    SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+                    Size headers = MeasureHeaders(TabPages);
+                    Rectangle allHeaders = new Rectangle(0, 0, headers.Width + 3, headers.Height);
+                    Invalidate(allHeaders);
+                }
+            }
+        }
 
-                            using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, allHeaders))
+        private int headerHight = 20;
+        [DefaultValue(20)]
+        public int HeaderHight
+        {
+            get { return headerHight; }
+            set
+            {
+                if (headerHight != value && value > 2)
+                {
+                    headerHight = value;
+                    HeaderHightChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        public TabControl()
+        {
+            TabPages = new TabPageCollection();
+            TabPages.Parent = this;
+            ControlAdded += TabControl_ControlAdded;
+            ControlRemoved += TabControl_ControlRemoved;
+            //SizeChanged += TabControl_SizeChanged;
+            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+        }
+
+        private void TabControl_SizeChanged(object sender, EventArgs e)
+        {
+            foreach(TabPage tp in TabPages)
+            {
+                tp.Size = new Size(Width - 2, Height - 3 - headerHight);
+            }
+        }
+
+        private void TabControl_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            if (e.Control.GetType() == typeof(CustomControls.TabPage))
+            {
+                TabPages.Remove((TabPage)e.Control);
+            }
+        }
+
+        private void TabControl_ControlAdded(object sender, ControlEventArgs e)
+        {
+            if(e.Control.GetType() == typeof(CustomControls.TabPage)) 
+            {
+                TabPages.Add((TabPage)e.Control);
+                e.Control.Location= new Point(1, headerHight+2);
+                e.Control.Width = Width - 2;
+                e.Control.Height = Height - 3 - headerHight;
+            }
+        }
+
+        public class TabPageCollection
+        {
+            List<TabPage> tabs = new List<TabPage>();
+
+            internal TabControl Parent { get; set; }
+
+            public TabPage this[int index]
+            {
+                get
+                {
+                    if (index >= 0 && index < tabs.Count)
+                        return tabs[index];
+                    else
+                        throw new ArgumentOutOfRangeException("index");
+                }
+                set
+                {
+                    if (index >= 0 && index < tabs.Count)
+                        tabs[index] = value;
+                    else
+                        throw new ArgumentOutOfRangeException("index");
+                }
+            }
+            public int Count => tabs.Count;
+
+            public void Add(TabPage value)
+            {
+                value.Parent = Parent;
+                tabs.Add(value);
+            }
+
+            public void Clear()
+            {
+                tabs.Clear();
+            }
+
+            public bool Contains(TabPage value)
+            {
+                return tabs.Contains(value);
+            }
+
+            public IEnumerator GetEnumerator()
+            {
+                return tabs.GetEnumerator();
+            }
+
+            public int IndexOf(TabPage value)
+            {
+                return tabs.IndexOf(value);
+            }
+
+            public void Insert(int index, TabPage value)
+            {
+                tabs.Insert(index, value);
+            }
+
+            public void Remove(TabPage value)
+            {
+                tabs.Remove(value);
+            }
+
+            public void RemoveAt(int index)
+            {
+                tabs.RemoveAt(index);
+            }
+        }
+        public TabPageCollection TabPages
+        {
+            get;
+            private set;
+        }
+
+        public event EventHandler SelectedIndexChanged;
+        public event EventHandler HeaderHightChanged;
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //base.OnPaint(e);
+            Size headers = MeasureHeaders(TabPages);
+            Rectangle allHeaders = new Rectangle(0, 0, headers.Width + 3, headers.Height);
+            
+            using (Pen p = new Pen(BorderColor, 1))
+            {
+                using (SolidBrush b = new SolidBrush(Parent.BackColor))
+                {
+                    using (Graphics g = e.Graphics)
+                    {
+                        g.DrawLine(p, 0, 0 + headers.Height - 1, 0, Height - 1);
+                        g.DrawLine(p, 0, Height - 1, Width - 1, Height - 1);
+                        g.DrawLine(p, Width - 1, 0 + headers.Height - 1, Width - 1, Height - 1);
+                        g.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
+
+                        using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, allHeaders))
+                        {
+                            if (!headers.IsEmpty)
                             {
-                                if (!headers.IsEmpty)
+                                //taby
+                                int index = 0;
+                                bg.Graphics.FillRectangle(b, allHeaders);
+                                bg.Graphics.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
+                                bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                                //vykreslit vzadu
+                                foreach (TabPage tp in TabPages)
                                 {
-                                    //taby
-                                    int index = 0;
-                                    bg.Graphics.FillRectangle(b, allHeaders);
-                                    bg.Graphics.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
-                                    bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                                    //vykreslit vzadu
-                                    foreach (TabPage tp in TabPages)
+                                    if (SelectedIndex != index)
                                     {
-                                        if (SelectedIndex != index)
+                                        Size header = MeasureHeader(TabPages[index]);
+                                        Rectangle headerRect = GetTabRect(index);
+                                        if (index == TabPages.Count - 1)
+                                            headerRect.Width -= 2;
+                                        using (SolidBrush abr = new SolidBrush(HeaderBackColor))
                                         {
-                                            Size header = MeasureHeader(TabPages[index]);
-                                            Rectangle headerRect = GetTabRect(index);
-                                            if (index == TabPages.Count - 1)
-                                                headerRect.Width -= 2;
-                                            using (SolidBrush abr = new SolidBrush(HeaderBackColor))
-                                            {
-                                                GraphicsPath headerRectFill = RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
-                                                    headerRect.Width, headerRect.Height), 1, 1, 0, 0);
+                                            GraphicsPath headerRectFill = RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
+                                                headerRect.Width, headerRect.Height), 1, 1, 0, 0);
 
-                                                bg.Graphics.SmoothingMode = SmoothingMode.None;
-                                                bg.Graphics.FillPath(abr, headerRectFill);
-                                                bg.Graphics.DrawLine(p, 0, 0 + headerRect.Height+1, Width - 1, headerRect.Height+1);
-                                                TextRenderer.DrawText(bg.Graphics, TabPages[index].Text, TabPages[index].Font, new Point(headerRect.X + 2, headerRect.Y + 2), this.FindForm().ForeColor);
-                                            }
-                                            bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                                            bg.Graphics.DrawPath(p, RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
-                                                    headerRect.Width, headerRect.Height), 1, 1, 0, 0));
+                                            bg.Graphics.SmoothingMode = SmoothingMode.None;
+                                            bg.Graphics.FillPath(abr, headerRectFill);
+                                            bg.Graphics.DrawLine(p, 0, 0 + headerRect.Height + 1, Width - 1, headerRect.Height + 1);
+                                            TextRenderer.DrawText(bg.Graphics, TabPages[index].Text, TabPages[index].Font, new Point(headerRect.X + 2, headerRect.Y + 2), this.FindForm().ForeColor);
                                         }
-                                        index++;
-                                    }
-                                    //a teď vybraný do popředí
-                                    Size headerSel = MeasureHeader(SelectedTab);
-                                    Rectangle tabRect = GetTabRect(SelectedIndex);
-                                    Rectangle headerRectSel = new Rectangle(tabRect.X - 2, tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 3);
-                                    using (SolidBrush abr = new SolidBrush(HeaderActiveBackColor))
-                                    {
-                                        GraphicsPath headerRectSelFill = RoundedRect(new Rectangle(tabRect.X - 2, tabRect.Y - 2,
-                                            headerSel.Width + 4, headerSel.Height + 4), 1, 1, 0, 0);
-
-                                        bg.Graphics.SmoothingMode = SmoothingMode.None;
-                                        bg.Graphics.FillPath(abr, headerRectSelFill);
-
                                         bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                                        bg.Graphics.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
-                                        bg.Graphics.SmoothingMode = SmoothingMode.None;
-                                        TextRenderer.DrawText(bg.Graphics, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), Parent.ForeColor);
+                                        bg.Graphics.DrawPath(p, RoundedRect(new Rectangle(headerRect.X, headerRect.Y,
+                                                headerRect.Width, headerRect.Height), 1, 1, 0, 0));
                                     }
-                                    bg.Render();
+                                    index++;
                                 }
+                                //a teď vybraný do popředí
+                                Size headerSel = MeasureHeader(SelectedTab);
+                                Rectangle tabRect = GetTabRect(SelectedIndex);
+                                Rectangle headerRectSel = new Rectangle(tabRect.X - 2, tabRect.Y - 2, headerSel.Width + 4, headerSel.Height + 3);
+                                using (SolidBrush abr = new SolidBrush(HeaderActiveBackColor))
+                                {
+                                    GraphicsPath headerRectSelFill = RoundedRect(new Rectangle(tabRect.X - 2, tabRect.Y - 2,
+                                        headerSel.Width + 4, headerSel.Height + 4), 1, 1, 0, 0);
+
+                                    bg.Graphics.SmoothingMode = SmoothingMode.None;
+                                    bg.Graphics.FillPath(abr, headerRectSelFill);
+
+                                    bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                                    bg.Graphics.DrawPath(p, RoundedRect(headerRectSel, 1, 1, 0, 0));
+                                    bg.Graphics.SmoothingMode = SmoothingMode.None;
+                                    TextRenderer.DrawText(bg.Graphics, SelectedTab.Text, SelectedTab.Font, new Point(headerRectSel.X + 4, headerRectSel.Y + 3), Parent.ForeColor);
+                                }
+                                bg.Render();
                             }
                         }
                     }
                 }
-                ReleaseDC(handle, dc);
-                
-            } 
-            else if (m.Msg == Messages.TabControlAdjustRectangle)
-            {
-                RECT rc = (RECT)m.GetLParam(typeof(RECT));
-                rc.Left -= 3;
-                rc.Right += 3;
-                rc.Top -= 2;
-                rc.Bottom += 3;
-                Marshal.StructureToPtr(rc, m.LParam, true);
-            }
-
-            //tohle je kvůli scrollbarům
-            if (needRefresh)
-            {
-                this.SuspendLayout();
-                foreach (TabPage tp in this.TabPages)
-                {
-                    tp.SuspendLayout();
-                    foreach (Control c in tp.Controls)
-                    {
-                        c.SuspendLayout();
-                        c.Refresh();
-                        needRefresh = false;
-                        c.ResumeLayout();
-                    }
-                    tp.ResumeLayout();
-                }
-                this.ResumeLayout();
             }
         }
-
-        internal struct RECT { public int Left, Top, Right, Bottom; }
-
-        protected override void OnSelectedIndexChanged(EventArgs e)
-        {
-            base.OnSelectedIndexChanged(e);
-            needRefresh = true;
-        }
-
-        private bool needRefresh = false;
-
-        private static Size MeasureHeader(TabPage page)
+        private Size MeasureHeader(TabPage page)
         {
             Size size = TextRenderer.MeasureText(page.Text, page.Font) + new Size(4, 4);
             if (size.Width < 41)
-                return new Size(41, size.Height);
-            return size;
+                return new Size(41, headerHight);
+
+            return new Size(size.Width, headerHight);
         }
 
-        private static Size MeasureHeaders(TabPageCollection pages)
+        private Size MeasureHeaders(TabPageCollection pages)
         {
-            Rectangle tr = ((TabControl)pages[pages.Count-1].Parent).GetTabRect(pages.Count - 1);
+            Rectangle tr = ((TabControl)pages[pages.Count - 1].Parent).GetTabRect(pages.Count - 1);
             return new Size(tr.X + tr.Width, tr.Y + tr.Height);
+        }
+
+        private Rectangle GetTabRect(int index)
+        {
+            int width = 0;
+            int x = 0;
+            for(int i = 0; i < TabPages.Count; i++)
+            {
+                width = MeasureHeader(TabPages[i]).Width;
+                if (i < index)
+                {
+                    x += width;
+                }
+                else
+                    break;
+            }
+            return new Rectangle(x+2, 2, width, headerHight);
         }
 
         private static GraphicsPath RoundedRect(Rectangle bounds, int radius1, int radius2, int radius3, int radius4)
@@ -237,7 +423,7 @@ namespace Ticketník.CustomControls
             {
                 path.AddArc(arc2, 270, 90);
             }
-            
+
             // bottom right arc  
 
             arc3.X = bounds.Right - diameter3;
@@ -251,17 +437,10 @@ namespace Ticketník.CustomControls
                 path.AddArc(arc3, 0, 90);
             }
 
-            
+
             //nechci spodní čáru. Začátek je tak posunut od jiného rohu
             //path.CloseFigure();
             return path;
         }
-
-
-
-        [DllImport("user32")]
-        private static extern IntPtr GetWindowDC(IntPtr hwnd);
-        [DllImport("user32.dll")]
-        static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
     }
 }
