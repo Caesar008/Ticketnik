@@ -74,7 +74,8 @@ namespace Ticketník
                     { "pozadíListView",Color.White },
                     { "pozadíListViewHeader",Color.White },
                     { "textListViewHeader",Color.Black },
-                    { "listViewSeparator",Color.LightGray }
+                    { "listViewSeparator",Color.LightGray },
+                    { "listViewGrid",Color.FromArgb(240, 240, 240) }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -104,7 +105,8 @@ namespace Ticketník
                     { "pozadíListView",Color.FromArgb(50, 50, 50) },
                     { "pozadíListViewHeader",Color.FromArgb(70, 70, 70) },
                     { "textListViewHeader",Color.FromArgb(240, 240, 240) },
-                    { "listViewSeparator",Color.LightGray }
+                    { "listViewSeparator",Color.FromArgb(120, 120, 120) },
+                    { "listViewGrid",Color.FromArgb(90, 90, 90) }
                 }
             }
         };
@@ -190,7 +192,8 @@ namespace Ticketník
                     ((Ticketník.CustomControls.ListView)c).BorderStyle = BorderStyle.None;
                     ((Ticketník.CustomControls.ListView)c).HeaderBackColor = barvy[sMotiv]["pozadíListViewHeader"];
                     ((Ticketník.CustomControls.ListView)c).HeaderForeColor = barvy[sMotiv]["textListViewHeader"];
-                    ((Ticketník.CustomControls.ListView)c).HeaderSeparatorColor = barvy[sMotiv]["listViewSeparator"]; 
+                    ((Ticketník.CustomControls.ListView)c).HeaderSeparatorColor = barvy[sMotiv]["listViewSeparator"];
+                    ((Ticketník.CustomControls.ListView)c).GridLinesColor = barvy[sMotiv]["listViewGrid"];
                 }
                 else if (c.GetType() == typeof(MenuStrip))
                 {

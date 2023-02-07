@@ -773,11 +773,13 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Popis";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader4.Width = 92;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Kontakt";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader5.Width = 89;
             // 
             // columnHeader6
@@ -801,10 +803,12 @@
             // columnHeader9
             // 
             this.columnHeader9.Text = "Stav";
+            this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // columnHeader10
             // 
             this.columnHeader10.Text = "Poznámka";
+            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader10.Width = 159;
             // 
             // unorT

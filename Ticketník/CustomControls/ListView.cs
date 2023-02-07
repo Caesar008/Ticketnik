@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,36 @@ namespace Ticketník.CustomControls
                 if (headerSeparatorColor != value)
                 {
                     headerSeparatorColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color gridLinesColor = Color.White;
+        [DefaultValue(typeof(Color), "White"),
+            Category("Appearance")]
+        public Color GridLinesColor
+        {
+            get { return gridLinesColor; }
+            set
+            {
+                if (gridLinesColor != value)
+                {
+                    gridLinesColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private bool allinglLastColumnLeft = true;
+        [DefaultValue(true),
+            Category("Appearance")]
+        public bool AllinglLastColumnLeft
+        {
+            get { return allinglLastColumnLeft; }
+            set
+            {
+                if (allinglLastColumnLeft != value)
+                {
+                    allinglLastColumnLeft = value;
                     Invalidate();
                 }
             }
@@ -214,12 +245,15 @@ namespace Ticketník.CustomControls
             }
             //TextRenderer.DrawText(e.Graphics, e.Header.Text, Font, e.Bounds, HeaderForeColor);
             TextFormatFlags tf = TextFormatFlags.Default;
+            
             switch (e.Header.TextAlign)
             {
                 case HorizontalAlignment.Center: tf = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter; break;
                 case HorizontalAlignment.Left: tf = TextFormatFlags.Left | TextFormatFlags.VerticalCenter; break;
                 case HorizontalAlignment.Right: tf = TextFormatFlags.Right | TextFormatFlags.VerticalCenter; break;
             }
+            if(AllinglLastColumnLeft && e.Header.DisplayIndex == Columns.Count-1)
+                tf = TextFormatFlags.Left | TextFormatFlags.VerticalCenter;
             TextRenderer.DrawText(e.Graphics, e.Header.Text, Font, e.Bounds, HeaderForeColor, tf);
         }
 
@@ -274,13 +308,61 @@ namespace Ticketník.CustomControls
                     SendMessage(this.Handle, Messages.LVM_SCROLL, 0, 0);
                     Refresh();
                 }
+                if (GridLines && View == View.Details)
+                {
+                    using (Pen p = new Pen(GridLinesColor, 1))
+                    {
+                        using (Graphics g = CreateGraphics())
+                        {
+                            for(int y = 23; y< this.Size.Height; y+=17)
+                            {
+                                g.DrawLine(p, 0, y, this.Size.Width, y);
+                            }
+                            foreach(ColumnHeader col in Columns)
+                            {
+                                string[] headerTags = ((string)col.Tag)?.Split(';');
+                                string separatorTag = "";
+                                if (headerTags != null)
+                                {
+                                    foreach (string tag in headerTags)
+                                    {
+                                        if (tag.StartsWith("Separator:"))
+                                        {
+                                            separatorTag = tag;
+                                        }
+                                    }
+                                }
+                                int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/);
+                                if (!separatorTag.Contains("NoLeft"))
+                                    g.DrawLine(p, col.DisplayIndex > 0 ? GetColumnLeft(col)-hScroll : 0, 0, col.DisplayIndex > 0 ? GetColumnLeft(col)-hScroll : 0, Height);
+                            }
+                        }
+                    }
+                }
             }
+        }
+
+        private int GetColumnLeft(ColumnHeader column)
+        {
+            ColumnHeader[] columns = new ColumnHeader[Columns.Count];
+            for(int c = 0; c < Columns.Count; c++)
+            {
+                columns[Columns[c].DisplayIndex] = Columns[c];
+            }
+            int left = 0;
+            for(int i = 0; i< column.DisplayIndex; i++)
+            {
+                left += columns[i].Width;
+            }
+            return left;
         }
 
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, int lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern int GetScrollPos(IntPtr hWnd, int nBar);
 
         private void GetVisibleScrollbars(IntPtr handle)
         {
