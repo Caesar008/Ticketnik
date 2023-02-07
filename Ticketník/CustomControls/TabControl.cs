@@ -322,7 +322,7 @@ namespace Ticketník.CustomControls
                                 bg.Graphics.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
                                 bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                                 //vykreslit vzadu
-                                foreach (TabPage tp in TabPages)
+                                foreach (CustomControls.TabPage tp in TabPages)
                                 {
                                     if (SelectedIndex != index)
                                     {

@@ -188,7 +188,7 @@ namespace Ticketník
                 {
                     //tu je úprava ticketu
 
-                    foreach (TabPage tp in form.tabControl1.Controls)
+                    foreach (CustomControls.TabPage tp in form.tabControl1.Controls)
                     {
                         if (tp.Controls.ContainsKey(form.vybranyMesic))
                         {
@@ -432,7 +432,7 @@ namespace Ticketník
             }
             else //při hledání
             {
-                foreach (TabPage tp in form.tabControl1.Controls)
+                foreach (CustomControls.TabPage tp in form.tabControl1.Controls)
                 {
                     if (tp.Controls.ContainsKey(form.vybranyMesic))
                     {
@@ -1150,7 +1150,7 @@ namespace Ticketník
             else
             {
                 //úprava toho, co je
-                foreach (TabPage tp in form.tabControl1.Controls)
+                foreach (CustomControls.TabPage tp in form.tabControl1.Controls)
                 {
                     if (tp.Controls.ContainsKey(form.vybranyMesic))
                     {

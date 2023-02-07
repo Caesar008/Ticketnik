@@ -2030,7 +2030,7 @@ namespace Ticketník
             form.upozorněníToolStripMenuItem.Text = form.jazyk.Menu_Upozorneni;
             form.vyhledatAktualizaceToolStripMenuItem.Text = form.jazyk.Menu_HledejAktualizace;
             form.aktualizovatVšechnyTerpyToolStripMenuItem.Text = form.jazyk.Menu_AktualizovatTerpyOnline;
-            foreach (TabPage tp in form.tabControl1.Controls)
+            foreach (CustomControls.TabPage tp in form.tabControl1.Controls)
             {
                 if (tp.Controls.ContainsKey("leden"))
                 {

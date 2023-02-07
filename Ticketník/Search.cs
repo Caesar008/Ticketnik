@@ -646,7 +646,7 @@ namespace Ticketník
 
                 form.vybranyMesic = mesic;
 
-                foreach (TabPage tp in form.tabControl1.Controls)
+                foreach (CustomControls.TabPage tp in form.tabControl1.Controls)
                 {
                     if (tp.Controls.ContainsKey(form.vybranyMesic))
                     {
