@@ -13,9 +13,11 @@ using System.Net.Http;
 
 namespace Ticketník
 {
-    /*interní changelog 1.8.0.0
+    /*interní changelog 2.0.0.0
     - Podpora světlého a tmavého módu
+    - Ovládací prvky přepsány pro větší kontrolu nad nimi
     - Zmenšení velikosti exe vynecháním knihoven
+    - Oprava chyby #22-003
     */
 
     public partial class Form1 : Form
@@ -25,7 +27,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 8;
-        internal readonly int program = 1080000;
+        internal readonly int program = 2000000;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";

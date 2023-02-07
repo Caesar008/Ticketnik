@@ -1973,7 +1973,7 @@ namespace Ticketník
                 catch
                 {
                     XmlDocument tmpPreklad = new XmlDocument();
-                    tmpPreklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml");
+                    tmpPreklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace("_Ticketnik.exe", "") + "lang\\CZ.xml");
                     return tmpPreklad.DocumentElement.SelectSingleNode(text).Attributes.GetNamedItem("en").InnerText;
                 }
             }

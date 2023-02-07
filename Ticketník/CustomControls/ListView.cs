@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ticketník.CustomControls
 {
@@ -268,11 +269,18 @@ namespace Ticketník.CustomControls
             if (m.Msg == Messages.OnPaint)
             {
                 GetVisibleScrollbars(Handle);
+                if(HeaderWidth == Width - (VScrollBarVisible ? 17 : 0) && HScrollBarVisible)
+                {
+                    SendMessage(this.Handle, Messages.LVM_SCROLL, 0, 0);
+                    Refresh();
+                }
             }
         }
 
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, int lParam);
 
         private void GetVisibleScrollbars(IntPtr handle)
         {

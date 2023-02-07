@@ -106,9 +106,19 @@ namespace Ticketník.CustomControls
                             selectedIndex = i;
                             TabPages[i].Visible = true;
                             SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-                            Size headers = MeasureHeaders(TabPages);
-                            Rectangle allHeaders = new Rectangle(0, 0, headers.Width + 3, headers.Height);
-                            Invalidate(allHeaders);
+
+                            Rectangle newTabRect = GetTabRect(selectedIndex);
+                            Size newSelSize = MeasureHeader(TabPages[selectedIndex]);
+                            Rectangle newTabRectSel = new Rectangle(newTabRect.X - 2, newTabRect.Y - 2, newSelSize.Width + 5, newSelSize.Height + 3);
+
+                            Rectangle lastTabRect = GetTabRect(lastSelected);
+                            Size lastSelSize = MeasureHeader(TabPages[lastSelected]);
+                            Rectangle lastTabRectSel = new Rectangle(lastTabRect.X - 2, lastTabRect.Y - 2, lastSelSize.Width + 5, lastSelSize.Height + 3);
+
+                            Invalidate(newTabRectSel);
+                            Invalidate(lastTabRectSel);
+                            lastSelected = selectedIndex;
+                            SelectedTab.Refresh();
                             break;
                         }
                     }
@@ -117,6 +127,7 @@ namespace Ticketník.CustomControls
         }
 
         private int selectedIndex = -1;
+        private int lastSelected = 0;
         public int SelectedIndex
         {
             get { return selectedIndex; }
@@ -136,9 +147,19 @@ namespace Ticketník.CustomControls
                         }
                     }
                     SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-                    Size headers = MeasureHeaders(TabPages);
-                    Rectangle allHeaders = new Rectangle(0, 0, headers.Width + 3, headers.Height);
-                    Invalidate(allHeaders);
+
+                    Rectangle newTabRect = GetTabRect(selectedIndex);
+                    Size newSelSize = MeasureHeader(TabPages[selectedIndex]);
+                    Rectangle newTabRectSel = new Rectangle(newTabRect.X - 2, newTabRect.Y - 2, newSelSize.Width + 5, newSelSize.Height + 3);
+                    
+                    Rectangle lastTabRect = GetTabRect(lastSelected);
+                    Size lastSelSize = MeasureHeader(TabPages[lastSelected]);
+                    Rectangle lastTabRectSel = new Rectangle(lastTabRect.X - 2, lastTabRect.Y - 2, lastSelSize.Width + 5, lastSelSize.Height + 3);
+
+                    Invalidate(newTabRectSel);
+                    Invalidate(lastTabRectSel);
+                    lastSelected = selectedIndex;
+                    SelectedTab.Refresh();
                 }
             }
         }
@@ -273,18 +294,24 @@ namespace Ticketník.CustomControls
             //base.OnPaint(e);
             Size headers = MeasureHeaders(TabPages);
             Rectangle allHeaders = new Rectangle(0, 0, headers.Width + 3, headers.Height);
-            
+
             using (Pen p = new Pen(BorderColor, 1))
             {
                 using (SolidBrush b = new SolidBrush(Parent.BackColor))
                 {
                     using (Graphics g = e.Graphics)
                     {
-                        g.DrawLine(p, 0, 0 + headers.Height - 1, 0, Height - 1);
-                        g.DrawLine(p, 0, Height - 1, Width - 1, Height - 1);
-                        g.DrawLine(p, Width - 1, 0 + headers.Height - 1, Width - 1, Height - 1);
-                        g.DrawLine(p, 0, 0 + headers.Height - 1, Width - 1, headers.Height - 1);
+                        Rectangle cely = new Rectangle(0, headerHight+1, Width, Height-headerHight-1);
+                        using (BufferedGraphics cbg = BufferedGraphicsManager.Current.Allocate(g, cely))
+                        {
+                            cbg.Graphics.DrawLine(p, cely.Left, cely.Top, cely.Left, cely.Bottom-1);
+                            cbg.Graphics.DrawLine(p, cely.Left, cely.Bottom-1, cely.Right-1, cely.Bottom-1);
+                            cbg.Graphics.DrawLine(p, cely.Right-1, cely.Top - 1, cely.Right-1, cely.Bottom-1);
+                            cbg.Graphics.DrawLine(p, cely.Left, cely.Top, cely.Right - 1, cely.Top);
 
+
+                            cbg.Render();
+                        }
                         using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, allHeaders))
                         {
                             if (!headers.IsEmpty)
@@ -341,6 +368,7 @@ namespace Ticketník.CustomControls
                         }
                     }
                 }
+
             }
         }
         private Size MeasureHeader(TabPage page)
