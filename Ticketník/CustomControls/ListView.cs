@@ -120,6 +120,7 @@ namespace Ticketník.CustomControls
             fillColl.BackColor = HeaderBackColor;
             Controls.Add(fillColl) ;
             DoubleBuffered = true;
+            //SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.DoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
         }
 
         [Category("Action")]
@@ -303,7 +304,7 @@ namespace Ticketník.CustomControls
             if (m.Msg == Messages.OnPaint)
             {
                 GetVisibleScrollbars(Handle);
-                if(HeaderWidth == Width - (VScrollBarVisible ? 17 : 0) && HScrollBarVisible)
+                if (HeaderWidth == Width - (VScrollBarVisible ? 17 : 0) && HScrollBarVisible)
                 {
                     SendMessage(this.Handle, Messages.LVM_SCROLL, 0, 0);
                     Refresh();
@@ -314,11 +315,11 @@ namespace Ticketník.CustomControls
                     {
                         using (Graphics g = CreateGraphics())
                         {
-                            for(int y = 23; y< this.Size.Height; y+=17)
+                            for (int y = 23; y < this.Size.Height; y += 17)
                             {
                                 g.DrawLine(p, 0, y, this.Size.Width, y);
                             }
-                            foreach(ColumnHeader col in Columns)
+                            foreach (ColumnHeader col in Columns)
                             {
                                 string[] headerTags = ((string)col.Tag)?.Split(';');
                                 string separatorTag = "";
@@ -334,7 +335,7 @@ namespace Ticketník.CustomControls
                                 }
                                 int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/);
                                 if (!separatorTag.Contains("NoLeft"))
-                                    g.DrawLine(p, col.DisplayIndex > 0 ? GetColumnLeft(col)-hScroll : 0, 0, col.DisplayIndex > 0 ? GetColumnLeft(col)-hScroll : 0, Height);
+                                    g.DrawLine(p, col.DisplayIndex > 0 ? GetColumnLeft(col) - hScroll : 0, 0, col.DisplayIndex > 0 ? GetColumnLeft(col) - hScroll : 0, Height);
                             }
                         }
                     }
@@ -362,8 +363,22 @@ namespace Ticketník.CustomControls
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, int lParam);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern int GetScrollPos(IntPtr hWnd, int nBar);
+        static extern int GetScrollPos(IntPtr hWnd, int nBar); 
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GetScrollInfo(IntPtr hwnd, int fnBar, ref SCROLLINFO lpsi);
 
+        [StructLayout(LayoutKind.Sequential)]
+        struct SCROLLINFO
+        {
+            public uint cbSize;
+            public uint fMask;
+            public int nMin;
+            public int nMax;
+            public uint nPage;
+            public int nPos;
+            public int nTrackPos;
+        }
         private void GetVisibleScrollbars(IntPtr handle)
         {
             int wndStyle = GetWindowLong(handle, Messages.GWL_STYLE);

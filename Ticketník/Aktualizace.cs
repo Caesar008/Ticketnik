@@ -331,11 +331,11 @@ namespace Ticketník
                 {
                     if (vcl.IsCancellationRequested)
                         return;
-                    if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml"))
+                    if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml"))
                     {
                         string[] jverze = Njazyk.InnerText.Split('.');
                         XmlDocument preklad = new XmlDocument();
-                        preklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
+                        preklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml");
 
                         if ((int.Parse(preklad.DocumentElement.Attributes.GetNamedItem("version").InnerText) < int.Parse(jverze[0])) ||
                             (int.Parse(preklad.DocumentElement.Attributes.GetNamedItem("version").InnerText) == int.Parse(jverze[0]) &&
@@ -361,7 +361,7 @@ namespace Ticketník
                                         {
                                             using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml").ConfigureAwait(false))
                                             {
-                                                using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml", FileMode.Create))
+                                                using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml", FileMode.Create))
                                                 {
                                                     await result.Content.CopyToAsync(fs).ConfigureAwait(false);
 
@@ -388,7 +388,7 @@ namespace Ticketník
                                     {
                                         using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + Njazyk.Name + ".xml").ConfigureAwait(false))
                                         {
-                                            using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml", FileMode.Create))
+                                            using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\" + Njazyk.Name + ".xml", FileMode.Create))
                                             {
                                                 await result.Content.CopyToAsync(fs).ConfigureAwait(false);
 

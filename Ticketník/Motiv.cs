@@ -71,10 +71,11 @@ namespace Ticketník
                     { "dayHeaderText",Color.FromArgb(55, 55, 55) },
                     { "vybranýDen",Color.FromArgb(204, 232, 255) },
                     { "najetýDen",Color.FromArgb(220, 235, 255) },
+                    { "vybranýDenRám",Color.Blue },
                     { "pozadíListView",Color.White },
                     { "pozadíListViewHeader",Color.White },
                     { "textListViewHeader",Color.Black },
-                    { "listViewSeparator",Color.LightGray },
+                    { "listViewSeparator",Color.FromArgb(210, 210, 210) },
                     { "listViewGrid",Color.FromArgb(240, 240, 240) }
                 }
             },
