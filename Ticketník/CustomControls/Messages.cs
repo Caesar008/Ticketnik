@@ -46,6 +46,7 @@ namespace Ticketník.CustomControls
         public const int WM_WINDOWPOSCHANGING = 0x46;
         public const int WM_MOUSELEAVE = 0x02A3;
         public const int WM_WINDOWPOSCHANGED = 0x0047;
+        public const int WM_CTLCOLORSTATIC = 0x0138;
 
         public static int OnPaint => WM_PAINT;
         public static int OnFramePaint => WM_NCPAINT;
@@ -62,6 +63,7 @@ namespace Ticketník.CustomControls
         public static int HorizontalScrollbar => WS_HSCROLL;
         public static int OnHorizontalScroll => WM_HSCROLL;
         public static int OnVerticalScroll => WM_VSCROLL;
+        public static int OnDisabledBackground => WM_CTLCOLORSTATIC;
 
         private static int wmMouseEnterMessage = -1;
         public static int WM_MOUSEENTER

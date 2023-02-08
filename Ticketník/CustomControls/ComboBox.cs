@@ -94,6 +94,75 @@ namespace Ticketník.CustomControls
                 }
             }
         }
+        private Color buttonHighlightColorDisabled = Color.Gray;
+        [DefaultValue(typeof(Color), "Gray")]
+        public Color ButtonHighlightColorDisabled
+        {
+            get { return buttonHighlightColorDisabled; }
+            set
+            {
+                if (buttonHighlightColorDisabled != value)
+                {
+                    buttonHighlightColorDisabled = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color foreColorDisabled = SystemColors.ControlDark;
+        [DefaultValue(typeof(SystemColors), "ControlDark")]
+        public Color ForeColorDisabled
+        {
+            get { return foreColorDisabled; }
+            set
+            {
+                if (foreColorDisabled != value)
+                {
+                    foreColorDisabled = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color foreColor = Color.Black;
+        /*[DefaultValue(typeof(Color), "Black")]
+        new public Color ForeColor
+        {
+            get { return Enabled ? foreColor : foreColorDisabled; }
+            set
+            {
+                if (foreColor != value)
+                {
+                    foreColor = value;
+                    Invalidate();
+                }
+            }
+        }*/
+
+        public override Color ForeColor 
+        {
+            get { return Enabled ? foreColor : foreColorDisabled; }
+            set
+            {
+                if (foreColor != value)
+                {
+                    foreColor = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Color borderColorDisabled = SystemColors.ControlDark;
+        [DefaultValue(typeof(SystemColors), "ControlDark")]
+        public Color BorderColorDisabled
+        {
+            get { return borderColorDisabled; }
+            set
+            {
+                if (borderColorDisabled != value)
+                {
+                    borderColorDisabled = value;
+                    Invalidate();
+                }
+            }
+        }
         protected override void OnMouseEnter(EventArgs e)
         {
             _mouseIn= true;
@@ -140,10 +209,10 @@ namespace Ticketník.CustomControls
                     dropDownRect.X = clientRect.Width - dropDownRect.Right;
                     dropDownRect.Width += 1;
                 }
-                var innerBorderColor = Enabled ? BackColor : SystemColors.Control;
-                var outerBorderColor = Enabled ? ((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor) : SystemColors.ControlDark; 
+                var innerBorderColor = BackColor;
+                var outerBorderColor = Enabled ? ((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor) : BorderColorDisabled;
                 var arrowColor = Enabled ? ((_mouseIn || this.Focused) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark;
-                var buttonColor = Enabled ? ((_mouseIn || this.Focused) ? ButtonColorMouseOver : ButtonColor) : SystemColors.Control;
+                var buttonColor = Enabled ? ((_mouseIn || this.Focused) ? ButtonColorMouseOver : ButtonColor) : ButtonHighlightColorDisabled;
                 var middle = new Point(dropDownRect.Left + dropDownRect.Width / 2,
                     dropDownRect.Top + dropDownRect.Height / 2);
                 var arrow = new Point[]
@@ -197,6 +266,13 @@ namespace Ticketník.CustomControls
                     EndPaint(Handle, ref ps);
                 DeleteObject(rgn);
             }
+            else if (m.Msg == Messages.OnDisabledBackground)
+            {
+                IntPtr brush;
+                SetBkColor(m.WParam, ColorTranslator.ToWin32(this.BackColor));
+                brush = CreateSolidBrush(ColorTranslator.ToWin32(this.BackColor));
+                m.Result = brush;
+            }
             else
                 base.WndProc(ref m);
         }
@@ -238,6 +314,11 @@ namespace Ticketník.CustomControls
 
         [DllImport("user32.dll")]
         public static extern int GetUpdateRgn(IntPtr hwnd, IntPtr hrgn, bool fErase);
+        [DllImport("gdi32.dll")]
+        internal static extern IntPtr CreateSolidBrush(int color);
+
+        [DllImport("gdi32.dll")]
+        internal static extern int SetBkColor(IntPtr hdc, int color);
         public enum RegionFlags
         {
             ERROR = 0,

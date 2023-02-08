@@ -154,6 +154,8 @@ namespace Ticketník
                     ((CustomControls.ComboBox)c).ArrowColor = barvy[sMotiv]["arrow"];
                     ((CustomControls.ComboBox)c).BorderColorMouseOver = Color.DodgerBlue;
                     ((CustomControls.ComboBox)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
+                    ((CustomControls.ComboBox)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
+                    ((CustomControls.ComboBox)c).BorderColorDisabled = barvy[sMotiv]["buttonBorder"];
                 }
                 else if (c.GetType() == typeof(CustomControls.NumericUpDown))
                 {
