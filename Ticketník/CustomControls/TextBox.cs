@@ -214,32 +214,29 @@ namespace Ticketník.CustomControls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            
-            using (Graphics g = e.Graphics)
+            using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
-                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
+                bg.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                using (Pen p = new Pen(((_mouseIn || _mouseInTextBox) || (this.Focused || textBox.Focused)) ? BorderColorMouseOver : BorderColor, 1))
                 {
-                    bg.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-                    using (Pen p = new Pen(((_mouseIn || _mouseInTextBox) || (this.Focused || textBox.Focused)) ? BorderColorMouseOver : BorderColor, 1))
-                    {
-                        bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
+                    bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
 
-                    }
-                    //inner box
-                    using (SolidBrush b = new SolidBrush(BackColor))
-                    {
-                        bg.Graphics.FillRectangle(b, 1, 1, Width - 2, Height - 2);
-                    }
-                    //zvýrazněný řádek jako na W11
-
-                    using (Pen p = new Pen((this.Focused || textBox.Focused) ? BorderColorMouseOver : BackColor, 1))
-                    {
-                        bg.Graphics.DrawLine(p, 1, Height - 2, Width - 2, Height - 2);
-
-                    }
-                    bg.Render();
                 }
+                //inner box
+                using (SolidBrush b = new SolidBrush(BackColor))
+                {
+                    bg.Graphics.FillRectangle(b, 1, 1, Width - 2, Height - 2);
+                }
+                //zvýrazněný řádek jako na W11
+
+                using (Pen p = new Pen((this.Focused || textBox.Focused) ? BorderColorMouseOver : BackColor, 1))
+                {
+                    bg.Graphics.DrawLine(p, 1, Height - 2, Width - 2, Height - 2);
+
+                }
+                bg.Render();
             }
+
             base.OnPaint(e);
         }
     }

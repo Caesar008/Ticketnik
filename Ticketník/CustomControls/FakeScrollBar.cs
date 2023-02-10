@@ -13,9 +13,9 @@ namespace Ticketník.CustomControls
         public FakeScrollBar(SizeModes sizeMode, ScrollBarAllignment scrollBarAllignment, System.Windows.Forms.Control parent) : base()
         {
             Parent = parent;
-            Allignment= scrollBarAllignment;
-            SizeMode= sizeMode;
-            if(Allignment == ScrollBarAllignment.Vertical)
+            Allignment = scrollBarAllignment;
+            SizeMode = sizeMode;
+            if (Allignment == ScrollBarAllignment.Vertical)
             {
                 Width = 17;
                 Height = Parent.Height;
@@ -43,8 +43,8 @@ namespace Ticketník.CustomControls
         public SizeModes SizeMode { get; private set; }
 
         private System.Drawing.Size dragSize = new System.Drawing.Size(0, 0);
-        public System.Drawing.Size DragSize 
-        { 
+        public System.Drawing.Size DragSize
+        {
             get
             {
                 return dragSize;
@@ -53,9 +53,9 @@ namespace Ticketník.CustomControls
             {
                 int x = value.Width;
                 int y = value.Height;
-                if(value.Width > Width)
+                if (value.Width > Width)
                     x = Width;
-                if(value.Height > Height) 
+                if (value.Height > Height)
                     y = Height;
                 dragSize = new System.Drawing.Size(x, y);
             }
@@ -64,19 +64,17 @@ namespace Ticketník.CustomControls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if(!Visible) 
+            if (!Visible)
                 return;
             //base.OnPaint(e);
-            using (Graphics g = e.Graphics)
+            using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
-                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, new Rectangle(0, 0, Width, Height)))
+                using (SolidBrush b = new SolidBrush(BackColor))
                 {
-                    using (SolidBrush b = new SolidBrush(BackColor))
-                    {
-                        bg.Graphics.FillRectangle(b, e.ClipRectangle);
-                    }
+                    bg.Graphics.FillRectangle(b, e.ClipRectangle);
                 }
             }
         }
+
     }
 }
