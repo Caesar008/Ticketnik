@@ -54,7 +54,7 @@ namespace Ticketník.CustomControls
         public System.Windows.Forms.HorizontalAlignment TextAlign
         {
             get { return textAlign; }
-            set { textAlign = value; Invalidate(); }
+            set { textAlign = value; textBox.TextAlign = value; }
         }
 
         private int maxLength = int.MaxValue;
@@ -167,7 +167,6 @@ namespace Ticketník.CustomControls
             textBox.TextChanged += TextBox_TextChanged;
             textBox.Text = this.Text;
             textBox.Font = this.Font;
-            textBox.TextAlign = HorizontalAlignment.Center;
             Controls.Add(textBox);
         }
 

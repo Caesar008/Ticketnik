@@ -187,6 +187,7 @@ namespace Ticketník
                     ((CustomControls.TextBox)c).ForeColor = barvy[sMotiv]["text"];
                     ((CustomControls.TextBox)c).BorderColor = barvy[sMotiv]["controlRámeček"];
                     ((CustomControls.TextBox)c).BorderColorMouseOver = Color.DodgerBlue;
+                    ((CustomControls.TextBox)c).TextAlign = HorizontalAlignment.Center;
                 }
                 else if (c.GetType() == typeof(Ticketník.CustomControls.ListView))
                 {
