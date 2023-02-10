@@ -167,6 +167,7 @@ namespace Ticketník.CustomControls
             textBox.TextChanged += TextBox_TextChanged;
             textBox.Text = this.Text;
             textBox.Font = this.Font;
+            textBox.TextAlign = HorizontalAlignment.Center;
             Controls.Add(textBox);
         }
 
