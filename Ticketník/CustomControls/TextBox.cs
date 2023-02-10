@@ -91,10 +91,17 @@ namespace Ticketník.CustomControls
             }
         }
 
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            textBox.Focus();
+        }
+
         protected override void OnGotFocus(EventArgs e)
         {
             _mouseIn = true;
             base.OnGotFocus(e);
+            textBox.Focus();
             Invalidate();
         }
         protected override void OnLostFocus(EventArgs e)
@@ -208,9 +215,9 @@ namespace Ticketník.CustomControls
         protected override void OnPaint(PaintEventArgs e)
         {
             
-            using (Graphics g = CreateGraphics())
+            using (Graphics g = e.Graphics)
             {
-                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, new Rectangle(0, 0, Width, Height)))
+                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
                 {
                     bg.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
                     using (Pen p = new Pen(((_mouseIn || _mouseInTextBox) || (this.Focused || textBox.Focused)) ? BorderColorMouseOver : BorderColor, 1))
