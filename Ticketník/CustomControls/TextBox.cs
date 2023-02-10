@@ -1,26 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace Ticketník.CustomControls
 {
-    /* Tohle se musí přidat do každého Form, kde je custom TextBox
-     *
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }
-     * */
-    public class TextBox : System.Windows.Forms.TextBox
+    internal class TextBox : System.Windows.Forms.Control
     {
         private bool _mouseIn = false;
+        private bool _mouseInTextBox = false;
         private Color borderColor = Color.Gray;
         [DefaultValue(typeof(Color), "Gray")]
         public Color BorderColor
@@ -50,25 +42,53 @@ namespace Ticketník.CustomControls
             }
         }
 
-        protected override void OnHandleCreated(EventArgs e)
+        private System.Windows.Forms.BorderStyle borderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        [DefaultValue(System.Windows.Forms.BorderStyle.FixedSingle)]
+        public System.Windows.Forms.BorderStyle BorderStyle
         {
-            base.OnHandleCreated(e);
-            if (IsHandleCreated)
-            {
-                SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.DoubleBuffer | ControlStyles.AllPaintingInWmPaint/* | ControlStyles.UserPaint*/, true);
+            get { return borderStyle; }
+            set { borderStyle = value; Invalidate(); }
+        }
+
+        private System.Windows.Forms.HorizontalAlignment textAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        public System.Windows.Forms.HorizontalAlignment TextAlign
+        {
+            get { return textAlign; }
+            set { textAlign = value; Invalidate(); }
+        }
+
+        private int maxLength = int.MaxValue;
+        public int MaxLength
+        {
+            get { return maxLength; }
+            set { maxLength = value;}
+        }
+
+        private bool @readonly = false;
+        public bool ReadOnly
+        {
+            get { return @readonly; }
+            set 
+            { 
+                @readonly = value;
+                textBox.ReadOnly = value;
             }
         }
+
         protected override void OnMouseEnter(EventArgs e)
         {
-            _mouseIn = true;
             base.OnMouseEnter(e);
+            _mouseIn = true;
             Invalidate();
         }
         protected override void OnMouseLeave(EventArgs e)
         {
-            _mouseIn = false;
             base.OnMouseLeave(e);
-            Invalidate();
+            if (!_mouseInTextBox)
+            {
+                _mouseIn = false;
+                Invalidate();
+            }
         }
 
         protected override void OnGotFocus(EventArgs e)
@@ -81,43 +101,139 @@ namespace Ticketník.CustomControls
         {
             _mouseIn = false;
             base.OnLostFocus(e);
-            Invalidate();
-        }
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
-            if (m.Msg == Messages.OnFramePaint)
+            if (!_mouseInTextBox)
             {
-                var dc = GetWindowDC(Handle);
-                using (Graphics g = Graphics.FromHdc(dc))
-                {
-                    using (Pen p = new Pen((_mouseIn || this.Focused) ? BorderColorMouseOver : BorderColor, 1))
-                    {
-                        g.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
-
-                    }
-                    //inner box
-                    using (Pen p = new Pen(BackColor, 1))
-                    {
-                        g.DrawRectangle(p, 1, 1, Width - 3, Height - 3);
-
-                    }
-                    //zvýrazněný řádek jako na W11
-
-                    using (Pen p = new Pen(this.Focused ? BorderColorMouseOver : BackColor, 1))
-                    {
-                        g.DrawLine(p, 1, Height - 2, Width - 2, Height - 2);
-
-                    }
-                }
-
-                ReleaseDC(Handle, dc);
+                _mouseIn = false;
+                Invalidate();
             }
         }
 
-        [DllImport("user32")]
-        private static extern IntPtr GetWindowDC(IntPtr hwnd);
-        [DllImport("user32.dll")]
-        static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC); 
+        [Browsable(false)]
+        new public ControlCollection Controls => base.Controls;
+
+        private Color backColor= Color.White;
+        new public Color BackColor
+        {
+            get { return backColor; }
+            set
+            {
+                backColor = value;
+                textBox.BackColor = backColor;
+            }
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            textBox.Size = new Size(Width -6, Height -6);
+            Invalidate();
+        }
+
+        protected override void OnForeColorChanged(EventArgs e)
+        {
+            base.OnForeColorChanged(e);
+            textBox.ForeColor = ForeColor;
+        }
+
+        protected override void OnTextChanged(EventArgs e)
+        {
+            base.OnTextChanged(e);
+            textBox.Text = Text; 
+        }
+
+        private System.Windows.Forms.TextBox textBox;
+        public TextBox() : base()
+        {
+            textBox = new System.Windows.Forms.TextBox();
+            textBox.Location = new Point(3, 3);
+            textBox.Multiline = false;
+            textBox.Width = this.Width - 6;
+            textBox.BackColor = BackColor;
+            textBox.ForeColor = ForeColor;
+            textBox.BorderStyle = BorderStyle.None;
+            textBox.MouseEnter += TextBox_MouseEnter;
+            textBox.MouseHover += TextBox_MouseHover;
+            textBox.MouseMove += TextBox_MouseMove;
+            textBox.MouseLeave += TextBox_MouseLeave;
+            textBox.GotFocus += TextBox_GotFocus;
+            textBox.LostFocus += TextBox_LostFocus;
+            textBox.TextChanged += TextBox_TextChanged;
+            textBox.Text = this.Text;
+            textBox.Font = this.Font;
+            Controls.Add(textBox);
+        }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            Text = textBox.Text;
+        }
+
+        private void TextBox_LostFocus(object sender, EventArgs e)
+        {
+            _mouseInTextBox= false;
+            Invalidate();
+        }
+
+        private void TextBox_GotFocus(object sender, EventArgs e)
+        {
+            _mouseInTextBox = true;
+            Invalidate();
+        }
+
+        private void TextBox_MouseLeave(object sender, EventArgs e)
+        {
+            _mouseInTextBox = false;
+
+            Invalidate();
+        }
+
+        private void TextBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            _mouseInTextBox = true;
+            Invalidate();
+        }
+
+        private void TextBox_MouseHover(object sender, EventArgs e)
+        {
+            _mouseInTextBox = true;
+            Invalidate();
+        }
+
+        private void TextBox_MouseEnter(object sender, EventArgs e)
+        {
+            _mouseInTextBox = true;
+            Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            
+            using (Graphics g = CreateGraphics())
+            {
+                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(g, new Rectangle(0, 0, Width, Height)))
+                {
+                    bg.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    using (Pen p = new Pen(((_mouseIn || _mouseInTextBox) || (this.Focused || textBox.Focused)) ? BorderColorMouseOver : BorderColor, 1))
+                    {
+                        bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
+
+                    }
+                    //inner box
+                    using (SolidBrush b = new SolidBrush(BackColor))
+                    {
+                        bg.Graphics.FillRectangle(b, 1, 1, Width - 2, Height - 2);
+                    }
+                    //zvýrazněný řádek jako na W11
+
+                    using (Pen p = new Pen((this.Focused || textBox.Focused) ? BorderColorMouseOver : BackColor, 1))
+                    {
+                        bg.Graphics.DrawLine(p, 1, Height - 2, Width - 2, Height - 2);
+
+                    }
+                    bg.Render();
+                }
+            }
+            base.OnPaint(e);
+        }
     }
 }

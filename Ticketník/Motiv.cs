@@ -303,7 +303,8 @@ namespace Ticketník
                     }
                 }
 
-                if (c as Control != null && !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+"))
+                if (c as Control != null && !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+") && 
+                    c.GetType() != typeof(CustomControls.TextBox) && c.GetType() != typeof(CustomControls.ComboBox))
                 {
                     foreach (Control cc in ((Control)c).Controls)
                     {
