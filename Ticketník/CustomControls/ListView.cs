@@ -351,6 +351,8 @@ namespace Ticketník.CustomControls
 
                 float sliderRatio = (float)VisibleItems / (float)Items.Count;
                 VScrollBar.SliderSize = new Size(6, (int)((VScrollBar.UsableHight) * sliderRatio));
+                if (VScrollBar.SliderSize.Height < 6)
+                    VScrollBar.SliderSize = new Size(6, 6);
                 int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
                 float step = (float)max / (float)(Items.Count - VisibleItems+1);
                 VScrollBar.ScrollPosition = (int)Math.Round((vScroll * step), MidpointRounding.AwayFromZero);

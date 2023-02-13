@@ -115,7 +115,7 @@ namespace Ticketník.CustomControls
         {
             get
             {
-                return bothVisible? Size.Height - 34-17 : Size.Height-34;
+                return bothVisible? Size.Height - 35-17 : Size.Height-35;
             }
         }
 
