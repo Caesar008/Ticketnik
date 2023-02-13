@@ -96,7 +96,7 @@
     <Compile Include="CustomControls\DateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomControls\FakeScrollBar.cs">
+    <Compile Include="CustomControls\ScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomControls\ListView.cs">

@@ -76,7 +76,9 @@ namespace Ticketník
                     { "pozadíListViewHeader",Color.White },
                     { "textListViewHeader",Color.Black },
                     { "listViewSeparator",Color.FromArgb(210, 210, 210) },
-                    { "listViewGrid",Color.FromArgb(240, 240, 240) }
+                    { "listViewGrid",Color.FromArgb(240, 240, 240) },
+                    { "scrollBarSeparator",Color.FromArgb(250, 250, 250) },
+                    { "scrollBarFore",Color.FromArgb(155, 155, 155) }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -107,7 +109,9 @@ namespace Ticketník
                     { "pozadíListViewHeader",Color.FromArgb(70, 70, 70) },
                     { "textListViewHeader",Color.FromArgb(240, 240, 240) },
                     { "listViewSeparator",Color.FromArgb(120, 120, 120) },
-                    { "listViewGrid",Color.FromArgb(90, 90, 90) }
+                    { "listViewGrid",Color.FromArgb(90, 90, 90) },
+                    { "scrollBarSeparator",Color.FromArgb(55, 55, 55) },
+                    { "scrollBarFore",Color.FromArgb(100, 100, 100) }
                 }
             }
         };
@@ -292,6 +296,12 @@ namespace Ticketník
                     ((CustomControls.DateTimePicker)c).MonthSelectedDayBorderColor = barvy[sMotiv]["vybranýDenRám"];
                     ((CustomControls.DateTimePicker)c).MonthSelectedColor = barvy[sMotiv]["vybranýDen"];
                     ((CustomControls.DateTimePicker)c).MonthSelectMouseOverColor = barvy[sMotiv]["najetýDen"];
+                }
+                else if(c.GetType() == typeof(CustomControls.ScrollBar))
+                {
+                    ((CustomControls.ScrollBar)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.ScrollBar)c).ForeColor = barvy[sMotiv]["scrollBarFore"];
+                    ((CustomControls.ScrollBar)c).SeparatorColor = barvy[sMotiv]["scrollBarSeparator"];
                 }
                 else
                 {

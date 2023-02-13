@@ -44,7 +44,7 @@
             this.id = new Ticketník.CustomControls.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pc = new Ticketník.CustomControls.TextBox();
-            this.listView1 = new Ticketník.CustomControls.ListView();
+            this.listView1 = new Ticketník.CustomControls.ListView(this);
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));

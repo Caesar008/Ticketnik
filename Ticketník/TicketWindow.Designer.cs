@@ -53,7 +53,7 @@ namespace Ticketník
             this.pauzaDo = new Ticketník.CustomControls.TextBox();
             this.pauzaOd = new Ticketník.CustomControls.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.listView1 = new Ticketník.CustomControls.ListView();
+            this.listView1 = new Ticketník.CustomControls.ListView(groupBox3);
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));

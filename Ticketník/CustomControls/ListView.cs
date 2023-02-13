@@ -113,7 +113,10 @@ namespace Ticketník.CustomControls
             Width = 0
         } ;
 
-        public ListView() : base()
+        private ScrollBar VScrollBar;
+        private ScrollBar HScrollBar;
+
+        public ListView(Control parent) : base()
         {
             OwnerDraw = true;
             //pro nc space, protože WM_cnpaint strašně bliká a zatěžuje cpu
@@ -121,6 +124,20 @@ namespace Ticketník.CustomControls
             Controls.Add(fillColl) ;
             DoubleBuffered = true;
             //SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.DoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+            VScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Vertical, this);
+            HScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Vertical, this);
+            VScrollBar.BackColor = BackColor;
+            HScrollBar.BackColor = BackColor;
+            VScrollBar.ForeColor = ForeColor;
+            HScrollBar.ForeColor = ForeColor;
+            VScrollBar.Visible = VScrollBarVisible;
+            HScrollBar.Visible = HScrollBarVisible;
+            if(VScrollBarVisible && HScrollBarVisible)
+            {
+                VScrollBar.BothVisible = HScrollBar.BothVisible = true;
+            }
+            Controls.Add(HScrollBar);
+            Controls.Add(VScrollBar);
         }
 
         [Category("Action")]
@@ -140,6 +157,15 @@ namespace Ticketník.CustomControls
                 if (hScrollVisible != value)
                 {
                     hScrollVisible = value;
+                    HScrollBar.Visible = value;
+                    if (VScrollBarVisible && HScrollBarVisible)
+                    {
+                        VScrollBar.BothVisible = HScrollBar.BothVisible = true;
+                    }
+                    else
+                    {
+                        VScrollBar.BothVisible = HScrollBar.BothVisible = false;
+                    }
                     HScrollBarVisibilityChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -156,7 +182,15 @@ namespace Ticketník.CustomControls
                 if (vScrollVisible != value)
                 {
                     vScrollVisible = value;
-
+                    VScrollBar.Visible= value; 
+                    if (VScrollBarVisible && HScrollBarVisible)
+                    {
+                        VScrollBar.BothVisible = HScrollBar.BothVisible = true;
+                    }
+                    else
+                    {
+                        VScrollBar.BothVisible = HScrollBar.BothVisible = false;
+                    }
                     VScrollBarVisibilityChanged?.Invoke(this, EventArgs.Empty);
                     FillHeaderSpace();
                 }
@@ -271,6 +305,14 @@ namespace Ticketník.CustomControls
             }
         }
 
+        private int VisibleItems
+        {
+            get
+            {
+                return (Height - 23) / 17;
+            }
+        }
+
         private void FillHeaderSpace(bool forceDummy = false)
         {
             if (HeaderFillMethod == HeaderTrailingSpaceFill.ExtendLastColumn && !forceDummy)
@@ -300,10 +342,19 @@ namespace Ticketník.CustomControls
 
         protected override void WndProc(ref Message m)
         {
-            base.WndProc(ref m);
             if (m.Msg == Messages.OnPaint)
             {
+                base.WndProc(ref m);
                 GetVisibleScrollbars(Handle);
+                int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/);
+                int vScroll = GetScrollPos(Handle, 1); // počet itemů scrollnutých
+
+                float sliderRatio = (float)VisibleItems / (float)Items.Count;
+                VScrollBar.SliderSize = new Size(6, (int)((VScrollBar.Height - 34) * sliderRatio));
+                int max = VScrollBar.Height - 34 - VScrollBar.SliderSize.Height;
+                float step = (float)max / (float)(Items.Count - VisibleItems+1);
+                VScrollBar.ScrollPosition = (int)(vScroll * step);
+
                 if (HeaderWidth == Width - (VScrollBarVisible ? 17 : 0) && HScrollBarVisible)
                 {
                     SendMessage(this.Handle, Messages.LVM_SCROLL, 0, 0);
@@ -333,7 +384,6 @@ namespace Ticketník.CustomControls
                                         }
                                     }
                                 }
-                                int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/);
                                 if (!separatorTag.Contains("NoLeft"))
                                     g.DrawLine(p, col.DisplayIndex > 0 ? GetColumnLeft(col) - hScroll : 0, 0, col.DisplayIndex > 0 ? GetColumnLeft(col) - hScroll : 0, Height);
                             }
@@ -341,6 +391,12 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
+            else if(m.Msg == Messages.OnScrollBarDraw)
+            {
+                //nekresli původní scrollbary
+            }
+            else
+                base.WndProc(ref m);
         }
 
         private int GetColumnLeft(ColumnHeader column)
