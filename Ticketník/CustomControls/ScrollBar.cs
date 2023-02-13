@@ -134,7 +134,7 @@ namespace Ticketník.CustomControls
                             bg.Graphics.FillPolygon(b, new Point[] { new Point(3, 11), new Point(13, 11), new Point(8, 5) });
                             bg.Graphics.FillPolygon(b, new Point[] { new Point(4, Height - 11 - (bothVisible ? 11 : 0)), new Point(13, Height - 11 - (bothVisible ? 11 : 0)), new Point(8, Height - 6 - (bothVisible ? 6 : 0)) });
                             bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                            bg.Graphics.FillPath(b, RoundedRect(new Rectangle((Width/2) - (sliderSize.Width/2), ScrollPosition + 18, sliderSize.Width, SliderSize.Height), 2, 2, 2, 2));
+                            bg.Graphics.FillPath(b, RoundedRect(new Rectangle((Width/2) - (sliderSize.Width/2), ScrollPosition + 18, sliderSize.Width, SliderSize.Height), 3, 3,3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
                         }
                     }
