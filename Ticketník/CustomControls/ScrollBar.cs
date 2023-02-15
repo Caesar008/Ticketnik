@@ -115,7 +115,23 @@ namespace Ticketník.CustomControls
         {
             get
             {
-                return bothVisible? Size.Height - 35-17 : Size.Height-35;
+                return bothVisible? Size.Height - 35-18 : Size.Height-35;
+            }
+        }
+
+        private int max = 1;
+        public int Max { get { return max; } set { if (max > 0 && max != value) max = value; Invalidate(); } }
+
+        private float ratio = 1;
+        public float ScrollbarRatio
+        {
+            get { return ratio; }
+            set
+            {
+                if (ratio != value)
+                {
+                    ratio = value; Invalidate();
+                }
             }
         }
 
@@ -124,6 +140,15 @@ namespace Ticketník.CustomControls
             if (!Visible)
                 return;
             //base.OnPaint(e);
+
+            
+            SliderSize = new Size(6, (int)((UsableHight) * ratio));
+            if (SliderSize.Height < 6)
+                SliderSize = new Size(6, 6);
+            int max = UsableHight - SliderSize.Height;
+            float step = (float)max / Max;
+            int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
+
             using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
                 using (SolidBrush b = new SolidBrush(BackColor))
@@ -142,7 +167,7 @@ namespace Ticketník.CustomControls
                             bg.Graphics.FillPolygon(b, new Point[] { new Point(3, 11), new Point(13, 11), new Point(8, 5) });
                             bg.Graphics.FillPolygon(b, new Point[] { new Point(4, Height - 11 - (bothVisible ? 17 : 0)), new Point(13, Height - 11 - (bothVisible ? 17 : 0)), new Point(8, Height - 6 - (bothVisible ? 17 : 0)) });
                             bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                            bg.Graphics.FillPath(b, RoundedRect(new Rectangle((Width/2) - (sliderSize.Width/2), ScrollPosition + 18, sliderSize.Width, SliderSize.Height), 3, 3,3, 3));
+                            bg.Graphics.FillPath(b, RoundedRect(new Rectangle((Width/2) - (sliderSize.Width/2), scrollPositionInner + 18, sliderSize.Width, SliderSize.Height), 3, 3,3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
                         }
                     }

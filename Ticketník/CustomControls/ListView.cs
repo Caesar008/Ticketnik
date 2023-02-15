@@ -349,14 +349,6 @@ namespace Ticketník.CustomControls
                 int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/);
                 int vScroll = GetScrollPos(Handle, 1); // počet itemů scrollnutých
 
-                float sliderRatio = (float)VisibleItems / (float)Items.Count;
-                VScrollBar.SliderSize = new Size(6, (int)((VScrollBar.UsableHight) * sliderRatio));
-                if (VScrollBar.SliderSize.Height < 6)
-                    VScrollBar.SliderSize = new Size(6, 6);
-                int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
-                float step = (float)max / (float)(Items.Count - VisibleItems+1);
-                VScrollBar.ScrollPosition = (int)Math.Round((vScroll * step), MidpointRounding.AwayFromZero);
-
                 if (HeaderWidth == Width - (VScrollBarVisible ? 17 : 0) && HScrollBarVisible)
                 {
                     SendMessage(this.Handle, Messages.LVM_SCROLL, 0, 0);
@@ -364,6 +356,15 @@ namespace Ticketník.CustomControls
                 }
                 if (GridLines && View == View.Details)
                 {
+                    VScrollBar.ScrollbarRatio = (float)VisibleItems / (float)Items.Count;
+                    VScrollBar.Max = Items.Count - VisibleItems + 1;
+                    if(vScroll <= VScrollBar.Max)
+                        VScrollBar.ScrollPosition = vScroll;
+                    else
+                        VScrollBar.ScrollPosition = VScrollBar.Max;
+
+                    //tady udělat přepočet, blbě roluje, slider jede za
+
                     using (Pen p = new Pen(GridLinesColor, 1))
                     {
                         using (Graphics g = CreateGraphics())
