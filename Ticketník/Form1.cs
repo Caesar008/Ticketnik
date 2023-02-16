@@ -160,7 +160,17 @@ namespace Ticketník
                 foreach (CustomControls.ListView lv in tp.Controls)
                 {
                     lv.Columns[0].Tag = "Separator:NoLeft,NoRight";
-                    lv.Columns[1].Tag = "Separator:NoLeft";
+                    for (int i = 1; i < lv.Columns.Count; i++)
+                    {
+                        if (lv.Columns[i].DisplayIndex == 1)
+                        {
+                            lv.Columns[i].Tag = "Separator:NoLeft";
+                        }
+                        else
+                        {
+                            lv.Columns[i].Tag = null;
+                        }
+                    }
                 }
             }
         }
@@ -3169,6 +3179,7 @@ namespace Ticketník
                 Properties.Settings.Default.Save();
                 e.Cancel = true;
                 NastavSirku();
+                SetTagy();
             }
             else
                 e.Cancel = true;
