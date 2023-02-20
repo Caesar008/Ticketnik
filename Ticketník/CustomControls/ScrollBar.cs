@@ -38,12 +38,14 @@ namespace Ticketník.CustomControls
                 Width = 17;
                 Height = Parent.Height;
                 Location = new Point(Parent.Width - Width, 0);
+                Invalidate();
             }
             else if (Allignment == ScrollBarAllignment.Horizontal)
             {
                 Width = Parent.Width;
                 Height = 17;
                 Location = new Point(0, Parent.Height - Height);
+                Invalidate();
             }
         }
 
@@ -85,6 +87,7 @@ namespace Ticketník.CustomControls
                 if (value.Height > Height)
                     y = Height;
                 sliderSize = new System.Drawing.Size(x, y);
+                //Invalidate();
             }
         }
         private int scrollPosition = 0;
@@ -96,10 +99,9 @@ namespace Ticketník.CustomControls
             }
             set
             {
-                int old = scrollPosition;
-                scrollPosition = value;
-                if(old != scrollPosition)
+                if (scrollPosition != value)
                 {
+                    scrollPosition = value;
                     Invalidate();
                 }
             }
@@ -108,7 +110,7 @@ namespace Ticketník.CustomControls
         public Color SeparatorColor 
         { 
             get { return separatorColor; }
-            set { if(separatorColor != value) separatorColor = value; }
+            set { if (separatorColor != value) { separatorColor = value; Invalidate(); } }
         }
 
         public int UsableHight
@@ -120,7 +122,15 @@ namespace Ticketník.CustomControls
         }
 
         private int max = 1;
-        public int Max { get { return max; } set { if (max > 0 && max != value) max = value; Invalidate(); } }
+        public int Max { 
+            get { return max; } 
+            set 
+            { 
+                if (value > 0 && max != value) 
+                    max = value; 
+                Invalidate(); 
+            } 
+        }
 
         private float ratio = 1;
         public float ScrollbarRatio

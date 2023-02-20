@@ -340,6 +340,8 @@ namespace Ticketník.CustomControls
             }
         }
 
+        
+
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == Messages.OnPaint)
@@ -357,7 +359,7 @@ namespace Ticketník.CustomControls
                 if (GridLines && View == View.Details)
                 {
                     VScrollBar.ScrollbarRatio = (float)VisibleItems / (float)Items.Count;
-                    VScrollBar.Max = Items.Count - VisibleItems + 1;
+                    VScrollBar.Max = Items.Count - VisibleItems;
                     if(vScroll <= VScrollBar.Max)
                         VScrollBar.ScrollPosition = vScroll;
                     else
