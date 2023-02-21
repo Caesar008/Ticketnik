@@ -363,6 +363,13 @@ namespace Ticketník.CustomControls
                     else
                         VScrollBar.ScrollPosition = VScrollBar.Max;
 
+                    HScrollBar.ScrollbarRatio = (float)Width/(float)HeaderWidth;
+                    HScrollBar.Max = HeaderWidth - Width;
+                    if (hScroll <= HScrollBar.Max)
+                        HScrollBar.ScrollPosition = hScroll;
+                    else
+                        HScrollBar.ScrollPosition = HScrollBar.Max;
+
                     //tady udělat přepočet, blbě roluje, slider jede za
 
                     using (Pen p = new Pen(GridLinesColor, 1))

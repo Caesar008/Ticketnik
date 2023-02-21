@@ -86,10 +86,20 @@ namespace Ticketník.CustomControls
             {
                 int x = value.Width;
                 int y = value.Height;
-                if (value.Width > Width)
-                    x = Width;
-                if (value.Height > Height)
-                    y = Height;
+                if (Allignment == ScrollBarAllignment.Vertical)
+                {
+                    if (value.Width > Width)
+                        x = Width;
+                    if (value.Height > UsableHight - 2)
+                        y = UsableHight - 2;
+                }
+                else if (Allignment == ScrollBarAllignment.Horizontal)
+                {
+                    if (value.Width > UsableHight - 2)
+                        x = UsableHight - 2;
+                    if (value.Height > Height)
+                        y = Height;
+                }
                 sliderSize = new System.Drawing.Size(x, y);
                 //Invalidate();
             }
@@ -121,7 +131,10 @@ namespace Ticketník.CustomControls
         {
             get
             {
-                return bothVisible? Size.Height - 37-18 : Size.Height-37;
+                if(Allignment == ScrollBarAllignment.Vertical)
+                    return bothVisible? Size.Height - 37-18 : Size.Height-37;
+                else
+                    return bothVisible ? Size.Width - 37 - 18 : Size.Width - 37;
             }
         }
 
@@ -211,10 +224,33 @@ namespace Ticketník.CustomControls
                             //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
                         }
                     }
-                    else if (Allignment != ScrollBarAllignment.Horizontal)
+                    else if (Allignment == ScrollBarAllignment.Horizontal)
                     {
+                        SliderSize = new Size((int)((UsableHight) * ratio), 6);
+                        if (SliderSize.Width < 6)
+                            SliderSize = new Size(6, 6);
+                        int max = UsableHight - SliderSize.Width;
+                        float step = (float)max / Max;
+                        int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
+
+                        Rectangle slider = new Rectangle(scrollPositionInner + 18, (Height / 2) - (sliderSize.Height / 2), sliderSize.Width, sliderSize.Height);
+                        sliderRectForDrag = new Rectangle(scrollPositionInner + 18, 1, sliderSize.Width, Height - 2);
+
                         bg.Graphics.DrawLine(p, 0, 0, Width, 0); 
                         bg.Graphics.DrawLine(p, 16, 0, 16, Height);
+                        bg.Graphics.DrawLine(p, Width - 17 - (bothVisible ? 17 : 0), 0, Width - 17 - (bothVisible ? 17 : 0), Height); 
+                        if (bothVisible)
+                            bg.Graphics.DrawLine(p, Width - 17, 0, Width - 17, Height);
+                        using (SolidBrush b = new SolidBrush(ForeColor))
+                        {
+                            bg.Graphics.FillPolygon(b, new Point[] { new Point(5, 8), new Point(10, 3), new Point(10, 13) });
+                            bg.Graphics.FillPolygon(b, new Point[] { new Point(Width - 10 - (bothVisible ? 17 : 0), 3), new Point(Width - 5 - (bothVisible ? 17 : 0), 8), new Point(Width - 10 - (bothVisible ? 17 : 0), 13) });
+                            bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                            bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
+                            bg.Graphics.SmoothingMode = SmoothingMode.None;
+                            //tohle je jen pro test
+                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
+                        }
                     }
                 }
                 bg.Render();
