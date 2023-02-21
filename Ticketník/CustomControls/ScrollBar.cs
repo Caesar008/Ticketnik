@@ -208,7 +208,7 @@ namespace Ticketník.CustomControls
                             bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
                             //tohle je jen pro test
-                            bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
+                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
                         }
                     }
                     else if (Allignment != ScrollBarAllignment.Horizontal)
