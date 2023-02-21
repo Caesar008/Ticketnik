@@ -174,18 +174,8 @@ namespace Ticketník.CustomControls
             if (!Visible)
                 return;
             //base.OnPaint(e);
-            
-            SliderSize = new Size(6, (int)((UsableHight) * ratio));
-            if (SliderSize.Height < 6)
-                SliderSize = new Size(6, 6);
-            int max = UsableHight - SliderSize.Height;
-            float step = (float)max / Max;
-            int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
 
-            Rectangle slider = new Rectangle((Width / 2) - (sliderSize.Width / 2), scrollPositionInner + 18, sliderSize.Width, sliderSize.Height);
-            sliderRectForDrag = new Rectangle(0, scrollPositionInner + 18, Width, sliderSize.Height);
-       
-using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
+            using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
                 using (SolidBrush b = new SolidBrush(BackColor))
                 {
@@ -195,9 +185,19 @@ using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics
                 {
                     if (Allignment == ScrollBarAllignment.Vertical)
                     {
+                        SliderSize = new Size(6, (int)((UsableHight) * ratio));
+                        if (SliderSize.Height < 6)
+                            SliderSize = new Size(6, 6);
+                        int max = UsableHight - SliderSize.Height;
+                        float step = (float)max / Max;
+                        int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
+
+                        Rectangle slider = new Rectangle((Width / 2) - (sliderSize.Width / 2), scrollPositionInner + 18, sliderSize.Width, sliderSize.Height);
+                        sliderRectForDrag = new Rectangle(1, scrollPositionInner + 18, Width - 2, sliderSize.Height);
+
                         bg.Graphics.DrawLine(p, 0, 0, 0, Height);
                         bg.Graphics.DrawLine(p, 0, 16, Width, 16);
-                        bg.Graphics.DrawLine(p, 0, Height -17 - (bothVisible?17:0), Width, Height - 17 - (bothVisible ? 17 : 0));
+                        bg.Graphics.DrawLine(p, 0, Height - 17 - (bothVisible ? 17 : 0), Width, Height - 17 - (bothVisible ? 17 : 0));
                         if (bothVisible)
                             bg.Graphics.DrawLine(p, 0, Height - 17, Width, Height - 17);
                         using (SolidBrush b = new SolidBrush(ForeColor))
@@ -208,15 +208,16 @@ using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics
                             bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
                             //tohle je jen pro test
-                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
+                            bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
                         }
                     }
                     else if (Allignment != ScrollBarAllignment.Horizontal)
                     {
-                        bg.Graphics.DrawLine(p, 0, 0, Width, 0);
+                        bg.Graphics.DrawLine(p, 0, 0, Width, 0); 
+                        bg.Graphics.DrawLine(p, 16, 0, 16, Height);
                     }
                 }
-                    bg.Render();
+                bg.Render();
             }
         }
 
