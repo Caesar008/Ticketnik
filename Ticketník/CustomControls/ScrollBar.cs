@@ -11,6 +11,9 @@ namespace Ticketník.CustomControls
 {
     internal class ScrollBar : System.Windows.Forms.Control
     {
+        Rectangle sliderRectForDrag;
+        bool dragScroll = false;
+
         public ScrollBar(SizeModes sizeMode, ScrollBarAllignment scrollBarAllignment, System.Windows.Forms.Control parent) : base()
         {
             Parent = parent;
@@ -29,6 +32,7 @@ namespace Ticketník.CustomControls
                 Location = new Point(0, Parent.Height - Height);
             }
             Parent.SizeChanged += Parent_SizeChanged;
+            
         }
 
         private void Parent_SizeChanged(object sender, EventArgs e)
@@ -117,7 +121,7 @@ namespace Ticketník.CustomControls
         {
             get
             {
-                return bothVisible? Size.Height - 35-18 : Size.Height-35;
+                return bothVisible? Size.Height - 37-18 : Size.Height-37;
             }
         }
 
@@ -140,8 +144,28 @@ namespace Ticketník.CustomControls
             {
                 if (ratio != value)
                 {
-                    ratio = value; Invalidate();
+                    ratio = value;
                 }
+                Invalidate();
+            }
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if(sliderRectForDrag.Contains(e.Location))
+            {
+                if (!dragScroll)
+                    dragScroll = true;
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (dragScroll)
+            {
+                dragScroll = false;
             }
         }
 
@@ -150,7 +174,6 @@ namespace Ticketník.CustomControls
             if (!Visible)
                 return;
             //base.OnPaint(e);
-
             
             SliderSize = new Size(6, (int)((UsableHight) * ratio));
             if (SliderSize.Height < 6)
@@ -159,7 +182,10 @@ namespace Ticketník.CustomControls
             float step = (float)max / Max;
             int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
 
-            using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
+            Rectangle slider = new Rectangle((Width / 2) - (sliderSize.Width / 2), scrollPositionInner + 18, sliderSize.Width, sliderSize.Height);
+            sliderRectForDrag = new Rectangle(0, scrollPositionInner + 18, Width, sliderSize.Height);
+       
+using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
                 using (SolidBrush b = new SolidBrush(BackColor))
                 {
@@ -172,13 +198,17 @@ namespace Ticketník.CustomControls
                         bg.Graphics.DrawLine(p, 0, 0, 0, Height);
                         bg.Graphics.DrawLine(p, 0, 16, Width, 16);
                         bg.Graphics.DrawLine(p, 0, Height -17 - (bothVisible?17:0), Width, Height - 17 - (bothVisible ? 17 : 0));
+                        if (bothVisible)
+                            bg.Graphics.DrawLine(p, 0, Height - 17, Width, Height - 17);
                         using (SolidBrush b = new SolidBrush(ForeColor))
                         {
                             bg.Graphics.FillPolygon(b, new Point[] { new Point(3, 11), new Point(13, 11), new Point(8, 5) });
                             bg.Graphics.FillPolygon(b, new Point[] { new Point(4, Height - 11 - (bothVisible ? 17 : 0)), new Point(13, Height - 11 - (bothVisible ? 17 : 0)), new Point(8, Height - 6 - (bothVisible ? 17 : 0)) });
                             bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                            bg.Graphics.FillPath(b, RoundedRect(new Rectangle((Width/2) - (sliderSize.Width/2), scrollPositionInner + 18, sliderSize.Width, SliderSize.Height), 3, 3,3, 3));
+                            bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
+                            //tohle je jen pro test
+                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
                         }
                     }
                     else if (Allignment != ScrollBarAllignment.Horizontal)

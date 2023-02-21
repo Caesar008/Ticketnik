@@ -125,7 +125,7 @@ namespace Ticketník.CustomControls
             DoubleBuffered = true;
             //SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.DoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             VScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Vertical, this);
-            HScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Vertical, this);
+            HScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Horizontal, this);
             VScrollBar.BackColor = BackColor;
             HScrollBar.BackColor = BackColor;
             VScrollBar.ForeColor = ForeColor;
@@ -339,8 +339,6 @@ namespace Ticketník.CustomControls
                 fillColl.BackColor = HeaderBackColor;
             }
         }
-
-        
 
         protected override void WndProc(ref Message m)
         {
