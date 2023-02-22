@@ -1734,812 +1734,806 @@ namespace Ticketník
                         break;
                 }
 
+                ticket.Datum = datum.Value;
 
-               // if (DialogResult.Yes == MessageBox.Show(form.jazyk.Windows_Ticket_ZmenaData, form.jazyk.Windows_Ticket_ZmenaDataOkno, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-               // {
-                    ticket.Datum = datum.Value;
-
-                    switch(datum.Value.Month)
-                    {
-                        case 1:
-                            if(ticket.Mesic != "Leden")
+                switch (datum.Value.Month)
+                {
+                    case 1:
+                        if (ticket.Mesic != "Leden")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Leden";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("leden"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtString("Mesic", "Leden"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Leden";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden") == null)
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("leden"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtString("Mesic", "Leden"));
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Leden";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
-
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("leden"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtString("Mesic", "Leden"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 2:
-                            if (ticket.Mesic != "Únor")
+                            else
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Únor";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("unor"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtString("Mesic", "Únor"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Leden";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
-                                    }
-                                    //přidat do nového
-                                    ticket.Mesic = "Únor";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
 
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("unor"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtString("Mesic", "Únor"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("leden"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Add(new NbtString("Mesic", "Leden"));
                                     }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("leden").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 3:
-                            if (ticket.Mesic != "Březen")
+                        }
+                        break;
+                    case 2:
+                        if (ticket.Mesic != "Únor")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Březen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("brezen"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtString("Mesic", "Březen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Únor";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor") == null)
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("unor"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtString("Mesic", "Únor"));
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Březen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
-
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("brezen"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtString("Mesic", "Březen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 4:
-                            if (ticket.Mesic != "Duben")
+                            else
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Duben";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("duben"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtString("Mesic", "Duben"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Únor";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
-                                    }
-                                    //přidat do nového
-                                    ticket.Mesic = "Duben";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
 
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("duben"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtString("Mesic", "Duben"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("unor"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Add(new NbtString("Mesic", "Únor"));
                                     }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("unor").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 5:
-                            if (ticket.Mesic != "Květen")
+                        }
+                        break;
+                    case 3:
+                        if (ticket.Mesic != "Březen")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Květen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("kveten"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtString("Mesic", "Květen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Březen";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen") == null)
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("brezen"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtString("Mesic", "Březen"));
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Květen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
-
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("kveten"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtString("Mesic", "Květen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 6:
-                            if (ticket.Mesic != "Červen")
+                            else
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Červen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cerven"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtString("Mesic", "Červen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Březen";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
-                                    }
-                                    //přidat do nového
-                                    ticket.Mesic = "Červen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
 
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cerven"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtString("Mesic", "Červen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("brezen"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Add(new NbtString("Mesic", "Březen"));
                                     }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("brezen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 7:
-                            if (ticket.Mesic != "Červenec")
+                        }
+                        break;
+                    case 4:
+                        if (ticket.Mesic != "Duben")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Červenec";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cervenec"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtString("Mesic", "Červenec"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Duben";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben") == null)
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("duben"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtString("Mesic", "Duben"));
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Červenec";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
-
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cervenec"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtString("Mesic", "Červenec"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 8:
-                            if (ticket.Mesic != "Srpen")
+                            else
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Srpen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("srpen"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtString("Mesic", "Srpen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Duben";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
-                                    }
-                                    //přidat do nového
-                                    ticket.Mesic = "Srpen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
 
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("srpen"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtString("Mesic", "Srpen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("duben"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Add(new NbtString("Mesic", "Duben"));
                                     }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("duben").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 9:
-                            if (ticket.Mesic != "Září")
+                        }
+                        break;
+                    case 5:
+                        if (ticket.Mesic != "Květen")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Září";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("zari"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtString("Mesic", "Září"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Květen";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten") == null)
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("kveten"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtString("Mesic", "Květen"));
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Září";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
-
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("zari"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtString("Mesic", "Září"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 10:
-                            if (ticket.Mesic != "Říjen")
+                            else
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Říjen"; 
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("rijen"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtString("Mesic", "Říjen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Květen";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
-                                    }
-                                    //přidat do nového
-                                    ticket.Mesic = "Říjen";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
 
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("rijen"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtString("Mesic", "Říjen"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("kveten"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Add(new NbtString("Mesic", "Květen"));
                                     }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("kveten").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 11:
-                            if (ticket.Mesic != "Listopad")
+                        }
+                        break;
+                    case 6:
+                        if (ticket.Mesic != "Červen")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-                                    //přidat do nového
-                                    ticket.Mesic = "Listopad";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("listopad"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtString("Mesic", "Listopad"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Červen";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven") == null)
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cerven"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtString("Mesic", "Červen"));
                                     }
-
-                                    //přidat do nového
-                                    ticket.Mesic = "Listopad";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
-
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("listopad"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtString("Mesic", "Listopad"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                        case 12:
-                            if (ticket.Mesic != "Prosinec")
+                            else
                             {
-                                //najít a odstranit
-                                int poc = 0;
-                                if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
                                     {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
                                         {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
+                                            break;
                                         }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                        poc++;
                                     }
-
-                                    //přidat do nového
-                                    ticket.Mesic = "Prosinec";
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("prosinec"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtString("Mesic", "Prosinec"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
-                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
                                 }
-                                else
+                                //přidat do nového
+                                ticket.Mesic = "Červen";
+                                if (ticket.IDtick != -1)
                                 {
-                                    if (ticket.IDtick != -1)
-                                    {
-                                        foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
-                                        {
-                                            if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
-                                            {
-                                                break;
-                                            }
-                                            poc++;
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
-                                    }
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
 
-                                    //přidat do nového
-                                    ticket.Mesic = "Prosinec";
-                                    if (ticket.IDtick != -1)
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven") == null)
                                     {
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
-
-                                        if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec") == null)
-                                        {
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("prosinec"));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtList("Tickety", NbtTagType.Compound));
-                                            form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtString("Mesic", "Prosinec"));
-                                        }
-                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cerven"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Add(new NbtString("Mesic", "Červen"));
                                     }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cerven").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                                 }
                             }
-                            break;
-                    }
-               // }
-               // else
-               //     datum.Value = ticket.Datum;
+                        }
+                        break;
+                    case 7:
+                        if (ticket.Mesic != "Červenec")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Červenec";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cervenec"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtString("Mesic", "Červenec"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                            else
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Červenec";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("cervenec"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Add(new NbtString("Mesic", "Červenec"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("cervenec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                        }
+                        break;
+                    case 8:
+                        if (ticket.Mesic != "Srpen")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Srpen";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("srpen"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtString("Mesic", "Srpen"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                            else
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Srpen";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("srpen"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Add(new NbtString("Mesic", "Srpen"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("srpen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                        }
+                        break;
+                    case 9:
+                        if (ticket.Mesic != "Září")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Září";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("zari"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtString("Mesic", "Září"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                            else
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Září";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("zari"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Add(new NbtString("Mesic", "Září"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("zari").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                        }
+                        break;
+                    case 10:
+                        if (ticket.Mesic != "Říjen")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Říjen";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("rijen"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtString("Mesic", "Říjen"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                            else
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Říjen";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("rijen"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Add(new NbtString("Mesic", "Říjen"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("rijen").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                        }
+                        break;
+                    case 11:
+                        if (ticket.Mesic != "Listopad")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+                                //přidat do nového
+                                ticket.Mesic = "Listopad";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("listopad"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtString("Mesic", "Listopad"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                            else
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+
+                                //přidat do nového
+                                ticket.Mesic = "Listopad";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("listopad"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Add(new NbtString("Mesic", "Listopad"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("listopad").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                        }
+                        break;
+                    case 12:
+                        if (ticket.Mesic != "Prosinec")
+                        {
+                            //najít a odstranit
+                            int poc = 0;
+                            if (form.file.RootTag.Get<NbtInt>("verze").Value < 10100)
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+
+                                //přidat do nového
+                                ticket.Mesic = "Prosinec";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("prosinec"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtString("Mesic", "Prosinec"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                            else
+                            {
+                                if (ticket.IDtick != -1)
+                                {
+                                    foreach (NbtCompound c in form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety"))
+                                    {
+                                        if (c.Get<NbtLong>("IDlong").Value == ticket.IDtick)
+                                        {
+                                            break;
+                                        }
+                                        poc++;
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(form.rokVyber.SelectedItem.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").RemoveAt(poc);
+                                }
+
+                                //přidat do nového
+                                ticket.Mesic = "Prosinec";
+                                if (ticket.IDtick != -1)
+                                {
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Add(new NbtCompound(ticket.Datum.Year.ToString()));
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik) == null)
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Add(new NbtCompound(ticket.Zakaznik));
+
+                                    if (form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec") == null)
+                                    {
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Add(new NbtCompound("prosinec"));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtList("Tickety", NbtTagType.Compound));
+                                        form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Add(new NbtString("Mesic", "Prosinec"));
+                                    }
+                                    form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>("prosinec").Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
+                                }
+                            }
+                        }
+                        break;
+                }
                 dat = false;
             }
         }
