@@ -226,8 +226,8 @@ namespace Ticketník.CustomControls
                             bg.Graphics.DrawLine(p, 0, Height - 17, Width, Height - 17);
                         using (SolidBrush b = new SolidBrush(ForeColor))
                         {
-                            bg.Graphics.FillPolygon(b, new Point[] { new Point(3, 11), new Point(13, 11), new Point(8, 5) });
-                            bg.Graphics.FillPolygon(b, new Point[] { new Point(4, Height - 11 - (bothVisible ? 17 : 0)), new Point(13, Height - 11 - (bothVisible ? 17 : 0)), new Point(8, Height - 6 - (bothVisible ? 17 : 0)) });
+                            bg.Graphics.FillPolygon(b, new Point[] { new Point(3, 10), new Point(13, 10), new Point(8, 4) });
+                            bg.Graphics.FillPolygon(b, new Point[] { new Point(4, Height - 10 - (bothVisible ? 17 : 0)), new Point(13, Height - 10 - (bothVisible ? 17 : 0)), new Point(8, Height - 5 - (bothVisible ? 17 : 0)) });
                             bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                             bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
