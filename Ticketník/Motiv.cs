@@ -77,8 +77,9 @@ namespace Ticketník
                     { "textListViewHeader",Color.Black },
                     { "listViewSeparator",Color.FromArgb(210, 210, 210) },
                     { "listViewGrid",Color.FromArgb(240, 240, 240) },
-                    { "scrollBarSeparator",Color.FromArgb(245, 245, 245) },
-                    { "scrollBarFore",Color.FromArgb(155, 155, 155) }
+                    { "scrollBarSeparator",Color.FromArgb(230, 230, 230) },
+                    { "scrollBarFore",Color.FromArgb(155, 155, 155) },
+                    { "scrollBarBack",Color.FromArgb(245, 245, 245) }
                 }
             },
             { "tmavý", new Dictionary<string, Color>()
@@ -111,7 +112,8 @@ namespace Ticketník
                     { "listViewSeparator",Color.FromArgb(120, 120, 120) },
                     { "listViewGrid",Color.FromArgb(90, 90, 90) },
                     { "scrollBarSeparator",Color.FromArgb(60, 60, 60) },
-                    { "scrollBarFore",Color.FromArgb(100, 100, 100) }
+                    { "scrollBarFore",Color.FromArgb(100, 100, 100) },
+                    { "scrollBarBack",Color.FromArgb(40, 40, 40) }
                 }
             }
         };
@@ -299,7 +301,7 @@ namespace Ticketník
                 }
                 else if(c.GetType() == typeof(CustomControls.ScrollBar))
                 {
-                    ((CustomControls.ScrollBar)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.ScrollBar)c).BackColor = barvy[sMotiv]["scrollBarBack"];
                     ((CustomControls.ScrollBar)c).ForeColor = barvy[sMotiv]["scrollBarFore"];
                     ((CustomControls.ScrollBar)c).SeparatorColor = barvy[sMotiv]["scrollBarSeparator"];
                 }
