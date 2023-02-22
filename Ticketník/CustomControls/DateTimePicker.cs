@@ -717,7 +717,7 @@ namespace Ticketník.CustomControls
 
         private void Calendar_ValueChanged(object sender, EventArgs e)
         {
-            this.Value = calendar.SelectedDate;
+            //this.Value = calendar.SelectedDate;
             Invalidate();
         }
 
@@ -902,7 +902,7 @@ namespace Ticketník.CustomControls
                 _dateChanging = false;
                 _keybuffer = "";
                 Value = tmpDateTime;
-                calendar.ActualDate = calendar.SelectedDate = tmpDateTime;
+                calendar.ActualDate/* = calendar.SelectedDate*/ = tmpDateTime;
             }
         }
         protected override void OnKeyUp(KeyEventArgs e)
@@ -932,7 +932,7 @@ namespace Ticketník.CustomControls
                     _dateChanging = false;
                     _keybuffer = "";
                     Value = tmpDateTime;
-                    calendar.ActualDate = calendar.SelectedDate = tmpDateTime;
+                    calendar.ActualDate/* = calendar.SelectedDate*/ = tmpDateTime;
                 }
 
                 base.OnMouseDown(e);
@@ -966,6 +966,7 @@ namespace Ticketník.CustomControls
                         calendar.Show();
                         calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
                         calendar.Parent = this;
+                        calendar.ActualDate = this.Value;
 
                         //this.Focus();
                         calendar.BringToFront();

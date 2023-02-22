@@ -391,12 +391,12 @@ namespace Ticketník.CustomControls
             private DateTime selectedDate = DateTime.Now;
             public DateTime SelectedDate
             {
-                get { return selectedDate; }
+                get { return /*selectedDate*/Parent.Value; }
                 set
                 {
-                    if (selectedDate != value)
+                    if (/*selectedDate*/Parent.Value != value)
                     {
-                        selectedDate = value;
+                        Parent.Value = ActualDate = value;//selectedDate = value;
                         Invalidate();
                     }
                 }
