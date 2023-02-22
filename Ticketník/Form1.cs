@@ -17,6 +17,7 @@ namespace Ticketník
     - Podpora světlého a tmavého módu
     - Ovládací prvky přepsány pro větší kontrolu nad nimi
     - Zmenšení velikosti exe vynecháním knihoven
+    - Zrušeno potvrzování změny data ticketu
     - Oprava chyby #22-003
     */
 

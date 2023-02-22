@@ -21,6 +21,7 @@ namespace Ticketník
         internal string terpt = "";
         internal string task = "";
         string puvodniID = "";
+        DateTime puvodniCas = new DateTime();
         int lastSelected;
 
         public TicketWindow(Form1 form, bool novy, bool search = false, ListViewItem listViewItem = null, string terp = "", string task = "")
@@ -672,6 +673,7 @@ namespace Ticketník
                 }
             }
             puvodniID = ticket.ID;
+            puvodniCas = ticket.Datum;
             groupBox1.Paint += new PaintEventHandler(groupBox_Paint);
             groupBox2.Paint += new PaintEventHandler(groupBox_Paint);
             groupBox3.Paint += new PaintEventHandler(groupBox_Paint);
@@ -1516,7 +1518,7 @@ namespace Ticketník
             if (e.KeyCode == Keys.Escape)
                 this.Close();
             else if (e.KeyCode == Keys.Enter && e.Modifiers != Keys.Shift)
-                if(ok.Enabled)
+                if(ok.Enabled && !datum.IsDateChanging)
                     ok_Click(null, null);
         }
 
@@ -1733,8 +1735,8 @@ namespace Ticketník
                 }
 
 
-                if (DialogResult.Yes == MessageBox.Show(form.jazyk.Windows_Ticket_ZmenaData, form.jazyk.Windows_Ticket_ZmenaDataOkno, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                {
+               // if (DialogResult.Yes == MessageBox.Show(form.jazyk.Windows_Ticket_ZmenaData, form.jazyk.Windows_Ticket_ZmenaDataOkno, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+               // {
                     ticket.Datum = datum.Value;
 
                     switch(datum.Value.Month)
@@ -2535,9 +2537,9 @@ namespace Ticketník
                             }
                             break;
                     }
-                }
-                else
-                    datum.Value = ticket.Datum;
+               // }
+               // else
+               //     datum.Value = ticket.Datum;
                 dat = false;
             }
         }
@@ -2703,7 +2705,10 @@ namespace Ticketník
         private void TicketWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!okClick)
+            {
                 ticket.ID = puvodniID;
+                ticket.Datum = puvodniCas;
+            }
         }
 
         private int ComboWidth(ComboBox cb)
@@ -2740,17 +2745,17 @@ namespace Ticketník
 
         private void comboBox_MouseEnter(object sender, EventArgs e)
         {
-            Motiv.SetControlColorOver(sender);
+            //Motiv.SetControlColorOver(sender);
         }
 
         private void event_MouseLeave(object sender, EventArgs e)
         {
-            Motiv.SetControlColor(sender);
+            //Motiv.SetControlColor(sender);
         }
 
         private void event_MouseEnter(object sender, EventArgs e)
         {
-            ((Button)sender).FlatAppearance.BorderColor = Color.DodgerBlue;
+            //((Button)sender).FlatAppearance.BorderColor = Color.DodgerBlue;
         }
     }
 }

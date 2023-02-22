@@ -713,6 +713,8 @@ namespace Ticketník.CustomControls
             calendar.ValueChanged += Calendar_ValueChanged;
         }
 
+        public bool IsDateChanging => _dateChanging;
+
         private void Calendar_ValueChanged(object sender, EventArgs e)
         {
             this.Value = calendar.SelectedDate;
