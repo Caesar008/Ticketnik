@@ -175,9 +175,13 @@ namespace Ticketník.CustomControls
             }
         }
 
-        protected override void OnDragDrop(DragEventArgs drgevent)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            base.OnDragDrop(drgevent);
+            base.OnMouseMove(e);
+            if(dragScroll)
+            {
+
+            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
