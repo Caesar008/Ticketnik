@@ -77,7 +77,7 @@ namespace Ticketník
                     { "textListViewHeader",Color.Black },
                     { "listViewSeparator",Color.FromArgb(210, 210, 210) },
                     { "listViewGrid",Color.FromArgb(240, 240, 240) },
-                    { "scrollBarSeparator",Color.FromArgb(250, 250, 250) },
+                    { "scrollBarSeparator",Color.FromArgb(245, 245, 245) },
                     { "scrollBarFore",Color.FromArgb(155, 155, 155) }
                 }
             },
@@ -110,7 +110,7 @@ namespace Ticketník
                     { "textListViewHeader",Color.FromArgb(240, 240, 240) },
                     { "listViewSeparator",Color.FromArgb(120, 120, 120) },
                     { "listViewGrid",Color.FromArgb(90, 90, 90) },
-                    { "scrollBarSeparator",Color.FromArgb(55, 55, 55) },
+                    { "scrollBarSeparator",Color.FromArgb(60, 60, 60) },
                     { "scrollBarFore",Color.FromArgb(100, 100, 100) }
                 }
             }

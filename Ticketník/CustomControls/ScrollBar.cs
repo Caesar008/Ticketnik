@@ -169,8 +169,15 @@ namespace Ticketník.CustomControls
             if(sliderRectForDrag.Contains(e.Location))
             {
                 if (!dragScroll)
+                {
                     dragScroll = true;
+                }
             }
+        }
+
+        protected override void OnDragDrop(DragEventArgs drgevent)
+        {
+            base.OnDragDrop(drgevent);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)

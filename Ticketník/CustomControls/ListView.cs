@@ -27,6 +27,7 @@ namespace Ticketník.CustomControls
                 if (headerBackColor != value)
                 {
                     headerBackColor = value;
+                    fillColl.BackColor = value;
                     Invalidate();
                 }
             }
@@ -57,6 +58,7 @@ namespace Ticketník.CustomControls
                 if (headerSeparatorColor != value)
                 {
                     headerSeparatorColor = value;
+                    fillColl.BorderColor = value;
                     Invalidate();
                 }
             }
@@ -106,12 +108,43 @@ namespace Ticketník.CustomControls
             ExtendLastColumn
         }
 
-        Label fillColl = new Label()
+        private class HeaderFill : Label
         {
-            AutoSize = false,
-            Location = new Point(0, 0),
-            Width = 0
-        } ;
+            public HeaderFill():base()
+            {
+                AutoSize = false;
+                Location = new Point(0, 0);
+                Width = 0;
+                Height = 24;
+            }
+
+            private Color borderColor  = Color.White;
+            public Color BorderColor
+            {
+                get { return borderColor; }
+                set { borderColor = value; Invalidate(); }
+            }
+
+            protected override void OnPaint(PaintEventArgs e)
+            {
+                //base.OnPaint(e);
+                using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, e.ClipRectangle))
+                {
+                    using (Brush b = new SolidBrush(BackColor))
+                    {
+                        bg.Graphics.FillRectangle(b, e.ClipRectangle);
+                        using (Pen p = new Pen(BorderColor, 1))
+                        {
+                            bg.Graphics.DrawLine(p, 0, 0, 0, Height - 1);
+                            bg.Graphics.DrawLine(p, 0, Height - 1, Width, Height - 1);
+                        }
+                    }
+                    bg.Render();
+                }
+            }
+        }
+
+        HeaderFill fillColl = new HeaderFill();
 
         private ScrollBar VScrollBar;
         private ScrollBar HScrollBar;
@@ -121,6 +154,7 @@ namespace Ticketník.CustomControls
             OwnerDraw = true;
             //pro nc space, protože WM_cnpaint strašně bliká a zatěžuje cpu
             fillColl.BackColor = HeaderBackColor;
+            fillColl.BorderColor = HeaderSeparatorColor;
             Controls.Add(fillColl) ;
             DoubleBuffered = true;
             //SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.DoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
@@ -309,7 +343,7 @@ namespace Ticketník.CustomControls
         {
             get
             {
-                return (Height - 23) / 17;
+                return (Height - (HScrollBarVisible ? 17 : 0) - 23) / 17;
             }
         }
 
@@ -334,7 +368,7 @@ namespace Ticketník.CustomControls
             }
             else if (HeaderFillMethod == HeaderTrailingSpaceFill.FillDummyColumn || forceDummy)
             {
-                fillColl.Location = new Point(HeaderWidth+1, 0);
+                fillColl.Location = new Point(HeaderWidth, 0);
                 fillColl.Width = Width - HeaderWidth - (VScrollBarVisible ? 17 : 0);
                 fillColl.BackColor = HeaderBackColor;
             }
@@ -363,14 +397,12 @@ namespace Ticketník.CustomControls
                     else
                         VScrollBar.ScrollPosition = VScrollBar.Max;
 
-                    HScrollBar.ScrollbarRatio = (float)Width/(float)HeaderWidth;
-                    HScrollBar.Max = HeaderWidth - Width;
+                    HScrollBar.ScrollbarRatio = (float)(Width-(VScrollBarVisible ? 17 : 0)) /(float)HeaderWidth;
+                    HScrollBar.Max = HeaderWidth - Width + (VScrollBarVisible ? 17 : 0);
                     if (hScroll <= HScrollBar.Max)
                         HScrollBar.ScrollPosition = hScroll;
                     else
                         HScrollBar.ScrollPosition = HScrollBar.Max;
-
-                    //tady udělat přepočet, blbě roluje, slider jede za
 
                     using (Pen p = new Pen(GridLinesColor, 1))
                     {
@@ -396,6 +428,8 @@ namespace Ticketník.CustomControls
                                 }
                                 if (!separatorTag.Contains("NoLeft"))
                                     g.DrawLine(p, col.DisplayIndex > 0 ? GetColumnLeft(col) - hScroll : 0, 0, col.DisplayIndex > 0 ? GetColumnLeft(col) - hScroll : 0, Height);
+                                if (!separatorTag.Contains("NoRight") && col.DisplayIndex == Columns.Count-1)
+                                    g.DrawLine(p, HeaderWidth - hScroll, 0,HeaderWidth - hScroll , Height);
                             }
                         }
                     }
