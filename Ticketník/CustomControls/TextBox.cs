@@ -165,9 +165,15 @@ namespace Ticketník.CustomControls
             textBox.GotFocus += TextBox_GotFocus;
             textBox.LostFocus += TextBox_LostFocus;
             textBox.TextChanged += TextBox_TextChanged;
+            textBox.KeyDown += TextBox_KeyDown;
             textBox.Text = this.Text;
             textBox.Font = this.Font;
             Controls.Add(textBox);
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            OnKeyDown(e);
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
