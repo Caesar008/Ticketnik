@@ -6,6 +6,7 @@ Potvrzené
 
 - Podpora tmavého režimu - ruční nastavení i detekce podle nastavení systému. V přípravě pro 2.0.
 - Vkládání příloh (2.0)
+- Přímý import do MyTime
 
 Nepotvrzené
 
