@@ -12,7 +12,7 @@ namespace Ticketník.CustomControls
     internal class ScrollBar : System.Windows.Forms.Control
     {
         Rectangle sliderRectForDrag;
-        bool dragScroll = false;
+        bool dragScroll= false, mouseDown = false;
 
         public ScrollBar(SizeModes sizeMode, ScrollBarAllignment scrollBarAllignment, System.Windows.Forms.Control parent) : base()
         {
@@ -173,6 +173,15 @@ namespace Ticketník.CustomControls
                     dragScroll = true;
                 }
             }
+            else if(Allignment == ScrollBarAllignment.Vertical && (new Rectangle(0, 0, Width, 17).Contains(e.Location)))
+            {
+                //vertical up
+                if(!mouseDown)
+                {
+                    mouseDown = true;
+                    //scroll o 1
+                }
+            }
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -190,6 +199,10 @@ namespace Ticketník.CustomControls
             if (dragScroll)
             {
                 dragScroll = false;
+            }
+            if(mouseDown)
+            {
+                mouseDown = false;
             }
         }
 
