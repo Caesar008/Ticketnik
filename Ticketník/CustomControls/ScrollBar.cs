@@ -194,17 +194,18 @@ namespace Ticketník.CustomControls
                 {
                     mouseDown = true;
                     //scroll o -1
-                    if (scrollPosition != 0)
+                    if (scrollPosition > 0)
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -1));
                 }
             }
             else if (Allignment == ScrollBarAllignment.Vertical && (new Rectangle(0, Height - 17 - (bothVisible ? 17 : 0), Width, 17).Contains(e.Location)))
             {
+                //vertical down
                 if (!mouseDown)
                 {
                     mouseDown = true;
-                    //scroll o -1
-                    if (scrollPosition != 0)
+                    //scroll o 1
+                    if (scrollPosition < UsableHight - SliderSize.Height)
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, 1));
                 }
             }
