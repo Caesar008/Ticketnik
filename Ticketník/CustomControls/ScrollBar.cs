@@ -163,23 +163,49 @@ namespace Ticketník.CustomControls
             }
         }
 
+        public sealed class ScrollEventArgs : EventArgs
+        {
+            internal ScrollEventArgs(ScrollBarAllignment scrollBarAllignment, int scrolledBy) 
+            { 
+                ScrollBarAllignment = scrollBarAllignment;
+                ScrolledBy = scrolledBy;
+            }
+            public ScrollBarAllignment ScrollBarAllignment { get; private set; }
+            public int ScrolledBy { get; private set; }
+
+        }
+
+        public event EventHandler<ScrollEventArgs> Scrolled;
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            if(sliderRectForDrag.Contains(e.Location))
+            if (sliderRectForDrag.Contains(e.Location))
             {
                 if (!dragScroll)
                 {
                     dragScroll = true;
                 }
             }
-            else if(Allignment == ScrollBarAllignment.Vertical && (new Rectangle(0, 0, Width, 17).Contains(e.Location)))
+            else if (Allignment == ScrollBarAllignment.Vertical && (new Rectangle(0, 0, Width, 17).Contains(e.Location)))
             {
                 //vertical up
-                if(!mouseDown)
+                if (!mouseDown)
                 {
                     mouseDown = true;
-                    //scroll o 1
+                    //scroll o -1
+                    if (scrollPosition != 0)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -1));
+                }
+            }
+            else if (Allignment == ScrollBarAllignment.Vertical && (new Rectangle(0, Height - 17 - (bothVisible ? 17 : 0), Width, 17).Contains(e.Location)))
+            {
+                if (!mouseDown)
+                {
+                    mouseDown = true;
+                    //scroll o -1
+                    if (scrollPosition != 0)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, 1));
                 }
             }
         }

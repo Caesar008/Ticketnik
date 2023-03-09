@@ -166,12 +166,26 @@ namespace Ticketník.CustomControls
             HScrollBar.ForeColor = ForeColor;
             VScrollBar.Visible = VScrollBarVisible;
             HScrollBar.Visible = HScrollBarVisible;
+            VScrollBar.Scrolled += VScrollBar_Scrolled;
+            HScrollBar.Scrolled += HScrollBar_Scrolled;
             if(VScrollBarVisible && HScrollBarVisible)
             {
                 VScrollBar.BothVisible = HScrollBar.BothVisible = true;
             }
             Controls.Add(HScrollBar);
             Controls.Add(VScrollBar);
+        }
+
+        private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
+        {
+            SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy * 5, 0);
+            Invalidate(new Rectangle(HScrollBar.Location, HScrollBar.Size));
+        }
+
+        private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
+        {
+            SendMessage(this.Handle, Messages.LVM_SCROLL, 0, e.ScrolledBy * 17);
+            Invalidate(new Rectangle(VScrollBar.Location, VScrollBar.Size));
         }
 
         [Category("Action")]
@@ -439,6 +453,10 @@ namespace Ticketník.CustomControls
             {
                 //nekresli původní scrollbary
             }
+            else if(m.Msg == Messages.OnVerticalScroll)
+            {
+                base.WndProc(ref m);
+            }
             else
                 base.WndProc(ref m);
         }
@@ -467,6 +485,13 @@ namespace Ticketník.CustomControls
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetScrollInfo(IntPtr hwnd, int fnBar, ref SCROLLINFO lpsi);
+        [DllImport("user32.dll")]
+        static extern int SetScrollInfo(IntPtr hwnd, int fnBar, [In] ref SCROLLINFO lpsi, bool fRedraw); 
+        [DllImport("user32.dll")]
+        static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+
+        [DllImport("User32.Dll", EntryPoint = "PostMessageA")]
+        static extern bool PostMessage(IntPtr hWnd, UIntPtr msg, IntPtr wParam, IntPtr lParam);
 
         [StructLayout(LayoutKind.Sequential)]
         struct SCROLLINFO
