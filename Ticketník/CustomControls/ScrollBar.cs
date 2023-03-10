@@ -191,22 +191,22 @@ namespace Ticketník.CustomControls
                 if(direction == ScrollDirection.Up)
                 {
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -1));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)scrollStep));
                 }
                 else if (direction == ScrollDirection.Down)
                 {
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, 1));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)scrollStep));
                 }
                 else if (direction == ScrollDirection.Left)
                 {
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, -1));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, -(int)scrollStep));
                 }
                 else if (direction == ScrollDirection.Right)
                 {
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, 1));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, (int)scrollStep));
                 }
             }
             else
@@ -220,6 +220,12 @@ namespace Ticketník.CustomControls
             Up, Down, Left, Right, No
         }
         private ScrollDirection direction = ScrollDirection.No;
+        private enum ScrollStep
+        {
+            Small = 1,
+            Medium = 3
+        }
+        private ScrollStep scrollStep = ScrollStep.Small;
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -237,12 +243,13 @@ namespace Ticketník.CustomControls
                 if (!mouseDown)
                 {
                     direction = ScrollDirection.Up;
+                    scrollStep = ScrollStep.Small;
                     mouseDownTimer.Enabled = true;
                     mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o -1
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -1));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)ScrollStep.Small));
 
                 }
             }
@@ -252,12 +259,13 @@ namespace Ticketník.CustomControls
                 if (!mouseDown)
                 {
                     direction = ScrollDirection.Down;
+                    scrollStep = ScrollStep.Small;
                     mouseDownTimer.Enabled = true;
                     mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o 1
                     if (scrollPosition < UsableHight - SliderSize.Height)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, 1));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Small));
                 }
             }
         }
