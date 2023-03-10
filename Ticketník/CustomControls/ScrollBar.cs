@@ -260,8 +260,8 @@ namespace Ticketník.CustomControls
                 {
                     direction = ScrollDirection.Down;
                     scrollStep = ScrollStep.Small;
-                    mouseDownTimer.Start();
                     mouseDownTimer.Enabled = true;
+                    mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o 1
                     if (scrollPosition < UsableHight - SliderSize.Height)
@@ -289,8 +289,8 @@ namespace Ticketník.CustomControls
             if(mouseDown)
             {
                 mouseDown = false;
-                mouseDownTimer.Enabled = false;
                 mouseDownTimer.Stop();
+                mouseDownTimer.Enabled = false;
                 direction = ScrollDirection.No;
                 firstScroll = 0;
             }
