@@ -32,7 +32,12 @@ namespace Ticketník.CustomControls
                 Location = new Point(0, Parent.Height - Height);
             }
             Parent.SizeChanged += Parent_SizeChanged;
-            
+            mouseDownTimer = new Timer()
+            {
+                Enabled = false,
+                Interval = 75
+            };
+            mouseDownTimer.Tick += MouseDownTimer_Tick;
         }
 
         private void Parent_SizeChanged(object sender, EventArgs e)
@@ -177,6 +182,45 @@ namespace Ticketník.CustomControls
 
         public event EventHandler<ScrollEventArgs> Scrolled;
 
+        Timer mouseDownTimer;
+        byte firstScroll = 0;
+        private void MouseDownTimer_Tick(object sender, EventArgs e)
+        {
+            if(firstScroll == 5)
+            {
+                if(direction == ScrollDirection.Up)
+                {
+                    if (scrollPosition > 0)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -1));
+                }
+                else if (direction == ScrollDirection.Down)
+                {
+                    if (scrollPosition > 0)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, 1));
+                }
+                else if (direction == ScrollDirection.Left)
+                {
+                    if (scrollPosition > 0)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, -1));
+                }
+                else if (direction == ScrollDirection.Right)
+                {
+                    if (scrollPosition > 0)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, 1));
+                }
+            }
+            else
+            {
+                firstScroll += 1;
+            }
+        }
+
+        private enum ScrollDirection
+        {
+            Up, Down, Left, Right, No
+        }
+        private ScrollDirection direction = ScrollDirection.No;
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -192,10 +236,14 @@ namespace Ticketník.CustomControls
                 //vertical up
                 if (!mouseDown)
                 {
+                    direction = ScrollDirection.Up;
+                    mouseDownTimer.Enabled = true;
+                    mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o -1
                     if (scrollPosition > 0)
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -1));
+
                 }
             }
             else if (Allignment == ScrollBarAllignment.Vertical && (new Rectangle(0, Height - 17 - (bothVisible ? 17 : 0), Width, 17).Contains(e.Location)))
@@ -203,6 +251,9 @@ namespace Ticketník.CustomControls
                 //vertical down
                 if (!mouseDown)
                 {
+                    direction = ScrollDirection.Down;
+                    mouseDownTimer.Enabled = true;
+                    mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o 1
                     if (scrollPosition < UsableHight - SliderSize.Height)
@@ -230,6 +281,10 @@ namespace Ticketník.CustomControls
             if(mouseDown)
             {
                 mouseDown = false;
+                mouseDownTimer.Enabled = false;
+                mouseDownTimer.Stop();
+                direction = ScrollDirection.No;
+                firstScroll = 0;
             }
         }
 
