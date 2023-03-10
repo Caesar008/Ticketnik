@@ -195,7 +195,7 @@ namespace Ticketník.CustomControls
                 }
                 else if (direction == ScrollDirection.Down)
                 {
-                    if (scrollPosition > 0)
+                    if (scrollPosition < UsableHight - SliderSize.Height)
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)scrollStep));
                 }
                 else if (direction == ScrollDirection.Left)
@@ -205,7 +205,7 @@ namespace Ticketník.CustomControls
                 }
                 else if (direction == ScrollDirection.Right)
                 {
-                    if (scrollPosition > 0)
+                    if (scrollPosition < UsableHight - SliderSize.Height)
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, (int)scrollStep));
                 }
             }
