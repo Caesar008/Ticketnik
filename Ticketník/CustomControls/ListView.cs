@@ -182,9 +182,19 @@ namespace Ticketník.CustomControls
             Invalidate(new Rectangle(HScrollBar.Location, HScrollBar.Size));
         }
 
+        int posun = 0;
+
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            SendMessage(this.Handle, Messages.LVM_SCROLL, 0, e.ScrolledBy * 17);
+            int innerPosun = e.ScrolledBy;
+            if (e.ScrollDirection == ScrollBar.ScrollDirection.DragDown || e.ScrollDirection == ScrollBar.ScrollDirection.DragUp)
+            {
+                posun += e.ScrolledBy;
+                innerPosun = posun / 17;
+                if(innerPosun != 0)
+                    posun = 0;
+            }
+            SendMessage(this.Handle, Messages.LVM_SCROLL, 0, innerPosun * 17);
             Invalidate(new Rectangle(VScrollBar.Location, VScrollBar.Size));
         }
 

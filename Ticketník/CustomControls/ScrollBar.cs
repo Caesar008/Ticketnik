@@ -15,6 +15,8 @@ namespace Ticketník.CustomControls
         Rectangle sliderRegionRectUp;
         Rectangle sliderRegionRectDown;
         bool dragScroll= false, mouseDown = false;
+        int mouseStartDrag = -1;
+        int posun = 0;
 
         public ScrollBar(SizeModes sizeMode, ScrollBarAllignment scrollBarAllignment, System.Windows.Forms.Control parent) : base()
         {
@@ -40,6 +42,12 @@ namespace Ticketník.CustomControls
                 Interval = 75
             };
             mouseDownTimer.Tick += MouseDownTimer_Tick;
+            dragTimer = new Timer()
+            {
+                Enabled = false,
+                Interval = 10
+            };
+            dragTimer.Tick += DragTimer_Tick;
         }
 
         private void Parent_SizeChanged(object sender, EventArgs e)
@@ -172,13 +180,15 @@ namespace Ticketník.CustomControls
 
         public sealed class ScrollEventArgs : EventArgs
         {
-            internal ScrollEventArgs(ScrollBarAllignment scrollBarAllignment, int scrolledBy) 
+            internal ScrollEventArgs(ScrollBarAllignment scrollBarAllignment, int scrolledBy, ScrollDirection scrollDirection) 
             { 
                 ScrollBarAllignment = scrollBarAllignment;
                 ScrolledBy = scrolledBy;
+                ScrollDirection = scrollDirection;
             }
             public ScrollBarAllignment ScrollBarAllignment { get; private set; }
             public int ScrolledBy { get; private set; }
+            public ScrollDirection ScrollDirection { get; private set; }
 
         }
 
@@ -193,22 +203,22 @@ namespace Ticketník.CustomControls
                 if(direction == ScrollDirection.Up)
                 {
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)scrollStep));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)scrollStep, ScrollDirection.Up));
                 }
                 else if (direction == ScrollDirection.Down)
                 {
                     if (scrollPosition < UsableHight - SliderSize.Height)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)scrollStep));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)scrollStep, ScrollDirection.Down));
                 }
                 else if (direction == ScrollDirection.Left)
                 {
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, -(int)scrollStep));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, -(int)scrollStep, ScrollDirection.Left));
                 }
                 else if (direction == ScrollDirection.Right)
                 {
                     if (scrollPosition < UsableHight - SliderSize.Width)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, (int)scrollStep));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Horizontal, (int)scrollStep, ScrollDirection.Right));
                 }
             }
             else
@@ -217,9 +227,52 @@ namespace Ticketník.CustomControls
             }
         }
 
-        private enum ScrollDirection
+        Timer dragTimer;
+
+        private void DragTimer_Tick(object sender, EventArgs e)
         {
-            Up, Down, Left, Right, No
+
+
+            if (dragScroll)
+            {
+                int currentMousePosY = MousePosition.Y;
+                posun = mouseStartDrag - currentMousePosY;
+                mouseStartDrag = currentMousePosY;
+                if (posun > 0)
+                {
+                    direction = ScrollDirection.DragUp;
+                    if (scrollPosition - posun > 0)
+                    {
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragUp));
+                    }
+                    else
+                    {
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -scrollPosition, ScrollDirection.DragUp));
+                    }
+                }
+                else if (posun == 0)
+                {
+                    direction = ScrollDirection.No;
+                }
+                else if (posun < 0)
+                {
+                    direction = ScrollDirection.DragDown;
+                    if (scrollPosition - posun < UsableHight - SliderSize.Height)
+                    {
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragDown));
+                    }
+                    else
+                    {
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, scrollPosition - UsableHight - SliderSize.Height, ScrollDirection.Down));
+                    }
+                }
+            }
+        }
+
+
+        public enum ScrollDirection
+        {
+            Up, Down, Left, Right, No, DragUp, DragDown, DragLeft, DragRight
         }
         private ScrollDirection direction = ScrollDirection.No;
         private enum ScrollStep
@@ -237,6 +290,9 @@ namespace Ticketník.CustomControls
                 if (!dragScroll)
                 {
                     dragScroll = true;
+                    mouseStartDrag = Allignment == ScrollBarAllignment.Vertical ? MousePosition.Y : MousePosition.X;
+                    dragTimer.Enabled = true;
+                    dragTimer.Start();
                 }
             }
             else if (Allignment == ScrollBarAllignment.Vertical && (new Rectangle(0, 0, Width, 17).Contains(e.Location)))
@@ -251,7 +307,7 @@ namespace Ticketník.CustomControls
                     mouseDown = true;
                     //scroll o -1
                     if (scrollPosition > 0)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)ScrollStep.Small));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)ScrollStep.Small, ScrollDirection.Up));
 
                 }
             }
@@ -267,7 +323,7 @@ namespace Ticketník.CustomControls
                     mouseDown = true;
                     //scroll o 1
                     if (scrollPosition < UsableHight - SliderSize.Height)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Small));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Small, ScrollDirection.Down));
                 }
             }
             else if (sliderRegionRectUp.Contains(e.Location))
@@ -280,9 +336,9 @@ namespace Ticketník.CustomControls
                     mouseDownTimer.Start();
                     mouseDown = true;
                     if (scrollPosition >= (int)ScrollStep.Medium)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)ScrollStep.Medium));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)ScrollStep.Medium, ScrollDirection.Up));
                     else if (scrollPosition > 0)
-                            Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -scrollPosition));
+                            Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -scrollPosition, ScrollDirection.Up));
                 }
             }
             else if (sliderRegionRectDown.Contains(e.Location))
@@ -294,23 +350,11 @@ namespace Ticketník.CustomControls
                     mouseDownTimer.Enabled = true;
                     mouseDownTimer.Start();
                     mouseDown = true;
-                    /*if (scrollPosition < UsableHight - SliderSize.Height)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Small));*/
                     if (scrollPosition + (int)ScrollStep.Medium < UsableHight - SliderSize.Height)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Medium));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Medium, ScrollDirection.Down));
                     else if (scrollPosition < UsableHight - SliderSize.Height)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height, ScrollDirection.Down));
                 }
-            }
-        }
-
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            base.OnMouseMove(e);
-            
-            if(dragScroll)
-            {
-
             }
         }
 
@@ -320,6 +364,9 @@ namespace Ticketník.CustomControls
             if (dragScroll)
             {
                 dragScroll = false;
+                mouseStartDrag = -1;
+                dragTimer.Stop();
+                dragTimer.Enabled = false;
             }
             if(mouseDown)
             {
@@ -347,6 +394,14 @@ namespace Ticketník.CustomControls
                 {
                     if (Allignment == ScrollBarAllignment.Vertical)
                     {
+                        if(sliderRectForDrag.Contains(PointToClient(MousePosition)))
+                        {
+                            mouseDown = false;
+                            mouseDownTimer.Stop();
+                            mouseDownTimer.Enabled = false;
+                            direction = ScrollDirection.No;
+                            firstScroll = 0;
+                        }
                         SliderSize = new Size(6, (int)((UsableHight) * ratio));
                         if (SliderSize.Height < 6)
                             SliderSize = new Size(6, 6);
