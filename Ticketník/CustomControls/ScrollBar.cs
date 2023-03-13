@@ -12,6 +12,8 @@ namespace Ticketník.CustomControls
     internal class ScrollBar : System.Windows.Forms.Control
     {
         Rectangle sliderRectForDrag;
+        Rectangle sliderRegionRectUp;
+        Rectangle sliderRegionRectDown;
         bool dragScroll= false, mouseDown = false;
 
         public ScrollBar(SizeModes sizeMode, ScrollBarAllignment scrollBarAllignment, System.Windows.Forms.Control parent) : base()
@@ -268,11 +270,44 @@ namespace Ticketník.CustomControls
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Small));
                 }
             }
+            else if (sliderRegionRectUp.Contains(e.Location))
+            {
+                if(Allignment == ScrollBarAllignment.Vertical)
+                {
+                    direction= ScrollDirection.Up;
+                    scrollStep = ScrollStep.Medium;
+                    mouseDownTimer.Enabled = true;
+                    mouseDownTimer.Start();
+                    mouseDown = true;
+                    if (scrollPosition >= (int)ScrollStep.Medium)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -(int)ScrollStep.Medium));
+                    else if (scrollPosition > 0)
+                            Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -scrollPosition));
+                }
+            }
+            else if (sliderRegionRectDown.Contains(e.Location))
+            {
+                if(Allignment ==  ScrollBarAllignment.Vertical)
+                {
+                    direction = ScrollDirection.Down;
+                    scrollStep = ScrollStep.Medium;
+                    mouseDownTimer.Enabled = true;
+                    mouseDownTimer.Start();
+                    mouseDown = true;
+                    /*if (scrollPosition < UsableHight - SliderSize.Height)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Small));*/
+                    if (scrollPosition + (int)ScrollStep.Medium < UsableHight - SliderSize.Height)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, (int)ScrollStep.Medium));
+                    else if (scrollPosition < UsableHight - SliderSize.Height)
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height));
+                }
+            }
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            
             if(dragScroll)
             {
 
@@ -321,6 +356,8 @@ namespace Ticketník.CustomControls
 
                         Rectangle slider = new Rectangle((Width / 2) - (sliderSize.Width / 2), scrollPositionInner + 18, sliderSize.Width, sliderSize.Height);
                         sliderRectForDrag = new Rectangle(1, scrollPositionInner + 18, Width - 2, sliderSize.Height);
+                        sliderRegionRectUp = new Rectangle(1, 17, Width -2, scrollPositionInner);
+                        sliderRegionRectDown = new Rectangle(1, sliderRectForDrag.Bottom +2, Width - 2, Height - sliderRectForDrag.Bottom - 19 - (bothVisible ? 18 : 0));
 
                         bg.Graphics.DrawLine(p, 0, 0, 0, Height);
                         bg.Graphics.DrawLine(p, 0, 16, Width, 16);
@@ -335,7 +372,8 @@ namespace Ticketník.CustomControls
                             bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
                             //tohle je jen pro test
-                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
+                            /*bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRegionRectUp);
+                            bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRegionRectDown);*/
                         }
                     }
                     else if (Allignment == ScrollBarAllignment.Horizontal)
@@ -349,6 +387,8 @@ namespace Ticketník.CustomControls
 
                         Rectangle slider = new Rectangle(scrollPositionInner + 18, (Height / 2) - (sliderSize.Height / 2), sliderSize.Width, sliderSize.Height);
                         sliderRectForDrag = new Rectangle(scrollPositionInner + 18, 1, sliderSize.Width, Height - 2);
+                        sliderRegionRectUp = new Rectangle(17, 1, scrollPositionInner, Height -2);
+                        sliderRegionRectDown = new Rectangle(sliderRectForDrag.Right + 2, 1, Width - sliderRectForDrag.Right - 19 - (bothVisible ? 18 : 0), Height -2);
 
                         bg.Graphics.DrawLine(p, 0, 0, Width, 0); 
                         bg.Graphics.DrawLine(p, 16, 0, 16, Height);
@@ -363,7 +403,8 @@ namespace Ticketník.CustomControls
                             bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
                             //tohle je jen pro test
-                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
+                            /*bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRegionRectUp);
+                            bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRegionRectDown);*/
                         }
                     }
                 }
