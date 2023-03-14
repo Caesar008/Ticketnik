@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -182,19 +183,20 @@ namespace Ticketník.CustomControls
             Invalidate(new Rectangle(HScrollBar.Location, HScrollBar.Size));
         }
 
-        int posun = 0;
+        float posun = 0;
 
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            int innerPosun = e.ScrolledBy;
             if (e.ScrollDirection == ScrollBar.ScrollDirection.DragDown || e.ScrollDirection == ScrollBar.ScrollDirection.DragUp)
             {
-                posun += e.ScrolledBy;
-                innerPosun = posun / 17;
-                if(innerPosun != 0)
-                    posun = 0;
+                posun += e.ScrolledBy / e.ScrollbarRatio;
             }
-            SendMessage(this.Handle, Messages.LVM_SCROLL, 0, innerPosun * 17);
+            Debug.WriteLine("Posun: " + posun);
+            if (posun >= 17 || posun <= -17)
+            {
+                SendMessage(this.Handle, Messages.LVM_SCROLL, 0, (int)posun);
+                posun = 0;
+            }
             Invalidate(new Rectangle(VScrollBar.Location, VScrollBar.Size));
         }
 
