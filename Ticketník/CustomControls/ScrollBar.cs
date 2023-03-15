@@ -165,8 +165,8 @@ namespace Ticketník.CustomControls
             } 
         }
 
-        private float ratio = 1;
-        public float ScrollbarRatio
+        private double ratio = 1;
+        public double ScrollbarRatio
         {
             get { return ratio; }
             set
@@ -181,7 +181,7 @@ namespace Ticketník.CustomControls
 
         public sealed class ScrollEventArgs : EventArgs
         {
-            internal ScrollEventArgs(ScrollBarAllignment scrollBarAllignment, int scrolledBy, ScrollDirection scrollDirection, float scrollbarRatio) 
+            internal ScrollEventArgs(ScrollBarAllignment scrollBarAllignment, int scrolledBy, ScrollDirection scrollDirection, double scrollbarRatio) 
             { 
                 ScrollBarAllignment = scrollBarAllignment;
                 ScrolledBy = scrolledBy;
@@ -191,7 +191,7 @@ namespace Ticketník.CustomControls
             public ScrollBarAllignment ScrollBarAllignment { get; private set; }
             public int ScrolledBy { get; private set; }
             public ScrollDirection ScrollDirection { get; private set; }
-            public float ScrollbarRatio { get; private set; }
+            public double ScrollbarRatio { get; private set; }
 
         }
 
@@ -240,9 +240,12 @@ namespace Ticketník.CustomControls
                 posun = mouseStartDrag - currentMousePosY;
 
                 mouseStartDrag = currentMousePosY;
-                float step = (float)(UsableHight - SliderSize.Height) / Max;
+                double step = (double)(UsableHight - SliderSize.Height) / Max;
+                Debug.WriteLine("pos: " + ((int)(scrollPosition * step)));
+                Debug.WriteLine("pos 2: " + (Math.Round(scrollPosition * step, MidpointRounding.AwayFromZero)));
+                Debug.WriteLine("max: " + (UsableHight - SliderSize.Height));
 
-                if (posun == 0 || ((scrollPosition == 0 && PointToClient(MousePosition).Y < 17) || ((int)(scrollPosition*step) == UsableHight - SliderSize.Height &&  PointToClient(MousePosition).Y > UsableHight)))
+                if (posun == 0 || ((scrollPosition == 0 && PointToClient(MousePosition).Y < 17) || (Math.Round(scrollPosition*step, MidpointRounding.AwayFromZero) == UsableHight - SliderSize.Height &&  PointToClient(MousePosition).Y > UsableHight)))
                 {
                     direction = ScrollDirection.No;
                 }
@@ -261,13 +264,13 @@ namespace Ticketník.CustomControls
                 else if (posun < 0)
                 {
                     direction = ScrollDirection.DragDown;
-                    if ((int)(scrollPosition*step) - posun < UsableHight - SliderSize.Height)
+                    if (Math.Round(scrollPosition*step, MidpointRounding.AwayFromZero) - posun < UsableHight - SliderSize.Height)
                     {
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragDown, ScrollbarRatio));
                     }
                     else
                     {
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height - (int)(scrollPosition * step), ScrollDirection.Down, ScrollbarRatio));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height - (int)Math.Round(scrollPosition * step, MidpointRounding.AwayFromZero), ScrollDirection.Down, ScrollbarRatio));
                     }
                 }
             }
@@ -410,7 +413,7 @@ namespace Ticketník.CustomControls
                         if (SliderSize.Height < 6)
                             SliderSize = new Size(6, 6);
                         int max = UsableHight - SliderSize.Height;
-                        float step = (float)max / Max;
+                        double step = (double)max / Max;
                         int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
 
                         Rectangle slider = new Rectangle((Width / 2) - (sliderSize.Width / 2), scrollPositionInner + 18, sliderSize.Width, sliderSize.Height);
@@ -441,7 +444,7 @@ namespace Ticketník.CustomControls
                         if (SliderSize.Width < 6)
                             SliderSize = new Size(6, 6);
                         int max = UsableHight - SliderSize.Width;
-                        float step = (float)max / Max;
+                        double step = (double)max / Max;
                         int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
 
                         Rectangle slider = new Rectangle(scrollPositionInner + 18, (Height / 2) - (sliderSize.Height / 2), sliderSize.Width, sliderSize.Height);

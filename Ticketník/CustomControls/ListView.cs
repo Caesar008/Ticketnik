@@ -183,7 +183,7 @@ namespace Ticketník.CustomControls
             Invalidate(new Rectangle(HScrollBar.Location, HScrollBar.Size));
         }
 
-        float posun = 0;
+        double posun = 0;
 
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
@@ -419,14 +419,14 @@ namespace Ticketník.CustomControls
                 }
                 if (GridLines && View == View.Details)
                 {
-                    VScrollBar.ScrollbarRatio = (float)VisibleItems / (float)Items.Count;
+                    VScrollBar.ScrollbarRatio = (double)VisibleItems / (double)Items.Count;
                     VScrollBar.Max = Items.Count - VisibleItems;
                     if(vScroll <= VScrollBar.Max)
                         VScrollBar.ScrollPosition = vScroll;
                     else
                         VScrollBar.ScrollPosition = VScrollBar.Max;
 
-                    HScrollBar.ScrollbarRatio = (float)(Width-(VScrollBarVisible ? 17 : 0)) /(float)HeaderWidth;
+                    HScrollBar.ScrollbarRatio = (double)(Width-(VScrollBarVisible ? 17 : 0)) /(double)HeaderWidth;
                     HScrollBar.Max = HeaderWidth - Width + (VScrollBarVisible ? 17 : 0);
                     if (hScroll <= HScrollBar.Max)
                         HScrollBar.ScrollPosition = hScroll;
