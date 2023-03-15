@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -238,7 +239,13 @@ namespace Ticketník.CustomControls
                 int currentMousePosY = MousePosition.Y;
                 posun = mouseStartDrag - currentMousePosY;
                 mouseStartDrag = currentMousePosY;
-                if (posun > 0)
+                float step = (float)(UsableHight - SliderSize.Height) / Max;
+
+                if (posun == 0 || ((scrollPosition == 0 && PointToClient(MousePosition).Y < 17) || (scrollPosition*step == UsableHight - SliderSize.Height &&  PointToClient(MousePosition).Y > UsableHight)))
+                {
+                    direction = ScrollDirection.No;
+                }
+                else if (posun > 0)
                 {
                     direction = ScrollDirection.DragUp;
                     if (scrollPosition - posun > 0)
@@ -250,14 +257,10 @@ namespace Ticketník.CustomControls
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -scrollPosition, ScrollDirection.DragUp, ScrollbarRatio));
                     }
                 }
-                else if (posun == 0)
-                {
-                    direction = ScrollDirection.No;
-                }
                 else if (posun < 0)
                 {
                     direction = ScrollDirection.DragDown;
-                    if (scrollPosition - posun < UsableHight - SliderSize.Height)
+                    if ((scrollPosition*step) - posun < UsableHight - SliderSize.Height)
                     {
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragDown, ScrollbarRatio));
                     }

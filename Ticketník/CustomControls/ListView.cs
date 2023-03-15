@@ -191,6 +191,10 @@ namespace Ticketník.CustomControls
             {
                 posun += e.ScrolledBy / e.ScrollbarRatio;
             }
+            else
+            {
+                posun = e.ScrolledBy*17;
+            }
             if (posun >= 17 || posun <= -17)
             {
                 SendMessage(this.Handle, Messages.LVM_SCROLL, 0, (int)posun);
