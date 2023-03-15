@@ -238,17 +238,18 @@ namespace Ticketník.CustomControls
             {
                 int currentMousePosY = MousePosition.Y;
                 posun = mouseStartDrag - currentMousePosY;
+
                 mouseStartDrag = currentMousePosY;
                 float step = (float)(UsableHight - SliderSize.Height) / Max;
 
-                if (posun == 0 || ((scrollPosition == 0 && PointToClient(MousePosition).Y < 17) || (scrollPosition*step == UsableHight - SliderSize.Height &&  PointToClient(MousePosition).Y > UsableHight)))
+                if (posun == 0 || ((scrollPosition == 0 && PointToClient(MousePosition).Y < 17) || ((int)(scrollPosition*step) == UsableHight - SliderSize.Height &&  PointToClient(MousePosition).Y > UsableHight)))
                 {
                     direction = ScrollDirection.No;
                 }
                 else if (posun > 0)
                 {
                     direction = ScrollDirection.DragUp;
-                    if (scrollPosition - posun > 0)
+                    if ((scrollPosition*step) - posun > 0)
                     {
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragUp, ScrollbarRatio));
                     }
@@ -260,13 +261,13 @@ namespace Ticketník.CustomControls
                 else if (posun < 0)
                 {
                     direction = ScrollDirection.DragDown;
-                    if ((scrollPosition*step) - posun < UsableHight - SliderSize.Height)
+                    if ((int)(scrollPosition*step) - posun < UsableHight - SliderSize.Height)
                     {
                         Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragDown, ScrollbarRatio));
                     }
                     else
                     {
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, scrollPosition - UsableHight - SliderSize.Height, ScrollDirection.Down, ScrollbarRatio));
+                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height - (int)(scrollPosition * step), ScrollDirection.Down, ScrollbarRatio));
                     }
                 }
             }
