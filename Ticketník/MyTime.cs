@@ -70,7 +70,8 @@ namespace Ticketník
             int page = 1;
             result = "";
             List<MyTimeTerp> myTimeTerpList = new List<MyTimeTerp>();
-            while (result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Projects\",\"tooltip\":\"Search in All Projects\",\"data\":null}]")
+            List<Terp> terpList = null;
+            while (true/*result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Projects\",\"tooltip\":\"Search in All Projects\",\"data\":null}]"*/)
             {
                 try
                 {
@@ -82,13 +83,17 @@ namespace Ticketník
                     await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
                     result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
                 }
-                try
-                {
-                    List<Terp> terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
-                }
-                catch { }
+                terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
 
-                JsonTextReader reader = new JsonTextReader(new StringReader(result));
+                if (terpList[0].Data == null)
+                    break;
+                foreach (Terp t in terpList)
+                {
+                    if(!t.Data.ProjectNumber.EndsWith("@"))
+                        myTimeTerpList.Add(new MyTimeTerp(t.ID, t.Label, t.Data.ProjectName, t.Data.ProjectNumber));
+                }
+
+                /*JsonTextReader reader = new JsonTextReader(new StringReader(result));
                 string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
 
                 while (reader.Read())
@@ -127,7 +132,7 @@ namespace Ticketník
                             }
                         }
                     }
-                }
+                }*/
                 page++;
             }
             for (int i = 0; i < myTimeTerpList.Count; i++)
@@ -149,9 +154,20 @@ namespace Ticketník
                 await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
                 result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID).ConfigureAwait(false);
             }
-            JsonTextReader reader = new JsonTextReader(new StringReader(result));
-            string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
+
             MyTimeTerp myTimeTerp = null;
+            List<Terp> terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
+            foreach(Terp t in terpList)
+            {
+                if(!t.Data.ProjectNumber.EndsWith("@"))
+                {
+                    myTimeTerp = new MyTimeTerp(t.ID, t.Label, t.Data.ProjectName, t.Data.ProjectNumber);
+                    myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID).Result;
+                }
+            }
+
+            /*JsonTextReader reader = new JsonTextReader(new StringReader(result));
+            string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
 
             while (reader.Read())
             {
@@ -187,17 +203,33 @@ namespace Ticketník
                         tmpId = tmpLabel = tmpName = "";
                     }
                 }
-            }
+            }*/
 
             return myTimeTerp;
+        }
+
+        sealed class Task
+        {
+            [JsonProperty("id")]
+            public string ID { get; set; }
+            [JsonProperty("label")]
+            public string Label { get; set; }
+            [JsonProperty("data")]
+            public TaskData Data { get; set; }
+        }
+        sealed class TaskData
+        {
+            [JsonProperty("task_description")]
+            public string TaskDescription { get; set; }
         }
 
         public async Task<List<MyTimeTask>> GetTerpTasks(string terpID)
         {
             int page = 1;
             List<MyTimeTask> myTimeTaskList = new List<MyTimeTask>();
+            List <Task> taskList = null;
             result = "";
-            while (result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Tasks\",\"data\":null}]")
+            while (true/*result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Tasks\",\"data\":null}]"*/)
             {
                 try
                 {
@@ -209,7 +241,17 @@ namespace Ticketník
                     result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page).ConfigureAwait(false);
                 }
 
-                JsonTextReader reader = new JsonTextReader(new StringReader(result));
+                taskList = JsonConvert.DeserializeObject<List<Task>>(result);
+
+                if (taskList[0].Data == null)
+                    break;
+
+                foreach(Task t in taskList)
+                {
+                    myTimeTaskList.Add(new MyTimeTask(t.ID, t.Label, t.Data.TaskDescription));
+                }
+
+                /*JsonTextReader reader = new JsonTextReader(new StringReader(result));
                 string tmpId = "", tmpName = "", tmpLabel = "";
 
                 while (reader.Read())
@@ -238,7 +280,7 @@ namespace Ticketník
                             tmpId = tmpLabel = tmpName = "";
                         }
                     }
-                }
+                }*/
                 page++;
             }
             for (int i = 0; i < myTimeTaskList.Count; i++)
@@ -260,9 +302,16 @@ namespace Ticketník
                 await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
                 result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID).ConfigureAwait(false);
             }
+            MyTimeTask myTimeTask = null;
+
+            List<Task> taskList = JsonConvert.DeserializeObject<List<Task>>(result);
+            
+            myTimeTask = new MyTimeTask(taskList[0].ID, taskList[0].Label, taskList[0].Data.TaskDescription);
+            
+
+            /*
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
             string tmpId = "", tmpName = "", tmpLabel = "";
-            MyTimeTask myTimeTask = null;
 
             while (reader.Read())
             {
@@ -290,10 +339,16 @@ namespace Ticketník
                         tmpId = tmpLabel = tmpName = "";
                     }
                 }
-            }
+            }*/
             myTimeTask.TypeLabels = GetTerpTaskTypes(terpID, myTimeTask.ID).Result;
 
             return myTimeTask;
+        }
+
+        sealed class Type
+        {
+            [JsonProperty("label")]
+            public string Label { get; set; }
         }
 
         public async Task<List<string>> GetTerpTaskTypes(string terpID, string taskID)
@@ -307,8 +362,16 @@ namespace Ticketník
                 await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
                 result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=").ConfigureAwait(false);
             }
-            JsonTextReader reader = new JsonTextReader(new StringReader(result));
+
             List<string> myTimeTerpTaskTypeList = new List<string>();
+            List<Type> typeList = JsonConvert.DeserializeObject<List<Type>>(result);
+
+            foreach(Type t in typeList)
+            {
+                myTimeTerpTaskTypeList.Add(t.Label);
+            }
+            /*
+            JsonTextReader reader = new JsonTextReader(new StringReader(result));
 
             while (reader.Read())
             {
@@ -320,7 +383,7 @@ namespace Ticketník
                         myTimeTerpTaskTypeList.Add((string)reader.Value);
                     }
                 }
-            }
+            }*/
 
             return myTimeTerpTaskTypeList;
         }
@@ -336,6 +399,11 @@ namespace Ticketník
                 await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
                 result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel).ConfigureAwait(false);
             }
+
+            List<Type> typeList = JsonConvert.DeserializeObject<List<Type>>(result);
+            string myTimeTerpTaskType = typeList[0].Label;
+
+            /*
             JsonTextReader reader = new JsonTextReader(new StringReader(result));
             string myTimeTerpTaskType = "";
 
@@ -349,7 +417,7 @@ namespace Ticketník
                         myTimeTerpTaskType = (string)reader.Value;
                     }
                 }
-            }
+            }*/
 
             return myTimeTerpTaskType;
         }
