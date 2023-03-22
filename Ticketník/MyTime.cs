@@ -47,6 +47,24 @@ namespace Ticketník
             }
         }
 
+        sealed class Terp
+        {
+            [JsonProperty("id")]
+            public string ID { get; set; }
+            [JsonProperty("label")]
+            public string Label { get; set; }
+            [JsonProperty("data")]
+            public TerpData Data { get; set; } 
+        }
+
+        sealed class TerpData
+        {
+            [JsonProperty("project_name")]
+            public string ProjectName { get; set; }
+            [JsonProperty("project_number")]
+            public string ProjectNumber { get; set; }
+        }
+
         public async Task<List<MyTimeTerp>> GetAllMyTerps()
         {
             int page = 1;
@@ -64,6 +82,11 @@ namespace Ticketník
                     await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
                     result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
                 }
+                try
+                {
+                    List<Terp> terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
+                }
+                catch { }
 
                 JsonTextReader reader = new JsonTextReader(new StringReader(result));
                 string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
