@@ -89,50 +89,9 @@ namespace Ticketník
                     break;
                 foreach (Terp t in terpList)
                 {
-                    if(!t.Data.ProjectNumber.EndsWith("@"))
+                    if(t.Data != null && !t.Data.ProjectNumber.EndsWith("@"))
                         myTimeTerpList.Add(new MyTimeTerp(t.ID, t.Label, t.Data.ProjectName, t.Data.ProjectNumber));
                 }
-
-                /*JsonTextReader reader = new JsonTextReader(new StringReader(result));
-                string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
-
-                while (reader.Read())
-                {
-                    if (reader.Value != null)
-                    {
-                        if (tmpId == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
-                        {
-                            reader.Read();
-                            if (!reader.Value.ToString().EndsWith("@"))
-                                tmpId = reader.Value.ToString();
-                        }
-                        else if (tmpName == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
-                        {
-                            reader.Read();
-                            tmpName = ((string)reader.Value);
-                        }
-                        else if (tmpLabel == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                        {
-                            reader.Read();
-                            tmpLabel = ((string)reader.Value);
-                        }
-                        else if (tmpNumber == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
-                        {
-                            reader.Read();
-                            if (!reader.Value.ToString().EndsWith("@"))
-                                tmpNumber = reader.Value.ToString();
-                        }
-
-                        if (tmpId != "" && tmpLabel != "" && (tmpName != "" || !result.Contains("project_name")) && (tmpNumber != "" || !result.Contains("project_number")))
-                        {
-                            if (tmpLabel != "Search in All Projects")
-                            {
-                                myTimeTerpList.Add(new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber));
-                                tmpId = tmpLabel = tmpName = tmpNumber = "";
-                            }
-                        }
-                    }
-                }*/
                 page++;
             }
             for (int i = 0; i < myTimeTerpList.Count; i++)
@@ -159,51 +118,12 @@ namespace Ticketník
             List<Terp> terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
             foreach(Terp t in terpList)
             {
-                if(!t.Data.ProjectNumber.EndsWith("@"))
+                if(t.Data != null && !t.Data.ProjectNumber.EndsWith("@"))
                 {
                     myTimeTerp = new MyTimeTerp(t.ID, t.Label, t.Data.ProjectName, t.Data.ProjectNumber);
                     myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID).Result;
                 }
             }
-
-            /*JsonTextReader reader = new JsonTextReader(new StringReader(result));
-            string tmpId = "", tmpName = "", tmpLabel = "", tmpNumber = "";
-
-            while (reader.Read())
-            {
-                if (reader.Value != null)
-                {
-                    if (tmpId == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
-                    {
-                        reader.Read();
-                        tmpId = reader.Value.ToString();
-                    }
-                    else if (tmpName == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_name")
-                    {
-                        reader.Read();
-                        if(!reader.Value.ToString().EndsWith("@"))
-                            tmpName = ((string)reader.Value);
-                    }
-                    else if (tmpLabel == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                    {
-                        reader.Read();
-                        tmpLabel = ((string)reader.Value);
-                    }
-                    else if (tmpNumber == "" && reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "project_number")
-                    {
-                        reader.Read();
-                        if (!reader.Value.ToString().EndsWith("@"))
-                            tmpNumber = reader.Value.ToString();
-                    }
-
-                    if (tmpId != "" && tmpLabel != "" && tmpName != "" && (tmpNumber != "" || !result.Contains("project_number")))
-                    {
-                        myTimeTerp = new MyTimeTerp(tmpId, tmpLabel, tmpName, tmpNumber);
-                        myTimeTerp.Tasks = GetTerpTasks(myTimeTerp.ID).Result;
-                        tmpId = tmpLabel = tmpName = "";
-                    }
-                }
-            }*/
 
             return myTimeTerp;
         }
@@ -229,7 +149,7 @@ namespace Ticketník
             List<MyTimeTask> myTimeTaskList = new List<MyTimeTask>();
             List <Task> taskList = null;
             result = "";
-            while (true/*result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Tasks\",\"data\":null}]"*/)
+            while (true)
             {
                 try
                 {
@@ -250,37 +170,6 @@ namespace Ticketník
                 {
                     myTimeTaskList.Add(new MyTimeTask(t.ID, t.Label, t.Data.TaskDescription));
                 }
-
-                /*JsonTextReader reader = new JsonTextReader(new StringReader(result));
-                string tmpId = "", tmpName = "", tmpLabel = "";
-
-                while (reader.Read())
-                {
-                    if (reader.Value != null)
-                    {
-                        if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
-                        {
-                            reader.Read();
-                            tmpId = reader.Value.ToString();
-                        }
-                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "task_description")
-                        {
-                            reader.Read();
-                            tmpName = (string)reader.Value;
-                        }
-                        else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                        {
-                            reader.Read();
-                            tmpLabel = (string)reader.Value;
-                        }
-
-                        if (tmpId != "" && tmpLabel != "" && tmpName != "")
-                        {
-                            myTimeTaskList.Add(new MyTimeTask(tmpId, tmpLabel, tmpName));
-                            tmpId = tmpLabel = tmpName = "";
-                        }
-                    }
-                }*/
                 page++;
             }
             for (int i = 0; i < myTimeTaskList.Count; i++)
@@ -308,38 +197,6 @@ namespace Ticketník
             
             myTimeTask = new MyTimeTask(taskList[0].ID, taskList[0].Label, taskList[0].Data.TaskDescription);
             
-
-            /*
-            JsonTextReader reader = new JsonTextReader(new StringReader(result));
-            string tmpId = "", tmpName = "", tmpLabel = "";
-
-            while (reader.Read())
-            {
-                if (reader.Value != null)
-                {
-                    if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "id")
-                    {
-                        reader.Read();
-                        tmpId = reader.Value.ToString();
-                    }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "task_description")
-                    {
-                        reader.Read();
-                        tmpName = (string)reader.Value;
-                    }
-                    else if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                    {
-                        reader.Read();
-                        tmpLabel = (string)reader.Value;
-                    }
-
-                    if (tmpId != "" && tmpLabel != "" && tmpName != "")
-                    {
-                        myTimeTask = new MyTimeTask(tmpId, tmpLabel, tmpName);
-                        tmpId = tmpLabel = tmpName = "";
-                    }
-                }
-            }*/
             myTimeTask.TypeLabels = GetTerpTaskTypes(terpID, myTimeTask.ID).Result;
 
             return myTimeTask;
@@ -370,20 +227,6 @@ namespace Ticketník
             {
                 myTimeTerpTaskTypeList.Add(t.Label);
             }
-            /*
-            JsonTextReader reader = new JsonTextReader(new StringReader(result));
-
-            while (reader.Read())
-            {
-                if (reader.Value != null)
-                {
-                    if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                    {
-                        reader.Read();
-                        myTimeTerpTaskTypeList.Add((string)reader.Value);
-                    }
-                }
-            }*/
 
             return myTimeTerpTaskTypeList;
         }
@@ -403,21 +246,6 @@ namespace Ticketník
             List<Type> typeList = JsonConvert.DeserializeObject<List<Type>>(result);
             string myTimeTerpTaskType = typeList[0].Label;
 
-            /*
-            JsonTextReader reader = new JsonTextReader(new StringReader(result));
-            string myTimeTerpTaskType = "";
-
-            while (reader.Read())
-            {
-                if (reader.Value != null)
-                {
-                    if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "label")
-                    {
-                        reader.Read();
-                        myTimeTerpTaskType = (string)reader.Value;
-                    }
-                }
-            }*/
 
             return myTimeTerpTaskType;
         }
