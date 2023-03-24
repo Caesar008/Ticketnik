@@ -240,39 +240,62 @@ namespace Ticketník.CustomControls
                 posun = mouseStartDrag - currentMousePosY;
 
                 mouseStartDrag = currentMousePosY;
-                double step = (double)(UsableHight - SliderSize.Height) / Max;
-                Debug.WriteLine("pos: " + ((int)(scrollPosition * step)));
-                Debug.WriteLine("pos 2: " + (Math.Round(scrollPosition * step, MidpointRounding.AwayFromZero)));
-                Debug.WriteLine("max: " + (UsableHight - SliderSize.Height));
 
-                if (posun == 0 || ((scrollPosition == 0 && PointToClient(MousePosition).Y < 17) || (Math.Round(scrollPosition*step, MidpointRounding.AwayFromZero) == UsableHight - SliderSize.Height &&  PointToClient(MousePosition).Y > UsableHight)))
+                if (posun == 0)
                 {
                     direction = ScrollDirection.No;
                 }
                 else if (posun > 0)
                 {
-                    direction = ScrollDirection.DragUp;
-                    if ((scrollPosition*step) - posun > 0)
+                    if (scrollPosition == UsableHight - SliderSize.Height && PointToClient(MousePosition).Y > UsableHight)
                     {
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragUp, ScrollbarRatio));
+                        direction = ScrollDirection.No;
+                        //Debug.WriteLine("konec");
                     }
                     else
                     {
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -scrollPosition, ScrollDirection.DragUp, ScrollbarRatio));
+                        direction = ScrollDirection.DragUp;
+                        if (scrollPosition - posun > 0)
+                        {
+                            Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragUp, ScrollbarRatio));
+                        }
+                        else
+                        {
+                            Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -scrollPosition-1, ScrollDirection.DragUp, ScrollbarRatio));
+                        }
                     }
                 }
                 else if (posun < 0)
                 {
-                    direction = ScrollDirection.DragDown;
-                    if (Math.Round(scrollPosition*step, MidpointRounding.AwayFromZero) - posun < UsableHight - SliderSize.Height)
+                    if (scrollPosition == 0 && PointToClient(MousePosition).Y < 17)
                     {
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragDown, ScrollbarRatio));
+                        direction = ScrollDirection.No;
+                        Debug.WriteLine("konec");
                     }
                     else
                     {
-                        Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height - (int)Math.Round(scrollPosition * step, MidpointRounding.AwayFromZero), ScrollDirection.Down, ScrollbarRatio));
+                        direction = ScrollDirection.DragDown;
+                        if (scrollPosition - posun <= UsableHight - SliderSize.Height)
+                        {
+                            Debug.WriteLine("Pozice " + scrollPosition);
+                            Debug.WriteLine("posun " + posun);
+                            Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, -posun, ScrollDirection.DragDown, ScrollbarRatio));
+                        }
+                        else
+                        {
+                            Debug.WriteLine("dojezd " + (UsableHight - SliderSize.Height - scrollPosition));
+                            Scrolled?.Invoke(this, new ScrollEventArgs(ScrollBarAllignment.Vertical, UsableHight - SliderSize.Height - scrollPosition+1, ScrollDirection.DragDown, ScrollbarRatio));
+                        }
                     }
                 }
+                /*if (posun != 0)
+                {
+                    Debug.WriteLine("Max: " + (UsableHight - SliderSize.Height));
+                    Debug.WriteLine("Position: " + scrollPosition);
+                    Debug.WriteLine("Target: " + (scrollPosition - posun));
+                    Debug.WriteLine("Dir: " + direction.ToString());
+                    Debug.WriteLine("-----");
+                }*/
             }
         }
 
@@ -412,13 +435,10 @@ namespace Ticketník.CustomControls
                         SliderSize = new Size(6, (int)((UsableHight) * ratio));
                         if (SliderSize.Height < 6)
                             SliderSize = new Size(6, 6);
-                        int max = UsableHight - SliderSize.Height;
-                        double step = (double)max / Max;
-                        int scrollPositionInner = (int)Math.Round((ScrollPosition * step), MidpointRounding.AwayFromZero);
 
-                        Rectangle slider = new Rectangle((Width / 2) - (sliderSize.Width / 2), scrollPositionInner + 18, sliderSize.Width, sliderSize.Height);
-                        sliderRectForDrag = new Rectangle(1, scrollPositionInner + 18, Width - 2, sliderSize.Height);
-                        sliderRegionRectUp = new Rectangle(1, 17, Width -2, scrollPositionInner);
+                        Rectangle slider = new Rectangle((Width / 2) - (sliderSize.Width / 2), ScrollPosition + 18, sliderSize.Width, sliderSize.Height);
+                        sliderRectForDrag = new Rectangle(1, ScrollPosition + 18, Width - 2, sliderSize.Height);
+                        sliderRegionRectUp = new Rectangle(1, 17, Width -2, ScrollPosition);
                         sliderRegionRectDown = new Rectangle(1, sliderRectForDrag.Bottom +2, Width - 2, Height - sliderRectForDrag.Bottom - 19 - (bothVisible ? 18 : 0));
 
                         bg.Graphics.DrawLine(p, 0, 0, 0, Height);

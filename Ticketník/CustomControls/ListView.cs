@@ -187,6 +187,9 @@ namespace Ticketník.CustomControls
 
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
+            int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
+            double step = (double)max / VScrollBar.Max;
+
             if (e.ScrollDirection == ScrollBar.ScrollDirection.DragDown || e.ScrollDirection == ScrollBar.ScrollDirection.DragUp)
             {
                 posun += e.ScrolledBy / e.ScrollbarRatio;
@@ -198,9 +201,13 @@ namespace Ticketník.CustomControls
             if (posun >= 17 || posun <= -17)
             {
                 SendMessage(this.Handle, Messages.LVM_SCROLL, 0, (int)posun);
-                posun = 0;
+                Invalidate(new Rectangle(VScrollBar.Location, VScrollBar.Size));
+                posun = posun - (int)posun;
+                if (max == VScrollBar.ScrollPosition && e.ScrollDirection == ScrollBar.ScrollDirection.DragDown)
+                {
+                    EnsureVisible(Items.Count - 1);
+                }
             }
-            Invalidate(new Rectangle(VScrollBar.Location, VScrollBar.Size));
         }
 
         [Category("Action")]
@@ -421,13 +428,21 @@ namespace Ticketník.CustomControls
                 {
                     VScrollBar.ScrollbarRatio = (double)VisibleItems / (double)Items.Count;
                     VScrollBar.Max = Items.Count - VisibleItems;
-                    if(vScroll <= VScrollBar.Max)
-                        VScrollBar.ScrollPosition = vScroll;
-                    else
-                        VScrollBar.ScrollPosition = VScrollBar.Max;
+                    int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
+                    double step = (double)max / VScrollBar.Max;
+                    int scrollPositionInner = (int)Math.Round((vScroll * step), MidpointRounding.AwayFromZero);
+                    
+                    //Debug.WriteLine("SCRI: " +  scrollPositionInner);
 
-                    HScrollBar.ScrollbarRatio = (double)(Width-(VScrollBarVisible ? 17 : 0)) /(double)HeaderWidth;
-                    HScrollBar.Max = HeaderWidth - Width + (VScrollBarVisible ? 17 : 0);
+                    if (vScroll < VScrollBar.Max)
+                        VScrollBar.ScrollPosition = /*vScroll*/scrollPositionInner;
+                    else
+                    {
+                        VScrollBar.ScrollPosition = /*VScrollBar.Max*/max;
+                    }
+
+                    HScrollBar.ScrollbarRatio = (double)(Width-(HScrollBarVisible ? 17 : 0)) /(double)HeaderWidth;
+                    HScrollBar.Max = HeaderWidth - Width + (HScrollBarVisible ? 17 : 0);
                     if (hScroll <= HScrollBar.Max)
                         HScrollBar.ScrollPosition = hScroll;
                     else
