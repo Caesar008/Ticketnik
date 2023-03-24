@@ -71,7 +71,7 @@ namespace Ticketník
             result = "";
             List<MyTimeTerp> myTimeTerpList = new List<MyTimeTerp>();
             List<Terp> terpList = null;
-            while (true/*result != "[{\"id\":\"switch_to_all\",\"label\":\"Search in All Projects\",\"tooltip\":\"Search in All Projects\",\"data\":null}]"*/)
+            while (true)
             {
                 try
                 {
