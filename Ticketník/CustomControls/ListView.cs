@@ -179,8 +179,13 @@ namespace Ticketník.CustomControls
 
         private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy * 5, 0);
-            Invalidate(new Rectangle(HScrollBar.Location, HScrollBar.Size));
+            if(HScrollBar.UsableHight - HScrollBar.ScrollPosition < 5 && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.UsableHight - HScrollBar.ScrollPosition * 5, 0);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && HScrollBar.ScrollPosition < 5)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
+            else
+                SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy * 5, 0);
+            Invalidate(/*new Rectangle(HScrollBar.Location, HScrollBar.Size)*/);
         }
 
         double posun = 0;
@@ -418,12 +423,6 @@ namespace Ticketník.CustomControls
                 GetVisibleScrollbars(Handle);
                 int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/); //počet pixelů, default 15 krok
                 int vScroll = GetScrollPos(Handle, 1); // počet itemů scrollnutých
-
-                if (HeaderWidth == Width - (VScrollBarVisible ? 17 : 0) && HScrollBarVisible)
-                {
-                    SendMessage(this.Handle, Messages.LVM_SCROLL, 0, 0);
-                    Refresh();
-                }
                 if (GridLines && View == View.Details)
                 {
                     VScrollBar.ScrollbarRatio = (double)VisibleItems / (double)Items.Count;
@@ -431,8 +430,6 @@ namespace Ticketník.CustomControls
                     int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
                     double step = (double)max / VScrollBar.Max;
                     int scrollPositionInner = (int)Math.Round((vScroll * step), MidpointRounding.AwayFromZero);
-                    
-                    //Debug.WriteLine("SCRI: " +  scrollPositionInner);
 
                     if (vScroll < VScrollBar.Max)
                         VScrollBar.ScrollPosition = /*vScroll*/scrollPositionInner;
@@ -441,6 +438,7 @@ namespace Ticketník.CustomControls
                         VScrollBar.ScrollPosition = /*VScrollBar.Max*/max;
                     }
 
+                    //nějaký špatný výpočet, musí se předělat. Přesahuje
                     HScrollBar.ScrollbarRatio = (double)(Width-(HScrollBarVisible ? 17 : 0)) /(double)HeaderWidth;
                     HScrollBar.Max = HeaderWidth - Width + (HScrollBarVisible ? 17 : 0);
                     if (hScroll <= HScrollBar.Max)
@@ -476,6 +474,12 @@ namespace Ticketník.CustomControls
                                     g.DrawLine(p, HeaderWidth - hScroll, 0,HeaderWidth - hScroll , Height);
                             }
                         }
+                    }
+
+                    if (HeaderWidth == Width - (VScrollBarVisible ? 17 : 0) && HScrollBarVisible)
+                    {
+                        SendMessage(this.Handle, Messages.LVM_SCROLL, 0, 0);
+                        Refresh();
                     }
                 }
             }

@@ -612,6 +612,7 @@ namespace Ticketník
             {
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, Form1.LogMessage.ERROR);
+                terpTaskFailedRetry.Start();
             }
             terpTaskFileLock = false;
 
@@ -786,6 +787,7 @@ namespace Ticketník
             {
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message, Form1.LogMessage.WARNING);
                 Logni("Updatování terpTask souboru selhalo\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, Form1.LogMessage.ERROR);
+                terpTaskFailedRetry.Start();
             }
 
             terpTaskFileLock = false;

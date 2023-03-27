@@ -10,14 +10,16 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 
 namespace Ticketník
 {
     /*interní changelog 2.0.0.0
-    - Podpora světlého a tmavého módu
+    - Podpora světlého a tmavého režimu
     - Ovládací prvky přepsány pro větší kontrolu nad nimi
     - Zmenšení velikosti exe vynecháním knihoven
     - Zrušeno potvrzování změny data ticketu
+    - Přepracován systém práce s JSON daty z MyTime
     - Oprava chyby #22-003
     */
 
@@ -61,6 +63,7 @@ namespace Ticketník
         public Form1()
         {
             CheckLog();
+            Logni("Startuji Ticketník " + Application.ProductVersion, LogMessage.INFO);
 
             //při updatu na 1.7 zapnout záložní update pro defaultní stahování z githubu
             if (Properties.Settings.Default.lastUpdateNotif < 107 && !Properties.Settings.Default.pouzivatZalozniUpdate)
