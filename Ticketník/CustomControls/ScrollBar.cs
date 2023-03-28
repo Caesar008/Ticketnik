@@ -125,6 +125,8 @@ namespace Ticketník.CustomControls
         { 
             get
             {
+                if (scrollPosition > UsableHight - SliderSize.Height)
+                    return UsableHight - SliderSize.Height;
                 return scrollPosition;
             }
             set
@@ -511,7 +513,7 @@ namespace Ticketník.CustomControls
             if (!Visible)
                 return;
             //base.OnPaint(e);
-
+            Debug.WriteLine(Allignment.ToString() + " " + bothVisible.ToString());
             using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
                 using (SolidBrush b = new SolidBrush(BackColor))
