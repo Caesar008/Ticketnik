@@ -1892,7 +1892,7 @@ namespace Ticketník
                 {
                     if (s == "")
                         continue;
-                    Regex incidenty = new Regex(@"^(INC|PRB|PTASK|RITM|ITASK|CTASK|TASK|RTASK|CHG)\d+?$", RegexOptions.IgnoreCase);
+                    Regex incidenty = new Regex(@"^(INC|PRB|PTASK|RITM|ITASK|CTASK|TASK|RTASK|CHG|IM|PM|RF|SD|C|RFT)\d+?(-\d+)?$", RegexOptions.IgnoreCase);
                     Match m = incidenty.Match(s);
                     if (m.Success)
                     {
@@ -1949,7 +1949,7 @@ namespace Ticketník
                                 break;
                         }
 
-                        DateTime casOdD = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0);
+                        DateTime casOdD = DateTime.Now;//new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0);
                         DateTime casDoD = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0);
 
                         Ticket ticket = ticket = new Ticket(-1, tMesic, DateTime.Today, DateTime.Today, DateTime.Today, new List<DateTime>(), new List<DateTime>(), Ticket.Stav.Probiha, "", "", "", "", "", Ticket.TypTicketu.Normalni);
