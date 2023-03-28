@@ -20,6 +20,8 @@ namespace Ticketník
     - Zmenšení velikosti exe vynecháním knihoven
     - Zrušeno potvrzování změny data ticketu
     - Přepracován systém práce s JSON daty z MyTime
+    - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
+    - Ctrl+V nyní umí rozpoznat tickety z SM9
     - Oprava chyby #22-003
     */
 
