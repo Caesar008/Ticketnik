@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -179,10 +180,28 @@ namespace Ticketník.CustomControls
 
         private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            if(HScrollBar.UsableHight - HScrollBar.ScrollPosition < 5 && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+            if (HScrollBar.UsableHight - HScrollBar.ScrollPosition < 50 && e.ScrollDirection == ScrollBar.ScrollDirection.Right && 
+                e.ScrolledBy == (int)ScrollBar.ScrollStep.Medium)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.UsableHight - HScrollBar.ScrollPosition, 0);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && HScrollBar.ScrollPosition < 50 &&
+                e.ScrolledBy == -(int)ScrollBar.ScrollStep.Medium)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && e.ScrolledBy == -(int)ScrollBar.ScrollStep.Medium)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, -50, 0);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Right && e.ScrolledBy == (int)ScrollBar.ScrollStep.Medium)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, 50, 0);
+            else if (HScrollBar.UsableHight - HScrollBar.ScrollPosition < 5 && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.UsableHight - HScrollBar.ScrollPosition * 5, 0);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && HScrollBar.ScrollPosition < 5)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
+            else if(e.ScrollDirection == ScrollBar.ScrollDirection.DragLeft && HScrollBar.ScrollPosition < -e.ScrolledBy)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragRight && HScrollBar.UsableHight - HScrollBar.ScrollPosition < -e.ScrolledBy)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.UsableHight - HScrollBar.ScrollPosition, 0);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragLeft)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy, 0);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragRight)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy, 0);
             else
                 SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy * 5, 0);
             Invalidate(/*new Rectangle(HScrollBar.Location, HScrollBar.Size)*/);
