@@ -69,6 +69,20 @@ namespace Ticketník.CustomControls
             }
         }
 
+        public void Relocate()
+        {
+            if (Allignment == ScrollBarAllignment.Vertical)
+            {
+                Location = new Point(Parent.Width - Width, 0);
+                //Invalidate();
+            }
+            else if (Allignment == ScrollBarAllignment.Horizontal)
+            {
+                Location = new Point(0, Parent.Height - Height);
+                //Invalidate();
+            }
+        }
+
         public enum ScrollBarAllignment
         {
             Vertical,
@@ -513,7 +527,6 @@ namespace Ticketník.CustomControls
             if (!Visible)
                 return;
             //base.OnPaint(e);
-            Debug.WriteLine(Allignment.ToString() + " " + bothVisible.ToString());
             using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
                 using (SolidBrush b = new SolidBrush(BackColor))

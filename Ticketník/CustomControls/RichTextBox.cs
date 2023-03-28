@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ticketník.CustomControls
 {
-    internal class RichTextBox : System.Windows.Forms.RichTextBox
+    internal class RichTextBox : System.Windows.Forms.Control
     {
-        private ScrollBar VScrollBar;
-        private ScrollBar HScrollBar;
+        internal ScrollBar VScrollBar;
+        internal ScrollBar HScrollBar;
+        private RichTextBoxInternal rtb;
 
         public RichTextBox() : base()
         {
@@ -23,15 +23,22 @@ namespace Ticketník.CustomControls
             HScrollBar.ForeColor = ForeColor;
             VScrollBar.Visible = VScrollBarVisible;
             HScrollBar.Visible = HScrollBarVisible;
+            rtb = new RichTextBoxInternal();
+            rtb.Location = new System.Drawing.Point(0, 0);
+            rtb.Size = this.Size;
+            rtb.Text = Text; 
+            rtb.Font = Font;
+            rtb.ForeColor = ForeColor;
+            rtb.BackColor = BackColor;
+            rtb.Parent = this;
             if (VScrollBarVisible && HScrollBarVisible)
             {
                 VScrollBar.BothVisible = HScrollBar.BothVisible = true;
             }
+            Controls.Add(rtb);
             Controls.Add(HScrollBar);
             Controls.Add(VScrollBar);
         }
-
-
 
         [Category("Action")]
         public event EventHandler HScrollBarVisibilityChanged;
@@ -45,7 +52,7 @@ namespace Ticketník.CustomControls
             {
                 return hScrollVisible;
             }
-            private set
+            internal set
             {
                 if (hScrollVisible != value)
                 {
@@ -59,6 +66,7 @@ namespace Ticketník.CustomControls
                     {
                         VScrollBar.BothVisible = HScrollBar.BothVisible = false;
                     }
+                    rtb.Height = hScrollVisible ? this.Height - HScrollBar.Height : this.Height;
                     HScrollBarVisibilityChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -70,7 +78,7 @@ namespace Ticketník.CustomControls
             {
                 return vScrollVisible;
             }
-            private set
+            internal set
             {
                 if (vScrollVisible != value)
                 {
@@ -84,54 +92,66 @@ namespace Ticketník.CustomControls
                     {
                         VScrollBar.BothVisible = HScrollBar.BothVisible = false;
                     }
+                    rtb.Width = vScrollVisible ? this.Width - VScrollBar.Width : this.Width;
                     VScrollBarVisibilityChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
 
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+        public System.Windows.Forms.BorderStyle BorderStyle
         {
-            if (m.Msg == Messages.OnPaint)
-            {
-                base.WndProc(ref m);
-                GetVisibleScrollbars(Handle);
-                int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/); //počet pixelů, default 15 krok
-                int vScroll = GetScrollPos(Handle, 1); // počet itemů scrollnutých
-            }
-            else if (m.Msg == Messages.OnScrollBarDraw)
-            {
-                //nekresli původní scrollbary
-            }
-            else
-                base.WndProc(ref m);
+            get { return rtb.BorderStyle; }
+            set { rtb.BorderStyle = value; }
         }
 
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, int lParam);
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern int GetScrollPos(IntPtr hWnd, int nBar);
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GetScrollInfo(IntPtr hwnd, int fnBar, ref SCROLLINFO lpsi);
-
-        [StructLayout(LayoutKind.Sequential)]
-        struct SCROLLINFO
+        public bool ReadOnly
         {
-            public uint cbSize;
-            public uint fMask;
-            public int nMin;
-            public int nMax;
-            public uint nPage;
-            public int nPos;
-            public int nTrackPos;
+            get { return rtb.ReadOnly; }
+            set { rtb.ReadOnly = value; }
         }
-        private void GetVisibleScrollbars(IntPtr handle)
+
+        public bool WordWrap
         {
-            int wndStyle = GetWindowLong(handle, Messages.GWL_STYLE);
-            HScrollBarVisible = (wndStyle & Messages.HorizontalScrollbar) != 0;
-            VScrollBarVisible = (wndStyle & Messages.VerticalSrollbar) != 0;
+            get { return rtb.WordWrap; }
+            set
+            {
+                rtb.WordWrap = value;
+            }
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            rtb.Size = new System.Drawing.Size(this.Size.Width - (VScrollBarVisible ? VScrollBar.Width : 0), this.Size.Height - (HScrollBarVisible ? HScrollBar.Height : 0));
+        }
+
+        protected override void OnTextChanged(EventArgs e)
+        {
+            //base.OnTextChanged(e);
+            rtb.Text = Text;
+        }
+
+        protected override void OnFontChanged(EventArgs e)
+        {
+            //base.OnFontChanged(e);
+            rtb.Font = Font;
+        }
+
+        protected override void OnBackColorChanged(EventArgs e)
+        {
+            //base.OnBackColorChanged(e);
+            rtb.BackColor = BackColor;
+        }
+
+        protected override void OnForeColorChanged(EventArgs e)
+        {
+            //base.OnForeColorChanged(e); 
+            rtb.ForeColor = ForeColor;
+        }
+
+        protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+        {
+            base.OnPaint(e);
         }
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new Ticketník.CustomControls.RichTextBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -64,7 +64,7 @@
 
         #endregion
 
-        internal System.Windows.Forms.RichTextBox richTextBox1;
+        internal Ticketník.CustomControls.RichTextBox richTextBox1;
 
     }
 }
