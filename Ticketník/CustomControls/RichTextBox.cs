@@ -52,19 +52,14 @@ namespace Ticketník.CustomControls
 
         private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            /*if (HScrollBar.ScrollPosition + (e.ScrolledBy*5) < HScrollBar.ScrollMax && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
-                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
+            if (rtb.InnerScroll.X + (e.ScrolledBy*5) < HScrollBar.Max && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+                rtb.Scroll(rtb.InnerScroll.X + (e.ScrolledBy * 5), rtb.InnerScroll.Y);
             else if(e.ScrollDirection == ScrollBar.ScrollDirection.Right)
-                rtb.Scroll(HScrollBar.Max, e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
-            else if (HScrollBar.ScrollPosition + (e.ScrolledBy * 5) > 0 && e.ScrollDirection == ScrollBar.ScrollDirection.Left)
-                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
+                rtb.Scroll(HScrollBar.Max, rtb.InnerScroll.Y);
+            else if (rtb.InnerScroll.X + (e.ScrolledBy * 5) > 0 && e.ScrollDirection == ScrollBar.ScrollDirection.Left)
+                rtb.Scroll(rtb.InnerScroll.X + (e.ScrolledBy * 5), rtb.InnerScroll.Y);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left)
-                rtb.Scroll(0, 1, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);*/
-            rtb.Scroll(rtb.InnerScroll.X + 5, e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
-            Debug.WriteLine("Scroll to: " + scrollPos);
-            Debug.WriteLine("ratio: " + e.ScrollbarRatio);
-            Debug.WriteLine("děleno: " + ((double)scrollPos / e.ScrollbarRatio));
-            Debug.WriteLine("InnerScroll: " + rtb.InnerScroll.X);
+                rtb.Scroll(0, rtb.InnerScroll.Y);
         }
 
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
@@ -75,8 +70,8 @@ namespace Ticketník.CustomControls
         {
             HScrollBar.ScrollbarRatio = (double)rtb.Width / (double)(rtb.PreferredSize.Width);
             VScrollBar.ScrollbarRatio = (double)rtb.Height / (double)(rtb.PreferredSize.Height);
-            HScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Width - rtb.Width - 17) * HScrollBar.ScrollbarRatio, MidpointRounding.AwayFromZero);
-            VScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Height - rtb.Height - 17) * VScrollBar.ScrollbarRatio, MidpointRounding.AwayFromZero);
+            HScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Width - rtb.Width - 17), MidpointRounding.AwayFromZero);
+            VScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Height - rtb.Height - 17), MidpointRounding.AwayFromZero);
 
             double vstep = (double)VScrollBar.ScrollMax / (rtb.PreferredSize.Height - rtb.Height - 17);
             int vscrollPositionInner = (int)Math.Round(((double)rtb.VScrollPosition * vstep), MidpointRounding.AwayFromZero);
@@ -96,9 +91,6 @@ namespace Ticketník.CustomControls
             double step = (double)HScrollBar.ScrollMax / (rtb.PreferredSize.Width - rtb.Width - 17);
             int scrollPositionInner = (int)Math.Round(((double)rtb.HScrollPosition * step), MidpointRounding.AwayFromZero);
 
-            Debug.WriteLine("H Max: " + HScrollBar.ScrollMax);
-            Debug.WriteLine("H Scroll: " + scrollPositionInner);
-
             HScrollBar.ScrollPosition = scrollPositionInner;
             HScrollBar.Invalidate();
         }
@@ -107,9 +99,6 @@ namespace Ticketník.CustomControls
         {
             double step = (double)VScrollBar.ScrollMax / (rtb.PreferredSize.Height - rtb.Height-17);
             int scrollPositionInner = (int)Math.Round(((double)rtb.VScrollPosition * step), MidpointRounding.AwayFromZero);
-
-            Debug.WriteLine("V Max: " + VScrollBar.ScrollMax);
-            Debug.WriteLine("V Scroll: " + scrollPositionInner);
 
             VScrollBar.ScrollPosition = scrollPositionInner;
             VScrollBar.Invalidate();
@@ -228,8 +217,8 @@ namespace Ticketník.CustomControls
         {
             HScrollBar.ScrollbarRatio = (double)rtb.Width / (double)(rtb.PreferredSize.Width);
             VScrollBar.ScrollbarRatio = (double)rtb.Height / (double)(rtb.PreferredSize.Height);
-            HScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Width - rtb.Width - 17) * HScrollBar.ScrollbarRatio, MidpointRounding.AwayFromZero);
-            VScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Height - rtb.Height - 17) * VScrollBar.ScrollbarRatio, MidpointRounding.AwayFromZero);
+            HScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Width - rtb.Width - 17), MidpointRounding.AwayFromZero);
+            VScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Height - rtb.Height - 17), MidpointRounding.AwayFromZero);
 
             double vstep = (double)VScrollBar.ScrollMax / (rtb.PreferredSize.Height - rtb.Height - 17);
             int vscrollPositionInner = (int)Math.Round(((double)rtb.VScrollPosition * vstep), MidpointRounding.AwayFromZero);
@@ -326,11 +315,11 @@ namespace Ticketník.CustomControls
 
         public Point InnerScroll { get; private set; }
 
-        public void Scroll(int hScroll, double hRatio, int vScroll, double vRatio)
+        public void Scroll(int hScroll, int vScroll)
         {
             Point p;
             //p.X = (int)((double)hScroll / hRatio);
-            p.Y = (int)((double)vScroll / vRatio);
+            p.Y = vScroll;
             //p.X = (int)((double)89 / hRatio); p.Y = vScroll;
             p.X = hScroll;
             SendMessage(this.Handle, Messages.EM_SETSCROLLPOS, 0, ref p);
