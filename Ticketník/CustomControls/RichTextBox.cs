@@ -50,9 +50,13 @@ namespace Ticketník.CustomControls
         private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
             if (HScrollBar.ScrollPosition + (e.ScrolledBy*5) < HScrollBar.ScrollMax && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
-                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), 0);
+                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), VScrollBar.ScrollPosition);
             else if(e.ScrollDirection == ScrollBar.ScrollDirection.Right)
-                rtb.Scroll(HScrollBar.Max, 0);
+                rtb.Scroll(HScrollBar.Max, VScrollBar.ScrollPosition);
+            else if (HScrollBar.ScrollPosition + (e.ScrolledBy * 5) > 0 && e.ScrollDirection == ScrollBar.ScrollDirection.Left)
+                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), VScrollBar.ScrollPosition);
+            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left)
+                rtb.Scroll(0, VScrollBar.ScrollPosition);
         }
 
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
@@ -315,7 +319,9 @@ namespace Ticketník.CustomControls
 
         public void Scroll(int hScroll, int vScroll)
         {
-            SendMessage(this.Handle, Messages.EM_SETSCROLLPOS, hScroll, vScroll);
+            System.Drawing.Point p = new System.Drawing.Point(hScroll, vScroll);
+            Debug.WriteLine(p);
+            SendMessage(this.Handle, Messages.EM_SETSCROLLPOS, IntPtr.Zero, ref p);
         }
 
         [Category("Action")]
@@ -347,7 +353,7 @@ namespace Ticketník.CustomControls
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, int lParam);
+        internal static extern int SendMessage(IntPtr hWnd, int uMsg, IntPtr wParam, ref System.Drawing.Point lParam);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern int GetScrollPos(IntPtr hWnd, int nBar);
         [DllImport("user32.dll")]
