@@ -180,9 +180,9 @@ namespace Ticketník.CustomControls
 
         private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            if (HScrollBar.UsableHight - HScrollBar.ScrollPosition < 50 && e.ScrollDirection == ScrollBar.ScrollDirection.Right && 
+            if (HScrollBar.ScrollMax - HScrollBar.ScrollPosition < 50 && e.ScrollDirection == ScrollBar.ScrollDirection.Right && 
                 e.ScrolledBy == (int)ScrollBar.ScrollStep.Medium)
-                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.UsableHight - HScrollBar.ScrollPosition, 0);
+                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.ScrollMax - HScrollBar.ScrollPosition, 0);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && HScrollBar.ScrollPosition < 50 &&
                 e.ScrolledBy == -(int)ScrollBar.ScrollStep.Medium)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
@@ -190,14 +190,14 @@ namespace Ticketník.CustomControls
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -50, 0);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.Right && e.ScrolledBy == (int)ScrollBar.ScrollStep.Medium)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, 50, 0);
-            else if (HScrollBar.UsableHight - HScrollBar.ScrollPosition < 5 && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
-                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.UsableHight - HScrollBar.ScrollPosition * 5, 0);
+            else if (HScrollBar.ScrollMax - HScrollBar.ScrollPosition < 5 && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.ScrollMax - HScrollBar.ScrollPosition * 5, 0);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && HScrollBar.ScrollPosition < 5)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
             else if(e.ScrollDirection == ScrollBar.ScrollDirection.DragLeft && HScrollBar.ScrollPosition < -e.ScrolledBy)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragRight && HScrollBar.UsableHight - HScrollBar.ScrollPosition < -e.ScrolledBy)
-                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.UsableHight - HScrollBar.ScrollPosition, 0);
+                SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.ScrollMax - HScrollBar.ScrollPosition, 0);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragLeft)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy, 0);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragRight)
@@ -211,8 +211,8 @@ namespace Ticketník.CustomControls
 
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
-            double step = (double)max / VScrollBar.Max;
+            //int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
+            double step = VScrollBar.ScrollMax / VScrollBar.Max;
 
             if (e.ScrollDirection == ScrollBar.ScrollDirection.DragDown || e.ScrollDirection == ScrollBar.ScrollDirection.DragUp)
             {
@@ -227,7 +227,7 @@ namespace Ticketník.CustomControls
                 SendMessage(this.Handle, Messages.LVM_SCROLL, 0, (int)posun);
                 Invalidate(new Rectangle(VScrollBar.Location, VScrollBar.Size));
                 posun = posun - (int)posun;
-                if (max == VScrollBar.ScrollPosition && e.ScrollDirection == ScrollBar.ScrollDirection.DragDown)
+                if (VScrollBar.ScrollMax == VScrollBar.ScrollPosition && e.ScrollDirection == ScrollBar.ScrollDirection.DragDown)
                 {
                     EnsureVisible(Items.Count - 1);
                 }
@@ -446,15 +446,15 @@ namespace Ticketník.CustomControls
                 {
                     VScrollBar.ScrollbarRatio = (double)VisibleItems / (double)Items.Count;
                     VScrollBar.Max = Items.Count - VisibleItems;
-                    int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
-                    double step = (double)max / VScrollBar.Max;
+                    //int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
+                    double step = (double)VScrollBar.ScrollMax / VScrollBar.Max;
                     int scrollPositionInner = (int)Math.Round((vScroll * step), MidpointRounding.AwayFromZero);
 
                     if (vScroll < VScrollBar.Max)
                         VScrollBar.ScrollPosition = /*vScroll*/scrollPositionInner;
                     else
                     {
-                        VScrollBar.ScrollPosition = /*VScrollBar.Max*/max;
+                        VScrollBar.ScrollPosition = /*VScrollBar.Max*/VScrollBar.ScrollMax;
                     }
 
                     //nějaký špatný výpočet, musí se předělat. Přesahuje

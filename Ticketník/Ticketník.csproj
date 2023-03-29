@@ -99,9 +99,6 @@
     <Compile Include="CustomControls\RichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomControls\RichTextBoxInternal.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CustomControls\ScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
