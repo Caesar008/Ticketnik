@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -47,21 +48,27 @@ namespace Ticketník.CustomControls
             Controls.Add(VScrollBar);
         }
 
+        int scrollPos = 0;
+
         private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            if (HScrollBar.ScrollPosition + (e.ScrolledBy*5) < HScrollBar.ScrollMax && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
-                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), VScrollBar.ScrollPosition);
+            /*if (HScrollBar.ScrollPosition + (e.ScrolledBy*5) < HScrollBar.ScrollMax && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
             else if(e.ScrollDirection == ScrollBar.ScrollDirection.Right)
-                rtb.Scroll(HScrollBar.Max, VScrollBar.ScrollPosition);
+                rtb.Scroll(HScrollBar.Max, e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
             else if (HScrollBar.ScrollPosition + (e.ScrolledBy * 5) > 0 && e.ScrollDirection == ScrollBar.ScrollDirection.Left)
-                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), VScrollBar.ScrollPosition);
+                rtb.Scroll(HScrollBar.ScrollPosition + (e.ScrolledBy * 5), e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
             else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left)
-                rtb.Scroll(0, VScrollBar.ScrollPosition);
+                rtb.Scroll(0, 1, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);*/
+            rtb.Scroll(rtb.InnerScroll.X + 5, e.ScrollbarRatio, VScrollBar.ScrollPosition, VScrollBar.ScrollbarRatio);
+            Debug.WriteLine("Scroll to: " + scrollPos);
+            Debug.WriteLine("ratio: " + e.ScrollbarRatio);
+            Debug.WriteLine("děleno: " + ((double)scrollPos / e.ScrollbarRatio));
+            Debug.WriteLine("InnerScroll: " + rtb.InnerScroll.X);
         }
 
         private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            
         }
 
         private void Rtb_SizeChanged(object sender, EventArgs e)
@@ -89,11 +96,8 @@ namespace Ticketník.CustomControls
             double step = (double)HScrollBar.ScrollMax / (rtb.PreferredSize.Width - rtb.Width - 17);
             int scrollPositionInner = (int)Math.Round(((double)rtb.HScrollPosition * step), MidpointRounding.AwayFromZero);
 
-            Debug.WriteLine("Ratio: " + HScrollBar.ScrollbarRatio);
-            Debug.WriteLine("Size: " + HScrollBar.SliderSize);
-            Debug.WriteLine("Usable: " + HScrollBar.UsableHight);
-            Debug.WriteLine("Max: " + HScrollBar.ScrollMax);
-            Debug.WriteLine("Scroll: " + scrollPositionInner);
+            Debug.WriteLine("H Max: " + HScrollBar.ScrollMax);
+            Debug.WriteLine("H Scroll: " + scrollPositionInner);
 
             HScrollBar.ScrollPosition = scrollPositionInner;
             HScrollBar.Invalidate();
@@ -103,6 +107,9 @@ namespace Ticketník.CustomControls
         {
             double step = (double)VScrollBar.ScrollMax / (rtb.PreferredSize.Height - rtb.Height-17);
             int scrollPositionInner = (int)Math.Round(((double)rtb.VScrollPosition * step), MidpointRounding.AwayFromZero);
+
+            Debug.WriteLine("V Max: " + VScrollBar.ScrollMax);
+            Debug.WriteLine("V Scroll: " + scrollPositionInner);
 
             VScrollBar.ScrollPosition = scrollPositionInner;
             VScrollBar.Invalidate();
@@ -317,11 +324,16 @@ namespace Ticketník.CustomControls
             }
         }
 
-        public void Scroll(int hScroll, int vScroll)
+        public Point InnerScroll { get; private set; }
+
+        public void Scroll(int hScroll, double hRatio, int vScroll, double vRatio)
         {
-            System.Drawing.Point p = new System.Drawing.Point(hScroll, vScroll);
-            Debug.WriteLine(p);
-            SendMessage(this.Handle, Messages.EM_SETSCROLLPOS, IntPtr.Zero, ref p);
+            Point p;
+            //p.X = (int)((double)hScroll / hRatio);
+            p.Y = (int)((double)vScroll / vRatio);
+            //p.X = (int)((double)89 / hRatio); p.Y = vScroll;
+            p.X = hScroll;
+            SendMessage(this.Handle, Messages.EM_SETSCROLLPOS, 0, ref p);
         }
 
         [Category("Action")]
@@ -341,6 +353,12 @@ namespace Ticketník.CustomControls
                 GetVisibleScrollbars(Handle);
                 HScrollPosition = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/); //počet pixelů, default 15 krok
                 VScrollPosition = GetScrollPos(Handle, 1); // počet itemů scrollnutých
+
+                IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(Point)));
+                Marshal.StructureToPtr(new Point(), ptr, false);
+                SendMessage(this.Handle, Messages.EM_GETSCROLLPOS, IntPtr.Zero, ptr);
+                InnerScroll = (Point)Marshal.PtrToStructure(ptr, typeof(Point));
+                Marshal.FreeHGlobal(ptr);
             }
             else if (m.Msg == Messages.OnScrollBarDraw)
             {
@@ -353,7 +371,10 @@ namespace Ticketník.CustomControls
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern int SendMessage(IntPtr hWnd, int uMsg, IntPtr wParam, ref System.Drawing.Point lParam);
+        internal static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, ref Point lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern int SendMessage(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern int GetScrollPos(IntPtr hWnd, int nBar);
         [DllImport("user32.dll")]
@@ -370,6 +391,11 @@ namespace Ticketník.CustomControls
             public uint nPage;
             public int nPos;
             public int nTrackPos;
+        }
+
+        internal struct Point
+        {
+            public int X, Y;
         }
         private void GetVisibleScrollbars(IntPtr handle)
         {

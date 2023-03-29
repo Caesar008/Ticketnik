@@ -51,6 +51,7 @@ namespace Ticketník.CustomControls
         public const int WM_USER = 0x0400;
         public const int EM_SCROLL = 0x00B5;
         public const int EM_SETSCROLLPOS = WM_USER + 222;
+        public const int EM_GETSCROLLPOS = WM_USER + 221;
 
         public static int OnPaint => WM_PAINT;
         public static int OnFramePaint => WM_NCPAINT;
