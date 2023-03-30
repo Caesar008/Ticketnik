@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -184,6 +185,8 @@ namespace Ticketník.CustomControls
         private void TextBox_LostFocus(object sender, EventArgs e)
         {
             _mouseInTextBox= false;
+            if (!Focused)
+                _mouseIn = false;
             Invalidate();
         }
 
@@ -196,20 +199,25 @@ namespace Ticketník.CustomControls
         private void TextBox_MouseLeave(object sender, EventArgs e)
         {
             _mouseInTextBox = false;
-
             Invalidate();
         }
 
         private void TextBox_MouseMove(object sender, MouseEventArgs e)
         {
-            _mouseInTextBox = true;
-            Invalidate();
+            if (!_mouseInTextBox)
+            {
+                _mouseInTextBox = true;
+                Invalidate();
+            }
         }
 
         private void TextBox_MouseHover(object sender, EventArgs e)
         {
-            _mouseInTextBox = true;
-            Invalidate();
+            if (!_mouseInTextBox)
+            {
+                _mouseInTextBox = true;
+                Invalidate();
+            }
         }
 
         private void TextBox_MouseEnter(object sender, EventArgs e)
