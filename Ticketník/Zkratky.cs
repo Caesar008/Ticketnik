@@ -65,7 +65,7 @@ namespace Ticketník
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                foreach (TabPage tp in tabControl1.Controls)
+                foreach (CustomControls.TabPage tp in tabControl1.Controls)
                 {
                     if (tp.Controls.ContainsKey(vybranyMesic))
                     {
