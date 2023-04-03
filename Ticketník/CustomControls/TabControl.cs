@@ -90,8 +90,8 @@ namespace Ticketník.CustomControls
             _mouseDown = false;
         }
 
-        private TabPage selectedTab = null;
-        public TabPage SelectedTab
+        private CustomControls.TabPage selectedTab = null;
+        public CustomControls.TabPage SelectedTab
         {
             get { return selectedTab; }
             set
@@ -189,7 +189,7 @@ namespace Ticketník.CustomControls
 
         private void TabControl_SizeChanged(object sender, EventArgs e)
         {
-            foreach(TabPage tp in TabPages)
+            foreach(CustomControls.TabPage tp in TabPages)
             {
                 tp.Size = new Size(Width - 2, Height - 3 - headerHight);
             }
@@ -199,7 +199,7 @@ namespace Ticketník.CustomControls
         {
             if (e.Control.GetType() == typeof(CustomControls.TabPage))
             {
-                TabPages.Remove((TabPage)e.Control);
+                TabPages.Remove((CustomControls.TabPage)e.Control);
             }
         }
 
@@ -207,7 +207,7 @@ namespace Ticketník.CustomControls
         {
             if(e.Control.GetType() == typeof(CustomControls.TabPage)) 
             {
-                TabPages.Add((TabPage)e.Control);
+                TabPages.Add((CustomControls.TabPage)e.Control);
                 e.Control.Location= new Point(1, headerHight+2);
                 e.Control.Width = Width - 2;
                 e.Control.Height = Height - 3 - headerHight;
@@ -216,11 +216,11 @@ namespace Ticketník.CustomControls
 
         public class TabPageCollection
         {
-            List<TabPage> tabs = new List<TabPage>();
+            List<CustomControls.TabPage> tabs = new List<CustomControls.TabPage>();
 
             internal TabControl Parent { get; set; }
 
-            public TabPage this[int index]
+            public CustomControls.TabPage this[int index]
             {
                 get
                 {
@@ -239,7 +239,7 @@ namespace Ticketník.CustomControls
             }
             public int Count => tabs.Count;
 
-            public void Add(TabPage value)
+            public void Add(CustomControls.TabPage value)
             {
                 value.Parent = Parent;
                 tabs.Add(value);
@@ -250,7 +250,7 @@ namespace Ticketník.CustomControls
                 tabs.Clear();
             }
 
-            public bool Contains(TabPage value)
+            public bool Contains(CustomControls.TabPage value)
             {
                 return tabs.Contains(value);
             }
@@ -260,17 +260,17 @@ namespace Ticketník.CustomControls
                 return tabs.GetEnumerator();
             }
 
-            public int IndexOf(TabPage value)
+            public int IndexOf(CustomControls.TabPage value)
             {
                 return tabs.IndexOf(value);
             }
 
-            public void Insert(int index, TabPage value)
+            public void Insert(int index, CustomControls.TabPage value)
             {
                 tabs.Insert(index, value);
             }
 
-            public void Remove(TabPage value)
+            public void Remove(CustomControls.TabPage value)
             {
                 tabs.Remove(value);
             }
@@ -371,7 +371,7 @@ namespace Ticketník.CustomControls
 
             }
         }
-        private Size MeasureHeader(TabPage page)
+        private Size MeasureHeader(CustomControls.TabPage page)
         {
             Size size = TextRenderer.MeasureText(page.Text, page.Font) + new Size(4, 4);
             if (size.Width < 41)
@@ -382,7 +382,7 @@ namespace Ticketník.CustomControls
 
         private Size MeasureHeaders(TabPageCollection pages)
         {
-            Rectangle tr = ((TabControl)pages[pages.Count - 1].Parent).GetTabRect(pages.Count - 1);
+            Rectangle tr = ((CustomControls.TabControl)pages[pages.Count - 1].Parent).GetTabRect(pages.Count - 1);
             return new Size(tr.X + tr.Width, tr.Y + tr.Height);
         }
 
