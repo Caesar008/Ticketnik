@@ -37,6 +37,7 @@ namespace Ticketník.CustomControls
             rtb.VScrollBarScrollChanged += Rtb_VScrollBarScrollChanged;
             rtb.HScrollBarScrollChanged += Rtb_HScrollBarScrollChanged;
             rtb.SizeChanged += Rtb_SizeChanged;
+            rtb.TextChanged += Rtb_TextChanged;
             VScrollBar.Scrolled += VScrollBar_Scrolled;
             HScrollBar.Scrolled += HScrollBar_Scrolled;
             if (VScrollBarVisible && HScrollBarVisible)
@@ -46,6 +47,11 @@ namespace Ticketník.CustomControls
             Controls.Add(rtb);
             Controls.Add(HScrollBar);
             Controls.Add(VScrollBar);
+        }
+
+        private void Rtb_TextChanged(object sender, EventArgs e)
+        {
+            Text = rtb.Text;
         }
 
         int scrollPos = 0;
@@ -187,12 +193,6 @@ namespace Ticketník.CustomControls
         {
             base.OnSizeChanged(e);
             rtb.Size = new System.Drawing.Size(this.Size.Width - (VScrollBarVisible ? VScrollBar.Width : 0), this.Size.Height - (HScrollBarVisible ? HScrollBar.Height : 0));
-        }
-
-        protected override void OnTextChanged(EventArgs e)
-        {
-            //base.OnTextChanged(e);
-            rtb.Text = Text;
         }
 
         protected override void OnFontChanged(EventArgs e)

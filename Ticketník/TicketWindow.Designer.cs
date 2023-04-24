@@ -89,7 +89,7 @@ namespace Ticketník
             this.label9 = new System.Windows.Forms.Label();
             this.stavTicketu = new Ticketník.CustomControls.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new Ticketník.CustomControls.RichTextBox();
             this.ok = new Ticketník.CustomControls.Button();
             this.datum = new Ticketník.CustomControls.DateTimePicker();
             this.groupBox1.SuspendLayout();
@@ -876,7 +876,7 @@ namespace Ticketník
         internal Ticketník.CustomControls.RadioButton normalni;
         internal Ticketník.CustomControls.RadioButton prescas;
         internal Ticketník.CustomControls.ComboBox stavTicketu;
-        internal System.Windows.Forms.RichTextBox richTextBox1;
+        internal Ticketník.CustomControls.RichTextBox richTextBox1;
         internal Ticketník.CustomControls.RadioButton volno;
         internal Ticketník.CustomControls.RadioButton nahradni;
         internal Ticketník.CustomControls.TextBox popis;
