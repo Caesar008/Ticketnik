@@ -23,6 +23,7 @@ namespace Ticketník
     - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
     - Ctrl+V nyní umí rozpoznat tickety z SM9
     - Oprava chyby #22-003
+    - Oprava chyby #23-001
     */
 
     public partial class Form1 : Form
