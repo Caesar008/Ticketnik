@@ -49,9 +49,13 @@ namespace Ticketník.CustomControls
             Controls.Add(VScrollBar);
         }
 
+        bool changeTextpreventDouble = false;
+
         private void Rtb_TextChanged(object sender, EventArgs e)
         {
+            changeTextpreventDouble = true;
             Text = rtb.Text;
+            changeTextpreventDouble = false;
         }
 
         int scrollPos = 0;
@@ -198,7 +202,8 @@ namespace Ticketník.CustomControls
         protected override void OnTextChanged(EventArgs e)
         {
             //base.OnTextChanged(e);
-            rtb.Text = Text;
+            if(!changeTextpreventDouble)
+                rtb.Text = Text;
         }
 
         protected override void OnFontChanged(EventArgs e)

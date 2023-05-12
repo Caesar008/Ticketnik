@@ -126,6 +126,11 @@ namespace Ticketník
                 ((RichTextBox)c).BackColor = barvy[sMotiv]["pozadí"];
                 ((RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
             }
+            else if(c.GetType() == typeof(CustomControls.RichTextBox))
+            {
+                ((CustomControls.RichTextBox)c).BackColor = barvy[sMotiv]["pozadí"];
+                ((CustomControls.RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
+            }
         }
 
         internal static Color GetColorForObject(string typ)
@@ -255,6 +260,11 @@ namespace Ticketník
                     ((RichTextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
                     ((RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
                 }
+                else if (c.GetType() == typeof(CustomControls.RichTextBox))
+                {
+                    ((CustomControls.RichTextBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
+                    ((CustomControls.RichTextBox)c).ForeColor = barvy[sMotiv]["text"];
+                }
                 else if (c.GetType() == typeof(CustomControls.TabControl))
                 {
                     ((CustomControls.TabControl)c).HeaderBackColor = barvy[sMotiv]["tabPozadí"];
@@ -308,7 +318,8 @@ namespace Ticketník
                 else
                 {
                     string typ = c.GetType().ToString();
-                    if (c as Control != null && !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+"))
+                    if (c as Control != null && !typ.StartsWith("System.Windows.Forms.UpDownBase+")
+                        && ((Control)c).Parent.GetType() != typeof(CustomControls.RichTextBox))
                     {
                         ((Control)c).BackColor = barvy[sMotiv]["pozadí"];
                         ((Control)c).ForeColor = barvy[sMotiv]["text"];
