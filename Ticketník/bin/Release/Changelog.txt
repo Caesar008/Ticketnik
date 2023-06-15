@@ -1,6 +1,7 @@
 1.7.2.4 (15.6.2023)
 
 - Opravena chyba #23-001
+- Přepracován systém práce s JSON daty z MyTime
 -----------------------------------
 1.7.2.3 (15.12.2022)
 
