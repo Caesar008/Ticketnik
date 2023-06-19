@@ -59,6 +59,13 @@ namespace Ticketník
                 konec = new DateTime(start.Year, start.Month, start.Day).AddDays(6);
             }
 
+            weekNumber = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(start, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            year = start.Year;
+            if (start.Month == 1 && weekNumber > 40)
+                year--;
+            else if (start.Month == 12 && weekNumber < 10)
+                year++;
+
             //Projít tickety splňující podmínku a zařadit je správně do exportu
             for (DateTime d = start; d <= konec; d = d.AddDays(1))
             {

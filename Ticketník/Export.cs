@@ -10,6 +10,8 @@ namespace Ticketník
         Form1 form;
         string outputCSV = "";
         bool over = false;
+        int weekNumber = 0;
+        int year = 0;
         public Export(Form1 form)
         {
             this.form = form;
@@ -22,6 +24,16 @@ namespace Ticketník
             this.radioButton1.Text = form.jazyk.Windows_Export_TentoTyden;
             this.radioButton2.Text = form.jazyk.Windows_Export_MinulyTyden;
             this.radioButton3.Text = form.jazyk.Windows_Export_VybraneObdobi;
+            if (Properties.Settings.Default.NovyExport)
+            {
+                checkBox1.Enabled = true;
+                checkBox1.Checked = true;
+            }
+            else
+            {
+                checkBox1.Enabled = false;
+                checkBox1.Checked = false;
+            }
             Motiv.SetMotiv(this);
         }
 
@@ -56,6 +68,11 @@ namespace Ticketník
                 else if (saveFileDialog1.FileName.EndsWith("xlsx"))
                 {
                     File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx", saveFileDialog1.FileName, true);
+                }
+
+                if(checkBox1.Checked)
+                {
+                    string url = "https://mytime.tietoevry.com/time_cards/" + year + "/week/" + weekNumber + "/import";
                 }
             }
         }
