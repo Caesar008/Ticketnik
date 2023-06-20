@@ -16,7 +16,8 @@ namespace Ticketník
     //udělat tlačítka ve správci jazyka opět viditelná
 
     /*interní changelog 1.7.3.0
-    - Přepracován systém aktualizace DLL - příprava pro 2.0
+    - Přepracován systém aktualizace - příprava pro 2.0
+    - Aktualizace pomocí samostatného updateru
     */
 
     public partial class Form1 : Form
