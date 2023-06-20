@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
+using System.Net.Http;
 
 namespace Ticketník
 {
@@ -59,7 +60,7 @@ namespace Ticketník
                 Export_Novy();
         }
 
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private async void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             if (saveFileDialog1.FileName != "")
             {
@@ -73,6 +74,14 @@ namespace Ticketník
                 if(checkBox1.Checked)
                 {
                     string url = "https://mytime.tietoevry.com/time_cards/" + year + "/week/" + weekNumber + "/import";
+                    HttpClient webClient = new HttpClient(new HttpClientHandler()
+                    {
+                        AllowAutoRedirect = true,
+                        UseDefaultCredentials = true
+                    });
+                    string page = "";
+                    page = await webClient.GetStringAsync(url).ConfigureAwait(false);
+
                 }
             }
         }

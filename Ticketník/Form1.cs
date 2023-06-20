@@ -24,6 +24,7 @@ namespace Ticketník
     - Ctrl+V nyní umí rozpoznat tickety z SM9
     - Oprava chyby #22-003
     - Oprava chyby #23-001
+    - Dll knihovny updatovány na novější verze
     */
 
     public partial class Form1 : Form

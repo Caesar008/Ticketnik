@@ -6,4 +6,12 @@
 	<Lang>
 		<CZ>7.0</CZ>
 	</Lang>
+	<Knihovny>
+		<Dll version="0.96.0.0">ClosedXML.dll</Dll>
+		<Dll version="2.16.0.0">DocumentFormat.OpenXml.dll</Dll>
+		<Dll version="1.1.0.0">ExcelNumberFormat.dll</Dll>
+		<Dll version="0.6.4.0">fNbt.dll</Dll>
+		<Dll version="1.11.48.0">HtmlAgilityPack.dll</Dll>
+		<Dll version="13.0.0.0">Newtonsoft.Json.dll</Dll>
+	</Knihovny>
 </Ticketnik>
