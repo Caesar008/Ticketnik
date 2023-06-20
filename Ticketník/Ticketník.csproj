@@ -402,6 +402,7 @@
     <Content Include="bin\Release\known_errors.txt" />
     <Content Include="bin\Release\Ticketnik.exe" />
     <Content Include="bin\Release\ticketnik.xml" />
+    <None Include="Resources\Updater.exe" />
     <Content Include="ticket-256.ico" />
   </ItemGroup>
   <ItemGroup>

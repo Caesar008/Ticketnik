@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Xml;
 using System.Net;
 using System.Net.Http;
+using Ticketník.Properties;
 
 namespace Ticketník
 {
@@ -416,8 +417,11 @@ namespace Ticketník
                 {
                     if (DialogResult.Yes == MessageBox.Show(jazyk.Message_NovaVerze, jazyk.Message_Aktualizace, MessageBoxButtons.YesNo))
                     {
+                        Logni("Rozbaluji Updater.exe", LogMessage.INFO);
+                        File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"), Resources.Updater);
                         try
                         {
+                            
                             //výchozí cesta v síti
                             if (!Properties.Settings.Default.pouzivatZalozniUpdate)
                             {
@@ -474,6 +478,27 @@ namespace Ticketník
                             catch (Exception e)
                             {
                                 Logni("Stažení aktualizace programu selhalo.\r\n" + e.Message, LogMessage.WARNING);
+                            }
+                        }
+
+                        //dll
+                        XmlNode dllList = updates.DocumentElement.SelectSingleNode("Knihovny");
+                        Logni("Kontroluji aktualizace knihoven dll", LogMessage.INFO);
+                        foreach (XmlNode dllNode in dllList.SelectNodes("Dll"))
+                        {
+                            string verze = dllNode.Attributes["version"].Value;
+                            string jmeno = dllNode.InnerText;
+                            string verzeExisting = "";
+                            string fileTest = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", jmeno);
+                            Logni("Knihovna " + jmeno + ", verze " + verze, LogMessage.INFO);
+                            if (File.Exists(fileTest))
+                            {
+                                verzeExisting = FileVersionInfo.GetVersionInfo(fileTest).FileVersion;
+                            }
+
+                            if (Version.Parse(verze) > Version.Parse(verzeExisting) || verzeExisting == "")
+                            {
+                                //updatovat/stáhnout
                             }
                         }
 

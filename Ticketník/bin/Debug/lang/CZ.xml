@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language name="Čeština" shortcut="CZ" international="Czech" version="7" revision="0">
+<Language name="Čeština" shortcut="CZ" international="Czech" version="8" revision="0">
 	<MainMenuItems>
 		<File en="File">Soubor</File>
 		<Options en="Options">Možnosti</Options>
@@ -113,6 +113,10 @@
 			<Language en="Language">Jazyk</Language>
 			<ChangeLanguage en="Change language">Změnit jazyk</ChangeLanguage>
 			<OnlineTerp en="Primarly use Terps loaded from MyTime">Primárně používat Terpy z MyTime</OnlineTerp>
+			<Theme en="Theme">Motiv</Theme>
+			<Light en="Light">Světlý</Light>
+			<Dark en="Dark">Tmavý</Dark>
+			<SystemTheme en="Reflect system settings">Podle nastavení systému</SystemTheme>
       <ResetToDefault en="Default settings">Výchozí nastavení</ResetToDefault>
 		</Settings>
 		<Customer>
