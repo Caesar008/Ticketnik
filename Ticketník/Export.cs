@@ -126,7 +126,9 @@ namespace Ticketník
 
                     webClient.Dispose();
                 }
-                catch { //zpráva že failed}
+                catch 
+                { //zpráva že failed
+                }
             }
         }
     }
