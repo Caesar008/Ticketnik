@@ -87,6 +87,7 @@
 			<ThisWeek en="This week">Tento týden</ThisWeek>
 			<LastWeek en="Last week">Minulý týden</LastWeek>
 			<Custom en="Selected date range">Vybrané období</Custom>
+			<MytimeExport en="Automatically upload to MyTime">Automaticky nahrát do MyTime</MytimeExport>
 		</Export>
 		<Settings>
 			<Settings en="Settings">Nastavení</Settings>

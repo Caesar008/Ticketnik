@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
 using System.Net.Http;
+using HtmlAgilityPack;
 
 namespace Ticketník
 {
@@ -25,11 +26,12 @@ namespace Ticketník
             this.radioButton1.Text = form.jazyk.Windows_Export_TentoTyden;
             this.radioButton2.Text = form.jazyk.Windows_Export_MinulyTyden;
             this.radioButton3.Text = form.jazyk.Windows_Export_VybraneObdobi;
-            this.checkBox1.Checked = Properties.Settings.Default.ExportToMyTime;
+            this.checkBox1.Text = form.jazyk.Windows_Export_NahratDoMyTime;
             if (Properties.Settings.Default.NovyExport)
             {
                 checkBox1.Enabled = true;
-                checkBox1.Checked = true;
+                //checkBox1.Checked = true;
+                this.checkBox1.Checked = Properties.Settings.Default.ExportToMyTime;
             }
             else
             {
@@ -72,9 +74,20 @@ namespace Ticketník
                 else if (saveFileDialog1.FileName.EndsWith("xlsx"))
                 {
                     File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx", saveFileDialog1.FileName, true);
+                    if(checkBox1.Checked)
+                    {
+                        form.Logni("Nahrávám tickety do MyTime", Form1.LogMessage.INFO);
+                        UploadToMytime();
+                    }
                 }
+            }
+        }
 
-                if(checkBox1.Checked)
+        private async void UploadToMytime()
+        {
+            if (checkBox1.Checked)
+            {
+                try
                 {
                     string url = "https://mytime.tietoevry.com/time_cards/" + year + "/week/" + weekNumber + "/import";
                     HttpClient webClient = new HttpClient(new HttpClientHandler()
@@ -83,9 +96,37 @@ namespace Ticketník
                         UseDefaultCredentials = true
                     });
                     string page = "";
-                    page = await webClient.GetStringAsync(url).ConfigureAwait(false);
+                    try
+                    {
+                        //test, jestli jsem lognutý, tohle hodí exception, když ne
+                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
+                        //načtení samotné stránky
+                        page = await webClient.GetStringAsync(url).ConfigureAwait(false);
+                    }
+                    catch
+                    {
+                        await webClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
+                        page = await webClient.GetStringAsync(url).ConfigureAwait(false);
+                    }
 
+                    HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+                    html.LoadHtml(page);
+                    HtmlNode form = html.DocumentNode.SelectSingleNode("//form[contains(@id, 'time_card_import_form')]");
+                    HtmlNode token = form.SelectSingleNode("//input[contains(@name, 'authenticity_token')]");
+                    string tokenValue = token.Attributes["value"].Value;
+                    byte[] file = File.ReadAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx");
+                    MultipartFormDataContent formData = new MultipartFormDataContent();
+                    formData.Add(new StringContent(tokenValue), "authenticity_token");
+                    formData.Add(new StringContent("Import"), "commit");
+                    formData.Add(new ByteArrayContent(file), "uploaded_file", "tmp_export.xlsx");
+                    HttpResponseMessage response = await webClient.PostAsync(url, formData).ConfigureAwait(false);
+                    response.EnsureSuccessStatusCode();
+                    //zpráva že success
+
+                    webClient.Dispose();
                 }
+                catch { //zpráva že failed}
             }
         }
     }

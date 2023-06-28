@@ -977,6 +977,14 @@ namespace Ticketník
                 return ReturnPreklad("Windows/Export/Custom");
             }
         }
+
+        internal string Windows_Export_NahratDoMyTime
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Export/MytimeExport");
+            }
+        }
         internal string Windows_JmenoSouboru
         {
             get

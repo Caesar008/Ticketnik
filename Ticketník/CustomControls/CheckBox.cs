@@ -159,39 +159,56 @@ namespace Ticketník.CustomControls
             {
                 using (Pen p = new Pen(_mouseIn ? BorderColorMouseOver : BorderColor, 1))
                 {
+                    Point topLeft = new Point(0, 0);
+                    if (!AutoSize)
+                    {
+                        switch(CheckAlign)
+                        {
+                            case ContentAlignment.TopLeft: topLeft.Y = 1; break;
+                            case ContentAlignment.MiddleLeft: topLeft.Y = (Height / 2) - 7; break;
+                            case ContentAlignment.BottomLeft: topLeft.Y = Height - 15; break;
+                            case ContentAlignment.TopCenter: topLeft = new Point((Width/2)-7, 1); break;
+                            case ContentAlignment.MiddleCenter: topLeft = new Point((Width / 2) - 7, (Height / 2) - 7); break;
+                            case ContentAlignment.BottomCenter: topLeft = new Point((Width / 2) - 7, Height - 15); break;
+                            case ContentAlignment.TopRight: topLeft = new Point(Width - 15, 1); break;
+                            case ContentAlignment.MiddleRight: topLeft = new Point(Width - 15, (Height / 2) - 7); break;
+                            case ContentAlignment.BottomRight: topLeft = new Point(Width - 15, Height - 15); break;
+                            default: break;
+                        }
+                    }
                     //vymazat původní čtverec
                     if (!Checked)
                     {
                         GraphicsPath gp = new GraphicsPath();
-                        gp.AddRectangle(new Rectangle(0, 0, 14, 14));
+                        gp.AddRectangle(new Rectangle(0 + topLeft.X, 0+topLeft.Y, 14, 14));
                         e.Graphics.FillPath(new SolidBrush(BackColor), gp);
                         //vyplnit
                         using (SolidBrush brush = new SolidBrush(_mouseIn ? BoxColorMouseOver : BoxColor))
                         {
-                            e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
+                            e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0 + topLeft.X, 1 + topLeft.Y, 12, 12), 2, 2, 2, 2));
                         }
                     }
                     else
                     {
                         GraphicsPath gp = new GraphicsPath();
-                        gp.AddRectangle(new Rectangle(0, 0, 14, 14));
+                        gp.AddRectangle(new Rectangle(0 + topLeft.X, 0 + topLeft.Y, 14, 14));
                         e.Graphics.FillPath(new SolidBrush(BackColor), gp);
                         //vyplnit
                         using (SolidBrush brush = new SolidBrush(_mouseIn ? CheckedColorMouseOver : CheckedColor))
                         {
-                            e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
+                            e.Graphics.FillPath(brush, RoundedRect(new Rectangle(0 + topLeft.X, 1 + topLeft.Y, 12, 12), 2, 2, 2, 2));
                         }
                         //udělat checkmark
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         using (Pen chm = new Pen(_mouseIn ? CheckMarkColorMouseOver : CheckMarkColor, 1))
                         {
-                            e.Graphics.DrawLine(chm, 3, 7, 5, 9);
-                            e.Graphics.DrawLine(chm, 5, 9, 9, 5);
+                            e.Graphics.DrawLine(chm, 3 + topLeft.X, 7 + topLeft.Y, 5 + topLeft.X, 9 + topLeft.Y);
+                            e.Graphics.DrawLine(chm, 5 + topLeft.X, 9 + topLeft.Y, 9 + topLeft.X, 5 + topLeft.Y);
                         }
                     }
                     //vytvořit rámeček
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.DrawPath(p, RoundedRect(new Rectangle(0, 1, 12, 12), 2, 2, 2, 2));
+                    e.Graphics.DrawPath(p, RoundedRect(new Rectangle(0 + topLeft.X, 1 + topLeft.Y, 12, 12), 2, 2, 2, 2));
                 }
 
             }
