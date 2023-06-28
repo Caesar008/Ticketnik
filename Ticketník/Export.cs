@@ -25,6 +25,7 @@ namespace Ticketník
             this.radioButton1.Text = form.jazyk.Windows_Export_TentoTyden;
             this.radioButton2.Text = form.jazyk.Windows_Export_MinulyTyden;
             this.radioButton3.Text = form.jazyk.Windows_Export_VybraneObdobi;
+            this.checkBox1.Checked = Properties.Settings.Default.ExportToMyTime;
             if (Properties.Settings.Default.NovyExport)
             {
                 checkBox1.Enabled = true;
@@ -54,6 +55,8 @@ namespace Ticketník
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.ExportToMyTime = checkBox1.Checked;
+            Properties.Settings.Default.Save();
             if (!Properties.Settings.Default.NovyExport)
                 Export_Stary();
             else
