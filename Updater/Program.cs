@@ -19,6 +19,17 @@ namespace Updater
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             int retry = 0;
+            string[] toRemove;
+            if(File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", "ToRemove")))
+            {
+                toRemove = File.ReadAllLines(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", "ToRemove"));
+                foreach(string line in toRemove)
+                {
+                    if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", line)))
+                        File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", line));
+                }
+                File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", "ToRemove"));
+            }
             try
             {
                 if (Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", "Update")))

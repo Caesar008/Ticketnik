@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Ticketnik>
 	<Zakosi>50</Zakosi>
-	<App>1070204</App>
+	<App>1070300</App>
 	<Help>7</Help>
 	<Lang>
 		<CZ>7.0</CZ>
@@ -13,5 +13,6 @@
 		<Dll version="0.6.4.0">fNbt.dll</Dll>
 		<Dll version="1.11.48.0">HtmlAgilityPack.dll</Dll>
 		<Dll version="13.0.0.0">Newtonsoft.Json.dll</Dll>
+		<Dll version="1.3.0.0" remove="true">FastMember.Signed.dll</Dll>
 	</Knihovny>
 </Ticketnik>

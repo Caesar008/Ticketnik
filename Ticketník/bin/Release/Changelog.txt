@@ -1,3 +1,8 @@
+1.7.3.0 (28.6.2023)
+
+- Přepracován systém aktualizace - příprava pro 2.0
+- Aktualizace pomocí samostatného updateru
+-----------------------------------
 1.7.2.4 (15.6.2023)
 
 - Opravena chyba #23-001

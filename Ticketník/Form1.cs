@@ -60,6 +60,7 @@ namespace Ticketník
         public Form1()
         {
             CheckLog();
+            Logni("Startuji Ticketník " + Application.ProductVersion, LogMessage.INFO);
 
             //při updatu na 1.7 zapnout záložní update pro defaultní stahování z githubu
             if (Properties.Settings.Default.lastUpdateNotif < 107 && !Properties.Settings.Default.pouzivatZalozniUpdate)

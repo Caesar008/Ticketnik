@@ -21,6 +21,7 @@ namespace Ticketník
             this.radioButton1.Text = form.jazyk.Windows_Export_TentoTyden;
             this.radioButton2.Text = form.jazyk.Windows_Export_MinulyTyden;
             this.radioButton3.Text = form.jazyk.Windows_Export_VybraneObdobi;
+            
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
