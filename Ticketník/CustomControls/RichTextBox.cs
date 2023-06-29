@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Ticketník.CustomControls
 {
@@ -193,6 +194,11 @@ namespace Ticketník.CustomControls
             }
         }
 
+        public int GetLineFromCharIndex(int index)
+        {
+            return rtb.GetLineFromCharIndex(index);
+        }
+
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
@@ -241,6 +247,21 @@ namespace Ticketník.CustomControls
             VScrollBar.ScrollPosition = vscrollPositionInner;
             base.OnPaint(e);
         }
+
+
+        public void SelectAll()
+        {
+            rtb.SelectAll();
+        }
+
+        public HorizontalAlignment SelectionAlignment
+        {
+            get { return rtb.SelectionAlignment; }
+            set { rtb.SelectionAlignment = value; }
+        }
+
+        public void DeselectAll()
+        { rtb.DeselectAll(); }
     }
 
     internal class RichTextBoxInternal : System.Windows.Forms.RichTextBox

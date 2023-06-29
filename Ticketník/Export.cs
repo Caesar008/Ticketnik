@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net.Http;
 using HtmlAgilityPack;
+using System.Diagnostics;
 
 namespace Ticketník
 {
@@ -63,6 +64,12 @@ namespace Ticketník
                 Export_Stary();
             else
                 Export_Novy();
+
+            if (checkBox1.Checked)
+            {
+                form.Logni("Nahrávám tickety do MyTime", Form1.LogMessage.INFO);
+                UploadToMytime();
+            }
         }
 
         private async void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -74,11 +81,7 @@ namespace Ticketník
                 else if (saveFileDialog1.FileName.EndsWith("xlsx"))
                 {
                     File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx", saveFileDialog1.FileName, true);
-                    if(checkBox1.Checked)
-                    {
-                        form.Logni("Nahrávám tickety do MyTime", Form1.LogMessage.INFO);
-                        UploadToMytime();
-                    }
+                    
                 }
             }
         }
@@ -87,9 +90,16 @@ namespace Ticketník
         {
             if (checkBox1.Checked)
             {
+                if (!InvokeRequired)
+                    this.form.timer_ClearInfo.Stop();
+                else
+                    this.BeginInvoke(new Action(() => form.timer_ClearInfo.Stop()));
+                this.form.infoBox.Text = form.jazyk.Message_Uploading;
+                this.form.Update();
                 try
                 {
                     string url = "https://mytime.tietoevry.com/time_cards/" + year + "/week/" + weekNumber + "/import";
+                    this.form.Logni("MyTime url: " + url, Form1.LogMessage.INFO);
                     HttpClient webClient = new HttpClient(new HttpClientHandler()
                     {
                         AllowAutoRedirect = true,
@@ -105,6 +115,7 @@ namespace Ticketník
                     }
                     catch
                     {
+                        this.form.Logni("Přihlašuji se do MyTime", Form1.LogMessage.INFO);
                         await webClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
                         await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
                         page = await webClient.GetStringAsync(url).ConfigureAwait(false);
@@ -112,23 +123,35 @@ namespace Ticketník
 
                     HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
                     html.LoadHtml(page);
-                    HtmlNode form = html.DocumentNode.SelectSingleNode("//form[contains(@id, 'time_card_import_form')]");
-                    HtmlNode token = form.SelectSingleNode("//input[contains(@name, 'authenticity_token')]");
+                    HtmlNode formHtml = html.DocumentNode.SelectSingleNode("//form[contains(@id, 'time_card_import_form')]");
+                    HtmlNode token = formHtml.SelectSingleNode("//input[contains(@name, 'authenticity_token')]");
                     string tokenValue = token.Attributes["value"].Value;
                     byte[] file = File.ReadAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx");
                     MultipartFormDataContent formData = new MultipartFormDataContent();
                     formData.Add(new StringContent(tokenValue), "authenticity_token");
                     formData.Add(new StringContent("Import"), "commit");
                     formData.Add(new ByteArrayContent(file), "uploaded_file", "tmp_export.xlsx");
+                    this.form.Logni("Nahrávám exportované tickety do MyTime", Form1.LogMessage.INFO);
                     HttpResponseMessage response = await webClient.PostAsync(url, formData).ConfigureAwait(false);
                     response.EnsureSuccessStatusCode();
                     //zpráva že success
 
+                    this.form.Logni("Úspěšně nahráno do MyTime, rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.INFO);
+                    
+                    DialogResult mtv = MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeSuccess, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (mtv == DialogResult.Yes)
+                        Process.Start(url.Replace("/import", ""));
+
                     webClient.Dispose();
                 }
-                catch 
+                catch (Exception ex)
                 { //zpráva že failed
+                    this.form.Logni("Nahrávání do MyTime selhalo. Rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.WARNING);
+                    this.form.Logni("Nahrávání do MyTime selhalo. Rok " + year + ", týden " + weekNumber + ".\r\n\r\n" + ex.Message + "\r\n" + ex.InnerException, Form1.LogMessage.ERROR);
+                    MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeFailed, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                form.infoBox.Text = "";
             }
         }
     }

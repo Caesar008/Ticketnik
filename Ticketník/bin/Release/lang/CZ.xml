@@ -88,6 +88,8 @@
 			<LastWeek en="Last week">Minulý týden</LastWeek>
 			<Custom en="Selected date range">Vybrané období</Custom>
 			<MytimeExport en="Automatically upload to MyTime">Automaticky nahrát do MyTime</MytimeExport>
+			<ExportSuccess en="Upload to MyTime was successful. Do not forget to visit MyTime and submit your timecards.\r\n\r\nVisit MyTime now?">Úspěšně nahráno do MyTime. Nezapomeň navštívit MyTime a potvrdit nahlášené hodiny.\r\n\r\nNavštívit nyní MyTime?</ExportSuccess>
+			<ExportFailed en="Upload to MyTime Failed.">Nahrání do MyTime selhalo.</ExportFailed>
 		</Export>
 		<Settings>
 			<Settings en="Settings">Nastavení</Settings>
@@ -300,5 +302,12 @@
     <LookingHelpUpdate en="Looking for Help updates...">Vyhledávám aktualizace nápovědy...</LookingHelpUpdate>
     <TerpUpdate en="Updating list of Terps and Tasks...">Aktualizuji seznam Terpů a Tasků...</TerpUpdate>
     <NotRecomended en="Disabling this option is not recommended.">Vypnutí tohoto nastavení není doporučeno.</NotRecomended>
+		<UploadingTickets en="Uploading to MyTime...">Nahrávám do MyTime...</UploadingTickets>
 	</Messages>
+	<Buttons>
+		<OK en="OK">OK</OK>
+		<Cancel en ="Cancel">Zrušit</Cancel>
+		<Yes en="Yes">Ano</Yes>
+		<No en="No">Ne</No>
+	</Buttons>
 </Language>

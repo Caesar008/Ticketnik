@@ -682,6 +682,13 @@ namespace Ticketník
                 return ReturnPreklad("Messages/NotRecomended");
             }
         }
+        internal string Message_Uploading
+        {
+            get
+            {
+                return ReturnPreklad("Messages/UploadingTickets");
+            }
+        }
 
         #endregion
 
@@ -983,6 +990,22 @@ namespace Ticketník
             get
             {
                 return ReturnPreklad("Windows/Export/MytimeExport");
+            }
+        }
+
+        internal string Windows_Export_NahratDoMyTimeSuccess
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Export/ExportSuccess").Replace("\\r", "\r").Replace("\\n", "\n");
+            }
+        }
+
+        internal string Windows_Export_NahratDoMyTimeFailed
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Export/ExportFailed");
             }
         }
         internal string Windows_JmenoSouboru
@@ -1959,6 +1982,42 @@ namespace Ticketník
             get
             {
                 return ReturnPreklad("Windows/LanguageManager/EditTranslation");
+            }
+        }
+
+        #endregion
+
+        #region Buttons
+
+        internal string Buttons_OK
+        {
+            get
+            {
+                return ReturnPreklad("Buttons/OK");
+            }
+        }
+
+        internal string Buttons_Cancel
+        {
+            get
+            {
+                return ReturnPreklad("Buttons/Cancel");
+            }
+        }
+
+        internal string Buttons_Yes
+        {
+            get
+            {
+                return ReturnPreklad("Buttons/Yes");
+            }
+        }
+
+        internal string Buttons_No
+        {
+            get
+            {
+                return ReturnPreklad("Buttons/No");
             }
         }
 

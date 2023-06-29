@@ -161,7 +161,7 @@ namespace Ticketník
                     "Kapacita: " + int.MaxValue.ToString("n0") + "\r\n" +
                     "Min rok: " + roky[0] + "\r\n" +
                     "Max rok: " + roky[max] + "\r\n" +
-                    "Cesta: " + jmenoSouboru + "\r\n\r\n" + 
+                    "Cesta: " + jmenoSouboru + "\r\n\r\n" +
                     "Konfig: " + System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.Replace("\\" + System.Reflection.Assembly.GetEntryAssembly().GetName().Version + "\\user.config", "").Replace(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Ticketník\\", "")
                     , "Info o souboru", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
@@ -187,6 +187,12 @@ namespace Ticketník
                 }
                 catch { }
 
+            }
+            else if (e.KeyCode == Keys.M && e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                CustomControls.MessageBox.Show("test a hodně douhý text prostě aby to tam nějak přesáhlo hodně moc - asdohas nasv n nasdfvn fdm vn sdvjnaeoirjg aeorg oaerjg oaerg nvaowrnb aenboae nbjn ab ejknb kjnb nfnabkwjrnb eakjbn ea njeaklnbjeakbn kbk eankjbnekj nkjbn kaelnbjknbkj ebjenakjb njkaenbkjaetnbj aenb jaelbn eajknb ejkat njket ndfmn vaekmfdn vdmfkn mdksn vmkdfn vmdnf vnkdmf nvmkdn djgfdasadhjfgsadjfgbsdhjgfasdkfgjgsdfgjdgfjsgdfjdfvhjsbdjgfshdgfshdgf https://google.com",
+                   "test", MessageBoxButtons.YesNoCancel);
+                //CustomControls.MessageBox.Show("test", "test", MessageBoxButtons.YesNoCancel);
             }
         }
     }

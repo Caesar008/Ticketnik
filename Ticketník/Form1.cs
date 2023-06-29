@@ -22,6 +22,7 @@ namespace Ticketník
     - Přepracován systém práce s JSON daty z MyTime
     - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
     - Ctrl+V nyní umí rozpoznat tickety z SM9
+    - Automatický upload do MyTime
     - Oprava chyby #22-003
     - Oprava chyby #23-001
     - Dll knihovny updatovány na novější verze

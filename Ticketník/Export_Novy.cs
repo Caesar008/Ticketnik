@@ -348,11 +348,14 @@ namespace Ticketník
 
             form.infoBox.Text = "";
 
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.DefaultExt = "xlsx";
-            saveFileDialog1.Filter = "Excel|*.xlsx";
-            saveFileDialog1.FileName = "MyTime Info.xlsx";
-            saveFileDialog1.ShowDialog();
+            if (!checkBox1.Checked)
+            {
+                saveFileDialog1.AddExtension = true;
+                saveFileDialog1.DefaultExt = "xlsx";
+                saveFileDialog1.Filter = "Excel|*.xlsx";
+                saveFileDialog1.FileName = "MyTime Info.xlsx";
+                saveFileDialog1.ShowDialog();
+            }
         }
     }
 
