@@ -199,7 +199,7 @@ namespace Ticketník
                     string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond;
                     File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Error.log", "[" + dat + "] Poškozený soubor nastavení " + filename + "\r\n\r\n");
 
-                    MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
+                    CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
 
                     File.Delete(filename);
                     Properties.Settings.Default.Reload();
@@ -209,7 +209,7 @@ namespace Ticketník
                 }
                 catch (System.Reflection.TargetInvocationException te)
                 {
-                    MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + te.Message + "\r\n\r\n" + te.StackTrace + "\r\n\r\n" + te.InnerException, new Jazyk().Error_KritickaChyba);
+                    CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + te.Message + "\r\n\r\n" + te.StackTrace + "\r\n\r\n" + te.InnerException, new Jazyk().Error_KritickaChyba);
 
                     if (!Directory.Exists(appdata + "\\Ticketnik"))
                     {
@@ -242,7 +242,7 @@ namespace Ticketník
                         string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond;
                         File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Error.log", "[" + dat + "] Poškozený soubor nastavení " + filename + "\r\n\r\n");
 
-                        MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
+                        CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
 
                         File.Delete(filename);
                         Properties.Settings.Default.Reload();
@@ -252,7 +252,7 @@ namespace Ticketník
                     }
                     else
                     {
-                        MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n\r\n" + e.InnerException, new Jazyk().Error_KritickaChyba);
+                        CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n\r\n" + e.InnerException, new Jazyk().Error_KritickaChyba);
 
                         if (!Directory.Exists(appdata + "\\Ticketnik"))
                         {

@@ -585,7 +585,7 @@ namespace Ticketník
                         }
                     }
                 }
-                catch { MessageBox.Show(form.jazyk.Error_RegexError); }
+                catch { CustomControls.MessageBox.Show(form.jazyk.Error_RegexError); }
             }
             listView1.EndUpdate();
         }

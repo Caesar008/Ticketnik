@@ -2018,7 +2018,7 @@ namespace Ticketník
                     }
                 }
                 if (preskoceno != 0)
-                    MessageBox.Show(preskoceno + " " + jazyk.Message_Preskoceno);
+                    CustomControls.MessageBox.Show(preskoceno + " " + jazyk.Message_Preskoceno);
             }
             else
             {
@@ -2493,7 +2493,7 @@ namespace Ticketník
                                     {
                                         copy = refer.GetNbtObject();
                                         zakaznikVlozit = refer.Zakaznik;
-                                        MessageBox.Show(jazyk.Message_Zkopirovan);
+                                        CustomControls.MessageBox.Show(jazyk.Message_Zkopirovan);
                                         Clipboard.SetText(refer.ID + "\t" + refer.Zakaznik + "\t" + refer.PC + "\t" + refer.Popis);
                                     }
                                     break;
@@ -2917,7 +2917,7 @@ namespace Ticketník
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(jazyk.Error_NejdeOtevritNapoveda);
+                    CustomControls.MessageBox.Show(jazyk.Error_NejdeOtevritNapoveda);
                     Logni("Nelze otevřít nápovědu\r\n\r\n" + ex.Message + "\r\n\r\n" + ex.StackTrace, LogMessage.ERROR);
                 }
             }
@@ -3122,7 +3122,7 @@ namespace Ticketník
             file = newFile;
             uložitToolStripMenuItem_Click(this, null);
             LoadFile();
-            MessageBox.Show(jazyk.Message_FormatNovy + jmenoSouboru.Remove(0, jmenoSouboru.LastIndexOf('\\') + 1).Replace(".tic", ".old"));
+            CustomControls.MessageBox.Show(jazyk.Message_FormatNovy + jmenoSouboru.Remove(0, jmenoSouboru.LastIndexOf('\\') + 1).Replace(".tic", ".old"));
         }
 
         private void leden_ColumnReordered(object sender, ColumnReorderedEventArgs e)

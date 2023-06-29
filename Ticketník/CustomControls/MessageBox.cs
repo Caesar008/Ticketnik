@@ -18,23 +18,27 @@ namespace Ticketník.CustomControls
         public MessageBoxInternal(string message, bool clickableLinks = true)
         {
             InitializeComponent();
-            DialogResult = DialogResult.None;
+            ClickableLinks = clickableLinks;
             richTextBox1.Text = message;
             this.Text = "";
-            ClickableLinks = clickableLinks;
+            richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
+            SetButtons(MessageBoxButtons.OK);
             richTextBox1.WordWrap = true;
-            AdjustSize();
+            richTextBox1.ReadOnly = true;
+            AdjustSize(true);
         }
 
         public MessageBoxInternal(string message, string caption, bool clickableLinks = true)
         {
             InitializeComponent();
-            DialogResult = DialogResult.None;
             ClickableLinks = clickableLinks;
             richTextBox1.Text = message;
             this.Text = caption;
+            richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
+            SetButtons(MessageBoxButtons.OK);
             richTextBox1.WordWrap = true;
-            AdjustSize();
+            richTextBox1.ReadOnly = true;
+            AdjustSize(true);
         }
 
         public MessageBoxInternal(string message, MessageBoxButtons buttons, bool clickableLinks = true)
@@ -46,6 +50,7 @@ namespace Ticketník.CustomControls
             richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
             SetButtons(buttons);
             richTextBox1.WordWrap = true;
+            richTextBox1.ReadOnly = true;
             AdjustSize(true);
         }
 
@@ -58,6 +63,7 @@ namespace Ticketník.CustomControls
             richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
             SetButtons(buttons);
             richTextBox1.WordWrap = true;
+            richTextBox1.ReadOnly = true;
             AdjustSize(true);
         }
         public MessageBoxInternal(string message, MessageBoxIcon icon, bool clickableLinks = true)
@@ -67,7 +73,10 @@ namespace Ticketník.CustomControls
             ClickableLinks = clickableLinks;
             richTextBox1.Text = message;
             this.Text = "";
+            richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
+            SetButtons(MessageBoxButtons.OK);
             richTextBox1.WordWrap = true;
+            richTextBox1.ReadOnly = true;
             AdjustSize();
         }
 
@@ -78,7 +87,10 @@ namespace Ticketník.CustomControls
             ClickableLinks = clickableLinks;
             richTextBox1.Text = message;
             this.Text = caption;
+            richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
+            SetButtons(MessageBoxButtons.OK);
             richTextBox1.WordWrap = true;
+            richTextBox1.ReadOnly = true;
             AdjustSize();
         }
 
@@ -91,6 +103,7 @@ namespace Ticketník.CustomControls
             richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
             SetButtons(buttons);
             richTextBox1.WordWrap = true;
+            richTextBox1.ReadOnly = true;
             AdjustSize(true);
         }
 
@@ -103,7 +116,20 @@ namespace Ticketník.CustomControls
             richTextBox1.Height = Height - 45 - 12 - 23 - 3; //velikost okna - prvky okna - odsazení odspodu - button - odsazení buttonu
             SetButtons(buttons);
             richTextBox1.WordWrap = true;
+            richTextBox1.ReadOnly = true;
             AdjustSize(true);
+        }
+
+        private Icon GetIcon(MessageBoxIcon icon)
+        {
+            switch (icon)
+            {
+                case MessageBoxIcon.Information: return SystemIcons.Information;
+                case MessageBoxIcon.Error: return SystemIcons.Error;
+                case MessageBoxIcon.Exclamation: return SystemIcons.Exclamation;
+                case MessageBoxIcon.Question: return SystemIcons.Question;
+                default: return null;
+            }
         }
 
         private void SetButtons(MessageBoxButtons buttons)
@@ -185,7 +211,9 @@ namespace Ticketník.CustomControls
             {
                 but = 23 + 3 + 12;
             }
-            int textHight = TextRenderer.MeasureText(richTextBox1.Text, richTextBox1.Font).Height * (richTextBox1.GetLineFromCharIndex(richTextBox1.Text.Length - 1) + 1);
+            int vyska = TextRenderer.MeasureText(richTextBox1.Text, richTextBox1.Font).Height;
+            int nasobek = (richTextBox1.GetLineFromCharIndex(richTextBox1.Text.Length - 1) + 1);
+            int textHight = vyska * (vyska == 13 ? nasobek : 1);
             /*if (textHight + 4 < Height)
             {
                 richTextBox1.Height = ((Height - 45 - but) / 2);

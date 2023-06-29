@@ -1353,7 +1353,7 @@ namespace Ticketník
 
             if (ticket.CustomTerp != "" && ticket.CustomTask == "")
             {
-                MessageBox.Show(form.jazyk.Message_TaskCannotBeEmpty);
+                CustomControls.MessageBox.Show(form.jazyk.Message_TaskCannotBeEmpty);
                 canClose = false;
             }
 

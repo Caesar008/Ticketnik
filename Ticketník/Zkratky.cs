@@ -155,7 +155,7 @@ namespace Ticketník
                     }
                     roky.Sort();
                     int max = roky.Count - 1;
-                    MessageBox.Show("Verze: " + file.RootTag.Get<NbtInt>("verze").Value + "\r\n" +
+                    CustomControls.MessageBox.Show("Verze: " + file.RootTag.Get<NbtInt>("verze").Value + "\r\n" +
                     "Max ID: " + file.RootTag.Get<NbtLong>("MaxID").Value.ToString("n0") + "\r\n" +
                     "Počet ticketů: " + pocet.ToString("n0") + "\r\n" +
                     "Kapacita: " + int.MaxValue.ToString("n0") + "\r\n" +
@@ -163,7 +163,7 @@ namespace Ticketník
                     "Max rok: " + roky[max] + "\r\n" +
                     "Cesta: " + jmenoSouboru + "\r\n\r\n" +
                     "Konfig: " + System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.Replace("\\" + System.Reflection.Assembly.GetEntryAssembly().GetName().Version + "\\user.config", "").Replace(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Ticketník\\", "")
-                    , "Info o souboru", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    , "Info o souboru", MessageBoxButtons.OK/*, MessageBoxIcon.None*/);
                 }
             }
             else if (e.KeyCode == Keys.U && e.Modifiers == (Keys.Control | Keys.Shift))

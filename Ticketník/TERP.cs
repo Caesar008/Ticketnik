@@ -144,7 +144,7 @@ namespace Ticketník
                         if (terpy.Value == textBox1.Text.Split(new[] { ' ' }, 2)[0])
                         {
                             nalezeno = true;
-                            MessageBox.Show(form.jazyk.Windows_Terp_TerpKod + " " + textBox1.Text + " " + form.jazyk.Windows_Terp_UzExistuje);
+                            CustomControls.MessageBox.Show(form.jazyk.Windows_Terp_TerpKod + " " + textBox1.Text + " " + form.jazyk.Windows_Terp_UzExistuje);
                             break;
                         }
                     }
@@ -160,7 +160,7 @@ namespace Ticketník
                     if (s[1] == null)
                         s[1] = "";
                     Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis").Add(new NbtString(s[0], s[1]));
-                    MessageBox.Show(form.jazyk.Windows_Terp_TerpKod + " " + textBox1.Text + " " + form.jazyk.Windows_Terp_BylPridan);
+                    CustomControls.MessageBox.Show(form.jazyk.Windows_Terp_TerpKod + " " + textBox1.Text + " " + form.jazyk.Windows_Terp_BylPridan);
                     this.Close();
                 }
             }
@@ -174,7 +174,7 @@ namespace Ticketník
                 if (s[1] == null)
                     s[1] = "";
                 Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TerpPopis").Add(new NbtString(s[0], s[1]));
-                MessageBox.Show(form.jazyk.Windows_Terp_TerpKod + " " + textBox1.Text + " " + form.jazyk.Windows_Terp_BylPridan);
+                CustomControls.MessageBox.Show(form.jazyk.Windows_Terp_TerpKod + " " + textBox1.Text + " " + form.jazyk.Windows_Terp_BylPridan);
                 this.Close();
             }
         }
@@ -191,7 +191,7 @@ namespace Ticketník
                         if (terpy.Value == textBox2.Text.Split(new[] { ' ' }, 2)[0])
                         {
                             nalezeno = true;
-                            MessageBox.Show(form.jazyk.Windows_Terp_Task + " " + textBox2.Text + " " + form.jazyk.Windows_Terp_UzExistuje);
+                            CustomControls.MessageBox.Show(form.jazyk.Windows_Terp_Task + " " + textBox2.Text + " " + form.jazyk.Windows_Terp_UzExistuje);
                             break;
                         }
                     }
@@ -207,7 +207,7 @@ namespace Ticketník
                     if (s[1] == null)
                         s[1] = "";
                     Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TaskPopis").Add(new NbtString(s[0], s[1]));
-                    MessageBox.Show(form.jazyk.Windows_Terp_Task + " " + textBox2.Text + " " + form.jazyk.Windows_Terp_BylPridan);
+                    CustomControls.MessageBox.Show(form.jazyk.Windows_Terp_Task + " " + textBox2.Text + " " + form.jazyk.Windows_Terp_BylPridan);
                     this.Close();
                 }
             }
@@ -221,7 +221,7 @@ namespace Ticketník
                 if (s[1] == null)
                     s[1] = "";
                 Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtCompound>("TaskPopis").Add(new NbtString(s[0], s[1]));
-                MessageBox.Show(form.jazyk.Windows_Terp_Task + " " + textBox2.Text + " " + form.jazyk.Windows_Terp_BylPridan);
+                CustomControls.MessageBox.Show(form.jazyk.Windows_Terp_Task + " " + textBox2.Text + " " + form.jazyk.Windows_Terp_BylPridan);
                 this.Close();
             }
         }

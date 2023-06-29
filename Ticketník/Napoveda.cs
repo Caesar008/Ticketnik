@@ -135,7 +135,7 @@ namespace Ticketník
             }
             catch (Exception ex)
             {
-                MessageBox.Show(form.jazyk.Windows_Help_NejdeStahnout);
+                CustomControls.MessageBox.Show(form.jazyk.Windows_Help_NejdeStahnout);
                 form.Logni(ex.Message + "\r\n\r\n" + ex.StackTrace, Form1.LogMessage.ERROR);
                 return;
             }
@@ -496,7 +496,7 @@ namespace Ticketník
                 }
                 catch
                 {
-                    MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
+                    CustomControls.MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
                 }
             }
             zmena = true;
@@ -520,7 +520,7 @@ namespace Ticketník
             }
             catch
             {
-                MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
+                CustomControls.MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
             }
         }
 

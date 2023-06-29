@@ -376,7 +376,7 @@ namespace Ticketník
             if (muze)
             {
                 if (!onlineTerp.Checked)
-                    MessageBox.Show(form.jazyk.Message_DisableNotRecommended);
+                    CustomControls.MessageBox.Show(form.jazyk.Message_DisableNotRecommended);
                 Properties.Settings.Default.onlineTerp = onlineTerp.Checked;
                 form.terpToolStripMenuItem.Visible = form.přidatTERPKódToolStripMenuItem.Visible = form.upravitTERPKódToolStripMenuItem.Visible = form.smazatTERPKódToolStripMenuItem.Visible = !onlineTerp.Checked;
                 Properties.Settings.Default.Save();
