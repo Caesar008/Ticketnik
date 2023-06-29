@@ -271,6 +271,7 @@ namespace Ticketník.CustomControls
         public static DialogResult Show(string message, string caption, MessageBoxButtons buttons, bool clickableLinks = true)
         {
             MessageBoxInternal messageBox = new MessageBoxInternal(message, caption, buttons, clickableLinks);
+            messageBox.StartPosition = FormStartPosition.CenterScreen;
             Motiv.SetMotiv(messageBox);
             return messageBox.ShowDialog();
         }
