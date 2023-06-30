@@ -737,7 +737,7 @@ namespace Ticketník
                     form.Kopirovat(((Tag)listView1.SelectedItems[0].Tag).IDlong, ((Tag)listView1.SelectedItems[0].Tag).Datum, listView1.SelectedItems[0].SubItems[3].Text, false, true);
                 }
                 else
-                    MessageBox.Show(form.jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    CustomControls.MessageBox.Show(form.jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

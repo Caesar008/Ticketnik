@@ -138,7 +138,7 @@ namespace Ticketník
 
                     this.form.Logni("Úspěšně nahráno do MyTime, rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.INFO);
                     
-                    DialogResult mtv = MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeSuccess, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    DialogResult mtv = CustomControls.MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeSuccess, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                     if (mtv == DialogResult.Yes)
                         Process.Start(url.Replace("/import", ""));
@@ -149,7 +149,7 @@ namespace Ticketník
                 { //zpráva že failed
                     this.form.Logni("Nahrávání do MyTime selhalo. Rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.WARNING);
                     this.form.Logni("Nahrávání do MyTime selhalo. Rok " + year + ", týden " + weekNumber + ".\r\n\r\n" + ex.Message + "\r\n" + ex.InnerException, Form1.LogMessage.ERROR);
-                    MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeFailed, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomControls.MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeFailed, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 form.infoBox.Text = "";
             }

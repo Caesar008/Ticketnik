@@ -309,5 +309,8 @@
 		<Cancel en ="Cancel">Zrušit</Cancel>
 		<Yes en="Yes">Ano</Yes>
 		<No en="No">Ne</No>
+		<Abort en="Abort">Přerušit</Abort>
+		<Retry en="Retry">Znovu</Retry>
+		<Ignore en="Ignore">Ignorovat</Ignore>
 	</Buttons>
 </Language>

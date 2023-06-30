@@ -1339,7 +1339,7 @@ namespace Ticketník
 
             if (ticket.StavT == Ticket.Stav.RDP)
             {
-                if (DialogResult.Yes == MessageBox.Show(form.jazyk.Message_VytvoritUpozorneni, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                if (DialogResult.Yes == CustomControls.MessageBox.Show(form.jazyk.Message_VytvoritUpozorneni, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
                     form.upozozrneniMuze = false;
                     Upozorneni upozorneni = new Upozorneni(form);

@@ -2021,6 +2021,30 @@ namespace Ticketník
             }
         }
 
+        internal string Buttons_Abort
+        {
+            get
+            {
+                return ReturnPreklad("Buttons/Abort");
+            }
+        }
+
+        internal string Buttons_Retry
+        {
+            get
+            {
+                return ReturnPreklad("Buttons/Retry");
+            }
+        }
+
+        internal string Buttons_Ignore
+        {
+            get
+            {
+                return ReturnPreklad("Buttons/Ignore");
+            }
+        }
+
         #endregion
 
         string ReturnPreklad(string text)

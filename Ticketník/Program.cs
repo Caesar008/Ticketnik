@@ -17,7 +17,7 @@ namespace Ticketník
             //zabránění spuštění z networku
             if (IsNetworkPath(Application.StartupPath))
             {
-                MessageBox.Show("Ticketník is not designed to run from network location. Please copy it locally to your computer.", "Network location detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CustomControls.MessageBox.Show("Ticketník is not designed to run from network location. Please copy it locally to your computer.", "Network location detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Application.Exit();
             }
             else
@@ -165,7 +165,7 @@ namespace Ticketník
                                 }
                                 else
                                 {
-                                    MessageBox.Show(new Jazyk().Error_NejdeZavritAAktualizovat, new Jazyk().Error_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    CustomControls.MessageBox.Show(new Jazyk().Error_NejdeZavritAAktualizovat, new Jazyk().Error_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                                     return;
                                 }
@@ -175,10 +175,10 @@ namespace Ticketník
                     else
                     {
                         if(!Application.ProductVersion.Contains("dev"))
-                            MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            CustomControls.MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         else
                         {
-                            if(DialogResult.Ignore == MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Exclamation))
+                            if(DialogResult.Ignore == CustomControls.MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Exclamation))
                                 Application.Run(new Form1());
                         }
                     }
@@ -199,7 +199,7 @@ namespace Ticketník
                     string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond;
                     File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Error.log", "[" + dat + "] Poškozený soubor nastavení " + filename + "\r\n\r\n");
 
-                    CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
+                    CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file", MessageBoxIcon.Warning);
 
                     File.Delete(filename);
                     Properties.Settings.Default.Reload();
@@ -209,7 +209,7 @@ namespace Ticketník
                 }
                 catch (System.Reflection.TargetInvocationException te)
                 {
-                    CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + te.Message + "\r\n\r\n" + te.StackTrace + "\r\n\r\n" + te.InnerException, new Jazyk().Error_KritickaChyba);
+                    CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + te.Message + "\r\n\r\n" + te.StackTrace + "\r\n\r\n" + te.InnerException, new Jazyk().Error_KritickaChyba, MessageBoxIcon.Error);
 
                     if (!Directory.Exists(appdata + "\\Ticketnik"))
                     {
@@ -242,7 +242,7 @@ namespace Ticketník
                         string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond;
                         File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Error.log", "[" + dat + "] Poškozený soubor nastavení " + filename + "\r\n\r\n");
 
-                        CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
+                        CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file", MessageBoxIcon.Warning);
 
                         File.Delete(filename);
                         Properties.Settings.Default.Reload();
@@ -252,7 +252,7 @@ namespace Ticketník
                     }
                     else
                     {
-                        CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n\r\n" + e.InnerException, new Jazyk().Error_KritickaChyba);
+                        CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n\r\n" + e.InnerException, new Jazyk().Error_KritickaChyba, MessageBoxIcon.Error);
 
                         if (!Directory.Exists(appdata + "\\Ticketnik"))
                         {

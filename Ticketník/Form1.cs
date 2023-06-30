@@ -125,7 +125,7 @@ namespace Ticketník
             catch
             {
                 Logni("Soubor .tic je poškozen. " + jmenoSouboru, LogMessage.WARNING);
-                MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomControls.MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Aktualizace(devtest);
 
@@ -1567,7 +1567,7 @@ namespace Ticketník
                         }
                     }
                     else
-                        MessageBox.Show(jazyk.Error_NovějsiVerze, jazyk.Error_Verze, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        CustomControls.MessageBox.Show(jazyk.Error_NovějsiVerze, jazyk.Error_Verze, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
                 }
                 else
@@ -1613,7 +1613,7 @@ namespace Ticketník
                 catch
                 {
                     Logni("Soubor .tic je poškozen. " + jmenoSouboru, LogMessage.WARNING);
-                    MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomControls.MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
         }
         }
@@ -1695,7 +1695,7 @@ namespace Ticketník
             {
                 if (e.CloseReason != CloseReason.WindowsShutDown)
                 {
-                    DialogResult dr = MessageBox.Show(jazyk.Message_Ulozit, jazyk.Message_Neulozeno, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                    DialogResult dr = CustomControls.MessageBox.Show(jazyk.Message_Ulozit, jazyk.Message_Neulozeno, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
                     if (dr == System.Windows.Forms.DialogResult.No)
                     {
                         ulozeno = true;
@@ -1881,7 +1881,7 @@ namespace Ticketník
             szk.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
             if (DialogResult.OK == szk.ShowDialog())
             {
-                if (DialogResult.Yes == MessageBox.Show(jazyk.Message_SmazatZakaznika + " " + tempZak + "?", jazyk.Message_OpravduSmazat, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                if (DialogResult.Yes == CustomControls.MessageBox.Show(jazyk.Message_SmazatZakaznika + " " + tempZak + "?", jazyk.Message_OpravduSmazat, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
                     list.SmazZakaznika(tempZak);
             }
         }
@@ -2045,7 +2045,7 @@ namespace Ticketník
                     zakaznikVlozit = "";
                 }
                 else
-                    MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    CustomControls.MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -2161,7 +2161,7 @@ namespace Ticketník
                 ticketWindow.ShowDialog();
             }
             else
-                MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CustomControls.MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         internal void toolStripButton2_Click(object sender, EventArgs e)
@@ -2175,7 +2175,7 @@ namespace Ticketník
                 ticketWindow.ShowDialog();
             }
             else
-                MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CustomControls.MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void zmenZakaznika_Click(object sender, EventArgs e)
@@ -2621,8 +2621,8 @@ namespace Ticketník
                 tw.ShowDialog();
             }
             catch 
-            { 
-                MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            {
+                CustomControls.MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Logni("Nemohu otevřít soubor chyb.", LogMessage.WARNING);
             }
         }
@@ -2652,8 +2652,8 @@ namespace Ticketník
                 tw.ShowDialog();
             }
             catch 
-            { 
-                MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            {
+                CustomControls.MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Logni("Nemohu otevřít soubor changelogu.", LogMessage.WARNING);
             }
         }
@@ -2683,8 +2683,8 @@ namespace Ticketník
                 tw.ShowDialog();
             }
             catch 
-            { 
-                MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            {
+                CustomControls.MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Logni("Nemohu otevřít soubor plánů.", LogMessage.WARNING);
             }
         }
@@ -2822,8 +2822,8 @@ namespace Ticketník
                 Process.Start(@"\\10.14.18.19\shareforyou\tools\Ticketnik\Ticketník.docx");
             }
             catch 
-            { 
-                MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            {
+                CustomControls.MessageBox.Show(jazyk.Error_NejdeOtevritSoubor, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Logni("Nemohu otevřít soubor dokumentace.", LogMessage.WARNING);
             }
         }
