@@ -6,8 +6,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 using CC = Ticketník.CustomControls;
 
 namespace Ticketník.CustomControls
@@ -146,19 +148,26 @@ namespace Ticketník.CustomControls
 
         private void DetectLink()
         {
-            //zatím umíme jeden link v textu
-            int linkStart = richTextBox1.Text.IndexOf("<a>");
-            int linkEnd = richTextBox1.Text.LastIndexOf("</a>");
-            if (linkStart == -1)
+            if(!ClickableLinks)
             {
                 richTextBox1.LinkArea = new LinkArea(0, 0);
                 return;
             }
-            string link = richTextBox1.Text.Substring(linkStart, linkEnd - linkStart).Replace("<a>", "").Replace("</a>", "");
-            richTextBox1.LinkColor = richTextBox1.VisitedLinkColor = richTextBox1.ActiveLinkColor = richTextBox1.ForeColor;
-            richTextBox1.Text = richTextBox1.Text.Replace("<a>", "").Replace("</a>", "");
-            richTextBox1.LinkClicked += RichTextBox1_LinkClicked;
-            richTextBox1.Links.Add(richTextBox1.Text.IndexOf(link), link.Length, link);
+            string pattern = @"(?:(?:https?|ftp|file)://|www\d?\.|ftp\.)(?:\([-A-Za-z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Za-z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Za-z0-9+&@#/%=~_|$?!:,.]*\)|[A-Za-z0-9+&@#/%=~_|$])";
+            Regex reg = new Regex(pattern);
+            MatchCollection matches = reg.Matches(richTextBox1.Text);
+            if (matches.Count > 0)
+            {
+                richTextBox1.LinkColor = richTextBox1.VisitedLinkColor = richTextBox1.ActiveLinkColor = richTextBox1.ForeColor;
+                richTextBox1.LinkClicked += RichTextBox1_LinkClicked;
+
+                foreach (Match match in matches)
+                {
+                    int linkStart = match.Index;
+                    int length = match.Value.Length;
+                    richTextBox1.Links.Add(match.Index, match.Length, match.Value);
+                }
+            }
         }
 
         private void RichTextBox1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
