@@ -168,6 +168,8 @@ namespace Ticketník.CustomControls
                     richTextBox1.Links.Add(match.Index, match.Length, match.Value);
                 }
             }
+            else
+                richTextBox1.LinkArea = new LinkArea(0, 0);
         }
 
         private void RichTextBox1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
