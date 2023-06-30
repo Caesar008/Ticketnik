@@ -205,6 +205,20 @@ namespace Ticketník.CustomControls
             rtb.Size = new System.Drawing.Size(this.Size.Width - (VScrollBarVisible ? VScrollBar.Width : 0), this.Size.Height - (HScrollBarVisible ? HScrollBar.Height : 0));
         }
 
+        private string text = "";
+        public override string Text
+        {
+            get { return text; }
+            set
+            {
+                if(text != value)
+                {
+                    text = value;
+                    OnTextChanged(EventArgs.Empty);
+                }
+            }
+        }
+
         protected override void OnTextChanged(EventArgs e)
         {
             //base.OnTextChanged(e);

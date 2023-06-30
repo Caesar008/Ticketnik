@@ -46,7 +46,7 @@ namespace Ticketník
                 }
             }
         }
-        protected override CreateParams CreateParams
+        /*protected override CreateParams CreateParams
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Ticketník
                 cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
                 return cp;
             }
-        }
+        }*/
     }
 
 }

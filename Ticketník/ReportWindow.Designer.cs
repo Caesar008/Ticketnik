@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportWindow));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl1 = new Ticketník.CustomControls.TabControl();
             this.tabPage1 = new Ticketník.CustomControls.TabPage();
-            this.ticketni_log_text = new System.Windows.Forms.RichTextBox();
+            this.ticketni_log_text = new Ticketník.CustomControls.RichTextBox();
             this.tabPage2 = new Ticketník.CustomControls.TabPage();
-            this.error_log_text = new System.Windows.Forms.RichTextBox();
+            this.error_log_text = new Ticketník.CustomControls.RichTextBox();
             this.tabPage4 = new Ticketník.CustomControls.TabPage();
-            this.user_config_file = new System.Windows.Forms.RichTextBox();
+            this.user_config_file = new Ticketník.CustomControls.RichTextBox();
             this.tabPage3 = new Ticketník.CustomControls.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -81,7 +81,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ticketni_log_text.Location = new System.Drawing.Point(6, 6);
             this.ticketni_log_text.Name = "ticketni_log_text";
-            this.ticketni_log_text.Size = new System.Drawing.Size(526, 435);
+            this.ticketni_log_text.Size = new System.Drawing.Size(532, 441);
             this.ticketni_log_text.TabIndex = 0;
             this.ticketni_log_text.Text = "";
             // 
@@ -103,7 +103,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.error_log_text.Location = new System.Drawing.Point(6, 6);
             this.error_log_text.Name = "error_log_text";
-            this.error_log_text.Size = new System.Drawing.Size(526, 435);
+            this.error_log_text.Size = new System.Drawing.Size(532, 441);
             this.error_log_text.TabIndex = 0;
             this.error_log_text.Text = "";
             // 
@@ -119,7 +119,10 @@
             // 
             // user_config_file
             // 
-            this.user_config_file.Location = new System.Drawing.Point(3, 3);
+            this.user_config_file.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.user_config_file.Location = new System.Drawing.Point(6, 6);
             this.user_config_file.Name = "user_config_file";
             this.user_config_file.Size = new System.Drawing.Size(532, 441);
             this.user_config_file.TabIndex = 0;
@@ -194,17 +197,17 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private Ticketník.CustomControls.TabControl tabControl1;
         private Ticketník.CustomControls.TabPage tabPage1;
-        private System.Windows.Forms.RichTextBox ticketni_log_text;
+        private Ticketník.CustomControls.RichTextBox ticketni_log_text;
         private Ticketník.CustomControls.TabPage tabPage2;
-        private System.Windows.Forms.RichTextBox error_log_text;
+        private Ticketník.CustomControls.RichTextBox error_log_text;
         private Ticketník.CustomControls.TabPage tabPage3;
         private Ticketník.CustomControls.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private Ticketník.CustomControls.TabPage tabPage4;
-        private System.Windows.Forms.RichTextBox user_config_file;
+        private Ticketník.CustomControls.RichTextBox user_config_file;
     }
 }
