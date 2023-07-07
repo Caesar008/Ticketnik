@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketník", "Ticketník\Ticketník.csproj", "{68FD2B62-EBA0-40F6-91FB-CD61F1DD6301}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{67950A4C-55BA-407B-8C22-32F495CD16C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{68FD2B62-EBA0-40F6-91FB-CD61F1DD6301}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68FD2B62-EBA0-40F6-91FB-CD61F1DD6301}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68FD2B62-EBA0-40F6-91FB-CD61F1DD6301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67950A4C-55BA-407B-8C22-32F495CD16C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67950A4C-55BA-407B-8C22-32F495CD16C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67950A4C-55BA-407B-8C22-32F495CD16C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67950A4C-55BA-407B-8C22-32F495CD16C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

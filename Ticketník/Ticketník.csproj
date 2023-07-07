@@ -463,6 +463,7 @@
     <None Include="ikony\exportW.png" />
     <None Include="ikony\offW.png" />
     <None Include="ikony\about.png" />
+    <None Include="Resources\Updater.exe" />
     <Content Include="ticket-256.ico" />
   </ItemGroup>
   <ItemGroup>
