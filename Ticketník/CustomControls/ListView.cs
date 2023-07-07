@@ -17,6 +17,7 @@ namespace Ticketník.CustomControls
 {
     internal class ListView : System.Windows.Forms.ListView
     {
+        public ListView() : base() { }
 
         private Color headerBackColor = Color.White;
         [DefaultValue(typeof(Color), "White"),

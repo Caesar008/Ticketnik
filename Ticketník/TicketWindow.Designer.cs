@@ -53,7 +53,6 @@ namespace Ticketník
             this.pauzaDo = new Ticketník.CustomControls.TextBox();
             this.pauzaOd = new Ticketník.CustomControls.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.listView1 = new Ticketník.CustomControls.ListView(groupBox3);
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -114,7 +113,9 @@ namespace Ticketník
             // idTicketu
             // 
             this.idTicketu.Location = new System.Drawing.Point(65, 19);
+            this.idTicketu.MaxLength = 2147483647;
             this.idTicketu.Name = "idTicketu";
+            this.idTicketu.ReadOnly = false;
             this.idTicketu.Size = new System.Drawing.Size(122, 20);
             this.idTicketu.TabIndex = 1;
             this.idTicketu.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -122,8 +123,10 @@ namespace Ticketník
             // 
             // zakaznik
             // 
+            this.zakaznik.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.zakaznik.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.zakaznik.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zakaznik.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.zakaznik.FormattingEnabled = true;
             this.zakaznik.Location = new System.Drawing.Point(65, 45);
             this.zakaznik.Name = "zakaznik";
@@ -156,7 +159,9 @@ namespace Ticketník
             // pocitac
             // 
             this.pocitac.Location = new System.Drawing.Point(65, 72);
+            this.pocitac.MaxLength = 2147483647;
             this.pocitac.Name = "pocitac";
+            this.pocitac.ReadOnly = false;
             this.pocitac.Size = new System.Drawing.Size(156, 20);
             this.pocitac.TabIndex = 5;
             this.pocitac.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -164,7 +169,9 @@ namespace Ticketník
             // kontakt
             // 
             this.kontakt.Location = new System.Drawing.Point(65, 98);
+            this.kontakt.MaxLength = 2147483647;
             this.kontakt.Name = "kontakt";
+            this.kontakt.ReadOnly = false;
             this.kontakt.Size = new System.Drawing.Size(156, 20);
             this.kontakt.TabIndex = 6;
             this.kontakt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -223,7 +230,9 @@ namespace Ticketník
             // popis
             // 
             this.popis.Location = new System.Drawing.Point(65, 124);
+            this.popis.MaxLength = 2147483647;
             this.popis.Name = "popis";
+            this.popis.ReadOnly = false;
             this.popis.Size = new System.Drawing.Size(156, 20);
             this.popis.TabIndex = 8;
             this.popis.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -250,8 +259,10 @@ namespace Ticketník
             // 
             // cas
             // 
+            this.cas.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.cas.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cas.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.cas.FormattingEnabled = true;
             this.cas.Location = new System.Drawing.Point(6, 19);
             this.cas.Name = "cas";
@@ -324,6 +335,7 @@ namespace Ticketník
             this.pauzaDo.Location = new System.Drawing.Point(135, 117);
             this.pauzaDo.MaxLength = 5;
             this.pauzaDo.Name = "pauzaDo";
+            this.pauzaDo.ReadOnly = false;
             this.pauzaDo.Size = new System.Drawing.Size(43, 20);
             this.pauzaDo.TabIndex = 3;
             this.pauzaDo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -333,6 +345,7 @@ namespace Ticketník
             this.pauzaOd.Location = new System.Drawing.Point(59, 117);
             this.pauzaOd.MaxLength = 5;
             this.pauzaOd.Name = "pauzaOd";
+            this.pauzaOd.ReadOnly = false;
             this.pauzaOd.Size = new System.Drawing.Size(43, 20);
             this.pauzaOd.TabIndex = 2;
             this.pauzaOd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -358,6 +371,7 @@ namespace Ticketník
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(6, 19);
             this.listView1.Name = "listView1";
+            this.listView1.OwnerDraw = true;
             this.listView1.Size = new System.Drawing.Size(120, 92);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -390,6 +404,7 @@ namespace Ticketník
             this.konec.Location = new System.Drawing.Point(178, 19);
             this.konec.MaxLength = 5;
             this.konec.Name = "konec";
+            this.konec.ReadOnly = false;
             this.konec.Size = new System.Drawing.Size(43, 20);
             this.konec.TabIndex = 10;
             this.konec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -409,6 +424,7 @@ namespace Ticketník
             this.zacatek.Location = new System.Drawing.Point(65, 19);
             this.zacatek.MaxLength = 5;
             this.zacatek.Name = "zacatek";
+            this.zacatek.ReadOnly = false;
             this.zacatek.Size = new System.Drawing.Size(43, 20);
             this.zacatek.TabIndex = 0;
             this.zacatek.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -515,7 +531,9 @@ namespace Ticketník
             // 
             // onlineTypeComboBox
             // 
+            this.onlineTypeComboBox.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.onlineTypeComboBox.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.onlineTypeComboBox.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.onlineTypeComboBox.FormattingEnabled = true;
             this.onlineTypeComboBox.Location = new System.Drawing.Point(100, 57);
             this.onlineTypeComboBox.Name = "onlineTypeComboBox";
@@ -527,7 +545,9 @@ namespace Ticketník
             // 
             // onlineTaskComboBox
             // 
+            this.onlineTaskComboBox.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.onlineTaskComboBox.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.onlineTaskComboBox.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.onlineTaskComboBox.FormattingEnabled = true;
             this.onlineTaskComboBox.Location = new System.Drawing.Point(100, 30);
             this.onlineTaskComboBox.Name = "onlineTaskComboBox";
@@ -549,7 +569,9 @@ namespace Ticketník
             // 
             // onlineTerpDropDown
             // 
+            this.onlineTerpDropDown.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.onlineTerpDropDown.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.onlineTerpDropDown.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.onlineTerpDropDown.FormattingEnabled = true;
             this.onlineTerpDropDown.Location = new System.Drawing.Point(100, 3);
             this.onlineTerpDropDown.Name = "onlineTerpDropDown";
@@ -732,8 +754,10 @@ namespace Ticketník
             // 
             // stavTicketu
             // 
+            this.stavTicketu.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.stavTicketu.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.stavTicketu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.stavTicketu.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.stavTicketu.FormattingEnabled = true;
             this.stavTicketu.Location = new System.Drawing.Point(114, 19);
             this.stavTicketu.Name = "stavTicketu";
@@ -758,9 +782,11 @@ namespace Ticketník
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Location = new System.Drawing.Point(6, 19);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = false;
+            this.richTextBox1.SelectionAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.richTextBox1.Size = new System.Drawing.Size(272, 140);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.WordWrap = true;
             // 
             // ok
             // 
@@ -782,8 +808,7 @@ namespace Ticketník
             this.datum.CustomFormat = null;
             this.datum.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.datum.Location = new System.Drawing.Point(250, 343);
-            this.datum.MaxDate = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
-            this.datum.MinDate = new System.DateTime(((long)(0)));
+            this.datum.MaxDate = new System.DateTime(8999, 12, 31, 0, 0, 0, 0);
             this.datum.Name = "datum";
             this.datum.Size = new System.Drawing.Size(180, 20);
             this.datum.TabIndex = 14;
@@ -822,7 +847,6 @@ namespace Ticketník
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.newTerpTaskPanel.ResumeLayout(false);

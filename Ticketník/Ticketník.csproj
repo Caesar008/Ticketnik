@@ -186,6 +186,12 @@
       <DependentUpon>Novinky.cs</DependentUpon>
     </Compile>
     <Compile Include="Pouzivani.cs" />
+    <Compile Include="Prilohy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prilohy.Designer.cs">
+      <DependentUpon>Prilohy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novinky.resx">
       <DependentUpon>Novinky.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prilohy.resx">
+      <DependentUpon>Prilohy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportWindow.resx">
       <DependentUpon>ReportWindow.cs</DependentUpon>
