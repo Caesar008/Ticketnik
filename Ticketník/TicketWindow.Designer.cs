@@ -99,6 +99,7 @@ namespace Ticketník
             this.newTerpTaskPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
+            this.listView1 = new CustomControls.ListView();
             // 
             // label1
             // 
