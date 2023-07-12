@@ -23,6 +23,7 @@ namespace Ticketník
     - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
     - Ctrl+V nyní umí rozpoznat tickety z SM9
     - Automatický upload do MyTime
+    - Přidány statusy Zrušeno a Přeřazeno
     - Oprava chyby #22-003
     - Oprava chyby #23-001
     - Dll knihovny updatovány na novější verze
@@ -767,6 +768,12 @@ namespace Ticketník
                                                 case 4:
                                                     st = Ticket.Stav.Vyreseno;
                                                     break;
+                                                case 5:
+                                                    st = Ticket.Stav.Zruseno;
+                                                    break;
+                                                case 6:
+                                                    st = Ticket.Stav.Prerazeno;
+                                                    break;
                                                 default:
                                                     st = Ticket.Stav.Probiha;
                                                     break;
@@ -1014,6 +1021,28 @@ namespace Ticketník
                                                         else
                                                             barvaP = Properties.Settings.Default.vyreseno;
                                                         break;
+                                                    case Ticket.Stav.Zruseno:
+                                                        stst = jazyk.Status_Zruseno;
+                                                        //barvaP = Color.FromArgb(255, 0, 200, 0);
+                                                        if (t.TypPrace == (byte)Ticket.TypTicketu.Prescas || t.TypPrace == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.EnkripcePrescas || t.TypPrace == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.MobilityPrescas || t.TypPrace == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas || t.OnlineTyp.ToLower().Contains("overtime"))
+                                                            barvaP = Properties.Settings.Default.prescas;
+                                                        else
+                                                            barvaP = Properties.Settings.Default.zruseno;
+                                                        break;
+                                                    case Ticket.Stav.Prerazeno:
+                                                        stst = jazyk.Status_Prerazeno;
+                                                        //barvaP = Color.FromArgb(255, 0, 200, 0);
+                                                        if (t.TypPrace == (byte)Ticket.TypTicketu.Prescas || t.TypPrace == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.EnkripcePrescas || t.TypPrace == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.MobilityPrescas || t.TypPrace == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas || t.OnlineTyp.ToLower().Contains("overtime"))
+                                                            barvaP = Properties.Settings.Default.prescas;
+                                                        else
+                                                            barvaP = Properties.Settings.Default.prerazeno;
+                                                        break;
                                                     default:
                                                         stst = jazyk.Status_Probiha;
                                                         //barvaP = Color.FromArgb(255, 255, 255, 160);
@@ -1230,6 +1259,12 @@ namespace Ticketník
                                                     break;
                                                 case 4:
                                                     st = Ticket.Stav.Vyreseno;
+                                                    break;
+                                                case 5:
+                                                    st = Ticket.Stav.Zruseno;
+                                                    break;
+                                                case 6:
+                                                    st = Ticket.Stav.Prerazeno;
                                                     break;
                                                 default:
                                                     st = Ticket.Stav.Probiha;
@@ -1480,6 +1515,28 @@ namespace Ticketník
                                                             barvaP = Properties.Settings.Default.prescas;
                                                         else
                                                             barvaP = Properties.Settings.Default.vyreseno;
+                                                        break;
+                                                    case Ticket.Stav.Zruseno:
+                                                        stst = jazyk.Status_Zruseno;
+                                                        //barvaP = Color.FromArgb(255, 0, 200, 0);
+                                                        if (t.TypPrace == (byte)Ticket.TypTicketu.Prescas || t.TypPrace == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.EnkripcePrescas || t.TypPrace == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.MobilityPrescas || t.TypPrace == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas || t.OnlineTyp.ToLower().Contains("overtime"))
+                                                            barvaP = Properties.Settings.Default.prescas;
+                                                        else
+                                                            barvaP = Properties.Settings.Default.zruseno;
+                                                        break;
+                                                    case Ticket.Stav.Prerazeno:
+                                                        stst = jazyk.Status_Prerazeno;
+                                                        //barvaP = Color.FromArgb(255, 0, 200, 0);
+                                                        if (t.TypPrace == (byte)Ticket.TypTicketu.Prescas || t.TypPrace == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.EnkripcePrescas || t.TypPrace == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.MobilityPrescas || t.TypPrace == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                            t.TypPrace == (byte)Ticket.TypTicketu.ProblemPrescas || t.OnlineTyp.ToLower().Contains("overtime"))
+                                                            barvaP = Properties.Settings.Default.prescas;
+                                                        else
+                                                            barvaP = Properties.Settings.Default.prerazeno;
                                                         break;
                                                     default:
                                                         stst = jazyk.Status_Probiha;

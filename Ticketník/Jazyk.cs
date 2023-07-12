@@ -49,6 +49,8 @@ namespace Ticketník
             InterniPamet.Add("Windows/Settings/RDP", ReturnPreklad("Windows/Settings/RDP"));
             InterniPamet.Add("Windows/Settings/WaitingForResponse", ReturnPreklad("Windows/Settings/WaitingForResponse"));
             InterniPamet.Add("Windows/Settings/Done", ReturnPreklad("Windows/Settings/Done"));
+            InterniPamet.Add("Windows/Settings/Canceled", ReturnPreklad("Windows/Settings/Canceled"));
+            InterniPamet.Add("Windows/Settings/Reassigned", ReturnPreklad("Windows/Settings/Reassigned"));
             InterniPamet.Add("Windows/NewTicket/BasicInfo", ReturnPreklad("Windows/NewTicket/BasicInfo"));
             InterniPamet.Add("Windows/NewTicket/TicketTime", ReturnPreklad("Windows/NewTicket/TicketTime"));
             InterniPamet.Add("Windows/NewTicket/Times", ReturnPreklad("Windows/NewTicket/Times"));
@@ -84,6 +86,8 @@ namespace Ticketník
             InterniPamet.Add("Windows/NewTicket/WaitingForResponse", ReturnPreklad("Windows/NewTicket/WaitingForResponse"));
             InterniPamet.Add("Windows/NewTicket/RDP", ReturnPreklad("Windows/NewTicket/RDP"));
             InterniPamet.Add("Windows/NewTicket/Done", ReturnPreklad("Windows/NewTicket/Done"));
+            InterniPamet.Add("Windows/NewTicket/Canceled", ReturnPreklad("Windows/NewTicket/Canceled"));
+            InterniPamet.Add("Windows/NewTicket/Reassigned", ReturnPreklad("Windows/NewTicket/Reassigned"));
             InterniPamet.Add("Windows/NewTicket/NormalDescription", ReturnPreklad("Windows/NewTicket/NormalDescription"));
             InterniPamet.Add("Windows/NewTicket/CompensLeaveDesc", ReturnPreklad("Windows/NewTicket/CompensLeaveDesc"));
             InterniPamet.Add("Windows/NewTicket/TicketTerp", ReturnPreklad("Windows/NewTicket/TicketTerp"));
@@ -729,6 +733,20 @@ namespace Ticketník
                 return InterniPamet["Windows/Settings/Done"];
             }
         }
+        internal string Status_Zruseno
+        {
+            get
+            {
+                return InterniPamet["Windows/Settings/Canceled"];
+            }
+        }
+        internal string Status_Prerazeno
+        {
+            get
+            {
+                return InterniPamet["Windows/Settings/Reassigned"];
+            }
+        }
 
         #endregion
 
@@ -1134,6 +1152,20 @@ namespace Ticketník
                 return ReturnPreklad("Windows/Settings/InProgress");
             }
         }
+        internal string Windows_Nastaveni_Zruseno
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Settings/Canceled");
+            }
+        }
+        internal string Windows_Nastaveni_Prerazeno
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Settings/Reassigned");
+            }
+        }
         internal string Windows_Nastaveni_Default
         {
             get
@@ -1356,6 +1388,20 @@ namespace Ticketník
             get
             {
                 return ReturnPreklad("Windows/Search/InProgress");
+            }
+        }
+        internal string Windows_Search_Zruseno
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Search/Cacneled");
+            }
+        }
+        internal string Windows_Search_Prerazeno
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Search/Reassigned");
             }
         }
         internal string Windows_Search_JenProCteni
@@ -1701,6 +1747,20 @@ namespace Ticketník
             get
             {
                 return InterniPamet["Windows/NewTicket/Done"];
+            }
+        }
+        internal string Windows_Ticket_Zruseno
+        {
+            get
+            {
+                return InterniPamet["Windows/NewTicket/Canceled"];
+            }
+        }
+        internal string Windows_Ticket_Prerazeno
+        {
+            get
+            {
+                return InterniPamet["Windows/NewTicket/Reassigned"];
             }
         }
         internal string Windows_Ticket_NormalniPopis

@@ -105,6 +105,8 @@
 			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
 			<RDP en="RDP">RDP</RDP>
 			<InProgress en="In progress">Probíhá</InProgress>
+			<Canceled en="Canceled">Zrušeno</Canceled>
+			<Reassigned en="Reassigned">Přeřazeno</Reassigned>
 			<Default en="Default">Default</Default>
 			<ShowTimePerDay en="Show time per day">Zobrazení času za den</ShowTimePerDay>
 			<ShowTotalTime en="Show total time">Zobrazovat celkový čas</ShowTotalTime>
@@ -167,6 +169,8 @@
 			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
 			<RDP en="RDP">RDP</RDP>
 			<InProgress en="In progress">Probíhá</InProgress>
+			<Canceled en="Canceled">Zrušeno</Canceled>
+			<Reassigned en="Reassigned">Přeřazeno</Reassigned>
 			<SearchCriteriaHelp en="Search by criteria.\r\n\r\nEg.: criterium 'Ticket ID' will be filled. Value of this criteria will be '128'. Program will try to find all tickets with ticket ID containing text '128'.\r\nIf this criterium field will be empty this criterium will be ignored.\r\n\r\nRegular expressions can be used in serach. In this case checkbox 'Regular expressions were used in search criteria' has to be checked. How to use regular expressions in this search and its syntax can be found on https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx">Vyhledávání podle kritérií.\r\n\r\nPř.: vyplněno bude kritérium "ID Ticketu". Hodnota tohoto kritéria bude "128". Program se pokusí najít všechny tickety, jejichž ID Ticketu obsahuje text "128".\r\nV případě, že je pole pro kritérium prázdné, bude toto kritérium ignorováno.\r\n\r\nVe vyhledávání se dají použít i regulární výrazy. V tomto případě je nutné zaškrtnout políčko "Ve vyhledávání byly použity regulární výrazy". Jak používat regulární výrazy v tomto vyhledávání a jaká je syntaxe, si můžeš přečíst na https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx</SearchCriteriaHelp>
 		</Search>
 		<About>
@@ -189,6 +193,8 @@
 			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
 			<RDP en="RDP">RDP</RDP>
 			<InProgress en="In progress">Probíhá</InProgress>
+			<Canceled en="Canceled">Zrušeno</Canceled>
+			<Reassigned en="Reassigned">Přeřazeno</Reassigned>
 			<Normal en="Normal hours">Normální doba</Normal>
 			<Overtime en="Overtime">Přesčas</Overtime>
 			<Holiday en="Holiday">Svátek</Holiday>

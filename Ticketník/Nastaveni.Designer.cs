@@ -31,6 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.clr_prerazeno = new Ticketník.CustomControls.Button();
+            this.clr_zruseno = new Ticketník.CustomControls.Button();
+            this.prerazeno = new System.Windows.Forms.Label();
+            this.zruseno = new System.Windows.Forms.Label();
             this.clr_prescas = new Ticketník.CustomControls.Button();
             this.prescas = new System.Windows.Forms.Label();
             this.button1 = new Ticketník.CustomControls.Button();
@@ -95,6 +99,10 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Controls.Add(this.clr_prerazeno);
+            this.groupBox1.Controls.Add(this.clr_zruseno);
+            this.groupBox1.Controls.Add(this.prerazeno);
+            this.groupBox1.Controls.Add(this.zruseno);
             this.groupBox1.Controls.Add(this.clr_prescas);
             this.groupBox1.Controls.Add(this.prescas);
             this.groupBox1.Controls.Add(this.button1);
@@ -110,10 +118,62 @@
             this.groupBox1.Controls.Add(this.clr_vyreseno);
             this.groupBox1.Location = new System.Drawing.Point(12, 157);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(205, 221);
+            this.groupBox1.Size = new System.Drawing.Size(205, 279);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Barvy ticketů";
+            // 
+            // clr_prerazeno
+            // 
+            this.clr_prerazeno.BackColor = System.Drawing.SystemColors.Window;
+            this.clr_prerazeno.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.clr_prerazeno.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.clr_prerazeno.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.clr_prerazeno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clr_prerazeno.Location = new System.Drawing.Point(124, 222);
+            this.clr_prerazeno.Name = "clr_prerazeno";
+            this.clr_prerazeno.Size = new System.Drawing.Size(75, 23);
+            this.clr_prerazeno.TabIndex = 16;
+            this.clr_prerazeno.Tag = "prerazeno";
+            this.clr_prerazeno.Text = "Změň";
+            this.clr_prerazeno.UseVisualStyleBackColor = false;
+            this.clr_prerazeno.Click += new System.EventHandler(this.clr_vyreseno_Click);
+            // 
+            // clr_zruseno
+            // 
+            this.clr_zruseno.BackColor = System.Drawing.SystemColors.Window;
+            this.clr_zruseno.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.clr_zruseno.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.clr_zruseno.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.clr_zruseno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clr_zruseno.Location = new System.Drawing.Point(124, 193);
+            this.clr_zruseno.Name = "clr_zruseno";
+            this.clr_zruseno.Size = new System.Drawing.Size(75, 23);
+            this.clr_zruseno.TabIndex = 15;
+            this.clr_zruseno.Tag = "zruseno";
+            this.clr_zruseno.Text = "Změň";
+            this.clr_zruseno.UseVisualStyleBackColor = false;
+            this.clr_zruseno.Click += new System.EventHandler(this.clr_vyreseno_Click);
+            // 
+            // prerazeno
+            // 
+            this.prerazeno.Location = new System.Drawing.Point(6, 222);
+            this.prerazeno.Name = "prerazeno";
+            this.prerazeno.Size = new System.Drawing.Size(112, 23);
+            this.prerazeno.TabIndex = 14;
+            this.prerazeno.Tag = "CustomColor";
+            this.prerazeno.Text = "Přeřazeno";
+            this.prerazeno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // zruseno
+            // 
+            this.zruseno.Location = new System.Drawing.Point(6, 193);
+            this.zruseno.Name = "zruseno";
+            this.zruseno.Size = new System.Drawing.Size(112, 23);
+            this.zruseno.TabIndex = 13;
+            this.zruseno.Tag = "CustomColor";
+            this.zruseno.Text = "Zrušeno";
+            this.zruseno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // clr_prescas
             // 
@@ -149,7 +209,7 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button1.Location = new System.Drawing.Point(6, 192);
+            this.button1.Location = new System.Drawing.Point(3, 251);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(193, 23);
             this.button1.TabIndex = 10;
@@ -494,10 +554,12 @@
             // jazyk
             // 
             this.jazyk.BorderColor = System.Drawing.Color.LightGray;
+            this.jazyk.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
             this.jazyk.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jazyk.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.jazyk.FormattingEnabled = true;
             this.jazyk.Location = new System.Drawing.Point(6, 19);
             this.jazyk.Name = "jazyk";
@@ -570,10 +632,12 @@
             // motivVyber
             // 
             this.motivVyber.BorderColor = System.Drawing.Color.LightGray;
+            this.motivVyber.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.motivVyber.ButtonColor = System.Drawing.SystemColors.Window;
             this.motivVyber.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
             this.motivVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.motivVyber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.motivVyber.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.motivVyber.FormattingEnabled = true;
             this.motivVyber.Location = new System.Drawing.Point(64, 130);
             this.motivVyber.Name = "motivVyber";
@@ -674,7 +738,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 390);
+            this.ClientSize = new System.Drawing.Size(390, 448);
             this.Controls.Add(this.motiv);
             this.Controls.Add(this.motivVyber);
             this.Controls.Add(this.button2);
@@ -690,8 +754,8 @@
             this.Controls.Add(this.poStartu);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(406, 429);
-            this.MinimumSize = new System.Drawing.Size(406, 429);
+            this.MaximumSize = new System.Drawing.Size(406, 487);
+            this.MinimumSize = new System.Drawing.Size(406, 487);
             this.Name = "Nastaveni";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -749,5 +813,9 @@
         private Ticketník.CustomControls.Button button2;
         private Ticketník.CustomControls.ComboBox motivVyber;
         private System.Windows.Forms.Label motiv;
+        private CustomControls.Button clr_prerazeno;
+        private CustomControls.Button clr_zruseno;
+        private System.Windows.Forms.Label prerazeno;
+        private System.Windows.Forms.Label zruseno;
     }
 }

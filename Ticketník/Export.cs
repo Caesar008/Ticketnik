@@ -72,7 +72,7 @@ namespace Ticketník
             }
         }
 
-        private async void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             if (saveFileDialog1.FileName != "")
             {

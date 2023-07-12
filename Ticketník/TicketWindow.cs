@@ -74,7 +74,7 @@ namespace Ticketník
                 newTerpTaskPanel = null;
             }
 
-            stavTicketu.Items.AddRange(new string[] { form.jazyk.Windows_Ticket_Probiha, form.jazyk.Windows_Ticket_CekaSe, form.jazyk.Windows_Ticket_CekaSeNaOdpoved, form.jazyk.Windows_Ticket_RDP, form.jazyk.Windows_Ticket_Hotovo });
+            stavTicketu.Items.AddRange(new string[] { form.jazyk.Windows_Ticket_Probiha, form.jazyk.Windows_Ticket_CekaSe, form.jazyk.Windows_Ticket_CekaSeNaOdpoved, form.jazyk.Windows_Ticket_RDP, form.jazyk.Windows_Ticket_Zruseno, form.jazyk.Windows_Ticket_Prerazeno, form.jazyk.Windows_Ticket_Hotovo });
 
             if (!Properties.Settings.Default.shortTime)
             {
@@ -250,6 +250,12 @@ namespace Ticketník
                                     break;
                                 case Ticket.Stav.Vyreseno:
                                     stavTicketu.SelectedItem = form.jazyk.Windows_Ticket_Hotovo;
+                                    break;
+                                case Ticket.Stav.Zruseno:
+                                    stavTicketu.SelectedItem = form.jazyk.Windows_Ticket_Zruseno;
+                                    break;
+                                case Ticket.Stav.Prerazeno:
+                                    stavTicketu.SelectedItem = form.jazyk.Windows_Ticket_Prerazeno;
                                     break;
                             }
 
@@ -495,6 +501,12 @@ namespace Ticketník
                             case Ticket.Stav.Vyreseno:
                                 stavTicketu.SelectedItem = form.jazyk.Windows_Ticket_Hotovo;
                                 break;
+                            case Ticket.Stav.Zruseno:
+                                stavTicketu.SelectedItem = form.jazyk.Windows_Ticket_Zruseno;
+                                break;
+                            case Ticket.Stav.Prerazeno:
+                                stavTicketu.SelectedItem = form.jazyk.Windows_Ticket_Prerazeno;
+                                break;
                         }
 
                         switch (refer.TypPrace)
@@ -698,9 +710,16 @@ namespace Ticketník
                        ticket.StavT = Ticket.Stav.Ceka_se_na_odpoved;
                 else if ((string)stavTicketu.SelectedItem == form.jazyk.Windows_Ticket_RDP)
                        ticket.StavT = Ticket.Stav.RDP;
-                else if ((string)stavTicketu.SelectedItem == form.jazyk.Windows_Ticket_Hotovo)
+                else if ((string)stavTicketu.SelectedItem == form.jazyk.Windows_Ticket_Hotovo ||
+                    (string)stavTicketu.SelectedItem == form.jazyk.Windows_Ticket_Zruseno ||
+                    (string)stavTicketu.SelectedItem == form.jazyk.Windows_Ticket_Prerazeno)
                 {
-                    ticket.StavT = Ticket.Stav.Vyreseno;
+                    if ((string)stavTicketu.SelectedItem == form.jazyk.Windows_Ticket_Zruseno)
+                        ticket.StavT = Ticket.Stav.Zruseno;
+                    else if ((string)stavTicketu.SelectedItem == form.jazyk.Windows_Ticket_Prerazeno)
+                        ticket.StavT = Ticket.Stav.Prerazeno;
+                    else
+                        ticket.StavT = Ticket.Stav.Vyreseno;
                     if (konec.Text == "")
                     {
                         konec.Text = DateTime.Now.ToString("H:mm");

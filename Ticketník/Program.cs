@@ -112,6 +112,8 @@ namespace Ticketník
                                 Properties.Settings.Default.ceka = System.Drawing.Color.Yellow;
                                 Properties.Settings.Default.odpoved = System.Drawing.Color.Yellow;
                                 Properties.Settings.Default.rdp = System.Drawing.Color.Yellow;
+                                Properties.Settings.Default.zruseno = System.Drawing.Color.FromArgb(100, 150, 0);
+                                Properties.Settings.Default.prerazeno = System.Drawing.Color.FromArgb(200, 200, 0);
                                 Properties.Settings.Default.vyreseno = System.Drawing.Color.FromArgb(0, 200, 0);
                                 Properties.Settings.Default.prescas = System.Drawing.Color.Fuchsia;
                                 Properties.Settings.Default.updateCesta = @"\\10.14.18.19\Shareforyou\tools\Ticketnik\Update";
