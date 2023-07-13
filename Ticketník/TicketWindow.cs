@@ -67,6 +67,7 @@ namespace Ticketník
             lbl_TicketWindow_onlineType.Text = form.jazyk.Windows_Ticket_TypOnline;
             btn_TicketWindow_SearchTerp.Text = form.jazyk.Windows_Ticket_VyhledatTerp;
             btn_TicketWindow_UpdateSelected.Text = form.jazyk.Windows_Ticket_AktualizovatTerp;
+            prilohyBtn.Text = form.jazyk.Windows_Prilohy_Prilohy;
 
             if (!Properties.Settings.Default.onlineTerp || !File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask"))
             {
@@ -1481,7 +1482,7 @@ namespace Ticketník
             {
                 string[] casOd = zacatek.Text.Split(':');
                 string[] casDo;
-                if (stavTicketu.Text != form.jazyk.Status_Vyreseno)
+                if (stavTicketu.Text != form.jazyk.Status_Vyreseno && stavTicketu.Text != form.jazyk.Status_Zruseno && stavTicketu.Text != form.jazyk.Status_Prerazeno)
                     casDo = konec.Text.Split(':');
                 else
                 {
@@ -2754,6 +2755,12 @@ namespace Ticketník
         private void groupBox_Paint(object sender, PaintEventArgs e)
         {
             Motiv.SetGroupBoxRamecek((GroupBox)sender, e);
+        }
+
+        private void prilohyBtn_Click(object sender, EventArgs e)
+        {
+            Prilohy prilohy = new Prilohy(form, ticket.IDtick);
+            prilohy.ShowDialog();
         }
 
         private void comboBox_MouseEnter(object sender, EventArgs e)

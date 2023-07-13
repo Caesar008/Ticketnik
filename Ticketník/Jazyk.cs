@@ -96,6 +96,7 @@ namespace Ticketník
             InterniPamet.Add("Windows/NewTicket/TypOnline", ReturnPreklad("Windows/NewTicket/TypOnline"));
             InterniPamet.Add("Windows/NewTicket/VyhledatTerp", ReturnPreklad("Windows/NewTicket/VyhledatTerp"));
             InterniPamet.Add("Windows/NewTicket/AktualizovatTerp", ReturnPreklad("Windows/NewTicket/AktualizovatTerp"));
+            InterniPamet.Add("Windows/NewTicket/Prilohy", ReturnPreklad("Windows/NewTicket/Prilohy"));
         }
         //překlady
         #region Main Menu
@@ -1861,6 +1862,13 @@ namespace Ticketník
                 return ReturnPreklad("Windows/NewTicket/Hour");
             }
         }
+        internal string Windows_Ticket_Prilohy
+        {
+            get
+            {
+                return ReturnPreklad("Windows/NewTicket/Prilohy");
+            }
+        }
         internal string Windows_Zakaznik
         {
             get
@@ -2042,6 +2050,38 @@ namespace Ticketník
             get
             {
                 return ReturnPreklad("Windows/LanguageManager/EditTranslation");
+            }
+        }
+
+        internal string Windows_Prilohy_Prilohy
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Attachements/Prilohy");
+            }
+        }
+
+        internal string Windows_Prilohy_Pridat
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Attachements/Pridat");
+            }
+        }
+
+        internal string Windows_Prilohy_Najit
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Attachements/Najit");
+            }
+        }
+
+        internal string Windows_Prilohy_Smazat
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Attachements/Smazat");
             }
         }
 

@@ -53,6 +53,7 @@ namespace Ticketník
             this.pauzaDo = new Ticketník.CustomControls.TextBox();
             this.pauzaOd = new Ticketník.CustomControls.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.listView1 = new Ticketník.CustomControls.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -91,6 +92,7 @@ namespace Ticketník
             this.richTextBox1 = new Ticketník.CustomControls.RichTextBox();
             this.ok = new Ticketník.CustomControls.Button();
             this.datum = new Ticketník.CustomControls.DateTimePicker();
+            this.prilohyBtn = new Ticketník.CustomControls.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -99,7 +101,6 @@ namespace Ticketník
             this.newTerpTaskPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
-            this.listView1 = new CustomControls.ListView();
             // 
             // label1
             // 
@@ -773,19 +774,22 @@ namespace Ticketník
             this.groupBox5.Controls.Add(this.richTextBox1);
             this.groupBox5.Location = new System.Drawing.Point(250, 172);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(284, 165);
+            this.groupBox5.Size = new System.Drawing.Size(284, 136);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Poznámky";
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Location = new System.Drawing.Point(6, 19);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = false;
             this.richTextBox1.SelectionAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.richTextBox1.Size = new System.Drawing.Size(272, 140);
+            this.richTextBox1.Size = new System.Drawing.Size(272, 111);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.WordWrap = true;
             // 
@@ -819,11 +823,22 @@ namespace Ticketník
             this.datum.DropDown += new System.EventHandler(this.datum_DropDown);
             this.datum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.datum_KeyDown);
             // 
+            // prilohyBtn
+            // 
+            this.prilohyBtn.Location = new System.Drawing.Point(250, 314);
+            this.prilohyBtn.Name = "prilohyBtn";
+            this.prilohyBtn.Size = new System.Drawing.Size(102, 23);
+            this.prilohyBtn.TabIndex = 15;
+            this.prilohyBtn.Text = "Přílohy";
+            this.prilohyBtn.UseVisualStyleBackColor = true;
+            this.prilohyBtn.Click += new System.EventHandler(this.prilohyBtn_Click);
+            // 
             // TicketWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(546, 378);
+            this.Controls.Add(this.prilohyBtn);
             this.Controls.Add(this.datum);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.groupBox5);
@@ -921,5 +936,6 @@ namespace Ticketník
         internal Ticketník.CustomControls.ComboBox onlineTerpDropDown;
         internal Ticketník.CustomControls.Button btn_TicketWindow_SearchTerp;
         internal Ticketník.CustomControls.Button btn_TicketWindow_UpdateSelected;
+        internal CustomControls.Button prilohyBtn;
     }
 }

@@ -122,7 +122,7 @@
 			<Light en="Light">Světlý</Light>
 			<Dark en="Dark">Tmavý</Dark>
 			<SystemTheme en="Reflect system settings">Podle nastavení systému</SystemTheme>
-      <ResetToDefault en="Default settings">Výchozí nastavení</ResetToDefault>
+			<ResetToDefault en="Default settings">Výchozí nastavení</ResetToDefault>
 		</Settings>
 		<Customer>
 			<Customer en="Customer">Zákazník</Customer>
@@ -229,11 +229,12 @@
 			<NormalDescription en="Normal">Normální</NormalDescription>
 			<CompensLeaveDesc en="Comp. leave">Náhr. volno</CompensLeaveDesc>
 			<TicketTerp en="Ticket TERP">Ticket TERP</TicketTerp>
-      <TerpOnline en="Terp">Terp</TerpOnline>
-      <TaskOnline en="Task">Task</TaskOnline>
-      <TypOnline en="Type">Typ</TypOnline>
-      <VyhledatTerp en="Serch for Terp">Vyhledat Terp</VyhledatTerp>
-      <AktualizovatTerp en="Update Terp">Aktualizovat Terp</AktualizovatTerp>
+			<TerpOnline en="Terp">Terp</TerpOnline>
+			<TaskOnline en="Task">Task</TaskOnline>
+			<TypOnline en="Type">Typ</TypOnline>
+			<VyhledatTerp en="Serch for Terp">Vyhledat Terp</VyhledatTerp>
+			<AktualizovatTerp en="Update Terp">Aktualizovat Terp</AktualizovatTerp>
+			<Prilohy en="Attachments">Přílohy</Prilohy>
 		</NewTicket>
 		<EditTicket>
 			<EditTicket en="Edit ticket">Upravit ticket</EditTicket>
@@ -264,8 +265,14 @@
 			<Shortcut en="Shortcut">Zkratka</Shortcut>
 			<Version en="Version">Verze</Version>
 			<NewTranslations en="New translation">Nový překlad</NewTranslations>
-      <EditTranslation en="Edit translation">Upravit překlad</EditTranslation>
+			<EditTranslation en="Edit translation">Upravit překlad</EditTranslation>
 		</LanguageManager>
+		<Attachements>
+			<Prilohy en="Attachments">Přílohy</Prilohy>
+			<Pridat en ="Add">Přidat</Pridat>
+			<Najit en="Find">Najít</Najit>
+			<Smazat en="Delete">Smazat</Smazat>
+		</Attachements>
 	</Windows>
 	<Errors>
 		<CustomerTerpNotImplemented en="This function is not implemented yet. Use standard size settings\r\nof customer and in ticket set custom terp code.">Tato funkce ještě není implementována. Použij standardní nastavení velikost\r\nzákazníka a v ticketu pak nastav custom terp.</CustomerTerpNotImplemented>
