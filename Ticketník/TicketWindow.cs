@@ -1380,6 +1380,7 @@ namespace Ticketník
             if (canClose)
             {
                 okClick = true;
+                Prilohy.PropojPrilohy(ticket.IDtick);
                 this.Close();
             }
         }
@@ -2722,6 +2723,7 @@ namespace Ticketník
             {
                 ticket.ID = puvodniID;
                 ticket.Datum = puvodniCas;
+                Prilohy.ZrusPrilohy();
             }
         }
 

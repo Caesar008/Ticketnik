@@ -631,6 +631,7 @@ namespace Ticketník
 
         internal void LoadFile(bool first = false)
         {
+            Prilohy.ObnovPrilohy();
             muze = false;
             if (jmenoSouboru != null && jmenoSouboru != "")
             {
@@ -1754,6 +1755,8 @@ namespace Ticketník
                     if (dr == System.Windows.Forms.DialogResult.No)
                     {
                         ulozeno = true;
+
+                        Prilohy.ObnovPrilohy();
                         timer1.Stop();
                         if(updateRunning)
                         {
@@ -1763,7 +1766,6 @@ namespace Ticketník
                         if (vlaknoTerp.IsAlive)
                             vlaknoTerp.Abort();
                         vlaknoTerp = null;
-
                     }
                     else if (dr == System.Windows.Forms.DialogResult.Cancel)
                         e.Cancel = true;
@@ -1801,6 +1803,7 @@ namespace Ticketník
             else
             {
                 timer1.Stop();
+                Prilohy.ZrusPrilohy();
 
                 if (vlaknoTerp != null && vlaknoTerp.IsAlive)
                     vlaknoTerp.Abort();
@@ -1817,6 +1820,7 @@ namespace Ticketník
         {
             if (jmenoSouboru != null && jmenoSouboru != "")
             {
+                Prilohy.ZrusPrilohy();
                 file.SaveToFile(jmenoSouboru, NbtCompression.GZip);
                 this.Text = this.Text.Replace(" (" + jazyk.Header_Neulozeno + ")", "");
                 ulozeno = true;
@@ -1916,7 +1920,7 @@ namespace Ticketník
                             }
                         }
                     }
-
+                    Prilohy.ZrusPrilohy(ta.IDlong);
                     ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices[0]);
                     if (zbyva == 0)
                     {

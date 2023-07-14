@@ -378,14 +378,30 @@ namespace Ticketník.CustomControls
             
             switch (e.Header.TextAlign)
             {
-                case HorizontalAlignment.Center: tf = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter; break;
-                case HorizontalAlignment.Left: tf = TextFormatFlags.Left | TextFormatFlags.VerticalCenter; break;
-                case HorizontalAlignment.Right: tf = TextFormatFlags.Right | TextFormatFlags.VerticalCenter; break;
+                case HorizontalAlignment.Center: tf = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter;
+                    break;
+                case HorizontalAlignment.Left: tf = TextFormatFlags.Left | TextFormatFlags.VerticalCenter; 
+                    break;
+                case HorizontalAlignment.Right: tf = TextFormatFlags.Right | TextFormatFlags.VerticalCenter;
+                    break;
             }
-            if(AllinglLastColumnLeft && e.Header.DisplayIndex == Columns.Count-1)
+            if (AllinglLastColumnLeft && e.Header.DisplayIndex == Columns.Count - 1)
+            { 
                 tf = TextFormatFlags.Left | TextFormatFlags.VerticalCenter;
+                if (!originalHeaderAlignement.ContainsKey(e.ColumnIndex))
+                    originalHeaderAlignement.Add(e.ColumnIndex, e.Header.TextAlign);
+                if(e.Header.TextAlign != HorizontalAlignment.Left)
+                    e.Header.TextAlign = HorizontalAlignment.Left;
+            }
+            else
+            {
+                if (originalHeaderAlignement.ContainsKey(e.ColumnIndex) && e.Header.TextAlign != originalHeaderAlignement[e.ColumnIndex])
+                    e.Header.TextAlign = originalHeaderAlignement[e.ColumnIndex];
+            }
             TextRenderer.DrawText(e.Graphics, e.Header.Text, Font, e.Bounds, HeaderForeColor, tf);
         }
+
+        private Dictionary<int, HorizontalAlignment> originalHeaderAlignement = new Dictionary<int, HorizontalAlignment>();
 
         public int HeaderWidth
         {

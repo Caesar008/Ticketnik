@@ -107,6 +107,7 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
             // 
             // openFileDialog1
             // 
