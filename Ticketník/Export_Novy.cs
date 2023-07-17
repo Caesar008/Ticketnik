@@ -11,7 +11,7 @@ namespace Ticketník
 {
     public partial class Export : Form
     {
-        private void Export_Novy()
+        private List<ExportRow> Export_Novy()
         {
             if (!InvokeRequired)
                 form.timer_ClearInfo.Stop();
@@ -356,6 +356,7 @@ namespace Ticketník
                 saveFileDialog1.FileName = "MyTime Info.xlsx";
                 saveFileDialog1.ShowDialog();
             }
+            return exportRadky;
         }
     }
 

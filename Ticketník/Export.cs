@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using HtmlAgilityPack;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Ticketník
 {
@@ -56,6 +57,8 @@ namespace Ticketník
             }
         }
 
+        List<ExportRow> exportRadky = new List<ExportRow>();
+
         private void button1_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.ExportToMyTime = checkBox1.Checked;
@@ -63,7 +66,7 @@ namespace Ticketník
             if (!Properties.Settings.Default.NovyExport)
                 Export_Stary();
             else
-                Export_Novy();
+                exportRadky = Export_Novy();
 
             if (checkBox1.Checked)
             {
@@ -134,12 +137,46 @@ namespace Ticketník
                     this.form.Logni("Nahrávám exportované tickety do MyTime", Form1.LogMessage.INFO);
                     HttpResponseMessage response = await webClient.PostAsync(url, formData).ConfigureAwait(false);
                     response.EnsureSuccessStatusCode();
-                    //zpráva že success
+                    //Ověření, že se nahrálo
+                    try
+                    {
+                        this.form.Logni("Ověřuji, zda se všechy terpy nahrály", Form1.LogMessage.INFO);
+                        //test, jestli jsem lognutý, tohle hodí exception, když ne
+                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
+                        //načtení samotné stránky
+                        page = await webClient.GetStringAsync(url.Remove(url.LastIndexOf("/import"))).ConfigureAwait(false);
+                    }
+                    catch
+                    {
+                        this.form.Logni("Přihlašuji se do MyTime", Form1.LogMessage.INFO);
+                        await webClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
+                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
+                        page = await webClient.GetStringAsync(url.Remove(url.LastIndexOf("/import"))).ConfigureAwait(false);
+                    }
+                    html.LoadHtml(page);
+                    string subHtml = html.DocumentNode.SelectSingleNode("//ol[contains(@id, 'time_card_rows')]").InnerHtml;
+                    bool missing = false;
+                    foreach(ExportRow row in exportRadky)
+                    {
+                        if (!subHtml.Contains(row.Task))
+                        {
+                            missing = true;
+                            break;
+                        }
+                    }
 
-                    this.form.Logni("Úspěšně nahráno do MyTime, rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.INFO);
-                    
-                    DialogResult mtv = CustomControls.MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeSuccess, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
+                    //zpráva že success nebo fail
+                    DialogResult mtv = DialogResult.None;
+                    if (!missing)
+                    {
+                        this.form.Logni("Úspěšně nahráno do MyTime, rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.INFO);
+                        mtv = CustomControls.MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeSuccess, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        this.form.Logni("Problém s uploadem některých terpů nebo tasků.", Form1.LogMessage.WARNING);
+                        CustomControls.MessageBox.Show(form.jazyk.Message_ExportProblem, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     if (mtv == DialogResult.Yes)
                         Process.Start(url.Replace("/import", ""));
 

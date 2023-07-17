@@ -1155,6 +1155,8 @@ namespace Ticketník
                     form.file.RootTag.Get<NbtCompound>("Zakaznici").Get<NbtCompound>(ticket.Datum.Year.ToString()).Get<NbtCompound>(ticket.Zakaznik).Get<NbtCompound>(mesic).Get<NbtList>("Tickety").Add(ticket.GetNbtObject());
                 }
 
+                Prilohy.PropojPrilohy(form, ticket.IDtick);
+
                 if (ticket.CustomTerp != "" && ticket.CustomTask == "")
                 {
                     canClose = false;
@@ -1380,7 +1382,7 @@ namespace Ticketník
             if (canClose)
             {
                 okClick = true;
-                Prilohy.PropojPrilohy(ticket.IDtick);
+                Prilohy.PropojPrilohy(form, ticket.IDtick);
                 this.Close();
             }
         }
@@ -2723,7 +2725,7 @@ namespace Ticketník
             {
                 ticket.ID = puvodniID;
                 ticket.Datum = puvodniCas;
-                Prilohy.ZrusPrilohy();
+                Prilohy.ZrusPrilohy(form);
             }
         }
 

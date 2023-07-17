@@ -23,6 +23,7 @@ namespace Ticketník
     - Ctrl+V nyní umí rozpoznat tickety z SM9
     - Automatický upload do MyTime
     - Přidány statusy Zrušeno a Přeřazeno
+    - Možnost přidávání příloh k ticketům
     - Oprava chyby #22-003
     - Dll knihovny updatovány na novější verze
     */
@@ -631,7 +632,7 @@ namespace Ticketník
 
         internal void LoadFile(bool first = false)
         {
-            Prilohy.ObnovPrilohy();
+            Prilohy.ObnovPrilohy(this);
             muze = false;
             if (jmenoSouboru != null && jmenoSouboru != "")
             {
@@ -1756,7 +1757,7 @@ namespace Ticketník
                     {
                         ulozeno = true;
 
-                        Prilohy.ObnovPrilohy();
+                        Prilohy.ObnovPrilohy(this);
                         timer1.Stop();
                         if(updateRunning)
                         {
@@ -1803,7 +1804,7 @@ namespace Ticketník
             else
             {
                 timer1.Stop();
-                Prilohy.ZrusPrilohy();
+                Prilohy.ZrusPrilohy(this);
 
                 if (vlaknoTerp != null && vlaknoTerp.IsAlive)
                     vlaknoTerp.Abort();
@@ -1820,7 +1821,7 @@ namespace Ticketník
         {
             if (jmenoSouboru != null && jmenoSouboru != "")
             {
-                Prilohy.ZrusPrilohy();
+                Prilohy.ZrusPrilohy(this);
                 file.SaveToFile(jmenoSouboru, NbtCompression.GZip);
                 this.Text = this.Text.Replace(" (" + jazyk.Header_Neulozeno + ")", "");
                 ulozeno = true;
@@ -1920,7 +1921,7 @@ namespace Ticketník
                             }
                         }
                     }
-                    Prilohy.ZrusPrilohy(ta.IDlong);
+                    Prilohy.ZrusPrilohy(this, ta.IDlong);
                     ((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).Items.RemoveAt(((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices[0]);
                     if (zbyva == 0)
                     {
@@ -2546,6 +2547,7 @@ namespace Ticketník
                                                 }
                                             }
                                         }
+                                        Prilohy.KopirovatPrilohy(this, refer.IDtick, -1);
                                         ticketWindow.ShowDialog();
                                     }
                                     else
@@ -2617,6 +2619,7 @@ namespace Ticketník
                                     }
                                 }
                             }
+                            Prilohy.KopirovatPrilohy(this, idt, -1);
                             ticketWindow.ShowDialog();
                         }
                         break;

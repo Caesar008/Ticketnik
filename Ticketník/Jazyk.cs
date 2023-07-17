@@ -539,7 +539,13 @@ namespace Ticketník
         #endregion
 
         #region Messages
-        
+        internal string Message_ExportProblem
+        {
+            get
+            {
+                return ReturnPreklad("Messages/ExportProblem");
+            }
+        }
         internal string Message_TaskCannotBeEmpty
         {
             get

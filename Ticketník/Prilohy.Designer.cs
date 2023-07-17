@@ -57,6 +57,7 @@
             this.findBtn.TabIndex = 5;
             this.findBtn.Text = "Najít";
             this.findBtn.UseVisualStyleBackColor = true;
+            this.findBtn.Click += new System.EventHandler(this.findBtn_Click);
             // 
             // addBtn
             // 
@@ -78,6 +79,7 @@
             this.delBtn.TabIndex = 3;
             this.delBtn.Text = "Smazat";
             this.delBtn.UseVisualStyleBackColor = true;
+            this.delBtn.Click += new System.EventHandler(this.delBtn_Click);
             // 
             // richTextBox1
             // 
@@ -108,6 +110,7 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.listView1.SelectedIndexChanged += ListView1_SelectedIndexChanged;
             // 
             // openFileDialog1
             // 
