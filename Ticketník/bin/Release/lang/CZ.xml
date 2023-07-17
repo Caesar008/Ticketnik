@@ -308,6 +308,7 @@
 		<FormatUpgrade en="File has been converted to new format. Old file is backuped as ">Soubor byl převeden na nový formát. Starý soubor byl zálohován jako </FormatUpgrade>
 		<CreateNotification en="Do you want to create RDP notification?">Chcete vytvořit upozornění na RDP?</CreateNotification>
 		<ExportProblem en="There was problem with some terp code(s). Make sure all are valid for selected time period.">Nastal problém s některými terpy. Ujisti se, že všechny jsou pro vybrané období platné.</ExportProblem>
+		<WrongExt en="File extension does not match file content. Preview load failed.">Koncovka souboru neodpovídá obsahu souboru. Načtení náhledu selhalo.</WrongExt>
     <TaskCannotBeEmpty en="Task Cannot be empty">Task nemůže být prázdný</TaskCannotBeEmpty>
     <LookingForUpdates en="Looking for updates...">Vyhledávám aktualizace...</LookingForUpdates>
     <UpdateFailed en="Update failed">Aktualizace se nezdařila</UpdateFailed>

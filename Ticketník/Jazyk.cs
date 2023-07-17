@@ -539,6 +539,13 @@ namespace Ticketník
         #endregion
 
         #region Messages
+        internal string Message_WrongExt
+        {
+            get
+            {
+                return ReturnPreklad("Messages/WrongExt");
+            }
+        }
         internal string Message_ExportProblem
         {
             get

@@ -19,6 +19,7 @@ namespace Ticketník
             listView1.Columns.Add("", listView1.Width - 20);
             listView1.HeaderStyle = ColumnHeaderStyle.None;
             listView1.FullRowSelect = true;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             Motiv.SetMotiv(this);
             this.Text = form.jazyk.Windows_Prilohy_Prilohy;
             this.addBtn.Text = form.jazyk.Windows_Prilohy_Pridat;
@@ -79,6 +80,11 @@ namespace Ticketník
         {
             if (DialogResult.OK == openFileDialog1.ShowDialog())
             {
+                pictureBox1.Visible = false;
+                richTextBox1.Visible = false;
+                richTextBox1.Text = "";
+                pictureBox1.Image = null;
+
                 string cesta = openFileDialog1.FileName;
                 string fileName = openFileDialog1.SafeFileName;
                 SHA256 sHA256 = SHA256.Create();
@@ -354,8 +360,36 @@ namespace Ticketník
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                findBtn.Enabled = true;
-                delBtn.Enabled = true;
+                try
+                {
+                    findBtn.Enabled = true;
+                    delBtn.Enabled = true;
+                    string cesta = ((NbtCompound)listView1.SelectedItems[0].Tag).Get<NbtString>("Cesta").Value;
+                    string extension = Path.GetExtension(cesta);
+                    richTextBox1.Text = "";
+                    pictureBox1.Image = null;
+                    if (extension.ToLower() == ".txt" || extension.ToLower() == ".cs" || extension.ToLower() == ".ps1" || extension.ToLower() == ".json" || extension.ToLower() == ".js" || extension.ToLower() == ".css" || extension.ToLower() == ".html" || extension.ToLower() == ".htm" || extension.ToLower() == ".reg")
+                    {
+                        pictureBox1.Visible = false;
+                        richTextBox1.Visible = true;
+                        richTextBox1.Text = File.ReadAllText(cesta);
+                    } 
+                    else if (extension.ToLower() == ".png" || extension.ToLower() == ".jpg" || extension.ToLower() == ".bmp" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".tif" || extension.ToLower() == ".tiff" || extension.ToLower() == ".gif")
+                    {
+                        pictureBox1.Visible = true;
+                        richTextBox1.Visible = false;
+                        pictureBox1.Image = System.Drawing.Image.FromFile(cesta);
+                    }
+                    else
+                    {
+                        pictureBox1.Visible = false;
+                        richTextBox1.Visible = false;
+                    }
+                }
+                catch
+                {
+                    CustomControls.MessageBox.Show(form.jazyk.Message_WrongExt, MessageBoxIcon.Warning);
+                }
             }
             else if (listView1.SelectedItems.Count > 1)
             {
@@ -407,6 +441,10 @@ namespace Ticketník
         {
             foreach (ListViewItem item in listView1.SelectedItems)
             {
+                pictureBox1.Visible = false;
+                richTextBox1.Visible = false;
+                richTextBox1.Text = "";
+                pictureBox1.Image = null;
                 SmazatPrilohu((NbtCompound)item.Tag);
             }
             findBtn.Enabled = false;
