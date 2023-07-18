@@ -115,6 +115,9 @@
     <Compile Include="CustomControls\ScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomControls\ScrollBarOld.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>

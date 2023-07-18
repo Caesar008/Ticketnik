@@ -149,8 +149,8 @@ namespace Ticketník.CustomControls
 
         HeaderFill fillColl = new HeaderFill();
 
-        private ScrollBar VScrollBar;
-        private ScrollBar HScrollBar;
+        private ScrollBarOld VScrollBar;
+        private ScrollBarOld HScrollBar;
 
         public ListView(Control parent) : base()
         {
@@ -161,8 +161,8 @@ namespace Ticketník.CustomControls
             Controls.Add(fillColl) ;
             DoubleBuffered = true;
             //SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.DoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
-            VScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Vertical, this);
-            HScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Horizontal, this);
+            VScrollBar = new ScrollBarOld(ScrollBarOld.SizeModes.Automatic, ScrollBarOld.ScrollBarAllignment.Vertical, this);
+            HScrollBar = new ScrollBarOld(ScrollBarOld.SizeModes.Automatic, ScrollBarOld.ScrollBarAllignment.Horizontal, this);
             VScrollBar.BackColor = BackColor;
             HScrollBar.BackColor = BackColor;
             VScrollBar.ForeColor = ForeColor;
@@ -179,29 +179,29 @@ namespace Ticketník.CustomControls
             Controls.Add(VScrollBar);
         }
 
-        private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
+        private void HScrollBar_Scrolled(object sender, ScrollBarOld.ScrollEventArgs e)
         {
-            if (HScrollBar.ScrollMax - HScrollBar.ScrollPosition < 50 && e.ScrollDirection == ScrollBar.ScrollDirection.Right && 
-                e.ScrolledBy == (int)ScrollBar.ScrollStep.Medium)
+            if (HScrollBar.ScrollMax - HScrollBar.ScrollPosition < 50 && e.ScrollDirection == ScrollBarOld.ScrollDirection.Right && 
+                e.ScrolledBy == (int)ScrollBarOld.ScrollStep.Medium)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.ScrollMax - HScrollBar.ScrollPosition, 0);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && HScrollBar.ScrollPosition < 50 &&
-                e.ScrolledBy == -(int)ScrollBar.ScrollStep.Medium)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.Left && HScrollBar.ScrollPosition < 50 &&
+                e.ScrolledBy == -(int)ScrollBarOld.ScrollStep.Medium)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && e.ScrolledBy == -(int)ScrollBar.ScrollStep.Medium)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.Left && e.ScrolledBy == -(int)ScrollBarOld.ScrollStep.Medium)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -50, 0);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Right && e.ScrolledBy == (int)ScrollBar.ScrollStep.Medium)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.Right && e.ScrolledBy == (int)ScrollBarOld.ScrollStep.Medium)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, 50, 0);
-            else if (HScrollBar.ScrollMax - HScrollBar.ScrollPosition < 5 && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+            else if (HScrollBar.ScrollMax - HScrollBar.ScrollPosition < 5 && e.ScrollDirection == ScrollBarOld.ScrollDirection.Right)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.ScrollMax - HScrollBar.ScrollPosition * 5, 0);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left && HScrollBar.ScrollPosition < 5)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.Left && HScrollBar.ScrollPosition < 5)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
-            else if(e.ScrollDirection == ScrollBar.ScrollDirection.DragLeft && HScrollBar.ScrollPosition < -e.ScrolledBy)
+            else if(e.ScrollDirection == ScrollBarOld.ScrollDirection.DragLeft && HScrollBar.ScrollPosition < -e.ScrolledBy)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, -HScrollBar.ScrollPosition, 0);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragRight && HScrollBar.UsableHight - HScrollBar.ScrollPosition < -e.ScrolledBy)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.DragRight && HScrollBar.UsableHight - HScrollBar.ScrollPosition < -e.ScrolledBy)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, HScrollBar.ScrollMax - HScrollBar.ScrollPosition, 0);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragLeft)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.DragLeft)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy, 0);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.DragRight)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.DragRight)
                 SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy, 0);
             else
                 SendMessage(this.Handle, Messages.LVM_SCROLL, e.ScrolledBy * 5, 0);
@@ -210,12 +210,12 @@ namespace Ticketník.CustomControls
 
         double posun = 0;
 
-        private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
+        private void VScrollBar_Scrolled(object sender, ScrollBarOld.ScrollEventArgs e)
         {
             //int max = VScrollBar.UsableHight - VScrollBar.SliderSize.Height;
             double step = VScrollBar.ScrollMax / VScrollBar.Max;
 
-            if (e.ScrollDirection == ScrollBar.ScrollDirection.DragDown || e.ScrollDirection == ScrollBar.ScrollDirection.DragUp)
+            if (e.ScrollDirection == ScrollBarOld.ScrollDirection.DragDown || e.ScrollDirection == ScrollBarOld.ScrollDirection.DragUp)
             {
                 posun += e.ScrolledBy / e.ScrollbarRatio;
             }
@@ -228,7 +228,7 @@ namespace Ticketník.CustomControls
                 SendMessage(this.Handle, Messages.LVM_SCROLL, 0, (int)posun);
                 Invalidate(new Rectangle(VScrollBar.Location, VScrollBar.Size));
                 posun = posun - (int)posun;
-                if (VScrollBar.ScrollMax == VScrollBar.ScrollPosition && e.ScrollDirection == ScrollBar.ScrollDirection.DragDown)
+                if (VScrollBar.ScrollMax == VScrollBar.ScrollPosition && e.ScrollDirection == ScrollBarOld.ScrollDirection.DragDown)
                 {
                     EnsureVisible(Items.Count - 1);
                 }

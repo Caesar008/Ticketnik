@@ -13,14 +13,14 @@ namespace Ticketník.CustomControls
 {
     internal class RichTextBox : System.Windows.Forms.Control
     {
-        internal ScrollBar VScrollBar;
-        internal ScrollBar HScrollBar;
+        internal ScrollBarOld VScrollBar;
+        internal ScrollBarOld HScrollBar;
         private RichTextBoxInternal rtb;
 
         public RichTextBox() : base()
         {
-            VScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Vertical, this);
-            HScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAllignment.Horizontal, this);
+            VScrollBar = new ScrollBarOld(ScrollBarOld.SizeModes.Automatic, ScrollBarOld.ScrollBarAllignment.Vertical, this);
+            HScrollBar = new ScrollBarOld(ScrollBarOld.SizeModes.Automatic, ScrollBarOld.ScrollBarAllignment.Horizontal, this);
             VScrollBar.BackColor = BackColor;
             HScrollBar.BackColor = BackColor;
             VScrollBar.ForeColor = ForeColor;
@@ -61,19 +61,19 @@ namespace Ticketník.CustomControls
 
         int scrollPos = 0;
 
-        private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
+        private void HScrollBar_Scrolled(object sender, ScrollBarOld.ScrollEventArgs e)
         {
-            if (rtb.InnerScroll.X + (e.ScrolledBy*5) < HScrollBar.Max && e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+            if (rtb.InnerScroll.X + (e.ScrolledBy*5) < HScrollBar.Max && e.ScrollDirection == ScrollBarOld.ScrollDirection.Right)
                 rtb.Scroll(rtb.InnerScroll.X + (e.ScrolledBy * 5), rtb.InnerScroll.Y);
-            else if(e.ScrollDirection == ScrollBar.ScrollDirection.Right)
+            else if(e.ScrollDirection == ScrollBarOld.ScrollDirection.Right)
                 rtb.Scroll(HScrollBar.Max, rtb.InnerScroll.Y);
-            else if (rtb.InnerScroll.X + (e.ScrolledBy * 5) > 0 && e.ScrollDirection == ScrollBar.ScrollDirection.Left)
+            else if (rtb.InnerScroll.X + (e.ScrolledBy * 5) > 0 && e.ScrollDirection == ScrollBarOld.ScrollDirection.Left)
                 rtb.Scroll(rtb.InnerScroll.X + (e.ScrolledBy * 5), rtb.InnerScroll.Y);
-            else if (e.ScrollDirection == ScrollBar.ScrollDirection.Left)
+            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.Left)
                 rtb.Scroll(0, rtb.InnerScroll.Y);
         }
 
-        private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
+        private void VScrollBar_Scrolled(object sender, ScrollBarOld.ScrollEventArgs e)
         {
         }
 
