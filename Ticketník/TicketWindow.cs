@@ -856,7 +856,8 @@ namespace Ticketník
                             break;
                     }
 
-                ticket.CustomTerp = terp;
+                if(ticket.CustomTerp == "")
+                    ticket.CustomTerp = terp;
             }
             else if (ticket.CustomTask == "" && typ == "" && task == "")
             {
