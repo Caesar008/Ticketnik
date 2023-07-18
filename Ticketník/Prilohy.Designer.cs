@@ -110,7 +110,6 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
-            this.listView1.SelectedIndexChanged += ListView1_SelectedIndexChanged;
             // 
             // openFileDialog1
             // 

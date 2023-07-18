@@ -185,6 +185,7 @@ namespace Ticketník
                     dat = true;
                     datum.Value = DateTime.Today;
                     dat = false;
+                    pocetPriloh.Text = Prilohy.PocetPriloh(form, -1).ToString();
                 }
                 else
                 {
@@ -234,6 +235,8 @@ namespace Ticketník
 
                             idTicketu.Text = refer.ID;
                             zakaznik.SelectedItem = refer.Zakaznik;
+
+                            pocetPriloh.Text = Prilohy.PocetPriloh(form, refer.IDtick).ToString();
 
                             switch (refer.StavT)
                             {
@@ -484,6 +487,8 @@ namespace Ticketník
 
                         idTicketu.Text = refer.ID;
                         zakaznik.SelectedItem = refer.Zakaznik;
+
+                        pocetPriloh.Text = Prilohy.PocetPriloh(form, refer.IDtick).ToString();
 
                         switch (refer.StavT)
                         {
@@ -2765,6 +2770,7 @@ namespace Ticketník
         {
             Prilohy prilohy = new Prilohy(form, ticket.IDtick);
             prilohy.ShowDialog();
+            pocetPriloh.Text = Prilohy.PocetPriloh(form, ticket.IDtick).ToString();
         }
 
         private void comboBox_MouseEnter(object sender, EventArgs e)

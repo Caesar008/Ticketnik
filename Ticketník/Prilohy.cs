@@ -19,6 +19,7 @@ namespace Ticketník
             listView1.Columns.Add("", listView1.Width - 20);
             listView1.HeaderStyle = ColumnHeaderStyle.None;
             listView1.FullRowSelect = true;
+            listView1.SelectedIndexChanged += ListView1_SelectedIndexChanged;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             Motiv.SetMotiv(this);
             this.Text = form.jazyk.Windows_Prilohy_Prilohy;
@@ -378,7 +379,13 @@ namespace Ticketník
                     {
                         pictureBox1.Visible = true;
                         richTextBox1.Visible = false;
-                        pictureBox1.Image = System.Drawing.Image.FromFile(cesta);
+
+                        System.Drawing.Image img;
+                        using (var bmpTemp = new System.Drawing.Bitmap(cesta))
+                        {
+                            img = new System.Drawing.Bitmap(bmpTemp);
+                        }
+                        pictureBox1.Image = img;
                     }
                     else
                     {
@@ -479,6 +486,14 @@ namespace Ticketník
                 prilohyDat.RootTag.Get<NbtCompound>("Tickety").Get<NbtList>(novyTicketID.ToString()).Add(new NbtString(sHash));
             }
             prilohyDat.SaveToFile(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\prilohy.dat", NbtCompression.GZip);
+        }
+
+        public static int PocetPriloh(Form1 form, long ticketID)
+        {
+            NbtFile prilohyDat = new NbtFile();
+            prilohyDat.LoadFromFile(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\prilohy.dat");
+                        
+            return prilohyDat.RootTag.Get<NbtCompound>("Tickety").Get<NbtList>(ticketID.ToString()) == null ? 0 : prilohyDat.RootTag.Get<NbtCompound>("Tickety").Get<NbtList>(ticketID.ToString()).Count;
         }
     }
 }

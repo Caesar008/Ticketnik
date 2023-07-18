@@ -293,6 +293,16 @@ namespace Ticketník.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap priloha {
+            get {
+                object obj = ResourceManager.GetObject("priloha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap red_ball {
             get {
                 object obj = ResourceManager.GetObject("red_ball", resourceCulture);

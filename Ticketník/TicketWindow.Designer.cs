@@ -93,6 +93,8 @@ namespace Ticketník
             this.ok = new Ticketník.CustomControls.Button();
             this.datum = new Ticketník.CustomControls.DateTimePicker();
             this.prilohyBtn = new Ticketník.CustomControls.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pocetPriloh = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -100,6 +102,7 @@ namespace Ticketník
             this.groupBox4.SuspendLayout();
             this.newTerpTaskPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -833,11 +836,32 @@ namespace Ticketník
             this.prilohyBtn.UseVisualStyleBackColor = true;
             this.prilohyBtn.Click += new System.EventHandler(this.prilohyBtn_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Ticketník.Properties.Resources.priloha;
+            this.pictureBox1.Location = new System.Drawing.Point(358, 313);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pocetPriloh
+            // 
+            this.pocetPriloh.AutoSize = true;
+            this.pocetPriloh.Location = new System.Drawing.Point(388, 319);
+            this.pocetPriloh.Name = "pocetPriloh";
+            this.pocetPriloh.Size = new System.Drawing.Size(13, 13);
+            this.pocetPriloh.TabIndex = 17;
+            this.pocetPriloh.Text = "0";
+            // 
             // TicketWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(546, 378);
+            this.Controls.Add(this.pocetPriloh);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.prilohyBtn);
             this.Controls.Add(this.datum);
             this.Controls.Add(this.ok);
@@ -868,7 +892,9 @@ namespace Ticketník
             this.newTerpTaskPanel.ResumeLayout(false);
             this.newTerpTaskPanel.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -937,5 +963,7 @@ namespace Ticketník
         internal Ticketník.CustomControls.Button btn_TicketWindow_SearchTerp;
         internal Ticketník.CustomControls.Button btn_TicketWindow_UpdateSelected;
         internal CustomControls.Button prilohyBtn;
+        private PictureBox pictureBox1;
+        private Label pocetPriloh;
     }
 }
