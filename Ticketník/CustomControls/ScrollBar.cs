@@ -53,10 +53,19 @@ namespace Ticketník.CustomControls
             dragTimer.Tick += DragTimer_Tick;
         }
 
+        private bool canProcessParentSizeChanged = true;
+
         private void Parent_SizeChanged(object sender, EventArgs e)
         {
+            if (!canProcessParentSizeChanged)
+                return;
+            canProcessParentSizeChanged = false;
             if (Alignment == ScrollBarAlignment.Vertical)
             {
+                if (Parent.Height < 44)
+                    Parent.Height = 44;
+                if (Parent.Width < 17)
+                    Parent.Width = 17;
                 Width = 17;
                 Height = Parent.Height;
                 Location = new Point(Parent.Width - Width, 0);
@@ -64,11 +73,16 @@ namespace Ticketník.CustomControls
             }
             else if (Alignment == ScrollBarAlignment.Horizontal)
             {
+                if (Parent.Height < 17)
+                    Parent.Height = 17;
+                if (Parent.Width < 44)
+                    Parent.Width = 44;
                 Width = Parent.Width;
                 Height = 17;
                 Location = new Point(0, Parent.Height - Height);
                 Invalidate();
             }
+            canProcessParentSizeChanged = true;
         }
 
         public void Relocate()
@@ -107,7 +121,6 @@ namespace Ticketník.CustomControls
         public ScrollBarAlignment Alignment { get; private set; }
         public SizeModes SizeMode { get; private set; }
 
-        bool canFireScrollEvent = true;
         private int scrollPosition = 0;
         public int ScrollPosition
         {
@@ -121,24 +134,39 @@ namespace Ticketník.CustomControls
                 {
                     int old = scrollPosition;
                     scrollPosition = value;
+                    Invalidate();
+                }
+            }
+        }
+        public int ScrollPositionInternal
+        {
+            get
+            {
+                return scrollPosition;
+            }
+            set
+            {
+                if (scrollPosition != value)
+                {
+                    int old = scrollPosition;
+                    scrollPosition = value;
                     ScrollDirection directionToReport = ScrollDirection.No;
-                    if(old < value)
+                    if (old < value)
                     {
                         if (Alignment == ScrollBarAlignment.Vertical)
                             directionToReport = ScrollDirection.Down;
                         else
                             directionToReport = ScrollDirection.Right;
                     }
-                    else if(old > value)
+                    else if (old > value)
                     {
                         if (Alignment == ScrollBarAlignment.Vertical)
                             directionToReport = ScrollDirection.Up;
                         else
                             directionToReport = ScrollDirection.Left;
                     }
-
-                    if(canFireScrollEvent)
-                        Scrolled?.Invoke(this, new ScrollEventArgs(Alignment, old, value, directionToReport));
+                    Scrolled?.Invoke(this, new ScrollEventArgs(Alignment, old, value, directionToReport));
+                    posun = 0;
                     Invalidate();
                 }
             }
@@ -150,14 +178,68 @@ namespace Ticketník.CustomControls
             set { if (separatorColor != value) { separatorColor = value; Invalidate(); } }
         }
 
-        private int max = 1;
-        public int Max
+        public bool ScrollToLatest
         {
-            get { return max; }
+            get; set;
+        }
+
+        private int lastOffset = 1;
+        public int LastOffset
+        {
+            get { return lastOffset; }
             set
             {
-                if (value > 0 && max != value)
-                    max = value;
+                if (value > 0 && lastOffset != value) 
+                { 
+                    lastOffset = value;
+                    Invalidate();
+                }
+            }
+        }
+
+        private int totalItems = 0;
+        
+        public int TotalItems
+        { 
+            get 
+            { 
+                return totalItems;
+            }
+            set
+            {
+                if (value >= 0 && totalItems != value)
+                    totalItems = value;
+                Invalidate();
+            }
+        }
+
+        private int scrollNasobitel = 1;
+        public int ScrollNasobitel
+        {
+            get { return scrollNasobitel; }
+            set
+            {
+                if(value >0 && scrollNasobitel != value)
+                {
+                    scrollNasobitel = value;
+                }
+            }
+        }
+
+        private int Max
+        {
+            get { return ScrollToLatest ? (totalItems - (1 * -lastOffset) < 0 ? 0 : totalItems - (1 * -lastOffset)) : 
+                    (totalItems - visibleItems < 0 ? 0 : totalItems - visibleItems); }
+        }
+
+        private int visibleItems = 1;
+        public int VisibleItems
+        {
+            get { return visibleItems; }
+            set
+            {
+                if (value > 0 && visibleItems != value)
+                    visibleItems = value;
                 Invalidate();
             }
         }
@@ -195,20 +277,20 @@ namespace Ticketník.CustomControls
                 {
                     if (scrollPosition > 0)
                     {
-                        if (scrollPosition - (int)scrollStep >= 0)
-                            ScrollPosition = scrollPosition - (int)scrollStep;
+                        if (ScrollPositionInternal - ((int)scrollStep*scrollNasobitel) >= 0)
+                            ScrollPositionInternal = scrollPosition - ((int)scrollStep * scrollNasobitel);
                         else
-                            ScrollPosition = 0;
+                            ScrollPositionInternal = 0;
                     }
                 }
                 else if (direction == ScrollDirection.Down || direction == ScrollDirection.Right)
                 {
-                    if (scrollPosition < max)
+                    if (scrollPosition < Max)
                     {
-                        if (scrollPosition + (int)scrollStep <= max)
-                            ScrollPosition = scrollPosition + (int)scrollStep;
+                        if (ScrollPositionInternal + ((int)scrollStep * scrollNasobitel) <= Max)
+                            ScrollPositionInternal = scrollPosition + ((int)scrollStep * scrollNasobitel);
                         else
-                            ScrollPosition = max;
+                            ScrollPositionInternal = Max;
                     }
                 }
             }
@@ -224,23 +306,49 @@ namespace Ticketník.CustomControls
         {
             if (dragScroll)
             {
+                
                 if (Alignment == ScrollBarAlignment.Vertical)
                 {
                     int currentMousePosY = MousePosition.Y;
                     posun = mouseStartDrag - currentMousePosY;
 
-                    mouseStartDrag = currentMousePosY;
+                    int maxPos = Height - 19 - SliderSize.Height - (bothVisible ? 17 : 0);
+                    int dostupnyProstor = maxPos - 19 ;
+                    double itemuNaPixel = Math.Round((double)Max / (double)dostupnyProstor, 4, MidpointRounding.AwayFromZero);
+                    int novaPozice = (int)(Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven) - posun);
+                    int novyScroll = (int)Math.Round((novaPozice - 19) * itemuNaPixel, 0, MidpointRounding.ToEven);
+                    if (novyScroll < 0)
+                        novyScroll = 0;
+                    else if(novyScroll > Max) 
+                        novyScroll = Max;
 
-                    //tady udělat výpočet o kolik posunout podle poměru Max a velikosti pro posun
+                    ScrollPositionInternal = novyScroll;
+                    if(posun==0)
+                        mouseStartDrag = currentMousePosY;
                 }
                 else if (Alignment == ScrollBarAlignment.Horizontal)
                 {
                     int currentMousePosX = MousePosition.X;
                     posun = mouseStartDrag - currentMousePosX;
 
-                    mouseStartDrag = currentMousePosX;
-
                     //tady udělat výpočet o kolik posunout podle poměru Max a velikosti pro posun
+                    int maxPos = Width - 19 - SliderSize.Width - (bothVisible ? 17 : 0);
+                    int dostupnyProstor = maxPos - 19;
+                    double itemuNaPixel = Math.Round((double)Max / (double)dostupnyProstor, 4, MidpointRounding.AwayFromZero);
+                    int novaPozice = (int)(Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven) - posun);
+                    int novyScroll = (int)Math.Round((novaPozice - 19) * itemuNaPixel, 0, MidpointRounding.ToEven);
+
+                    Debug.WriteLine("Max: " + Max);
+                    Debug.WriteLine("Nový: " + novyScroll);
+
+                    if (novyScroll < 0)
+                        novyScroll = 0;
+                    else if (novyScroll > Max)
+                        novyScroll = Max;
+
+                    ScrollPositionInternal = novyScroll;
+                    if (posun == 0)
+                        mouseStartDrag = currentMousePosX;
                 }
             }
         }
@@ -281,11 +389,12 @@ namespace Ticketník.CustomControls
                     mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o -1
-                    if (scrollPosition > 0)
+                    if (scrollPosition - ((int)ScrollStep.Small * scrollNasobitel) >= 0)
                     {
-                        ScrollPosition = scrollPosition - (int)ScrollStep.Small;
+                        ScrollPositionInternal = scrollPosition - ((int)ScrollStep.Small * scrollNasobitel);
                     }
-
+                    else
+                        ScrollPositionInternal = 0;
                 }
             }
             else if (Alignment == ScrollBarAlignment.Vertical && (new Rectangle(0, Height - 17 - (bothVisible ? 17 : 0), Width, 17).Contains(e.Location)))
@@ -299,8 +408,12 @@ namespace Ticketník.CustomControls
                     mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o 1
-                    if (scrollPosition < max)
-                        ScrollPosition = scrollPosition + (int)ScrollStep.Small;
+                    if (scrollPosition + ((int)ScrollStep.Small * scrollNasobitel) <= Max)
+                    {
+                        ScrollPositionInternal = scrollPosition + ((int)ScrollStep.Small*scrollNasobitel);
+                    }
+                    else
+                        ScrollPositionInternal = Max;
                 }
             }
             else if (sliderRegionRectUp.Contains(e.Location))
@@ -313,10 +426,10 @@ namespace Ticketník.CustomControls
                 mouseDownTimer.Enabled = true;
                 mouseDownTimer.Start();
                 mouseDown = true;
-                if (scrollPosition >= (int)ScrollStep.Medium)
-                    ScrollPosition = scrollPosition - (int)ScrollStep.Medium;
+                if (ScrollPositionInternal >= ((int)ScrollStep.Medium*scrollNasobitel))
+                    ScrollPositionInternal = scrollPosition - ((int)ScrollStep.Medium*scrollNasobitel);
                 else
-                    ScrollPosition = 0;
+                    ScrollPositionInternal = 0;
             }
             else if (sliderRegionRectDown.Contains(e.Location))
             {
@@ -328,10 +441,10 @@ namespace Ticketník.CustomControls
                 mouseDownTimer.Enabled = true;
                 mouseDownTimer.Start();
                 mouseDown = true;
-                if (scrollPosition + (int)ScrollStep.Medium <= max)
-                    ScrollPosition = scrollPosition + (int)ScrollStep.Medium;
+                if (scrollPosition + ((int)ScrollStep.Medium * scrollNasobitel) <= Max)
+                    ScrollPositionInternal = scrollPosition + ((int)ScrollStep.Medium * scrollNasobitel);
                 else
-                    ScrollPosition = max;
+                    ScrollPositionInternal = Max;
 
             }
             else if (Alignment == ScrollBarAlignment.Horizontal && (new Rectangle(0, 0, 17, Height).Contains(e.Location)))
@@ -344,8 +457,10 @@ namespace Ticketník.CustomControls
                     mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o -1
-                    if (scrollPosition > 0)
-                        ScrollPosition = scrollPosition - (int)ScrollStep.Small;
+                    if (scrollPosition - ((int)ScrollStep.Small * scrollNasobitel) >= 0)
+                        ScrollPositionInternal = scrollPosition - ((int)ScrollStep.Small * scrollNasobitel);
+                    else
+                        ScrollPositionInternal = 0;
 
                 }
             }
@@ -359,8 +474,10 @@ namespace Ticketník.CustomControls
                     mouseDownTimer.Start();
                     mouseDown = true;
                     //scroll o 1
-                    if (scrollPosition < Max)
-                        ScrollPosition = scrollPosition + (int)ScrollStep.Small;
+                    if (scrollPosition + ((int)ScrollStep.Small * scrollNasobitel) <= Max)
+                        ScrollPositionInternal = scrollPosition + ((int)ScrollStep.Small * scrollNasobitel);
+                    else
+                        ScrollPositionInternal = Max;
                 }
             }
         }
@@ -385,10 +502,30 @@ namespace Ticketník.CustomControls
             }
         }
 
+        private Size SliderSize
+        {
+            get
+            {
+                int zakladPomeru = Max + visibleItems;
+                int zakladVelikosti = Alignment == ScrollBarAlignment.Vertical ? this.Height - 38 - (bothVisible ? 17 : 0) : this.Width - 38 - (bothVisible ? 17 : 0);
+                double pomer = Math.Round((double)visibleItems / (double)zakladPomeru, 4, MidpointRounding.AwayFromZero);
+                if (pomer > 1)
+                    pomer = 1;
+                int velikost = (int)Math.Round((double)zakladVelikosti * pomer, 0, MidpointRounding.AwayFromZero);
+                if(velikost < 6) 
+                    velikost = 6;
+                if (Alignment == ScrollBarAlignment.Horizontal)
+                    return new Size(velikost, 6);
+                else
+                    return new Size(6, velikost);
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             if (!Visible)
                 return;
+            
             //base.OnPaint(e);
             using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
@@ -398,10 +535,6 @@ namespace Ticketník.CustomControls
                 }
                 using (Pen p = new Pen(SeparatorColor, 1))
                 {
-                    //tohle je jen temp
-                    Size SliderSize = new Size(6, 6);
-
-
                     if (Alignment == ScrollBarAlignment.Vertical)
                     {
                         if (sliderRectForDrag.Contains(PointToClient(MousePosition)))
@@ -413,16 +546,22 @@ namespace Ticketník.CustomControls
                             firstScroll = 0;
                         }
 
+                        int maxPos = Height - 19 - SliderSize.Height - (bothVisible ? 17 : 0);
+                        int dostupnyProstor = maxPos - 19;
+                        double itemuNaPixel = Math.Round((double)Max / (double)dostupnyProstor, 4, MidpointRounding.AwayFromZero);
+                        /*Debug.WriteLine("__________");
+                        Debug.WriteLine("ScrollPosition: " + ScrollPosition.ToString());
+                        Debug.WriteLine("Max: " + Max.ToString());
+                        Debug.WriteLine("Výpočet pozice: " + Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven));
+                        Debug.WriteLine("VisibleItems: " + VisibleItems.ToString());
+                        Debug.WriteLine("TotalItems: " + TotalItems.ToString());*/
 
-                        //SliderSize = new Size(6, (int)((UsableHight) * ratio));
-                        if (SliderSize.Height < 6)
-                            SliderSize = new Size(6, 6);
+                        int scrollPos = (int)Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven)-19;
 
-                        Rectangle slider = new Rectangle((Width / 2) - (SliderSize.Width / 2), ScrollPosition + 18, SliderSize.Width, SliderSize.Height);
-                        sliderRectForDrag = new Rectangle(1, ScrollPosition + 18, Width - 2, SliderSize.Height);
-                        sliderRegionRectUp = new Rectangle(1, 17, Width - 2, ScrollPosition);
+                        Rectangle slider = new Rectangle((Width / 2) - (SliderSize.Width / 2), scrollPos + 18, SliderSize.Width, SliderSize.Height);
+                        sliderRectForDrag = new Rectangle(1, scrollPos + 18, Width - 2, SliderSize.Height);
+                        sliderRegionRectUp = new Rectangle(1, 17, Width - 2, scrollPos);
                         sliderRegionRectDown = new Rectangle(1, sliderRectForDrag.Bottom + 2, Width - 2, Height - sliderRectForDrag.Bottom - 19 - (bothVisible ? 18 : 0));
-
                         bg.Graphics.DrawLine(p, 0, 0, 0, Height);
                         bg.Graphics.DrawLine(p, 0, 16, Width, 16);
                         bg.Graphics.DrawLine(p, 0, Height - 17 - (bothVisible ? 17 : 0), Width, Height - 17 - (bothVisible ? 17 : 0));
@@ -441,13 +580,28 @@ namespace Ticketník.CustomControls
                     }
                     else if (Alignment == ScrollBarAlignment.Horizontal)
                     {
-                        //SliderSize = /*new Size(UsableHight - Max, 6);*/new Size((int)((UsableHight) * ratio), 6);
-                        if (SliderSize.Width < 6)
-                            SliderSize = new Size(6, 6);
+                        int maxPos = Width - 19 - SliderSize.Width - (bothVisible ? 17 : 0);
+                        int dostupnyProstor = maxPos - 19;
+                        double itemuNaPixel = Math.Round((double)Max / (double)dostupnyProstor, 4, MidpointRounding.AwayFromZero);
+                        if(double.IsNaN(itemuNaPixel))
+                        {
+                            itemuNaPixel = 1;
+                        }
+                        /*Debug.WriteLine("__________");
+                        Debug.WriteLine("ScrollPosition: " + ScrollPosition.ToString());
+                        Debug.WriteLine("Max: " + Max.ToString());
+                        Debug.WriteLine("VisibleItems: " + VisibleItems.ToString());
+                        Debug.WriteLine("TotalItems: " + TotalItems.ToString());
+                        Debug.WriteLine("Slider position: " + (ScrollPosition + 18));
+                        Debug.WriteLine("Max position: " + maxPos);
+                        Debug.WriteLine("Itemů na pixel: " + itemuNaPixel);
+                        Debug.WriteLine("Test výpočet pozice: " + Math.Round(((ScrollPosition / itemuNaPixel + 18))+1, 0, MidpointRounding.ToEven));*/
 
-                        Rectangle slider = new Rectangle(/*scrollPositionInner*/ScrollPosition + 18, (Height / 2) - (SliderSize.Height / 2), SliderSize.Width, SliderSize.Height);
-                        sliderRectForDrag = new Rectangle(/*scrollPositionInner*/ScrollPosition + 18, 1, SliderSize.Width, Height - 2);
-                        sliderRegionRectUp = new Rectangle(17, 1, /*scrollPositionInner*/ScrollPosition, Height - 2);
+                        int scrollPos = (int)Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven) - 19;
+
+                        Rectangle slider = new Rectangle(scrollPos + 18, (Height / 2) - (SliderSize.Height / 2), SliderSize.Width, SliderSize.Height);
+                        sliderRectForDrag = new Rectangle(scrollPos + 18, 1, SliderSize.Width, Height - 2);
+                        sliderRegionRectUp = new Rectangle(17, 1, scrollPos, Height - 2);
                         sliderRegionRectDown = new Rectangle(sliderRectForDrag.Right + 2, 1, Width - sliderRectForDrag.Right - 19 - (bothVisible ? 18 : 0), Height - 2);
 
                         bg.Graphics.DrawLine(p, 0, 0, Width, 0);

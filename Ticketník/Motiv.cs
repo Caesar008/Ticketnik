@@ -315,6 +315,12 @@ namespace Ticketník
                     ((CustomControls.ScrollBarOld)c).ForeColor = barvy[sMotiv]["scrollBarFore"];
                     ((CustomControls.ScrollBarOld)c).SeparatorColor = barvy[sMotiv]["scrollBarSeparator"];
                 }
+                else if (c.GetType() == typeof(CustomControls.ScrollBar))
+                {
+                    ((CustomControls.ScrollBar)c).BackColor = barvy[sMotiv]["scrollBarBack"];
+                    ((CustomControls.ScrollBar)c).ForeColor = barvy[sMotiv]["scrollBarFore"];
+                    ((CustomControls.ScrollBar)c).SeparatorColor = barvy[sMotiv]["scrollBarSeparator"];
+                }
                 else
                 {
                     string typ = c.GetType().ToString();

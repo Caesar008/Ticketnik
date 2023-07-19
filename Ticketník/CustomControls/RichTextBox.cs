@@ -13,18 +13,20 @@ namespace Ticketník.CustomControls
 {
     internal class RichTextBox : System.Windows.Forms.Control
     {
-        internal ScrollBarOld VScrollBar;
-        internal ScrollBarOld HScrollBar;
+        internal ScrollBar VScrollBar;
+        internal ScrollBar HScrollBar;
         private RichTextBoxInternal rtb;
 
         public RichTextBox() : base()
         {
-            VScrollBar = new ScrollBarOld(ScrollBarOld.SizeModes.Automatic, ScrollBarOld.ScrollBarAllignment.Vertical, this);
-            HScrollBar = new ScrollBarOld(ScrollBarOld.SizeModes.Automatic, ScrollBarOld.ScrollBarAllignment.Horizontal, this);
+            VScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Vertical, this);
+            HScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Horizontal, this);
             VScrollBar.BackColor = BackColor;
             HScrollBar.BackColor = BackColor;
             VScrollBar.ForeColor = ForeColor;
             HScrollBar.ForeColor = ForeColor;
+            VScrollBar.ScrollNasobitel = 5;
+            HScrollBar.ScrollNasobitel = 5;
             VScrollBar.Visible = VScrollBarVisible;
             HScrollBar.Visible = HScrollBarVisible;
             rtb = new RichTextBoxInternal();
@@ -61,37 +63,26 @@ namespace Ticketník.CustomControls
 
         int scrollPos = 0;
 
-        private void HScrollBar_Scrolled(object sender, ScrollBarOld.ScrollEventArgs e)
+        private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
-            if (rtb.InnerScroll.X + (e.ScrolledBy*5) < HScrollBar.Max && e.ScrollDirection == ScrollBarOld.ScrollDirection.Right)
-                rtb.Scroll(rtb.InnerScroll.X + (e.ScrolledBy * 5), rtb.InnerScroll.Y);
-            else if(e.ScrollDirection == ScrollBarOld.ScrollDirection.Right)
-                rtb.Scroll(HScrollBar.Max, rtb.InnerScroll.Y);
-            else if (rtb.InnerScroll.X + (e.ScrolledBy * 5) > 0 && e.ScrollDirection == ScrollBarOld.ScrollDirection.Left)
-                rtb.Scroll(rtb.InnerScroll.X + (e.ScrolledBy * 5), rtb.InnerScroll.Y);
-            else if (e.ScrollDirection == ScrollBarOld.ScrollDirection.Left)
-                rtb.Scroll(0, rtb.InnerScroll.Y);
+            rtb.Scroll(e.NewPosition, rtb.InnerScroll.Y);
         }
 
-        private void VScrollBar_Scrolled(object sender, ScrollBarOld.ScrollEventArgs e)
+        private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
+            rtb.Scroll(rtb.InnerScroll.X, e.NewPosition);
         }
 
         private void Rtb_SizeChanged(object sender, EventArgs e)
         {
-            HScrollBar.ScrollbarRatio = (double)rtb.Width / (double)(rtb.PreferredSize.Width);
-            VScrollBar.ScrollbarRatio = (double)rtb.Height / (double)(rtb.PreferredSize.Height);
-            HScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Width - rtb.Width - 17), MidpointRounding.AwayFromZero);
-            VScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Height - rtb.Height - 17), MidpointRounding.AwayFromZero);
 
-            double vstep = (double)VScrollBar.ScrollMax / (rtb.PreferredSize.Height - rtb.Height - 17);
-            int vscrollPositionInner = (int)Math.Round(((double)rtb.VScrollPosition * vstep), MidpointRounding.AwayFromZero);
+            HScrollBar.TotalItems = rtb.PreferredSize.Width;
+            VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            HScrollBar.VisibleItems = rtb.Width;
+            VScrollBar.VisibleItems = rtb.Height;
 
-            double hstep = (double)HScrollBar.ScrollMax / (rtb.PreferredSize.Width - rtb.Width - 17);
-            int hscrollPositionInner = (int)Math.Round(((double)rtb.HScrollPosition * hstep), MidpointRounding.AwayFromZero);
-
-            HScrollBar.ScrollPosition = hscrollPositionInner;
-            VScrollBar.ScrollPosition = vscrollPositionInner;
+            HScrollBar.ScrollPosition = rtb.HScrollPosition;
+            VScrollBar.ScrollPosition = rtb.VScrollPosition;
 
             HScrollBar.Invalidate();
             VScrollBar.Invalidate();
@@ -99,19 +90,13 @@ namespace Ticketník.CustomControls
 
         private void Rtb_HScrollBarScrollChanged(object sender, EventArgs e)
         {
-            double step = (double)HScrollBar.ScrollMax / (rtb.PreferredSize.Width - rtb.Width - 17);
-            int scrollPositionInner = (int)Math.Round(((double)rtb.HScrollPosition * step), MidpointRounding.AwayFromZero);
-
-            HScrollBar.ScrollPosition = scrollPositionInner;
+            HScrollBar.ScrollPosition = rtb.HScrollPosition;
             HScrollBar.Invalidate();
         }
 
         private void Rtb_VScrollBarScrollChanged(object sender, EventArgs e)
         {
-            double step = (double)VScrollBar.ScrollMax / (rtb.PreferredSize.Height - rtb.Height-17);
-            int scrollPositionInner = (int)Math.Round(((double)rtb.VScrollPosition * step), MidpointRounding.AwayFromZero);
-
-            VScrollBar.ScrollPosition = scrollPositionInner;
+            VScrollBar.ScrollPosition = rtb.VScrollPosition;
             VScrollBar.Invalidate();
         }
 
@@ -246,7 +231,7 @@ namespace Ticketník.CustomControls
 
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
-            HScrollBar.ScrollbarRatio = (double)rtb.Width / (double)(rtb.PreferredSize.Width);
+            /*HScrollBar.ScrollbarRatio = (double)rtb.Width / (double)(rtb.PreferredSize.Width);
             VScrollBar.ScrollbarRatio = (double)rtb.Height / (double)(rtb.PreferredSize.Height);
             HScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Width - rtb.Width - 17), MidpointRounding.AwayFromZero);
             VScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Height - rtb.Height - 17), MidpointRounding.AwayFromZero);
@@ -258,7 +243,11 @@ namespace Ticketník.CustomControls
             int hscrollPositionInner = (int)Math.Round(((double)rtb.HScrollPosition * hstep), MidpointRounding.AwayFromZero);
 
             HScrollBar.ScrollPosition = hscrollPositionInner;
-            VScrollBar.ScrollPosition = vscrollPositionInner;
+            VScrollBar.ScrollPosition = vscrollPositionInner;*/
+            HScrollBar.TotalItems = rtb.PreferredSize.Width;
+            VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            HScrollBar.VisibleItems = rtb.Width - rtb.Width - 17;
+            VScrollBar.VisibleItems = rtb.Height - rtb.Height - 17;
             base.OnPaint(e);
         }
 
