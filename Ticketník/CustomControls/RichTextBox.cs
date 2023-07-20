@@ -90,7 +90,7 @@ namespace Ticketník.CustomControls
                 VScrollBar.TotalItems = rtb.PreferredSize.Height;
             }
             else
-            {//(bothVisible ? 17 : 0)
+            {
                 System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
                     TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
                 HScrollBar.TotalItems = size.Width;
