@@ -34,7 +34,7 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelCompanyName = new System.Windows.Forms.Label();
-            this.textBoxDescription = new System.Windows.Forms.RichTextBox();
+            this.textBoxDescription = new Ticketník.CustomControls.RichTextBox();
             this.okButton = new Ticketník.CustomControls.Button();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
@@ -133,10 +133,12 @@
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
+            this.textBoxDescription.SelectionAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxDescription.Size = new System.Drawing.Size(271, 126);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = "Description";
+            this.textBoxDescription.WordWrap = true;
             this.textBoxDescription.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.textBoxDescription_LinkClicked_1);
             // 
             // okButton
@@ -187,7 +189,7 @@
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label labelCopyright;
         private System.Windows.Forms.Label labelCompanyName;
-        private System.Windows.Forms.RichTextBox textBoxDescription;
+        private Ticketník.CustomControls.RichTextBox textBoxDescription;
         private Ticketník.CustomControls.Button okButton;
     }
 }

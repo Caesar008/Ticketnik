@@ -41,6 +41,7 @@ namespace Ticketník.CustomControls
             rtb.HScrollBarScrollChanged += Rtb_HScrollBarScrollChanged;
             rtb.SizeChanged += Rtb_SizeChanged;
             rtb.TextChanged += Rtb_TextChanged;
+            rtb.LinkClicked += Rtb_LinkClicked;
             VScrollBar.Scrolled += VScrollBar_Scrolled;
             HScrollBar.Scrolled += HScrollBar_Scrolled;
             if (VScrollBarVisible && HScrollBarVisible)
@@ -52,7 +53,15 @@ namespace Ticketník.CustomControls
             Controls.Add(VScrollBar);
         }
 
+        public event LinkClickedEventHandler LinkClicked;
+
+        private void Rtb_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            LinkClicked?.Invoke(this, e);
+        }
+
         bool changeTextpreventDouble = false;
+        
 
         private void Rtb_TextChanged(object sender, EventArgs e)
         {
@@ -75,9 +84,18 @@ namespace Ticketník.CustomControls
 
         private void Rtb_SizeChanged(object sender, EventArgs e)
         {
-
-            HScrollBar.TotalItems = rtb.PreferredSize.Width;
-            VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            if (!WordWrap)
+            {
+                HScrollBar.TotalItems = rtb.PreferredSize.Width;
+                VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            }
+            else
+            {//(bothVisible ? 17 : 0)
+                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                    TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
+                HScrollBar.TotalItems = size.Width;
+                VScrollBar.TotalItems = size.Height;
+            }
             HScrollBar.VisibleItems = rtb.Width;
             VScrollBar.VisibleItems = rtb.Height;
 

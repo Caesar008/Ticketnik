@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new Ticketník.CustomControls.RichTextBox();
             this.ok = new Ticketník.CustomControls.Button();
             this.cancel = new Ticketník.CustomControls.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -103,7 +103,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private Ticketník.CustomControls.RichTextBox richTextBox1;
         private Ticketník.CustomControls.Button ok;
         private Ticketník.CustomControls.Button cancel;
     }

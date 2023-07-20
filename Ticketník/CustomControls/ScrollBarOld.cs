@@ -560,7 +560,7 @@ namespace Ticketník.CustomControls
                         Rectangle slider = new Rectangle((Width / 2) - (SliderSize.Width / 2), ScrollPosition + 18, SliderSize.Width, SliderSize.Height);
                         sliderRectForDrag = new Rectangle(1, ScrollPosition + 18, Width - 2, SliderSize.Height);
                         sliderRegionRectUp = new Rectangle(1, 17, Width -2, ScrollPosition);
-                        sliderRegionRectDown = new Rectangle(1, sliderRectForDrag.Bottom +2, Width - 2, Height - sliderRectForDrag.Bottom - 19 - (bothVisible ? 18 : 0));
+                        sliderRegionRectDown = new Rectangle(1, sliderRectForDrag.Bottom +2, Width - 2, Height - sliderRectForDrag.Bottom - 19 - (bothVisible ? 17 : 0));
 
                         bg.Graphics.DrawLine(p, 0, 0, 0, Height);
                         bg.Graphics.DrawLine(p, 0, 16, Width, 16);

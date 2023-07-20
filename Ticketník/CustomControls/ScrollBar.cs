@@ -549,6 +549,10 @@ namespace Ticketník.CustomControls
                         int maxPos = Height - 19 - SliderSize.Height - (bothVisible ? 17 : 0);
                         int dostupnyProstor = maxPos - 19;
                         double itemuNaPixel = Math.Round((double)Max / (double)dostupnyProstor, 4, MidpointRounding.AwayFromZero);
+                        if (double.IsNaN(itemuNaPixel))
+                        {
+                            itemuNaPixel = 1;
+                        }
                         /*Debug.WriteLine("__________");
                         Debug.WriteLine("ScrollPosition: " + ScrollPosition.ToString());
                         Debug.WriteLine("Max: " + Max.ToString());
