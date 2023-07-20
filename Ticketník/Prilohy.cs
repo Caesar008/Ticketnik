@@ -20,6 +20,7 @@ namespace Ticketník
             listView1.HeaderStyle = ColumnHeaderStyle.None;
             listView1.FullRowSelect = true;
             listView1.SelectedIndexChanged += ListView1_SelectedIndexChanged;
+            richTextBox1.Text = "";
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             Motiv.SetMotiv(this);
             this.Text = form.jazyk.Windows_Prilohy_Prilohy;
@@ -407,6 +408,8 @@ namespace Ticketník
             {
                 findBtn.Enabled = false;
                 delBtn.Enabled = false;
+                pictureBox1.Visible = false;
+                richTextBox1.Visible = false;
             }
         }
 
