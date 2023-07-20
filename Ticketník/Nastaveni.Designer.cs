@@ -62,12 +62,12 @@
             this.celkovyCasZobrazit = new Ticketník.CustomControls.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.jazykPopis = new System.Windows.Forms.Label();
-            this.jazyk = new Ticketník.CustomControls.ComboBox();
+            this.jazyk = new Ticketník.CustomControls.ComboBoxOld();
             this.zmenitJazyk = new Ticketník.CustomControls.Button();
             this.skryteNastaveni = new Ticketník.CustomControls.Button();
             this.button2 = new Ticketník.CustomControls.Button();
             this.motiv = new System.Windows.Forms.Label();
-            this.motivVyber = new Ticketník.CustomControls.ComboBox();
+            this.motivVyber = new Ticketník.CustomControls.ComboBoxOld();
             this.onlineTerp = new Ticketník.CustomControls.CheckBox();
             this.checkBox1 = new Ticketník.CustomControls.CheckBox();
             this.numericUpDown1 = new Ticketník.CustomControls.NumericUpDown();
@@ -803,7 +803,7 @@
         private System.Windows.Forms.Label textMid;
         private System.Windows.Forms.Label textLow;
         private System.Windows.Forms.GroupBox groupBox3;
-        private Ticketník.CustomControls.ComboBox jazyk;
+        private Ticketník.CustomControls.ComboBoxOld jazyk;
         private Ticketník.CustomControls.Button zmenitJazyk;
         private System.Windows.Forms.Label jazykPopis;
         private Ticketník.CustomControls.Button clr_prescas;
@@ -811,7 +811,7 @@
         private Ticketník.CustomControls.Button skryteNastaveni;
         private Ticketník.CustomControls.CheckBox onlineTerp;
         private Ticketník.CustomControls.Button button2;
-        private Ticketník.CustomControls.ComboBox motivVyber;
+        private Ticketník.CustomControls.ComboBoxOld motivVyber;
         private System.Windows.Forms.Label motiv;
         private CustomControls.Button clr_prerazeno;
         private CustomControls.Button clr_zruseno;

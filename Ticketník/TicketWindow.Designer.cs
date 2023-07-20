@@ -32,7 +32,7 @@ namespace Ticketník
         {
             this.label1 = new System.Windows.Forms.Label();
             this.idTicketu = new Ticketník.CustomControls.TextBox();
-            this.zakaznik = new Ticketník.CustomControls.ComboBox();
+            this.zakaznik = new Ticketník.CustomControls.ComboBoxOld();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pocitac = new Ticketník.CustomControls.TextBox();
@@ -44,7 +44,7 @@ namespace Ticketník
             this.popis = new Ticketník.CustomControls.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cas = new Ticketník.CustomControls.ComboBox();
+            this.cas = new Ticketník.CustomControls.ComboBoxOld();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.upravit = new Ticketník.CustomControls.Button();
             this.smazat = new Ticketník.CustomControls.Button();
@@ -68,10 +68,10 @@ namespace Ticketník
             this.btn_TicketWindow_UpdateSelected = new Ticketník.CustomControls.Button();
             this.lbl_TicketWindow_onlineType = new System.Windows.Forms.Label();
             this.lbl_TicketWindow_onlineTask = new System.Windows.Forms.Label();
-            this.onlineTypeComboBox = new Ticketník.CustomControls.ComboBox();
-            this.onlineTaskComboBox = new Ticketník.CustomControls.ComboBox();
+            this.onlineTypeComboBox = new Ticketník.CustomControls.ComboBoxOld();
+            this.onlineTaskComboBox = new Ticketník.CustomControls.ComboBoxOld();
             this.lbl_TicketWindow_onlineTerp = new System.Windows.Forms.Label();
-            this.onlineTerpDropDown = new Ticketník.CustomControls.ComboBox();
+            this.onlineTerpDropDown = new Ticketník.CustomControls.ComboBoxOld();
             this.button1 = new Ticketník.CustomControls.Button();
             this.nahradni = new Ticketník.CustomControls.RadioButton();
             this.volno = new Ticketník.CustomControls.RadioButton();
@@ -87,7 +87,7 @@ namespace Ticketník
             this.normalni = new Ticketník.CustomControls.RadioButton();
             this.prescas = new Ticketník.CustomControls.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
-            this.stavTicketu = new Ticketník.CustomControls.ComboBox();
+            this.stavTicketu = new Ticketník.CustomControls.ComboBoxOld();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new Ticketník.CustomControls.RichTextBox();
             this.ok = new Ticketník.CustomControls.Button();
@@ -930,7 +930,7 @@ namespace Ticketník
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label14;
         internal Ticketník.CustomControls.TextBox idTicketu;
-        internal Ticketník.CustomControls.ComboBox zakaznik;
+        internal Ticketník.CustomControls.ComboBoxOld zakaznik;
         internal Ticketník.CustomControls.TextBox pocitac;
         internal Ticketník.CustomControls.TextBox kontakt;
         internal Ticketník.CustomControls.TextBox konec;
@@ -941,14 +941,14 @@ namespace Ticketník
         internal Ticketník.CustomControls.TextBox pauzaOd;
         internal Ticketník.CustomControls.RadioButton normalni;
         internal Ticketník.CustomControls.RadioButton prescas;
-        internal Ticketník.CustomControls.ComboBox stavTicketu;
+        internal Ticketník.CustomControls.ComboBoxOld stavTicketu;
         internal Ticketník.CustomControls.RichTextBox richTextBox1;
         internal Ticketník.CustomControls.RadioButton volno;
         internal Ticketník.CustomControls.RadioButton nahradni;
         internal Ticketník.CustomControls.TextBox popis;
         internal Ticketník.CustomControls.ListView listView1;
         internal Ticketník.CustomControls.Button ok;
-        internal Ticketník.CustomControls.ComboBox cas;
+        internal Ticketník.CustomControls.ComboBoxOld cas;
         internal System.Windows.Forms.Label terpKod;
         private Ticketník.CustomControls.Button search_btn;
         internal Ticketník.CustomControls.Button button1;
@@ -957,9 +957,9 @@ namespace Ticketník
         private System.Windows.Forms.Label lbl_TicketWindow_onlineType;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTask;
         private System.Windows.Forms.Label lbl_TicketWindow_onlineTerp;
-        internal Ticketník.CustomControls.ComboBox onlineTypeComboBox;
-        internal Ticketník.CustomControls.ComboBox onlineTaskComboBox;
-        internal Ticketník.CustomControls.ComboBox onlineTerpDropDown;
+        internal Ticketník.CustomControls.ComboBoxOld onlineTypeComboBox;
+        internal Ticketník.CustomControls.ComboBoxOld onlineTaskComboBox;
+        internal Ticketník.CustomControls.ComboBoxOld onlineTerpDropDown;
         internal Ticketník.CustomControls.Button btn_TicketWindow_SearchTerp;
         internal Ticketník.CustomControls.Button btn_TicketWindow_UpdateSelected;
         internal CustomControls.Button prilohyBtn;

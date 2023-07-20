@@ -97,6 +97,12 @@
     <Compile Include="CustomControls\ComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomControls\ComboBoxOld.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ComboBox.DropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\DateTimePicker.Calendar.cs">
       <SubType>Component</SubType>
     </Compile>

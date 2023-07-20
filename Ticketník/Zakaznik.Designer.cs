@@ -32,11 +32,11 @@
             this.textBox1 = new Ticketník.CustomControls.TextBox();
             this.button1 = new Ticketník.CustomControls.Button();
             this.button2 = new Ticketník.CustomControls.Button();
-            this.comboBox1 = new Ticketník.CustomControls.ComboBox();
+            this.comboBox1 = new Ticketník.CustomControls.ComboBoxOld();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new Ticketník.CustomControls.ComboBox();
+            this.comboBox2 = new Ticketník.CustomControls.ComboBoxOld();
             this.SuspendLayout();
             // 
             // label1
@@ -160,9 +160,9 @@
         private Ticketník.CustomControls.Button button2;
         private System.Windows.Forms.Label label2;
         internal Ticketník.CustomControls.TextBox textBox1;
-        internal Ticketník.CustomControls.ComboBox comboBox1;
+        internal Ticketník.CustomControls.ComboBoxOld comboBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        internal Ticketník.CustomControls.ComboBox comboBox2;
+        internal Ticketník.CustomControls.ComboBoxOld comboBox2;
     }
 }
