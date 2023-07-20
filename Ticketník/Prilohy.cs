@@ -31,6 +31,8 @@ namespace Ticketník
             this.delBtn.Enabled = false;
             this.findBtn.Enabled = false;
             this.form = form;
+            pictureBox1.Visible = false;
+            richTextBox1.Visible = false;
             NactiPrilohy(ticketID);
         }
 
