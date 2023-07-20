@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Ticketník.CustomControls.ScrollBarOld;
 
 namespace Ticketník.CustomControls
 {

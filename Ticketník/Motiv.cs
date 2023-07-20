@@ -309,12 +309,6 @@ namespace Ticketník
                     ((CustomControls.DateTimePicker)c).MonthSelectedColor = barvy[sMotiv]["vybranýDen"];
                     ((CustomControls.DateTimePicker)c).MonthSelectMouseOverColor = barvy[sMotiv]["najetýDen"];
                 }
-                else if(c.GetType() == typeof(CustomControls.ScrollBarOld))
-                {
-                    ((CustomControls.ScrollBarOld)c).BackColor = barvy[sMotiv]["scrollBarBack"];
-                    ((CustomControls.ScrollBarOld)c).ForeColor = barvy[sMotiv]["scrollBarFore"];
-                    ((CustomControls.ScrollBarOld)c).SeparatorColor = barvy[sMotiv]["scrollBarSeparator"];
-                }
                 else if (c.GetType() == typeof(CustomControls.ScrollBar))
                 {
                     ((CustomControls.ScrollBar)c).BackColor = barvy[sMotiv]["scrollBarBack"];
