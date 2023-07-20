@@ -249,21 +249,18 @@ namespace Ticketník.CustomControls
 
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
-            /*HScrollBar.ScrollbarRatio = (double)rtb.Width / (double)(rtb.PreferredSize.Width);
-            VScrollBar.ScrollbarRatio = (double)rtb.Height / (double)(rtb.PreferredSize.Height);
-            HScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Width - rtb.Width - 17), MidpointRounding.AwayFromZero);
-            VScrollBar.Max = (int)Math.Round((double)(rtb.PreferredSize.Height - rtb.Height - 17), MidpointRounding.AwayFromZero);
-
-            double vstep = (double)VScrollBar.ScrollMax / (rtb.PreferredSize.Height - rtb.Height - 17);
-            int vscrollPositionInner = (int)Math.Round(((double)rtb.VScrollPosition * vstep), MidpointRounding.AwayFromZero);
-
-            double hstep = (double)HScrollBar.ScrollMax / (rtb.PreferredSize.Width - rtb.Width - 17);
-            int hscrollPositionInner = (int)Math.Round(((double)rtb.HScrollPosition * hstep), MidpointRounding.AwayFromZero);
-
-            HScrollBar.ScrollPosition = hscrollPositionInner;
-            VScrollBar.ScrollPosition = vscrollPositionInner;*/
-            HScrollBar.TotalItems = rtb.PreferredSize.Width;
-            VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            if (!WordWrap)
+            {
+                HScrollBar.TotalItems = rtb.PreferredSize.Width;
+                VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            }
+            else
+            {
+                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                    TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
+                HScrollBar.TotalItems = size.Width;
+                VScrollBar.TotalItems = size.Height;
+            }
             HScrollBar.VisibleItems = rtb.Width - rtb.Width - 17;
             VScrollBar.VisibleItems = rtb.Height - rtb.Height - 17;
             base.OnPaint(e);
