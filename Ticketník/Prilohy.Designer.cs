@@ -88,7 +88,7 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.richTextBox1.Location = new System.Drawing.Point(276, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = false;
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.SelectionAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.richTextBox1.Size = new System.Drawing.Size(512, 426);
             this.richTextBox1.TabIndex = 1;
@@ -123,9 +123,9 @@
             this.Controls.Add(this.findBtn);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.delBtn);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listView1);
+            this.Controls.Add(this.pictureBox1);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Prilohy";
             this.ShowIcon = false;
