@@ -67,6 +67,18 @@ namespace Ticketník.CustomControls
         {
             changeTextpreventDouble = true;
             Text = rtb.Text;
+            if (!WordWrap)
+            {
+                HScrollBar.TotalItems = rtb.PreferredSize.Width;
+                VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            }
+            else
+            {
+                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                    TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
+                HScrollBar.TotalItems = size.Width;
+                VScrollBar.TotalItems = size.Height;
+            }
             changeTextpreventDouble = false;
         }
 
@@ -227,6 +239,19 @@ namespace Ticketník.CustomControls
             //base.OnTextChanged(e);
             if(!changeTextpreventDouble)
                 rtb.Text = Text;
+
+            if (!WordWrap)
+            {
+                HScrollBar.TotalItems = rtb.PreferredSize.Width;
+                VScrollBar.TotalItems = rtb.PreferredSize.Height;
+            }
+            else
+            {
+                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                    TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
+                HScrollBar.TotalItems = size.Width;
+                VScrollBar.TotalItems = size.Height;
+            }
         }
 
         protected override void OnFontChanged(EventArgs e)
