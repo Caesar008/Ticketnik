@@ -74,7 +74,7 @@ namespace Ticketník.CustomControls
             }
             else
             {
-                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                System.Drawing.Size size = TextRenderer.MeasureText(Text+"\r\n", Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
                     TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
                 HScrollBar.TotalItems = size.Width;
                 VScrollBar.TotalItems = size.Height;
@@ -103,7 +103,7 @@ namespace Ticketník.CustomControls
             }
             else
             {
-                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                System.Drawing.Size size = TextRenderer.MeasureText(Text + "\r\n", Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
                     TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
                 HScrollBar.TotalItems = size.Width;
                 VScrollBar.TotalItems = size.Height;
@@ -247,7 +247,7 @@ namespace Ticketník.CustomControls
             }
             else
             {
-                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                System.Drawing.Size size = TextRenderer.MeasureText(Text + "\r\n", Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
                     TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
                 HScrollBar.TotalItems = size.Width;
                 VScrollBar.TotalItems = size.Height;
@@ -281,7 +281,7 @@ namespace Ticketník.CustomControls
             }
             else
             {
-                System.Drawing.Size size = TextRenderer.MeasureText(Text, Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
+                System.Drawing.Size size = TextRenderer.MeasureText(Text + "\r\n", Font, new System.Drawing.Size(Width - (HScrollBar.BothVisible ? 17 : 0), int.MaxValue),
                     TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
                 HScrollBar.TotalItems = size.Width;
                 VScrollBar.TotalItems = size.Height;
