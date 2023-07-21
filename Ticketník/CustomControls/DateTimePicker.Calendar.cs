@@ -100,20 +100,7 @@ namespace Ticketník.CustomControls
                         Invalidate();
                     }
                 }
-            }/*
-            private Color dayListColor = Color.White;
-            public Color DayListColor
-            {
-                get { return dayListColor; }
-                set
-                {
-                    if (dayListColor != value)
-                    {
-                        dayListColor = value;
-                        Invalidate();
-                    }
-                }
-            }*/
+            }
             private Color todayButtonColor = Color.FromArgb(0, 102, 204);
             public Color TodayButtonColor
             {
@@ -166,19 +153,6 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
-            /*private Color dayListForeColor = Color.Black;
-            public Color DayListForeColor
-            {
-                get { return dayListForeColor; }
-                set
-                {
-                    if (dayListForeColor != value)
-                    {
-                        dayListForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }*/
             private Color todayButtonForeColor = Color.Black;
             public Color TodayButtonForeColor
             {

@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new Ticketník.CustomControls.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new Ticketník.CustomControls.ComboBoxOld();
+            this.comboBox1 = new Ticketník.CustomControls.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new Ticketník.CustomControls.TextBox();
             this.SuspendLayout();
@@ -133,7 +133,7 @@
         internal Ticketník.CustomControls.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        internal Ticketník.CustomControls.ComboBoxOld comboBox1;
+        internal Ticketník.CustomControls.ComboBox comboBox1;
         internal Ticketník.CustomControls.TextBox textBox1;
     }
 }
