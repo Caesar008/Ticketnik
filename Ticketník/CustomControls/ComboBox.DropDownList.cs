@@ -5,6 +5,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text;
 using System.Threading.Tasks;
+using static Ticketník.Zakaznici;
+using System.ComponentModel;
 
 namespace Ticketník.CustomControls
 {
@@ -12,7 +14,12 @@ namespace Ticketník.CustomControls
     {
         protected sealed class DropDownList : System.Windows.Forms.Form
         {
+            private static VScrollBar vScrollBar = new VScrollBar();
             private Color borderColor = Color.Gray;
+            private bool _mouseIn = false;
+            private int _scrollPosition = 0;
+            private Point _mousePos = Point.Empty;
+            private int _markedItem = 0;
             public Color BorderColor
             {
                 get { return borderColor; }
@@ -65,6 +72,32 @@ namespace Ticketník.CustomControls
                 }
             }
 
+            private Color selectedItemBackColor = Color.DodgerBlue;
+            [DefaultValue(typeof(Color), "DodgerBlue")]
+            public Color SelectedItemBackColor
+            {
+                get
+                {
+                    return selectedItemBackColor;
+                }
+                set { selectedItemBackColor = value; }
+            }
+
+            private Color selectedItemForeColor = Color.White;
+            [DefaultValue(typeof(Color), "White")]
+            public Color SelectedItemForeColor
+            {
+                get { return selectedItemForeColor; }
+                set { selectedItemForeColor = value; }
+            }
+
+            private int maxVisibleItems = 30;
+            public int MaxVisibleItems
+            {
+                get { return maxVisibleItems; }
+                set { maxVisibleItems = value; }
+            }
+
             private bool autosize = true;
             new public bool AutoSize
             {
@@ -74,7 +107,7 @@ namespace Ticketník.CustomControls
 
             public void SetWidth(int width)
             {
-                if (width <= maxWidth && width >= 20)
+                if (width <= maxWidth && width >= Parent.Width)
                 {
                     MaximumSize = new Size(width, Height);
                     Width = width;
@@ -86,8 +119,8 @@ namespace Ticketník.CustomControls
                 }
                 else
                 {
-                    MaximumSize = new Size(20, Height);
-                    Width = 20;
+                    MaximumSize = new Size(Parent.Width, Height);
+                    Width = Parent.Width;
                 }
                 Invalidate();
             }
@@ -126,19 +159,39 @@ namespace Ticketník.CustomControls
             protected override void OnShown(EventArgs e)
             {
                 base.OnShown(e);
-                int w = 20;
+                int w = Parent.Width;
                 int radky = Parent.Items.Count;
                 int h = TextRenderer.MeasureText("A", Font).Height;
+                if (radky > maxVisibleItems)
+                {
+                    radky = maxVisibleItems;
+                    VScrollBarVisible = true;
+                }
                 foreach (object s in Parent.Items)
                 {
                     Size velikost = TextRenderer.MeasureText(s as string, Font);
                     if (w < velikost.Width)
-                        w = velikost.Width;
+                        w = VScrollBarVisible ? velikost.Width + vScrollBar.Width : velikost.Width; 
                 }
 
                 MaximumSize = new Size(radky * h + 2,w);
-                Height = radky * h;
+                Height = radky * h +2;
                 SetWidth(w);
+            }
+
+            protected override void OnMouseMove(MouseEventArgs e)
+            {
+                base.OnMouseMove(e);
+                _mouseIn = true;
+                _mousePos = e.Location;
+                if(_markedItem != _mousePos.Y / TextRenderer.MeasureText(Parent.Items[_markedItem + _scrollPosition] as string, Font).Height)
+                Invalidate();
+            }
+            Rectangle item;
+
+            private bool VScrollBarVisible
+            {
+                get; set;
             }
 
             protected override void OnPaint(PaintEventArgs e)
@@ -153,9 +206,31 @@ namespace Ticketník.CustomControls
                         bg.Graphics.FillRectangle(b, new Rectangle(0, 0, Width, Height));
                     }
 
-                    //rámeček
-                    using(Pen p = new Pen(BorderColor))
+                    //itemy
+                    for (int i = 0; i < Parent.Items.Count; i++)
                     {
+                        Size velikost = TextRenderer.MeasureText(Parent.Items[i] as string, Font);
+                        item = new Rectangle(0, (i-_scrollPosition) * velikost.Height + 1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
+
+                        if ((Parent.SelectedItem == Parent.Items[i] && !_mouseIn) || (_mouseIn && !_mousePos.IsEmpty && item.Contains(_mousePos)))
+                        {
+                            //označení
+                            using (Brush b = new SolidBrush(selectedItemBackColor))
+                            {
+                                bg.Graphics.FillRectangle(b, item);
+                            }
+                            _markedItem = i - _scrollPosition;
+                            TextRenderer.DrawText(bg.Graphics, Parent.Items[i] as string, Font, item, selectedItemForeColor, TextFormatFlags.EndEllipsis);
+                        }
+                        else
+                        {
+                            TextRenderer.DrawText(bg.Graphics, Parent.Items[i] as string, Font, item, ForeColor, TextFormatFlags.EndEllipsis);
+                        }
+                    }
+
+                //rámeček
+                    using(Pen p = new Pen(BorderColor))
+                {
                         bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
                     }
                     bg.Render();

@@ -143,19 +143,57 @@ namespace Ticketník.CustomControls
             }
         }
         private Color foreColor = Color.Black;
-
+        [DefaultValue(typeof(Color), "Black")]
         public override Color ForeColor
         {
-            get { return Enabled ? foreColor : foreColorDisabled; }
+            get { return foreColor; }
             set
             {
                 if (foreColor != value)
                 {
                     foreColor = value;
+                    if (list != null)
+                        list.ForeColor = value;
                     Invalidate();
                 }
             }
         }
+
+        [DefaultValue(typeof(Color), "White")]
+        public Color SelectedItemForeColor
+        {
+            get
+            {
+                if (list != null)
+                    return list.SelectedItemForeColor;
+                return Color.White;
+            }
+            set
+            {
+                if (list != null)
+                {
+                    list.SelectedItemForeColor = value;
+                }
+            }
+        }
+        [DefaultValue(typeof(Color), "DodgerBlue")]
+        public Color SelectedItemBackColor
+        {
+            get
+            {
+                if (list != null)
+                    return list.SelectedItemBackColor;
+                return Color.DodgerBlue;
+            }
+            set
+            {
+                if (list != null)
+                {
+                    list.SelectedItemBackColor = value;
+                }
+            }
+        }
+
         private Color borderColorDisabled = SystemColors.ControlDark;
         [DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color BorderColorDisabled
@@ -186,27 +224,27 @@ namespace Ticketník.CustomControls
         }
         protected override void OnMouseEnter(EventArgs e)
         {
-            _mouseIn = true;
             base.OnMouseEnter(e);
+            _mouseIn = true;
             Invalidate();
         }
         protected override void OnMouseLeave(EventArgs e)
         {
-            _mouseIn = false;
             base.OnMouseLeave(e);
+            _mouseIn = false;
             Invalidate();
         }
 
         protected override void OnGotFocus(EventArgs e)
         {
-            _mouseIn = true;
             base.OnGotFocus(e);
+            _mouseIn = true;
             Invalidate();
         }
         protected override void OnLostFocus(EventArgs e)
         {
-            _mouseIn = false;
             base.OnLostFocus(e);
+            _mouseIn = false;
             Invalidate();
         }
 
@@ -240,11 +278,42 @@ namespace Ticketník.CustomControls
             }
         }
 
-
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
             _mouseDown = false;
+        }
+
+        [DefaultValue(typeof(bool), "True")]
+        public bool DropDownAutoSize
+        {
+            get
+            {
+                if (list != null)
+                    return list.AutoSize;
+                return false;
+            }
+            set
+            {
+                if(list != null)
+                    list.AutoSize = value;
+            }
+        }
+
+        [DefaultValue(typeof(int), "30")]
+        public int MaxVisibleItems
+        {
+            get
+            {
+                if (list != null)
+                    return list.MaxVisibleItems;
+                return 0;
+            }
+            set
+            {
+                if(list != null)
+                    list.MaxVisibleItems = value;
+            }
         }
 
         [DefaultValue(typeof(bool), "True")]
@@ -334,17 +403,17 @@ namespace Ticketník.CustomControls
                     bg.Graphics.FillRectangle(b, 0, 0, Width, Height);
                 }
                 //dropdown button
-                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || this.Focused || list != null ? list.IsOpen : false) ? ButtonColorMouseOver : ButtonColor) : ButtonColorDisabled))
+                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || this.Focused || (list != null ? list.IsOpen : false)) ? ButtonColorMouseOver : ButtonColor) : ButtonColorDisabled))
                 {
                     bg.Graphics.FillRectangle(b, dropDown);
                 }
                 //dropdown arrow
-                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || this.Focused || list != null ? list.IsOpen : false) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark))
+                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || this.Focused || (list != null ? list.IsOpen : false)) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark))
                 {
                     bg.Graphics.FillPolygon(b, arrow);
                 }
                 //rámeček
-                using (Pen p = new Pen((_mouseIn || this.Focused || list != null ? list.IsOpen : false) ? BorderColorMouseOver : BorderColor))
+                using (Pen p = new Pen((_mouseIn || this.Focused || (list != null ? list.IsOpen : false)) ? BorderColorMouseOver : BorderColor))
                 {
                     bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
                 }
@@ -352,7 +421,7 @@ namespace Ticketník.CustomControls
                 if(DropDownStyle == ComboBoxStyle.DropDownList)
                 {
                     Size textSize = TextRenderer.MeasureText(selectedItem as string, Font);
-                    TextRenderer.DrawText(bg.Graphics, selectedItem as string, Font, new Rectangle(1, (Height/2) - (textSize.Height/2)-1, Width - 18, Height - 6), Enabled ? ForeColor : ForeColorDisabled, BackColor, TextFormatFlags.EndEllipsis);
+                    TextRenderer.DrawText(bg.Graphics, selectedItem as string, Font, new Rectangle(1, (Height/2) - (textSize.Height/2)-1, Width - 18, Height - 6), Enabled ? foreColor : foreColorDisabled, BackColor, TextFormatFlags.EndEllipsis);
                 }
                 bg.Render();
             }
