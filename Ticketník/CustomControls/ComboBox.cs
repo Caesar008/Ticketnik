@@ -248,6 +248,21 @@ namespace Ticketník.CustomControls
             Invalidate();
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if(e.KeyCode == Keys.Up)
+            {
+                if (items.IndexOf(selectedItem) > 0)
+                    SelectedItem = items[items.IndexOf(selectedItem)-1];
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                if (items.IndexOf(selectedItem) < items.Count -1)
+                    SelectedItem = items[items.IndexOf(selectedItem) + 1];
+            }
+        }
+
         public event EventHandler DropDown;
 
         protected override void OnMouseDown(MouseEventArgs e)

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Ticketník.Zakaznici;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Ticketník.CustomControls
 {
@@ -16,10 +17,9 @@ namespace Ticketník.CustomControls
         {
             private static VScrollBar vScrollBar = new VScrollBar();
             private Color borderColor = Color.Gray;
-            private bool _mouseIn = false;
             private int _scrollPosition = 0;
             private Point _mousePos = Point.Empty;
-            private int _markedItem = 0;
+            private Rectangle _markedItem;
             public Color BorderColor
             {
                 get { return borderColor; }
@@ -152,6 +152,7 @@ namespace Ticketník.CustomControls
                     this.Hide();
                     this.isOpen = false;
                     Parent.lastFocusLost = DateTime.Now;
+                    _markedItem = new Rectangle();
                     Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
                 }
             }
@@ -182,10 +183,17 @@ namespace Ticketník.CustomControls
             protected override void OnMouseMove(MouseEventArgs e)
             {
                 base.OnMouseMove(e);
-                _mouseIn = true;
                 _mousePos = e.Location;
-                if(_markedItem != _mousePos.Y / TextRenderer.MeasureText(Parent.Items[_markedItem + _scrollPosition] as string, Font).Height)
-                Invalidate();
+                int vyska = TextRenderer.MeasureText("A", Font).Height;
+                int itemNum = e.Location.Y / vyska;
+                if (itemNum >= Parent.Items.Count)
+                    itemNum = Parent.Items.Count - 1;
+                if (_markedItem == null || !_markedItem.Contains(e.Location))
+                {
+                    int osaY = (itemNum - _scrollPosition) * vyska +1;
+                    _markedItem = new Rectangle(0, osaY, Width, vyska);
+                    Invalidate();
+                }
             }
             Rectangle item;
 
@@ -210,16 +218,16 @@ namespace Ticketník.CustomControls
                     for (int i = 0; i < Parent.Items.Count; i++)
                     {
                         Size velikost = TextRenderer.MeasureText(Parent.Items[i] as string, Font);
-                        item = new Rectangle(0, (i-_scrollPosition) * velikost.Height + 1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
-
-                        if ((Parent.SelectedItem == Parent.Items[i] && !_mouseIn) || (_mouseIn && !_mousePos.IsEmpty && item.Contains(_mousePos)))
+                        item = new Rectangle(0, (i-_scrollPosition) * velikost.Height +1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
+                        
+                        if ((Parent.SelectedItem == Parent.Items[i] && (_markedItem == null || _markedItem.IsEmpty)) || 
+                            item.IntersectsWith(_markedItem))
                         {
                             //označení
                             using (Brush b = new SolidBrush(selectedItemBackColor))
                             {
                                 bg.Graphics.FillRectangle(b, item);
                             }
-                            _markedItem = i - _scrollPosition;
                             TextRenderer.DrawText(bg.Graphics, Parent.Items[i] as string, Font, item, selectedItemForeColor, TextFormatFlags.EndEllipsis);
                         }
                         else
