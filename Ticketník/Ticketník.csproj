@@ -91,6 +91,7 @@
     <Compile Include="Aktualizace.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ControlLocation.cs" />
     <Compile Include="CustomControls\CheckBox.cs">
       <SubType>Component</SubType>
     </Compile>

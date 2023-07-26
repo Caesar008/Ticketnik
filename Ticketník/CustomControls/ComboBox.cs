@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Ticketník.CustomControls
         public ComboBox():base()
         {
             list = new DropDownList(BorderColorMouseOver, BackColor);
+            list.Parent = this;
             CloseUp += ComboBox_CloseUp;
         }
 
@@ -248,18 +250,48 @@ namespace Ticketník.CustomControls
             Invalidate();
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            base.OnKeyDown(e);
-            if(e.KeyCode == Keys.Up)
+            if (!list.IsOpen)
             {
-                if (items.IndexOf(selectedItem) > 0)
-                    SelectedItem = items[items.IndexOf(selectedItem)-1];
+                if (keyData == Keys.Up)
+                {
+                    if (selectedIndex > 0)
+                    {
+                        selectedIndex -= 1;
+                        Invalidate();
+                        SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+                    }
+                }
+                else if (keyData == Keys.Down)
+                {
+                    if (selectedIndex < items.Count - 1)
+                    {
+                        selectedIndex += 1;
+                        Invalidate();
+                        SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+                    }
+                }
             }
-            else if (e.KeyCode == Keys.Down)
+            return true;
+        }
+
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            //base.OnMouseWheel(e);
+            if (e.Delta > 0)
             {
-                if (items.IndexOf(selectedItem) < items.Count -1)
-                    SelectedItem = items[items.IndexOf(selectedItem) + 1];
+                if (selectedIndex > 0)
+                {
+                    SelectedIndex -= 1;
+                }
+            }
+            else if (e.Delta < 0)
+            {
+                if (selectedIndex < items.Count - 1)
+                {
+                    SelectedIndex += 1;
+                }
             }
         }
 
@@ -278,14 +310,27 @@ namespace Ticketník.CustomControls
 
                     if (DropDownStyle == ComboBoxStyle.DropDownList)
                     {
-                        list.BorderColor = this.BorderColorMouseOver;
-                        list.BackgroundColor = this.BackColor;
-                        list.Show();
-                        list.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
-                        list.Parent = this;
-                        list.BringToFront();
-                        list.IsOpen = true;
-                        DropDown?.Invoke(this, EventArgs.Empty);
+                        if (!list.IsOpen || !list.Visible)
+                        {
+                            list.BorderColor = this.BorderColorMouseOver;
+                            list.BackgroundColor = this.BackColor;
+                            list.Show();
+                            //list.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
+                            Point relativeLocation = ControlLocation.RelativeToWindowLocation(this);
+                            list.Location = new Point(this.FindForm().Location.X + relativeLocation.X + 8, this.FindForm().Location.Y + relativeLocation.Y + Height + 31);
+                            list.Parent = this;
+                            list.BringToFront();
+                            list.IsOpen = true;
+                            DropDown?.Invoke(this, EventArgs.Empty);
+                        }
+                        else
+                        {
+                            list.Hide();
+                            list.IsOpen = false;
+                            lastFocusLost = DateTime.Now;
+                            //list._markedItem = -1;
+                            CloseUp?.Invoke(Parent, EventArgs.Empty);
+                        }
                     }
                 }
 
@@ -363,23 +408,60 @@ namespace Ticketník.CustomControls
             }
         }
 
-        public event EventHandler SelectedItemChanged;
+        public event EventHandler SelectedIndexChanged;
         public event EventHandler CloseUp;
 
-        private object selectedItem;
+        private int selectedIndex = -1;
         public object SelectedItem
         { 
-            get { return selectedItem; }
+            get 
+            {
+                return selectedIndex == -1 ? null : Items[selectedIndex];
+            }
             set
             {
-                if(selectedItem != value)
+                int x = -1;
+
+                if (Items != null)
                 {
-                    selectedItem = value;
-                    SelectedItemChanged?.Invoke(this, EventArgs.Empty);
+                    //bug (82115)
+                    if (value != null)
+                        x = Items.IndexOf(value);
+                    else
+                        selectedIndex = -1;
+                }
+
+                if (x != -1)
+                {
+                    selectedIndex = x;
+                    if (list != null)
+                    {
+                        list._markedItem = x;
+                    }
+                    Invalidate();
+                    SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
 
+        public int SelectedIndex
+        {
+            get { return selectedIndex; }
+            set
+            {
+                if (value >= 0 && value < Items.Count)
+                {
+                    selectedIndex = value;
+                    if (list != null)
+                    {
+                        list._markedItem = value;
+                    }
+                    
+                    Invalidate();
+                    SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
         List<object> items = new List<object>();
         public List<object> Items
         {
@@ -387,8 +469,8 @@ namespace Ticketník.CustomControls
             private set 
             { 
                 items = value;
-                if (selectedItem == null && items.Count > 0)
-                    SelectedItem = items[0];
+                if (selectedIndex == -1 && items.Count > 0)
+                    selectedIndex = 0;
             }
         }
 
@@ -435,8 +517,17 @@ namespace Ticketník.CustomControls
 
                 if(DropDownStyle == ComboBoxStyle.DropDownList)
                 {
-                    Size textSize = TextRenderer.MeasureText(selectedItem as string, Font);
-                    TextRenderer.DrawText(bg.Graphics, selectedItem as string, Font, new Rectangle(1, (Height/2) - (textSize.Height/2)-1, Width - 18, Height - 6), Enabled ? foreColor : foreColorDisabled, BackColor, TextFormatFlags.EndEllipsis);
+
+                    Size textSize = Size.Empty;
+                    string text = "";
+                    if (selectedIndex == -1)
+                        textSize = TextRenderer.MeasureText("A", Font);
+                    else
+                    {
+                        textSize = TextRenderer.MeasureText(Items[selectedIndex] as string, Font);
+                        text = Items[selectedIndex] as string;
+                    }
+                    TextRenderer.DrawText(bg.Graphics, text, Font, new Rectangle(1, (Height/2) - (textSize.Height/2)-1, Width - 18, Height - 6), Enabled ? foreColor : foreColorDisabled, BackColor, TextFormatFlags.EndEllipsis);
                 }
                 bg.Render();
             }

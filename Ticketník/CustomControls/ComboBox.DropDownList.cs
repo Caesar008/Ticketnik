@@ -5,7 +5,6 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text;
 using System.Threading.Tasks;
-using static Ticketník.Zakaznici;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -15,11 +14,13 @@ namespace Ticketník.CustomControls
     {
         protected sealed class DropDownList : System.Windows.Forms.Form
         {
-            private static VScrollBar vScrollBar = new VScrollBar();
+            private static ScrollBar vScrollBar;
             private Color borderColor = Color.Gray;
             private int _scrollPosition = 0;
             private Point _mousePos = Point.Empty;
-            private Rectangle _markedItem;
+            internal int _markedItem = -1;
+            private bool _scrolling = false;
+
             public Color BorderColor
             {
                 get { return borderColor; }
@@ -142,6 +143,25 @@ namespace Ticketník.CustomControls
                 this.BorderColor = borderColor;
                 this.BackgroundColor = backColor;
                 this.Tag = "CustomColor:Ignore";
+                vScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Vertical, this);
+                vScrollBar.Visible = false;
+                vScrollBar.ParentBorderColor = BorderColor;
+                vScrollBar.RespectParentBorder = true;
+                vScrollBar.Scrolled += VScrollBar_Scrolled;
+                Motiv.SetControlColor(vScrollBar);
+            }
+
+            private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
+            {
+                this._scrollPosition = e.NewPosition;
+                Invalidate();
+            }
+
+            protected override void OnMouseDown(MouseEventArgs e)
+            {
+                base.OnMouseDown(e);
+                if (VScrollBarVisible && vScrollBar.Bounds.Contains(e.Location))
+                    _scrolling = true;
             }
 
             protected override void OnLostFocus(EventArgs e)
@@ -152,7 +172,7 @@ namespace Ticketník.CustomControls
                     this.Hide();
                     this.isOpen = false;
                     Parent.lastFocusLost = DateTime.Now;
-                    _markedItem = new Rectangle();
+                    //_markedItem = -1;
                     Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
                 }
             }
@@ -166,7 +186,9 @@ namespace Ticketník.CustomControls
                 if (radky > maxVisibleItems)
                 {
                     radky = maxVisibleItems;
-                    VScrollBarVisible = true;
+                    VScrollBarVisible = vScrollBar.Visible = true;
+                    vScrollBar.TotalItems = Parent.Items.Count;
+                    vScrollBar.VisibleItems = radky;
                 }
                 foreach (object s in Parent.Items)
                 {
@@ -175,31 +197,131 @@ namespace Ticketník.CustomControls
                         w = VScrollBarVisible ? velikost.Width + vScrollBar.Width : velikost.Width; 
                 }
 
-                MaximumSize = new Size(radky * h + 2,w);
+                MaximumSize = new Size(w, radky * h + 2);
                 Height = radky * h +2;
                 SetWidth(w);
+                EnsureVisible(_markedItem);
             }
 
             protected override void OnMouseMove(MouseEventArgs e)
             {
                 base.OnMouseMove(e);
-                _mousePos = e.Location;
-                int vyska = TextRenderer.MeasureText("A", Font).Height;
-                int itemNum = e.Location.Y / vyska;
-                if (itemNum >= Parent.Items.Count)
-                    itemNum = Parent.Items.Count - 1;
-                if (_markedItem == null || !_markedItem.Contains(e.Location))
+                if (VScrollBarVisible && vScrollBar.Bounds.Contains(e.Location))
                 {
-                    int osaY = (itemNum - _scrollPosition) * vyska +1;
-                    _markedItem = new Rectangle(0, osaY, Width, vyska);
-                    Invalidate();
+                    
+                }
+                else if(!_scrolling)
+                {
+                    _mousePos = e.Location;
+                    int vyska = TextRenderer.MeasureText("A", Font).Height;
+                    int itemNum = e.Location.Y / vyska;
+                    if (itemNum >= Parent.Items.Count)
+                        itemNum = Parent.Items.Count - 1;
+                    if (itemNum != _markedItem)
+                    {
+                        _markedItem = itemNum + _scrollPosition;
+                        Invalidate();
+                    }
                 }
             }
+
+            protected override void OnMouseUp(MouseEventArgs e)
+            {
+                base.OnMouseUp(e);
+                if (VScrollBarVisible && vScrollBar.Bounds.Contains(e.Location))
+                {
+                    
+                }
+                else
+                {
+                    _mousePos = e.Location;
+                    int vyska = TextRenderer.MeasureText("A", Font).Height;
+                    int itemNum = (e.Location.Y / vyska) + _scrollPosition;
+                    Parent.SelectedIndex = itemNum;
+
+                    this.Hide();
+                    this.isOpen = false;
+                    Parent.lastFocusLost = DateTime.Now;
+                    //_markedItem = -1;
+                    Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
+                }
+                _scrolling = false;
+            }
+
             Rectangle item;
 
             private bool VScrollBarVisible
             {
                 get; set;
+            }
+
+            protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+            {
+                if (keyData == Keys.Up)
+                {
+                    if (Parent.SelectedIndex > 0)
+                    {
+                        Parent.SelectedIndex -= 1;
+                    }
+                }
+                else if (keyData == Keys.Down)
+                {
+                    if (Parent.SelectedIndex < Parent.Items.Count - 1)
+                    {
+                        Parent.SelectedIndex += 1;
+                    }
+                }
+                _markedItem = Parent.SelectedIndex;
+                EnsureVisible(_markedItem);
+                //Invalidate();
+                return true;
+            }
+
+            protected override void OnPaintBackground(PaintEventArgs e)
+            {
+               // base.OnPaintBackground(e);
+            }
+
+            private DateTime mouseWheelStep = DateTime.Now;
+
+            protected override void OnMouseWheel(MouseEventArgs e)
+            {
+                //base.OnMouseWheel(e);
+                if (mouseWheelStep.AddMilliseconds(75) < DateTime.Now)
+                {
+                    int posun = e.Delta;
+                    if (posun > maxVisibleItems / 3)
+                        posun = maxVisibleItems / 3 + 1;
+                    else if (posun < -(maxVisibleItems / 3))
+                        posun = -(maxVisibleItems / 3 +1);
+                    int maxScroll = Parent.Items.Count - MaxVisibleItems;
+                    if (maxScroll < 0)
+                        maxScroll = 0;
+                    int newScroll = _scrollPosition - posun;
+                    if (newScroll > maxScroll)
+                        newScroll = maxScroll;
+                    else if (newScroll < 0)
+                        newScroll = 0;
+                    _scrollPosition = newScroll;
+                    vScrollBar.ScrollPosition = newScroll;
+                    Invalidate();
+                    mouseWheelStep = DateTime.Now;
+                }
+            }
+
+            public void EnsureVisible(int index)
+            {
+                int maxVisible = MaxVisibleItems + _scrollPosition;
+                if(index < _scrollPosition && index >= 0)
+                {
+                    _scrollPosition = index;
+                }
+                else if(index < Parent.Items.Count && index > maxVisible-1)
+                { 
+                    _scrollPosition = index - MaxVisibleItems+1;
+                }
+                vScrollBar.ScrollPosition = _scrollPosition;
+                Invalidate();
             }
 
             protected override void OnPaint(PaintEventArgs e)
@@ -218,10 +340,13 @@ namespace Ticketník.CustomControls
                     for (int i = 0; i < Parent.Items.Count; i++)
                     {
                         Size velikost = TextRenderer.MeasureText(Parent.Items[i] as string, Font);
+                        if (velikost == Size.Empty)
+                            velikost = TextRenderer.MeasureText("A" as string, Font);
                         item = new Rectangle(0, (i-_scrollPosition) * velikost.Height +1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
+
+                        Rectangle marked = new Rectangle(0, (_markedItem - _scrollPosition) * velikost.Height +1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
                         
-                        if ((Parent.SelectedItem == Parent.Items[i] && (_markedItem == null || _markedItem.IsEmpty)) || 
-                            item.IntersectsWith(_markedItem))
+                        if (item.IntersectsWith(marked))
                         {
                             //označení
                             using (Brush b = new SolidBrush(selectedItemBackColor))
@@ -238,7 +363,7 @@ namespace Ticketník.CustomControls
 
                 //rámeček
                     using(Pen p = new Pen(BorderColor))
-                {
+                    {
                         bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
                     }
                     bg.Render();

@@ -110,6 +110,11 @@ namespace Ticketník.CustomControls
             Custom
         }
 
+        public bool RespectParentBorder
+        { get; set; }
+
+        public Color ParentBorderColor { get; set; }
+
         private bool bothVisible = false;
         internal bool BothVisible
         {
@@ -548,7 +553,7 @@ namespace Ticketník.CustomControls
                         int maxPos = Height - 19 - SliderSize.Height - (bothVisible ? 17 : 0);
                         int dostupnyProstor = maxPos - 19;
                         double itemuNaPixel = Math.Round((double)Max / (double)dostupnyProstor, 4, MidpointRounding.AwayFromZero);
-                        if (double.IsNaN(itemuNaPixel))
+                        if (double.IsNaN(itemuNaPixel) || itemuNaPixel == 0)
                         {
                             itemuNaPixel = 1;
                         }
@@ -568,6 +573,18 @@ namespace Ticketník.CustomControls
                         bg.Graphics.DrawLine(p, 0, 0, 0, Height);
                         bg.Graphics.DrawLine(p, 0, 16, Width, 16);
                         bg.Graphics.DrawLine(p, 0, Height - 17 - (bothVisible ? 17 : 0), Width, Height - 17 - (bothVisible ? 17 : 0));
+
+                        if(RespectParentBorder)
+                        {
+                            using (Pen bcp = new Pen(ParentBorderColor))
+                            {
+                                bg.Graphics.DrawLine(bcp, 0, 0, Width, 0);
+                                bg.Graphics.DrawLine(bcp, Width-1,0, Width-1, Height-1);
+                                bg.Graphics.DrawLine(bcp, 0, Height-1, Width, Height-1);
+                            }
+
+                        }
+
                         if (bothVisible)
                             bg.Graphics.DrawLine(p, 0, Height - 17, Width, Height - 17);
                         using (SolidBrush b = new SolidBrush(ForeColor))

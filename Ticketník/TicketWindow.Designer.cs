@@ -32,7 +32,7 @@ namespace Ticketník
         {
             this.label1 = new System.Windows.Forms.Label();
             this.idTicketu = new Ticketník.CustomControls.TextBox();
-            this.zakaznik = new Ticketník.CustomControls.ComboBoxOld();
+            this.zakaznik = new Ticketník.CustomControls.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pocitac = new Ticketník.CustomControls.TextBox();
@@ -930,7 +930,7 @@ namespace Ticketník
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label14;
         internal Ticketník.CustomControls.TextBox idTicketu;
-        internal Ticketník.CustomControls.ComboBoxOld zakaznik;
+        internal Ticketník.CustomControls.ComboBox zakaznik;
         internal Ticketník.CustomControls.TextBox pocitac;
         internal Ticketník.CustomControls.TextBox kontakt;
         internal Ticketník.CustomControls.TextBox konec;
