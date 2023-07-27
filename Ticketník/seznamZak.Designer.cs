@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.button1 = new Ticketník.CustomControls.Button();
-            this.zakaznik = new Ticketník.CustomControls.ComboBoxOld();
+            this.zakaznik = new Ticketník.CustomControls.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -75,6 +75,6 @@
         #endregion
 
         private Ticketník.CustomControls.Button button1;
-        private Ticketník.CustomControls.ComboBoxOld zakaznik;
+        private Ticketník.CustomControls.ComboBox zakaznik;
     }
 }

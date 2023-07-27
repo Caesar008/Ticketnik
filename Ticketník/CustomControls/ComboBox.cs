@@ -465,6 +465,20 @@ namespace Ticketník.CustomControls
             }
         }
 
+        private bool sorted = false;
+        public bool Sorted
+        {
+            get { return sorted = true; }
+            set
+            {
+                sorted = value;
+                if(sorted)
+                {
+                    items.Sort();
+                }
+            }
+        }
+
         public int SelectedIndex
         {
             get { return selectedIndex; }

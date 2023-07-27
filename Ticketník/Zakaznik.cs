@@ -42,11 +42,11 @@ namespace Ticketník
                 {
                     comboBox2.Items.Add(onlineTerpy.Label);
                 }
-                comboBox2.DropDownWidth = ComboWidth(comboBox2);
+                //comboBox2.DropDownWidth = ComboWidth(comboBox2);
                 form.terpTaskFileLock = false;
             }
             comboBox2.Sorted = true;
-            comboBox2.DropDownWidth = ComboWidth(comboBox2);
+            //comboBox2.DropDownWidth = ComboWidth(comboBox2);
             Motiv.SetMotiv(this);
         }
 
