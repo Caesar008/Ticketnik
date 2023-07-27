@@ -250,6 +250,21 @@ namespace Ticketník.CustomControls
             Invalidate();
         }
 
+        private List<KeyValuePair<int, string>> dataSource = new List<KeyValuePair<int, string>>();
+        public List<KeyValuePair<int, string>> DataSource
+        {
+            get { return dataSource; }
+            set
+            {
+                dataSource = value;
+                items = new List<object>(new object[dataSource.Count]);
+                foreach(KeyValuePair<int, string> kvp in dataSource)
+                {
+                    items[kvp.Key] = kvp.Value;
+                }
+            }
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (!list.IsOpen)

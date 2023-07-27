@@ -362,8 +362,8 @@ namespace Ticketník
                 {1, form.jazyk.Windows_Nastaveni_Tmavy},
                 {2, form.jazyk.Windows_Nastaveni_PodleSystemu}}.ToList();
             motivVyber.SelectedIndex = selectedMotiv;
-            motivVyber.ValueMember = "Key";
-            motivVyber.DisplayMember = "Value";
+            //motivVyber.ValueMember = "Key";
+            //motivVyber.DisplayMember = "Value";
             this.ResumeLayout();
             form.ResumeLayout();
             Motiv.SetMotiv(this);

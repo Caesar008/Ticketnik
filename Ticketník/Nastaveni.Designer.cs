@@ -67,7 +67,7 @@
             this.skryteNastaveni = new Ticketník.CustomControls.Button();
             this.button2 = new Ticketník.CustomControls.Button();
             this.motiv = new System.Windows.Forms.Label();
-            this.motivVyber = new Ticketník.CustomControls.ComboBoxOld();
+            this.motivVyber = new Ticketník.CustomControls.ComboBox();
             this.onlineTerp = new Ticketník.CustomControls.CheckBox();
             this.checkBox1 = new Ticketník.CustomControls.CheckBox();
             this.numericUpDown1 = new Ticketník.CustomControls.NumericUpDown();
@@ -811,7 +811,7 @@
         private Ticketník.CustomControls.Button skryteNastaveni;
         private Ticketník.CustomControls.CheckBox onlineTerp;
         private Ticketník.CustomControls.Button button2;
-        private Ticketník.CustomControls.ComboBoxOld motivVyber;
+        private Ticketník.CustomControls.ComboBox motivVyber;
         private System.Windows.Forms.Label motiv;
         private CustomControls.Button clr_prerazeno;
         private CustomControls.Button clr_zruseno;
