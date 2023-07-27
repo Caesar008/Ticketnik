@@ -50,8 +50,8 @@ namespace Ticketník
                 }
                 staryTask.Sorted = true;
                 staryTerp.Sorted = true;
-                staryTask.DropDownWidth = ComboWidth(staryTask);
-                staryTerp.DropDownWidth = ComboWidth(staryTerp);
+                //staryTask.DropDownWidth = ComboWidth(staryTask);
+                //staryTerp.DropDownWidth = ComboWidth(staryTerp);
             }
             else if(typ == 2)
             {
@@ -74,8 +74,8 @@ namespace Ticketník
                 }
                 terpList.Sorted = true;
                 taskList.Sorted = true;
-                terpList.DropDownWidth = ComboWidth(terpList);
-                taskList.DropDownWidth = ComboWidth(taskList);
+                //terpList.DropDownWidth = ComboWidth(terpList);
+                //taskList.DropDownWidth = ComboWidth(taskList);
             }
             else if (typ == 3)
             {
