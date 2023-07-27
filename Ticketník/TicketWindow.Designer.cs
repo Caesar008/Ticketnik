@@ -44,7 +44,7 @@ namespace Ticketník
             this.popis = new Ticketník.CustomControls.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cas = new Ticketník.CustomControls.ComboBoxOld();
+            this.cas = new Ticketník.CustomControls.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.upravit = new Ticketník.CustomControls.Button();
             this.smazat = new Ticketník.CustomControls.Button();
@@ -87,7 +87,7 @@ namespace Ticketník
             this.normalni = new Ticketník.CustomControls.RadioButton();
             this.prescas = new Ticketník.CustomControls.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
-            this.stavTicketu = new Ticketník.CustomControls.ComboBoxOld();
+            this.stavTicketu = new Ticketník.CustomControls.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new Ticketník.CustomControls.RichTextBox();
             this.ok = new Ticketník.CustomControls.Button();
@@ -941,14 +941,14 @@ namespace Ticketník
         internal Ticketník.CustomControls.TextBox pauzaOd;
         internal Ticketník.CustomControls.RadioButton normalni;
         internal Ticketník.CustomControls.RadioButton prescas;
-        internal Ticketník.CustomControls.ComboBoxOld stavTicketu;
+        internal Ticketník.CustomControls.ComboBox stavTicketu;
         internal Ticketník.CustomControls.RichTextBox richTextBox1;
         internal Ticketník.CustomControls.RadioButton volno;
         internal Ticketník.CustomControls.RadioButton nahradni;
         internal Ticketník.CustomControls.TextBox popis;
         internal Ticketník.CustomControls.ListView listView1;
         internal Ticketník.CustomControls.Button ok;
-        internal Ticketník.CustomControls.ComboBoxOld cas;
+        internal Ticketník.CustomControls.ComboBox cas;
         internal System.Windows.Forms.Label terpKod;
         private Ticketník.CustomControls.Button search_btn;
         internal Ticketník.CustomControls.Button button1;

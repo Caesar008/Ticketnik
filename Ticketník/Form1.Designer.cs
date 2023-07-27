@@ -91,7 +91,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
             this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
-            this.rokVyber = new Ticketník.CustomControls.ComboBoxOld();
+            this.rokVyber = new Ticketník.CustomControls.ComboBox();
             this.tabControl1 = new Ticketník.CustomControls.TabControl();
             this.ledenT = new Ticketník.CustomControls.TabPage();
             this.leden = new Ticketník.CustomControls.ListView(ledenT);
@@ -128,7 +128,7 @@
             this.listopad = new Ticketník.CustomControls.ListView(listopadT);
             this.prosinecT = new Ticketník.CustomControls.TabPage();
             this.prosinec = new Ticketník.CustomControls.ListView(prosinecT);
-            this.rokVyberO = new Ticketník.CustomControls.ComboBoxOld();
+            this.rokVyberO = new Ticketník.CustomControls.ComboBox();
             this.menu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tool.SuspendLayout();
@@ -1390,7 +1390,7 @@
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenu_Napoveda;
         internal System.Windows.Forms.ToolStripSeparator toolStripButton7;
         internal System.Windows.Forms.ToolStripButton toolStripButton_Napoveda;
-        internal Ticketník.CustomControls.ComboBoxOld rokVyberO;
+        internal Ticketník.CustomControls.ComboBox rokVyberO;
         internal System.Windows.Forms.ToolStripSeparator oddToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem převéstNaFormátMilleniumToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator upoToolStripMenuItem;
@@ -1406,7 +1406,7 @@
         internal System.Windows.Forms.ToolStripMenuItem aktualizovatVšechnyTerpyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator dělitelToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem nahlásitProblémToolStripMenuItem;
-        internal CustomControls.ComboBoxOld rokVyber;
+        internal CustomControls.ComboBox rokVyber;
     }
 }
 

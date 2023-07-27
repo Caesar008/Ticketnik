@@ -999,6 +999,11 @@ namespace Ticketník
         {
             if(muze)
             {
+                if (ticket.IDtick == -1)
+                {
+                    ticket.CustomTerp = "";
+                    ticket.CustomTask = "";
+                }
                 terpKod.Text = DejTerp();
                 ticket.Zakaznik = (string)zakaznik.SelectedItem;
                 string tmpSelected = DejNewTerp(terpKod.Text);

@@ -961,7 +961,7 @@ namespace Ticketník.CustomControls
                 {
                     if (lastFocusLost.AddMilliseconds(10) < DateTime.Now)
                     {
-                        calendar.BorderColor = this.BorderColor;
+                        calendar.BorderColor = this.BorderColorMouseOver;
                         calendar.BackgroundColor = this.BackColor;
                         calendar.Show();
                         calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
@@ -1215,7 +1215,13 @@ namespace Ticketník.CustomControls
                     //rámeček
                     g.DrawRectangle(p, area);
                 }
-
+                if (calendar != null && calendar.IsOpen)
+                {
+                    using (Pen p = new Pen(BorderColorMouseOver))
+                    {
+                        g.DrawRectangle(p, area);
+                    }
+                }
             }
         }
 

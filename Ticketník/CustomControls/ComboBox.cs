@@ -434,6 +434,7 @@ namespace Ticketník.CustomControls
                 if (x != -1)
                 {
                     selectedIndex = x;
+                    Text = items[x] as string;
                     if (list != null)
                     {
                         list._markedItem = x;
@@ -441,6 +442,26 @@ namespace Ticketník.CustomControls
                     Invalidate();
                     SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
                 }
+            }
+        }
+
+        private Point selection = new Point(0, 0);
+        public void Select(int start, int length)
+        {
+            selection = new Point(start, length);
+            //Invalidate();
+        }
+
+        public int DropDownWidth
+        {
+            get
+            {
+                return list.Width;
+            }
+            set
+            {
+                DropDownAutoSize = false;
+                list.SetWidth(value);
             }
         }
 
@@ -452,6 +473,7 @@ namespace Ticketník.CustomControls
                 if (value >= 0 && value < Items.Count)
                 {
                     selectedIndex = value;
+                    Text = items[value] as string;
                     if (list != null)
                     {
                         list._markedItem = value;

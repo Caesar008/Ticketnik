@@ -14,7 +14,7 @@ namespace Ticketník.CustomControls
     {
         protected sealed class DropDownList : System.Windows.Forms.Form
         {
-            private static ScrollBar vScrollBar;
+            private ScrollBar vScrollBar;
             private Color borderColor = Color.Gray;
             private int _scrollPosition = 0;
             private Point _mousePos = Point.Empty;
@@ -143,11 +143,11 @@ namespace Ticketník.CustomControls
                 this.BorderColor = borderColor;
                 this.BackgroundColor = backColor;
                 this.Tag = "CustomColor:Ignore";
-                vScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Vertical, this);
-                vScrollBar.Visible = false;
-                vScrollBar.ParentBorderColor = BorderColor;
-                vScrollBar.RespectParentBorder = true;
-                vScrollBar.Scrolled += VScrollBar_Scrolled;
+                this.vScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Vertical, this);
+                this.vScrollBar.Visible = false;
+                this.vScrollBar.ParentBorderColor = BorderColor;
+                this.vScrollBar.RespectParentBorder = true;
+                this.vScrollBar.Scrolled += VScrollBar_Scrolled;
                 Motiv.SetControlColor(vScrollBar);
             }
 
@@ -197,9 +197,13 @@ namespace Ticketník.CustomControls
                         w = VScrollBarVisible ? velikost.Width + vScrollBar.Width : velikost.Width; 
                 }
 
-                MaximumSize = new Size(w, radky * h + 2);
-                Height = radky * h +2;
-                SetWidth(w);
+                if (AutoSize)
+                {
+                    MaximumSize = new Size(w, radky * h + 2);
+                    Height = radky * h + 2;
+                    SetWidth(w);
+                }
+                vScrollBar.Visible = VScrollBarVisible;
                 EnsureVisible(_markedItem);
             }
 
@@ -322,6 +326,12 @@ namespace Ticketník.CustomControls
                 }
                 vScrollBar.ScrollPosition = _scrollPosition;
                 Invalidate();
+            }
+
+            protected override void OnVisibleChanged(EventArgs e)
+            {
+                base.OnVisibleChanged(e);
+                vScrollBar.Visible = VScrollBarVisible;
             }
 
             protected override void OnPaint(PaintEventArgs e)

@@ -342,9 +342,6 @@ namespace Ticketník.CustomControls
                     int novaPozice = (int)(Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven) - posun);
                     int novyScroll = (int)Math.Round((novaPozice - 19) * itemuNaPixel, 0, MidpointRounding.ToEven);
 
-                    Debug.WriteLine("Max: " + Max);
-                    Debug.WriteLine("Nový: " + novyScroll);
-
                     if (novyScroll < 0)
                         novyScroll = 0;
                     else if (novyScroll > Max)
@@ -529,7 +526,7 @@ namespace Ticketník.CustomControls
         {
             if (!Visible)
                 return;
-            
+
             //base.OnPaint(e);
             using (BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, new Rectangle(0, 0, Width, Height)))
             {
@@ -557,12 +554,6 @@ namespace Ticketník.CustomControls
                         {
                             itemuNaPixel = 1;
                         }
-                        /*Debug.WriteLine("__________");
-                        Debug.WriteLine("ScrollPosition: " + ScrollPosition.ToString());
-                        Debug.WriteLine("Max: " + Max.ToString());
-                        Debug.WriteLine("Výpočet pozice: " + Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven));
-                        Debug.WriteLine("VisibleItems: " + VisibleItems.ToString());
-                        Debug.WriteLine("TotalItems: " + TotalItems.ToString());*/
 
                         int scrollPos = (int)Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven)-19;
 
@@ -607,16 +598,6 @@ namespace Ticketník.CustomControls
                         {
                             itemuNaPixel = 1;
                         }
-                        /*Debug.WriteLine("__________");
-                        Debug.WriteLine("ScrollPosition: " + ScrollPosition.ToString());
-                        Debug.WriteLine("Max: " + Max.ToString());
-                        Debug.WriteLine("VisibleItems: " + VisibleItems.ToString());
-                        Debug.WriteLine("TotalItems: " + TotalItems.ToString());
-                        Debug.WriteLine("Slider position: " + (ScrollPosition + 18));
-                        Debug.WriteLine("Max position: " + maxPos);
-                        Debug.WriteLine("Itemů na pixel: " + itemuNaPixel);
-                        Debug.WriteLine("Test výpočet pozice: " + Math.Round(((ScrollPosition / itemuNaPixel + 18))+1, 0, MidpointRounding.ToEven));*/
-
                         int scrollPos = (int)Math.Round(((ScrollPosition / itemuNaPixel + 18)) + 1, 0, MidpointRounding.ToEven) - 19;
 
                         Rectangle slider = new Rectangle(scrollPos + 18, (Height / 2) - (SliderSize.Height / 2), SliderSize.Width, SliderSize.Height);
