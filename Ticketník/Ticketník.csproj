@@ -156,6 +156,9 @@
     <Compile Include="Export_stary.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Header.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Jazyk.cs" />
     <Compile Include="JednaInstalnce.cs" />
     <Compile Include="Motiv.cs" />
