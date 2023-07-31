@@ -187,7 +187,7 @@ namespace Ticketník
 
                 foreach (NbtList nl in prilohyDat.RootTag.Get<NbtCompound>("Tickety"))
                 {
-                    if (nl.Name.StartsWith("-"))
+                    if (nl.Name.StartsWith("-") || nl.Count == 0)
                         tr.Add(nl.Name);
                 }
 
