@@ -747,6 +747,15 @@ namespace Ticketník.CustomControls
             }
 
             //protected override bool ShowWithoutActivation => true;
+            protected override void OnShown(EventArgs e)
+            {
+                base.OnShown(e);
+
+                if (!FitDown(this.Location.Y))
+                {
+                    this.Location = new Point(this.Location.X, this.Location.Y - this.Height - Parent.Height);
+                }
+            }
 
             protected override void OnVisibleChanged(EventArgs e)
             {
@@ -760,6 +769,13 @@ namespace Ticketník.CustomControls
                     _mouseDown = false;
 
                     _mouseInCal = -1;
+                }
+                else
+                {
+                    if (!FitDown(this.Location.Y))
+                    {
+                        this.Location = new Point(this.Location.X, this.Location.Y - this.Height - Parent.Height);
+                    }
                 }
             }
 

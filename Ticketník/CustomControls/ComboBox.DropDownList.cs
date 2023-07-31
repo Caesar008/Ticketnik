@@ -214,6 +214,10 @@ namespace Ticketník.CustomControls
                 }
                 vScrollBar.Visible = VScrollBarVisible;
                 EnsureVisible(_markedItem);
+                if(!FitDown(this.Location.Y))
+                {
+                    this.Location = new Point(this.Location.X, this.Location.Y - this.Height - Parent.Height);
+                }
             }
 
             protected override void OnMouseMove(MouseEventArgs e)
@@ -341,6 +345,11 @@ namespace Ticketník.CustomControls
             {
                 base.OnVisibleChanged(e);
                 vScrollBar.Visible = VScrollBarVisible;
+
+                if (Visible && !FitDown(this.Location.Y))
+                {
+                    this.Location = new Point(this.Location.X, this.Location.Y - this.Height - Parent.Height);
+                }
             }
 
             protected override void OnPaint(PaintEventArgs e)
