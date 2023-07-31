@@ -365,6 +365,12 @@ namespace Ticketník
             return barvy[sMotiv][barva];
         }
 
+        internal static Color GetBarvy(string barva)
+        {
+            string sMotiv = Motiv.GetMotiv();
+            return barvy[sMotiv][barva];
+        }
+
         private static string GetMotiv()
         {
             switch (Properties.Settings.Default.motiv)

@@ -489,7 +489,23 @@ namespace Ticketník
                 {
                     if (!zmena)
                     {
-                        browser.DocumentText = File.ReadAllText(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\" + (string)e.Node.Tag).Replace("{verze}", Application.ProductVersion).Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace('\\', '/'));
+                        string scrollFore = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarFore"));
+                        string scrollBack = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarBack"));
+                        string scrollSeparator = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarSeparator"));
+                        string back = ColorTranslator.ToHtml(Motiv.GetBarvy("pozadíControl"));
+                        string fore = ColorTranslator.ToHtml(Motiv.GetBarvy("text"));
+                        browser.DocumentText = File.ReadAllText(System.Reflection.Assembly.GetEntryAssembly().Location
+                            .Replace("Ticketnik.exe", "") + "help\\" + (string)e.Node.Tag)
+                            .Replace("{verze}", Application.ProductVersion)
+                            .Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location)
+                            .Replace("Ticketnik.exe", "")
+                            .Replace('\\', '/')
+                            .Replace("{scrollForeColor}", scrollFore)
+                            .Replace("{scrollBackColor}", scrollBack)
+                            .Replace("{scrollSeparatorColor}", scrollSeparator)
+                            .Replace("{backColor}", back)
+                            .Replace("{foreColor}", fore)
+                            ;
                         menuTree.SelectedNode = null;
                         
                     }
@@ -508,10 +524,25 @@ namespace Ticketník
             {
                 if (url.StartsWith("tic://"))
                 {
+                    string scrollFore = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarFore"));
+                    string scrollBack = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarBack"));
+                    string scrollSeparator = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarSeparator"));
+                    string back = ColorTranslator.ToHtml(Motiv.GetBarvy("pozadíControl"));
+                    string fore = ColorTranslator.ToHtml(Motiv.GetBarvy("text"));
                     string soub = url.Replace("tic://", "");
                     Expand(soub, menuTree.Nodes);
                     soub = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\" + soub;
-                    browser.DocumentText = File.ReadAllText(soub).Replace("{verze}", Application.ProductVersion).Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace('\\', '/'));
+                    browser.DocumentText = File.ReadAllText(soub)
+                        .Replace("{verze}", Application.ProductVersion)
+                        .Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location)
+                        .Replace("Ticketnik.exe", "")
+                        .Replace('\\', '/')
+                        .Replace("{scrollForeColor}", scrollFore)
+                        .Replace("{scrollBackColor}", scrollBack)
+                        .Replace("{scrollSeparatorColor}", scrollSeparator)
+                        .Replace("{backColor}", back)
+                        .Replace("{foreColor}", fore)
+                        ;
                 }
                 else if (url.StartsWith("http"))
                 {
