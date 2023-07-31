@@ -408,8 +408,9 @@ namespace Ticketník.CustomControls
                     Invalidate();
                 }
             }
-            public Calendar(Color borderColor, Color backColor)
+            public Calendar(Color borderColor, Color backColor, CustomControls.DateTimePicker dateTimePicker)
             {
+                this.Parent = dateTimePicker;
                 this.MinimizeBox= false;
                 this.MaximizeBox= false;
                 this.ControlBox = false;
@@ -760,6 +761,14 @@ namespace Ticketník.CustomControls
 
                     _mouseInCal = -1;
                 }
+            }
+
+            internal bool FitDown(int proposedYCoord)
+            {
+                int height = Screen.FromHandle(this.Handle).WorkingArea.Height - 1;
+                if (proposedYCoord + this.Height > height)
+                    return false;
+                return true;
             }
 
             protected override void OnPaint(PaintEventArgs e)

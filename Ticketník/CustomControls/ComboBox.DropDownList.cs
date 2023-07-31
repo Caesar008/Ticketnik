@@ -125,8 +125,9 @@ namespace Ticketník.CustomControls
                 }
                 Invalidate();
             }
-            public DropDownList(Color borderColor, Color backColor) 
+            public DropDownList(Color borderColor, Color backColor, CustomControls.ComboBox parent) 
             {
+                this.Parent = parent;
                 this.MinimizeBox = false;
                 this.MaximizeBox = false;
                 this.ControlBox = false;
@@ -149,6 +150,14 @@ namespace Ticketník.CustomControls
                 this.vScrollBar.RespectParentBorder = true;
                 this.vScrollBar.Scrolled += VScrollBar_Scrolled;
                 Motiv.SetControlColor(vScrollBar);
+            }
+
+            internal bool FitDown(int proposedYCoord)
+            {
+                int height = Screen.FromHandle(this.Handle).WorkingArea.Height - 1;
+                if (proposedYCoord + this.Height > height)
+                    return false;
+                return true;
             }
 
             private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)

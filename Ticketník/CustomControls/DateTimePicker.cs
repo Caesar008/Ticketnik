@@ -709,7 +709,7 @@ namespace Ticketník.CustomControls
         public DateTimePicker():base()
         {
             Value = DateTime.Today;
-            calendar = new Calendar(MonthBorderColor, MonthBackColor);
+            calendar = new Calendar(MonthBorderColor, MonthBackColor, this);
             calendar.ValueChanged += Calendar_ValueChanged;
         }
 
@@ -963,9 +963,12 @@ namespace Ticketník.CustomControls
                     {
                         calendar.BorderColor = this.BorderColorMouseOver;
                         calendar.BackgroundColor = this.BackColor;
+                        if(calendar.FitDown(this.FindForm().Location.Y + this.Bottom + 31))
+                            calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
+                        else
+                            calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31 - calendar.Height - this.Height);
+
                         calendar.Show();
-                        calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
-                        calendar.Parent = this;
                         calendar.ActualDate = this.Value;
 
                         //this.Focus();

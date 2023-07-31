@@ -20,8 +20,8 @@ namespace Ticketník.CustomControls
 
         public ComboBox():base()
         {
-            list = new DropDownList(BorderColorMouseOver, BackColor);
-            list.Parent = this;
+            list = new DropDownList(BorderColorMouseOver, BackColor, this);
+            //list.Parent = this;
             CloseUp += ComboBox_CloseUp;
         }
 
@@ -329,11 +329,14 @@ namespace Ticketník.CustomControls
                         {
                             list.BorderColor = this.BorderColorMouseOver;
                             list.BackgroundColor = this.BackColor;
-                            list.Show();
                             //list.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
                             Point relativeLocation = ControlLocation.RelativeToWindowLocation(this);
-                            list.Location = new Point(this.FindForm().Location.X + relativeLocation.X + 8, this.FindForm().Location.Y + relativeLocation.Y + Height + 31);
-                            list.Parent = this;
+                            if(list.FitDown(this.FindForm().Location.Y + relativeLocation.Y + Height + 31))
+                                list.Location = new Point(this.FindForm().Location.X + relativeLocation.X + 8, this.FindForm().Location.Y + relativeLocation.Y + Height + 31);
+                            else
+                                list.Location = new Point(this.FindForm().Location.X + relativeLocation.X + 8, this.FindForm().Location.Y + relativeLocation.Y + Height + 31 - this.Height - list.Height);
+
+                            list.Show();
                             list.BringToFront();
                             list.IsOpen = true;
                             DropDown?.Invoke(this, EventArgs.Empty);
