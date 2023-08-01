@@ -1,20 +1,21 @@
 ﻿Tady je to, co si představuju, že by mohlo v programu být. Některé funkce nemusí být nikdy implementovány.
-Aktuální seznam na https://github.com/Caesar008/Ticketnik/issues
-Položky s label "Enhancement"
+Aktuální seznam na https://github.com/Caesar008/Ticketnik/discussions/categories/ideas
 
 Potvrzené
 
-- Podpora tmavého režimu - ruční nastavení i detekce podle nastavení systému. V přípravě pro 2.0.
+- Podpora tmavého režimu - ruční nastavení i detekce podle nastavení systému. (2.0)
 - Vkládání příloh (2.0)
-- Přímý import do MyTime
-- Multiselect
+- Přímý import do MyTime (2.0)
+- Multiselect (2.1)
+- Vlastní vzhled záhlaví okna (2.1)
+- Kopírování ticketů včetně času a statusu (v případě multiselect) (2.1)
+- Ovládací prvky ve vlastní knihovně dll (2.2)
 
 Nepotvrzené
 
 - funkce zpět a klávesová zkratka ctrl+z
 - Položka Oblíbené pro často používané záznamy
 - Vyhledávání ticketu v Tone / SN bez nutnosti otevřít daný ticket - zkratka Ctrl+T
-- Kopírování ticketů včetně času a statusu
 
 Zamítnuté
 
