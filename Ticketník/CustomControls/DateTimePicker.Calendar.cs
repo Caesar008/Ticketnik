@@ -453,6 +453,7 @@ namespace Ticketník.CustomControls
                     this.isOpen = false;
                     Parent.lastFocusLost = DateTime.Now;
                     Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
+                    this.Close();
                 }
             }
 

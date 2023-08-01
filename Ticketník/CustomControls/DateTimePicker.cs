@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-
+//tady udělat new calendar a jeho barvy, podobně jako dropdown
 namespace Ticketník.CustomControls
 {
     internal partial class DateTimePicker : System.Windows.Forms.Control
@@ -961,8 +961,14 @@ namespace Ticketník.CustomControls
                 {
                     if (lastFocusLost.AddMilliseconds(10) < DateTime.Now)
                     {
+                        //calendar = new Calendar(MonthBorderColor, MonthBackColor, this);
+                        calendar.ValueChanged += Calendar_ValueChanged;
                         calendar.BorderColor = this.BorderColorMouseOver;
                         calendar.BackgroundColor = this.BackColor;
+                        /*calendar.ForeColor = this.ForeColor;
+                        calendar.DayHeaderForeColor = MonthDayHeaderForeColor;
+                        calendar.HeaderColor = MonthHeaderBackColor;
+                        calendar.HeaderMouseOverColor = MonthHeaderMouseOverBackColor;*/
                         if(calendar.FitDown(this.FindForm().Location.Y + this.Bottom + 31))
                             calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
                         else

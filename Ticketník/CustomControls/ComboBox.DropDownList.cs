@@ -176,12 +176,13 @@ namespace Ticketník.CustomControls
             protected override void OnLostFocus(EventArgs e)
             {
                 //base.OnLostFocus(e)
-                if (Parent != null)
+                if (Parent != null && this.isOpen)
                 {
                     this.Hide();
                     this.isOpen = false;
                     Parent.lastFocusLost = DateTime.Now;
                     //_markedItem = -1;
+                    this.Close();
                     Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
                 }
             }
@@ -213,6 +214,7 @@ namespace Ticketník.CustomControls
                     SetWidth(w);
                 }
                 vScrollBar.Visible = VScrollBarVisible;
+                _markedItem = Parent.SelectedIndex;
                 EnsureVisible(_markedItem);
                 if(!FitDown(this.Location.Y))
                 {

@@ -327,8 +327,10 @@ namespace Ticketník.CustomControls
                     {
                         if (!list.IsOpen || !list.Visible)
                         {
-                            list.BorderColor = this.BorderColorMouseOver;
-                            list.BackgroundColor = this.BackColor;
+                            list = new DropDownList(BorderColorMouseOver, BackColor, this);
+                            /*list.BorderColor = this.BorderColorMouseOver;
+                            list.BackgroundColor = this.BackColor;*/
+                            list.ForeColor = this.ForeColor;
                             //list.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
                             Point relativeLocation = ControlLocation.RelativeToWindowLocation(this);
                             if(list.FitDown(this.FindForm().Location.Y + relativeLocation.Y + Height + 31))
@@ -338,6 +340,7 @@ namespace Ticketník.CustomControls
 
                             list.Show();
                             list.BringToFront();
+                            list.Focus();
                             list.IsOpen = true;
                             DropDown?.Invoke(this, EventArgs.Empty);
                         }
