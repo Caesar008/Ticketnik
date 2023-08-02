@@ -127,7 +127,7 @@ namespace Ticketník.CustomControls
             protected override void OnLostFocus(EventArgs e)
             {
                 //base.OnLostFocus(e)
-                if (Parent != null && this.isOpen)
+                if (Parent != null && this.isOpen && Parent.DropDownStyle != ComboBoxStyle.DropDown)
                 {
                     this.Hide();
                     this.isOpen = false;
@@ -240,6 +240,11 @@ namespace Ticketník.CustomControls
                     {
                         Parent.SelectedIndex += 1;
                     }
+                }
+                else
+                {
+                    msg.HWnd = Parent.textBox.Handle;
+                    Parent.SendMesg(Parent.textBox.Handle, msg.Msg, msg.WParam, msg.LParam);
                 }
                 Parent._markedItem = Parent.SelectedIndex;
                 EnsureVisible(Parent._markedItem);

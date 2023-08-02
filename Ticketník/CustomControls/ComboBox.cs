@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Ticketník.CustomControls
 {
@@ -63,17 +64,6 @@ namespace Ticketník.CustomControls
             textBox.Size = new Size(Width - 6 -18, Height - 6);
             Invalidate();
         }
-
-        /*private Color backColor = Color.White;
-        new public Color BackColor
-        {
-            get { return backColor; }
-            set
-            {
-                backColor = value;
-                textBox.BackColor = backColor;
-            }
-        }*/
 
         protected override void OnBackColorChanged(EventArgs e)
         {
@@ -369,7 +359,7 @@ namespace Ticketník.CustomControls
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (!list.IsOpen)
+            if (list != null && !list.IsOpen)
             {
                 if (keyData == Keys.Up)
                 {
@@ -390,8 +380,23 @@ namespace Ticketník.CustomControls
                     }
                 }
             }
+            else
+            {
+                Debug.WriteLine("HWnd: " + msg.HWnd.ToString() + " | LParam: " + msg.LParam.ToString() + " | WParam: " +
+                    msg.WParam.ToString() + " | Result: " + msg.Result.ToString() + " | Msg: " + msg.Msg.ToString());
+                
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
             return true;
         }
+
+        internal void SendMesg(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
+        {
+            SendMessage(hWnd, msg, wParam, lParam);
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern int SendMessage(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam);
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
@@ -666,17 +671,17 @@ namespace Ticketník.CustomControls
                     bg.Graphics.FillRectangle(b, 0, 0, Width, Height);
                 }
                 //dropdown button
-                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || _mouseInTextBox || this.Focused || (list != null ? list.IsOpen : false)) ? ButtonColorMouseOver : ButtonColor) : ButtonColorDisabled))
+                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || _mouseInTextBox || this.Focused || textBox.Focused || (list != null ? list.IsOpen : false)) ? ButtonColorMouseOver : ButtonColor) : ButtonColorDisabled))
                 {
                     bg.Graphics.FillRectangle(b, dropDown);
                 }
                 //dropdown arrow
-                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || _mouseInTextBox || this.Focused || (list != null ? list.IsOpen : false)) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark))
+                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || _mouseInTextBox || this.Focused || textBox.Focused || (list != null ? list.IsOpen : false)) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark))
                 {
                     bg.Graphics.FillPolygon(b, arrow);
                 }
                 //rámeček
-                using (Pen p = new Pen((_mouseIn || _mouseInTextBox || this.Focused || (list != null ? list.IsOpen : false)) ? BorderColorMouseOver : BorderColor))
+                using (Pen p = new Pen((_mouseIn || _mouseInTextBox || this.Focused || textBox.Focused || (list != null ? list.IsOpen : false)) ? BorderColorMouseOver : BorderColor))
                 {
                     bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
                 }
