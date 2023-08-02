@@ -19,10 +19,120 @@ namespace Ticketník.CustomControls
         protected DateTime lastFocusLost = DateTime.Now;
         internal int _scrollPosition = 0;
         internal int _markedItem = -1;
+        private System.Windows.Forms.TextBox textBox;
+        private bool _mouseInTextBox = false;
 
         public ComboBox():base()
         {
             CloseUp += ComboBox_CloseUp;
+
+            textBox = new System.Windows.Forms.TextBox();
+            textBox.Location = new Point(3, 3);
+            textBox.Multiline = false;
+            textBox.Width = this.Width - 6;
+            textBox.BackColor = BackColor;
+            textBox.ForeColor = ForeColor;
+            textBox.BorderStyle = BorderStyle.None;
+            textBox.MouseEnter += TextBox_MouseEnter;
+            textBox.MouseHover += TextBox_MouseHover;
+            textBox.MouseMove += TextBox_MouseMove;
+            textBox.MouseLeave += TextBox_MouseLeave;
+            textBox.GotFocus += TextBox_GotFocus;
+            textBox.LostFocus += TextBox_LostFocus;
+            textBox.TextChanged += TextBox_TextChanged;
+            textBox.KeyDown += TextBox_KeyDown;
+            textBox.Text = this.Text;
+            textBox.Font = this.Font;
+            textBox.Tag = "CustomColor:Ignore";
+            if(DropDownStyle == ComboBoxStyle.DropDownList)
+                textBox.Visible = false;
+            else
+                textBox.Visible = true;
+            Controls.Add(textBox);
+        }
+
+        protected override void OnTextChanged(EventArgs e)
+        {
+            base.OnTextChanged(e);
+            textBox.Text = Text;
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            textBox.Size = new Size(Width - 6 -18, Height - 6);
+            Invalidate();
+        }
+
+        /*private Color backColor = Color.White;
+        new public Color BackColor
+        {
+            get { return backColor; }
+            set
+            {
+                backColor = value;
+                textBox.BackColor = backColor;
+            }
+        }*/
+
+        protected override void OnBackColorChanged(EventArgs e)
+        {
+            base.OnBackColorChanged(e);
+            textBox.BackColor = BackColor;
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            OnKeyDown(e);
+        }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            Text = textBox.Text;
+        }
+
+        private void TextBox_LostFocus(object sender, EventArgs e)
+        {
+            _mouseInTextBox = false;
+            if (!Focused)
+                _mouseIn = false;
+            Invalidate();
+        }
+
+        private void TextBox_GotFocus(object sender, EventArgs e)
+        {
+            _mouseInTextBox = true;
+            Invalidate();
+        }
+
+        private void TextBox_MouseLeave(object sender, EventArgs e)
+        {
+            _mouseInTextBox = false;
+            Invalidate();
+        }
+
+        private void TextBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_mouseInTextBox)
+            {
+                _mouseInTextBox = true;
+                Invalidate();
+            }
+        }
+
+        private void TextBox_MouseHover(object sender, EventArgs e)
+        {
+            if (!_mouseInTextBox)
+            {
+                _mouseInTextBox = true;
+                Invalidate();
+            }
+        }
+
+        private void TextBox_MouseEnter(object sender, EventArgs e)
+        {
+            _mouseInTextBox = true;
+            Invalidate();
         }
 
         private void ComboBox_CloseUp(object sender, EventArgs e)
@@ -154,6 +264,7 @@ namespace Ticketník.CustomControls
                 if (foreColor != value)
                 {
                     foreColor = value;
+                    textBox.ForeColor = ForeColor;
                     Invalidate();
                 }
             }
@@ -313,8 +424,10 @@ namespace Ticketník.CustomControls
                 if (lastFocusLost.AddMilliseconds(10) < DateTime.Now)
                 {
                     this.Focus();
+                    Rectangle area = new Rectangle(0, 0, Width - 1, Height - 1);
+                    dropDown = new Rectangle(Width - 18, area.X + 1, 17, Height - 2);
 
-                    if (DropDownStyle == ComboBoxStyle.DropDownList)
+                    if (DropDownStyle == ComboBoxStyle.DropDownList || (DropDownStyle == ComboBoxStyle.DropDown && dropDown.Contains(e.Location)))
                     {
                         if (list == null || !list.IsOpen || !list.Visible)
                         {
@@ -405,14 +518,18 @@ namespace Ticketník.CustomControls
             get; set;
         }
 
-        private ComboBoxStyle comboBoxStyle = ComboBoxStyle.DropDownList;
-        [DefaultValue(typeof(ComboBoxStyle), "DropDownList")]
+        private ComboBoxStyle comboBoxStyle = ComboBoxStyle.DropDown;
+        [DefaultValue(typeof(ComboBoxStyle), "DropDown")]
         public ComboBoxStyle DropDownStyle
         { 
             get { return comboBoxStyle; }
             set
             {
-                comboBoxStyle = value; 
+                comboBoxStyle = value;
+                if (value == ComboBoxStyle.DropDown)
+                    textBox.Visible = true;
+                else
+                    textBox.Visible = false;
                 Invalidate();
             }
         }
@@ -500,6 +617,7 @@ namespace Ticketník.CustomControls
                 {
                     selectedIndex = value;
                     Text = items[value] as string;
+                    textBox.Text = Text;
                     if (list != null)
                     {
                         _markedItem = value;
@@ -548,17 +666,17 @@ namespace Ticketník.CustomControls
                     bg.Graphics.FillRectangle(b, 0, 0, Width, Height);
                 }
                 //dropdown button
-                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || this.Focused || (list != null ? list.IsOpen : false)) ? ButtonColorMouseOver : ButtonColor) : ButtonColorDisabled))
+                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || _mouseInTextBox || this.Focused || (list != null ? list.IsOpen : false)) ? ButtonColorMouseOver : ButtonColor) : ButtonColorDisabled))
                 {
                     bg.Graphics.FillRectangle(b, dropDown);
                 }
                 //dropdown arrow
-                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || this.Focused || (list != null ? list.IsOpen : false)) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark))
+                using (SolidBrush b = new SolidBrush(Enabled ? ((_mouseIn || _mouseInTextBox || this.Focused || (list != null ? list.IsOpen : false)) ? ArrowColorMouseOver : ArrowColor) : SystemColors.ControlDark))
                 {
                     bg.Graphics.FillPolygon(b, arrow);
                 }
                 //rámeček
-                using (Pen p = new Pen((_mouseIn || this.Focused || (list != null ? list.IsOpen : false)) ? BorderColorMouseOver : BorderColor))
+                using (Pen p = new Pen((_mouseIn || _mouseInTextBox || this.Focused || (list != null ? list.IsOpen : false)) ? BorderColorMouseOver : BorderColor))
                 {
                     bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
                 }

@@ -2627,7 +2627,7 @@ namespace Ticketník
                     break;
                 }
             }
-            onlineTypeComboBox.DropDownWidth = ComboWidth(onlineTypeComboBox);
+            //onlineTypeComboBox.DropDownWidth = ComboWidth(onlineTypeComboBox);
             onlineTypeComboBox.Sorted = true;
 
             if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday && DateTime.Now.DayOfWeek != DayOfWeek.Saturday)

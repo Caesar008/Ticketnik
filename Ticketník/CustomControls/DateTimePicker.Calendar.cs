@@ -22,7 +22,6 @@ namespace Ticketník.CustomControls
             Rectangle buttonR;
             Rectangle todayRect;
             Rectangle poRect;
-            Rectangle r1;
             Rectangle _lastActiveRect;
 
             bool _mouseInLB = false;

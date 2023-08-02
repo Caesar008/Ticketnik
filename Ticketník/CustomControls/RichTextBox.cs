@@ -101,8 +101,6 @@ namespace Ticketník.CustomControls
                     TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak);
         }
 
-        int scrollPos = 0;
-
         private void HScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
         {
             rtb.Scroll(e.NewPosition, rtb.InnerScroll.Y);
