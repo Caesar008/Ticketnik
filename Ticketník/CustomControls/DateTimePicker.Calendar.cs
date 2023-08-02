@@ -36,319 +36,6 @@ namespace Ticketník.CustomControls
             KeyValuePair<Rectangle,DateTime?>[] dny = new KeyValuePair<Rectangle, DateTime?>[42];
             KeyValuePair<Rectangle, DateTime?>[] mesice = new KeyValuePair<Rectangle, DateTime?>[12];
 
-            private Color borderColor = Color.Gray;
-            public Color BorderColor
-            {
-                get { return borderColor; }
-                set
-                {
-                    if (borderColor != value)
-                    {
-                        borderColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color backColor = Color.White;
-            public Color BackgroundColor
-            {
-                get { return backColor; }
-                set
-                {
-                    if (backColor != value)
-                    {
-                        backColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color headerColor = Color.White;
-            public Color HeaderColor
-            {
-                get { return headerColor; }
-                set
-                {
-                    if (headerColor != value)
-                    {
-                        headerColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color headerMouseOverColor = Color.White;
-            public Color HeaderMouseOverColor
-            {
-                get { return headerMouseOverColor; }
-                set
-                {
-                    if (headerMouseOverColor != value)
-                    {
-                        headerMouseOverColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color dayHeaderColor = Color.White;
-            public Color DayHeaderColor
-            {
-                get { return dayHeaderColor; }
-                set
-                {
-                    if (dayHeaderColor != value)
-                    {
-                        dayHeaderColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color todayButtonColor = Color.FromArgb(0, 102, 204);
-            public Color TodayButtonColor
-            {
-                get { return todayButtonColor; }
-                set
-                {
-                    if (todayButtonColor != value)
-                    {
-                        todayButtonColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color headerForeColor = Color.Black;
-            public Color HeaderForeColor
-            {
-                get { return headerForeColor; }
-                set
-                {
-                    if (headerForeColor != value)
-                    {
-                        headerForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color headerMouseOverForeColor = Color.DodgerBlue;
-            public Color HeaderMouseOverForeColor
-            {
-                get { return headerMouseOverForeColor; }
-                set
-                {
-                    if (headerMouseOverForeColor != value)
-                    {
-                        headerMouseOverForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color dayHeaderForeColor = Color.Black;
-            public Color DayHeaderForeColor
-            {
-                get { return dayHeaderForeColor; }
-                set
-                {
-                    if (dayHeaderForeColor != value)
-                    {
-                        dayHeaderForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color todayButtonForeColor = Color.Black;
-            public Color TodayButtonForeColor
-            {
-                get { return todayButtonForeColor; }
-                set
-                {
-                    if (todayButtonForeColor != value)
-                    {
-                        todayButtonForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color todayButtonMouseOverForeColor = Color.Black;
-            public Color TodayButtonMouseOverForeColor
-            {
-                get { return todayButtonMouseOverForeColor; }
-                set
-                {
-                    if (todayButtonMouseOverForeColor != value)
-                    {
-                        todayButtonMouseOverForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color selectedDayBorderColor = Color.DodgerBlue;
-            public Color SelectedDayBorderColor
-            {
-                get { return selectedDayBorderColor; }
-                set
-                {
-                    if (selectedDayBorderColor != value)
-                    {
-                        selectedDayBorderColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color trailingForeColor = Color.Gray;
-            public Color TrailingForeColor
-            {
-                get { return trailingForeColor; }
-                set
-                {
-                    if (trailingForeColor != value)
-                    {
-                        trailingForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color selectedMouseOverForeColor = Color.DodgerBlue;
-            public Color SelectedMouseOverForeColor
-            {
-                get { return selectedMouseOverForeColor; }
-                set
-                {
-                    if (selectedMouseOverForeColor != value)
-                    {
-                        selectedMouseOverForeColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color buttonArrowColor = Color.Black;
-            public Color ButtonArrowColor
-            {
-                get { return buttonArrowColor; }
-                set
-                {
-                    if (buttonArrowColor != value)
-                    {
-                        buttonArrowColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color buttonBackColor = Color.White;
-            public Color ButtonBackColor
-            {
-                get { return buttonBackColor; }
-                set
-                {
-                    if (buttonBackColor != value)
-                    {
-                        buttonBackColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color buttonBorderColor = Color.White;
-            public Color ButtonBorderColor
-            {
-                get { return buttonBorderColor; }
-                set
-                {
-                    if (buttonBorderColor != value)
-                    {
-                        buttonBorderColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color separatorColor = Color.Gray;
-            public Color SeparatorColor
-            {
-                get { return separatorColor; }
-                set
-                {
-                    if (separatorColor != value)
-                    {
-                        separatorColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color buttonMouseOverColor = Color.White;//Color.FromArgb(229, 243, 255);
-            public Color ButonMouseOverColor
-            {
-                get { return buttonMouseOverColor; }
-                set
-                {
-                    if (buttonMouseOverColor != value)
-                    {
-                        buttonMouseOverColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color buttonBorderMouseOverColor = Color.DodgerBlue;
-                public Color ButonBorderMouseOverColor
-            {
-                get { return buttonBorderMouseOverColor; }
-                set
-                {
-                    if (buttonBorderMouseOverColor != value)
-                    {
-                        buttonBorderMouseOverColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-
-            private Color arrowMouseOverColor = Color.DodgerBlue;
-            public Color ArrowMouseOverColor
-            {
-                get { return arrowMouseOverColor; }
-                set
-                {
-                    if (arrowMouseOverColor != value)
-                    {
-                        arrowMouseOverColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color selectMouseOverColor = Color.FromArgb(229, 243, 255);
-            public Color SelectMouseOverColor
-            {
-                get { return selectMouseOverColor; }
-                set
-                {
-                    if (selectMouseOverColor != value)
-                    {
-                        selectMouseOverColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color selectedColor = Color.FromArgb(204, 232, 255);
-            public Color SelectedColor
-            {
-                get { return selectedColor; }
-                set
-                {
-                    if (selectedColor != value)
-                    {
-                        selectedColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color todayButtonBackColor = Color.White;
-            public Color TodayButtonBackColor
-            {
-                get { return todayButtonBackColor; }
-                set
-                {
-                    if (todayButtonBackColor != value)
-                    {
-                        todayButtonBackColor = value;
-                        Invalidate();
-                    }
-                }
-            }
             private DateTime actualDate = DateTime.Now;
             public DateTime ActualDate
             {
@@ -408,7 +95,7 @@ namespace Ticketník.CustomControls
                     Invalidate();
                 }
             }
-            public Calendar(Color borderColor, Color backColor, CustomControls.DateTimePicker dateTimePicker)
+            public Calendar(CustomControls.DateTimePicker dateTimePicker)
             {
                 this.Parent = dateTimePicker;
                 this.MinimizeBox= false;
@@ -424,8 +111,6 @@ namespace Ticketník.CustomControls
                 this.Width = 146;
                 this.Height = 158;
                 this.MaximumSize = new System.Drawing.Size(146, 158);
-                this.BorderColor = borderColor;
-                this.BackgroundColor= backColor;
                 this.Tag = "CustomColor:Ignore";
                 for(int i = 0; i<42;i++)
                 {
@@ -453,7 +138,7 @@ namespace Ticketník.CustomControls
                     this.isOpen = false;
                     Parent.lastFocusLost = DateTime.Now;
                     Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
-                    //this.Close();
+                    this.Close();
                 }
             }
 
@@ -822,13 +507,13 @@ namespace Ticketník.CustomControls
                     };
 
                     //pozadí
-                    using (SolidBrush b = new SolidBrush(BackgroundColor))
+                    using (SolidBrush b = new SolidBrush(Parent.MonthBackColor))
                     {
                         g.FillPath(b, RoundedRect(drawArea, 3, 3, 3, 3));
                     }
 
                     //header
-                    using (SolidBrush b = new SolidBrush(_mouseInHeader ? HeaderMouseOverColor : HeaderColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInHeader ? Parent.MonthHeaderMouseOverBackColor : Parent.MonthHeaderBackColor))
                     {
                         g.FillRectangle(b, header);
                     }
@@ -852,36 +537,36 @@ namespace Ticketník.CustomControls
                             mr = minY + " - " + (ActualDate.Year / 100) + 99; break;
                     }
                     Size mrSize = TextRenderer.MeasureText(mr, Font);
-                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), _mouseInHeader ? HeaderMouseOverForeColor : HeaderForeColor);
+                    TextRenderer.DrawText(g, mr, Font, new Point((header.Width / 2) - (mrSize.Width / 2) + header.Location.X, 15 - (mrSize.Height / 2) + header.Location.Y), _mouseInHeader ? Parent.MonthHeaderMouseOverForeColor : Parent.MonthHeaderForeColor);
 
                     //rámeček
-                    using (Pen p = new Pen(BorderColor, 1))
+                    using (Pen p = new Pen(Parent.MonthBorderColor, 1))
                     {
                         g.DrawPath(p, RoundedRect(drawArea, 3, 3, 3, 3));
                     }
 
                     //tlačítka
-                    using (SolidBrush b = new SolidBrush(_mouseInLB ? ButonMouseOverColor : ButtonBackColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInLB ? Parent.MonthButtonMouseOverColor : Parent.MonthBackColor))
                     {
                         g.FillPath(b, RoundedRect(buttonL, 2, 0, 0, 0));
                     }
-                    using (Pen pb = new Pen(_mouseInLB ? ButonBorderMouseOverColor : ButtonBorderColor, 1))
+                    using (Pen pb = new Pen(_mouseInLB ? Parent.MonthButtonBorderMouseOverColor : Parent.MonthButtonBorderColor, 1))
                     {
                         g.DrawPath(pb, RoundedRect(buttonL, 2, 0, 0, 0));
                     }
-                    using (SolidBrush b = new SolidBrush(_mouseInLB ? ArrowMouseOverColor : ButtonArrowColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInLB ? Parent.MonthButtonMouseOverForeColor : Parent.MonthButtonForeColor))
                     {
                         g.FillPolygon(b, arrowL);
                     }
-                    using (SolidBrush b = new SolidBrush(_mouseInRB ? ButonMouseOverColor : ButtonBackColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInRB ? Parent.MonthButtonMouseOverColor : Parent.MonthBackColor))
                     {
                         g.FillPath(b, RoundedRect(buttonR, 0, 2, 0, 0));
                     }
-                    using (Pen pb = new Pen(_mouseInRB ? ButonBorderMouseOverColor : ButtonBorderColor, 1))
+                    using (Pen pb = new Pen(_mouseInRB ? Parent.MonthButtonBorderMouseOverColor : Parent.MonthButtonBorderColor, 1))
                     {
                         g.DrawPath(pb, RoundedRect(buttonR, 0, 2, 0, 0));
                     }
-                    using (SolidBrush b = new SolidBrush(_mouseInRB ? ArrowMouseOverColor : ButtonArrowColor))
+                    using (SolidBrush b = new SolidBrush(_mouseInRB ? Parent.MonthButtonMouseOverForeColor : Parent.MonthButtonForeColor))
                     {
                         g.FillPolygon(b, arrowR);
                     }
@@ -891,28 +576,28 @@ namespace Ticketník.CustomControls
                         //názvy dnů - ještě posunout na střed rect ty názvy
                         poRect = new Rectangle(3, header.Bottom + 1, 20, 13);
                         string po = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Monday);
-                        TextRenderer.DrawText(g, po, Font, poRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        TextRenderer.DrawText(g, po, Font, poRect, Parent.MonthDayHeaderForeColor, TextFormatFlags.Right);
                         Rectangle utRect = new Rectangle(poRect.Right, header.Bottom + 1, 20, 13);
                         string ut = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Tuesday);
-                        TextRenderer.DrawText(g, ut, Font, utRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        TextRenderer.DrawText(g, ut, Font, utRect, Parent.MonthDayHeaderForeColor, TextFormatFlags.Right);
                         Rectangle stRect = new Rectangle(utRect.Right, header.Bottom + 1, 20, 13);
                         string st = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Wednesday);
-                        TextRenderer.DrawText(g, st, Font, stRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        TextRenderer.DrawText(g, st, Font, stRect, Parent.MonthDayHeaderForeColor, TextFormatFlags.Right);
                         Rectangle ctRect = new Rectangle(stRect.Right, header.Bottom + 1, 20, 13);
                         string ct = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Thursday);
-                        TextRenderer.DrawText(g, ct, Font, ctRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        TextRenderer.DrawText(g, ct, Font, ctRect, Parent.MonthDayHeaderForeColor, TextFormatFlags.Right);
                         Rectangle paRect = new Rectangle(ctRect.Right, header.Bottom + 1, 20, 13);
                         string pa = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Friday);
-                        TextRenderer.DrawText(g, pa, Font, paRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        TextRenderer.DrawText(g, pa, Font, paRect, Parent.MonthDayHeaderForeColor, TextFormatFlags.Right);
                         Rectangle soRect = new Rectangle(paRect.Right, header.Bottom + 1, 20, 13);
                         string so = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Saturday);
-                        TextRenderer.DrawText(g, so, Font, soRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        TextRenderer.DrawText(g, so, Font, soRect, Parent.MonthDayHeaderForeColor, TextFormatFlags.Right);
                         Rectangle neRect = new Rectangle(soRect.Right, header.Bottom + 1, 20, 13);
                         string ne = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(DayOfWeek.Sunday);
-                        TextRenderer.DrawText(g, ne, Font, neRect, DayHeaderForeColor, TextFormatFlags.Right);
+                        TextRenderer.DrawText(g, ne, Font, neRect, Parent.MonthDayHeaderForeColor, TextFormatFlags.Right);
 
                         //dělící čára
-                        using (Pen ps = new Pen(SeparatorColor, 1))
+                        using (Pen ps = new Pen(Parent.MonthSeparatorColor, 1))
                         {
                             g.DrawLine(ps, 1, poRect.Bottom + 1, Width - 2, poRect.Bottom + 1);
                         }
@@ -937,18 +622,18 @@ namespace Ticketník.CustomControls
                             g.SmoothingMode = SmoothingMode.AntiAlias;
                             if (tmp.Day == SelectedDate.Day && tmp.Month == SelectedDate.Month && tmp.Year == SelectedDate.Year)
                             {
-                                using (SolidBrush b = new SolidBrush(SelectedColor))
+                                using (SolidBrush b = new SolidBrush(Parent.MonthSelectedColor))
                                 {
                                     g.FillPath(b, RoundedRect(new Rectangle(dny[ii].Key.Left + 3, dny[ii].Key.Top + poRect.Bottom + 3, dny[ii].Key.Width, dny[ii].Key.Height), 2, 2, 2, 2));
                                 }
-                                using (Pen p = new Pen(SelectedDayBorderColor, 1))
+                                using (Pen p = new Pen(Parent.MonthSelectedDayBorderColor, 1))
                                 {
                                     g.DrawPath(p, RoundedRect(new Rectangle(dny[ii].Key.Left + 3, dny[ii].Key.Top + poRect.Bottom + 3, dny[ii].Key.Width, dny[ii].Key.Height), 2, 2, 2, 2));
                                 }
                             }
                             else if (ii == _mouseInCal)
                             {
-                                using (SolidBrush b = new SolidBrush(SelectMouseOverColor))
+                                using (SolidBrush b = new SolidBrush(Parent.MonthSelectMouseOverColor))
                                 {
                                     g.FillPath(b, RoundedRect(new Rectangle(dny[ii].Key.Left + 3, dny[ii].Key.Top + poRect.Bottom + 3, dny[ii].Key.Width, dny[ii].Key.Height), 2, 2, 2, 2));
                                 }
@@ -957,7 +642,7 @@ namespace Ticketník.CustomControls
                             string datum = tmp.ToString("%d");
                             Size ds = TextRenderer.MeasureText(datum, Font);
                             TextRenderer.DrawText(g, datum, Font, new Point(dny[ii].Key.Left + 13 - (ds.Width / 2), dny[ii].Key.Top + 10 - (ds.Height / 2) + poRect.Bottom),
-                                ActualDate.Month == tmp.Month ? ForeColor : TrailingForeColor);
+                                ActualDate.Month == tmp.Month ? Parent.MonthForeColor : Parent.MonthTrailintForeColor);
 
                             tmp = tmp.AddDays(1);
                         }
@@ -993,18 +678,18 @@ namespace Ticketník.CustomControls
                                 g.SmoothingMode = SmoothingMode.AntiAlias;
                                 if (tmp.Month == SelectedDate.Month && tmp.Year == SelectedDate.Year)
                                 {
-                                    using (SolidBrush b = new SolidBrush(SelectedColor))
+                                    using (SolidBrush b = new SolidBrush(Parent.MonthSelectedColor))
                                     {
                                         g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
                                     }
-                                    using (Pen p = new Pen(SelectedDayBorderColor, 1))
+                                    using (Pen p = new Pen(Parent.MonthSelectedDayBorderColor, 1))
                                     {
                                         g.DrawPath(p, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
                                     }
                                 }
                                 else if (ii == _mouseInCal)
                                 {
-                                    using (SolidBrush b = new SolidBrush(SelectMouseOverColor))
+                                    using (SolidBrush b = new SolidBrush(Parent.MonthSelectMouseOverColor))
                                     {
                                         g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
                                     }
@@ -1015,7 +700,7 @@ namespace Ticketník.CustomControls
                                 if (tmp <= refMaxDate && tmp >= refMinDate)
                                 {
                                     TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
-                                    ForeColor);
+                                    Parent.MonthForeColor);
 
                                     tmp = tmp.AddMonths(1);
                                 }
@@ -1025,18 +710,18 @@ namespace Ticketník.CustomControls
                                 g.SmoothingMode = SmoothingMode.AntiAlias;
                                 if (tmp.Year - (tmp.Year % modifier) == SelectedDate.Year - (SelectedDate.Year % modifier))
                                 {
-                                    using (SolidBrush b = new SolidBrush(SelectedColor))
+                                    using (SolidBrush b = new SolidBrush(Parent.MonthSelectedColor))
                                     {
                                         g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
                                     }
-                                    using (Pen p = new Pen(SelectedDayBorderColor, 1))
+                                    using (Pen p = new Pen(Parent.MonthSelectedDayBorderColor, 1))
                                     {
                                         g.DrawPath(p, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
                                     }
                                 }
                                 else if (ii == _mouseInCal)
                                 {
-                                    using (SolidBrush b = new SolidBrush(SelectMouseOverColor))
+                                    using (SolidBrush b = new SolidBrush(Parent.MonthSelectMouseOverColor))
                                     {
                                         g.FillPath(b, RoundedRect(new Rectangle(mesice[ii].Key.Left + 3, mesice[ii].Key.Top + header.Bottom + 1, mesice[ii].Key.Width, mesice[ii].Key.Height), 2, 2, 2, 2));
                                     }
@@ -1052,7 +737,7 @@ namespace Ticketník.CustomControls
                                 }
                                 Size ds = TextRenderer.MeasureText(datum, Font);
                                 TextRenderer.DrawText(g, datum, Font, new Point(mesice[ii].Key.Left + 20 - (ds.Width / 2), mesice[ii].Key.Top + 18 - (ds.Height / 2) + header.Bottom),
-                                (ii == 0 || ii == 11) ? TrailingForeColor : ForeColor);
+                                (ii == 0 || ii == 11) ? Parent.MonthTrailintForeColor : Parent.MonthForeColor);
 
                                 if (tmp >= refMinDate && tmp <= refMaxDate)
                                     tmp = tmp.AddYears(modifier);
@@ -1064,7 +749,7 @@ namespace Ticketník.CustomControls
 
                     //tlačítko Dnes
                     Rectangle todayBlueRect = new Rectangle(todayRect.Width / 2 - 5, todayRect.Top + 4, 17, 12);
-                    using (SolidBrush b = new SolidBrush(TodayButtonBackColor))
+                    using (SolidBrush b = new SolidBrush(Parent.MonthTodayButtonBackColor))
                     {
                         g.FillPath(b, RoundedRect(todayRect, 0, 0, 2, 2));
                     }
@@ -1074,10 +759,10 @@ namespace Ticketník.CustomControls
                     int centerV = todayRect.Top + (todayRect.Height / 2) - datumDnesVelikost.Height / 2;
                     int centerH = todayRect.Right - (todayRect.Width / 2) - datumDnesVelikost.Width / 2;
                     TextRenderer.DrawText(g, datumDnes, Font, new Point(centerH + 13, centerV),
-                        _mouseInTB ? TodayButtonMouseOverForeColor : TodayButtonForeColor);
+                        _mouseInTB ? Parent.MonthTodayButtonMouseOverForeColor : Parent.MonthTodayButtonForeColor);
 
                     g.SmoothingMode = SmoothingMode.AntiAlias;
-                    g.DrawPath(new Pen(TodayButtonColor, 1), RoundedRect(todayBlueRect, 2, 2, 2, 2));
+                    g.DrawPath(new Pen(Parent.MonthTodayButtonColor, 1), RoundedRect(todayBlueRect, 2, 2, 2, 2));
                     g.SmoothingMode = SmoothingMode.None;
                 }
 

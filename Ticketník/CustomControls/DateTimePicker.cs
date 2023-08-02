@@ -90,8 +90,6 @@ namespace Ticketník.CustomControls
                 if (monthBorderColor != value)
                 {
                     monthBorderColor = value;
-                    if (calendar != null)
-                        calendar.BorderColor = value;
                     Invalidate();
                 }
             }
@@ -107,8 +105,6 @@ namespace Ticketník.CustomControls
                 if (monthBackColor != value)
                 {
                     monthBackColor = value;
-                    if (calendar != null)
-                        calendar.BackgroundColor = value;
                     Invalidate();
                 }
             }
@@ -124,8 +120,6 @@ namespace Ticketník.CustomControls
                 if (dayHeaderForeColor != value)
                 {
                     dayHeaderForeColor = value;
-                    if (calendar != null)
-                        calendar.DayHeaderForeColor = value;
                     Invalidate();
                 }
             }
@@ -141,8 +135,6 @@ namespace Ticketník.CustomControls
                 if (monthHeaderBackColor != value)
                 {
                     monthHeaderBackColor = value;
-                    if (calendar != null)
-                        calendar.HeaderColor = value;
                     Invalidate();
                 }
             }
@@ -158,8 +150,6 @@ namespace Ticketník.CustomControls
                 if (monthHeaderMouseOverBackColor != value)
                 {
                     monthHeaderMouseOverBackColor = value;
-                    if (calendar != null)
-                        calendar.HeaderMouseOverColor = value;
                     Invalidate();
                 }
             }
@@ -175,8 +165,6 @@ namespace Ticketník.CustomControls
                 if (monthHeaderForeColor != value)
                 {
                     monthHeaderForeColor = value;
-                    if (calendar != null)
-                        calendar.HeaderForeColor = value;
                     Invalidate();
                 }
             }
@@ -192,8 +180,6 @@ namespace Ticketník.CustomControls
                 if (monthHeaderMouseOverForeColor != value)
                 {
                     monthHeaderMouseOverForeColor = value;
-                    if (calendar != null)
-                        calendar.HeaderMouseOverForeColor = value;
                     Invalidate();
                 }
             }
@@ -209,8 +195,6 @@ namespace Ticketník.CustomControls
                 if (monthButtonForeColor != value)
                 {
                     monthButtonForeColor = value;
-                    if (calendar != null)
-                        calendar.ButtonArrowColor = value;
                     Invalidate();
                 }
             }
@@ -226,8 +210,6 @@ namespace Ticketník.CustomControls
                 if (monthButtonColor != value)
                 {
                     monthButtonColor = value;
-                    if (calendar != null)
-                        calendar.ButtonBackColor = value;
                     Invalidate();
                 }
             }
@@ -243,8 +225,6 @@ namespace Ticketník.CustomControls
                 if (monthButtonBorderColor != value)
                 {
                     monthButtonBorderColor = value;
-                    if (calendar != null)
-                        calendar.ButtonBorderColor = value;
                     Invalidate();
                 }
             }
@@ -260,8 +240,6 @@ namespace Ticketník.CustomControls
                 if (monthTodayButtonBackColor != value)
                 {
                     monthTodayButtonBackColor = value;
-                    if (calendar != null)
-                        calendar.TodayButtonBackColor = value;
                     Invalidate();
                 }
             }
@@ -277,8 +255,6 @@ namespace Ticketník.CustomControls
                 if (monthTodayButtonColor != value)
                 {
                     monthTodayButtonColor = value;
-                    if (calendar != null)
-                        calendar.TodayButtonColor = value;
                     Invalidate();
                 }
             }
@@ -294,8 +270,6 @@ namespace Ticketník.CustomControls
                 if (monthTodayButtonForeColor != value)
                 {
                     monthTodayButtonForeColor = value;
-                    if (calendar != null)
-                        calendar.TodayButtonForeColor = value;
                     Invalidate();
                 }
             }
@@ -311,8 +285,6 @@ namespace Ticketník.CustomControls
                 if (monthForeColor != value)
                 {
                     monthForeColor = value;
-                    if (calendar != null)
-                        calendar.ForeColor = value;
                     Invalidate();
                 }
             }
@@ -328,8 +300,6 @@ namespace Ticketník.CustomControls
                 if (monthSelectedMouseOverForeColor != value)
                 {
                     monthSelectedMouseOverForeColor = value;
-                    if (calendar != null)
-                        calendar.SelectedMouseOverForeColor = value;
                     Invalidate();
                 }
             }
@@ -345,8 +315,6 @@ namespace Ticketník.CustomControls
                 if (monthSelectedDayBorderColor != value)
                 {
                     monthSelectedDayBorderColor = value;
-                    if (calendar != null)
-                        calendar.SelectedDayBorderColor = value;
                     Invalidate();
                 }
             }
@@ -362,8 +330,6 @@ namespace Ticketník.CustomControls
                 if (monthSelectedColor != value)
                 {
                     monthSelectedColor = value;
-                    if (calendar != null)
-                        calendar.SelectedColor = value;
                     Invalidate();
                 }
             }
@@ -379,8 +345,6 @@ namespace Ticketník.CustomControls
                 if (monthSelectMouseOverColor != value)
                 {
                     monthSelectMouseOverColor = value;
-                    if (calendar != null)
-                        calendar.SelectMouseOverColor = value;
                     Invalidate();
                 }
             }
@@ -396,8 +360,6 @@ namespace Ticketník.CustomControls
                 if (monthTrailingForeColor != value)
                 {
                     monthTrailingForeColor = value;
-                    if (calendar != null)
-                        calendar.TrailingForeColor = value;
                     Invalidate();
                 }
             }
@@ -413,8 +375,6 @@ namespace Ticketník.CustomControls
                 if (monthTodayButtonMouseOverForeColor != value)
                 {
                     monthTodayButtonMouseOverForeColor = value;
-                    if (calendar != null)
-                        calendar.TodayButtonMouseOverForeColor = value;
                     Invalidate();
                 }
             }
@@ -430,8 +390,6 @@ namespace Ticketník.CustomControls
                 if (monthButtonMouseOverColor != value)
                 {
                     monthButtonMouseOverColor = value;
-                    if (calendar != null)
-                        calendar.ButonMouseOverColor = value;
                     Invalidate();
                 }
             }
@@ -447,8 +405,6 @@ namespace Ticketník.CustomControls
                 if (monthButtonBorderMouseOverColor != value)
                 {
                     monthButtonBorderMouseOverColor = value;
-                    if (calendar != null)
-                        calendar.ButonBorderMouseOverColor = value;
                     Invalidate();
                 }
             }
@@ -464,8 +420,6 @@ namespace Ticketník.CustomControls
                 if (monthButtonMouseOverForeColor != value)
                 {
                     monthButtonMouseOverForeColor = value;
-                    if (calendar != null)
-                        calendar.ArrowMouseOverColor = value;
                     Invalidate();
                 }
             }
@@ -584,8 +538,6 @@ namespace Ticketník.CustomControls
                 if (monthSeparatorColor != value)
                 {
                     monthSeparatorColor = value;
-                    if (calendar != null)
-                        calendar.SeparatorColor = value;
                     Invalidate();
                 }
             }
@@ -709,8 +661,6 @@ namespace Ticketník.CustomControls
         public DateTimePicker():base()
         {
             Value = DateTime.Today;
-            calendar = new Calendar(MonthBorderColor, MonthBackColor, this);
-            calendar.ValueChanged += Calendar_ValueChanged;
         }
 
         public bool IsDateChanging => _dateChanging;
@@ -961,14 +911,8 @@ namespace Ticketník.CustomControls
                 {
                     if (lastFocusLost.AddMilliseconds(10) < DateTime.Now)
                     {
-                        //calendar = new Calendar(MonthBorderColor, MonthBackColor, this);
+                        calendar = new Calendar(this);
                         calendar.ValueChanged += Calendar_ValueChanged;
-                        calendar.BorderColor = this.BorderColorMouseOver;
-                        calendar.BackgroundColor = this.BackColor;
-                        /*calendar.ForeColor = this.ForeColor;
-                        calendar.DayHeaderForeColor = MonthDayHeaderForeColor;
-                        calendar.HeaderColor = MonthHeaderBackColor;
-                        calendar.HeaderMouseOverColor = MonthHeaderMouseOverBackColor;*/
                         if(calendar.FitDown(this.FindForm().Location.Y + this.Bottom + 31))
                             calendar.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
                         else

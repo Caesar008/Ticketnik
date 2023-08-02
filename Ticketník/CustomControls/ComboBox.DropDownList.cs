@@ -15,37 +15,9 @@ namespace Ticketník.CustomControls
         protected sealed class DropDownList : System.Windows.Forms.Form
         {
             private ScrollBar vScrollBar;
-            private Color borderColor = Color.Gray;
-            private int _scrollPosition = 0;
             private Point _mousePos = Point.Empty;
-            internal int _markedItem = -1;
             private bool _scrolling = false;
 
-            public Color BorderColor
-            {
-                get { return borderColor; }
-                set
-                {
-                    if (borderColor != value)
-                    {
-                        borderColor = value;
-                        Invalidate();
-                    }
-                }
-            }
-            private Color backColor = Color.White;
-            public Color BackgroundColor
-            {
-                get { return backColor; }
-                set
-                {
-                    if (backColor != value)
-                    {
-                        backColor = value;
-                        Invalidate();
-                    }
-                }
-            }
             private bool isOpen = false;
             public bool IsOpen
             {
@@ -71,25 +43,6 @@ namespace Ticketník.CustomControls
                         Invalidate();
                     }
                 }
-            }
-
-            private Color selectedItemBackColor = Color.DodgerBlue;
-            [DefaultValue(typeof(Color), "DodgerBlue")]
-            public Color SelectedItemBackColor
-            {
-                get
-                {
-                    return selectedItemBackColor;
-                }
-                set { selectedItemBackColor = value; }
-            }
-
-            private Color selectedItemForeColor = Color.White;
-            [DefaultValue(typeof(Color), "White")]
-            public Color SelectedItemForeColor
-            {
-                get { return selectedItemForeColor; }
-                set { selectedItemForeColor = value; }
             }
 
             private int maxVisibleItems = 30;
@@ -125,7 +78,7 @@ namespace Ticketník.CustomControls
                 }
                 Invalidate();
             }
-            public DropDownList(Color borderColor, Color backColor, CustomControls.ComboBox parent) 
+            public DropDownList(CustomControls.ComboBox parent) 
             {
                 this.Parent = parent;
                 this.MinimizeBox = false;
@@ -141,12 +94,10 @@ namespace Ticketník.CustomControls
                 int minHeight = TextRenderer.MeasureText("A", Font).Height + 4;
                 this.Height = minHeight;
                 this.MaximumSize = new System.Drawing.Size(20, minHeight);
-                this.BorderColor = borderColor;
-                this.BackgroundColor = backColor;
                 this.Tag = "CustomColor:Ignore";
                 this.vScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Vertical, this);
                 this.vScrollBar.Visible = false;
-                this.vScrollBar.ParentBorderColor = BorderColor;
+                this.vScrollBar.ParentBorderColor = Parent.BorderColor;
                 this.vScrollBar.RespectParentBorder = true;
                 this.vScrollBar.Scrolled += VScrollBar_Scrolled;
                 Motiv.SetControlColor(vScrollBar);
@@ -162,7 +113,7 @@ namespace Ticketník.CustomControls
 
             private void VScrollBar_Scrolled(object sender, ScrollBar.ScrollEventArgs e)
             {
-                this._scrollPosition = e.NewPosition;
+                Parent._scrollPosition = e.NewPosition;
                 Invalidate();
             }
 
@@ -214,8 +165,8 @@ namespace Ticketník.CustomControls
                     SetWidth(w);
                 }
                 vScrollBar.Visible = VScrollBarVisible;
-                _markedItem = Parent.SelectedIndex;
-                EnsureVisible(_markedItem);
+                Parent._markedItem = Parent.SelectedIndex;
+                EnsureVisible(Parent._markedItem);
                 if(!FitDown(this.Location.Y))
                 {
                     this.Location = new Point(this.Location.X, this.Location.Y - this.Height - Parent.Height);
@@ -236,9 +187,9 @@ namespace Ticketník.CustomControls
                     int itemNum = e.Location.Y / vyska;
                     if (itemNum >= Parent.Items.Count)
                         itemNum = Parent.Items.Count - 1;
-                    if (itemNum != _markedItem)
+                    if (itemNum != Parent._markedItem)
                     {
-                        _markedItem = itemNum + _scrollPosition;
+                        Parent._markedItem = itemNum + Parent._scrollPosition;
                         Invalidate();
                     }
                 }
@@ -255,7 +206,7 @@ namespace Ticketník.CustomControls
                 {
                     _mousePos = e.Location;
                     int vyska = TextRenderer.MeasureText("A", Font).Height;
-                    int itemNum = (e.Location.Y / vyska) + _scrollPosition;
+                    int itemNum = (e.Location.Y / vyska) + Parent._scrollPosition;
                     Parent.SelectedIndex = itemNum;
 
                     this.Hide();
@@ -290,8 +241,8 @@ namespace Ticketník.CustomControls
                         Parent.SelectedIndex += 1;
                     }
                 }
-                _markedItem = Parent.SelectedIndex;
-                EnsureVisible(_markedItem);
+                Parent._markedItem = Parent.SelectedIndex;
+                EnsureVisible(Parent._markedItem);
                 //Invalidate();
                 return true;
             }
@@ -316,12 +267,12 @@ namespace Ticketník.CustomControls
                     int maxScroll = Parent.Items.Count - MaxVisibleItems;
                     if (maxScroll < 0)
                         maxScroll = 0;
-                    int newScroll = _scrollPosition - posun;
+                    int newScroll = Parent._scrollPosition - posun;
                     if (newScroll > maxScroll)
                         newScroll = maxScroll;
                     else if (newScroll < 0)
                         newScroll = 0;
-                    _scrollPosition = newScroll;
+                    Parent._scrollPosition = newScroll;
                     vScrollBar.ScrollPosition = newScroll;
                     Invalidate();
                     mouseWheelStep = DateTime.Now;
@@ -330,16 +281,16 @@ namespace Ticketník.CustomControls
 
             public void EnsureVisible(int index)
             {
-                int maxVisible = MaxVisibleItems + _scrollPosition;
-                if(index < _scrollPosition && index >= 0)
+                int maxVisible = MaxVisibleItems + Parent._scrollPosition;
+                if(index < Parent._scrollPosition && index >= 0)
                 {
-                    _scrollPosition = index;
+                    Parent._scrollPosition = index;
                 }
                 else if(index < Parent.Items.Count && index > maxVisible-1)
                 { 
-                    _scrollPosition = index - MaxVisibleItems+1;
+                    Parent._scrollPosition = index - MaxVisibleItems+1;
                 }
-                vScrollBar.ScrollPosition = _scrollPosition;
+                vScrollBar.ScrollPosition = Parent._scrollPosition;
                 Invalidate();
             }
 
@@ -361,7 +312,7 @@ namespace Ticketník.CustomControls
                 {
                     bg.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
                     //pozadí
-                    using(Brush b = new SolidBrush(BackgroundColor))
+                    using(Brush b = new SolidBrush(Parent.BackColor))
                     {
                         bg.Graphics.FillRectangle(b, new Rectangle(0, 0, Width, Height));
                     }
@@ -372,27 +323,27 @@ namespace Ticketník.CustomControls
                         Size velikost = TextRenderer.MeasureText(Parent.Items[i] as string, Font);
                         if (velikost == Size.Empty)
                             velikost = TextRenderer.MeasureText("A" as string, Font);
-                        item = new Rectangle(0, (i-_scrollPosition) * velikost.Height +1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
+                        item = new Rectangle(0, (i-Parent._scrollPosition) * velikost.Height +1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
 
-                        Rectangle marked = new Rectangle(0, (_markedItem - _scrollPosition) * velikost.Height +1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
+                        Rectangle marked = new Rectangle(0, (Parent._markedItem - Parent._scrollPosition) * velikost.Height +1, VScrollBarVisible ? Width - vScrollBar.Width : Width, velikost.Height);
                         
                         if (item.IntersectsWith(marked))
                         {
                             //označení
-                            using (Brush b = new SolidBrush(selectedItemBackColor))
+                            using (Brush b = new SolidBrush(Parent.SelectedItemBackColor))
                             {
                                 bg.Graphics.FillRectangle(b, item);
                             }
-                            TextRenderer.DrawText(bg.Graphics, Parent.Items[i] as string, Font, item, selectedItemForeColor, TextFormatFlags.EndEllipsis);
+                            TextRenderer.DrawText(bg.Graphics, Parent.Items[i] as string, Font, item, Parent.SelectedItemForeColor, TextFormatFlags.EndEllipsis);
                         }
                         else
                         {
-                            TextRenderer.DrawText(bg.Graphics, Parent.Items[i] as string, Font, item, ForeColor, TextFormatFlags.EndEllipsis);
+                            TextRenderer.DrawText(bg.Graphics, Parent.Items[i] as string, Font, item, Parent.ForeColor, TextFormatFlags.EndEllipsis);
                         }
                     }
 
                 //rámeček
-                    using(Pen p = new Pen(BorderColor))
+                    using(Pen p = new Pen(Parent.BorderColorMouseOver))
                     {
                         bg.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
                     }

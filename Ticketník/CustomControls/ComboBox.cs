@@ -17,11 +17,11 @@ namespace Ticketník.CustomControls
         private Rectangle dropDown;
         private DropDownList list;
         protected DateTime lastFocusLost = DateTime.Now;
+        internal int _scrollPosition = 0;
+        internal int _markedItem = -1;
 
         public ComboBox():base()
         {
-            list = new DropDownList(BorderColorMouseOver, BackColor, this);
-            //list.Parent = this;
             CloseUp += ComboBox_CloseUp;
         }
 
@@ -154,45 +154,36 @@ namespace Ticketník.CustomControls
                 if (foreColor != value)
                 {
                     foreColor = value;
-                    if (list != null)
-                        list.ForeColor = value;
                     Invalidate();
                 }
             }
         }
 
+        Color selectedItemForeColor = Color.White;
         [DefaultValue(typeof(Color), "White")]
         public Color SelectedItemForeColor
         {
             get
             {
-                if (list != null)
-                    return list.SelectedItemForeColor;
-                return Color.White;
+                return selectedItemForeColor;
             }
             set
             {
-                if (list != null)
-                {
-                    list.SelectedItemForeColor = value;
-                }
+                selectedItemForeColor = value;
             }
         }
+
+        Color selectedItemBackColor = Color.DodgerBlue;
         [DefaultValue(typeof(Color), "DodgerBlue")]
         public Color SelectedItemBackColor
         {
             get
             {
-                if (list != null)
-                    return list.SelectedItemBackColor;
-                return Color.DodgerBlue;
+                return selectedItemBackColor;
             }
             set
             {
-                if (list != null)
-                {
-                    list.SelectedItemBackColor = value;
-                }
+                selectedItemBackColor = value;
             }
         }
 
@@ -325,13 +316,11 @@ namespace Ticketník.CustomControls
 
                     if (DropDownStyle == ComboBoxStyle.DropDownList)
                     {
-                        if (!list.IsOpen || !list.Visible)
+                        if (list == null || !list.IsOpen || !list.Visible)
                         {
-                            list = new DropDownList(BorderColorMouseOver, BackColor, this);
-                            /*list.BorderColor = this.BorderColorMouseOver;
-                            list.BackgroundColor = this.BackColor;*/
-                            list.ForeColor = this.ForeColor;
-                            //list.Location = new Point(this.FindForm().Location.X + this.Left + 8, this.FindForm().Location.Y + this.Bottom + 31);
+                            list = new DropDownList(this);
+                            if (!DropDownAutoSize)
+                                list.SetWidth(DropDownWidth);
                             Point relativeLocation = ControlLocation.RelativeToWindowLocation(this);
                             if(list.FitDown(this.FindForm().Location.Y + relativeLocation.Y + Height + 31))
                                 list.Location = new Point(this.FindForm().Location.X + relativeLocation.X + 8, this.FindForm().Location.Y + relativeLocation.Y + Height + 31);
@@ -349,7 +338,6 @@ namespace Ticketník.CustomControls
                             list.Hide();
                             list.IsOpen = false;
                             lastFocusLost = DateTime.Now;
-                            //list._markedItem = -1;
                             CloseUp?.Invoke(Parent, EventArgs.Empty);
                         }
                     }
@@ -458,7 +446,7 @@ namespace Ticketník.CustomControls
                     Text = items[x] as string;
                     if (list != null)
                     {
-                        list._markedItem = x;
+                        _markedItem = x;
                     }
                     Invalidate();
                     SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
@@ -473,16 +461,19 @@ namespace Ticketník.CustomControls
             //Invalidate();
         }
 
+        int dropDownWidth = 20;
         public int DropDownWidth
         {
             get
             {
-                return list.Width;
+                return dropDownWidth;
             }
             set
             {
                 DropDownAutoSize = false;
-                list.SetWidth(value);
+                dropDownWidth = value;
+                if(list != null) 
+                    list.SetWidth(value);
             }
         }
 
@@ -511,7 +502,7 @@ namespace Ticketník.CustomControls
                     Text = items[value] as string;
                     if (list != null)
                     {
-                        list._markedItem = value;
+                        _markedItem = value;
                     }
                     
                     Invalidate();

@@ -23,6 +23,8 @@ namespace Ticketník
             InitializeComponent();
             dateTimePicker1.MaxDate = DateTime.Today;
             dateTimePicker2.MaxDate = DateTime.Today;
+            dateTimePicker1.Value = DateTime.Today;
+            dateTimePicker2.Value = DateTime.Today;
             this.Text = form.jazyk.Windows_Export_Nazev;
             this.button1.Text = form.jazyk.Windows_Export_Exportovat;
             this.radioButton1.Text = form.jazyk.Windows_Export_TentoTyden;
