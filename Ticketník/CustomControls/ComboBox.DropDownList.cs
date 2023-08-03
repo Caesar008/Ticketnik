@@ -243,13 +243,33 @@ namespace Ticketník.CustomControls
                 }
                 else
                 {
-                    msg.HWnd = Parent.textBox.Handle;
-                    Parent.SendMesg(Parent.textBox.Handle, msg.Msg, msg.WParam, msg.LParam);
+                    return base.ProcessCmdKey(ref msg, keyData);
                 }
                 Parent._markedItem = Parent.SelectedIndex;
                 EnsureVisible(Parent._markedItem);
                 //Invalidate();
                 return true;
+            }
+
+            bool backspace = false;
+
+            protected override void OnKeyDown(KeyEventArgs e)
+            {
+                base.OnKeyDown(e);
+                if (e.KeyCode == Keys.Back)
+                {
+                    backspace = true;
+                    if(Parent.textBox.Text.Length > 0) 
+                        Parent.textBox.Text = Parent.textBox.Text.Remove(Parent.textBox.Text.Length - 1);
+                }
+            }
+
+            protected override void OnKeyPress(KeyPressEventArgs e)
+            {
+                base.OnKeyPress(e);
+                if (!backspace)
+                    Parent.textBox.Text += e.KeyChar;
+                backspace = false;
             }
 
             protected override void OnPaintBackground(PaintEventArgs e)

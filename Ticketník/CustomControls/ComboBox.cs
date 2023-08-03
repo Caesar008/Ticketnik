@@ -52,10 +52,17 @@ namespace Ticketník.CustomControls
             Controls.Add(textBox);
         }
 
+        bool canSearch = true;
+
         protected override void OnTextChanged(EventArgs e)
         {
             base.OnTextChanged(e);
-            textBox.Text = Text;
+            if (canSearch)
+            {
+                canSearch = false;
+                textBox.Text = Text;
+                canSearch = true;
+            }
         }
 
         protected override void OnSizeChanged(EventArgs e)
@@ -78,7 +85,28 @@ namespace Ticketník.CustomControls
 
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
+            if(canSearch)
+            {
+                if (items.Count > 0 && textBox.Text.Length > 0)
+                {
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        if (items[i].ToString().StartsWith(textBox.Text, StringComparison.OrdinalIgnoreCase))
+                        {
+                            _markedItem = i; break;
+                        }
+                        _markedItem = -1;
+                    }
+                }
+                else if (textBox.Text.Length == 0 && items.Count > 0)
+                    _markedItem = 0;
+                else
+                    _markedItem = -1;
+                list.Invalidate();
+            }
+            canSearch = false;
             Text = textBox.Text;
+            canSearch= true;
         }
 
         private void TextBox_LostFocus(object sender, EventArgs e)
@@ -382,21 +410,10 @@ namespace Ticketník.CustomControls
             }
             else
             {
-                Debug.WriteLine("HWnd: " + msg.HWnd.ToString() + " | LParam: " + msg.LParam.ToString() + " | WParam: " +
-                    msg.WParam.ToString() + " | Result: " + msg.Result.ToString() + " | Msg: " + msg.Msg.ToString());
-                
                 return base.ProcessCmdKey(ref msg, keyData);
             }
             return true;
         }
-
-        internal void SendMesg(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
-        {
-            SendMessage(hWnd, msg, wParam, lParam);
-        }
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern int SendMessage(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam);
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
