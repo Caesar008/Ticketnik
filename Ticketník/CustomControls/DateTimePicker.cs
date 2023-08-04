@@ -852,7 +852,8 @@ namespace Ticketník.CustomControls
                 _dateChanging = false;
                 _keybuffer = "";
                 Value = tmpDateTime;
-                calendar.ActualDate/* = calendar.SelectedDate*/ = tmpDateTime;
+                if(calendar != null)
+                    calendar.ActualDate/* = calendar.SelectedDate*/ = tmpDateTime;
             }
         }
         protected override void OnKeyUp(KeyEventArgs e)
