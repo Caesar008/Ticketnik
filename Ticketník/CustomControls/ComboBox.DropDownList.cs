@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 namespace Ticketník.CustomControls
 {
+    //zkusit si pohrát s NativeWindow nebo s https://johnespiritu.info/blog/winforms-custom-dropdown/ ToolStripDropDown
     public partial class ComboBox : System.Windows.Forms.Control
     {
         protected sealed class DropDownList : System.Windows.Forms.Form
