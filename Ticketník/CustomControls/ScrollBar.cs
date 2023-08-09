@@ -592,7 +592,7 @@ namespace Ticketník.CustomControls
                     else if (Alignment == ScrollBarAlignment.Horizontal)
                     {
                         int maxPos = Width - 19 - SliderSize.Width - (bothVisible ? 17 : 0);
-                        int dostupnyProstor = maxPos - 19;
+                        int dostupnyProstor = maxPos - (bothVisible ? 19 : 0);// - 19;
                         double itemuNaPixel = Math.Round((double)Max / (double)dostupnyProstor, 4, MidpointRounding.AwayFromZero);
                         if(double.IsNaN(itemuNaPixel))
                         {
