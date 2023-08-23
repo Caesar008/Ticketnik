@@ -180,6 +180,7 @@ namespace Ticketník
                     ((CustomControls.ComboBox)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
                     ((CustomControls.ComboBox)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
                     ((CustomControls.ComboBox)c).BorderColorDisabled = barvy[sMotiv]["buttonBorder"];
+                    ((CustomControls.ComboBox)c).ButtonColorDisabled = barvy[sMotiv]["pozadíDisabled"];
                 }
                 else if (c.GetType() == typeof(CustomControls.NumericUpDown))
                 {

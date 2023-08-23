@@ -1408,7 +1408,7 @@ namespace Ticketník
         {
             get
             {
-                return ReturnPreklad("Windows/Search/Cacneled");
+                return ReturnPreklad("Windows/Search/Canceled");
             }
         }
         internal string Windows_Search_Prerazeno
