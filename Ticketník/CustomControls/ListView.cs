@@ -270,10 +270,13 @@ namespace Ticketník.CustomControls
                 canCallColumnChange = true;
             }
 
-            if(this.Width > Parent.Width)
-                this.Width = Parent.Width;
-            if (this.Height > Parent.Height)
-                this.Height = Parent.Height;
+            if (Parent != null)
+            {
+                if (this.Width > Parent.Width)
+                    this.Width = Parent.Width;
+                if (this.Height > Parent.Height)
+                    this.Height = Parent.Height;
+            }
         }
 
         protected override void OnClientSizeChanged(EventArgs e)
