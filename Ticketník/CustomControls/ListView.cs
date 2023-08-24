@@ -269,6 +269,11 @@ namespace Ticketník.CustomControls
                 FillHeaderSpace();
                 canCallColumnChange = true;
             }
+
+            if(this.Width > Parent.Width)
+                this.Width = Parent.Width;
+            if (this.Height > Parent.Height)
+                this.Height = Parent.Height;
         }
 
         protected override void OnClientSizeChanged(EventArgs e)
@@ -413,7 +418,7 @@ namespace Ticketník.CustomControls
             {
                 base.WndProc(ref m);
                 GetVisibleScrollbars(Handle);
-                int hScroll = GetScrollPos(Handle, 0 /*0 - horizontal, 1- vertical*/); //počet pixelů, default 15 krok
+                int hScroll = GetScrollPos(Handle, 0); //0 - horizontal, 1- vertical //počet pixelů, default 15 krok
                 int vScroll = GetScrollPos(Handle, 1); // počet itemů scrollnutých
                 if (GridLines && View == View.Details)
                 {

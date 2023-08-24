@@ -51,11 +51,13 @@ namespace Ticketník.CustomControls
             };
             dragTimer.Tick += DragTimer_Tick;
         }
+        bool formMin = false;
 
         private bool canProcessParentSizeChanged = true;
 
         private void Parent_SizeChanged(object sender, EventArgs e)
         {
+            
             if (!canProcessParentSizeChanged)
                 return;
             canProcessParentSizeChanged = false;
