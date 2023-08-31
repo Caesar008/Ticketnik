@@ -25,6 +25,7 @@ namespace Ticketník
     - Přidány statusy Zrušeno a Přeřazeno
     - Možnost přidávání příloh k ticketům
     - Oprava chyby #22-003
+    - Oprava chyby #23-002
     - Dll knihovny updatovány na novější verze
     */
 
@@ -1667,7 +1668,7 @@ namespace Ticketník
                     LoadFile();
                     File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
                 }
-                catch
+                catch (Exception ee)
                 {
                     Logni("Soubor .tic je poškozen. " + jmenoSouboru, LogMessage.WARNING);
                     CustomControls.MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);

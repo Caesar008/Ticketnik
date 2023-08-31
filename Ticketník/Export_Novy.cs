@@ -6,6 +6,7 @@ using System.IO;
 using Excel = ClosedXML.Excel;
 using System.Linq;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace Ticketník
 {
@@ -163,7 +164,7 @@ namespace Ticketník
                                         exportRadky[i].Radek[den].Cas = tCas;
                                         break;
                                     }
-                                    else if (exportRadky[i].Terp == t.CustomTerp && exportRadky[i].Task == t.CustomTask && exportRadky[i].Typ == et)
+                                    else if (exportRadky[i].Terp == t.CustomTerp && exportRadky[i].Task == t.CustomTask && ((exportRadky[i].Typ == et && t.OnlineTyp == "") || (exportRadky[i].OnlineTyp == t.OnlineTyp && t.OnlineTyp != "")))
                                     {
                                         if ((exportRadky[i].Radek[den].Koment.Length + (t.ID + " " + t.Zakaznik + " " + t.Popis + "\r\n").Length < 240))
                                         {

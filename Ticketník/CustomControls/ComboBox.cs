@@ -564,7 +564,7 @@ namespace Ticketník.CustomControls
         { 
             get 
             {
-                return selectedIndex == -1 ? null : Items[selectedIndex];
+                return selectedIndex == -1 ? null : (Items.Count > 0 ? Items[selectedIndex] : -1);
             }
             set
             {
@@ -708,7 +708,7 @@ namespace Ticketník.CustomControls
 
                     Size textSize = Size.Empty;
                     string text = "";
-                    if (selectedIndex == -1)
+                    if (selectedIndex == -1 || Items.Count == 0)
                         textSize = TextRenderer.MeasureText("A", Font);
                     else
                     {
