@@ -201,7 +201,7 @@ namespace Ticketník
 
             foreach (ExportRow s in exportRadky)
             {
-                if(s.Typ == ExportTyp.Normal)
+                if/*(s.Typ == ExportTyp.Normal) */((s.Typ == ExportTyp.Normal && s.OnlineTyp == "") || (s.OnlineTyp.ToLower().Contains("normal")))
                 {
                     casy["Pondělí"] += s.Radek["Pondělí"].Cas;
                     casy["Úterý"] += s.Radek["Úterý"].Cas;
@@ -224,7 +224,7 @@ namespace Ticketník
 
                     for(int i = 0; i< exportRadky.Count; i++)
                     {
-                        if(exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].Radek[cs].Cas > 0)
+                        if(/*exportRadky[i].Typ == ExportTyp.Normal*/((exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].OnlineTyp == "") || (exportRadky[i].OnlineTyp.ToLower().Contains("normal"))) && exportRadky[i].Radek[cs].Cas > 0)
                         {
                             pridat.Add(i, exportRadky[i].Radek[cs].Cas);
                         }
@@ -258,7 +258,7 @@ namespace Ticketník
 
                     for (int i = 0; i < exportRadky.Count; i++)
                     {
-                        if (exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].Radek[cs].Cas > 0.5m)
+                        if (/*exportRadky[i].Typ == ExportTyp.Normal*/((exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].OnlineTyp == "") || (exportRadky[i].OnlineTyp.ToLower().Contains("normal"))) && exportRadky[i].Radek[cs].Cas > 0.5m)
                         {
                             ubrat.Add(i, exportRadky[i].Radek[cs].Cas);
                         }
