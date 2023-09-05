@@ -265,11 +265,34 @@ namespace Ticketník.CustomControls
                 }
             }
 
+            DateTime lastSearch = DateTime.MinValue;
+            string search = "";
+
             protected override void OnKeyPress(KeyPressEventArgs e)
             {
                 base.OnKeyPress(e);
                 if (!backspace)
-                    Parent.textBox.Text += e.KeyChar;
+                {
+                    if(Parent.DropDownStyle == ComboBoxStyle.DropDown)
+                        Parent.textBox.Text += e.KeyChar;
+                    else if(Parent.DropDownStyle == ComboBoxStyle.DropDownList)
+                    {
+                        if (lastSearch.AddSeconds(1) < DateTime.Now)
+                            search = "";
+                        search += e.KeyChar;
+                        for(int i = 0; i<Parent.Items.Count; i++)
+                        {
+                            if ((Parent.Items[i] as string).ToLower().StartsWith(search.ToLower()))
+                            {
+                                Parent.SelectedIndex = i;
+                                Parent._markedItem = Parent.SelectedIndex;
+                                EnsureVisible(Parent._markedItem);
+                                break;
+                            }
+                        }
+                        lastSearch = DateTime.Now;
+                    }
+                }
                 backspace = false;
             }
 
