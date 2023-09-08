@@ -602,7 +602,11 @@ namespace Ticketník
             finally
             {
                 updateRunning = false;
-                File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"));
+                try
+                {
+                    File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"));
+                }
+                catch { }
             }
 
             if (vlaknoTerp != null && !vlaknoTerp.IsAlive)
