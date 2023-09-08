@@ -42,7 +42,7 @@ namespace Updater
                         {
                             if (retry >= 50)
                                 throw new IOException("File " + fileName + " cannot be updated - it is being used by another process.");
-                            System.Threading.Thread.Sleep(100);
+                            System.Threading.Thread.Sleep(120);
                             retry++;
                         }
                         File.Copy(file, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", fileName), true);
