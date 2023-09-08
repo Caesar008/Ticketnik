@@ -17,9 +17,6 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #23-001 2.5.2023
 - Updatování terp souboru selže pokud došlo k přejměnování terpu na straně MyTime
 
-#23-002
-- Export nefunguje správně s typem ticketu
-
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
@@ -177,3 +174,6 @@ OPRAVENÉ CHYBY
 
 #23-001 2.5.2023 - Opraveno 15.6.2023 (1.7.2.4)
 - Updatování terp souboru selže pokud došlo k přejměnování terpu na straně MyTime
+
+#23-002 Opraveno 8.9.2023 (1.7.3.1)
+- Export nefunguje správně s typem ticketu

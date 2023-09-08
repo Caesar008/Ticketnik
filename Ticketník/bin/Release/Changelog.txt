@@ -1,3 +1,8 @@
+1.7.3.1 (8.9.2023)
+
+- Změněn formát xlsx kvůli změně na straně MyTime
+- Oprava chyby #23-002
+-----------------------------------
 1.7.3.0 (28.6.2023)
 
 - Přepracován systém aktualizace - příprava pro 2.0

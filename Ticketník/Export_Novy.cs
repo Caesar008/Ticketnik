@@ -150,6 +150,8 @@ namespace Ticketník
                                         exportRadky[i].OnlineTyp = t.OnlineTyp;
                                         exportRadky[i].Typ = et;
                                         exportRadky[i].Radek[den].Koment = t.ID + " " + t.Zakaznik + " " + t.Popis + "\r\n";
+                                        if (exportRadky[i].Radek[den].Datum == "")
+                                            exportRadky[i].Radek[den].Datum = t.Datum.ToString("dd.MM.yyyy");
                                         decimal tCas = hrubyCas.Hour;
                                         if (hrubyCas.Minute == 30)
                                             tCas += 0.5m;
@@ -160,6 +162,8 @@ namespace Ticketník
                                     {
                                         if ((exportRadky[i].Radek[den].Koment.Length + (t.ID + " " + t.Zakaznik + " " + t.Popis + "\r\n").Length < 240))
                                         {
+                                            if (exportRadky[i].Radek[den].Datum == "")
+                                                exportRadky[i].Radek[den].Datum = t.Datum.ToString("dd.MM.yyyy");
                                             exportRadky[i].Radek[den].Koment += t.ID + " " + t.Zakaznik + " " + t.Popis + "\r\n";
                                             decimal tCas = hrubyCas.Hour;
                                             if (hrubyCas.Minute == 30)
@@ -193,7 +197,7 @@ namespace Ticketník
 
             foreach (ExportRow s in exportRadky)
             {
-                if(s.Typ == ExportTyp.Normal)
+                if ((s.Typ == ExportTyp.Normal && s.OnlineTyp == "") || (s.OnlineTyp.ToLower().Contains("normal")))
                 {
                     casy["Pondělí"] += s.Radek["Pondělí"].Cas;
                     casy["Úterý"] += s.Radek["Úterý"].Cas;
@@ -216,7 +220,7 @@ namespace Ticketník
 
                     for(int i = 0; i< exportRadky.Count; i++)
                     {
-                        if(exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].Radek[cs].Cas > 0)
+                        if(((exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].OnlineTyp == "") || (exportRadky[i].OnlineTyp.ToLower().Contains("normal"))) && exportRadky[i].Radek[cs].Cas > 0)
                         {
                             pridat.Add(i, exportRadky[i].Radek[cs].Cas);
                         }
@@ -250,7 +254,7 @@ namespace Ticketník
 
                     for (int i = 0; i < exportRadky.Count; i++)
                     {
-                        if (exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].Radek[cs].Cas > 0.5m)
+                        if (((exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].OnlineTyp == "") || (exportRadky[i].OnlineTyp.ToLower().Contains("normal"))) && exportRadky[i].Radek[cs].Cas > 0.5m)
                         {
                             ubrat.Add(i, exportRadky[i].Radek[cs].Cas);
                         }
@@ -294,45 +298,54 @@ namespace Ticketník
             {
                 if (s.Terp != null)
                 {
-                    //project
-                    exportSheet.Cell(row, 1).Value = s.Terp;
-                    //project name
-                    exportSheet.Cell(row, 2).Value = "najdiSiSam";
-                    //task
-                    if(s.Task.Contains(" - "))
-                        exportSheet.Cell(row, 3).SetValue(s.Task.Remove(s.Task.IndexOf(" -")));
-                    else
-                        exportSheet.Cell(row, 3).SetValue(s.Task);
-                    //task name
-                    if (s.Task.Contains(" - "))
-                        exportSheet.Cell(row, 4).Value = s.Task.Remove(0, s.Task.IndexOf(" -")+3);//"TyVisCo";
-                    else
-                        exportSheet.Cell(row, 4).Value = "TyVisCo";
-                    //type
-                    exportSheet.Cell(row, 5).Value = s.GetTyp();
-                    //pondělí (čas, comment)
-                    exportSheet.Cell(row, 6).Value = s.Radek["Pondělí"].Cas.ToString() == "0" ? "" : s.Radek["Pondělí"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 7).Value = s.Radek["Pondělí"].Koment.Replace("\t", " ").Replace("\"", "");
-                    //úterý
-                    exportSheet.Cell(row, 10).Value = s.Radek["Úterý"].Cas.ToString() == "0" ? "" : s.Radek["Úterý"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 11).Value = s.Radek["Úterý"].Koment.Replace("\t", " ").Replace("\"", "");
-                    //středa
-                    exportSheet.Cell(row, 14).Value = s.Radek["Středa"].Cas.ToString() == "0" ? "" : s.Radek["Středa"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 15).Value = s.Radek["Středa"].Koment.Replace("\t", " ").Replace("\"", "");
-                    //čtvrtek
-                    exportSheet.Cell(row, 18).Value = s.Radek["Čtvrtek"].Cas.ToString() == "0" ? "" : s.Radek["Čtvrtek"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 19).Value = s.Radek["Čtvrtek"].Koment.Replace("\t", " ").Replace("\"", "");
-                    //pátek
-                    exportSheet.Cell(row, 22).Value = s.Radek["Pátek"].Cas.ToString() == "0" ? "" : s.Radek["Pátek"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 23).Value = s.Radek["Pátek"].Koment.Replace("\t", " ").Replace("\"", "");
-                    //sobota
-                    exportSheet.Cell(row, 26).Value = s.Radek["Sobota"].Cas.ToString() == "0" ? "" : s.Radek["Sobota"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 27).Value = s.Radek["Sobota"].Koment.Replace("\t", " ").Replace("\"", "");
-                    //neděle
-                    exportSheet.Cell(row, 30).Value = s.Radek["Neděle"].Cas.ToString() == "0" ? "" : s.Radek["Neděle"].Cas.ToString(nfi);
-                    exportSheet.Cell(row, 31).Value = s.Radek["Neděle"].Koment.Replace("\t", " ").Replace("\"", "");
+                    foreach (string ed in s.Radek.Keys)
+                    {
+                        if (s.Radek[ed].Datum == "")
+                            continue;
+                        //project
+                        exportSheet.Cell(row, 1).Value = s.Terp;
+                        //project name
+                        exportSheet.Cell(row, 2).Value = "najdiSiSam";
+                        //task
+                        if (s.Task.Contains(" - "))
+                            exportSheet.Cell(row, 3).SetValue(s.Task.Remove(s.Task.IndexOf(" -")));
+                        else
+                            exportSheet.Cell(row, 3).SetValue(s.Task);
+                        //task name
+                        if (s.Task.Contains(" - "))
+                            exportSheet.Cell(row, 4).Value = s.Task.Remove(0, s.Task.IndexOf(" -") + 3);//"TyVisCo";
+                        else
+                            exportSheet.Cell(row, 4).Value = "TyVisCo";
+                        //type
+                        exportSheet.Cell(row, 5).Value = s.GetTyp();
+                        //date, time, comment
+                        exportSheet.Cell(row, 6).Value = s.Radek[ed].Datum;
+                        exportSheet.Cell(row, 7).Value = s.Radek[ed].Cas.ToString() == "0" ? "" : s.Radek[ed].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 8).Value = s.Radek[ed].Koment.Replace("\t", " ").Replace("\"", "");
+                        /*//pondělí (čas, comment)
+                        exportSheet.Cell(row, 6).Value = s.Radek["Pondělí"].Cas.ToString() == "0" ? "" : s.Radek["Pondělí"].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 7).Value = s.Radek["Pondělí"].Koment.Replace("\t", " ").Replace("\"", "");
+                        //úterý
+                        exportSheet.Cell(row, 10).Value = s.Radek["Úterý"].Cas.ToString() == "0" ? "" : s.Radek["Úterý"].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 11).Value = s.Radek["Úterý"].Koment.Replace("\t", " ").Replace("\"", "");
+                        //středa
+                        exportSheet.Cell(row, 14).Value = s.Radek["Středa"].Cas.ToString() == "0" ? "" : s.Radek["Středa"].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 15).Value = s.Radek["Středa"].Koment.Replace("\t", " ").Replace("\"", "");
+                        //čtvrtek
+                        exportSheet.Cell(row, 18).Value = s.Radek["Čtvrtek"].Cas.ToString() == "0" ? "" : s.Radek["Čtvrtek"].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 19).Value = s.Radek["Čtvrtek"].Koment.Replace("\t", " ").Replace("\"", "");
+                        //pátek
+                        exportSheet.Cell(row, 22).Value = s.Radek["Pátek"].Cas.ToString() == "0" ? "" : s.Radek["Pátek"].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 23).Value = s.Radek["Pátek"].Koment.Replace("\t", " ").Replace("\"", "");
+                        //sobota
+                        exportSheet.Cell(row, 26).Value = s.Radek["Sobota"].Cas.ToString() == "0" ? "" : s.Radek["Sobota"].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 27).Value = s.Radek["Sobota"].Koment.Replace("\t", " ").Replace("\"", "");
+                        //neděle
+                        exportSheet.Cell(row, 30).Value = s.Radek["Neděle"].Cas.ToString() == "0" ? "" : s.Radek["Neděle"].Cas.ToString(nfi);
+                        exportSheet.Cell(row, 31).Value = s.Radek["Neděle"].Koment.Replace("\t", " ").Replace("\"", "");*/
 
-                    row++;
+                        row++;
+                    }
                 }
             }
 
@@ -355,9 +368,11 @@ namespace Ticketník
         {
             Koment = "";
             Cas = 0;
+            Datum = "";
         }
         public string Koment { get; set; }
         public decimal Cas { get; set; }
+        public string Datum { get; set; }
     }
 
     class ExportRow

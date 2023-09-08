@@ -7,7 +7,6 @@ Potvrzené
 - Vkládání příloh (2.0)
 - Přímý import do MyTime (2.0)
 - Multiselect (2.1)
-- Vlastní vzhled záhlaví okna (2.1)
 - Kopírování ticketů včetně času a statusu (v případě multiselect) (2.1)
 - Ovládací prvky ve vlastní knihovně dll (2.2)
 
@@ -16,6 +15,7 @@ Nepotvrzené
 - funkce zpět a klávesová zkratka ctrl+z
 - Položka Oblíbené pro často používané záznamy
 - Vyhledávání ticketu v Tone / SN bez nutnosti otevřít daný ticket - zkratka Ctrl+T
+- Vlastní vzhled záhlaví okna (2.1)
 
 Zamítnuté
 

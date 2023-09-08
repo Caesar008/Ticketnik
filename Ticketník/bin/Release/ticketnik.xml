@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Ticketnik>
 	<Zakosi>50</Zakosi>
-	<App>1070300</App>
+	<App>1070301</App>
 	<Help>7</Help>
 	<Lang>
 		<CZ>7.0</CZ>
 	</Lang>
 	<Knihovny>
-		<Dll version="0.96.0.0">ClosedXML.dll</Dll>
-		<Dll version="2.16.0.0">DocumentFormat.OpenXml.dll</Dll>
-		<Dll version="1.1.0.0">ExcelNumberFormat.dll</Dll>
-		<Dll version="0.6.4.0">fNbt.dll</Dll>
-		<Dll version="1.11.48.0">HtmlAgilityPack.dll</Dll>
-		<Dll version="13.0.0.0">Newtonsoft.Json.dll</Dll>
-		<Dll version="1.3.0.0" remove="true">FastMember.Signed.dll</Dll>
+		<Dll version="0.93.1.0">ClosedXML.dll</Dll>
+		<Dll version="2.7.2.0">DocumentFormat.OpenXml.dll</Dll>
+		<Dll version="0.6.3.0">fNbt.dll</Dll>
+		<Dll version="12.0.3.23909">Newtonsoft.Json.dll</Dll>
+		<Dll version="1.3.0.0">FastMember.Signed.dll</Dll>
 	</Knihovny>
 </Ticketnik>
