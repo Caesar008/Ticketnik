@@ -45,7 +45,7 @@ namespace Ticketník
         internal byte velikost = 0;
         internal int posledniVybrany = 0;
         internal string tempZak = "";
-        internal int program = 1070301;
+        internal int program = 1070302;
         internal int verze = 0;
         NbtCompound copy = null;
         internal string zakaznikVlozit = "";

@@ -17,6 +17,11 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #23-001 2.5.2023
 - Updatování terp souboru selže pokud došlo k přejměnování terpu na straně MyTime
 
+---------
+UPDATER
+---------
+- Problém při updatu, může skončit s tím, že proces je používán
+
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
