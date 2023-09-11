@@ -587,26 +587,31 @@ namespace Ticketník
                         Logni("Spouštím aktualizaci " + System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe") + " s parametrem \"" + System.Reflection.Assembly.GetEntryAssembly().Location + "\"", LogMessage.INFO);
 
                         if (!InvokeRequired)
+                        {
+                            Logni("Zavírám Ticketník.", LogMessage.INFO);
                             this.Close();
+                            Application.Exit();
+                        }
                         else
+                        {
+
+                            Logni("Zavírám Ticketník.", LogMessage.INFO);
                             this.BeginInvoke(new Action(() => this.Close()));
+
+                            Application.Exit();
+                        }
                     }
                 }
                 infoBox.Text = jazyk.Message_AktualizaceHotova;
+
+                updateRunning = false;
             }
             catch (Exception e)
             {
                 infoBox.Text = jazyk.Message_AktualizaceSeNezdarila;
                 Logni("Aktualizace se nezdařila\r\n\r\n" + e.Message, LogMessage.WARNING);
-            }
-            finally
-            {
+
                 updateRunning = false;
-                try
-                {
-                    File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"));
-                }
-                catch { }
             }
 
             if (vlaknoTerp != null && !vlaknoTerp.IsAlive)
