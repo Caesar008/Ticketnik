@@ -327,7 +327,8 @@ namespace Ticketník
                         //type
                         exportSheet.Cell(row, 5).Value = s.GetTyp();
                         //date, time, comment
-                        exportSheet.Cell(row, 6).Value = s.Radek[ed].Datum;
+                        exportSheet.Cell(row, 6).DataType = Excel.XLDataType.Text;
+                        exportSheet.Cell(row, 6).SetValue(s.Radek[ed].Datum);
                         exportSheet.Cell(row, 7).Value = s.Radek[ed].Cas.ToString() == "0" ? "" : s.Radek[ed].Cas.ToString(nfi);
                         exportSheet.Cell(row, 8).Value = s.Radek[ed].Koment.Replace("\t", " ").Replace("\"", "");
                         /*//pondělí (čas, comment)
