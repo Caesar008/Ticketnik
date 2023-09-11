@@ -40,7 +40,7 @@ namespace Updater
                         string fileName = Path.GetFileName(file);
                         while (IsFileLocked(new FileInfo(file)))
                         {
-                            if (retry >= 50)
+                            if (retry >= 100)
                                 throw new IOException("File " + fileName + " cannot be updated - it is being used by another process.");
                             System.Threading.Thread.Sleep(120);
                             retry++;

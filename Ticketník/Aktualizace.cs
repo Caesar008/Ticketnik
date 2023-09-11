@@ -591,6 +591,7 @@ namespace Ticketník
                             Logni("Zavírám Ticketník.", LogMessage.INFO);
                             this.Close();
                             Application.Exit();
+                            System.Diagnostics.Process.GetCurrentProcess().Kill();
                         }
                         else
                         {
@@ -599,6 +600,7 @@ namespace Ticketník
                             this.BeginInvoke(new Action(() => this.Close()));
 
                             Application.Exit();
+                            System.Diagnostics.Process.GetCurrentProcess().Kill();
                         }
                     }
                 }
