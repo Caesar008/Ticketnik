@@ -98,7 +98,7 @@ namespace Ticketník.CustomControls
                 this.Tag = "CustomColor:Ignore";
                 this.vScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Vertical, this);
                 this.vScrollBar.Visible = false;
-                this.vScrollBar.ParentBorderColor = Parent.BorderColor;
+                this.vScrollBar.ParentBorderColor = Parent.BorderColorMouseOver;
                 this.vScrollBar.RespectParentBorder = true;
                 this.vScrollBar.Scrolled += VScrollBar_Scrolled;
                 Motiv.SetControlColor(vScrollBar);
