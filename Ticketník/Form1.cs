@@ -25,6 +25,7 @@ namespace Ticketník
     - Přidány statusy Zrušeno a Přeřazeno
     - Možnost přidávání příloh k ticketům
     - Oprava chyby #22-003
+    - Oprava chyby #23-003
     - Dll knihovny updatovány na novější verze
     */
 
