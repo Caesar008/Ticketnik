@@ -25,8 +25,8 @@ namespace Ticketník.CustomControls
             HScrollBar.BackColor = BackColor;
             VScrollBar.ForeColor = ForeColor;
             HScrollBar.ForeColor = ForeColor;
-            VScrollBar.ScrollNasobitel = 5;
-            HScrollBar.ScrollNasobitel = 5;
+            VScrollBar.ScrollNasobitel = 15;
+            HScrollBar.ScrollNasobitel = 15;
             VScrollBar.Visible = VScrollBarVisible;
             HScrollBar.Visible = HScrollBarVisible;
             rtb = new RichTextBoxInternal();
