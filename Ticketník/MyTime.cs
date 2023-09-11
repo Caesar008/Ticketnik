@@ -431,7 +431,7 @@ namespace Ticketník
                     foreach (NbtCompound customTerpy in terpFile.RootTag.Get<NbtCompound>("Custom").Tags.OfType<NbtCompound>())
                     {
                         MyTimeTerp customTerp = GetTerpData(customTerpy.Get<NbtString>("Number").Value).Result;
-                        if (customTerp.Label.EndsWith("@"))
+                        if (customTerp == null || customTerp.Label.EndsWith("@"))
                             continue;
                         Logni("Updatuji TERP " + customTerp.Number + " - " + customTerp.Label, Form1.LogMessage.INFO);
                         string label = customTerp.Label;
