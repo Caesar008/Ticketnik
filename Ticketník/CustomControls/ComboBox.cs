@@ -42,6 +42,7 @@ namespace Ticketník.CustomControls
             textBox.LostFocus += TextBox_LostFocus;
             textBox.TextChanged += TextBox_TextChanged;
             textBox.KeyDown += TextBox_KeyDown;
+            textBox.MouseDown += TextBox_MouseDown;
             textBox.Text = this.Text;
             textBox.Font = this.Font;
             textBox.Tag = "CustomColor:Ignore";
@@ -50,6 +51,11 @@ namespace Ticketník.CustomControls
             else
                 textBox.Visible = true;
             Controls.Add(textBox);
+        }
+
+        private void TextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBox.BackColor = BackColor;
         }
 
         bool canSearch = true;
@@ -87,24 +93,32 @@ namespace Ticketník.CustomControls
         {
             if(canSearch)
             {
+                canSearch = false;
                 if (items.Count > 0 && textBox.Text.Length > 0)
                 {
                     for (int i = 0; i < items.Count; i++)
                     {
                         if (items[i].ToString().StartsWith(textBox.Text, StringComparison.OrdinalIgnoreCase))
                         {
-                            _markedItem = i; break;
+                            SelectedIndex = i;
+                            _markedItem = SelectedIndex; break;
                         }
-                        _markedItem = -1;
+                        SelectedIndex = -1;
+                        _markedItem = SelectedIndex;
                     }
                 }
                 else if (textBox.Text.Length == 0 && items.Count > 0)
-                    _markedItem = 0;
+                {
+                    SelectedIndex = 0;
+                    _markedItem = SelectedIndex;
+                }
                 else
-                    _markedItem = -1;
+                {
+                    SelectedIndex = 0;
+                    _markedItem = SelectedIndex;
+                }
                 list.Invalidate();
             }
-            canSearch = false;
             Text = textBox.Text;
             canSearch= true;
         }
@@ -367,6 +381,7 @@ namespace Ticketník.CustomControls
         {
             base.OnLostFocus(e);
             _mouseIn = false;
+            textBox.BackColor = BackColor;
             Invalidate();
         }
 
@@ -393,7 +408,7 @@ namespace Ticketník.CustomControls
                 {
                     if (selectedIndex > 0)
                     {
-                        selectedIndex -= 1;
+                        SelectedIndex -= 1;
                         Invalidate();
                         SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
                     }
@@ -402,17 +417,81 @@ namespace Ticketník.CustomControls
                 {
                     if (selectedIndex < items.Count - 1)
                     {
-                        selectedIndex += 1;
+                        SelectedIndex += 1;
                         Invalidate();
                         SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
                     }
+                }
+                else
+                {
+                    return base.ProcessCmdKey(ref msg, keyData);
                 }
             }
             else
             {
                 return base.ProcessCmdKey(ref msg, keyData);
             }
+            _markedItem = SelectedIndex;
             return true;
+        }
+
+        bool backspace = false;
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                base.OnKeyDown(e);
+                if (textBox.BackColor == Color.FromArgb(0, 120, 215))
+                {
+                    textBox.BackColor = BackColor;
+                    textBox.Text = "";
+                    Text = "";
+                }
+                if (e.KeyCode == Keys.Back)
+                {
+                    backspace = true;
+                    if (textBox.Text.Length > 0)
+                        textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
+                }
+            }
+        }
+
+        DateTime lastSearch = DateTime.MinValue;
+        string search = "";
+
+        protected override void OnKeyPress(KeyPressEventArgs e)
+        {
+            base.OnKeyPress(e);
+            if (!backspace)
+            {
+                if (DropDownStyle == ComboBoxStyle.DropDown)
+                {
+                    if (textBox.BackColor == Color.FromArgb(0, 120, 215))
+                    {
+                        textBox.BackColor = Parent.BackColor;
+                        textBox.Text = "";
+                    }
+                    textBox.Text += e.KeyChar;
+                }
+                else if (DropDownStyle == ComboBoxStyle.DropDownList)
+                {
+                    if (lastSearch.AddSeconds(1) < DateTime.Now)
+                        search = "";
+                    search += e.KeyChar;
+                    for (int i = 0; i < Items.Count; i++)
+                    {
+                        if ((Items[i] as string).ToLower().StartsWith(search.ToLower()))
+                        {
+                            SelectedIndex = i;
+                            _markedItem = SelectedIndex;
+                            break;
+                        }
+                    }
+                    lastSearch = DateTime.Now;
+                }
+            }
+            backspace = false;
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)
@@ -630,6 +709,16 @@ namespace Ticketník.CustomControls
             }
         }
 
+        public int FindString(string text)
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (Items[i] as string == text)
+                    return i;
+            }
+            return -1;
+        }
+
         public int SelectedIndex
         {
             get { return selectedIndex; }
@@ -638,11 +727,14 @@ namespace Ticketník.CustomControls
                 if (value >= 0 && value < Items.Count)
                 {
                     selectedIndex = value;
-                    Text = items[value] as string;
-                    textBox.Text = Text;
-                    if (list != null)
+                    if (canSearch)
                     {
-                        _markedItem = value;
+                        Text = items[value] as string;
+                        textBox.Text = Text;
+                        if (list != null)
+                        {
+                            _markedItem = value;
+                        }
                     }
                     
                     Invalidate();

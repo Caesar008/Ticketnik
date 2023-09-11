@@ -50,10 +50,10 @@
             this.terpList = new Ticketník.CustomControls.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new Ticketník.CustomControls.Button();
-            this.taskListTic = new Ticketník.CustomControls.ComboBoxOld();
+            this.taskListTic = new Ticketník.CustomControls.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.terpListTic = new Ticketník.CustomControls.ComboBoxOld();
+            this.terpListTic = new Ticketník.CustomControls.ComboBox();
             this.upravitPan.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -369,7 +369,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private Ticketník.CustomControls.Button button1;
-        internal Ticketník.CustomControls.ComboBoxOld taskListTic;
-        internal Ticketník.CustomControls.ComboBoxOld terpListTic;
+        internal Ticketník.CustomControls.ComboBox taskListTic;
+        internal Ticketník.CustomControls.ComboBox terpListTic;
     }
 }

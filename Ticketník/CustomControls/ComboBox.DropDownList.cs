@@ -172,6 +172,11 @@ namespace Ticketník.CustomControls
                 {
                     this.Location = new Point(this.Location.X, this.Location.Y - this.Height - Parent.Height);
                 }
+
+                if(Parent.DropDownStyle == ComboBoxStyle.DropDown && Parent.textBox.Text.Length > 0)
+                {
+                    Parent.textBox.BackColor = Color.FromArgb(0, 120, 215);
+                }
             }
 
             protected override void OnMouseMove(MouseEventArgs e)
@@ -257,6 +262,11 @@ namespace Ticketník.CustomControls
             protected override void OnKeyDown(KeyEventArgs e)
             {
                 base.OnKeyDown(e);
+                if (Parent.textBox.BackColor == Color.FromArgb(0, 120, 215))
+                {
+                    Parent.textBox.BackColor = Parent.BackColor;
+                    Parent.textBox.Text = "";
+                }
                 if (e.KeyCode == Keys.Back)
                 {
                     backspace = true;
@@ -273,14 +283,21 @@ namespace Ticketník.CustomControls
                 base.OnKeyPress(e);
                 if (!backspace)
                 {
-                    if(Parent.DropDownStyle == ComboBoxStyle.DropDown)
+                    if (Parent.DropDownStyle == ComboBoxStyle.DropDown)
+                    {
+                        if (Parent.textBox.BackColor == Color.FromArgb(0, 120, 215))
+                        {
+                            Parent.textBox.BackColor = Parent.BackColor;
+                            Parent.textBox.Text = "";
+                        }
                         Parent.textBox.Text += e.KeyChar;
-                    else if(Parent.DropDownStyle == ComboBoxStyle.DropDownList)
+                    }
+                    else if (Parent.DropDownStyle == ComboBoxStyle.DropDownList)
                     {
                         if (lastSearch.AddSeconds(1) < DateTime.Now)
                             search = "";
                         search += e.KeyChar;
-                        for(int i = 0; i<Parent.Items.Count; i++)
+                        for (int i = 0; i < Parent.Items.Count; i++)
                         {
                             if ((Parent.Items[i] as string).ToLower().StartsWith(search.ToLower()))
                             {

@@ -103,8 +103,8 @@ namespace Ticketník
                 taskListTic.Sorted = true;
                 terpListTic.SelectedIndex = terpListTic.FindString(terp);
                 taskListTic.SelectedIndex = taskListTic.FindString(task);
-                terpListTic.DropDownWidth = ComboWidth(terpListTic);
-                taskListTic.DropDownWidth = ComboWidth(taskListTic);
+                //terpListTic.DropDownWidth = ComboWidth(terpListTic);
+                //taskListTic.DropDownWidth = ComboWidth(taskListTic);
             }
             Motiv.SetMotiv(this);
         }
