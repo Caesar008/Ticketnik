@@ -394,6 +394,21 @@ namespace Ticketník
             }
         }
 
+        public enum MotivType
+        {
+            Svetly = 1,
+            Tmavy = 2
+        }
+
+        public static MotivType GetMotivType()
+        {
+            string m = GetMotiv();
+            if (m == "světlý")
+                return MotivType.Svetly;
+            else
+                return MotivType.Tmavy;
+        }
+
         internal static void SetControlColorOver(object c)
         {
             string sMotiv = GetMotiv();

@@ -494,6 +494,12 @@ namespace Ticketník
                         string scrollSeparator = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarSeparator"));
                         string back = ColorTranslator.ToHtml(Motiv.GetBarvy("pozadíControl"));
                         string fore = ColorTranslator.ToHtml(Motiv.GetBarvy("text"));
+                        Motiv.MotivType motiv = Motiv.GetMotivType();
+                        string typ = "";
+                        if (motiv == Motiv.MotivType.Tmavy)
+                            typ = "-Dark";
+                        else
+                            typ = "";
                         browser.DocumentText = File.ReadAllText(System.Reflection.Assembly.GetEntryAssembly().Location
                             .Replace("Ticketnik.exe", "") + "help\\" + (string)e.Node.Tag)
                             .Replace("{verze}", Application.ProductVersion)
@@ -505,6 +511,7 @@ namespace Ticketník
                             .Replace("{scrollSeparatorColor}", scrollSeparator)
                             .Replace("{backColor}", back)
                             .Replace("{foreColor}", fore)
+                            .Replace("{imgTypName}", typ)
                             ;
                         menuTree.SelectedNode = null;
                         
@@ -530,6 +537,12 @@ namespace Ticketník
                     string back = ColorTranslator.ToHtml(Motiv.GetBarvy("pozadíControl"));
                     string fore = ColorTranslator.ToHtml(Motiv.GetBarvy("text"));
                     string soub = url.Replace("tic://", "");
+                    Motiv.MotivType motiv = Motiv.GetMotivType();
+                    string typ = "";
+                    if (motiv == Motiv.MotivType.Tmavy)
+                        typ = "-Dark";
+                    else
+                        typ = "";
                     Expand(soub, menuTree.Nodes);
                     soub = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\" + soub;
                     browser.DocumentText = File.ReadAllText(soub)
@@ -542,6 +555,7 @@ namespace Ticketník
                         .Replace("{scrollSeparatorColor}", scrollSeparator)
                         .Replace("{backColor}", back)
                         .Replace("{foreColor}", fore)
+                        .Replace("{imgTypName}", typ)
                         ;
                 }
                 else if (url.StartsWith("http"))
