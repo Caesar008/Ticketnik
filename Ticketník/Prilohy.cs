@@ -216,12 +216,15 @@ namespace Ticketník
 
                 prilohyDat.SaveToFile(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\prilohy.dat", NbtCompression.GZip);
 
-                foreach (string s in Directory.GetDirectories(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\Soubory"))
+                if (Directory.Exists(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\Soubory"))
                 {
-                    if (Directory.GetFiles(s).Length == 0)
+                    foreach (string s in Directory.GetDirectories(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\Soubory"))
                     {
-                        Directory.Delete(s);
-                        form.Logni("Mažu složku " + s, Form1.LogMessage.INFO);
+                        if (Directory.GetFiles(s).Length == 0)
+                        {
+                            Directory.Delete(s);
+                            form.Logni("Mažu složku " + s, Form1.LogMessage.INFO);
+                        }
                     }
                 }
             }
@@ -495,6 +498,26 @@ namespace Ticketník
 
         public static int PocetPriloh(Form1 form, long ticketID)
         {
+            if (!Directory.Exists(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1)))
+            {
+                form.Logni("Vytvářím složku příloh i s dat souborem pro " + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1), Form1.LogMessage.INFO);
+                Directory.CreateDirectory(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1));
+                NbtFile prilohyFile = new NbtFile(new NbtCompound("Přílohy"));
+                prilohyFile.RootTag.Add(new NbtCompound("Seznam příloh"));
+                prilohyFile.RootTag.Add(new NbtCompound("Tickety"));
+                prilohyFile.SaveToFile(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\prilohy.dat", NbtCompression.GZip);
+                
+            }
+
+            if (!File.Exists(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\prilohy.dat"))
+            {
+                form.Logni("Vytvářím prilohy.dat pro " + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1), Form1.LogMessage.INFO);
+                NbtFile prilohyFile = new NbtFile(new NbtCompound("Přílohy"));
+                prilohyFile.RootTag.Add(new NbtCompound("Seznam příloh"));
+                prilohyFile.RootTag.Add(new NbtCompound("Tickety"));
+                prilohyFile.SaveToFile(appdata + "\\Ticketnik\\Prilohy\\prilohy.dat", NbtCompression.GZip);
+                
+            }
             NbtFile prilohyDat = new NbtFile();
             prilohyDat.LoadFromFile(appdata + "\\Ticketnik\\Prilohy\\" + form.jmenoSouboru.Remove(0, form.jmenoSouboru.LastIndexOf('\\') + 1) + "\\prilohy.dat");
                         

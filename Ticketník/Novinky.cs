@@ -11,21 +11,43 @@ namespace Ticketník
             InitializeComponent();
             this.form = form;
 
-            cz.AppendText("Novinky ve verzi 1.8.0.0\r\n\r\n");
+            cz.AppendText("Novinky ve verzi 2.0.0.0\r\n\r\n");
             cz.SelectionStart = 0;
             cz.SelectionLength = cz.TextLength;
             cz.SelectionFont = new Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
 
-            cz.AppendText(@" - Podpota světlého a tmavého módu
-    - Zmenšení velikosti exe vynecháním knihoven");
+            cz.AppendText(@"- Podpora světlého a tmavého režimu
+    - Ovládací prvky přepsány pro větší kontrolu nad nimi
+    - Zmenšení velikosti exe vynecháním knihoven
+    - Zrušeno potvrzování změny data ticketu
+    - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
+    - Ctrl+V nyní umí rozpoznat tickety z SM9
+    - Automatický upload do MyTime
+    - Přidány statusy Zrušeno a Přeřazeno
+    - Možnost přidávání příloh k ticketům
+    - Oprava chyby #22-003
+    - Oprava chyby #23-003
+    - Dll knihovny updatovány na novější verze
+    - Opravy v překladu");
 
-            en.AppendText("News in version 1.8.0.0\r\n\r\n");
+            en.AppendText("News in version 2.0.0.0\r\n\r\n");
             en.SelectionStart = 0;
             en.SelectionLength = en.TextLength;
             en.SelectionFont = new Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
 
             en.AppendText(@" - Support for light and dark mode
-    - Decreased exe size by excluding libraries");
+    - Controlls has been redone to have more control over them
+    - Decreased size of exe by excluding libraries
+    - Removed date change confirmation
+    - Ctrl+V now sets start time to time of insertion rather than midnight
+    - Ctrl+V now recognize tickets from SM9
+    - Autoupload to MyTime
+    - Added statuses Canceled and Reassigned
+    - Abbility to join attachemtns to tickets
+    - Fixed error #22-003
+    - Fixed error #23-003
+    - Dll updated to newer versions
+    - Fixes in translation");
             Motiv.SetMotiv(this);
         }
 

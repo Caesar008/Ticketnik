@@ -1665,12 +1665,14 @@ namespace Ticketník
                 Properties.Settings.Default.Save();
                 try
                 {
+                    Logni("Načítám " + jmenoSouboru, LogMessage.INFO);
                     LoadFile();
+                    Logni("Vytvářím " + jmenoSouboru + ".bak", LogMessage.INFO);
                     File.Copy(jmenoSouboru, jmenoSouboru + ".bak", true);
                 }
                 catch (Exception ee)
                 {
-                    Logni("Soubor .tic je poškozen. " + jmenoSouboru, LogMessage.WARNING);
+                    Logni("Soubor .tic je poškozen. " + jmenoSouboru + "\r\n" + ee.Message, LogMessage.WARNING);
                     CustomControls.MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
         }

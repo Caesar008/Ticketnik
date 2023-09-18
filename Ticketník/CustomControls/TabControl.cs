@@ -205,13 +205,21 @@ namespace Ticketník.CustomControls
 
         private void TabControl_ControlAdded(object sender, ControlEventArgs e)
         {
-            if(e.Control.GetType() == typeof(CustomControls.TabPage)) 
+            if (e.Control.GetType() == typeof(CustomControls.TabPage))
             {
                 TabPages.Add((CustomControls.TabPage)e.Control);
-                e.Control.Location= new Point(1, headerHight+2);
+                e.Control.Location = new Point(1, headerHight + 2);
                 e.Control.Width = Width - 2;
                 e.Control.Height = Height - 3 - headerHight;
+                e.Control.TextChanged += TabPage_TextChanged; 
             }
+        }
+
+        private void TabPage_TextChanged(object sender, EventArgs e)
+        {
+            Size headers = MeasureHeaders(TabPages);
+            Rectangle allHeaders = new Rectangle(0, 0, headers.Width + 3, headers.Height);
+            Invalidate(allHeaders);
         }
 
         public class TabPageCollection

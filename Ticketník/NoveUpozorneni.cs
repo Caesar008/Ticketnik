@@ -18,6 +18,7 @@ namespace Ticketník
             this.comboBox1.Items.Add(form.jazyk.Windows_Upozorneni_RDP);
             this.comboBox1.Items.Add(form.jazyk.Windows_Upozorneni_Upo);
             this.comboBox1.SelectedItem = form.jazyk.Windows_Upozorneni_Upo;
+            this.label3.Text = form.jazyk.Windows_Upozorneni_Popis;
             Motiv.SetMotiv(this);
         }
 
