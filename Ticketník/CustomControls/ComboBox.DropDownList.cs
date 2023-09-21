@@ -247,6 +247,14 @@ namespace Ticketník.CustomControls
                         Parent.SelectedIndex += 1;
                     }
                 }
+                else if(keyData == Keys.Enter || keyData == Keys.Escape)
+                {
+                    Hide();
+                    IsOpen = false;
+                    Parent.lastFocusLost = DateTime.Now;
+                    Parent.Text = Parent.items[Parent.SelectedIndex] as string;
+                    Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
+                }
                 else
                 {
                     return base.ProcessCmdKey(ref msg, keyData);

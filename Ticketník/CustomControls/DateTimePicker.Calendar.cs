@@ -62,6 +62,25 @@ namespace Ticketník.CustomControls
                 }
             }
 
+            protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+            {
+                if (keyData == Keys.Enter || keyData == Keys.Escape)
+                {
+                    CurrentView = View.Days;
+                    if(keyData == Keys.Enter)
+                        ActualDate = SelectedDate;
+                    if (Parent != null)
+                    {
+                        this.Hide();
+                        this.isOpen = false;
+                        Parent.lastFocusLost = DateTime.Now;
+                        Parent.CloseUp?.Invoke(Parent, EventArgs.Empty);
+                        this.Close();
+                    }
+                }
+                return true;
+            }
+
             DateTimePicker dp;
             new public DateTimePicker Parent
             {

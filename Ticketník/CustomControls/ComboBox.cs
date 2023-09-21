@@ -117,7 +117,8 @@ namespace Ticketník.CustomControls
                     SelectedIndex = 0;
                     _markedItem = SelectedIndex;
                 }
-                list.Invalidate();
+                if(list != null)
+                    list.Invalidate();
             }
             Text = textBox.Text;
             canSearch= true;
