@@ -702,6 +702,15 @@ namespace Ticketník.CustomControls
             }*/
         }
 
+        protected override void OnHandleDestroyed(EventArgs e)
+        {
+            if(calendar != null)
+            {
+                calendar.Close();
+            }
+            base.OnHandleDestroyed(e);
+        }
+
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);

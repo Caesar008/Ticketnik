@@ -154,7 +154,7 @@ namespace Ticketník
                     ((CustomControls.Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
                     ((CustomControls.Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
                     ((CustomControls.Button)c).BorderColorMouseOver = Color.DodgerBlue;
-                }
+                }/*
                 else if (c.GetType() == typeof(CustomControls.ComboBoxOld))
                 {
                     ((CustomControls.ComboBoxOld)c).BackColor = barvy[sMotiv]["pozadíControl"];
@@ -167,7 +167,7 @@ namespace Ticketník
                     ((CustomControls.ComboBoxOld)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
                     ((CustomControls.ComboBoxOld)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
                     ((CustomControls.ComboBoxOld)c).BorderColorDisabled = barvy[sMotiv]["buttonBorder"];
-                }
+                }*/
                 else if (c.GetType() == typeof(CustomControls.ComboBox))
                 {
                     ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
@@ -341,7 +341,7 @@ namespace Ticketník
                 }
 
                 if (c as Control != null && !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+") && 
-                    c.GetType() != typeof(CustomControls.TextBox) && c.GetType() != typeof(CustomControls.ComboBoxOld))
+                    c.GetType() != typeof(CustomControls.TextBox)/* && c.GetType() != typeof(CustomControls.ComboBoxOld)*/)
                 {
                     foreach (Control cc in ((Control)c).Controls)
                     {

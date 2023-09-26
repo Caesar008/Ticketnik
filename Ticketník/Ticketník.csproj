@@ -98,9 +98,6 @@
     <Compile Include="CustomControls\ComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomControls\ComboBoxOld.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CustomControls\ComboBox.DropDownList.cs">
       <SubType>Component</SubType>
     </Compile>

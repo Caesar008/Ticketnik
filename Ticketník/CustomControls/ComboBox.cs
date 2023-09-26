@@ -514,6 +514,15 @@ namespace Ticketník.CustomControls
             }
         }
 
+        protected override void OnHandleDestroyed(EventArgs e)
+        {
+            if(list != null)
+            {
+                list.Close();
+            }
+            base.OnHandleDestroyed(e);
+        }
+
         public event EventHandler DropDown;
 
         protected override void OnMouseDown(MouseEventArgs e)
