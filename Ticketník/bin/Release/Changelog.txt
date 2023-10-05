@@ -1,3 +1,7 @@
+2.0.0.1 (5.10.2023)
+
+- Opraven problém s knihovnami a jejich závislostmi
+-----------------------------------
 2.0.0.0 (5.10.2023)
 
 - Podpora světlého a tmavého režimu
