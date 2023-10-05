@@ -154,20 +154,7 @@ namespace Ticketník
                     ((CustomControls.Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
                     ((CustomControls.Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
                     ((CustomControls.Button)c).BorderColorMouseOver = Color.DodgerBlue;
-                }/*
-                else if (c.GetType() == typeof(CustomControls.ComboBoxOld))
-                {
-                    ((CustomControls.ComboBoxOld)c).BackColor = barvy[sMotiv]["pozadíControl"];
-                    ((CustomControls.ComboBoxOld)c).ForeColor = barvy[sMotiv]["text"];
-                    ((CustomControls.ComboBoxOld)c).FlatStyle = FlatStyle.Flat;
-                    ((CustomControls.ComboBoxOld)c).BorderColor = barvy[sMotiv]["buttonBorder"];
-                    ((CustomControls.ComboBoxOld)c).ButtonColor = barvy[sMotiv]["button"];
-                    ((CustomControls.ComboBoxOld)c).ArrowColor = barvy[sMotiv]["arrow"];
-                    ((CustomControls.ComboBoxOld)c).BorderColorMouseOver = Color.DodgerBlue;
-                    ((CustomControls.ComboBoxOld)c).ButtonColorMouseOver = barvy[sMotiv]["controlOver"];
-                    ((CustomControls.ComboBoxOld)c).ButtonHighlightColorDisabled = barvy[sMotiv]["pozadíDisabled"];
-                    ((CustomControls.ComboBoxOld)c).BorderColorDisabled = barvy[sMotiv]["buttonBorder"];
-                }*/
+                }
                 else if (c.GetType() == typeof(CustomControls.ComboBox))
                 {
                     ((CustomControls.ComboBox)c).BackColor = barvy[sMotiv]["pozadíControl"];
@@ -288,7 +275,6 @@ namespace Ticketník
                 }
                 else if (c.GetType() == typeof(CustomControls.DateTimePicker))
                 {
-                    //((CustomControls.DateTimePicker)c).BackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DateTimePicker)c).ForeColor = barvy[sMotiv]["text"];
                     ((CustomControls.DateTimePicker)c).BorderColor = barvy[sMotiv]["buttonBorder"];
                     ((CustomControls.DateTimePicker)c).ButtonColor = barvy[sMotiv]["button"];
@@ -299,7 +285,7 @@ namespace Ticketník
                     ((CustomControls.DateTimePicker)c).ButtonColorDisabled = barvy[sMotiv]["pozadíDisabled"];
                     ((CustomControls.DateTimePicker)c).BorderColorDisabled = barvy[sMotiv]["buttonBorder"];
 
-                    ((CustomControls.DateTimePicker)c).MonthBorderColor = Color.DodgerBlue; //barvy[sMotiv]["buttonBorder"];
+                    ((CustomControls.DateTimePicker)c).MonthBorderColor = Color.DodgerBlue;
                     ((CustomControls.DateTimePicker)c).MonthBackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DateTimePicker)c).MonthHeaderBackColor = barvy[sMotiv]["pozadíControl"];
                     ((CustomControls.DateTimePicker)c).MonthHeaderForeColor = barvy[sMotiv]["text"];
@@ -341,7 +327,7 @@ namespace Ticketník
                 }
 
                 if (c as Control != null && !c.GetType().ToString().StartsWith("System.Windows.Forms.UpDownBase+") && 
-                    c.GetType() != typeof(CustomControls.TextBox)/* && c.GetType() != typeof(CustomControls.ComboBoxOld)*/)
+                    c.GetType() != typeof(CustomControls.TextBox))
                 {
                     foreach (Control cc in ((Control)c).Controls)
                     {
@@ -415,7 +401,7 @@ namespace Ticketník
 
             if (c.GetType() == typeof(Button))
             {
-                ((Button)c).FlatAppearance.BorderColor = Color.DodgerBlue; //barvy[sMotiv]["controlRámeček"];
+                ((Button)c).FlatAppearance.BorderColor = Color.DodgerBlue;
                 ((Button)c).FlatAppearance.MouseOverBackColor = barvy[sMotiv]["controlOver"];
                 ((Button)c).FlatAppearance.MouseDownBackColor = barvy[sMotiv]["pozadíControlPush"];
 

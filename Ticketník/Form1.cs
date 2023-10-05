@@ -27,6 +27,7 @@ namespace Ticketník
     - Oprava chyby #22-003
     - Oprava chyby #23-003
     - Dll knihovny updatovány na novější verze
+    - Oprava updateru
     */
 
     public partial class Form1 : Form
@@ -3360,15 +3361,5 @@ namespace Ticketník
                 Aktualizace(devtest);
             }
         }
-
-        /*protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }*/
     }
 }

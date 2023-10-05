@@ -2607,7 +2607,6 @@ namespace Ticketník
                 else if (_search)
                     onlineTaskComboBox.Items.Add(mtt.Label);
             }
-            //onlineTaskComboBox.DropDownWidth = ComboWidth(onlineTaskComboBox);
             onlineTaskComboBox.Sorted = true;
         }
 
@@ -2627,7 +2626,6 @@ namespace Ticketník
                     break;
                 }
             }
-            //onlineTypeComboBox.DropDownWidth = ComboWidth(onlineTypeComboBox);
             onlineTypeComboBox.Sorted = true;
 
             if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday && DateTime.Now.DayOfWeek != DayOfWeek.Saturday)
@@ -2686,7 +2684,6 @@ namespace Ticketník
                 else if (_search)
                     onlineTerpDropDown.Items.Add(onlineTerpy.Label);
             }
-            //onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
             onlineTerpDropDown.Sorted = true;
 
             foreach (string s in onlineTerpDropDown.Items)

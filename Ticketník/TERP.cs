@@ -50,8 +50,6 @@ namespace Ticketník
                 }
                 staryTask.Sorted = true;
                 staryTerp.Sorted = true;
-                //staryTask.DropDownWidth = ComboWidth(staryTask);
-                //staryTerp.DropDownWidth = ComboWidth(staryTerp);
             }
             else if(typ == 2)
             {
@@ -74,8 +72,6 @@ namespace Ticketník
                 }
                 terpList.Sorted = true;
                 taskList.Sorted = true;
-                //terpList.DropDownWidth = ComboWidth(terpList);
-                //taskList.DropDownWidth = ComboWidth(taskList);
             }
             else if (typ == 3)
             {
@@ -103,8 +99,6 @@ namespace Ticketník
                 taskListTic.Sorted = true;
                 terpListTic.SelectedIndex = terpListTic.FindString(terp);
                 taskListTic.SelectedIndex = taskListTic.FindString(task);
-                //terpListTic.DropDownWidth = ComboWidth(terpListTic);
-                //taskListTic.DropDownWidth = ComboWidth(taskListTic);
             }
             Motiv.SetMotiv(this);
         }
@@ -366,16 +360,6 @@ namespace Ticketník
             Zakaznici.Terpy.Get<NbtCompound>("Custom").Get<NbtList>("Task").RemoveAt(index);
             form.list.Save();
             this.Close();
-        }
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
         }
     }
 }

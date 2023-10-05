@@ -28,14 +28,5 @@ namespace Ticketník
             u.typ = (string)comboBox1.SelectedItem;
             u.popis = textBox1.Text;
         }
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }
     }
 }

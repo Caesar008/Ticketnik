@@ -159,7 +159,6 @@ namespace Ticketník.CustomControls
             fillColl.BorderColor = HeaderSeparatorColor;
             Controls.Add(fillColl) ;
             DoubleBuffered = true;
-            //SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.DoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             VScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Vertical, this);
             HScrollBar = new ScrollBar(ScrollBar.SizeModes.Automatic, ScrollBar.ScrollBarAlignment.Horizontal, this);
             VScrollBar.BackColor = BackColor;

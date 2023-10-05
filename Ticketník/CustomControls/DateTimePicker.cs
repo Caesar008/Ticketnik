@@ -968,7 +968,6 @@ namespace Ticketník.CustomControls
                 string den = new DateTime(Value.Ticks).ToString("%d") + ".";
                 Size denSize = TextRenderer.MeasureText(den, Font);
                 denRect = new Rectangle(new Point(denNameRect.Right, denNameRect.Top), denSize);
-                //DateTimeFormatInfo info = CultureInfo.GetCultureInfo(CultureInfo.CurrentCulture.Name).DateTimeFormat;
                 string mesic = DateTimeFormatInfo.CurrentInfo.MonthGenitiveNames[new DateTime(Value.Ticks).Month - 1];
                 Size mesicSize = TextRenderer.MeasureText(mesic, Font);
                 mesicRect = new Rectangle(new Point(denRect.Right, denRect.Top), mesicSize);

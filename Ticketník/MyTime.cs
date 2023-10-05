@@ -437,7 +437,6 @@ namespace Ticketník
                         string label = customTerp.Label;
                         if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerp.Label) == null)
                         {
-                            //terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(customTerpy.Name).Name = customTerp.Label;
                             label = customTerpy.Name;
                         }
                         if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtLong>("LastUpdate") != null)

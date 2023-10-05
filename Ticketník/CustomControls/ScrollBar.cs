@@ -587,8 +587,6 @@ namespace Ticketník.CustomControls
                             bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                             bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
-                            //tohle je jen pro test
-                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), new Rectangle(slider.X, slider.Y, 6, 119));
                         }
                     }
                     else if (Alignment == ScrollBarAlignment.Horizontal)
@@ -619,8 +617,6 @@ namespace Ticketník.CustomControls
                             bg.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                             bg.Graphics.FillPath(b, RoundedRect(slider, 3, 3, 3, 3));
                             bg.Graphics.SmoothingMode = SmoothingMode.None;
-                            //tohle je jen pro test
-                            //bg.Graphics.DrawRectangle(new Pen(Color.Violet, 1), sliderRectForDrag);
                         }
                     }
                 }

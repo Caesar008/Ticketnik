@@ -362,8 +362,6 @@ namespace Ticketník
                 {1, form.jazyk.Windows_Nastaveni_Tmavy},
                 {2, form.jazyk.Windows_Nastaveni_PodleSystemu}}.ToList();
             motivVyber.SelectedIndex = selectedMotiv;
-            //motivVyber.ValueMember = "Key";
-            //motivVyber.DisplayMember = "Value";
             this.ResumeLayout();
             form.ResumeLayout();
             Motiv.SetMotiv(this);
@@ -501,7 +499,7 @@ namespace Ticketník
         {
             Motiv.SetControlColor(sender);
         }
-        protected override CreateParams CreateParams
+        /*protected override CreateParams CreateParams
         {
             get
             {
@@ -509,6 +507,6 @@ namespace Ticketník
                 cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
                 return cp;
             }
-        }
+        }*/
     }
 }

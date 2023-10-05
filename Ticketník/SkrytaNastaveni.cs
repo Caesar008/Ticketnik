@@ -30,14 +30,5 @@ namespace Ticketník
                 update_cesta.Text + "\r\nZáložní update: " + zalozni_update.Text + "\r\nZáložní update první: " + 
                 zalozniUpdateBox.Checked + "\r\nNový export: " + novyExport.Checked , Form1.LogMessage.INFO);
         }
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }
     }
 }

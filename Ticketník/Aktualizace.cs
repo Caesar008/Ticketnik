@@ -69,7 +69,6 @@ namespace Ticketník
                                 catch { Logni("Nelze načíst aktualizační zdroj v síti.", LogMessage.WARNING); }
                             }
                             Logni("Nelze načíst žádný zdroj aktualizací.\r\n" + e.Message, LogMessage.WARNING);
-                            //why? Lepší je return. throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
                             return;
                         }
                     }
@@ -109,7 +108,6 @@ namespace Ticketník
                             catch { Logni("Nelze načíst aktualizační zdroj v síti.", LogMessage.WARNING); }
                         }
                         Logni("Nelze načíst žádný zdroj aktualizací.\r\n" + e.Message, LogMessage.WARNING);
-                        //why? Lepší je return. throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
                         return;
                     }
                 }
@@ -446,7 +444,7 @@ namespace Ticketník
                                 File.AppendAllText(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "ToRemove"), jmeno + "\r\n");
                             }
 
-                            if ((Version.Parse(verze) > Version.Parse(verzeExisting) || verzeExisting == "") && !toRemove)
+                            if ((verzeExisting == "" || Version.Parse(verze) > Version.Parse(verzeExisting)) && !toRemove)
                             {
                                 //updatovat/stáhnout
                                 try
