@@ -45,17 +45,25 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClosedXML, Version=0.93.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\ClosedXML.dll</HintPath>
+    <Reference Include="ClosedXML, Version=0.96.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.96.0\lib\net46\ClosedXML.dll</HintPath>
     </Reference>
-    <Reference Include="fNbt, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\fNbt.dll</HintPath>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.20.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.20.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MyTime terp loader test\MyTime terp loader test\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="fNbt, Version=0.6.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\fNbt.0.6.4\lib\net35-client\fNbt.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.54.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.54\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -73,6 +81,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutBox1.cs">
@@ -83,6 +92,56 @@
     </Compile>
     <Compile Include="Aktualizace.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlLocation.cs" />
+    <Compile Include="CustomControls\CheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ComboBox.DropDownList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\DateTimePicker.Calendar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\DateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MessageBox.Designer.cs">
+      <DependentUpon>MessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\RichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Messages.cs" />
+    <Compile Include="CustomControls\NumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\RadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Button.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Export.cs">
       <SubType>Form</SubType>
@@ -96,8 +155,12 @@
     <Compile Include="Export_stary.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Header.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Jazyk.cs" />
     <Compile Include="JednaInstalnce.cs" />
+    <Compile Include="Motiv.cs" />
     <Compile Include="MyTime.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,11 +195,11 @@
       <DependentUpon>Novinky.cs</DependentUpon>
     </Compile>
     <Compile Include="Pouzivani.cs" />
-    <Compile Include="Preklad.cs">
+    <Compile Include="Prilohy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preklad.Designer.cs">
-      <DependentUpon>Preklad.cs</DependentUpon>
+    <Compile Include="Prilohy.Designer.cs">
+      <DependentUpon>Prilohy.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -228,6 +291,9 @@
       <DependentUpon>AboutBox1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\MessageBox.resx">
+      <DependentUpon>MessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Export.resx">
       <DependentUpon>Export.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -249,8 +315,8 @@
     <EmbeddedResource Include="Novinky.resx">
       <DependentUpon>Novinky.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preklad.resx">
-      <DependentUpon>Preklad.cs</DependentUpon>
+    <EmbeddedResource Include="Prilohy.resx">
+      <DependentUpon>Prilohy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportWindow.resx">
       <DependentUpon>ReportWindow.cs</DependentUpon>
@@ -298,6 +364,7 @@
     <None Include="bin\Debug\help\help" />
     <None Include="bin\Release\Help.zip" />
     <None Include="bin\Release\zakaznici" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -392,16 +459,29 @@
     <None Include="bin\Release\fNbt.dll" />
     <None Include="bin\Release\ClosedXML.dll" />
     <None Include="bin\Release\DocumentFormat.OpenXml.dll" />
-    <None Include="bin\Release\FastMember.Signed.dll" />
     <Resource Include="bin\Release\lang\CZ.xml" />
     <None Include="bin\Release\Newtonsoft.Json.dll" />
     <Content Include="bin\Release\Changelog.txt" />
+    <Content Include="bin\Release\ExcelNumberFormat.dll" />
     <Content Include="bin\Release\Future.txt" />
     <Content Include="bin\Release\Help.xml" />
+    <Content Include="bin\Release\HtmlAgilityPack.dll" />
     <Content Include="bin\Release\jazyky.xml" />
     <Content Include="bin\Release\known_errors.txt" />
     <Content Include="bin\Release\Ticketnik.exe" />
     <Content Include="bin\Release\ticketnik.xml" />
+    <None Include="ikony\newFile.png" />
+    <None Include="ikony\settings.png" />
+    <None Include="ikony\crash.png" />
+    <None Include="ikony\millenium.png" />
+    <None Include="ikony\open.png" />
+    <None Include="ikony\save.png" />
+    <None Include="ikony\export.png" />
+    <None Include="ikony\off.png" />
+    <None Include="ikony\exportW.png" />
+    <None Include="ikony\offW.png" />
+    <None Include="ikony\about.png" />
+    <None Include="ikony\priloha.png" />
     <None Include="Resources\Updater.exe" />
     <Content Include="ticket-256.ico" />
   </ItemGroup>

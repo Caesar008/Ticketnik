@@ -135,7 +135,7 @@ namespace Ticketník
                             }
                             catch
                             {
-                                MessageBox.Show(form.jazyk.Windows_Export_Ticket + " " + t.ID + " - " + t.Zakaznik + ", " + form.jazyk.Windows_Export_NaKteremJsiPracoval + " " + t.Datum.ToString("d.MM.yyyy") + ", " + form.jazyk.Windows_Export_Neukoncen);
+                                CustomControls.MessageBox.Show(form.jazyk.Windows_Export_Ticket + " " + t.ID + " - " + t.Zakaznik + ", " + form.jazyk.Windows_Export_NaKteremJsiPracoval + " " + t.Datum.ToString("d.MM.yyyy") + ", " + form.jazyk.Windows_Export_Neukoncen);
                             }
                         }
                     }

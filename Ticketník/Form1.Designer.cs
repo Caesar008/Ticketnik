@@ -71,7 +71,6 @@
             this.nahlásitProblémToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenu_Napoveda = new System.Windows.Forms.ToolStripMenuItem();
-            this.rokVyber = new System.Windows.Forms.ToolStripComboBox();
             this.infoBox = new System.Windows.Forms.ToolStripLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tool = new System.Windows.Forms.ToolStrip();
@@ -88,9 +87,14 @@
             this.hledat = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Napoveda = new System.Windows.Forms.ToolStripButton();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.ledenT = new System.Windows.Forms.TabPage();
-            this.leden = new System.Windows.Forms.ListView();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
+            this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
+            this.rokVyber = new Ticketník.CustomControls.ComboBox();
+            this.tabControl1 = new Ticketník.CustomControls.TabControl();
+            this.ledenT = new Ticketník.CustomControls.TabPage();
+            this.leden = new Ticketník.CustomControls.ListView(ledenT);
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -102,32 +106,29 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.unorT = new System.Windows.Forms.TabPage();
-            this.unor = new System.Windows.Forms.ListView();
-            this.brezenT = new System.Windows.Forms.TabPage();
-            this.brezen = new System.Windows.Forms.ListView();
-            this.dubenT = new System.Windows.Forms.TabPage();
-            this.duben = new System.Windows.Forms.ListView();
-            this.kvetenT = new System.Windows.Forms.TabPage();
-            this.kveten = new System.Windows.Forms.ListView();
-            this.cervenT = new System.Windows.Forms.TabPage();
-            this.cerven = new System.Windows.Forms.ListView();
-            this.cervenecT = new System.Windows.Forms.TabPage();
-            this.cervenec = new System.Windows.Forms.ListView();
-            this.srpenT = new System.Windows.Forms.TabPage();
-            this.srpen = new System.Windows.Forms.ListView();
-            this.zariT = new System.Windows.Forms.TabPage();
-            this.zari = new System.Windows.Forms.ListView();
-            this.rijenT = new System.Windows.Forms.TabPage();
-            this.rijen = new System.Windows.Forms.ListView();
-            this.listopadT = new System.Windows.Forms.TabPage();
-            this.listopad = new System.Windows.Forms.ListView();
-            this.prosinecT = new System.Windows.Forms.TabPage();
-            this.prosinec = new System.Windows.Forms.ListView();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
-            this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
+            this.unorT = new Ticketník.CustomControls.TabPage();
+            this.unor = new Ticketník.CustomControls.ListView(unorT);
+            this.brezenT = new Ticketník.CustomControls.TabPage();
+            this.brezen = new Ticketník.CustomControls.ListView(brezenT);
+            this.dubenT = new Ticketník.CustomControls.TabPage();
+            this.duben = new Ticketník.CustomControls.ListView(dubenT);
+            this.kvetenT = new Ticketník.CustomControls.TabPage();
+            this.kveten = new Ticketník.CustomControls.ListView(kvetenT);
+            this.cervenT = new Ticketník.CustomControls.TabPage();
+            this.cerven = new Ticketník.CustomControls.ListView(cervenT);
+            this.cervenecT = new Ticketník.CustomControls.TabPage();
+            this.cervenec = new Ticketník.CustomControls.ListView(cervenecT);
+            this.srpenT = new Ticketník.CustomControls.TabPage();
+            this.srpen = new Ticketník.CustomControls.ListView(srpenT);
+            this.zariT = new Ticketník.CustomControls.TabPage();
+            this.zari = new Ticketník.CustomControls.ListView(zariT);
+            this.rijenT = new Ticketník.CustomControls.TabPage();
+            this.rijen = new Ticketník.CustomControls.ListView(rijenT);
+            this.listopadT = new Ticketník.CustomControls.TabPage();
+            this.listopad = new Ticketník.CustomControls.ListView(listopadT);
+            this.prosinecT = new Ticketník.CustomControls.TabPage();
+            this.prosinec = new Ticketník.CustomControls.ListView(prosinecT);
+            this.rokVyberO = new Ticketník.CustomControls.ComboBox();
             this.menu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tool.SuspendLayout();
@@ -154,11 +155,10 @@
             this.sourceToolStripMenuItem,
             this.oProgramuToolStripMenuItem,
             this.toolStripMenu_Napoveda,
-            this.rokVyber,
             this.infoBox});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(834, 27);
+            this.menu.Size = new System.Drawing.Size(834, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -176,68 +176,74 @@
             this.oddToolStripMenuItem,
             this.ukončitToolStripMenuItem});
             this.souborToolStripMenuItem.Name = "souborToolStripMenuItem";
-            this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 23);
+            this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.souborToolStripMenuItem.Text = "Soubor";
             // 
             // novýToolStripMenuItem
             // 
+            this.novýToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("novýToolStripMenuItem.Image")));
             this.novýToolStripMenuItem.Name = "novýToolStripMenuItem";
-            this.novýToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.novýToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.novýToolStripMenuItem.Text = "Nový";
             this.novýToolStripMenuItem.Click += new System.EventHandler(this.novýToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(201, 6);
             // 
             // načístToolStripMenuItem
             // 
+            this.načístToolStripMenuItem.Image = global::Ticketník.Properties.Resources.open;
             this.načístToolStripMenuItem.Name = "načístToolStripMenuItem";
-            this.načístToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.načístToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.načístToolStripMenuItem.Text = "Otevřít";
             this.načístToolStripMenuItem.Click += new System.EventHandler(this.načístToolStripMenuItem_Click);
             // 
             // uložitToolStripMenuItem
             // 
+            this.uložitToolStripMenuItem.Image = global::Ticketník.Properties.Resources.save;
             this.uložitToolStripMenuItem.Name = "uložitToolStripMenuItem";
-            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.uložitToolStripMenuItem.Text = "Uložit";
             this.uložitToolStripMenuItem.Click += new System.EventHandler(this.uložitToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(201, 6);
             // 
             // exportovatToolStripMenuItem
             // 
+            this.exportovatToolStripMenuItem.Image = global::Ticketník.Properties.Resources.export;
             this.exportovatToolStripMenuItem.Name = "exportovatToolStripMenuItem";
-            this.exportovatToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.exportovatToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.exportovatToolStripMenuItem.Text = "Exportovat";
             this.exportovatToolStripMenuItem.Click += new System.EventHandler(this.exportovatToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(201, 6);
             // 
             // převéstNaFormátMilleniumToolStripMenuItem
             // 
+            this.převéstNaFormátMilleniumToolStripMenuItem.Image = global::Ticketník.Properties.Resources.millenium;
             this.převéstNaFormátMilleniumToolStripMenuItem.Name = "převéstNaFormátMilleniumToolStripMenuItem";
-            this.převéstNaFormátMilleniumToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.převéstNaFormátMilleniumToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.převéstNaFormátMilleniumToolStripMenuItem.Text = "Převést na formát Millenium";
             this.převéstNaFormátMilleniumToolStripMenuItem.Click += new System.EventHandler(this.převéstNaFormátMilleniumToolStripMenuItem_Click);
             // 
             // oddToolStripMenuItem
             // 
             this.oddToolStripMenuItem.Name = "oddToolStripMenuItem";
-            this.oddToolStripMenuItem.Size = new System.Drawing.Size(221, 6);
+            this.oddToolStripMenuItem.Size = new System.Drawing.Size(201, 6);
             // 
             // ukončitToolStripMenuItem
             // 
+            this.ukončitToolStripMenuItem.Image = global::Ticketník.Properties.Resources.off;
             this.ukončitToolStripMenuItem.Name = "ukončitToolStripMenuItem";
-            this.ukončitToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.ukončitToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
             this.ukončitToolStripMenuItem.Text = "Zavřít";
             this.ukončitToolStripMenuItem.Click += new System.EventHandler(this.ukončitToolStripMenuItem_Click);
             // 
@@ -260,13 +266,14 @@
             this.toolStripMenuItem6,
             this.reportToolStripMenuItem});
             this.možnostiToolStripMenuItem.Name = "možnostiToolStripMenuItem";
-            this.možnostiToolStripMenuItem.Size = new System.Drawing.Size(68, 23);
+            this.možnostiToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.možnostiToolStripMenuItem.Text = "Možnosti";
             // 
             // nastaveníToolStripMenuItem
             // 
+            this.nastaveníToolStripMenuItem.Image = global::Ticketník.Properties.Resources.settings;
             this.nastaveníToolStripMenuItem.Name = "nastaveníToolStripMenuItem";
-            this.nastaveníToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.nastaveníToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.nastaveníToolStripMenuItem.Text = "Nastavení";
             this.nastaveníToolStripMenuItem.Click += new System.EventHandler(this.nastaveníToolStripMenuItem_Click);
             // 
@@ -277,8 +284,9 @@
             // 
             // upozorněníToolStripMenuItem
             // 
+            this.upozorněníToolStripMenuItem.Image = global::Ticketník.Properties.Resources.bell_16;
             this.upozorněníToolStripMenuItem.Name = "upozorněníToolStripMenuItem";
-            this.upozorněníToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.upozorněníToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.upozorněníToolStripMenuItem.Text = "Upozornění";
             this.upozorněníToolStripMenuItem.Click += new System.EventHandler(this.upozorněníToolStripMenuItem_Click);
             // 
@@ -289,22 +297,25 @@
             // 
             // přidatZákazníkaToolStripMenuItem
             // 
+            this.přidatZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.addZak;
             this.přidatZákazníkaToolStripMenuItem.Name = "přidatZákazníkaToolStripMenuItem";
-            this.přidatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.přidatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.přidatZákazníkaToolStripMenuItem.Text = "Přidat zákazníka";
             this.přidatZákazníkaToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // upravitZákazníkaToolStripMenuItem
             // 
+            this.upravitZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.zmenZak;
             this.upravitZákazníkaToolStripMenuItem.Name = "upravitZákazníkaToolStripMenuItem";
-            this.upravitZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.upravitZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.upravitZákazníkaToolStripMenuItem.Text = "Upravit zákazníka";
             this.upravitZákazníkaToolStripMenuItem.Click += new System.EventHandler(this.zmenZakaznika_Click);
             // 
             // smazatZákazníkaToolStripMenuItem
             // 
+            this.smazatZákazníkaToolStripMenuItem.Image = global::Ticketník.Properties.Resources.delZak;
             this.smazatZákazníkaToolStripMenuItem.Name = "smazatZákazníkaToolStripMenuItem";
-            this.smazatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.smazatZákazníkaToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.smazatZákazníkaToolStripMenuItem.Text = "Smazat zákazníka";
             this.smazatZákazníkaToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
@@ -315,22 +326,25 @@
             // 
             // přidatTERPKódToolStripMenuItem
             // 
+            this.přidatTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.addZaznam;
             this.přidatTERPKódToolStripMenuItem.Name = "přidatTERPKódToolStripMenuItem";
-            this.přidatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.přidatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.přidatTERPKódToolStripMenuItem.Text = "Přidat TERP kód";
             this.přidatTERPKódToolStripMenuItem.Click += new System.EventHandler(this.přidatTERPKódToolStripMenuItem_Click);
             // 
             // upravitTERPKódToolStripMenuItem
             // 
+            this.upravitTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.editZaznam;
             this.upravitTERPKódToolStripMenuItem.Name = "upravitTERPKódToolStripMenuItem";
-            this.upravitTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.upravitTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.upravitTERPKódToolStripMenuItem.Text = "Aktualizovat TERP kódy";
             this.upravitTERPKódToolStripMenuItem.Click += new System.EventHandler(this.upravitTERPKódToolStripMenuItem_Click);
             // 
             // smazatTERPKódToolStripMenuItem
             // 
+            this.smazatTERPKódToolStripMenuItem.Image = global::Ticketník.Properties.Resources.delZaznam;
             this.smazatTERPKódToolStripMenuItem.Name = "smazatTERPKódToolStripMenuItem";
-            this.smazatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.smazatTERPKódToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.smazatTERPKódToolStripMenuItem.Text = "Smazat TERP kód";
             this.smazatTERPKódToolStripMenuItem.Click += new System.EventHandler(this.smazatTERPKódToolStripMenuItem_Click);
             // 
@@ -341,8 +355,9 @@
             // 
             // hledatToolStripMenuItem
             // 
+            this.hledatToolStripMenuItem.Image = global::Ticketník.Properties.Resources.search;
             this.hledatToolStripMenuItem.Name = "hledatToolStripMenuItem";
-            this.hledatToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.hledatToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.hledatToolStripMenuItem.Text = "Hledat";
             this.hledatToolStripMenuItem.Click += new System.EventHandler(this.hledat_Click);
             // 
@@ -353,8 +368,9 @@
             // 
             // reportToolStripMenuItem
             // 
+            this.reportToolStripMenuItem.Image = global::Ticketník.Properties.Resources.crash;
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
-            this.reportToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(197, 20);
             this.reportToolStripMenuItem.Text = "Crash report";
             this.reportToolStripMenuItem.Click += new System.EventHandler(this.reportToolStripMenuItem_Click);
             // 
@@ -372,34 +388,34 @@
             this.dělitelToolStripMenuItem,
             this.nahlásitProblémToolStripMenuItem});
             this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
-            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(55, 23);
+            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.sourceToolStripMenuItem.Text = "Source";
             // 
             // knownIssuesToolStripMenuItem
             // 
             this.knownIssuesToolStripMenuItem.Name = "knownIssuesToolStripMenuItem";
-            this.knownIssuesToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.knownIssuesToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.knownIssuesToolStripMenuItem.Text = "Známé problémy";
             this.knownIssuesToolStripMenuItem.Click += new System.EventHandler(this.knownIssuesToolStripMenuItem_Click);
             // 
             // changelogToolStripMenuItem
             // 
             this.changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.changelogToolStripMenuItem.Text = "Changelog";
             this.changelogToolStripMenuItem.Click += new System.EventHandler(this.changelogToolStripMenuItem_Click);
             // 
             // plányDoBudoucnaToolStripMenuItem
             // 
             this.plányDoBudoucnaToolStripMenuItem.Name = "plányDoBudoucnaToolStripMenuItem";
-            this.plányDoBudoucnaToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.plányDoBudoucnaToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.plányDoBudoucnaToolStripMenuItem.Text = "Plány do budoucna";
             this.plányDoBudoucnaToolStripMenuItem.Click += new System.EventHandler(this.plányDoBudoucnaToolStripMenuItem_Click);
             // 
             // dokumentaceToolStripMenuItem
             // 
             this.dokumentaceToolStripMenuItem.Name = "dokumentaceToolStripMenuItem";
-            this.dokumentaceToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.dokumentaceToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.dokumentaceToolStripMenuItem.Text = "Dokumentace";
             this.dokumentaceToolStripMenuItem.Click += new System.EventHandler(this.dokumentaceToolStripMenuItem_Click);
             // 
@@ -411,21 +427,21 @@
             // dostupnéJazykyToolStripMenuItem
             // 
             this.dostupnéJazykyToolStripMenuItem.Name = "dostupnéJazykyToolStripMenuItem";
-            this.dostupnéJazykyToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.dostupnéJazykyToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.dostupnéJazykyToolStripMenuItem.Text = "Dostupné jazyky";
             this.dostupnéJazykyToolStripMenuItem.Click += new System.EventHandler(this.dostupnéJazykyToolStripMenuItem_Click);
             // 
             // vyhledatAktualizaceToolStripMenuItem
             // 
             this.vyhledatAktualizaceToolStripMenuItem.Name = "vyhledatAktualizaceToolStripMenuItem";
-            this.vyhledatAktualizaceToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.vyhledatAktualizaceToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.vyhledatAktualizaceToolStripMenuItem.Text = "Vyhledat aktualizace";
             this.vyhledatAktualizaceToolStripMenuItem.Click += new System.EventHandler(this.vyhledatAktualizaceToolStripMenuItem_Click);
             // 
             // aktualizovatVšechnyTerpyToolStripMenuItem
             // 
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Name = "aktualizovatVšechnyTerpyToolStripMenuItem";
-            this.aktualizovatVšechnyTerpyToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.aktualizovatVšechnyTerpyToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Text = "Aktualizovat všechny Terpy";
             this.aktualizovatVšechnyTerpyToolStripMenuItem.Click += new System.EventHandler(this.aktualizovatVšechnyTerpyToolStripMenuItem_Click);
             // 
@@ -437,40 +453,31 @@
             // nahlásitProblémToolStripMenuItem
             // 
             this.nahlásitProblémToolStripMenuItem.Name = "nahlásitProblémToolStripMenuItem";
-            this.nahlásitProblémToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.nahlásitProblémToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.nahlásitProblémToolStripMenuItem.Text = "Nahlásit problém";
             this.nahlásitProblémToolStripMenuItem.Click += new System.EventHandler(this.nahlásitProblémToolStripMenuItem_Click);
             // 
             // oProgramuToolStripMenuItem
             // 
             this.oProgramuToolStripMenuItem.Name = "oProgramuToolStripMenuItem";
-            this.oProgramuToolStripMenuItem.Size = new System.Drawing.Size(84, 23);
+            this.oProgramuToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.oProgramuToolStripMenuItem.Text = "O programu";
             this.oProgramuToolStripMenuItem.Click += new System.EventHandler(this.oProgramuToolStripMenuItem_Click);
             // 
             // toolStripMenu_Napoveda
             // 
             this.toolStripMenu_Napoveda.Name = "toolStripMenu_Napoveda";
-            this.toolStripMenu_Napoveda.Size = new System.Drawing.Size(73, 23);
+            this.toolStripMenu_Napoveda.Size = new System.Drawing.Size(73, 20);
             this.toolStripMenu_Napoveda.Text = "Nápověda";
             this.toolStripMenu_Napoveda.ToolTipText = "Nápověda";
             this.toolStripMenu_Napoveda.Click += new System.EventHandler(this.toolStripMenu_Napoveda_Click);
             // 
-            // rokVyber
-            // 
-            this.rokVyber.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.rokVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.rokVyber.DropDownWidth = 60;
-            this.rokVyber.Name = "rokVyber";
-            this.rokVyber.Size = new System.Drawing.Size(75, 23);
-            this.rokVyber.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
-            // 
             // infoBox
             // 
             this.infoBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.infoBox.Enabled = false;
+            this.infoBox.ForeColor = System.Drawing.Color.DarkGray;
             this.infoBox.Name = "infoBox";
-            this.infoBox.Size = new System.Drawing.Size(48, 20);
+            this.infoBox.Size = new System.Drawing.Size(48, 17);
             this.infoBox.Text = "InfoBox";
             // 
             // panel1
@@ -596,6 +603,7 @@
             // 
             // toolStripSeparator1
             // 
+            this.toolStripSeparator1.BackColor = System.Drawing.Color.IndianRed;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(40, 6);
             // 
@@ -624,11 +632,42 @@
             this.toolStripButton_Napoveda.Text = "Nápověda";
             this.toolStripButton_Napoveda.Click += new System.EventHandler(this.toolStripMenu_Napoveda_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timerUpozorneni
+            // 
+            this.timerUpozorneni.Interval = 1000;
+            this.timerUpozorneni.Tick += new System.EventHandler(this.timerUpozorneni_Tick);
+            // 
+            // timer_ClearInfo
+            // 
+            this.timer_ClearInfo.Interval = 5000;
+            this.timer_ClearInfo.Tick += new System.EventHandler(this.Timer_ClearInfo_Tick);
+            // 
+            // rokVyber
+            // 
+            this.rokVyber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rokVyber.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.rokVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.rokVyber.FormattingEnabled = true;
+            this.rokVyber.Location = new System.Drawing.Point(762, 1);
+            this.rokVyber.Name = "rokVyber";
+            this.rokVyber.Size = new System.Drawing.Size(60, 21);
+            this.rokVyber.TabIndex = 4;
+            this.rokVyber.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
+            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.BorderColor = System.Drawing.Color.LightGray;
             this.tabControl1.Controls.Add(this.ledenT);
             this.tabControl1.Controls.Add(this.unorT);
             this.tabControl1.Controls.Add(this.brezenT);
@@ -641,23 +680,28 @@
             this.tabControl1.Controls.Add(this.rijenT);
             this.tabControl1.Controls.Add(this.listopadT);
             this.tabControl1.Controls.Add(this.prosinecT);
+            this.tabControl1.HeaderBackColor = System.Drawing.SystemColors.Control;
             this.tabControl1.Location = new System.Drawing.Point(44, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.SelectedTab = this.ledenT;
             this.tabControl1.Size = new System.Drawing.Size(778, 382);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
             // 
             // ledenT
             // 
+            this.ledenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ledenT.BackColor = System.Drawing.Color.Orange;
             this.ledenT.Controls.Add(this.leden);
-            this.ledenT.Location = new System.Drawing.Point(4, 22);
+            this.ledenT.Location = new System.Drawing.Point(1, 20);
+            this.ledenT.Margin = new System.Windows.Forms.Padding(0);
             this.ledenT.Name = "ledenT";
-            this.ledenT.Padding = new System.Windows.Forms.Padding(3);
-            this.ledenT.Size = new System.Drawing.Size(770, 356);
+            this.ledenT.Size = new System.Drawing.Size(776, 361);
             this.ledenT.TabIndex = 0;
             this.ledenT.Text = "Leden";
-            this.ledenT.UseVisualStyleBackColor = true;
             // 
             // leden
             // 
@@ -680,13 +724,16 @@
             this.columnHeader10});
             this.leden.FullRowSelect = true;
             this.leden.GridLines = true;
+            this.leden.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.leden.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.leden.HideSelection = false;
             this.leden.Location = new System.Drawing.Point(0, 0);
+            this.leden.Margin = new System.Windows.Forms.Padding(0);
             this.leden.MultiSelect = false;
             this.leden.Name = "leden";
+            this.leden.OwnerDraw = true;
             this.leden.ShowItemToolTips = true;
-            this.leden.Size = new System.Drawing.Size(770, 356);
+            this.leden.Size = new System.Drawing.Size(776, 361);
             this.leden.TabIndex = 0;
             this.leden.UseCompatibleStateImageBehavior = false;
             this.leden.View = System.Windows.Forms.View.Details;
@@ -698,6 +745,7 @@
             // 
             // columnHeader11
             // 
+            this.columnHeader11.Tag = "Separator:NoLeft,NoRight";
             this.columnHeader11.Text = "It is a dark time for the Rebellion. Although the Death Star has been destroyed, " +
     "Imperial troops have driven the Rebel forces from their hidden base and pursued " +
     "them across the galaxy.";
@@ -705,6 +753,7 @@
             // 
             // columnHeader1
             // 
+            this.columnHeader1.Tag = "Separator:NoLeft";
             this.columnHeader1.Text = "Počítač";
             this.columnHeader1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader1.Width = 68;
@@ -724,11 +773,13 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Popis";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader4.Width = 92;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Kontakt";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader5.Width = 89;
             // 
             // columnHeader6
@@ -752,22 +803,26 @@
             // columnHeader9
             // 
             this.columnHeader9.Text = "Stav";
+            this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // columnHeader10
             // 
             this.columnHeader10.Text = "Poznámka";
-            this.columnHeader10.Width = 149;
+            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader10.Width = 159;
             // 
             // unorT
             // 
+            this.unorT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.unorT.Controls.Add(this.unor);
-            this.unorT.Location = new System.Drawing.Point(4, 22);
+            this.unorT.Location = new System.Drawing.Point(1, 20);
+            this.unorT.Margin = new System.Windows.Forms.Padding(0);
             this.unorT.Name = "unorT";
-            this.unorT.Padding = new System.Windows.Forms.Padding(3);
-            this.unorT.Size = new System.Drawing.Size(770, 356);
+            this.unorT.Size = new System.Drawing.Size(776, 361);
             this.unorT.TabIndex = 1;
             this.unorT.Text = "Únor";
-            this.unorT.UseVisualStyleBackColor = true;
             // 
             // unor
             // 
@@ -778,13 +833,15 @@
             this.unor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.unor.FullRowSelect = true;
             this.unor.GridLines = true;
+            this.unor.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.unor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.unor.HideSelection = false;
             this.unor.Location = new System.Drawing.Point(0, 0);
             this.unor.MultiSelect = false;
             this.unor.Name = "unor";
+            this.unor.OwnerDraw = true;
             this.unor.ShowItemToolTips = true;
-            this.unor.Size = new System.Drawing.Size(770, 356);
+            this.unor.Size = new System.Drawing.Size(776, 361);
             this.unor.TabIndex = 1;
             this.unor.UseCompatibleStateImageBehavior = false;
             this.unor.View = System.Windows.Forms.View.Details;
@@ -796,13 +853,16 @@
             // 
             // brezenT
             // 
+            this.brezenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.brezenT.Controls.Add(this.brezen);
-            this.brezenT.Location = new System.Drawing.Point(4, 22);
+            this.brezenT.Location = new System.Drawing.Point(1, 20);
+            this.brezenT.Margin = new System.Windows.Forms.Padding(0);
             this.brezenT.Name = "brezenT";
-            this.brezenT.Size = new System.Drawing.Size(770, 356);
+            this.brezenT.Size = new System.Drawing.Size(776, 361);
             this.brezenT.TabIndex = 2;
             this.brezenT.Text = "Březen";
-            this.brezenT.UseVisualStyleBackColor = true;
             // 
             // brezen
             // 
@@ -813,13 +873,15 @@
             this.brezen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.brezen.FullRowSelect = true;
             this.brezen.GridLines = true;
+            this.brezen.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.brezen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.brezen.HideSelection = false;
             this.brezen.Location = new System.Drawing.Point(0, 0);
             this.brezen.MultiSelect = false;
             this.brezen.Name = "brezen";
+            this.brezen.OwnerDraw = true;
             this.brezen.ShowItemToolTips = true;
-            this.brezen.Size = new System.Drawing.Size(770, 356);
+            this.brezen.Size = new System.Drawing.Size(776, 361);
             this.brezen.TabIndex = 1;
             this.brezen.UseCompatibleStateImageBehavior = false;
             this.brezen.View = System.Windows.Forms.View.Details;
@@ -831,13 +893,16 @@
             // 
             // dubenT
             // 
+            this.dubenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dubenT.Controls.Add(this.duben);
-            this.dubenT.Location = new System.Drawing.Point(4, 22);
+            this.dubenT.Location = new System.Drawing.Point(1, 20);
+            this.dubenT.Margin = new System.Windows.Forms.Padding(0);
             this.dubenT.Name = "dubenT";
-            this.dubenT.Size = new System.Drawing.Size(770, 356);
+            this.dubenT.Size = new System.Drawing.Size(776, 361);
             this.dubenT.TabIndex = 3;
             this.dubenT.Text = "Duben";
-            this.dubenT.UseVisualStyleBackColor = true;
             // 
             // duben
             // 
@@ -848,13 +913,15 @@
             this.duben.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.duben.FullRowSelect = true;
             this.duben.GridLines = true;
+            this.duben.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.duben.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.duben.HideSelection = false;
             this.duben.Location = new System.Drawing.Point(0, 0);
             this.duben.MultiSelect = false;
             this.duben.Name = "duben";
+            this.duben.OwnerDraw = true;
             this.duben.ShowItemToolTips = true;
-            this.duben.Size = new System.Drawing.Size(770, 356);
+            this.duben.Size = new System.Drawing.Size(776, 361);
             this.duben.TabIndex = 1;
             this.duben.UseCompatibleStateImageBehavior = false;
             this.duben.View = System.Windows.Forms.View.Details;
@@ -866,13 +933,16 @@
             // 
             // kvetenT
             // 
+            this.kvetenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.kvetenT.Controls.Add(this.kveten);
-            this.kvetenT.Location = new System.Drawing.Point(4, 22);
+            this.kvetenT.Location = new System.Drawing.Point(1, 20);
+            this.kvetenT.Margin = new System.Windows.Forms.Padding(0);
             this.kvetenT.Name = "kvetenT";
-            this.kvetenT.Size = new System.Drawing.Size(770, 356);
+            this.kvetenT.Size = new System.Drawing.Size(776, 361);
             this.kvetenT.TabIndex = 4;
             this.kvetenT.Text = "Květen";
-            this.kvetenT.UseVisualStyleBackColor = true;
             // 
             // kveten
             // 
@@ -883,13 +953,15 @@
             this.kveten.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.kveten.FullRowSelect = true;
             this.kveten.GridLines = true;
+            this.kveten.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.kveten.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.kveten.HideSelection = false;
             this.kveten.Location = new System.Drawing.Point(0, 0);
             this.kveten.MultiSelect = false;
             this.kveten.Name = "kveten";
+            this.kveten.OwnerDraw = true;
             this.kveten.ShowItemToolTips = true;
-            this.kveten.Size = new System.Drawing.Size(770, 356);
+            this.kveten.Size = new System.Drawing.Size(776, 361);
             this.kveten.TabIndex = 1;
             this.kveten.UseCompatibleStateImageBehavior = false;
             this.kveten.View = System.Windows.Forms.View.Details;
@@ -901,13 +973,16 @@
             // 
             // cervenT
             // 
+            this.cervenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cervenT.Controls.Add(this.cerven);
-            this.cervenT.Location = new System.Drawing.Point(4, 22);
+            this.cervenT.Location = new System.Drawing.Point(1, 20);
+            this.cervenT.Margin = new System.Windows.Forms.Padding(0);
             this.cervenT.Name = "cervenT";
-            this.cervenT.Size = new System.Drawing.Size(770, 356);
+            this.cervenT.Size = new System.Drawing.Size(776, 361);
             this.cervenT.TabIndex = 5;
             this.cervenT.Text = "Červen";
-            this.cervenT.UseVisualStyleBackColor = true;
             // 
             // cerven
             // 
@@ -918,13 +993,15 @@
             this.cerven.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cerven.FullRowSelect = true;
             this.cerven.GridLines = true;
+            this.cerven.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.cerven.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cerven.HideSelection = false;
             this.cerven.Location = new System.Drawing.Point(0, 0);
             this.cerven.MultiSelect = false;
             this.cerven.Name = "cerven";
+            this.cerven.OwnerDraw = true;
             this.cerven.ShowItemToolTips = true;
-            this.cerven.Size = new System.Drawing.Size(770, 356);
+            this.cerven.Size = new System.Drawing.Size(776, 361);
             this.cerven.TabIndex = 1;
             this.cerven.UseCompatibleStateImageBehavior = false;
             this.cerven.View = System.Windows.Forms.View.Details;
@@ -936,13 +1013,16 @@
             // 
             // cervenecT
             // 
+            this.cervenecT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cervenecT.Controls.Add(this.cervenec);
-            this.cervenecT.Location = new System.Drawing.Point(4, 22);
+            this.cervenecT.Location = new System.Drawing.Point(1, 20);
+            this.cervenecT.Margin = new System.Windows.Forms.Padding(0);
             this.cervenecT.Name = "cervenecT";
-            this.cervenecT.Size = new System.Drawing.Size(770, 356);
+            this.cervenecT.Size = new System.Drawing.Size(776, 361);
             this.cervenecT.TabIndex = 6;
             this.cervenecT.Text = "Červenec";
-            this.cervenecT.UseVisualStyleBackColor = true;
             // 
             // cervenec
             // 
@@ -953,13 +1033,15 @@
             this.cervenec.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cervenec.FullRowSelect = true;
             this.cervenec.GridLines = true;
+            this.cervenec.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.cervenec.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cervenec.HideSelection = false;
             this.cervenec.Location = new System.Drawing.Point(0, 0);
             this.cervenec.MultiSelect = false;
             this.cervenec.Name = "cervenec";
+            this.cervenec.OwnerDraw = true;
             this.cervenec.ShowItemToolTips = true;
-            this.cervenec.Size = new System.Drawing.Size(770, 356);
+            this.cervenec.Size = new System.Drawing.Size(776, 361);
             this.cervenec.TabIndex = 1;
             this.cervenec.UseCompatibleStateImageBehavior = false;
             this.cervenec.View = System.Windows.Forms.View.Details;
@@ -971,13 +1053,16 @@
             // 
             // srpenT
             // 
+            this.srpenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.srpenT.Controls.Add(this.srpen);
-            this.srpenT.Location = new System.Drawing.Point(4, 22);
+            this.srpenT.Location = new System.Drawing.Point(1, 20);
+            this.srpenT.Margin = new System.Windows.Forms.Padding(0);
             this.srpenT.Name = "srpenT";
-            this.srpenT.Size = new System.Drawing.Size(770, 356);
+            this.srpenT.Size = new System.Drawing.Size(776, 361);
             this.srpenT.TabIndex = 7;
             this.srpenT.Text = "Srpen";
-            this.srpenT.UseVisualStyleBackColor = true;
             // 
             // srpen
             // 
@@ -988,13 +1073,15 @@
             this.srpen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.srpen.FullRowSelect = true;
             this.srpen.GridLines = true;
+            this.srpen.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.srpen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.srpen.HideSelection = false;
             this.srpen.Location = new System.Drawing.Point(0, 0);
             this.srpen.MultiSelect = false;
             this.srpen.Name = "srpen";
+            this.srpen.OwnerDraw = true;
             this.srpen.ShowItemToolTips = true;
-            this.srpen.Size = new System.Drawing.Size(770, 356);
+            this.srpen.Size = new System.Drawing.Size(776, 361);
             this.srpen.TabIndex = 1;
             this.srpen.UseCompatibleStateImageBehavior = false;
             this.srpen.View = System.Windows.Forms.View.Details;
@@ -1006,13 +1093,16 @@
             // 
             // zariT
             // 
+            this.zariT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.zariT.Controls.Add(this.zari);
-            this.zariT.Location = new System.Drawing.Point(4, 22);
+            this.zariT.Location = new System.Drawing.Point(1, 20);
+            this.zariT.Margin = new System.Windows.Forms.Padding(0);
             this.zariT.Name = "zariT";
-            this.zariT.Size = new System.Drawing.Size(770, 356);
+            this.zariT.Size = new System.Drawing.Size(776, 361);
             this.zariT.TabIndex = 8;
             this.zariT.Text = "Září";
-            this.zariT.UseVisualStyleBackColor = true;
             // 
             // zari
             // 
@@ -1023,13 +1113,15 @@
             this.zari.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.zari.FullRowSelect = true;
             this.zari.GridLines = true;
+            this.zari.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.zari.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.zari.HideSelection = false;
             this.zari.Location = new System.Drawing.Point(0, 0);
             this.zari.MultiSelect = false;
             this.zari.Name = "zari";
+            this.zari.OwnerDraw = true;
             this.zari.ShowItemToolTips = true;
-            this.zari.Size = new System.Drawing.Size(770, 356);
+            this.zari.Size = new System.Drawing.Size(776, 361);
             this.zari.TabIndex = 1;
             this.zari.UseCompatibleStateImageBehavior = false;
             this.zari.View = System.Windows.Forms.View.Details;
@@ -1041,13 +1133,16 @@
             // 
             // rijenT
             // 
+            this.rijenT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rijenT.Controls.Add(this.rijen);
-            this.rijenT.Location = new System.Drawing.Point(4, 22);
+            this.rijenT.Location = new System.Drawing.Point(1, 20);
+            this.rijenT.Margin = new System.Windows.Forms.Padding(0);
             this.rijenT.Name = "rijenT";
-            this.rijenT.Size = new System.Drawing.Size(770, 356);
+            this.rijenT.Size = new System.Drawing.Size(776, 361);
             this.rijenT.TabIndex = 9;
             this.rijenT.Text = "Říjen";
-            this.rijenT.UseVisualStyleBackColor = true;
             // 
             // rijen
             // 
@@ -1058,13 +1153,15 @@
             this.rijen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rijen.FullRowSelect = true;
             this.rijen.GridLines = true;
+            this.rijen.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.rijen.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.rijen.HideSelection = false;
             this.rijen.Location = new System.Drawing.Point(0, 0);
             this.rijen.MultiSelect = false;
             this.rijen.Name = "rijen";
+            this.rijen.OwnerDraw = true;
             this.rijen.ShowItemToolTips = true;
-            this.rijen.Size = new System.Drawing.Size(770, 356);
+            this.rijen.Size = new System.Drawing.Size(776, 361);
             this.rijen.TabIndex = 1;
             this.rijen.UseCompatibleStateImageBehavior = false;
             this.rijen.View = System.Windows.Forms.View.Details;
@@ -1076,13 +1173,16 @@
             // 
             // listopadT
             // 
+            this.listopadT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listopadT.Controls.Add(this.listopad);
-            this.listopadT.Location = new System.Drawing.Point(4, 22);
+            this.listopadT.Location = new System.Drawing.Point(1, 20);
+            this.listopadT.Margin = new System.Windows.Forms.Padding(0);
             this.listopadT.Name = "listopadT";
-            this.listopadT.Size = new System.Drawing.Size(770, 356);
+            this.listopadT.Size = new System.Drawing.Size(776, 361);
             this.listopadT.TabIndex = 10;
             this.listopadT.Text = "Listopad";
-            this.listopadT.UseVisualStyleBackColor = true;
             // 
             // listopad
             // 
@@ -1093,13 +1193,15 @@
             this.listopad.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listopad.FullRowSelect = true;
             this.listopad.GridLines = true;
+            this.listopad.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.listopad.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listopad.HideSelection = false;
             this.listopad.Location = new System.Drawing.Point(0, 0);
             this.listopad.MultiSelect = false;
             this.listopad.Name = "listopad";
+            this.listopad.OwnerDraw = true;
             this.listopad.ShowItemToolTips = true;
-            this.listopad.Size = new System.Drawing.Size(770, 356);
+            this.listopad.Size = new System.Drawing.Size(776, 361);
             this.listopad.TabIndex = 1;
             this.listopad.UseCompatibleStateImageBehavior = false;
             this.listopad.View = System.Windows.Forms.View.Details;
@@ -1111,13 +1213,16 @@
             // 
             // prosinecT
             // 
+            this.prosinecT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.prosinecT.Controls.Add(this.prosinec);
-            this.prosinecT.Location = new System.Drawing.Point(4, 22);
+            this.prosinecT.Location = new System.Drawing.Point(1, 20);
+            this.prosinecT.Margin = new System.Windows.Forms.Padding(0);
             this.prosinecT.Name = "prosinecT";
-            this.prosinecT.Size = new System.Drawing.Size(770, 356);
+            this.prosinecT.Size = new System.Drawing.Size(776, 361);
             this.prosinecT.TabIndex = 11;
             this.prosinecT.Text = "Prosinec";
-            this.prosinecT.UseVisualStyleBackColor = true;
             // 
             // prosinec
             // 
@@ -1128,13 +1233,15 @@
             this.prosinec.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.prosinec.FullRowSelect = true;
             this.prosinec.GridLines = true;
+            this.prosinec.HeaderFillMethod = Ticketník.CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             this.prosinec.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.prosinec.HideSelection = false;
             this.prosinec.Location = new System.Drawing.Point(0, 0);
             this.prosinec.MultiSelect = false;
             this.prosinec.Name = "prosinec";
+            this.prosinec.OwnerDraw = true;
             this.prosinec.ShowItemToolTips = true;
-            this.prosinec.Size = new System.Drawing.Size(770, 356);
+            this.prosinec.Size = new System.Drawing.Size(776, 361);
             this.prosinec.TabIndex = 1;
             this.prosinec.UseCompatibleStateImageBehavior = false;
             this.prosinec.View = System.Windows.Forms.View.Details;
@@ -1144,32 +1251,27 @@
             this.prosinec.DoubleClick += new System.EventHandler(this.leden_DoubleClick);
             this.prosinec.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leden_MouseClick);
             // 
-            // openFileDialog1
+            // rokVyberO
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timerUpozorneni
-            // 
-            this.timerUpozorneni.Interval = 1000;
-            this.timerUpozorneni.Tick += new System.EventHandler(this.timerUpozorneni_Tick);
-            // 
-            // timer_ClearInfo
-            // 
-            this.timer_ClearInfo.Interval = 5000;
-            this.timer_ClearInfo.Tick += new System.EventHandler(this.Timer_ClearInfo_Tick);
+            this.rokVyberO.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.rokVyberO.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.rokVyberO.DropDownWidth = 60;
+            this.rokVyberO.Location = new System.Drawing.Point(700, 0);
+            this.rokVyberO.Name = "rokVyberO";
+            this.rokVyberO.Size = new System.Drawing.Size(75, 21);
+            this.rokVyberO.TabIndex = 3;
+            this.rokVyberO.SelectedIndexChanged += new System.EventHandler(this.rokVyber_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 421);
+            this.Controls.Add(this.rokVyber);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menu);
+            this.Controls.Add(this.rokVyberO);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu;
@@ -1186,6 +1288,7 @@
             this.tool.ResumeLayout(false);
             this.tool.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabControl1.PerformLayout();
             this.ledenT.ResumeLayout(false);
             this.unorT.ResumeLayout(false);
             this.brezenT.ResumeLayout(false);
@@ -1226,30 +1329,30 @@
         internal System.Windows.Forms.ToolStripButton toolStripButton4;
         internal System.Windows.Forms.ToolStripButton toolStripButton6;
         internal System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
-        internal System.Windows.Forms.TabPage ledenT;
-        internal System.Windows.Forms.ListView leden;
-        internal System.Windows.Forms.TabPage unorT;
-        internal System.Windows.Forms.ListView unor;
-        internal System.Windows.Forms.TabPage brezenT;
-        internal System.Windows.Forms.ListView brezen;
-        internal System.Windows.Forms.TabPage dubenT;
-        internal System.Windows.Forms.ListView duben;
-        internal System.Windows.Forms.TabPage kvetenT;
-        internal System.Windows.Forms.ListView kveten;
-        internal System.Windows.Forms.TabPage cervenT;
-        internal System.Windows.Forms.ListView cerven;
-        internal System.Windows.Forms.TabPage cervenecT;
-        internal System.Windows.Forms.ListView cervenec;
-        internal System.Windows.Forms.TabPage srpenT;
-        internal System.Windows.Forms.ListView srpen;
-        internal System.Windows.Forms.TabPage zariT;
-        internal System.Windows.Forms.ListView zari;
-        internal System.Windows.Forms.TabPage rijenT;
-        internal System.Windows.Forms.ListView rijen;
-        internal System.Windows.Forms.TabPage listopadT;
-        internal System.Windows.Forms.ListView listopad;
-        internal System.Windows.Forms.TabPage prosinecT;
-        internal System.Windows.Forms.ListView prosinec;
+        internal Ticketník.CustomControls.TabPage ledenT;
+        internal Ticketník.CustomControls.ListView leden;
+        internal Ticketník.CustomControls.TabPage unorT;
+        internal Ticketník.CustomControls.ListView unor;
+        internal Ticketník.CustomControls.TabPage brezenT;
+        internal Ticketník.CustomControls.ListView brezen;
+        internal Ticketník.CustomControls.TabPage dubenT;
+        internal Ticketník.CustomControls.ListView duben;
+        internal Ticketník.CustomControls.TabPage kvetenT;
+        internal Ticketník.CustomControls.ListView kveten;
+        internal Ticketník.CustomControls.TabPage cervenT;
+        internal Ticketník.CustomControls.ListView cerven;
+        internal Ticketník.CustomControls.TabPage cervenecT;
+        internal Ticketník.CustomControls.ListView cervenec;
+        internal Ticketník.CustomControls.TabPage srpenT;
+        internal Ticketník.CustomControls.ListView srpen;
+        internal Ticketník.CustomControls.TabPage zariT;
+        internal Ticketník.CustomControls.ListView zari;
+        internal Ticketník.CustomControls.TabPage rijenT;
+        internal Ticketník.CustomControls.ListView rijen;
+        internal Ticketník.CustomControls.TabPage listopadT;
+        internal Ticketník.CustomControls.ListView listopad;
+        internal Ticketník.CustomControls.TabPage prosinecT;
+        internal Ticketník.CustomControls.ListView prosinec;
         internal System.Windows.Forms.ColumnHeader columnHeader1;
         internal System.Windows.Forms.ColumnHeader columnHeader2;
         internal System.Windows.Forms.ColumnHeader columnHeader3;
@@ -1263,7 +1366,7 @@
         internal System.Windows.Forms.OpenFileDialog openFileDialog1;
         internal System.Windows.Forms.ColumnHeader columnHeader11;
         internal System.Windows.Forms.ToolStripButton zmenZakaznika;
-        internal System.Windows.Forms.TabControl tabControl1;
+        internal Ticketník.CustomControls.TabControl tabControl1;
         internal System.Windows.Forms.ToolStripMenuItem upravitZákazníkaToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem smazatZákazníkaToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
@@ -1287,7 +1390,7 @@
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenu_Napoveda;
         internal System.Windows.Forms.ToolStripSeparator toolStripButton7;
         internal System.Windows.Forms.ToolStripButton toolStripButton_Napoveda;
-        internal System.Windows.Forms.ToolStripComboBox rokVyber;
+        internal Ticketník.CustomControls.ComboBox rokVyberO;
         internal System.Windows.Forms.ToolStripSeparator oddToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem převéstNaFormátMilleniumToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator upoToolStripMenuItem;
@@ -1303,6 +1406,7 @@
         internal System.Windows.Forms.ToolStripMenuItem aktualizovatVšechnyTerpyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator dělitelToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem nahlásitProblémToolStripMenuItem;
+        internal CustomControls.ComboBox rokVyber;
     }
 }
 

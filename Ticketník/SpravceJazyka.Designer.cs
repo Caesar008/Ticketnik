@@ -28,17 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView1 = new Ticketník.CustomControls.ListView(this);
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.stahnout = new System.Windows.Forms.Button();
-            this.odebrat = new System.Windows.Forms.Button();
-            this.btn_novy_preklad = new System.Windows.Forms.Button();
-            this.upravit = new System.Windows.Forms.Button();
+            this.stahnout = new Ticketník.CustomControls.Button();
+            this.odebrat = new Ticketník.CustomControls.Button();
             this.listView1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -128,33 +126,11 @@
             this.odebrat.UseVisualStyleBackColor = true;
             this.odebrat.Click += new System.EventHandler(this.odebrat_Click);
             // 
-            // btn_novy_preklad
-            // 
-            this.btn_novy_preklad.Location = new System.Drawing.Point(364, 223);
-            this.btn_novy_preklad.Name = "btn_novy_preklad";
-            this.btn_novy_preklad.Size = new System.Drawing.Size(158, 23);
-            this.btn_novy_preklad.TabIndex = 3;
-            this.btn_novy_preklad.Text = "Nový překlad";
-            this.btn_novy_preklad.UseVisualStyleBackColor = true;
-            this.btn_novy_preklad.Click += new System.EventHandler(this.btn_novy_preklad_Click);
-            // 
-            // upravit
-            // 
-            this.upravit.Location = new System.Drawing.Point(365, 194);
-            this.upravit.Name = "upravit";
-            this.upravit.Size = new System.Drawing.Size(157, 23);
-            this.upravit.TabIndex = 4;
-            this.upravit.Text = "Upravit překlad";
-            this.upravit.UseVisualStyleBackColor = true;
-            this.upravit.Click += new System.EventHandler(this.upravit_Click);
-            // 
             // SpravceJazyka
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 260);
-            this.Controls.Add(this.upravit);
-            this.Controls.Add(this.btn_novy_preklad);
             this.Controls.Add(this.odebrat);
             this.Controls.Add(this.stahnout);
             this.Controls.Add(this.listView1);
@@ -174,16 +150,14 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private Ticketník.CustomControls.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.Button stahnout;
-        private System.Windows.Forms.Button odebrat;
+        private Ticketník.CustomControls.Button stahnout;
+        private Ticketník.CustomControls.Button odebrat;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btn_novy_preklad;
-        private System.Windows.Forms.Button upravit;
     }
 }

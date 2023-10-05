@@ -18,6 +18,8 @@ namespace Ticketník
             this.comboBox1.Items.Add(form.jazyk.Windows_Upozorneni_RDP);
             this.comboBox1.Items.Add(form.jazyk.Windows_Upozorneni_Upo);
             this.comboBox1.SelectedItem = form.jazyk.Windows_Upozorneni_Upo;
+            this.label3.Text = form.jazyk.Windows_Upozorneni_Popis;
+            Motiv.SetMotiv(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,6 +27,6 @@ namespace Ticketník
             u.datum = dateTimePicker1.Value;
             u.typ = (string)comboBox1.SelectedItem;
             u.popis = textBox1.Text;
-      }
+        }
     }
 }

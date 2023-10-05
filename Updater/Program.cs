@@ -40,11 +40,12 @@ namespace Updater
                         string fileName = Path.GetFileName(file);
                         while (IsFileLocked(new FileInfo(file)))
                         {
-                            if (retry >= 50)
+                            if (retry >= 100)
                                 throw new IOException("File " + fileName + " cannot be updated - it is being used by another process.");
                             System.Threading.Thread.Sleep(120);
                             retry++;
                         }
+                        System.Threading.Thread.Sleep(1000);
                         File.Copy(file, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", fileName), true);
                     }
                     Directory.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", "Update"), true);
@@ -52,7 +53,7 @@ namespace Updater
                     System.Diagnostics.Process.GetCurrentProcess().Kill();
                 }
             }
-            catch (IOException ex) { MessageBox.Show(ex.Message); }
+            catch (IOException ex) { MessageBox.Show(ex.StackTrace); }
         }
 
         static bool IsFileLocked(FileInfo file)

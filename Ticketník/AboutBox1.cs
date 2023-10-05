@@ -18,6 +18,8 @@ namespace Ticketník
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = "";
             this.textBoxDescription.Text = form.jazyk.Windows_AboutBox_Popis;
+
+            Motiv.SetMotiv(this);
         }
 
         #region Assembly Attribute Accessors

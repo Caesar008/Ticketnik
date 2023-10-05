@@ -6,12 +6,13 @@ using System.IO;
 using Excel = ClosedXML.Excel;
 using System.Linq;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace Ticketník
 {
     public partial class Export : Form
     {
-        private void Export_Novy()
+        private List<ExportRow> Export_Novy()
         {
             if (!InvokeRequired)
                 form.timer_ClearInfo.Stop();
@@ -58,6 +59,13 @@ namespace Ticketník
 
                 konec = new DateTime(start.Year, start.Month, start.Day).AddDays(6);
             }
+
+            weekNumber = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(start, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            year = start.Year;
+            if (start.Month == 1 && weekNumber > 40)
+                year--;
+            else if (start.Month == 12 && weekNumber < 10)
+                year++;
 
             //Projít tickety splňující podmínku a zařadit je správně do exportu
             for (DateTime d = start; d <= konec; d = d.AddDays(1))
@@ -158,7 +166,7 @@ namespace Ticketník
                                         exportRadky[i].Radek[den].Cas = tCas;
                                         break;
                                     }
-                                    else if (exportRadky[i].Terp == t.CustomTerp && exportRadky[i].Task == t.CustomTask && exportRadky[i].Typ == et)
+                                    else if (exportRadky[i].Terp == t.CustomTerp && exportRadky[i].Task == t.CustomTask && ((exportRadky[i].Typ == et && t.OnlineTyp == "") || (exportRadky[i].OnlineTyp == t.OnlineTyp && t.OnlineTyp != "")))
                                     {
                                         if ((exportRadky[i].Radek[den].Koment.Length + (t.ID + " " + t.Zakaznik + " " + t.Popis + "\r\n").Length < 240))
                                         {
@@ -184,7 +192,7 @@ namespace Ticketník
                             }
                             catch
                             {
-                                MessageBox.Show(form.jazyk.Windows_Export_Ticket + " " + t.ID + " - " + t.Zakaznik + ", " + form.jazyk.Windows_Export_NaKteremJsiPracoval + " " + t.Datum.ToString("d.MM.yyyy") + ", " + form.jazyk.Windows_Export_Neukoncen);
+                                CustomControls.MessageBox.Show(form.jazyk.Windows_Export_Ticket + " " + t.ID + " - " + t.Zakaznik + ", " + form.jazyk.Windows_Export_NaKteremJsiPracoval + " " + t.Datum.ToString("d.MM.yyyy") + ", " + form.jazyk.Windows_Export_Neukoncen);
                             }
                         }
                     }
@@ -197,7 +205,9 @@ namespace Ticketník
 
             foreach (ExportRow s in exportRadky)
             {
-                if ((s.Typ == ExportTyp.Normal && s.OnlineTyp == "") || (s.OnlineTyp.ToLower().Contains("normal")))
+                if (s.Terp == null && s.Task == null && s.OnlineTyp == null)
+                    continue;
+                if((s.Typ == ExportTyp.Normal && s.OnlineTyp == "") || (s.OnlineTyp.ToLower().Contains("normal")))
                 {
                     casy["Pondělí"] += s.Radek["Pondělí"].Cas;
                     casy["Úterý"] += s.Radek["Úterý"].Cas;
@@ -220,7 +230,9 @@ namespace Ticketník
 
                     for(int i = 0; i< exportRadky.Count; i++)
                     {
-                        if(((exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].OnlineTyp == "") || (exportRadky[i].OnlineTyp.ToLower().Contains("normal"))) && exportRadky[i].Radek[cs].Cas > 0)
+                        if (exportRadky[i].Terp == null && exportRadky[i].Task == null && exportRadky[i].OnlineTyp == null)
+                            continue;
+                        if (((exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].OnlineTyp == "") || (exportRadky[i].OnlineTyp.ToLower().Contains("normal"))) && exportRadky[i].Radek[cs].Cas > 0)
                         {
                             pridat.Add(i, exportRadky[i].Radek[cs].Cas);
                         }
@@ -323,27 +335,6 @@ namespace Ticketník
                         exportSheet.Cell(row, 6).SetValue(s.Radek[ed].Datum);
                         exportSheet.Cell(row, 7).Value = s.Radek[ed].Cas.ToString() == "0" ? "" : s.Radek[ed].Cas.ToString(nfi);
                         exportSheet.Cell(row, 8).Value = s.Radek[ed].Koment.Replace("\t", " ").Replace("\"", "");
-                        /*//pondělí (čas, comment)
-                        exportSheet.Cell(row, 6).Value = s.Radek["Pondělí"].Cas.ToString() == "0" ? "" : s.Radek["Pondělí"].Cas.ToString(nfi);
-                        exportSheet.Cell(row, 7).Value = s.Radek["Pondělí"].Koment.Replace("\t", " ").Replace("\"", "");
-                        //úterý
-                        exportSheet.Cell(row, 10).Value = s.Radek["Úterý"].Cas.ToString() == "0" ? "" : s.Radek["Úterý"].Cas.ToString(nfi);
-                        exportSheet.Cell(row, 11).Value = s.Radek["Úterý"].Koment.Replace("\t", " ").Replace("\"", "");
-                        //středa
-                        exportSheet.Cell(row, 14).Value = s.Radek["Středa"].Cas.ToString() == "0" ? "" : s.Radek["Středa"].Cas.ToString(nfi);
-                        exportSheet.Cell(row, 15).Value = s.Radek["Středa"].Koment.Replace("\t", " ").Replace("\"", "");
-                        //čtvrtek
-                        exportSheet.Cell(row, 18).Value = s.Radek["Čtvrtek"].Cas.ToString() == "0" ? "" : s.Radek["Čtvrtek"].Cas.ToString(nfi);
-                        exportSheet.Cell(row, 19).Value = s.Radek["Čtvrtek"].Koment.Replace("\t", " ").Replace("\"", "");
-                        //pátek
-                        exportSheet.Cell(row, 22).Value = s.Radek["Pátek"].Cas.ToString() == "0" ? "" : s.Radek["Pátek"].Cas.ToString(nfi);
-                        exportSheet.Cell(row, 23).Value = s.Radek["Pátek"].Koment.Replace("\t", " ").Replace("\"", "");
-                        //sobota
-                        exportSheet.Cell(row, 26).Value = s.Radek["Sobota"].Cas.ToString() == "0" ? "" : s.Radek["Sobota"].Cas.ToString(nfi);
-                        exportSheet.Cell(row, 27).Value = s.Radek["Sobota"].Koment.Replace("\t", " ").Replace("\"", "");
-                        //neděle
-                        exportSheet.Cell(row, 30).Value = s.Radek["Neděle"].Cas.ToString() == "0" ? "" : s.Radek["Neděle"].Cas.ToString(nfi);
-                        exportSheet.Cell(row, 31).Value = s.Radek["Neděle"].Koment.Replace("\t", " ").Replace("\"", "");*/
 
                         row++;
                     }
@@ -355,11 +346,15 @@ namespace Ticketník
 
             form.infoBox.Text = "";
 
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.DefaultExt = "xlsx";
-            saveFileDialog1.Filter = "Excel|*.xlsx";
-            saveFileDialog1.FileName = "MyTime Info.xlsx";
-            saveFileDialog1.ShowDialog();
+            if (!checkBox1.Checked)
+            {
+                saveFileDialog1.AddExtension = true;
+                saveFileDialog1.DefaultExt = "xlsx";
+                saveFileDialog1.Filter = "Excel|*.xlsx";
+                saveFileDialog1.FileName = "MyTime Info.xlsx";
+                saveFileDialog1.ShowDialog();
+            }
+            return exportRadky;
         }
     }
 

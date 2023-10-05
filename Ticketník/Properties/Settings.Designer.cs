@@ -589,6 +589,18 @@ namespace Ticketník.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int motiv {
+            get {
+                return ((int)(this["motiv"]));
+            }
+            set {
+                this["motiv"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ExportToMyTime {
             get {
@@ -596,6 +608,30 @@ namespace Ticketník.Properties {
             }
             set {
                 this["ExportToMyTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100, 150, 0")]
+        public global::System.Drawing.Color zruseno {
+            get {
+                return ((global::System.Drawing.Color)(this["zruseno"]));
+            }
+            set {
+                this["zruseno"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200, 200, 0")]
+        public global::System.Drawing.Color prerazeno {
+            get {
+                return ((global::System.Drawing.Color)(this["prerazeno"]));
+            }
+            set {
+                this["prerazeno"] = value;
             }
         }
     }

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.ok = new System.Windows.Forms.Button();
-            this.cancel = new System.Windows.Forms.Button();
+            this.richTextBox1 = new Ticketník.CustomControls.RichTextBox();
+            this.ok = new Ticketník.CustomControls.Button();
+            this.cancel = new Ticketník.CustomControls.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,8 +103,8 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.Button cancel;
+        private Ticketník.CustomControls.RichTextBox richTextBox1;
+        private Ticketník.CustomControls.Button ok;
+        private Ticketník.CustomControls.Button cancel;
     }
 }

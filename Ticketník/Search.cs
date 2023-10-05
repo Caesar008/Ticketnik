@@ -31,7 +31,9 @@ namespace Ticketník
             button1.Text = form.jazyk.Windows_Search_Hledej;
             richTextBox1.Text = form.jazyk.Windows_Search_HledaniNapoveda;
             this.Text = form.jazyk.Windows_Search_Hledej;
+            listView1.Columns[0].Tag = "Separator:NoLeft,NoRight";
             listView1.Columns[1].Text = form.jazyk.Windows_Search_PC;
+            listView1.Columns[1].Tag = "Separator:NoLeft";
             listView1.Columns[2].Text = form.jazyk.Windows_Search_IDTicketu;
             listView1.Columns[3].Text = form.jazyk.Windows_Search_Zakaznik;
             listView1.Columns[4].Text = form.jazyk.Windows_Search_Popis;
@@ -40,6 +42,7 @@ namespace Ticketník
             listView1.Columns[7].Text = form.jazyk.Windows_Search_Pauzy;
             listView1.Columns[8].Text = form.jazyk.Windows_Search_Status;
             listView1.Columns[9].Text = form.jazyk.Windows_Search_Poznamka;
+            Motiv.SetMotiv(this);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -161,6 +164,26 @@ namespace Ticketník
                                                     barvaP = Properties.Settings.Default.prescas;
                                                 else
                                                     barvaP = Properties.Settings.Default.vyreseno;
+                                                break;
+                                            case (byte)Ticket.Stav.Zruseno:
+                                                stst = form.jazyk.Windows_Search_Zruseno;
+                                                if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                    barvaP = Properties.Settings.Default.prescas;
+                                                else
+                                                    barvaP = Properties.Settings.Default.zruseno;
+                                                break;
+                                            case (byte)Ticket.Stav.Prerazeno:
+                                                stst = form.jazyk.Windows_Search_Prerazeno;
+                                                if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                    barvaP = Properties.Settings.Default.prescas;
+                                                else
+                                                    barvaP = Properties.Settings.Default.prerazeno;
                                                 break;
                                             default:
                                                 stst = form.jazyk.Windows_Search_Probiha;
@@ -285,6 +308,26 @@ namespace Ticketník
                                                         barvaP = Properties.Settings.Default.prescas;
                                                     else
                                                         barvaP = Properties.Settings.Default.vyreseno;
+                                                    break;
+                                                case (byte)Ticket.Stav.Zruseno:
+                                                    stst = form.jazyk.Windows_Search_Zruseno;
+                                                    if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                        barvaP = Properties.Settings.Default.prescas;
+                                                    else
+                                                        barvaP = Properties.Settings.Default.zruseno;
+                                                    break;
+                                                case (byte)Ticket.Stav.Prerazeno:
+                                                    stst = form.jazyk.Windows_Search_Prerazeno;
+                                                    if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                        barvaP = Properties.Settings.Default.prescas;
+                                                    else
+                                                        barvaP = Properties.Settings.Default.prerazeno;
                                                     break;
                                                 default:
                                                     stst = form.jazyk.Windows_Search_Probiha;
@@ -425,6 +468,26 @@ namespace Ticketník
                                                     else
                                                         barvaP = Properties.Settings.Default.vyreseno;
                                                     break;
+                                                case (byte)Ticket.Stav.Zruseno:
+                                                    stst = form.jazyk.Windows_Search_Zruseno;
+                                                    if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                        barvaP = Properties.Settings.Default.prescas;
+                                                    else
+                                                        barvaP = Properties.Settings.Default.zruseno;
+                                                    break;
+                                                case (byte)Ticket.Stav.Prerazeno:
+                                                    stst = form.jazyk.Windows_Search_Prerazeno;
+                                                    if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                        barvaP = Properties.Settings.Default.prescas;
+                                                    else
+                                                        barvaP = Properties.Settings.Default.prerazeno;
+                                                    break;
                                                 default:
                                                     stst = form.jazyk.Windows_Search_Probiha;
                                                     barvaP = Properties.Settings.Default.probiha;
@@ -551,6 +614,26 @@ namespace Ticketník
                                                         else
                                                             barvaP = Properties.Settings.Default.vyreseno;
                                                         break;
+                                                    case (byte)Ticket.Stav.Zruseno:
+                                                        stst = form.jazyk.Windows_Search_Zruseno;
+                                                        if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                            barvaP = Properties.Settings.Default.prescas;
+                                                        else
+                                                            barvaP = Properties.Settings.Default.zruseno;
+                                                        break;
+                                                    case (byte)Ticket.Stav.Prerazeno:
+                                                        stst = form.jazyk.Windows_Search_Prerazeno;
+                                                        if (ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.Prescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.CustomPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripcePrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.EnkripceProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityPrescas || ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.MobilityProblemPrescas ||
+                                                        ti.Get<NbtByte>("Prace").Value == (byte)Ticket.TypTicketu.ProblemPrescas)
+                                                            barvaP = Properties.Settings.Default.prescas;
+                                                        else
+                                                            barvaP = Properties.Settings.Default.prerazeno;
+                                                        break;
                                                     default:
                                                         stst = form.jazyk.Windows_Search_Probiha;
                                                         barvaP = Properties.Settings.Default.probiha;
@@ -582,7 +665,7 @@ namespace Ticketník
                         }
                     }
                 }
-                catch { MessageBox.Show(form.jazyk.Error_RegexError); }
+                catch { CustomControls.MessageBox.Show(form.jazyk.Error_RegexError); }
             }
             listView1.EndUpdate();
         }
@@ -643,11 +726,11 @@ namespace Ticketník
 
                 form.vybranyMesic = mesic;
 
-                foreach (TabPage tp in form.tabControl1.Controls)
+                foreach (CustomControls.TabPage tp in form.tabControl1.Controls)
                 {
                     if (tp.Controls.ContainsKey(form.vybranyMesic))
                     {
-                        foreach (ListViewItem lvi in ((ListView)tp.Controls[form.vybranyMesic]).Items)
+                        foreach (ListViewItem lvi in ((Ticketník.CustomControls.ListView)tp.Controls[form.vybranyMesic]).Items)
                         {
                             
                             if(((Tag)lvi.Tag).Compare((Tag)listView1.SelectedItems[0].Tag))
@@ -734,7 +817,7 @@ namespace Ticketník
                     form.Kopirovat(((Tag)listView1.SelectedItems[0].Tag).IDlong, ((Tag)listView1.SelectedItems[0].Tag).Datum, listView1.SelectedItems[0].SubItems[3].Text, false, true);
                 }
                 else
-                    MessageBox.Show(form.jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    CustomControls.MessageBox.Show(form.jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -762,6 +845,10 @@ namespace Ticketník
             else if (id.StartsWith("PRB") || id.StartsWith("PTASK"))
                 return Zakaznici.Terpy.Get<NbtCompound>("Task").Get<NbtString>("Problem").Value;
             else return "-";
+        }
+        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            Motiv.SetGroupBoxRamecek((GroupBox)sender, e);
         }
     }
 }

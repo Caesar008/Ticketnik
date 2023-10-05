@@ -17,7 +17,7 @@ namespace Ticketník
             //zabránění spuštění z networku
             if (IsNetworkPath(Application.StartupPath))
             {
-                MessageBox.Show("Ticketník is not designed to run from network location. Please copy it locally to your computer.", "Network location detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CustomControls.MessageBox.Show("Ticketník is not designed to run from network location. Please copy it locally to your computer.", "Network location detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Application.Exit();
             }
             else
@@ -28,23 +28,29 @@ namespace Ticketník
                 else
                     par = args[0];
                 //tohler je pro dev verze
+                //System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "")
+                if(Properties.Settings.Default.JazykCesta != "" && !Properties.Settings.Default.JazykCesta.Contains(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "")))
+                {
+                    Properties.Settings.Default.JazykCesta = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\" + Properties.Settings.Default.Jazyk + ".xml";
+                    Properties.Settings.Default.Save();
+                }
                 if (Application.ProductVersion.EndsWith("dev") && !par.Contains("update"))
-                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
+                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
 
-                if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang"))
-                    Directory.CreateDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang");
+                if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang"))
+                    Directory.CreateDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang");
 
                 if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml"))
-                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
+                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
 
                 System.Xml.XmlDocument preklad = new System.Xml.XmlDocument();
                 System.Xml.XmlDocument attPreklad = new System.Xml.XmlDocument();
-                preklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml");
+                preklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\CZ.xml");
                 attPreklad.LoadXml(System.Text.Encoding.UTF8.GetString(Properties.Resources.CZ));
 
                 if (int.Parse(preklad.DocumentElement.Attributes.GetNamedItem("version").InnerText) < int.Parse(attPreklad.DocumentElement.Attributes.GetNamedItem("version").InnerText))
                 {
-                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
+                    File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\CZ.xml", Properties.Resources.CZ);
                 }
 
                 string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -61,20 +67,7 @@ namespace Ticketník
                     Application.SetCompatibleTextRenderingDefault(false);
                     if (!JednaInstance.Bezi(TimeSpan.FromSeconds(5)) && !par.Contains("update"))
                     {
-                        //když nějaký soubor chybí
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "fNbt.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "fNbt.dll", Properties.Resources.fNbt);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "ClosedXML.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "ClosedXML.dll", Properties.Resources.ClosedXML);
-                        if (!File.Exists(appdata + "\\Ticketnik\\zakaznici") || par.Contains("repair"))
-                            File.WriteAllBytes(appdata + "\\Ticketnik\\zakaznici", Properties.Resources.zakaznici);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "DocumentFormat.OpenXml.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "DocumentFormat.OpenXml.dll", Properties.Resources.DocumentFormat_OpenXml);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "FastMember.Signed.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "FastMember.Signed.dll", Properties.Resources.FastMember_Signed);
-                        if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "Newtonsoft.Json.dll") || par.Contains("repair"))
-                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "Newtonsoft.Json.dll", Properties.Resources.Newtonsoft_Json);
-
+                        
                         if (par.Contains("show"))
                             Properties.Settings.Default.umisteni = new System.Drawing.Point(0, 0);
                         else if (par.Contains("default") || Control.ModifierKeys == Keys.Shift)
@@ -119,6 +112,8 @@ namespace Ticketník
                                 Properties.Settings.Default.ceka = System.Drawing.Color.Yellow;
                                 Properties.Settings.Default.odpoved = System.Drawing.Color.Yellow;
                                 Properties.Settings.Default.rdp = System.Drawing.Color.Yellow;
+                                Properties.Settings.Default.zruseno = System.Drawing.Color.FromArgb(100, 150, 0);
+                                Properties.Settings.Default.prerazeno = System.Drawing.Color.FromArgb(200, 200, 0);
                                 Properties.Settings.Default.vyreseno = System.Drawing.Color.FromArgb(0, 200, 0);
                                 Properties.Settings.Default.prescas = System.Drawing.Color.Fuchsia;
                                 Properties.Settings.Default.updateCesta = @"\\10.14.18.19\Shareforyou\tools\Ticketnik\Update";
@@ -144,6 +139,7 @@ namespace Ticketník
                                 Properties.Settings.Default.colPozPoradi = 10;
                                 Properties.Settings.Default.onlineTerp = true;
                                 Properties.Settings.Default.lastUpdateNotif = 0;
+                                Properties.Settings.Default.motiv = 2;
 
                                 Properties.Settings.Default.Save();
                             }
@@ -171,7 +167,7 @@ namespace Ticketník
                                 }
                                 else
                                 {
-                                    MessageBox.Show(new Jazyk().Error_NejdeZavritAAktualizovat, new Jazyk().Error_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    CustomControls.MessageBox.Show(new Jazyk().Error_NejdeZavritAAktualizovat, new Jazyk().Error_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                                     return;
                                 }
@@ -181,10 +177,10 @@ namespace Ticketník
                     else
                     {
                         if(!Application.ProductVersion.Contains("dev"))
-                            MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            CustomControls.MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         else
                         {
-                            if(DialogResult.Ignore == MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Exclamation))
+                            if(DialogResult.Ignore == CustomControls.MessageBox.Show(new Jazyk().Error_UzBezi, "Ticketník", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Exclamation))
                                 Application.Run(new Form1());
                         }
                     }
@@ -205,7 +201,7 @@ namespace Ticketník
                     string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond;
                     File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Error.log", "[" + dat + "] Poškozený soubor nastavení " + filename + "\r\n\r\n");
 
-                    MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
+                    CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file", MessageBoxIcon.Warning);
 
                     File.Delete(filename);
                     Properties.Settings.Default.Reload();
@@ -215,7 +211,7 @@ namespace Ticketník
                 }
                 catch (System.Reflection.TargetInvocationException te)
                 {
-                    MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + te.Message + "\r\n\r\n" + te.StackTrace + "\r\n\r\n" + te.InnerException, new Jazyk().Error_KritickaChyba);
+                    CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + te.Message + "\r\n\r\n" + te.StackTrace + "\r\n\r\n" + te.InnerException, new Jazyk().Error_KritickaChyba, MessageBoxIcon.Error);
 
                     if (!Directory.Exists(appdata + "\\Ticketnik"))
                     {
@@ -248,7 +244,7 @@ namespace Ticketník
                         string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond;
                         File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Error.log", "[" + dat + "] Poškozený soubor nastavení " + filename + "\r\n\r\n");
 
-                        MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file");
+                        CustomControls.MessageBox.Show("Ticketník found damaged settings file.\r\nSettings have to be reset to default.\r\nProgram will be restarted.\r\n\r\nAll saved tickets will be preserved.\r\nYou will need to only open it File ->Open.", "Damaged settings file", MessageBoxIcon.Warning);
 
                         File.Delete(filename);
                         Properties.Settings.Default.Reload();
@@ -258,7 +254,7 @@ namespace Ticketník
                     }
                     else
                     {
-                        MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n\r\n" + e.InnerException, new Jazyk().Error_KritickaChyba);
+                        CustomControls.MessageBox.Show(new Jazyk().Error_DosloKChybe + "\r\n" + new Jazyk().Error_Error + ":\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n\r\n" + e.InnerException, new Jazyk().Error_KritickaChyba, MessageBoxIcon.Error);
 
                         if (!Directory.Exists(appdata + "\\Ticketnik"))
                         {

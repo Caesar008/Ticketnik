@@ -1,3 +1,21 @@
+2.0.0.0 (5.10.2023)
+
+- Podpora světlého a tmavého režimu
+- Ovládací prvky přepsány pro větší kontrolu nad nimi
+- Zmenšení velikosti exe vynecháním knihoven
+- Zrušeno potvrzování změny data ticketu
+- Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
+- Ctrl+V nyní umí rozpoznat tickety z SM9
+- Automatický upload do MyTime
+- Přidány statusy Zrušeno a Přeřazeno
+- Možnost přidávání příloh k ticketům
+- Oprava chyby #22-003
+- Oprava chyby #23-003
+- Oprava chyby #23-004
+- Dll knihovny updatovány na novější verze
+- Opravy v překladu
+- Oprava updateru
+-----------------------------------
 1.7.3.2 (11.9.2023)
 
 - Ukládání data v exportu je nyní kulturně nezávislé

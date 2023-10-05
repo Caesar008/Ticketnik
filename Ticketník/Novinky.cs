@@ -11,33 +11,48 @@ namespace Ticketník
             InitializeComponent();
             this.form = form;
 
-            cz.AppendText("Novinky ve verzi 1.7.0.0\r\n\r\n");
+            cz.AppendText("Novinky ve verzi 2.0.0.0\r\n\r\n");
             cz.SelectionStart = 0;
             cz.SelectionLength = cz.TextLength;
             cz.SelectionFont = new Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
 
-            cz.AppendText(@" - Načítání Terp a tasků z MyTime
-    - Opravena chyba 20-006
-    - Přepracován způsob pouštění aktualizací na pozadí
-    - Upraven systém aktualizací z internetu
-    - Defaultně se updatuje z Github jako první, až pak ze sharu
-    - Při úspěšném otevření souboru se vytvoří záloha s .bak
-    - Zrušen radiobutton Enkrypce a MDM
-    - Updatováno na .NET 4.8");
+            cz.AppendText(@"- Podpora světlého a tmavého režimu
+    - Ovládací prvky přepsány pro větší kontrolu nad nimi
+    - Zmenšení velikosti exe vynecháním knihoven
+    - Zrušeno potvrzování změny data ticketu
+    - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
+    - Ctrl+V nyní umí rozpoznat tickety z SM9
+    - Automatický upload do MyTime
+    - Přidány statusy Zrušeno a Přeřazeno
+    - Možnost přidávání příloh k ticketům
+    - Oprava chyby #22-003
+    - Oprava chyby #23-003
+    - Oprava chyby #23-004
+    - Dll knihovny updatovány na novější verze
+    - Opravy v překladu
+    - Oprava updateru");
 
-            en.AppendText("News in version 1.7.0.0\r\n\r\n");
+            en.AppendText("News in version 2.0.0.0\r\n\r\n");
             en.SelectionStart = 0;
             en.SelectionLength = en.TextLength;
             en.SelectionFont = new Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
 
-            en.AppendText(@" - Loading Terp and Task codes from MyTime
-    - Fixed error 20-006
-    - System of updates on background has been reworked
-    - Updated system of updates from Internet
-    - Updates are primarly downloaded from Github, then from share
-    - After successful file opening backup file with .bak is created
-    - Removed radiobutton Encryption and MDM
-    - Updated to .NET 4.8");
+            en.AppendText(@" - Support for light and dark mode
+    - Controlls has been redone to have more control over them
+    - Decreased size of exe by excluding libraries
+    - Removed date change confirmation
+    - Ctrl+V now sets start time to time of insertion rather than midnight
+    - Ctrl+V now recognize tickets from SM9
+    - Autoupload to MyTime
+    - Added statuses Canceled and Reassigned
+    - Abbility to join attachemtns to tickets
+    - Fixed error #22-003
+    - Fixed error #23-003
+    - Fixed error #23-004
+    - Dll updated to newer versions
+    - Fixes in translation
+    - Fix of Updater");
+            Motiv.SetMotiv(this);
         }
 
         private void Novinky_FormClosing(object sender, FormClosingEventArgs e)

@@ -87,6 +87,9 @@
 			<ThisWeek en="This week">Tento týden</ThisWeek>
 			<LastWeek en="Last week">Minulý týden</LastWeek>
 			<Custom en="Selected date range">Vybrané období</Custom>
+			<MytimeExport en="Automatically upload to MyTime">Automaticky nahrát do MyTime</MytimeExport>
+			<ExportSuccess en="Upload to MyTime was successful. Do not forget to visit MyTime and submit your timecards.\r\n\r\nVisit MyTime now?">Úspěšně nahráno do MyTime. Nezapomeň navštívit MyTime a potvrdit nahlášené hodiny.\r\n\r\nNavštívit nyní MyTime?</ExportSuccess>
+			<ExportFailed en="Upload to MyTime Failed.">Nahrání do MyTime selhalo.</ExportFailed>
 		</Export>
 		<Settings>
 			<Settings en="Settings">Nastavení</Settings>
@@ -102,6 +105,8 @@
 			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
 			<RDP en="RDP">RDP</RDP>
 			<InProgress en="In progress">Probíhá</InProgress>
+			<Canceled en="Canceled">Zrušeno</Canceled>
+			<Reassigned en="Reassigned">Přeřazeno</Reassigned>
 			<Default en="Default">Default</Default>
 			<ShowTimePerDay en="Show time per day">Zobrazení času za den</ShowTimePerDay>
 			<ShowTotalTime en="Show total time">Zobrazovat celkový čas</ShowTotalTime>
@@ -117,7 +122,7 @@
 			<Light en="Light">Světlý</Light>
 			<Dark en="Dark">Tmavý</Dark>
 			<SystemTheme en="Reflect system settings">Podle nastavení systému</SystemTheme>
-      <ResetToDefault en="Default settings">Výchozí nastavení</ResetToDefault>
+			<ResetToDefault en="Default settings">Výchozí nastavení</ResetToDefault>
 		</Settings>
 		<Customer>
 			<Customer en="Customer">Zákazník</Customer>
@@ -164,6 +169,8 @@
 			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
 			<RDP en="RDP">RDP</RDP>
 			<InProgress en="In progress">Probíhá</InProgress>
+			<Canceled en="Canceled">Zrušeno</Canceled>
+			<Reassigned en="Reassigned">Přeřazeno</Reassigned>
 			<SearchCriteriaHelp en="Search by criteria.\r\n\r\nEg.: criterium 'Ticket ID' will be filled. Value of this criteria will be '128'. Program will try to find all tickets with ticket ID containing text '128'.\r\nIf this criterium field will be empty this criterium will be ignored.\r\n\r\nRegular expressions can be used in serach. In this case checkbox 'Regular expressions were used in search criteria' has to be checked. How to use regular expressions in this search and its syntax can be found on https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx">Vyhledávání podle kritérií.\r\n\r\nPř.: vyplněno bude kritérium "ID Ticketu". Hodnota tohoto kritéria bude "128". Program se pokusí najít všechny tickety, jejichž ID Ticketu obsahuje text "128".\r\nV případě, že je pole pro kritérium prázdné, bude toto kritérium ignorováno.\r\n\r\nVe vyhledávání se dají použít i regulární výrazy. V tomto případě je nutné zaškrtnout políčko "Ve vyhledávání byly použity regulární výrazy". Jak používat regulární výrazy v tomto vyhledávání a jaká je syntaxe, si můžeš přečíst na https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx</SearchCriteriaHelp>
 		</Search>
 		<About>
@@ -186,6 +193,8 @@
 			<WaitingForResponse en="Waiting for response">Čeká se na odpověď</WaitingForResponse>
 			<RDP en="RDP">RDP</RDP>
 			<InProgress en="In progress">Probíhá</InProgress>
+			<Canceled en="Canceled">Zrušeno</Canceled>
+			<Reassigned en="Reassigned">Přeřazeno</Reassigned>
 			<Normal en="Normal hours">Normální doba</Normal>
 			<Overtime en="Overtime">Přesčas</Overtime>
 			<Holiday en="Holiday">Svátek</Holiday>
@@ -220,11 +229,12 @@
 			<NormalDescription en="Normal">Normální</NormalDescription>
 			<CompensLeaveDesc en="Comp. leave">Náhr. volno</CompensLeaveDesc>
 			<TicketTerp en="Ticket TERP">Ticket TERP</TicketTerp>
-      <TerpOnline en="Terp">Terp</TerpOnline>
-      <TaskOnline en="Task">Task</TaskOnline>
-      <TypOnline en="Type">Typ</TypOnline>
-      <VyhledatTerp en="Serch for Terp">Vyhledat Terp</VyhledatTerp>
-      <AktualizovatTerp en="Update Terp">Aktualizovat Terp</AktualizovatTerp>
+			<TerpOnline en="Terp">Terp</TerpOnline>
+			<TaskOnline en="Task">Task</TaskOnline>
+			<TypOnline en="Type">Typ</TypOnline>
+			<VyhledatTerp en="Serch for Terp">Vyhledat Terp</VyhledatTerp>
+			<AktualizovatTerp en="Update Terp">Aktualizovat Terp</AktualizovatTerp>
+			<Prilohy en="Attachments">Přílohy</Prilohy>
 		</NewTicket>
 		<EditTicket>
 			<EditTicket en="Edit ticket">Upravit ticket</EditTicket>
@@ -255,8 +265,14 @@
 			<Shortcut en="Shortcut">Zkratka</Shortcut>
 			<Version en="Version">Verze</Version>
 			<NewTranslations en="New translation">Nový překlad</NewTranslations>
-      <EditTranslation en="Edit translation">Upravit překlad</EditTranslation>
+			<EditTranslation en="Edit translation">Upravit překlad</EditTranslation>
 		</LanguageManager>
+		<Attachements>
+			<Prilohy en="Attachments">Přílohy</Prilohy>
+			<Pridat en ="Add">Přidat</Pridat>
+			<Najit en="Find">Najít</Najit>
+			<Smazat en="Delete">Smazat</Smazat>
+		</Attachements>
 	</Windows>
 	<Errors>
 		<CustomerTerpNotImplemented en="This function is not implemented yet. Use standard size settings\r\nof customer and in ticket set custom terp code.">Tato funkce ještě není implementována. Použij standardní nastavení velikost\r\nzákazníka a v ticketu pak nastav custom terp.</CustomerTerpNotImplemented>
@@ -291,6 +307,8 @@
 		<CustomerNotImplemented en="This function os not implemented yet. Please use standard customer size settings and set custom TERP in ticket.">Tato funkce ještě není implementovýána. Použij standardní nastavení velikosti zákazníka a v ticketu pak nastav custom terp.</CustomerNotImplemented>
 		<FormatUpgrade en="File has been converted to new format. Old file is backuped as ">Soubor byl převeden na nový formát. Starý soubor byl zálohován jako </FormatUpgrade>
 		<CreateNotification en="Do you want to create RDP notification?">Chcete vytvořit upozornění na RDP?</CreateNotification>
+		<ExportProblem en="There was problem with some terp code(s). Make sure all are valid for selected time period.">Nastal problém s některými terpy. Ujisti se, že všechny jsou pro vybrané období platné.</ExportProblem>
+		<WrongExt en="File extension does not match file content. Preview load failed.">Koncovka souboru neodpovídá obsahu souboru. Načtení náhledu selhalo.</WrongExt>
     <TaskCannotBeEmpty en="Task Cannot be empty">Task nemůže být prázdný</TaskCannotBeEmpty>
     <LookingForUpdates en="Looking for updates...">Vyhledávám aktualizace...</LookingForUpdates>
     <UpdateFailed en="Update failed">Aktualizace se nezdařila</UpdateFailed>
@@ -299,5 +317,15 @@
     <LookingHelpUpdate en="Looking for Help updates...">Vyhledávám aktualizace nápovědy...</LookingHelpUpdate>
     <TerpUpdate en="Updating list of Terps and Tasks...">Aktualizuji seznam Terpů a Tasků...</TerpUpdate>
     <NotRecomended en="Disabling this option is not recommended.">Vypnutí tohoto nastavení není doporučeno.</NotRecomended>
+		<UploadingTickets en="Uploading to MyTime...">Nahrávám do MyTime...</UploadingTickets>
 	</Messages>
+	<Buttons>
+		<OK en="OK">OK</OK>
+		<Cancel en ="Cancel">Zrušit</Cancel>
+		<Yes en="Yes">Ano</Yes>
+		<No en="No">Ne</No>
+		<Abort en="Abort">Přerušit</Abort>
+		<Retry en="Retry">Znovu</Retry>
+		<Ignore en="Ignore">Ignorovat</Ignore>
+	</Buttons>
 </Language>

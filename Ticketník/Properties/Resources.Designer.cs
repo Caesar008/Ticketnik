@@ -93,6 +93,16 @@ namespace Ticketník.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap about {
+            get {
+                object obj = ResourceManager.GetObject("about", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap addZak {
             get {
                 object obj = ResourceManager.GetObject("addZak", resourceCulture);
@@ -141,12 +151,12 @@ namespace Ticketník.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] ClosedXML {
+        internal static System.Drawing.Bitmap crash {
             get {
-                object obj = ResourceManager.GetObject("ClosedXML", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("crash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -181,16 +191,6 @@ namespace Ticketník.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] DocumentFormat_OpenXml {
-            get {
-                object obj = ResourceManager.GetObject("DocumentFormat_OpenXml", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap editZaznam {
@@ -201,22 +201,22 @@ namespace Ticketník.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] FastMember_Signed {
+        internal static System.Drawing.Bitmap export {
             get {
-                object obj = ResourceManager.GetObject("FastMember_Signed", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] fNbt {
+        internal static System.Drawing.Bitmap exportW {
             get {
-                object obj = ResourceManager.GetObject("fNbt", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("exportW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -226,6 +226,16 @@ namespace Ticketník.Properties {
         internal static System.Drawing.Bitmap green_ball {
             get {
                 object obj = ResourceManager.GetObject("green_ball", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap millenium {
+            get {
+                object obj = ResourceManager.GetObject("millenium", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -241,12 +251,52 @@ namespace Ticketník.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] Newtonsoft_Json {
+        internal static System.Drawing.Bitmap newFile {
             get {
-                object obj = ResourceManager.GetObject("Newtonsoft_Json", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("newFile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap off {
+            get {
+                object obj = ResourceManager.GetObject("off", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap offW {
+            get {
+                object obj = ResourceManager.GetObject("offW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap open {
+            get {
+                object obj = ResourceManager.GetObject("open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap priloha {
+            get {
+                object obj = ResourceManager.GetObject("priloha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -283,9 +333,29 @@ namespace Ticketník.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap save {
+            get {
+                object obj = ResourceManager.GetObject("save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings {
+            get {
+                object obj = ResourceManager.GetObject("settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

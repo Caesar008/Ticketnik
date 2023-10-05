@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Xml;
+using System.Linq;
 
 namespace Ticketník
 {
@@ -48,7 +49,15 @@ namespace Ticketník
                 poStartu.Checked = false;
             celkovyCasZobrazit.Checked = Properties.Settings.Default.pouzivatCasy;
             onlineTerp.Checked = Properties.Settings.Default.onlineTerp;
+
+            motivVyber.SelectedIndex = Properties.Settings.Default.motiv;
+            groupBox1.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox2.Paint += new PaintEventHandler(groupBox_Paint);
+            groupBox3.Paint += new PaintEventHandler(groupBox_Paint);
+            
             muze = true;
+
+            Motiv.SetMotiv(this);
 
             probiha.BackColor = Properties.Settings.Default.probiha;
             ceka.BackColor = Properties.Settings.Default.ceka;
@@ -56,11 +65,15 @@ namespace Ticketník
             rdp.BackColor = Properties.Settings.Default.rdp;
             vyreseno.BackColor = Properties.Settings.Default.vyreseno;
             prescas.BackColor = Properties.Settings.Default.prescas;
+            zruseno.BackColor = Properties.Settings.Default.zruseno;
+            prerazeno.BackColor = Properties.Settings.Default.prerazeno;
             probiha.ForeColor = form.ContrastColor(Properties.Settings.Default.probiha);
             ceka.ForeColor = form.ContrastColor(Properties.Settings.Default.ceka);
             odpoved.ForeColor = form.ContrastColor(Properties.Settings.Default.odpoved);
             rdp.ForeColor = form.ContrastColor(Properties.Settings.Default.rdp);
             vyreseno.ForeColor = form.ContrastColor(Properties.Settings.Default.vyreseno);
+            zruseno.ForeColor = form.ContrastColor(Properties.Settings.Default.zruseno);
+            prerazeno.ForeColor = form.ContrastColor(Properties.Settings.Default.prerazeno);
             prescas.ForeColor = form.ContrastColor(Properties.Settings.Default.prescas);
             textLow.BackColor = Properties.Settings.Default.timeLow;
             textMid.BackColor = Properties.Settings.Default.timeMid;
@@ -128,6 +141,12 @@ namespace Ticketník
                 case "rdp":
                     colorDialog1.Color = Properties.Settings.Default.rdp;
                     break;
+                case "zruseno":
+                    colorDialog1.Color = Properties.Settings.Default.zruseno;
+                    break;
+                case "prerazeno":
+                    colorDialog1.Color = Properties.Settings.Default.prerazeno;
+                    break;
                 case "probiha":
                     colorDialog1.Color = Properties.Settings.Default.probiha;
                     break;
@@ -174,6 +193,18 @@ namespace Ticketník
                         Properties.Settings.Default.Save();
                         rdp.BackColor = Properties.Settings.Default.rdp;
                         rdp.ForeColor = form.ContrastColor(Properties.Settings.Default.rdp);
+                        break;
+                    case "zruseno":
+                        Properties.Settings.Default.zruseno = colorDialog1.Color;
+                        Properties.Settings.Default.Save();
+                        zruseno.BackColor = Properties.Settings.Default.zruseno;
+                        zruseno.ForeColor = form.ContrastColor(Properties.Settings.Default.zruseno);
+                        break;
+                    case "prerazeno":
+                        Properties.Settings.Default.prerazeno = colorDialog1.Color;
+                        Properties.Settings.Default.Save();
+                        prerazeno.BackColor = Properties.Settings.Default.prerazeno;
+                        prerazeno.ForeColor = form.ContrastColor(Properties.Settings.Default.prerazeno);
                         break;
                     case "probiha":
                         Properties.Settings.Default.probiha = colorDialog1.Color;
@@ -222,17 +253,23 @@ namespace Ticketník
             Properties.Settings.Default.ceka = Properties.Settings.Default.odpoved = Properties.Settings.Default.rdp = Color.Yellow;
             Properties.Settings.Default.probiha = Color.FromArgb(255, 255, 255, 160);
             Properties.Settings.Default.prescas = Color.Fuchsia;
+            Properties.Settings.Default.zruseno = Color.FromArgb(100, 150, 0);
+            Properties.Settings.Default.prerazeno = Color.FromArgb(200, 200, 0);
             Properties.Settings.Default.Save();
             probiha.BackColor = Properties.Settings.Default.probiha;
             ceka.BackColor = Properties.Settings.Default.ceka;
             odpoved.BackColor = Properties.Settings.Default.odpoved;
             rdp.BackColor = Properties.Settings.Default.rdp;
+            zruseno.BackColor = Properties.Settings.Default.zruseno;
+            prerazeno.BackColor = Properties.Settings.Default.prerazeno;
             vyreseno.BackColor = Properties.Settings.Default.vyreseno;
             prescas.BackColor = Properties.Settings.Default.prescas;
             probiha.ForeColor = form.ContrastColor(Properties.Settings.Default.probiha);
             ceka.ForeColor = form.ContrastColor(Properties.Settings.Default.ceka);
             odpoved.ForeColor = form.ContrastColor(Properties.Settings.Default.odpoved);
             rdp.ForeColor = form.ContrastColor(Properties.Settings.Default.rdp);
+            zruseno.ForeColor = form.ContrastColor(Properties.Settings.Default.zruseno);
+            prerazeno.ForeColor = form.ContrastColor(Properties.Settings.Default.prerazeno);
             vyreseno.ForeColor = form.ContrastColor(Properties.Settings.Default.vyreseno);
             prescas.ForeColor = form.ContrastColor(Properties.Settings.Default.prescas);
             form.LoadFile();
@@ -289,6 +326,9 @@ namespace Ticketník
 
         void Setlang()
         {
+            this.SuspendLayout();
+            form.SuspendLayout();
+            int selectedMotiv = motivVyber.SelectedIndex;
             poStartu.Text = form.jazyk.Windows_Nastaveni_PoStratu;
             autosave.Text = form.jazyk.Windows_Nastaveni_Autosave;
             label1.Text = form.jazyk.Windows_Nastaveni_UkladatKazdych;
@@ -301,6 +341,8 @@ namespace Ticketník
             ceka.Text = form.jazyk.Windows_Nastaveni_CekaSe;
             odpoved.Text = form.jazyk.Windows_Nastaveni_CekaSeNaOdpoved;
             rdp.Text = form.jazyk.Windows_Nastaveni_RDP;
+            zruseno.Text = form.jazyk.Windows_Nastaveni_Zruseno;
+            prerazeno.Text = form.jazyk.Windows_Nastaveni_Prerazeno;
             probiha.Text = form.jazyk.Windows_Nastaveni_Probiha;
             button1.Text = defaultCasy.Text = form.jazyk.Windows_Nastaveni_Default;
             groupBox2.Text = form.jazyk.Windows_Nastaveni_CasZaDen;
@@ -314,7 +356,15 @@ namespace Ticketník
             prescas.Text = form.jazyk.Windows_Ticket_Prescas;
             onlineTerp.Text = form.jazyk.Windows_Nastaveni_OnlineTerp;
             button2.Text = form.jazyk.Windows_Nastaveni_Reset_Vychozi;
-            
+            motiv.Text = form.jazyk.Windows_Nastaveni_Theme;
+            motivVyber.DataSource = new Dictionary<int, string>(){
+                {0, form.jazyk.Windows_Nastaveni_Svetly },
+                {1, form.jazyk.Windows_Nastaveni_Tmavy},
+                {2, form.jazyk.Windows_Nastaveni_PodleSystemu}}.ToList();
+            motivVyber.SelectedIndex = selectedMotiv;
+            this.ResumeLayout();
+            form.ResumeLayout();
+            Motiv.SetMotiv(this);
         }
 
         private void jazyk_SelectedIndexChanged(object sender, EventArgs e)
@@ -354,7 +404,7 @@ namespace Ticketník
             if (muze)
             {
                 if (!onlineTerp.Checked)
-                    MessageBox.Show(form.jazyk.Message_DisableNotRecommended);
+                    CustomControls.MessageBox.Show(form.jazyk.Message_DisableNotRecommended);
                 Properties.Settings.Default.onlineTerp = onlineTerp.Checked;
                 form.terpToolStripMenuItem.Visible = form.přidatTERPKódToolStripMenuItem.Visible = form.upravitTERPKódToolStripMenuItem.Visible = form.smazatTERPKódToolStripMenuItem.Visible = !onlineTerp.Checked;
                 Properties.Settings.Default.Save();
@@ -385,6 +435,8 @@ namespace Ticketník
             Properties.Settings.Default.ceka = System.Drawing.Color.Yellow;
             Properties.Settings.Default.odpoved = System.Drawing.Color.Yellow;
             Properties.Settings.Default.rdp = System.Drawing.Color.Yellow;
+            Properties.Settings.Default.zruseno = System.Drawing.Color.FromArgb(100,150,0);
+            Properties.Settings.Default.prerazeno = System.Drawing.Color.FromArgb(200, 200, 0);
             Properties.Settings.Default.vyreseno = System.Drawing.Color.FromArgb(0, 200, 0);
             Properties.Settings.Default.prescas = System.Drawing.Color.Fuchsia;
             Properties.Settings.Default.updateCesta = @"\\10.14.18.19\Shareforyou\tools\Ticketnik\Update";
@@ -410,6 +462,7 @@ namespace Ticketník
             Properties.Settings.Default.colPozPoradi = 10;
             Properties.Settings.Default.onlineTerp = true;
             Properties.Settings.Default.lastUpdateNotif = 0;
+            Properties.Settings.Default.motiv = 2;
 
             Properties.Settings.Default.Save();
             try
@@ -419,7 +472,41 @@ namespace Ticketník
                 registryKey.DeleteValue("Ticketnik");
             }
             catch { }
-
+            Motiv.SetMotiv(this);
         }
+
+        private void motivVyber_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (muze)
+            {
+                Properties.Settings.Default.motiv = motivVyber.SelectedIndex;
+                Motiv.SetMotiv(this);
+                Motiv.SetMotiv(form);
+            }
+        }
+
+        private void groupBox_Paint(object sender, PaintEventArgs e)
+        {
+            Motiv.SetGroupBoxRamecek((GroupBox)sender, e);
+        }
+
+        private void event_MouseEnter(object sender, EventArgs e)
+        {
+            Motiv.SetControlColorOver(sender);
+        }
+
+        private void event_MouseLeave(object sender, EventArgs e)
+        {
+            Motiv.SetControlColor(sender);
+        }
+        /*protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }*/
     }
 }

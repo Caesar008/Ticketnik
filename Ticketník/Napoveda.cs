@@ -29,6 +29,7 @@ namespace Ticketník
             this.Text = form.jazyk.SideMenu_Napoveda;
             this.label1.Text = form.jazyk.Windows_Help_Updating;
             browser.ObjectForScripting = new ScriptManager(this);
+            Motiv.SetMotiv(this);
             VytvorMenu(true);
         }
 
@@ -134,7 +135,7 @@ namespace Ticketník
             }
             catch (Exception ex)
             {
-                MessageBox.Show(form.jazyk.Windows_Help_NejdeStahnout);
+                CustomControls.MessageBox.Show(form.jazyk.Windows_Help_NejdeStahnout);
                 form.Logni(ex.Message + "\r\n\r\n" + ex.StackTrace, Form1.LogMessage.ERROR);
                 return;
             }
@@ -488,14 +489,37 @@ namespace Ticketník
                 {
                     if (!zmena)
                     {
-                        browser.DocumentText = File.ReadAllText(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\" + (string)e.Node.Tag).Replace("{verze}", Application.ProductVersion).Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace('\\', '/'));
+                        string scrollFore = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarFore"));
+                        string scrollBack = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarBack"));
+                        string scrollSeparator = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarSeparator"));
+                        string back = ColorTranslator.ToHtml(Motiv.GetBarvy("pozadíControl"));
+                        string fore = ColorTranslator.ToHtml(Motiv.GetBarvy("text"));
+                        Motiv.MotivType motiv = Motiv.GetMotivType();
+                        string typ = "";
+                        if (motiv == Motiv.MotivType.Tmavy)
+                            typ = "-Dark";
+                        else
+                            typ = "";
+                        browser.DocumentText = File.ReadAllText(System.Reflection.Assembly.GetEntryAssembly().Location
+                            .Replace("Ticketnik.exe", "") + "help\\" + (string)e.Node.Tag)
+                            .Replace("{verze}", Application.ProductVersion)
+                            .Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location)
+                            .Replace("Ticketnik.exe", "")
+                            .Replace('\\', '/')
+                            .Replace("{scrollForeColor}", scrollFore)
+                            .Replace("{scrollBackColor}", scrollBack)
+                            .Replace("{scrollSeparatorColor}", scrollSeparator)
+                            .Replace("{backColor}", back)
+                            .Replace("{foreColor}", fore)
+                            .Replace("{imgTypName}", typ)
+                            ;
                         menuTree.SelectedNode = null;
                         
                     }
                 }
                 catch
                 {
-                    MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
+                    CustomControls.MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
                 }
             }
             zmena = true;
@@ -507,10 +531,32 @@ namespace Ticketník
             {
                 if (url.StartsWith("tic://"))
                 {
+                    string scrollFore = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarFore"));
+                    string scrollBack = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarBack"));
+                    string scrollSeparator = ColorTranslator.ToHtml(Motiv.GetBarvy("scrollBarSeparator"));
+                    string back = ColorTranslator.ToHtml(Motiv.GetBarvy("pozadíControl"));
+                    string fore = ColorTranslator.ToHtml(Motiv.GetBarvy("text"));
                     string soub = url.Replace("tic://", "");
+                    Motiv.MotivType motiv = Motiv.GetMotivType();
+                    string typ = "";
+                    if (motiv == Motiv.MotivType.Tmavy)
+                        typ = "-Dark";
+                    else
+                        typ = "";
                     Expand(soub, menuTree.Nodes);
                     soub = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "help\\" + soub;
-                    browser.DocumentText = File.ReadAllText(soub).Replace("{verze}", Application.ProductVersion).Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "").Replace('\\', '/'));
+                    browser.DocumentText = File.ReadAllText(soub)
+                        .Replace("{verze}", Application.ProductVersion)
+                        .Replace("{cesta}", System.Reflection.Assembly.GetEntryAssembly().Location)
+                        .Replace("Ticketnik.exe", "")
+                        .Replace('\\', '/')
+                        .Replace("{scrollForeColor}", scrollFore)
+                        .Replace("{scrollBackColor}", scrollBack)
+                        .Replace("{scrollSeparatorColor}", scrollSeparator)
+                        .Replace("{backColor}", back)
+                        .Replace("{foreColor}", fore)
+                        .Replace("{imgTypName}", typ)
+                        ;
                 }
                 else if (url.StartsWith("http"))
                 {
@@ -519,7 +565,7 @@ namespace Ticketník
             }
             catch
             {
-                MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
+                CustomControls.MessageBox.Show(form.jazyk.Windows_Help_Nenalezeno);
             }
         }
 

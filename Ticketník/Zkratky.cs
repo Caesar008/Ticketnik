@@ -48,7 +48,7 @@ namespace Ticketník
                     Kopirovat();
                 }
                 else
-                    MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    CustomControls.MessageBox.Show(jazyk.Message_TerpUpdate, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else if (e.KeyCode == Keys.NumPad0 && e.Modifiers == Keys.Control)
             {
@@ -65,11 +65,11 @@ namespace Ticketník
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                foreach (TabPage tp in tabControl1.Controls)
+                foreach (CustomControls.TabPage tp in tabControl1.Controls)
                 {
                     if (tp.Controls.ContainsKey(vybranyMesic))
                     {
-                        if (((ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count != 0 && ((Tag)((ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong != -1)
+                        if (((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedIndices.Count != 0 && ((Tag)((Ticketník.CustomControls.ListView)tp.Controls[vybranyMesic]).SelectedItems[0].Tag).IDlong != -1)
                             toolStripButton2_Click(sender, e);
                         break;
                     }
@@ -155,15 +155,15 @@ namespace Ticketník
                     }
                     roky.Sort();
                     int max = roky.Count - 1;
-                    MessageBox.Show("Verze: " + file.RootTag.Get<NbtInt>("verze").Value + "\r\n" +
+                    CustomControls.MessageBox.Show("Verze: " + file.RootTag.Get<NbtInt>("verze").Value + "\r\n" +
                     "Max ID: " + file.RootTag.Get<NbtLong>("MaxID").Value.ToString("n0") + "\r\n" +
                     "Počet ticketů: " + pocet.ToString("n0") + "\r\n" +
                     "Kapacita: " + int.MaxValue.ToString("n0") + "\r\n" +
                     "Min rok: " + roky[0] + "\r\n" +
                     "Max rok: " + roky[max] + "\r\n" +
-                    "Cesta: " + jmenoSouboru + "\r\n\r\n" + 
+                    "Cesta: " + jmenoSouboru + "\r\n\r\n" +
                     "Konfig: " + System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.Replace("\\" + System.Reflection.Assembly.GetEntryAssembly().GetName().Version + "\\user.config", "").Replace(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Ticketník\\", "")
-                    , "Info o souboru", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    , "Info o souboru", MessageBoxButtons.OK/*, MessageBoxIcon.None*/);
                 }
             }
             else if (e.KeyCode == Keys.U && e.Modifiers == (Keys.Control | Keys.Shift))

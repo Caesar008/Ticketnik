@@ -22,8 +22,6 @@ namespace Ticketník
                 this.BeginInvoke(new Action(() => timer_ClearInfo.Stop()));
 
             infoBox.Text = jazyk.Message_VyhledavamAktualizace;
-
-            bool skipDelete = false;
             try
             {
                 XmlDocument updates = new XmlDocument();
@@ -71,7 +69,6 @@ namespace Ticketník
                                 catch { Logni("Nelze načíst aktualizační zdroj v síti.", LogMessage.WARNING); }
                             }
                             Logni("Nelze načíst žádný zdroj aktualizací.\r\n" + e.Message, LogMessage.WARNING);
-                            //why? Lepší je return. throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
                             return;
                         }
                     }
@@ -111,7 +108,6 @@ namespace Ticketník
                             catch { Logni("Nelze načíst aktualizační zdroj v síti.", LogMessage.WARNING); }
                         }
                         Logni("Nelze načíst žádný zdroj aktualizací.\r\n" + e.Message, LogMessage.WARNING);
-                        //why? Lepší je return. throw new Exception("Nelze vyhledat žádný zdroj aktualizací");
                         return;
                     }
                 }
@@ -448,7 +444,7 @@ namespace Ticketník
                                 File.AppendAllText(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "ToRemove"), jmeno + "\r\n");
                             }
 
-                            if ((Version.Parse(verze) > Version.Parse(verzeExisting) || verzeExisting == "") && !toRemove)
+                            if ((verzeExisting == "" || Version.Parse(verze) > Version.Parse(verzeExisting)) && !toRemove)
                             {
                                 //updatovat/stáhnout
                                 try
@@ -517,7 +513,7 @@ namespace Ticketník
 
                         try
                         {
-                            
+
                             //výchozí cesta v síti
                             if (!Properties.Settings.Default.pouzivatZalozniUpdate)
                             {
@@ -578,7 +574,7 @@ namespace Ticketník
                         }
 
                         int retry = 0;
-                        while(!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Update\\Ticketnik.exe")) && retry < 100)
+                        while (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Update\\Ticketnik.exe")) && retry < 100)
                         {
                             Thread.Sleep(100);
                             Application.DoEvents();
@@ -586,14 +582,14 @@ namespace Ticketník
                         }
 
                         Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"), "\"" + System.Reflection.Assembly.GetEntryAssembly().Location + "\"");
-                        Logni("Spouštím aktualizaci " + System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe") + " s parametrem \"" + System.Reflection.Assembly.GetEntryAssembly().Location + "\"" , LogMessage.INFO);
+                        Logni("Spouštím aktualizaci " + System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe") + " s parametrem \"" + System.Reflection.Assembly.GetEntryAssembly().Location + "\"", LogMessage.INFO);
 
                         if (!InvokeRequired)
                         {
                             Logni("Zavírám Ticketník.", LogMessage.INFO);
-                            skipDelete = true;
                             this.Close();
                             Application.Exit();
+                            System.Diagnostics.Process.GetCurrentProcess().Kill();
                         }
                         else
                         {
@@ -602,6 +598,7 @@ namespace Ticketník
                             this.BeginInvoke(new Action(() => this.Close()));
 
                             Application.Exit();
+                            System.Diagnostics.Process.GetCurrentProcess().Kill();
                         }
                     }
                 }
@@ -616,7 +613,6 @@ namespace Ticketník
 
                 updateRunning = false;
             }
-
 
             if (vlaknoTerp != null && !vlaknoTerp.IsAlive)
             {

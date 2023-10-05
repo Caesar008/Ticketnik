@@ -19,6 +19,7 @@ namespace Ticketník
             openFileDialog1.Filter = "Crash report|*.report";
             label1.Text = "";
             label2.Text = "";
+            Motiv.SetMotiv(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,8 +41,8 @@ namespace Ticketník
                 }
                 catch (Exception fileEx)
                 {
-                    MessageBox.Show("Tic soubor je poškozený. Je třeba ho zkontrolovat ručně v NBT editoru.");
-                    MessageBox.Show(fileEx.Message);
+                    CustomControls.MessageBox.Show("Tic soubor je poškozený. Je třeba ho zkontrolovat ručně v NBT editoru.");
+                    CustomControls.MessageBox.Show(fileEx.Message);
                 }
             }
         }

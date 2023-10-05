@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Upozorneni));
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView1 = new Ticketník.CustomControls.ListView(this);
             this.slTyp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.slDatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.slCas = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.slPopis = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.noveUpozorneni = new System.Windows.Forms.Button();
-            this.upravitUpozorneni = new System.Windows.Forms.Button();
-            this.smazatUpozorneni = new System.Windows.Forms.Button();
+            this.noveUpozorneni = new Ticketník.CustomControls.Button();
+            this.upravitUpozorneni = new Ticketník.CustomControls.Button();
+            this.smazatUpozorneni = new Ticketník.CustomControls.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -61,6 +61,7 @@
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.DoubleClick += new System.EventHandler(this.upravitUpozorneni_Click);
+            this.listView1.HeaderFillMethod = CustomControls.ListView.HeaderTrailingSpaceFill.ExtendLastColumn;
             // 
             // slTyp
             // 
@@ -138,13 +139,13 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private Ticketník.CustomControls.ListView listView1;
         private System.Windows.Forms.ColumnHeader slDatum;
         private System.Windows.Forms.ColumnHeader slCas;
         private System.Windows.Forms.ColumnHeader slTyp;
         private System.Windows.Forms.ColumnHeader slPopis;
-        private System.Windows.Forms.Button noveUpozorneni;
-        private System.Windows.Forms.Button upravitUpozorneni;
-        private System.Windows.Forms.Button smazatUpozorneni;
+        private Ticketník.CustomControls.Button noveUpozorneni;
+        private Ticketník.CustomControls.Button upravitUpozorneni;
+        private Ticketník.CustomControls.Button smazatUpozorneni;
     }
 }

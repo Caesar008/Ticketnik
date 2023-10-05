@@ -12,7 +12,9 @@ namespace Ticketník
             Ceka_se = 1,
             RDP = 2,
             Ceka_se_na_odpoved = 3,
-            Vyreseno = 4
+            Vyreseno = 4,
+            Zruseno = 5,
+            Prerazeno = 6
         }
 
         internal enum TerpTyp

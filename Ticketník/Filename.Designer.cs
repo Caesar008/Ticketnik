@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new Ticketník.CustomControls.TextBox();
+            this.button1 = new Ticketník.CustomControls.Button();
+            this.button2 = new Ticketník.CustomControls.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -99,8 +99,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private Ticketník.CustomControls.TextBox textBox1;
+        private Ticketník.CustomControls.Button button1;
+        private Ticketník.CustomControls.Button button2;
     }
 }
