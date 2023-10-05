@@ -1,4 +1,4 @@
-2.0.0.1 (5.10.2023)
+2.0.0.2 (5.10.2023)
 
 - Opraven problém s knihovnami a jejich závislostmi
 -----------------------------------
