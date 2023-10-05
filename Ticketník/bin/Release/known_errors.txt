@@ -14,11 +14,8 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-003 15.8.2022
 - Složky a soubory někdy dostávají podtržítko na začátek
 
-#23-003 11.9.2023
-- Updatování terp souboru selže, pokud terp není déle dostupný
-
-#23-004 22.9.2023 1.1.0.11
-- Export failuje v případě, že některý řádek exportu má přesně 240 znaků
+#23-001 2.5.2023
+- Updatování terp souboru selže pokud došlo k přejměnování terpu na straně MyTime
 
 ---------
 UPDATER
@@ -162,6 +159,9 @@ OPRAVENÉ CHYBY
 - Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
 	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"
 
+#22-003 15.8.2022 - Opraveno 5.10.2023 (2.0.0.0)
+- Složky a soubory někdy dostávají podtržítko na začátek
+
 #22-004 15.8.2022 - Opraveno 15.8.2022 (1.7.1.0)
 - parametr -default neresetuje Ticketník podle nastavení verze 1.7
 
@@ -185,3 +185,9 @@ OPRAVENÉ CHYBY
 
 #23-002 Opraveno 8.9.2023 (1.7.3.1)
 - Export nefunguje správně s typem ticketu
+
+#23-003 11.9.2023 - Opraveno 5.10.2023 (2.0.0.0)
+- Updatování terp souboru selže, pokud terp není déle dostupný
+
+#23-004 22.9.2023 1.1.0.11 - Opraveno 5.10.2023 (2.0.0.0)
+- Export failuje v případě, že některý řádek exportu má přesně 240 znaků
