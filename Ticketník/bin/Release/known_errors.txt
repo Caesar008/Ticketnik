@@ -17,6 +17,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #23-001 2.5.2023
 - Updatování terp souboru selže pokud došlo k přejměnování terpu na straně MyTime
 
+#23-005 5.10.2023 (2.0.0.0)
+- Při ruční změně data nebo času v prvku DateTimePicker může za určitých podmínek dojít k pádu
+
 ---------
 UPDATER
 ---------
