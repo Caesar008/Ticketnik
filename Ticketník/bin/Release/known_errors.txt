@@ -8,22 +8,21 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
-#22-002 27.7.2022
+#22-002 27.7.2022 (Nelze opravit z důvodu nastavení AAD)
 - Autologin bez VPN nebo Tieto sítě nefunguje - vyžaduje výběr MS accountu
-
-#22-003 15.8.2022
-- Složky a soubory někdy dostávají podtržítko na začátek
-
-#23-001 2.5.2023
-- Updatování terp souboru selže pokud došlo k přejměnování terpu na straně MyTime
 
 #23-005 5.10.2023 (2.0.0.0)
 - Při ruční změně data nebo času v prvku DateTimePicker může za určitých podmínek dojít k pádu
 
+#23-006 16.10.2023
+- Při zapnutém autosavu může program spadnou kvůli tomu, že .tic je používán jiným procesem
+
+#23-007 16.10.2023
+- ListView se seznamem ticketů občas ztratí barvy.
+
 ---------
 UPDATER
 ---------
-- Problém při updatu, může skončit s tím, že proces je používán
 
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
@@ -194,3 +193,8 @@ OPRAVENÉ CHYBY
 
 #23-004 22.9.2023 1.1.0.11 - Opraveno 5.10.2023 (2.0.0.0)
 - Export failuje v případě, že některý řádek exportu má přesně 240 znaků
+
+---------
+UPDATER
+---------
+- Problém při updatu, může skončit s tím, že proces je používán - opraveno 2.0.0.0
