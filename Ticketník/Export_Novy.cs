@@ -266,6 +266,8 @@ namespace Ticketník
 
                     for (int i = 0; i < exportRadky.Count; i++)
                     {
+                        if (exportRadky[i].Terp == null && exportRadky[i].Task == null && exportRadky[i].OnlineTyp == null)
+                            continue;
                         if (((exportRadky[i].Typ == ExportTyp.Normal && exportRadky[i].OnlineTyp == "") || (exportRadky[i].OnlineTyp.ToLower().Contains("normal"))) && exportRadky[i].Radek[cs].Cas > 0.5m)
                         {
                             ubrat.Add(i, exportRadky[i].Radek[cs].Cas);
