@@ -37,7 +37,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 8;
-        internal readonly int program = 2000003;
+        internal readonly int program = 2000004;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
