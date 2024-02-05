@@ -14,20 +14,8 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.0.0.0
-    - Podpora světlého a tmavého režimu
-    - Ovládací prvky přepsány pro větší kontrolu nad nimi
-    - Zmenšení velikosti exe vynecháním knihoven
-    - Zrušeno potvrzování změny data ticketu
-    - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
-    - Ctrl+V nyní umí rozpoznat tickety z SM9
-    - Automatický upload do MyTime
-    - Přidány statusy Zrušeno a Přeřazeno
-    - Možnost přidávání příloh k ticketům
-    - Oprava chyby #22-003
-    - Oprava chyby #23-003
-    - Dll knihovny updatovány na novější verze
-    - Oprava updateru
+    /*interní changelog 2.1.0.0
+    - Opravena chyba #24-001
     */
 
     public partial class Form1 : Form
