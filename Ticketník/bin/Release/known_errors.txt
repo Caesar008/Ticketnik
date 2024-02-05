@@ -20,6 +20,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #23-007 16.10.2023
 - ListView se seznamem ticketů občas ztratí barvy.
 
+#24-001 5.2.2024
+- Ticketník spadne kvůli prázdnému souboru "upozorneni"
+
 ---------
 UPDATER
 ---------
