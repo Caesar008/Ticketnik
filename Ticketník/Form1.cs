@@ -16,6 +16,7 @@ namespace Ticketník
 {
     /*interní changelog 2.1.0.0
     - Opravena chyba #24-001
+    - Odstraněn autosave
     */
 
     public partial class Form1 : Form
@@ -123,7 +124,7 @@ namespace Ticketník
             SetIE();
             AktualizujTerpyTasky();
 
-            Autosave();
+            //Autosave();
 
             if (!IsOnScreen(this))
             {
@@ -1750,7 +1751,7 @@ namespace Ticketník
                         ulozeno = true;
 
                         Prilohy.ObnovPrilohy(this);
-                        timer1.Stop();
+                        //timer1.Stop();
                         if(updateRunning)
                         {
                             vlaknoCancel.Cancel();
@@ -1765,7 +1766,7 @@ namespace Ticketník
                     else
                     {
                         uložitToolStripMenuItem_Click(sender, e);
-                        timer1.Stop();
+                        //timer1.Stop();
 
                         if (vlaknoTerp.IsAlive)
                             vlaknoTerp.Abort();
@@ -1781,7 +1782,7 @@ namespace Ticketník
                 else
                 {
                     uložitToolStripMenuItem_Click(sender, e);
-                    timer1.Stop();
+                    //timer1.Stop();
 
                     if (vlaknoTerp.IsAlive)
                         vlaknoTerp.Abort();
@@ -1795,7 +1796,7 @@ namespace Ticketník
             }
             else
             {
-                timer1.Stop();
+                //timer1.Stop();
                 Prilohy.ZrusPrilohy(this);
 
                 if (vlaknoTerp != null && vlaknoTerp.IsAlive)
@@ -2136,15 +2137,15 @@ namespace Ticketník
             nast.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
             nast.ShowDialog();
 
-            timer1.Stop();
-            Autosave();
+            //timer1.Stop();
+            //Autosave();
         }
 
-        internal void Autosave()
+        /*internal void Autosave()
         {
             timer1.Interval = (int)Properties.Settings.Default.minuty * 1000 * 60;
             timer1.Start();
-        }
+        }*/
 
         private void timer1_Tick(object sender, EventArgs e)
         {

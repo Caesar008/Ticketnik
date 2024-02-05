@@ -88,7 +88,7 @@
             this.toolStripButton7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Napoveda = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            //this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerUpozorneni = new System.Windows.Forms.Timer(this.components);
             this.timer_ClearInfo = new System.Windows.Forms.Timer(this.components);
             this.rokVyber = new Ticketník.CustomControls.ComboBox();
@@ -638,7 +638,7 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            //this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timerUpozorneni
             // 
@@ -1371,7 +1371,7 @@
         internal System.Windows.Forms.ToolStripMenuItem smazatZákazníkaToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         internal System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
-        internal System.Windows.Forms.Timer timer1;
+        //internal System.Windows.Forms.Timer timer1;
         internal System.Windows.Forms.ToolStripMenuItem hledatToolStripMenuItem;
         internal System.Windows.Forms.ToolStripSeparator separator;
         internal System.Windows.Forms.ToolStripButton hledat;
