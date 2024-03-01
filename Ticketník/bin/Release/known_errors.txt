@@ -23,6 +23,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #24-001 5.2.2024
 - Ticketník spadne kvůli prázdnému souboru "upozorneni"
 
+#24-002 1.3.2024
+- Při updatu jména terpu se neupdatují všechny záznamy v seznamu a mohou se zobrazovat duplikátní nebo staré záznamy
+
 ---------
 UPDATER
 ---------
