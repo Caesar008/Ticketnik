@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Ticketník
 {
@@ -474,12 +475,16 @@ namespace Ticketník
                                     terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types").Add(new NbtString(customType));
                             }
                         }
-                        if (label != customTerp.Label)
+                        if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtString>("Label").Value != label)
+                            toRename.Add(label, label);
+                        if (label != customTerp.Label && !toRename.ContainsKey(label))
                             toRename.Add(label, customTerp.Label);
                     }
                     foreach(string s in toRename.Keys)
                     {
                         Logni("Přejmenovávám custom terp " + s + " na " + toRename[s], Form1.LogMessage.INFO);
+                        terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(s).Get<NbtString>("Label").Value = toRename[s];
+                        terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(s).Get<NbtString>("Name").Value = toRename[s].Remove(0, toRename[s].IndexOf(" - ")+3);
                         terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(s).Name = toRename[s];
                     }
                 }
@@ -854,9 +859,9 @@ namespace Ticketník
                                 myterp.Tasks.Add(mytask);
                             }
 
-                            if (!Terpy.ContainsKey(mtt.Get<NbtString>("Label").Value))
+                            if (!Terpy.ContainsKey(mtt.Get<NbtString>("Label").Value) && (TerpFileUpdate == myterp.LastUpdate || myterp.LastUpdate == 0) )
                                 Terpy.Add(myterp.Label, myterp);
-                            else
+                            else if(TerpFileUpdate == myterp.LastUpdate || myterp.LastUpdate == 0)
                                 Terpy[myterp.Label] = myterp;
                         }
                     }
@@ -879,9 +884,9 @@ namespace Ticketník
                                 myterp.Tasks.Add(mytask);
                             }
 
-                            if (!Terpy.ContainsKey(customTerpy.Get<NbtString>("Label").Value))
+                            if (!Terpy.ContainsKey(customTerpy.Get<NbtString>("Label").Value) && (TerpFileUpdate == myterp.LastUpdate || myterp.LastUpdate == 0))
                                 Terpy.Add(myterp.Label, myterp);
-                            else
+                            else if(TerpFileUpdate == myterp.LastUpdate || myterp.LastUpdate == 0)
                                 Terpy[myterp.Label] = myterp;
                         }
                     }

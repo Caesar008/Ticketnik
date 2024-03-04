@@ -16,6 +16,9 @@ namespace Ticketník
 {
     /*interní changelog 2.1.0.0
     - Opravena chyba #24-001
+    - Opravena chyba #24-002
+    - Opravena chyba #24-003
+    - Opravena chyba #23-006
     - Odstraněn autosave
     */
 
@@ -26,7 +29,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 8;
-        internal readonly int program = 2000004;
+        internal readonly int program = 2010000;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
