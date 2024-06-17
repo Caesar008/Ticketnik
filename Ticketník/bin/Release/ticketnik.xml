@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Ticketnik>
-	<Zakosi>50</Zakosi>
-	<App>2000000</App>
-	<Help>7</Help>
+	<Zakosi>52</Zakosi>
+	<App>2010000</App>
+	<Help>8</Help>
 	<Lang>
 		<CZ>8.0</CZ>
 	</Lang>
 	<Knihovny>
 		<Dll version="0.96.0.0">ClosedXML.dll</Dll>
-		<Dll version="2.20.0.0">DocumentFormat.OpenXml.dll</Dll>
+		<Dll version="2.16.0.0">DocumentFormat.OpenXml.dll</Dll>
 		<Dll version="1.1.0.0">ExcelNumberFormat.dll</Dll>
 		<Dll version="0.6.4.0">fNbt.dll</Dll>
 		<Dll version="1.11.54.0">HtmlAgilityPack.dll</Dll>

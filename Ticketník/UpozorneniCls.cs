@@ -28,7 +28,15 @@ namespace Ticketník
             NbtFile file = new NbtFile();
             if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni"))
             {
-                file.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni");
+                try
+                {
+                    file.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni");
+                }
+                catch
+                {
+                    file.RootTag = new NbtCompound("Upozorneni");
+                    file.RootTag.Add(new NbtList("Upozorneni", NbtTagType.Compound));
+                }
             }
             else
             {
@@ -54,7 +62,16 @@ namespace Ticketník
             NbtFile file;
             if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni"))
             {
-                file = new NbtFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni");
+                try
+                {
+                    file = new NbtFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni");
+                }
+                catch
+                {
+                    file = new NbtFile();
+                    file.RootTag = new NbtCompound("Upozorneni");
+                    file.RootTag.Add(new NbtList("Upozorneni", NbtTagType.Compound));
+                }
                 List<UpozorneniCls> list = new List<UpozorneniCls>();
                 int index = 0;
                 foreach (NbtCompound c in file.RootTag.Get<NbtList>("Upozorneni"))
@@ -92,7 +109,16 @@ namespace Ticketník
             NbtFile file;
             if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni"))
             {
+                try
+                { 
                 file = new NbtFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni");
+                }
+                catch
+                {
+                    file = new NbtFile();
+                    file.RootTag = new NbtCompound("Upozorneni");
+                    file.RootTag.Add(new NbtList("Upozorneni", NbtTagType.Compound));
+                }
                 List<UpozorneniCls> list = new List<UpozorneniCls>();
                 int index = 0;
                 foreach (NbtCompound c in file.RootTag.Get<NbtList>("Upozorneni"))
@@ -147,7 +173,16 @@ namespace Ticketník
                 NbtFile file;
                 if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni"))
                 {
+                    try
+                    { 
                     file = new NbtFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\upozorneni");
+                    }
+                    catch
+                    {
+                        file = new NbtFile();
+                        file.RootTag = new NbtCompound("Upozorneni");
+                        file.RootTag.Add(new NbtList("Upozorneni", NbtTagType.Compound));
+                    }
                     List<UpozorneniCls> list = new List<UpozorneniCls>();
                     foreach (NbtCompound c in file.RootTag.Get<NbtList>("Upozorneni"))
                     {

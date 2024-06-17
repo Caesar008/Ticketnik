@@ -160,6 +160,8 @@ namespace Ticketník
                     bool missing = false;
                     foreach(ExportRow row in exportRadky)
                     {
+                        if (row.Task == null)
+                            continue;
                         if (!subHtml.Contains(row.Task))
                         {
                             missing = true;

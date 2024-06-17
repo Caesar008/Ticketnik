@@ -14,20 +14,12 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.0.0.0
-    - Podpora světlého a tmavého režimu
-    - Ovládací prvky přepsány pro větší kontrolu nad nimi
-    - Zmenšení velikosti exe vynecháním knihoven
-    - Zrušeno potvrzování změny data ticketu
-    - Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
-    - Ctrl+V nyní umí rozpoznat tickety z SM9
-    - Automatický upload do MyTime
-    - Přidány statusy Zrušeno a Přeřazeno
-    - Možnost přidávání příloh k ticketům
-    - Oprava chyby #22-003
-    - Oprava chyby #23-003
-    - Dll knihovny updatovány na novější verze
-    - Oprava updateru
+    /*interní changelog 2.1.0.0
+    - Opravena chyba #24-001
+    - Opravena chyba #24-002
+    - Opravena chyba #24-003
+    - Opravena chyba #23-006
+    - Odstraněn autosave
     */
 
     public partial class Form1 : Form
@@ -37,7 +29,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 8;
-        internal readonly int program = 2000000;
+        internal readonly int program = 2010000;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -135,7 +127,7 @@ namespace Ticketník
             SetIE();
             AktualizujTerpyTasky();
 
-            Autosave();
+            //Autosave();
 
             if (!IsOnScreen(this))
             {
@@ -1762,7 +1754,7 @@ namespace Ticketník
                         ulozeno = true;
 
                         Prilohy.ObnovPrilohy(this);
-                        timer1.Stop();
+                        //timer1.Stop();
                         if(updateRunning)
                         {
                             vlaknoCancel.Cancel();
@@ -1777,7 +1769,7 @@ namespace Ticketník
                     else
                     {
                         uložitToolStripMenuItem_Click(sender, e);
-                        timer1.Stop();
+                        //timer1.Stop();
 
                         if (vlaknoTerp.IsAlive)
                             vlaknoTerp.Abort();
@@ -1793,7 +1785,7 @@ namespace Ticketník
                 else
                 {
                     uložitToolStripMenuItem_Click(sender, e);
-                    timer1.Stop();
+                    //timer1.Stop();
 
                     if (vlaknoTerp.IsAlive)
                         vlaknoTerp.Abort();
@@ -1807,7 +1799,7 @@ namespace Ticketník
             }
             else
             {
-                timer1.Stop();
+                //timer1.Stop();
                 Prilohy.ZrusPrilohy(this);
 
                 if (vlaknoTerp != null && vlaknoTerp.IsAlive)
@@ -2148,15 +2140,15 @@ namespace Ticketník
             nast.Location = new Point(this.Location.X + 50, this.Location.Y + 50);
             nast.ShowDialog();
 
-            timer1.Stop();
-            Autosave();
+            //timer1.Stop();
+            //Autosave();
         }
 
-        internal void Autosave()
+        /*internal void Autosave()
         {
             timer1.Interval = (int)Properties.Settings.Default.minuty * 1000 * 60;
             timer1.Start();
-        }
+        }*/
 
         private void timer1_Tick(object sender, EventArgs e)
         {

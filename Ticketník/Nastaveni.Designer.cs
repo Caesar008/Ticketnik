@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Nastaveni));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.clr_prerazeno = new Ticketník.CustomControls.Button();
             this.clr_zruseno = new Ticketník.CustomControls.Button();
@@ -70,31 +69,11 @@
             this.motivVyber = new Ticketník.CustomControls.ComboBox();
             this.onlineTerp = new Ticketník.CustomControls.CheckBox();
             this.checkBox1 = new Ticketník.CustomControls.CheckBox();
-            this.numericUpDown1 = new Ticketník.CustomControls.NumericUpDown();
-            this.autosave = new Ticketník.CustomControls.CheckBox();
             this.poStartu = new Ticketník.CustomControls.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Ukládat každých";
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(175, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "minut.";
             // 
             // groupBox1
             // 
@@ -116,7 +95,7 @@
             this.groupBox1.Controls.Add(this.clr_odpoved);
             this.groupBox1.Controls.Add(this.clr_ceka);
             this.groupBox1.Controls.Add(this.clr_vyreseno);
-            this.groupBox1.Location = new System.Drawing.Point(12, 157);
+            this.groupBox1.Location = new System.Drawing.Point(12, 108);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(205, 279);
             this.groupBox1.TabIndex = 6;
@@ -553,17 +532,24 @@
             // 
             // jazyk
             // 
+            this.jazyk.AllowSelection = false;
             this.jazyk.BorderColor = System.Drawing.Color.LightGray;
             this.jazyk.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.jazyk.ButtonColor = System.Drawing.SystemColors.Window;
+            this.jazyk.ButtonColorDisabled = System.Drawing.SystemColors.Control;
             this.jazyk.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.jazyk.DataSource = ((System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<int, string>>)(resources.GetObject("jazyk.DataSource")));
+            this.jazyk.DropDownAutoSize = false;
             this.jazyk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.jazyk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jazyk.DropDownWidth = 20;
             this.jazyk.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
-            this.jazyk.FormattingEnabled = true;
             this.jazyk.Location = new System.Drawing.Point(6, 19);
+            this.jazyk.MaxVisibleItems = 0;
             this.jazyk.Name = "jazyk";
+            this.jazyk.SelectedIndex = -1;
+            this.jazyk.SelectedItem = null;
             this.jazyk.Size = new System.Drawing.Size(146, 21);
+            this.jazyk.Sorted = true;
             this.jazyk.TabIndex = 1;
             this.jazyk.SelectedIndexChanged += new System.EventHandler(this.jazyk_SelectedIndexChanged);
             this.jazyk.MouseEnter += new System.EventHandler(this.event_MouseEnter);
@@ -623,7 +609,7 @@
             // motiv
             // 
             this.motiv.AutoSize = true;
-            this.motiv.Location = new System.Drawing.Point(12, 133);
+            this.motiv.Location = new System.Drawing.Point(12, 84);
             this.motiv.Name = "motiv";
             this.motiv.Size = new System.Drawing.Size(33, 13);
             this.motiv.TabIndex = 13;
@@ -631,17 +617,24 @@
             // 
             // motivVyber
             // 
+            this.motivVyber.AllowSelection = false;
             this.motivVyber.BorderColor = System.Drawing.Color.LightGray;
             this.motivVyber.BorderColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.motivVyber.ButtonColor = System.Drawing.SystemColors.Window;
+            this.motivVyber.ButtonColorDisabled = System.Drawing.SystemColors.Control;
             this.motivVyber.ButtonColorMouseOver = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.motivVyber.DataSource = ((System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<int, string>>)(resources.GetObject("motivVyber.DataSource")));
+            this.motivVyber.DropDownAutoSize = false;
             this.motivVyber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.motivVyber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.motivVyber.DropDownWidth = 20;
             this.motivVyber.ForeColorDisabled = System.Drawing.SystemColors.ControlDark;
-            this.motivVyber.FormattingEnabled = true;
-            this.motivVyber.Location = new System.Drawing.Point(64, 130);
+            this.motivVyber.Location = new System.Drawing.Point(64, 81);
+            this.motivVyber.MaxVisibleItems = 0;
             this.motivVyber.Name = "motivVyber";
+            this.motivVyber.SelectedIndex = -1;
+            this.motivVyber.SelectedItem = null;
             this.motivVyber.Size = new System.Drawing.Size(153, 21);
+            this.motivVyber.Sorted = true;
             this.motivVyber.TabIndex = 12;
             this.motivVyber.SelectedIndexChanged += new System.EventHandler(this.motivVyber_SelectedIndexChanged);
             this.motivVyber.MouseEnter += new System.EventHandler(this.event_MouseEnter);
@@ -654,7 +647,7 @@
             this.onlineTerp.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
             this.onlineTerp.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(184)))));
             this.onlineTerp.CheckedColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(110)))), ((int)(((byte)(191)))));
-            this.onlineTerp.Location = new System.Drawing.Point(12, 107);
+            this.onlineTerp.Location = new System.Drawing.Point(12, 58);
             this.onlineTerp.Name = "onlineTerp";
             this.onlineTerp.Size = new System.Drawing.Size(186, 17);
             this.onlineTerp.TabIndex = 10;
@@ -671,7 +664,7 @@
             this.checkBox1.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
             this.checkBox1.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(184)))));
             this.checkBox1.CheckedColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(110)))), ((int)(((byte)(191)))));
-            this.checkBox1.Location = new System.Drawing.Point(12, 84);
+            this.checkBox1.Location = new System.Drawing.Point(12, 35);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(171, 17);
             this.checkBox1.TabIndex = 5;
@@ -680,42 +673,6 @@
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             this.checkBox1.MouseEnter += new System.EventHandler(this.event_MouseEnter);
             this.checkBox1.MouseLeave += new System.EventHandler(this.event_MouseLeave);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numericUpDown1.Location = new System.Drawing.Point(121, 58);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            240,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // autosave
-            // 
-            this.autosave.AutoSize = true;
-            this.autosave.BoxColor = System.Drawing.SystemColors.Window;
-            this.autosave.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
-            this.autosave.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(184)))));
-            this.autosave.CheckedColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(110)))), ((int)(((byte)(191)))));
-            this.autosave.Location = new System.Drawing.Point(12, 35);
-            this.autosave.Name = "autosave";
-            this.autosave.Size = new System.Drawing.Size(130, 17);
-            this.autosave.TabIndex = 1;
-            this.autosave.Text = "Automatické ukládání";
-            this.autosave.UseVisualStyleBackColor = true;
-            this.autosave.CheckedChanged += new System.EventHandler(this.autosave_CheckedChanged);
-            this.autosave.MouseEnter += new System.EventHandler(this.event_MouseEnter);
-            this.autosave.MouseLeave += new System.EventHandler(this.event_MouseLeave);
             // 
             // poStartu
             // 
@@ -738,7 +695,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 448);
+            this.ClientSize = new System.Drawing.Size(390, 396);
             this.Controls.Add(this.motiv);
             this.Controls.Add(this.motivVyber);
             this.Controls.Add(this.button2);
@@ -748,14 +705,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.autosave);
             this.Controls.Add(this.poStartu);
-            this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(406, 487);
-            this.MinimumSize = new System.Drawing.Size(406, 487);
+            this.MaximumSize = new System.Drawing.Size(406, 435);
+            this.MinimumSize = new System.Drawing.Size(406, 435);
             this.Name = "Nastaveni";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -764,7 +717,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -773,10 +725,6 @@
         #endregion
 
         private Ticketník.CustomControls.CheckBox poStartu;
-        private Ticketník.CustomControls.CheckBox autosave;
-        private Ticketník.CustomControls.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private Ticketník.CustomControls.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label probiha;

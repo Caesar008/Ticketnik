@@ -38,9 +38,9 @@ namespace Ticketník
 
             Setlang();
 
-            label1.Enabled = label2.Enabled = numericUpDown1.Enabled = autosave.Checked = Properties.Settings.Default.autosave;
+            //label1.Enabled = label2.Enabled = numericUpDown1.Enabled = autosave.Checked = Properties.Settings.Default.autosave;
             checkBox1.Checked = Properties.Settings.Default.shortTime;
-            numericUpDown1.Value = Properties.Settings.Default.minuty;
+            //numericUpDown1.Value = Properties.Settings.Default.minuty;
             if (Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run").GetValue("Ticketnik") != null && Application.ExecutablePath == Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run").GetValue("Ticketnik").ToString())
             {
                 poStartu.Checked = true;
@@ -105,18 +105,6 @@ namespace Ticketník
                     registryKey.DeleteValue("Ticketnik");
                 }
             }
-        }
-
-        private void autosave_CheckedChanged(object sender, EventArgs e)
-        {
-            label1.Enabled = label2.Enabled = numericUpDown1.Enabled = Properties.Settings.Default.autosave = autosave.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.minuty = (short)numericUpDown1.Value;
-            Properties.Settings.Default.Save();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -330,9 +318,9 @@ namespace Ticketník
             form.SuspendLayout();
             int selectedMotiv = motivVyber.SelectedIndex;
             poStartu.Text = form.jazyk.Windows_Nastaveni_PoStratu;
-            autosave.Text = form.jazyk.Windows_Nastaveni_Autosave;
-            label1.Text = form.jazyk.Windows_Nastaveni_UkladatKazdych;
-            label2.Text = form.jazyk.Windows_Nastaveni_Minut;
+            //autosave.Text = form.jazyk.Windows_Nastaveni_Autosave;
+            //label1.Text = form.jazyk.Windows_Nastaveni_UkladatKazdych;
+            //label2.Text = form.jazyk.Windows_Nastaveni_Minut;
             checkBox1.Text = form.jazyk.Windows_Nastaveni_ZjednodusenyCas;
             this.Text = form.jazyk.Windows_Nastaveni_Nastaveni;
             groupBox1.Text = form.jazyk.Windows_Nastaveni_BarvyTicketu;
@@ -419,7 +407,7 @@ namespace Ticketník
             Properties.Settings.Default.maximized = false;
             Properties.Settings.Default.umisteni = new System.Drawing.Point(0, 0);
             Properties.Settings.Default.minuty = 5;
-            Properties.Settings.Default.autosave = false;
+            //Properties.Settings.Default.autosave = false;
             Properties.Settings.Default.colPC = 68;
             Properties.Settings.Default.colID = 82;
             Properties.Settings.Default.colZak = 84;

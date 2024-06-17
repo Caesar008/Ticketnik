@@ -8,11 +8,19 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
-#22-002 27.7.2022
+#22-002 27.7.2022 (Nelze opravit z důvodu nastavení AAD)
 - Autologin bez VPN nebo Tieto sítě nefunguje - vyžaduje výběr MS accountu
 
-#22-003 15.8.2022
-- Složky a soubory někdy dostávají podtržítko na začátek
+#23-005 5.10.2023 (2.0.0.0)
+- Při ruční změně data nebo času v prvku DateTimePicker může za určitých podmínek dojít k pádu
+
+#23-007 16.10.2023
+- ListView se seznamem ticketů občas ztratí barvy.
+
+---------
+UPDATER
+---------
+
 -----------------------------------------------------------------------------------------------------------
 OPRAVENÉ CHYBY
 
@@ -150,6 +158,9 @@ OPRAVENÉ CHYBY
 - Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
 	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"
 
+#22-003 15.8.2022 - Opraveno 5.10.2023 (2.0.0.0)
+- Složky a soubory někdy dostávají podtržítko na začátek
+
 #22-004 15.8.2022 - Opraveno 15.8.2022 (1.7.1.0)
 - parametr -default neresetuje Ticketník podle nastavení verze 1.7
 
@@ -167,3 +178,32 @@ OPRAVENÉ CHYBY
 
 #22-009 10.11.2022 - Opraveno 10.11.2022 (1.7.1.3)
 - Update konkrétního terpu nefunguje správně
+
+#23-001 2.5.2023 - Opraveno 15.6.2023 (1.7.2.4)
+- Updatování terp souboru selže pokud došlo k přejměnování terpu na straně MyTime
+
+#23-002 Opraveno 8.9.2023 (1.7.3.1)
+- Export nefunguje správně s typem ticketu
+
+#23-003 11.9.2023 - Opraveno 5.10.2023 (2.0.0.0)
+- Updatování terp souboru selže, pokud terp není déle dostupný
+
+#23-004 22.9.2023 1.1.0.11 - Opraveno 5.10.2023 (2.0.0.0)
+- Export failuje v případě, že některý řádek exportu má přesně 240 znaků
+
+#23-006 16.10.2023 - Opraveno 4.3.2024 (2.1.0.0)
+- Při zapnutém autosavu může program spadnou kvůli tomu, že .tic je používán jiným procesem
+
+#24-001 5.2.2024 - Opraveno 4.3.2024 (2.1.0.0)
+- Ticketník spadne kvůli prázdnému souboru "upozorneni"
+
+#24-002 1.3.2024 - Opraveno 4.3.2024 (2.1.0.0)
+- Při updatu jména terpu se neupdatují všechny záznamy v seznamu a mohou se zobrazovat duplikátní nebo staré záznamy
+
+#24-003 4.3.2024 - Opraveno 4.3.2024 (2.1.0.0)
+- Za určitých podmínek se při výběru zákazníka v okne úpravy ticketu neupravuje nebo nezobrazuje TERP
+
+---------
+UPDATER
+---------
+- Problém při updatu, může skončit s tím, že proces je používán - opraveno 2.0.0.0

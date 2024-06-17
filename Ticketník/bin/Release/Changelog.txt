@@ -1,3 +1,64 @@
+2.1.0.0 (4.3.2024)
+
+- Opravena chyba #24-001
+- Opravena chyba #24-002
+- Opravena chyba #24-003
+- Opravena chyba #23-006
+- Odstraněn autosave
+-----------------------------------
+2.0.0.4 (7.12.2023)
+
+- Opravena chyba při exportu zabraňující kontrolu, zda se všechno nahrálo
+-----------------------------------
+2.0.0.3 (20.10.2023)
+
+- Opraven pád programu při exportu
+-----------------------------------
+2.0.0.2 (5.10.2023)
+
+- Opraven problém s knihovnami a jejich závislostmi
+-----------------------------------
+2.0.0.0 (5.10.2023)
+
+- Podpora světlého a tmavého režimu
+- Ovládací prvky přepsány pro větší kontrolu nad nimi
+- Zmenšení velikosti exe vynecháním knihoven
+- Zrušeno potvrzování změny data ticketu
+- Ctrl+V nyní nastavuje čas začátku na čas vložení místo půlnoci
+- Ctrl+V nyní umí rozpoznat tickety z SM9
+- Automatický upload do MyTime
+- Přidány statusy Zrušeno a Přeřazeno
+- Možnost přidávání příloh k ticketům
+- Oprava chyby #22-003
+- Oprava chyby #23-003
+- Oprava chyby #23-004
+- Dll knihovny updatovány na novější verze
+- Opravy v překladu
+- Oprava updateru
+-----------------------------------
+1.7.3.2 (11.9.2023)
+
+- Ukládání data v exportu je nyní kulturně nezávislé
+-----------------------------------
+1.7.3.1 (8.9.2023)
+
+- Změněn formát xlsx kvůli změně na straně MyTime
+- Oprava chyby #23-002
+-----------------------------------
+1.7.3.0 (28.6.2023)
+
+- Přepracován systém aktualizace - příprava pro 2.0
+- Aktualizace pomocí samostatného updateru
+-----------------------------------
+1.7.2.4 (15.6.2023)
+
+- Opravena chyba #23-001
+- Přepracován systém práce s JSON daty z MyTime
+-----------------------------------
+1.7.2.3 (15.12.2022)
+
+- Opravena chyba překladu jednoho tlačítka v okně nastavení - zůstavalo v CZ
+-----------------------------------
 1.7.2.2 (28.11.2022)
 
 - Opravena chyba vytváření nového terpTask souboru
