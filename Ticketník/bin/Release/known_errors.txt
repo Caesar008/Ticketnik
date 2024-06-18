@@ -8,7 +8,7 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
-#22-002 27.7.2022 (Nelze opravit z důvodu nastavení AAD)
+#22-002 27.7.2022 (bude vyřešeno ve 2.2.0.0)
 - Autologin bez VPN nebo Tieto sítě nefunguje - vyžaduje výběr MS accountu
 
 #23-005 5.10.2023 (2.0.0.0)
