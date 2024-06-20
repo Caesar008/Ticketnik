@@ -29,7 +29,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 9;
-        internal readonly int program = 2020000;
+        internal readonly int program = 2020001;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -1732,8 +1732,11 @@ namespace Ticketník
             try
             {
                 Logni("Ukončuji Selenium (zavření okna Ticketníku)", LogMessage.INFO);
-                if (edge != null)
+                try
+                {
                     edge.Quit();
+                }
+                catch { }
             }
             catch { }
 
@@ -3341,7 +3344,7 @@ namespace Ticketník
         private void aktualizovatVšechnyTerpyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (edge.SessionId != null)
-                edge.Quit();
+                try { edge.Quit(); } catch { }
             AktualizujTerpyTasky();
         }
 

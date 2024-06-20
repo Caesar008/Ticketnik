@@ -2674,7 +2674,7 @@ namespace Ticketník
         {
             form.terpTaskFileLock = false;
             if (form.edge.SessionId != null)
-                form.edge.Quit();
+                try { form.edge.Quit(); } catch { }
             form.UpdateTerpTaskFile(onlineTerpDropDown.Text);
             string tmpSelected = onlineTerpDropDown.Text;
             onlineTerpDropDown.Items.Clear();
@@ -2696,7 +2696,7 @@ namespace Ticketník
                     break;
                 }
             }
-            form.edge.Quit();
+            try { form.edge.Quit(); } catch { }
             onlineTerpDropDown.SelectedItem = tmpSelected;
         }
 
@@ -2704,7 +2704,7 @@ namespace Ticketník
         {
             form.terpTaskFileLock = false;
             if (form.edge.SessionId != null)
-                form.edge.Quit();
+                try { form.edge.Quit(); } catch { }
             form.UpdateSelected(form.Terpy[onlineTerpDropDown.Text].Number);
             string tmpSelected = onlineTerpDropDown.Text; 
             onlineTerpDropDown.Items.Clear();
@@ -2718,7 +2718,7 @@ namespace Ticketník
             }
             //onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
             onlineTerpDropDown.Sorted = true;
-            form.edge.Quit();
+            try { form.edge.Quit(); } catch { }
             onlineTerpDropDown.SelectedItem = tmpSelected;
         }
 

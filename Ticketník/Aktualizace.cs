@@ -27,8 +27,12 @@ namespace Ticketník
                         try
                         {
                             Logni("Zastavuji Selenium", LogMessage.INFO);
-                            edge.Quit();
-                            Thread.Sleep(1000);
+                            try
+                            {
+                                edge.Quit();
+                                Thread.Sleep(1000);
+                            }
+                            catch { }
                         }
                         catch { Logni("Selenium je už ukončené, nebo nelze ukončit.", LogMessage.WARNING); }
                     }
@@ -388,8 +392,12 @@ namespace Ticketník
                                         try
                                         {
                                             Logni("Zastavuji Selenium", LogMessage.INFO);
-                                            edge.Quit();
-                                            Thread.Sleep(1000);
+                                            try
+                                            {
+                                                edge.Quit();
+                                                Thread.Sleep(1000);
+                                            }
+                                            catch { }
                                         }
                                         catch { Logni("Selenium je už ukončené, nebo nelze ukončit.", LogMessage.WARNING); }
                                     }

@@ -172,7 +172,7 @@ namespace Ticketník
                 try
                 {
                     if(edge != null)
-                        edge.Quit();
+                        try { edge.Quit(); } catch { }
                     if (updateRunning)
                     {
                         vlaknoCancel.Cancel();

@@ -125,11 +125,11 @@ namespace Ticketník
                 catch (Exception e)
                 {
                     Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
-                    Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
+                    Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
                 }
                 terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
 
-                if (terpList[0].Data == null)
+                if (terpList == null || terpList[0].Data == null)
                     break;
                 foreach (Terp t in terpList)
                 {
@@ -199,11 +199,13 @@ namespace Ticketník
             catch (Exception e)
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
-                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
             }
 
             MyTimeTerp myTimeTerp = null;
             List<Terp> terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
+            if (terpList == null)
+                return null;
             foreach(Terp t in terpList)
             {
                 if(t.Data != null && !t.Data.ProjectNumber.EndsWith("@"))
@@ -287,12 +289,12 @@ namespace Ticketník
                 catch (Exception e)
                 {
                     Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
-                    Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
+                    Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
                 }
 
                 taskList = JsonConvert.DeserializeObject<List<Task>>(result);
 
-                if (taskList[0].Data == null)
+                if (taskList == null || taskList[0].Data == null)
                     break;
 
                 foreach(Task t in taskList)
@@ -359,7 +361,7 @@ namespace Ticketník
             catch (Exception e)
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
-                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
             }
 
             MyTimeTask myTimeTask = null;
@@ -429,7 +431,7 @@ namespace Ticketník
             catch (Exception e)
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
-                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
             }
 
             List<string> myTimeTerpTaskTypeList = new List<string>();
@@ -493,7 +495,7 @@ namespace Ticketník
             catch (Exception e)
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
-                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
             }
 
             List<Type> typeList = JsonConvert.DeserializeObject<List<Type>>(result);
@@ -582,7 +584,11 @@ namespace Ticketník
                 else
                     this.BeginInvoke(new Action(() => timer_ClearInfo.Start()));
             }
-            edge.Quit();
+            try
+            {
+                edge.Quit();
+            }
+            catch { }
         }
 
         public void UpdateTerpTaskFile()
@@ -767,7 +773,11 @@ namespace Ticketník
                 else
                     this.BeginInvoke(new Action(() => timer_ClearInfo.Start()));
             }
-            edge.Quit();
+            try
+            {
+                edge.Quit();
+            }
+            catch { }
         }
 
         public void UpdateTerpTaskFile(string terpNumber)

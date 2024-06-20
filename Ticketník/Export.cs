@@ -109,7 +109,7 @@ namespace Ticketník
                     try
                     {
                         if (form.edge.SessionId != null)
-                            form.edge.Quit();
+                            try { form.edge.Quit(); } catch { }
                         if (form.edge == null || form.edge.SessionId == null)
                         {
                             form.Logni("Startuji Selenium Edge pro přihlášení k MyTime", Form1.LogMessage.INFO);
@@ -179,7 +179,7 @@ namespace Ticketník
                                     form.Logni("Potvrzuji timecard v MyTime.", Form1.LogMessage.INFO);
                                     var els = form.edge.FindElements(By.Name("action_submit"));
                                     els[els.Count - 1].Click();
-                                    form.edge.Quit();
+                                    try { form.edge.Quit(); } catch { }
                                 }
                             }
                         }
