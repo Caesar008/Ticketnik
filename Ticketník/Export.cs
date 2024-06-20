@@ -2,10 +2,11 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
-using System.Net.Http;
 using HtmlAgilityPack;
 using System.Diagnostics;
 using System.Collections.Generic;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Edge;
 
 namespace Ticketník
 {
@@ -105,86 +106,89 @@ namespace Ticketník
                 {
                     string url = "https://mytime.tietoevry.com/time_cards/" + year + "/week/" + weekNumber + "/import";
                     this.form.Logni("MyTime url: " + url, Form1.LogMessage.INFO);
-                    HttpClient webClient = new HttpClient(new HttpClientHandler()
-                    {
-                        AllowAutoRedirect = true,
-                        UseDefaultCredentials = true
-                    });
-                    string page = "";
                     try
                     {
-                        //test, jestli jsem lognutý, tohle hodí exception, když ne
-                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
-                        //načtení samotné stránky
-                        page = await webClient.GetStringAsync(url).ConfigureAwait(false);
-                    }
-                    catch
-                    {
-                        this.form.Logni("Přihlašuji se do MyTime", Form1.LogMessage.INFO);
-                        await webClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
-                        page = await webClient.GetStringAsync(url).ConfigureAwait(false);
-                    }
-
-                    HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
-                    html.LoadHtml(page);
-                    HtmlNode formHtml = html.DocumentNode.SelectSingleNode("//form[contains(@id, 'time_card_import_form')]");
-                    HtmlNode token = formHtml.SelectSingleNode("//input[contains(@name, 'authenticity_token')]");
-                    string tokenValue = token.Attributes["value"].Value;
-                    byte[] file = File.ReadAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx");
-                    MultipartFormDataContent formData = new MultipartFormDataContent();
-                    formData.Add(new StringContent(tokenValue), "authenticity_token");
-                    formData.Add(new StringContent("Import"), "commit");
-                    formData.Add(new ByteArrayContent(file), "uploaded_file", "tmp_export.xlsx");
-                    this.form.Logni("Nahrávám exportované tickety do MyTime", Form1.LogMessage.INFO);
-                    HttpResponseMessage response = await webClient.PostAsync(url, formData).ConfigureAwait(false);
-                    response.EnsureSuccessStatusCode();
-                    //Ověření, že se nahrálo
-                    try
-                    {
-                        this.form.Logni("Ověřuji, zda se všechy terpy nahrály", Form1.LogMessage.INFO);
-                        //test, jestli jsem lognutý, tohle hodí exception, když ne
-                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
-                        //načtení samotné stránky
-                        page = await webClient.GetStringAsync(url.Remove(url.LastIndexOf("/import"))).ConfigureAwait(false);
-                    }
-                    catch
-                    {
-                        this.form.Logni("Přihlašuji se do MyTime", Form1.LogMessage.INFO);
-                        await webClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                        await webClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
-                        page = await webClient.GetStringAsync(url.Remove(url.LastIndexOf("/import"))).ConfigureAwait(false);
-                    }
-                    html.LoadHtml(page);
-                    string subHtml = html.DocumentNode.SelectSingleNode("//ol[contains(@id, 'time_card_rows')]").InnerHtml;
-                    bool missing = false;
-                    foreach(ExportRow row in exportRadky)
-                    {
-                        if (row.Task == null)
-                            continue;
-                        if (!subHtml.Contains(row.Task))
+                        if (form.edge.SessionId != null)
+                            form.edge.Quit();
+                        if (form.edge == null || form.edge.SessionId == null)
                         {
-                            missing = true;
-                            break;
+                            form.Logni("Startuji Selenium Edge pro přihlášení k MyTime", Form1.LogMessage.INFO);
+                            form.service = EdgeDriverService.CreateDefaultService(form.options);
+                            form.service.HideCommandPromptWindow = true;
+                            form.edge = new EdgeDriver(form.service, form.options);
+                            form.edge.Manage().Window.Minimize();
+                            form.edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
+                        }
+
+                        form.edge.Navigate().GoToUrl(url);
+                        if (form.edge.PageSource.ToLower().Contains("access denied"))
+                        {
+                            form.Logni("Vyžadováno příhlášení MS", Form1.LogMessage.INFO);
+                            form.Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", Form1.LogMessage.INFO);
+                            form.edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
+                            form.edge.Manage().Window.Maximize();
+
+                            while (true)
+                            {
+                                if (form.edge == null || form.edge.SessionId == null)
+                                    break;
+
+                                if (!form.edge.PageSource.Contains("My Time"))
+                                {
+                                    Application.DoEvents();
+                                    System.Threading.Thread.Sleep(100);
+                                }
+                                else break;
+                            }
+                            form.edge.Manage().Window.Minimize();
+                            form.Logni("Naviguji na \""+ url +"\"", Form1.LogMessage.INFO);
+                            form.edge.Navigate().GoToUrl(url);
+                            IWebElement uploadfile = form.edge.FindElement(By.Id("uploaded_file"));
+                            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\tmp_export.xlsx";
+                            uploadfile.SendKeys(filePath);
+                            form.Logni("Uploaduji tickety do MyTime.", Form1.LogMessage.INFO);
+                            form.edge.FindElement(By.Name("commit")).Click();
+                            while (true)
+                            {
+                                if (form.edge == null || form.edge.SessionId == null)
+                                    break;
+
+                                if (!form.edge.PageSource.Contains("<input type=\"submit\" name=\"action_submit\" value=\"Submit\""))
+                                {
+                                    Application.DoEvents();
+                                    System.Threading.Thread.Sleep(100);
+                                }
+                                else break;
+                            }
+
+                            if (form.edge.PageSource.Contains("<div class=\"flash flash_error\">") || form.edge.PageSource.Contains("<li class=\"row row_with_errors\">"))
+                            {
+                                form.Logni("Při uploadu do MyTime došlo k problému s některými terpy nebo tasky.", Form1.LogMessage.WARNING);
+                                form.edge.Manage().Window.Maximize();
+                            }
+                            else
+                            {
+                                form.Logni("Úspěšně nahráno do MyTime, rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.INFO);
+                                DialogResult subConf = CustomControls.MessageBox.Show(form.jazyk.Windows_Export_ConfirmSubmit, form.jazyk.Windows_Export_Nazev, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                if (subConf == DialogResult.Yes)
+                                {
+                                    form.edge.Manage().Window.Maximize();
+                                }
+                                else
+                                {
+                                    form.Logni("Potvrzuji timecard v MyTime.", Form1.LogMessage.INFO);
+                                    var els = form.edge.FindElements(By.Name("action_submit"));
+                                    els[els.Count - 1].Click();
+                                    form.edge.Quit();
+                                }
+                            }
                         }
                     }
-
-                    //zpráva že success nebo fail
-                    DialogResult mtv = DialogResult.None;
-                    if (!missing)
+                    catch (Exception e)
                     {
-                        this.form.Logni("Úspěšně nahráno do MyTime, rok " + year + ", týden " + weekNumber + ".", Form1.LogMessage.INFO);
-                        mtv = CustomControls.MessageBox.Show(this.form.jazyk.Windows_Export_NahratDoMyTimeSuccess, this.form.jazyk.Windows_Export_Nazev, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        form.Logni("Při připojování k MyTime došlo k chybě.", Form1.LogMessage.WARNING);
+                        form.Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, Form1.LogMessage.ERROR);
                     }
-                    else
-                    {
-                        this.form.Logni("Problém s uploadem některých terpů nebo tasků.", Form1.LogMessage.WARNING);
-                        CustomControls.MessageBox.Show(form.jazyk.Message_ExportProblem, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    if (mtv == DialogResult.Yes)
-                        Process.Start(url.Replace("/import", ""));
-
-                    webClient.Dispose();
                 }
                 catch (Exception ex)
                 { //zpráva že failed

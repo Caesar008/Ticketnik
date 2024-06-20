@@ -8,20 +8,20 @@ using Microsoft.Win32;
 using System.Security;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Diagnostics;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Edge;
 
 namespace Ticketník
 {
     public partial class Form1 : Form
     {
-        public HttpClient terpLoaderClient = new HttpClient(new HttpClientHandler()
-        {
-            AllowAutoRedirect = true,
-            UseDefaultCredentials = true
-        });
+        internal EdgeOptions options = new EdgeOptions();
+        internal EdgeDriverService service;
+        internal EdgeDriver edge;
+
         string result = "";
         internal NbtFile terpFile;
         System.Windows.Forms.Timer terpTaskFailedRetry = new System.Windows.Forms.Timer();
@@ -76,13 +76,56 @@ namespace Ticketník
             {
                 try
                 {
-                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
-                    
+                    if (edge == null || edge.SessionId == null)
+                    {
+                        Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
+                        service = EdgeDriverService.CreateDefaultService(options);
+                        service.HideCommandPromptWindow = true;
+                        edge = new EdgeDriver(service, options);
+                        edge.Manage().Window.Minimize();
+                        edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
+                    }
+
+                    //Logni("Naviguji na \"https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page + "\"", LogMessage.INFO);
+                    edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page);
+
+                    if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                    {
+                        Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
+                        Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
+                        edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
+                        edge.Manage().Window.Maximize();
+
+                        while (true)
+                        {
+                            if (edge == null || edge.SessionId == null)
+                                break;
+
+                            if (!edge.PageSource.Contains("My Time"))
+                            {
+                                Application.DoEvents();
+                                Thread.Sleep(100);
+                            }
+                            else break;
+                        }
+                        //Logni("Naviguji na \"https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page + "\"", LogMessage.INFO);
+                        edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page);
+                    }
+                    HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+                    html.LoadHtml(edge.PageSource);
+                    //Logni("Hledám JSON data", LogMessage.INFO);
+                    HtmlAgilityPack.HtmlNode jsonNode = html.DocumentNode.SelectSingleNode("//td[@class='line-content']");
+                    result = jsonNode.InnerText;
+                    try
+                    {
+                        edge.Manage().Window.Minimize();
+                    }
+                    catch { }
                 }
-                catch
+                catch (Exception e)
                 {
-                    await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page).ConfigureAwait(false);
+                    Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
+                    Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
                 }
                 terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
 
@@ -107,12 +150,56 @@ namespace Ticketník
         {
             try
             {
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID).ConfigureAwait(false);
+                if (edge == null || edge.SessionId == null)
+                {
+                    Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
+                    service = EdgeDriverService.CreateDefaultService(options);
+                    service.HideCommandPromptWindow = true;
+                    edge = new EdgeDriver(service, options);
+                    edge.Manage().Window.Minimize();
+                    edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
+                }
+
+                //Logni("Naviguji na \"https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID + "\"", LogMessage.INFO);
+                edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID);
+
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                {
+                    Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
+                    Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
+                    edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
+                    edge.Manage().Window.Maximize();
+
+                    while (true)
+                    {
+                        if (edge == null || edge.SessionId == null)
+                            break;
+
+                        if (!edge.PageSource.Contains("My Time"))
+                        {
+                            Application.DoEvents();
+                            Thread.Sleep(100);
+                        }
+                        else break;
+                    }
+                    //Logni("Naviguji na \"https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID + "\"", LogMessage.INFO);
+                    edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID);
+                }
+                HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+                html.LoadHtml(edge.PageSource);
+                //Logni("Hledám JSON data", LogMessage.INFO);
+                HtmlAgilityPack.HtmlNode jsonNode = html.DocumentNode.SelectSingleNode("//td[@class='line-content']");
+                result = jsonNode.InnerText;
+                try
+                {
+                    edge.Manage().Window.Minimize();
+                }
+                catch { }
             }
-            catch
+            catch (Exception e)
             {
-                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID).ConfigureAwait(false);
+                Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
             }
 
             MyTimeTerp myTimeTerp = null;
@@ -154,12 +241,53 @@ namespace Ticketník
             {
                 try
                 {
-                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page).ConfigureAwait(false);
+                    if (edge == null || edge.SessionId == null)
+                    {
+                        Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
+                        service = EdgeDriverService.CreateDefaultService(options);
+                        service.HideCommandPromptWindow = true;
+                        edge = new EdgeDriver(service, options);
+                        edge.Manage().Window.Minimize();
+                        edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
+                    }
+
+                    edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page);
+
+                    if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                    {
+                        Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
+                        Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
+                        edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
+                        edge.Manage().Window.Maximize();
+
+                        while (true)
+                        {
+                            if (edge == null || edge.SessionId == null)
+                                break;
+
+                            if (!edge.PageSource.Contains("My Time"))
+                            {
+                                Application.DoEvents();
+                                Thread.Sleep(100);
+                            }
+                            else break;
+                        }
+                        edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page);
+                    }
+                    HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+                    html.LoadHtml(edge.PageSource);
+                    HtmlAgilityPack.HtmlNode jsonNode = html.DocumentNode.SelectSingleNode("//td[@class='line-content']");
+                    result = jsonNode.InnerText;
+                    try
+                    {
+                        edge.Manage().Window.Minimize();
+                    }
+                    catch { }
                 }
-                catch
+                catch (Exception e)
                 {
-                    await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                    result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page).ConfigureAwait(false);
+                    Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
+                    Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
                 }
 
                 taskList = JsonConvert.DeserializeObject<List<Task>>(result);
@@ -185,13 +313,55 @@ namespace Ticketník
         {
             try
             {
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID).ConfigureAwait(false);
+                if (edge == null || edge.SessionId == null)
+                {
+                    Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
+                    service = EdgeDriverService.CreateDefaultService(options);
+                    service.HideCommandPromptWindow = true;
+                    edge = new EdgeDriver(service, options);
+                    edge.Manage().Window.Minimize();
+                    edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
+                }
+
+                edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID);
+
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                {
+                    Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
+                    Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
+                    edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
+                    edge.Manage().Window.Maximize();
+
+                    while (true)
+                    {
+                        if (edge == null || edge.SessionId == null)
+                            break;
+
+                        if (!edge.PageSource.Contains("My Time"))
+                        {
+                            Application.DoEvents();
+                            Thread.Sleep(100);
+                        }
+                        else break;
+                    }
+                    edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID);
+                }
+                HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+                html.LoadHtml(edge.PageSource);
+                HtmlAgilityPack.HtmlNode jsonNode = html.DocumentNode.SelectSingleNode("//td[@class='line-content']");
+                result = jsonNode.InnerText;
+                try
+                {
+                    edge.Manage().Window.Minimize();
+                }
+                catch { }
             }
-            catch
+            catch (Exception e)
             {
-                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID).ConfigureAwait(false);
+                Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
             }
+
             MyTimeTask myTimeTask = null;
 
             List<Task> taskList = JsonConvert.DeserializeObject<List<Task>>(result);
@@ -213,12 +383,53 @@ namespace Ticketník
         {
             try
             {
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=").ConfigureAwait(false);
+                if (edge == null || edge.SessionId == null)
+                {
+                    Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
+                    service = EdgeDriverService.CreateDefaultService(options);
+                    service.HideCommandPromptWindow = true;
+                    edge = new EdgeDriver(service, options);
+                    edge.Manage().Window.Minimize();
+                    edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
+                }
+
+                edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=");
+
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                {
+                    Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
+                    Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
+                    edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
+                    edge.Manage().Window.Maximize();
+
+                    while (true)
+                    {
+                        if (edge == null || edge.SessionId == null)
+                            break;
+
+                        if (!edge.PageSource.Contains("My Time"))
+                        {
+                            Application.DoEvents();
+                            Thread.Sleep(100);
+                        }
+                        else break;
+                    }
+                    edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=");
+                }
+                HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+                html.LoadHtml(edge.PageSource);
+                HtmlAgilityPack.HtmlNode jsonNode = html.DocumentNode.SelectSingleNode("//td[@class='line-content']");
+                result = jsonNode.InnerText;
+                try
+                {
+                    edge.Manage().Window.Minimize();
+                }
+                catch { }
             }
-            catch
+            catch (Exception e)
             {
-                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=").ConfigureAwait(false);
+                Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
             }
 
             List<string> myTimeTerpTaskTypeList = new List<string>();
@@ -236,12 +447,53 @@ namespace Ticketník
         {
             try
             {
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel).ConfigureAwait(false);
+                if (edge == null || edge.SessionId == null)
+                {
+                    Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
+                    service = EdgeDriverService.CreateDefaultService(options);
+                    service.HideCommandPromptWindow = true;
+                    edge = new EdgeDriver(service, options);
+                    edge.Manage().Window.Minimize();
+                    edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
+                }
+
+                edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID);
+
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                {
+                    Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
+                    Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
+                    edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
+                    edge.Manage().Window.Maximize();
+
+                    while (true)
+                    {
+                        if (edge == null || edge.SessionId == null)
+                            break;
+
+                        if (!edge.PageSource.Contains("My Time"))
+                        {
+                            Application.DoEvents();
+                            Thread.Sleep(100);
+                        }
+                        else break;
+                    }
+                    edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel);
+                }
+                HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+                html.LoadHtml(edge.PageSource);
+                HtmlAgilityPack.HtmlNode jsonNode = html.DocumentNode.SelectSingleNode("//td[@class='line-content']");
+                result = jsonNode.InnerText;
+                try
+                {
+                    edge.Manage().Window.Minimize();
+                }
+                catch { }
             }
-            catch
+            catch (Exception e)
             {
-                await terpLoaderClient.GetAsync("https://mytime.tietoevry.com/winlogin?utf8=%E2%9C%93&commit=Log+in").ConfigureAwait(false);
-                result = await terpLoaderClient.GetStringAsync("https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=" + typeLabel).ConfigureAwait(false);
+                Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
+                Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message, LogMessage.ERROR);
             }
 
             List<Type> typeList = JsonConvert.DeserializeObject<List<Type>>(result);
@@ -330,6 +582,7 @@ namespace Ticketník
                 else
                     this.BeginInvoke(new Action(() => timer_ClearInfo.Start()));
             }
+            edge.Quit();
         }
 
         public void UpdateTerpTaskFile()
@@ -514,6 +767,7 @@ namespace Ticketník
                 else
                     this.BeginInvoke(new Action(() => timer_ClearInfo.Start()));
             }
+            edge.Quit();
         }
 
         public void UpdateTerpTaskFile(string terpNumber)

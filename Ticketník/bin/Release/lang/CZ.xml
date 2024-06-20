@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language name="Čeština" shortcut="CZ" international="Czech" version="8" revision="0">
+<Language name="Čeština" shortcut="CZ" international="Czech" version="9" revision="0">
 	<MainMenuItems>
 		<File en="File">Soubor</File>
 		<Options en="Options">Možnosti</Options>
@@ -90,6 +90,7 @@
 			<MytimeExport en="Automatically upload to MyTime">Automaticky nahrát do MyTime</MytimeExport>
 			<ExportSuccess en="Upload to MyTime was successful. Do not forget to visit MyTime and submit your timecards.\r\n\r\nVisit MyTime now?">Úspěšně nahráno do MyTime. Nezapomeň navštívit MyTime a potvrdit nahlášené hodiny.\r\n\r\nNavštívit nyní MyTime?</ExportSuccess>
 			<ExportFailed en="Upload to MyTime Failed.">Nahrání do MyTime selhalo.</ExportFailed>
+			<ConfirmSubmit en="Do you want to manually check timecard for times and records imported to MyTime?\r\nIf you click 'No' timecard will be automaticaly submited.">Chcete ručně zkontrolovat timecard ohledně časů a záznamů importovaných do MyTime?\r\nPokud kliknete na 'Ne', bude timecard automaticky potrzená.</ConfirmSubmit>
 		</Export>
 		<Settings>
 			<Settings en="Settings">Nastavení</Settings>

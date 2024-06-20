@@ -8,18 +8,8 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
-#22-002 27.7.2022 (bude vyřešeno ve 2.2.0.0)
-- Autologin bez VPN nebo Tieto sítě nefunguje - vyžaduje výběr MS accountu
-
 #23-005 5.10.2023 (2.0.0.0)
 - Při ruční změně data nebo času v prvku DateTimePicker může za určitých podmínek dojít k pádu
-
-#23-007 16.10.2023
-- ListView se seznamem ticketů občas ztratí barvy.
-
-#24-004 14.6.2024
-- Po změnách na straně MyTime nefunguje automatický upload do MyTime. Vyžaduje přihlášení přes MS.
-- Nefunguje ani update ticketů z MyTime kvůli stejnému problému s loginem
 
 ---------
 UPDATER
@@ -162,6 +152,9 @@ OPRAVENÉ CHYBY
 - Při nastavení Ticketníku do výchozího nastavení parametrem -default nebo
 	stisknutím Shift při startu se špatně nastavuje barva "In Progress / Probíhá"
 
+#22-002 27.7.2022 (Nelze opravit z důvodu nastavení AAD) - Opraveno 20.6.2024 (2.2.0.0)
+- Autologin bez VPN nebo Tieto sítě nefunguje - vyžaduje výběr MS accountu
+
 #22-003 15.8.2022 - Opraveno 5.10.2023 (2.0.0.0)
 - Složky a soubory někdy dostávají podtržítko na začátek
 
@@ -198,6 +191,9 @@ OPRAVENÉ CHYBY
 #23-006 16.10.2023 - Opraveno 4.3.2024 (2.1.0.0)
 - Při zapnutém autosavu může program spadnou kvůli tomu, že .tic je používán jiným procesem
 
+#23-007 16.10.2023 - Opraveno 20.6.2024 (2.1.0.0) odebráním autosavu
+- ListView se seznamem ticketů občas ztratí barvy.
+
 #24-001 5.2.2024 - Opraveno 4.3.2024 (2.1.0.0)
 - Ticketník spadne kvůli prázdnému souboru "upozorneni"
 
@@ -206,6 +202,10 @@ OPRAVENÉ CHYBY
 
 #24-003 4.3.2024 - Opraveno 4.3.2024 (2.1.0.0)
 - Za určitých podmínek se při výběru zákazníka v okne úpravy ticketu neupravuje nebo nezobrazuje TERP
+
+#24-004 14.6.2024 - Opraveno 20.4.2024 (2.2.0.0)
+- Po změnách na straně MyTime nefunguje automatický upload do MyTime. Vyžaduje přihlášení přes MS.
+- Nefunguje ani update ticketů z MyTime kvůli stejnému problému s loginem
 
 ---------
 UPDATER

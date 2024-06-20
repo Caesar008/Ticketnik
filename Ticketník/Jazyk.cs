@@ -1040,6 +1040,13 @@ namespace Ticketník
                 return ReturnPreklad("Windows/Export/ExportFailed");
             }
         }
+        internal string Windows_Export_ConfirmSubmit
+        {
+            get
+            {
+                return ReturnPreklad("Windows/Export/ConfirmSubmit").Replace("\\r", "\r").Replace("\\n", "\n");
+            }
+        }
         internal string Windows_JmenoSouboru
         {
             get

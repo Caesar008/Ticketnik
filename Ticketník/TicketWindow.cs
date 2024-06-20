@@ -2673,6 +2673,8 @@ namespace Ticketník
         private void btn_TicketWindow_SearchTerp_Click(object sender, EventArgs e)
         {
             form.terpTaskFileLock = false;
+            if (form.edge.SessionId != null)
+                form.edge.Quit();
             form.UpdateTerpTaskFile(onlineTerpDropDown.Text);
             string tmpSelected = onlineTerpDropDown.Text;
             onlineTerpDropDown.Items.Clear();
@@ -2694,13 +2696,15 @@ namespace Ticketník
                     break;
                 }
             }
-
+            form.edge.Quit();
             onlineTerpDropDown.SelectedItem = tmpSelected;
         }
 
         private void btn_TicketWindow_UpdateSelected_Click(object sender, EventArgs e)
         {
             form.terpTaskFileLock = false;
+            if (form.edge.SessionId != null)
+                form.edge.Quit();
             form.UpdateSelected(form.Terpy[onlineTerpDropDown.Text].Number);
             string tmpSelected = onlineTerpDropDown.Text; 
             onlineTerpDropDown.Items.Clear();
@@ -2714,6 +2718,7 @@ namespace Ticketník
             }
             //onlineTerpDropDown.DropDownWidth = ComboWidth(onlineTerpDropDown);
             onlineTerpDropDown.Sorted = true;
+            form.edge.Quit();
             onlineTerpDropDown.SelectedItem = tmpSelected;
         }
 

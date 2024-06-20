@@ -14,12 +14,12 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.1.0.0
-    - Opravena chyba #24-001
-    - Opravena chyba #24-002
-    - Opravena chyba #24-003
-    - Opravena chyba #23-006
-    - Odstraněn autosave
+    /*interní changelog 2.2.0.0
+    - Opravena chyba #22-002
+    - Opravena chyba #23-007 (zrušením autosave v předchozí verzi)
+    - Opravena chyba #24-004
+    - Přepracováno spojení s MyTime
+    - Zrušen update z umístění UNC
     */
 
     public partial class Form1 : Form
@@ -28,8 +28,8 @@ namespace Ticketník
         //Skryté věci - Report + skryté nastavení
         internal bool devtest = false;
 
-        internal readonly int saveFileVersion = 10101, langVersion = 8;
-        internal readonly int program = 2010000;
+        internal readonly int saveFileVersion = 10101, langVersion = 9;
+        internal readonly int program = 2020000;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -65,12 +65,12 @@ namespace Ticketník
             Logni("Startuji Ticketník " + Application.ProductVersion, LogMessage.INFO);
 
             //při updatu na 1.7 zapnout záložní update pro defaultní stahování z githubu
-            if (Properties.Settings.Default.lastUpdateNotif < 107 && !Properties.Settings.Default.pouzivatZalozniUpdate)
-            {
+            //if (Properties.Settings.Default.lastUpdateNotif < 107 && !Properties.Settings.Default.pouzivatZalozniUpdate)
+            //{
                 Properties.Settings.Default.pouzivatZalozniUpdate = true;
                 Properties.Settings.Default.ZalozniUpdate = "https://github.com/Caesar008/Ticketnik/raw/master/Ticketn%C3%ADk/bin/Release";
                 Properties.Settings.Default.Save();
-            }
+            //}
 
             this.Location = Properties.Settings.Default.umisteni;
             
@@ -121,6 +121,7 @@ namespace Ticketník
                 Logni("Soubor .tic je poškozen. " + jmenoSouboru, LogMessage.WARNING);
                 CustomControls.MessageBox.Show(jazyk.Error_DamagedTicFile, jazyk.Error_NejdeOtevrit, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             Aktualizace(devtest);
 
             //nastavení IE11 pro WebBrowser + nastavení JSON pro IE
@@ -1728,10 +1729,12 @@ namespace Ticketník
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try 
-            { 
-                terpLoaderClient.CancelPendingRequests();
-            } 
+            try
+            {
+                Logni("Ukončuji Selenium (zavření okna Ticketníku)", LogMessage.INFO);
+                if (edge != null)
+                    edge.Quit();
+            }
             catch { }
 
             if (this.WindowState != FormWindowState.Maximized)
@@ -1757,6 +1760,7 @@ namespace Ticketník
                         //timer1.Stop();
                         if(updateRunning)
                         {
+                            Logni("Ruším aktualizace (zavření okna Ticketníku)", LogMessage.INFO);
                             vlaknoCancel.Cancel();
                         }
 
@@ -1777,6 +1781,7 @@ namespace Ticketník
 
                         if (updateRunning)
                         {
+                            Logni("Ruším aktualizace (zavření okna Ticketníku)", LogMessage.INFO);
                             vlaknoCancel.Cancel();
                         }
 
@@ -1793,6 +1798,7 @@ namespace Ticketník
 
                     if (updateRunning)
                     {
+                        Logni("Ruším aktualizace (zavření okna Ticketníku)", LogMessage.INFO);
                         vlaknoCancel.Cancel();
                     }
                 }
@@ -1808,9 +1814,11 @@ namespace Ticketník
 
                 if (updateRunning)
                 {
+                    Logni("Ruším aktualizace (zavření okna Ticketníku)", LogMessage.INFO);
                     vlaknoCancel.Cancel();
                 }
             }
+            Logni("Zavírám Ticketník", LogMessage.INFO);
         }
 
         internal void uložitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2671,8 +2679,6 @@ namespace Ticketník
                     }
                 }
                 catch { Logni("Nelze se spojit s GitHub.", LogMessage.INFO); }
-                if (text == "")
-                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\known_errors.txt");
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
                 tw.Text = jazyk.Menu_ZnameProblemy;
@@ -2701,8 +2707,6 @@ namespace Ticketník
                     }
                 }
                 catch { Logni("Nelze se spojit s GitHub.", LogMessage.INFO); }
-                if (text == "")
-                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Changelog.txt");
                 
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
@@ -2732,8 +2736,6 @@ namespace Ticketník
                     }
                 }
                 catch { Logni("Nelze se spojit s GitHub.", LogMessage.INFO); }
-                if (text == "")
-                    text = File.ReadAllText(Properties.Settings.Default.updateCesta + @"\..\Future.txt");
                 
                 TextWindow tw = new TextWindow();
                 tw.richTextBox1.Text = text;
@@ -3020,7 +3022,7 @@ namespace Ticketník
                 if(File.Exists(appdata + "\\Ticketnik\\Logs\\Error.log"))
                 {
                     FileInfo fi = new FileInfo(appdata + "\\Ticketnik\\Logs\\Error.log");
-                    if (fi.Length > 200000)
+                    if (fi.Length > 5000000)
                     {
 
                         File.Copy(appdata + "\\Ticketnik\\Logs\\Error.log", appdata + "\\Ticketnik\\Logs\\Error_" + DateTime.Now.ToString("yyyy-MM-dd_H-mm-ss") + ".log");
@@ -3338,6 +3340,8 @@ namespace Ticketník
 
         private void aktualizovatVšechnyTerpyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (edge.SessionId != null)
+                edge.Quit();
             AktualizujTerpyTasky();
         }
 

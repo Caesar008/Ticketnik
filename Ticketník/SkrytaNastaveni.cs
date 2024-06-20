@@ -14,7 +14,7 @@ namespace Ticketník
             update_cesta.Text = Properties.Settings.Default.updateCesta;
             zalozni_update.Text = Properties.Settings.Default.ZalozniUpdate;
             novyExport.Checked = Properties.Settings.Default.NovyExport;
-            zalozniUpdateBox.Checked = Properties.Settings.Default.pouzivatZalozniUpdate;
+            zalozniUpdateBox.Checked = Properties.Settings.Default.pouzivatZalozniUpdate = true;
             Motiv.SetMotiv(this);
         }
 
@@ -26,8 +26,8 @@ namespace Ticketník
             Properties.Settings.Default.NovyExport = novyExport.Checked;
             Properties.Settings.Default.pouzivatZalozniUpdate = zalozniUpdateBox.Checked;
             Properties.Settings.Default.Save();
-            form.Logni("Nové skryté nastavení\r\n\r\nSoubor: " + cesta_k_souboru.Text + "\r\nUpdate: " +
-                update_cesta.Text + "\r\nZáložní update: " + zalozni_update.Text + "\r\nZáložní update první: " + 
+            form.Logni("Nové skryté nastavení\r\n\r\nSoubor: " + cesta_k_souboru.Text + "\r\nUpdate (UNC - nepoužito): " +
+                update_cesta.Text + "\r\nUpdate (URL): " + zalozni_update.Text + "\r\nPoužít URL první: " + 
                 zalozniUpdateBox.Checked + "\r\nNový export: " + novyExport.Checked , Form1.LogMessage.INFO);
         }
     }

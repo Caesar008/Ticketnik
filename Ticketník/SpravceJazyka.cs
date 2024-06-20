@@ -50,89 +50,33 @@ namespace Ticketník
             
             try
             {
-
+                //download z netu
                 try
                 {
-                    //výchozí cesta v síti
-                    if (!Properties.Settings.Default.pouzivatZalozniUpdate)
-                    { 
-                        File.Copy(Properties.Settings.Default.updateCesta + "\\jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", true);
-                        form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.updateCesta + "\\jazyky.xml", Form1.LogMessage.INFO);
-                    }
-                    else
+                    using (HttpClient hc = new HttpClient(new HttpClientHandler()
                     {
-                        try
+                        AllowAutoRedirect = true
+                    }))
+                    {
+                        using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml").ConfigureAwait(false))
                         {
-                            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                            using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", FileMode.Create))
                             {
-                                AllowAutoRedirect = true
-                            }))
-                            {
-                                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml").ConfigureAwait(false))
-                                {
-                                    using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", FileMode.Create))
-                                    {
-                                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+                                await result.Content.CopyToAsync(fs).ConfigureAwait(false);
 
-                                    }
-                                }
                             }
-                            form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
-                        }
-                        catch (Exception ee)
-                        {
-                            if(Properties.Settings.Default.pouzivatZalozniUpdate)
-                            {
-                                try
-                                {
-                                    File.Copy(Properties.Settings.Default.updateCesta + "\\jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", true);
-                                    form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.updateCesta + "\\jazyky.xml", Form1.LogMessage.INFO);
-                                }
-                                catch { }
-                            }
-                            form.Logni("Vyhledání aktualizací jazyků selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
-                            return;// throw new Exception("Nelze vyhledat žádný update source");
                         }
                     }
+                    form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
+
+                    form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
                 }
-                catch
+                catch (Exception ee)
                 {
-                    //backup download z netu
-                    try
-                    {
-                        using (HttpClient hc = new HttpClient(new HttpClientHandler()
-                        {
-                            AllowAutoRedirect = true
-                        }))
-                        {
-                            using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml").ConfigureAwait(false))
-                            {
-                                using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", FileMode.Create))
-                                {
-                                    await result.Content.CopyToAsync(fs).ConfigureAwait(false);
-
-                                }
-                            }
-                        }
-                        form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
-
-                        form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
-                    }
-                    catch (Exception ee)
-                    {
-                        if (Properties.Settings.Default.pouzivatZalozniUpdate)
-                        {
-                            try
-                            {
-                                File.Copy(Properties.Settings.Default.updateCesta + "\\jazyky.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml", true);
-                                form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.updateCesta + "\\jazyky.xml", Form1.LogMessage.INFO);
-                            }
-                            catch { }
-                        }
-                        form.Logni("Vyhledání aktualizací jazyků selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
-                        return;//throw new Exception("Nelze vyhledat žádný update source");
-                    }
+                    form.Logni("Vyhledání aktualizací jazyků selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
+                    return;//throw new Exception("Nelze vyhledat žádný update source");
                 }
+                
 
                 XmlDocument jazyky = new XmlDocument();
                 jazyky.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\jazyky.xml");
@@ -284,79 +228,27 @@ namespace Ticketník
             {
                 try
                 {
-                    if (!Properties.Settings.Default.pouzivatZalozniUpdate)
+                    using (HttpClient hc = new HttpClient(new HttpClientHandler()
                     {
-                        File.Copy(Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, true);
-                        form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
-                    }
-                    else
+                        AllowAutoRedirect = true
+                    }))
                     {
-                        try
+                        using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor).ConfigureAwait(false))
                         {
-                            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                            using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, FileMode.Create))
                             {
-                                AllowAutoRedirect = true
-                            }))
-                            {
-                                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor).ConfigureAwait(false))
-                                {
-                                    using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, FileMode.Create))
-                                    {
-                                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+                                await result.Content.CopyToAsync(fs).ConfigureAwait(false);
 
-                                    }
-                                }
                             }
-                            form.Logni("Kontroluji jazyky na " + Properties.Settings.Default.ZalozniUpdate + "/jazyky.xml", Form1.LogMessage.INFO);
-
-                            form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
-                        }
-                        catch (Exception ee)
-                        {
-                            try
-                            {
-                                File.Copy(Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, true);
-                                form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
-                            }
-                            catch { }
-                            form.Logni("Stažení jazyka selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
                         }
                     }
+                    form.Logni("Stahuji " + Properties.Settings.Default.ZalozniUpdate + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
                 }
-                catch 
+                catch (Exception ee)
                 {
-                    try
-                    {
-                        using (HttpClient hc = new HttpClient(new HttpClientHandler()
-                        {
-                            AllowAutoRedirect = true
-                        }))
-                        {
-                            using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/lang/" + ((Tag)listView1.SelectedItems[0].Tag).Soubor).ConfigureAwait(false))
-                            {
-                                using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, FileMode.Create))
-                                {
-                                    await result.Content.CopyToAsync(fs).ConfigureAwait(false);
-
-                                }
-                            }
-                        }
-                        form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
-                    }
-                    catch (Exception ee)
-                    {
-                        if (Properties.Settings.Default.pouzivatZalozniUpdate)
-                        {
-                            try
-                            {
-                                File.Copy(Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "") + "lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, true);
-                                form.Logni("Stahuji " + Properties.Settings.Default.updateCesta + "\\lang\\" + ((Tag)listView1.SelectedItems[0].Tag).Soubor, Form1.LogMessage.INFO);
-                            }
-                            catch { }
-                        }
-                        form.Logni("Stažení jazyka selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
-                    }
+                    form.Logni("Stažení jazyka selhalo.\r\n" + ee.Message, Form1.LogMessage.WARNING);
                 }
+                
                 listView1.SelectedItems[0].UseItemStyleForSubItems = false;
                 listView1.SelectedItems[0].SubItems[4].BackColor = Color.Green;
                 ((Tag)listView1.SelectedItems[0].Tag).Instalován = true;

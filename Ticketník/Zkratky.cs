@@ -171,7 +171,8 @@ namespace Ticketník
                 Logni("Ruším update TerpTask souboru", LogMessage.INFO);
                 try
                 {
-                    terpLoaderClient.CancelPendingRequests();
+                    if(edge != null)
+                        edge.Quit();
                     if (updateRunning)
                     {
                         vlaknoCancel.Cancel();

@@ -42,9 +42,12 @@
             // cesta_k_souboru
             // 
             this.cesta_k_souboru.Location = new System.Drawing.Point(128, 12);
+            this.cesta_k_souboru.MaxLength = 2147483647;
             this.cesta_k_souboru.Name = "cesta_k_souboru";
+            this.cesta_k_souboru.ReadOnly = false;
             this.cesta_k_souboru.Size = new System.Drawing.Size(466, 20);
             this.cesta_k_souboru.TabIndex = 0;
+            this.cesta_k_souboru.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -57,14 +60,19 @@
             // 
             // update_cesta
             // 
+            this.update_cesta.Enabled = false;
             this.update_cesta.Location = new System.Drawing.Point(128, 38);
+            this.update_cesta.MaxLength = 2147483647;
             this.update_cesta.Name = "update_cesta";
+            this.update_cesta.ReadOnly = true;
             this.update_cesta.Size = new System.Drawing.Size(466, 20);
             this.update_cesta.TabIndex = 2;
+            this.update_cesta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Enabled = false;
             this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
@@ -74,18 +82,21 @@
             // zalozni_update
             // 
             this.zalozni_update.Location = new System.Drawing.Point(128, 64);
+            this.zalozni_update.MaxLength = 2147483647;
             this.zalozni_update.Name = "zalozni_update";
+            this.zalozni_update.ReadOnly = false;
             this.zalozni_update.Size = new System.Drawing.Size(466, 20);
             this.zalozni_update.TabIndex = 4;
+            this.zalozni_update.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 67);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 13);
+            this.label3.Size = new System.Drawing.Size(102, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Záložní update (URL)";
+            this.label3.Text = "Update cesta (URL)";
             // 
             // button1
             // 
@@ -100,6 +111,10 @@
             // novyExport
             // 
             this.novyExport.AutoSize = true;
+            this.novyExport.BoxColor = System.Drawing.SystemColors.Window;
+            this.novyExport.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
+            this.novyExport.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(184)))));
+            this.novyExport.CheckedColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(110)))), ((int)(((byte)(191)))));
             this.novyExport.Location = new System.Drawing.Point(12, 113);
             this.novyExport.Name = "novyExport";
             this.novyExport.Size = new System.Drawing.Size(115, 17);
@@ -110,6 +125,11 @@
             // zalozniUpdateBox
             // 
             this.zalozniUpdateBox.AutoSize = true;
+            this.zalozniUpdateBox.BoxColor = System.Drawing.SystemColors.Window;
+            this.zalozniUpdateBox.BoxColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
+            this.zalozniUpdateBox.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(184)))));
+            this.zalozniUpdateBox.CheckedColorMouseOver = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(110)))), ((int)(((byte)(191)))));
+            this.zalozniUpdateBox.Enabled = false;
             this.zalozniUpdateBox.Location = new System.Drawing.Point(12, 90);
             this.zalozniUpdateBox.Name = "zalozniUpdateBox";
             this.zalozniUpdateBox.Size = new System.Drawing.Size(185, 17);
