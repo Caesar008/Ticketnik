@@ -342,7 +342,7 @@ namespace Ticketník
                                     SHA256 sha = SHA256.Create();
                                     byte[] bytes = sha.ComputeHash(File.ReadAllBytes(fileTest));
                                     sha256Existing = Convert.ToBase64String(bytes);
-                                    verzeExisting = "SHA";
+                                    verzeExisting = "0.0.0.0";
                                 }
                             }
 
@@ -352,7 +352,7 @@ namespace Ticketník
                                 File.AppendAllText(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "ToRemove"), jmeno + "\r\n");
                             }
 
-                            if ((verzeExisting == "" || (verzeExisting != "SHA" && Version.Parse(verze) > Version.Parse(verzeExisting)) || (verzeExisting == "SHA" && sha256Existing != sha256)) && !toRemove)
+                            if ((verzeExisting == "" || (verzeExisting != "0.0.0.0" && Version.Parse(verze) > Version.Parse(verzeExisting)) || (verzeExisting == "0.0.0.0" && sha256Existing != sha256)) && !toRemove)
                             {
                                 //updatovat/stáhnout
 
