@@ -29,7 +29,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 9;
-        internal readonly int program = 2020001;
+        internal readonly int program = 2020002;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -1734,7 +1734,8 @@ namespace Ticketník
                 Logni("Ukončuji Selenium (zavření okna Ticketníku)", LogMessage.INFO);
                 try
                 {
-                    edge.Quit();
+                    if(edge != null)
+                        edge.Quit();
                 }
                 catch { }
             }

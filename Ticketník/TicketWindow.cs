@@ -2673,7 +2673,7 @@ namespace Ticketník
         private void btn_TicketWindow_SearchTerp_Click(object sender, EventArgs e)
         {
             form.terpTaskFileLock = false;
-            if (form.edge.SessionId != null)
+            if (form.edge != null && form.edge.SessionId != null)
                 try { form.edge.Quit(); } catch { }
             form.UpdateTerpTaskFile(onlineTerpDropDown.Text);
             string tmpSelected = onlineTerpDropDown.Text;
@@ -2703,7 +2703,7 @@ namespace Ticketník
         private void btn_TicketWindow_UpdateSelected_Click(object sender, EventArgs e)
         {
             form.terpTaskFileLock = false;
-            if (form.edge.SessionId != null)
+            if (form.edge != null && form.edge.SessionId != null)
                 try { form.edge.Quit(); } catch { }
             form.UpdateSelected(form.Terpy[onlineTerpDropDown.Text].Number);
             string tmpSelected = onlineTerpDropDown.Text; 

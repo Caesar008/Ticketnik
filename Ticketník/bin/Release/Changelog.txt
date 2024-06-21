@@ -1,3 +1,6 @@
+2.2.0.2 (21.6.2024)
+- Opraveny některé chyby v kódu
+-----------------------------------
 2.2.0.1 (20.6.2024)
 
 - Opraveny některé chyby způsobující pád

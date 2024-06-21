@@ -9,6 +9,7 @@ namespace Ticketník
     partial class Form1 : Form
     {
         bool keyDown = false;
+        bool terpTaskCancel = false;
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -116,6 +117,24 @@ namespace Ticketník
             {
                 //vývojová zkratka
                 Logni("Používám testovací crash.", LogMessage.INFO);
+                try
+                {
+                    if (edge != null)
+                        try { edge.Quit(); } catch { }
+                    if (updateRunning)
+                    {
+                        vlaknoCancel.Cancel();
+                    }
+
+                    if (vlaknoTerp != null && vlaknoTerp.IsAlive)
+                        vlaknoTerp.Abort();
+                    vlaknoTerp = null;
+                    updateRunning = false;
+                    terpTaskFileLock = false;
+
+                    infoBox.Text = "";
+                }
+                catch { }
                 throw new Exception("Test exception");
             }
             else if (e.KeyCode == Keys.I && e.Modifiers == (Keys.Control | Keys.Shift))
@@ -171,6 +190,7 @@ namespace Ticketník
                 Logni("Ruším update TerpTask souboru", LogMessage.INFO);
                 try
                 {
+                    terpTaskCancel = true;
                     if(edge != null)
                         try { edge.Quit(); } catch { }
                     if (updateRunning)
@@ -185,6 +205,7 @@ namespace Ticketník
                     terpTaskFileLock = false;
 
                     infoBox.Text = "";
+                    terpTaskCancel = false;
                 }
                 catch { }
 

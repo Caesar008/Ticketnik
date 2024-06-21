@@ -748,9 +748,11 @@ namespace Ticketník
                     }
                 }
 
-                terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
-                Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
-
+                if (!terpTaskCancel)
+                {
+                    terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
+                    Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
+                }
                 terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
@@ -775,7 +777,8 @@ namespace Ticketník
             }
             try
             {
-                edge.Quit();
+                if(edge != null)
+                    edge.Quit();
             }
             catch { }
         }
@@ -879,10 +882,11 @@ namespace Ticketník
                     }
                 }
 
-
-                terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
-                Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
-
+                if (!terpTaskCancel)
+                {
+                    terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
+                    Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
+                }
                 terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
@@ -1055,9 +1059,11 @@ namespace Ticketník
                     }
                 }
 
-                terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
-                Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
-
+                if (!terpTaskCancel)
+                {
+                    terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
+                    Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
+                }
                 terpTaskFileLock = false;
                 LoadTerptaskFile();
             }
