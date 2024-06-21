@@ -4,7 +4,7 @@
 	<App>2020002</App>
 	<Help>8</Help>
 	<Lang>
-		<CZ>9.0</CZ>
+		<CZ>9.1</CZ>
 	</Lang>
 	<Knihovny>
 		<Dll version="0.96.0.0">ClosedXML.dll</Dll>
