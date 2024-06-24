@@ -89,7 +89,7 @@ namespace Ticketník
                     //Logni("Naviguji na \"https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page + "\"", LogMessage.INFO);
                     edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=my&term=&page=" + page);
 
-                    if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                    if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved.") || edge.PageSource.Contains("document.location.replace"))
                     {
                         Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
                         Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
@@ -163,7 +163,7 @@ namespace Ticketník
                 //Logni("Naviguji na \"https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID + "\"", LogMessage.INFO);
                 edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/by_number?mode=all&term=" + terpID);
 
-                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved.") || edge.PageSource.Contains("document.location.replace"))
                 {
                     Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
                     Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
@@ -255,7 +255,7 @@ namespace Ticketník
 
                     edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=&page=" + page);
 
-                    if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                    if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved.") || edge.PageSource.Contains("document.location.replace"))
                     {
                         Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
                         Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
@@ -327,7 +327,7 @@ namespace Ticketník
 
                 edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID);
 
-                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved.") || edge.PageSource.Contains("document.location.replace"))
                 {
                     Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
                     Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
@@ -397,7 +397,7 @@ namespace Ticketník
 
                 edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks/" + taskID + "/expenditure_types?term=");
 
-                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved.") || edge.PageSource.Contains("document.location.replace"))
                 {
                     Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
                     Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
@@ -461,7 +461,7 @@ namespace Ticketník
 
                 edge.Navigate().GoToUrl("view-source:https://mytime.tietoevry.com/autocomplete/projects/" + terpID + "/tasks?mode=my&term=" + taskID);
 
-                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved."))
+                if (edge.PageSource.ToLower().Contains("access denied") || edge.PageSource.Contains("Copyright (C) Microsoft Corporation. All rights reserved.") || edge.PageSource.Contains("document.location.replace"))
                 {
                     Logni("Vyžadováno příhlášení MS", LogMessage.INFO);
                     Logni("Naviguji na \"https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=\"", LogMessage.INFO);
