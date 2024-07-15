@@ -62,7 +62,7 @@ namespace Ticketník
         public Form1()
         {
             CheckLog();
-            Logni("Startuji Ticketník " + Application.ProductVersion, LogMessage.INFO);
+            Logni("\r\nStartuji Ticketník " + Application.ProductVersion, LogMessage.INFO);
 
             //při updatu na 1.7 zapnout záložní update pro defaultní stahování z githubu
             //if (Properties.Settings.Default.lastUpdateNotif < 107 && !Properties.Settings.Default.pouzivatZalozniUpdate)
@@ -2966,7 +2966,7 @@ namespace Ticketník
             }
             else
             {
-                File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "]" + t + zprava + "\r\n\r\n");
+                File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "]" + t + zprava + "\r\n");
             }
         }
 
