@@ -8,9 +8,6 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
-#23-005 5.10.2023 (2.0.0.0)
-- Při ruční změně data nebo času v prvku DateTimePicker může za určitých podmínek dojít k pádu
-
 ---------
 UPDATER
 ---------
@@ -187,6 +184,9 @@ OPRAVENÉ CHYBY
 
 #23-004 22.9.2023 1.1.0.11 - Opraveno 5.10.2023 (2.0.0.0)
 - Export failuje v případě, že některý řádek exportu má přesně 240 znaků
+
+#23-005 5.10.2023 (2.0.0.0) - Opraveno 2.10.2024 (2.2.0.4)
+- Při ruční změně data nebo času v prvku DateTimePicker může za určitých podmínek dojít k pádu
 
 #23-006 16.10.2023 - Opraveno 4.3.2024 (2.1.0.0)
 - Při zapnutém autosavu může program spadnou kvůli tomu, že .tic je používán jiným procesem

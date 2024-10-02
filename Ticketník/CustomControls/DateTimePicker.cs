@@ -744,7 +744,7 @@ namespace Ticketník.CustomControls
                         _keybuffer = value.ToString();
                         Value = new DateTime(Value.Year, Value.Month, int.Parse(_keybuffer), Value.Hour, Value.Minute, Value.Second);
                     }
-                    else if (int.Parse(_keybuffer + value.ToString()) <= DateTime.DaysInMonth(Value.Year, Value.Month))
+                    else if (int.Parse(_keybuffer + value.ToString()) <= DateTime.DaysInMonth(Value.Year, Value.Month) && int.Parse(_keybuffer + value.ToString()) > 0)
                     {
                         _dateChanging = true;
                         _keybuffer = _keybuffer + value.ToString();
@@ -892,7 +892,8 @@ namespace Ticketník.CustomControls
                     _dateChanging = false;
                     _keybuffer = "";
                     Value = tmpDateTime;
-                    calendar.ActualDate/* = calendar.SelectedDate*/ = tmpDateTime;
+                    if (calendar != null)
+                        calendar.ActualDate/* = calendar.SelectedDate*/ = tmpDateTime;
                 }
 
                 base.OnMouseDown(e);

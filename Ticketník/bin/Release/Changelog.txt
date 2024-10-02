@@ -1,3 +1,8 @@
+2.2.0.3 (2.10.2024)
+
+- Opravena chyba #22-009
+- Upraveno řádkování v logu
+-----------------------------------
 2.2.0.3 (24.6.2024)
 
 - Upravena detekce způsobující nefunkční přihlášení na MyTime

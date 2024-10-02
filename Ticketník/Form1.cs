@@ -14,12 +14,9 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.2.0.0
-    - Opravena chyba #22-002
-    - Opravena chyba #23-007 (zrušením autosave v předchozí verzi)
-    - Opravena chyba #24-004
-    - Přepracováno spojení s MyTime
-    - Zrušen update z umístění UNC
+    /*interní changelog 2.2.0.4
+    - Opravena chyba #22-009
+    - Upraveno řádkování v logu
     */
 
     public partial class Form1 : Form
@@ -29,7 +26,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 9;
-        internal readonly int program = 2020003;
+        internal readonly int program = 2020004;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
