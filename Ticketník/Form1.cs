@@ -59,7 +59,7 @@ namespace Ticketník
         public Form1()
         {
             CheckLog();
-            Logni("\r\nStartuji Ticketník " + Application.ProductVersion, LogMessage.INFO);
+            Logni("Startuji Ticketník " + Application.ProductVersion, LogMessage.INFO);
 
             //při updatu na 1.7 zapnout záložní update pro defaultní stahování z githubu
             //if (Properties.Settings.Default.lastUpdateNotif < 107 && !Properties.Settings.Default.pouzivatZalozniUpdate)
@@ -1819,7 +1819,7 @@ namespace Ticketník
                     vlaknoCancel.Cancel();
                 }
             }
-            Logni("Zavírám Ticketník", LogMessage.INFO);
+            Logni("Zavírám Ticketník\r\n---------------------------------------------", LogMessage.INFO);
         }
 
         internal void uložitToolStripMenuItem_Click(object sender, EventArgs e)
