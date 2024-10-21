@@ -8,6 +8,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
+#24-005 1.0
+- Pád programu při hledání bez otevřeného souboru ticketů
+
 ---------
 UPDATER
 ---------
