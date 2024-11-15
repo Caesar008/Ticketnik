@@ -11,6 +11,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #24-005 1.0
 - Pád programu při hledání bez otevřeného souboru ticketů
 
+#24-006 15.11.2024
+- Kalendář neukazuje aktuální desetilietí v režimu století
+
 ---------
 UPDATER
 ---------
