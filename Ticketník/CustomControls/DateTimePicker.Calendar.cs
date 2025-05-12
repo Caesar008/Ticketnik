@@ -684,9 +684,21 @@ namespace Ticketník.CustomControls
                             {
                                 mesice[ii] = new KeyValuePair<Rectangle, DateTime?>(mesice[ii].Key, null);
                                 if (CurrentView == View.Months)
-                                    tmp = tmp.AddMonths(1);
+                                {
+                                    if(tmp.Month == refMinDate.Month)
+                                        tmp = tmp.AddDays(1);
+                                    else
+                                        tmp = tmp.AddMonths(1);
+                                }
                                 else
-                                    tmp = tmp.AddYears(modifier);
+                                {
+                                    if (tmp.Year == refMinDate.Year && tmp.Month != refMinDate.Month)
+                                        tmp = tmp.AddMonths(1);
+                                    else if (tmp.Year == refMinDate.Year && tmp.Month == refMinDate.Month)
+                                        tmp = tmp.AddDays(1);
+                                    else
+                                        tmp = tmp.AddYears(modifier);
+                                }
                                 continue;
                             }
                             mesice[ii] = new KeyValuePair<Rectangle, DateTime?>(mesice[ii].Key, tmp);

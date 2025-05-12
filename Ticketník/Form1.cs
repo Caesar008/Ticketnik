@@ -14,9 +14,8 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.2.0.4
-    - Opravena chyba #22-009
-    - Upraveno řádkování v logu
+    /*interní changelog 2.2.0.5
+    - Opravena chyba #24-006
     */
 
     public partial class Form1 : Form
@@ -26,7 +25,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 9;
-        internal readonly int program = 2020004;
+        internal readonly int program = 2020005;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";

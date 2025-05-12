@@ -11,9 +11,6 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #24-005 1.0
 - Pád programu při hledání bez otevřeného souboru ticketů
 
-#24-006 15.11.2024
-- Kalendář neukazuje aktuální desetilietí v režimu století
-
 ---------
 UPDATER
 ---------
@@ -212,6 +209,9 @@ OPRAVENÉ CHYBY
 #24-004 14.6.2024 - Opraveno 20.4.2024 (2.2.0.0)
 - Po změnách na straně MyTime nefunguje automatický upload do MyTime. Vyžaduje přihlášení přes MS.
 - Nefunguje ani update ticketů z MyTime kvůli stejnému problému s loginem
+
+#24-006 15.11.2024 - Opraveno 12.5.2025 (2.2.0.5)
+- Kalendář neukazuje aktuální desetilietí v režimu století
 
 ---------
 UPDATER
