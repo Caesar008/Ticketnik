@@ -1,4 +1,8 @@
-2.2.0.5
+2.2.0.6 (15.5.2025)
+
+- Opravena chyba občasného pádu programu při ručním hledání aktualizací
+-----------------------------------
+2.2.0.5 (12.5.2025)
 
 - Opravena chyba #24-006
 -----------------------------------
