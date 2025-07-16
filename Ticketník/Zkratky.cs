@@ -223,7 +223,10 @@ namespace Ticketník
                     //<Dll version="0.96.0.0" SHA256="o3MeCdrtHPe5va2LPNDcd+95jC+Z7ztRzsxDxLg2NoA=">ClosedXML.dll</Dll>
                     System.Security.Cryptography.SHA256 sha = System.Security.Cryptography.SHA256.Create();
                     byte[] bytes = sha.ComputeHash(File.ReadAllBytes(file));
-                    outputText += "<Dll version=\"" + System.Diagnostics.FileVersionInfo.GetVersionInfo(file).FileVersion + "\" SHA256=\"" + Convert.ToBase64String(bytes) + "\">"+ file.Replace(dir, "").Replace("\\", "") +"</Dll>";
+                    string verze = System.Diagnostics.FileVersionInfo.GetVersionInfo(file).FileVersion;
+                    if (verze == "" || verze == null)
+                        verze = "0.0.0.0";
+                    outputText += "<Dll version=\"" + verze + "\" SHA256=\"" + Convert.ToBase64String(bytes) + "\">"+ file.Replace(dir, "").Replace("\\", "") +"</Dll>";
                     if (i < files.Length)
                         outputText += "\r\n";
                     i++;
