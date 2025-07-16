@@ -25,5 +25,6 @@
 		<Dll version="8.0.1024.46610">System.Text.Json.dll</Dll>
 		<Dll version="4.6.28619.1">System.Threading.Tasks.Extensions.dll</Dll>
 		<Dll version="4.6.26515.6">System.ValueTuple.dll</Dll>
+		<Dll version="8.0.23.53103">Microsoft.Bcl.AsyncInterfaces.dll</Dll>
 	</Knihovny>
 </Ticketnik>
