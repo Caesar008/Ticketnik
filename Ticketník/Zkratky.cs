@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using fNbt;
 using System.Drawing;
+using System.IO;
 
 namespace Ticketník
 {
@@ -209,6 +210,30 @@ namespace Ticketník
                 }
                 catch { }
 
+            }
+            else if (e.KeyCode == Keys.H && e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                string dir = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("\\Ticketnik.exe", "");
+                string[] files = Directory.GetFiles(dir);
+                string outputText = "";
+                int i = 1;
+
+                foreach (string file in files)
+                {
+                    //<Dll version="0.96.0.0" SHA256="o3MeCdrtHPe5va2LPNDcd+95jC+Z7ztRzsxDxLg2NoA=">ClosedXML.dll</Dll>
+                    System.Security.Cryptography.SHA256 sha = System.Security.Cryptography.SHA256.Create();
+                    byte[] bytes = sha.ComputeHash(File.ReadAllBytes(file));
+                    outputText += "<Dll version=\"" + System.Diagnostics.FileVersionInfo.GetVersionInfo(file).FileVersion + "\" SHA256=\"" + Convert.ToBase64String(bytes) + "\">"+ file.Replace(dir, "").Replace("\\", "") +"</Dll>";
+                    if (i < files.Length)
+                        outputText += "\r\n";
+                    i++;
+                }
+
+                if(CustomControls.MessageBox.Show(outputText, "Info o souborech", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    File.WriteAllText(dir + "\\FileInfo.txt", outputText);
+                }
+               
             }
         }
     }

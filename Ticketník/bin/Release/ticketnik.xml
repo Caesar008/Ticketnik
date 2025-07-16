@@ -7,24 +7,24 @@
 		<CZ>9.1</CZ>
 	</Lang>
 	<Knihovny>
-		<Dll version="0.96.0.0">ClosedXML.dll</Dll>
-		<Dll version="2.16.0.0">DocumentFormat.OpenXml.dll</Dll>
-		<Dll version="1.1.0.0">ExcelNumberFormat.dll</Dll>
-		<Dll version="0.6.4.0">fNbt.dll</Dll>
-		<Dll version="1.11.54.0">HtmlAgilityPack.dll</Dll>
-		<Dll version="13.0.3.27908">Newtonsoft.Json.dll</Dll>
+		<Dll version="0.96.0.0" SHA256="o3MeCdrtHPe5va2LPNDcd+95jC+Z7ztRzsxDxLg2NoA=">ClosedXML.dll</Dll>
+		<Dll version="2.16.0.0" SHA256="44attfqfTbx+EdWaQqyKJBUxCwXTM+uvX7TnQk7qqrU=">DocumentFormat.OpenXml.dll</Dll>
+		<Dll version="1.1.0.0" SHA256="A8zHGkKDMQLvVK6ezznZ1iwEkcFzWao30dLvDsc5fQQ=">ExcelNumberFormat.dll</Dll>
+		<Dll version="0.6.4.0" SHA256="bdoAsKMwTbOk4WoBRsXf+bJvbhPtQSlQibKs6SV5Rfc=">fNbt.dll</Dll>
+		<Dll version="1.11.54.0" SHA256="oJoUU01Rxd/Yj8NxRbHXAKz59X9ulbgbjJhMt0sf7Hg=">HtmlAgilityPack.dll</Dll>
+		<Dll version="13.0.3.27908" SHA256="4eJ697B+7t9c5xqSVfBCKBam/FhJpIPGcU4bRyBE+p0=">Newtonsoft.Json.dll</Dll>
 		<Dll version="1.3.0.0" remove="true">FastMember.Signed.dll</Dll>
 		<Dll version="4.34.0.0" SHA256="t9efGD/NqyZS0IahRpah5qC9kMIt865kLKNYGNQmT8Y=">WebDriver.dll</Dll>
 		<Dll version="0.0.0.0" SHA256="pJBVO88++kCnw31zHeLU3v2HR8LPusbkK/D2Z9FfQvk=">selenium-manager.zip</Dll>
 		<Dll version="0.0.0.0" SHA256="o/PlLLw70q8D2OoE73TcQT1sN/J6Qrx9FD5wktfU3W0=">Ticketnik.exe.config</Dll>
-		<Dll version="4.6.28619.1">System.Buffers.dll</Dll>
-		<Dll version="4.6.31308.1">System.Memory.dll</Dll>
-		<Dll version="4.6.26515.6">System.Numerics.Vectors.dll</Dll>
-		<Dll version="6.0.21.52210">System.Runtime.CompilerServices.Unsafe.dll</Dll>
-		<Dll version="8.0.23.53103">System.Text.Encodings.Web.dll</Dll>
-		<Dll version="8.0.1024.46610">System.Text.Json.dll</Dll>
-		<Dll version="4.6.28619.1">System.Threading.Tasks.Extensions.dll</Dll>
-		<Dll version="4.6.26515.6">System.ValueTuple.dll</Dll>
-		<Dll version="8.0.23.53103">Microsoft.Bcl.AsyncInterfaces.dll</Dll>
+		<Dll version="4.6.28619.01" SHA256="rMzPvkXZ8I/+7ZkW43sz6YxlvgEs//bn+ntnIQzh/vs=">System.Buffers.dll</Dll>
+		<Dll version="4.6.31308.01" SHA256="vz+4RmT0CX8aipvHGlHc+M8akF1AgKTSkNoXMIZuhW8=">System.Memory.dll</Dll>
+		<Dll version="4.6.26515.06" SHA256="HT74aYKB589zcdFVSv71hys5+Wwm2nciEKM9oEG6EYM=">System.Numerics.Vectors.dll</Dll>
+		<Dll version="6.0.21.52210" SHA256="N3aEiOjvRXKbx9miZ3YzxkUAQpdbuWUW4YbabLnNDc8=">System.Runtime.CompilerServices.Unsafe.dll</Dll>
+		<Dll version="8.0.23.53103" SHA256="6cT17tGGyxKcUnxLjWfRY+ovI5bp2LluMLXnwSIDzoQ=">System.Text.Encodings.Web.dll</Dll>
+		<Dll version="8.0.1024.46610" SHA256="hsPyY66bRGmrEmbIBHEIcIJEfrSjjmuXv16E3hXAeh0=">System.Text.Json.dll</Dll>
+		<Dll version="4.6.28619.01" SHA256="T4H/0NxyBNt1r8NepCkXabB8RAWS8oiUJg7qdmJqI8Y=">System.Threading.Tasks.Extensions.dll</Dll>
+		<Dll version="4.6.26515.06" SHA256="6QXRAlhbIsbfBPIZr1y9v6e8Fll56XiLYt9tzBZeEPQ=">System.ValueTuple.dll</Dll>
+		<Dll version="4.6.26515.06" SHA256="6QXRAlhbIsbfBPIZr1y9v6e8Fll56XiLYt9tzBZeEPQ=">System.ValueTuple.dll</Dll>
 	</Knihovny>
 </Ticketnik>

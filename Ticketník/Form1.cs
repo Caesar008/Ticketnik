@@ -14,8 +14,8 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.2.0.5
-    - Opravena chyba #24-006
+    /*interní changelog 2.2.0.8
+    - funkce na vyjetí SHA hodnot
     */
 
     public partial class Form1 : Form
