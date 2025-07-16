@@ -25,6 +25,6 @@
 		<Dll version="8.0.1024.46610" SHA256="hsPyY66bRGmrEmbIBHEIcIJEfrSjjmuXv16E3hXAeh0=">System.Text.Json.dll</Dll>
 		<Dll version="4.6.28619.01" SHA256="T4H/0NxyBNt1r8NepCkXabB8RAWS8oiUJg7qdmJqI8Y=">System.Threading.Tasks.Extensions.dll</Dll>
 		<Dll version="4.6.26515.06" SHA256="6QXRAlhbIsbfBPIZr1y9v6e8Fll56XiLYt9tzBZeEPQ=">System.ValueTuple.dll</Dll>
-		<Dll version="4.6.26515.06" SHA256="6QXRAlhbIsbfBPIZr1y9v6e8Fll56XiLYt9tzBZeEPQ=">System.ValueTuple.dll</Dll>
+		<Dll version="8.0.23.53103" SHA256="gGeCA70CA6ZZT04zCyJUPA3lBZOCuxyTNLeGi48xsbw=">Microsoft.Bcl.AsyncInterfaces.dll</Dll>
 	</Knihovny>
 </Ticketnik>
