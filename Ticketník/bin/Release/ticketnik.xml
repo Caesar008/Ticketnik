@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Ticketnik>
 	<Zakosi>52</Zakosi>
-	<App>2020006</App>
+	<App>2020007</App>
 	<Help>8</Help>
 	<Lang>
 		<CZ>9.1</CZ>
@@ -14,7 +14,7 @@
 		<Dll version="1.11.54.0">HtmlAgilityPack.dll</Dll>
 		<Dll version="13.0.3.27908">Newtonsoft.Json.dll</Dll>
 		<Dll version="1.3.0.0" remove="true">FastMember.Signed.dll</Dll>
-		<Dll version="4.34.0.0" SHA256="awdaB2uQ+OIGrBun5rhhWMV9SP9njRg/WbAV+wcXrJY=">WebDriver.dll</Dll>
+		<Dll version="4.34.0.0" SHA256="t9efGD/NqyZS0IahRpah5qC9kMIt865kLKNYGNQmT8Y=">WebDriver.dll</Dll>
 		<Dll version="0.0.0.0" SHA256="S5qSCrUTQ2BF+7f9Q5ictImG7CQuiHaNvKdIhGSjYxY=">selenium-manager.zip</Dll>
 	</Knihovny>
 </Ticketnik>
