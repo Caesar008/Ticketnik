@@ -79,7 +79,7 @@ namespace Ticketník
                     if (edge == null || edge.SessionId == null)
                     {
                         Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                        service = EdgeDriverService.CreateDefaultService(options);
+                        service = EdgeDriverService.CreateDefaultService();
                         service.HideCommandPromptWindow = true;
                         edge = new EdgeDriver(service, options);
                         edge.Manage().Window.Minimize();
@@ -153,7 +153,7 @@ namespace Ticketník
                 if (edge == null || edge.SessionId == null)
                 {
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService(options);
+                    service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
                     edge = new EdgeDriver(service, options);
                     edge.Manage().Window.Minimize();
@@ -246,7 +246,7 @@ namespace Ticketník
                     if (edge == null || edge.SessionId == null)
                     {
                         Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                        service = EdgeDriverService.CreateDefaultService(options);
+                        service = EdgeDriverService.CreateDefaultService();
                         service.HideCommandPromptWindow = true;
                         edge = new EdgeDriver(service, options);
                         edge.Manage().Window.Minimize();
@@ -318,7 +318,7 @@ namespace Ticketník
                 if (edge == null || edge.SessionId == null)
                 {
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService(options);
+                    service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
                     edge = new EdgeDriver(service, options);
                     edge.Manage().Window.Minimize();
@@ -388,7 +388,7 @@ namespace Ticketník
                 if (edge == null || edge.SessionId == null)
                 {
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService(options);
+                    service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
                     edge = new EdgeDriver(service, options);
                     edge.Manage().Window.Minimize();
@@ -452,7 +452,7 @@ namespace Ticketník
                 if (edge == null || edge.SessionId == null)
                 {
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService(options);
+                    service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
                     edge = new EdgeDriver(service, options);
                     edge.Manage().Window.Minimize();

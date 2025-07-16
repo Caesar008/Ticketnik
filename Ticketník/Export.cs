@@ -116,7 +116,7 @@ namespace Ticketník
                         if (form.edge == null || form.edge.SessionId == null)
                         {
                             form.Logni("Startuji Selenium Edge pro přihlášení k MyTime", Form1.LogMessage.INFO);
-                            form.service = EdgeDriverService.CreateDefaultService(form.options);
+                            form.service = EdgeDriverService.CreateDefaultService();
                             form.service.HideCommandPromptWindow = true;
                             form.edge = new EdgeDriver(form.service, form.options);
                             form.edge.Manage().Window.Minimize();
