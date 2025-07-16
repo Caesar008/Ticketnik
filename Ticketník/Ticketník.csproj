@@ -404,6 +404,7 @@
     <None Include="bin\Debug\help\help" />
     <None Include="bin\Release\Help.zip" />
     <None Include="bin\Release\selenium-manager.zip" />
+    <None Include="bin\Release\Ticketnik.exe.config" />
     <None Include="bin\Release\zakaznici" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -509,6 +510,15 @@
     <Content Include="bin\Release\HtmlAgilityPack.dll" />
     <Content Include="bin\Release\jazyky.xml" />
     <Content Include="bin\Release\known_errors.txt" />
+    <Content Include="bin\Release\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="bin\Release\System.Buffers.dll" />
+    <Content Include="bin\Release\System.Memory.dll" />
+    <Content Include="bin\Release\System.Numerics.Vectors.dll" />
+    <Content Include="bin\Release\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\Release\System.Text.Encodings.Web.dll" />
+    <Content Include="bin\Release\System.Text.Json.dll" />
+    <Content Include="bin\Release\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\Release\System.ValueTuple.dll" />
     <Content Include="bin\Release\Ticketnik.exe" />
     <Content Include="bin\Release\ticketnik.xml" />
     <None Include="ikony\newFile.png" />
