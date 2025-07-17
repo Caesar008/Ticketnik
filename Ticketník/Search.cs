@@ -68,6 +68,8 @@ namespace Ticketník
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (form.file == null)
+                return;
             listView1.BeginUpdate();
             listView1.Items.Clear();
 

@@ -72,7 +72,7 @@ namespace Ticketník
             result = "";
             List<MyTimeTerp> myTimeTerpList = new List<MyTimeTerp>();
             List<Terp> terpList = null;
-            while (true)
+            while (true && !terpTaskCancel)
             {
                 try
                 {
@@ -239,7 +239,7 @@ namespace Ticketník
             List<MyTimeTask> myTimeTaskList = new List<MyTimeTask>();
             List <Task> taskList = null;
             result = "";
-            while (true)
+            while (true && !terpTaskCancel)
             {
                 try
                 {
@@ -383,6 +383,8 @@ namespace Ticketník
 
         public async Task<List<string>> GetTerpTaskTypes(string terpID, string taskID)
         {
+            if (terpTaskCancel)
+                return null;
             try
             {
                 if (edge == null || edge.SessionId == null)
@@ -404,7 +406,7 @@ namespace Ticketník
                     edge.Navigate().GoToUrl("https://mytime.tietoevry.com/auth/microsoft-identity-platform?button=");
                     edge.Manage().Window.Maximize();
 
-                    while (true)
+                    while (true && !terpTaskCancel)
                     {
                         if (edge == null || edge.SessionId == null)
                             break;
@@ -668,19 +670,22 @@ namespace Ticketník
                                 terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Add(new NbtLong("LastUpdate", lastUpd));
                         }
 
-                        foreach (string mtty in mtta.TypeLabels)
+                        if (mtta.TypeLabels != null)
                         {
-                            bool found = false;
-                            foreach (NbtString mttys in terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Get<NbtList>("Types"))
+                            foreach (string mtty in mtta.TypeLabels)
                             {
-                                if (mttys.Value == mtty)
+                                bool found = false;
+                                foreach (NbtString mttys in terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Get<NbtList>("Types"))
                                 {
-                                    found = true;
-                                    break;
+                                    if (mttys.Value == mtty)
+                                    {
+                                        found = true;
+                                        break;
+                                    }
                                 }
+                                if (!found)
+                                    terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Get<NbtList>("Types").Add(new NbtString(mtty));
                             }
-                            if (!found)
-                                terpFile.RootTag.Get<NbtCompound>(mtt.Label).Get<NbtCompound>("Tasks").Get<NbtCompound>(mtta.Label).Get<NbtList>("Types").Add(new NbtString(mtty));
                         }
                     }
                 }
@@ -723,15 +728,18 @@ namespace Ticketník
                                     terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Add(new NbtLong("LastUpdate", lastUpd));
                             }
 
-                            foreach (string customType in customTask.TypeLabels)
+                            if (customTask.TypeLabels != null)
                             {
-                                List<string> tmpCheck = new List<string>();
-                                foreach (NbtString ns in terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types"))
+                                foreach (string customType in customTask.TypeLabels)
                                 {
-                                    tmpCheck.Add(ns.Value);
+                                    List<string> tmpCheck = new List<string>();
+                                    foreach (NbtString ns in terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types"))
+                                    {
+                                        tmpCheck.Add(ns.Value);
+                                    }
+                                    if (!tmpCheck.Contains(customType))
+                                        terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types").Add(new NbtString(customType));
                                 }
-                                if (!tmpCheck.Contains(customType))
-                                    terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtCompound>("Tasks").Get<NbtCompound>(customTask.Label).Get<NbtList>("Types").Add(new NbtString(customType));
                             }
                         }
                         if (terpFile.RootTag.Get<NbtCompound>("Custom").Get<NbtCompound>(label).Get<NbtString>("Label").Value != label)
