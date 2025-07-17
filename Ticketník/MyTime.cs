@@ -148,6 +148,8 @@ namespace Ticketník
 
         public async Task<MyTimeTerp> GetTerpData(string terpID)
         {
+            if (terpTaskCancel)
+                return null;
             try
             {
                 if (edge == null || edge.SessionId == null)
@@ -313,6 +315,8 @@ namespace Ticketník
 
         public async Task<MyTimeTask> GetTerpTaskData(string terpID, string taskID)
         {
+            if (terpTaskCancel)
+                return null;
             try
             {
                 if (edge == null || edge.SessionId == null)
@@ -449,6 +453,8 @@ namespace Ticketník
 
         public async Task<string> GetTerpTaskTypeData(string terpID, string taskID, string typeLabel)
         {
+            if (terpTaskCancel)
+                return null;
             try
             {
                 if (edge == null || edge.SessionId == null)
@@ -926,7 +932,7 @@ namespace Ticketník
                 Thread.Sleep(50);
                 Application.DoEvents();
             }
-                if (!InvokeRequired)
+            if (!InvokeRequired)
                 timer_ClearInfo.Stop();
             else
                 this.BeginInvoke(new Action(() => timer_ClearInfo.Stop()));

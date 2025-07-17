@@ -485,13 +485,13 @@ namespace Ticketník
                 updateRunning = false;
             }
 
-            if (vlaknoTerp != null && !vlaknoTerp.IsAlive)
-            {
+            /*if (vlaknoTerp != null && !vlaknoTerp.IsAlive)
+            {*/
                 if (!InvokeRequired)
                     timer_ClearInfo.Start();
                 else
                     this.BeginInvoke(new Action(() => timer_ClearInfo.Start()));
-            }
+            //}
         }
     }
 }
