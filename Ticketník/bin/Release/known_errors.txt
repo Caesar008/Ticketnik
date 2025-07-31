@@ -8,6 +8,9 @@ AKTUÁLNĚ ZNÁMÉ CHYBY
 #22-001 7.7.2022
 - Při ručním zadávání nového TERPu v okně ticketu spolu s jeho popisem se neuloží popis TERPu
 
+#25-001 31.7.2025
+- Po kliknutí na Ne v možnostech kontroly nahraných záznamů do mytime se na straně MyTime nic nestane - pořád se musí ručně kliknout na Submit.
+
 ---------
 UPDATER
 ---------
