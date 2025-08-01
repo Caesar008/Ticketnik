@@ -182,8 +182,19 @@ namespace Ticketník
                                     form.Logni("Potvrzuji timecard v MyTime.", Form1.LogMessage.INFO);
                                     var els = form.edge.FindElements(By.Name("action_submit"));
                                     els[els.Count - 1].Click();
-                                    try { form.edge.Quit();
-                                    } catch { 
+                                    for (int i = 0; i < 30; i++)
+                                    {
+                                        Application.DoEvents();
+                                        System.Threading.Thread.Sleep(100);
+                                    }
+                                    try 
+                                    { 
+                                        form.edge.Quit();
+                                    } 
+                                    catch (Exception e)
+                                    {
+                                        form.Logni("Při potvrzování timecard došlo k chybě.", Form1.LogMessage.WARNING);
+                                        form.Logni("Při potvrzování timecard došlo k chybě.\r\n\r\n" + e.Message, Form1.LogMessage.ERROR);
                                     }
                                 }
                             }
