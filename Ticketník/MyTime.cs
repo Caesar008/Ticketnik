@@ -13,6 +13,7 @@ using System.Linq;
 using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
+using System.Text.RegularExpressions;
 
 namespace Ticketník
 {
@@ -21,6 +22,7 @@ namespace Ticketník
         internal EdgeOptions options = new EdgeOptions();
         internal EdgeDriverService service;
         internal EdgeDriver edge;
+        bool fatalError = false;
 
         string result = "";
         internal NbtFile terpFile;
@@ -81,7 +83,21 @@ namespace Ticketník
                         Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
                         service = EdgeDriverService.CreateDefaultService();
                         service.HideCommandPromptWindow = true;
-                        edge = new EdgeDriver(service, options);
+                        try
+                        {
+                            edge = new EdgeDriver(service, options);
+                        }
+                        catch (InvalidOperationException invo)
+                        {
+                            if (invo.Message.Contains("session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version "))
+                            {
+                                Regex regex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+                                string version = regex.Match(invo.Message).Value;
+                                string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
+                                UpdateWebDriver(updateUrl);
+                                edge = new EdgeDriver(service, options);
+                            }
+                        }
                         edge.Manage().Window.Minimize();
                         edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
                     }
@@ -126,6 +142,7 @@ namespace Ticketník
                 {
                     Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
                     Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
+                    fatalError = true;
                 }
                 terpList = JsonConvert.DeserializeObject<List<Terp>>(result);
 
@@ -154,10 +171,25 @@ namespace Ticketník
             {
                 if (edge == null || edge.SessionId == null)
                 {
+
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
                     service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
-                    edge = new EdgeDriver(service, options);
+                    try
+                    {
+                        edge = new EdgeDriver(service, options);
+                    }
+                    catch (InvalidOperationException invo)
+                    {
+                        if (invo.Message.Contains("session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version "))
+                        {
+                            Regex regex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+                            string version = regex.Match(invo.Message).Value;
+                            string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
+                            UpdateWebDriver(updateUrl);
+                            edge = new EdgeDriver(service, options);
+                        }
+                    }
                     edge.Manage().Window.Minimize();
                     edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
                 }
@@ -202,6 +234,7 @@ namespace Ticketník
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
                 Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
+                fatalError = true;
             }
 
             MyTimeTerp myTimeTerp = null;
@@ -250,7 +283,21 @@ namespace Ticketník
                         Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
                         service = EdgeDriverService.CreateDefaultService();
                         service.HideCommandPromptWindow = true;
-                        edge = new EdgeDriver(service, options);
+                        try
+                        {
+                            edge = new EdgeDriver(service, options);
+                        }
+                        catch (InvalidOperationException invo)
+                        {
+                            if (invo.Message.Contains("session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version "))
+                            {
+                                Regex regex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+                                string version = regex.Match(invo.Message).Value;
+                                string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
+                                UpdateWebDriver(updateUrl);
+                                edge = new EdgeDriver(service, options);
+                            }
+                        }
                         edge.Manage().Window.Minimize();
                         edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
                     }
@@ -292,6 +339,7 @@ namespace Ticketník
                 {
                     Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
                     Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
+                    fatalError = true;
                 }
 
                 taskList = JsonConvert.DeserializeObject<List<Task>>(result);
@@ -324,7 +372,21 @@ namespace Ticketník
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
                     service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
-                    edge = new EdgeDriver(service, options);
+                    try
+                    {
+                        edge = new EdgeDriver(service, options);
+                    }
+                    catch (InvalidOperationException invo)
+                    {
+                        if (invo.Message.Contains("session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version "))
+                        {
+                            Regex regex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+                            string version = regex.Match(invo.Message).Value;
+                            string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
+                            UpdateWebDriver(updateUrl);
+                            edge = new EdgeDriver(service, options);
+                        }
+                    }
                     edge.Manage().Window.Minimize();
                     edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
                 }
@@ -366,6 +428,7 @@ namespace Ticketník
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
                 Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
+                fatalError = true;
             }
 
             MyTimeTask myTimeTask = null;
@@ -396,7 +459,21 @@ namespace Ticketník
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
                     service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
-                    edge = new EdgeDriver(service, options);
+                    try
+                    {
+                        edge = new EdgeDriver(service, options);
+                    }
+                    catch (InvalidOperationException invo)
+                    {
+                        if (invo.Message.Contains("session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version "))
+                        {
+                            Regex regex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+                            string version = regex.Match(invo.Message).Value;
+                            string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
+                            UpdateWebDriver(updateUrl);
+                            edge = new EdgeDriver(service, options);
+                        }
+                    }
                     edge.Manage().Window.Minimize();
                     edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
                 }
@@ -438,6 +515,7 @@ namespace Ticketník
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
                 Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
+                fatalError = true;
             }
 
             List<string> myTimeTerpTaskTypeList = new List<string>();
@@ -462,7 +540,21 @@ namespace Ticketník
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
                     service = EdgeDriverService.CreateDefaultService();
                     service.HideCommandPromptWindow = true;
-                    edge = new EdgeDriver(service, options);
+                    try
+                    {
+                        edge = new EdgeDriver(service, options);
+                    }
+                    catch (InvalidOperationException invo)
+                    {
+                        if (invo.Message.Contains("session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version "))
+                        {
+                            Regex regex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+                            string version = regex.Match(invo.Message).Value;
+                            string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
+                            UpdateWebDriver(updateUrl);
+                            edge = new EdgeDriver(service, options);
+                        }
+                    }
                     edge.Manage().Window.Minimize();
                     edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
                 }
@@ -504,6 +596,7 @@ namespace Ticketník
             {
                 Logni("Při připojování k MyTime došlo k chybě.", LogMessage.WARNING);
                 Logni("Při připojování k MyTime došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace, LogMessage.ERROR);
+                fatalError = true;
             }
 
             List<Type> typeList = JsonConvert.DeserializeObject<List<Type>>(result);
@@ -762,7 +855,7 @@ namespace Ticketník
                     }
                 }
 
-                if (!terpTaskCancel)
+                if (!terpTaskCancel && !fatalError)
                 {
                     terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
                     Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
@@ -896,7 +989,7 @@ namespace Ticketník
                     }
                 }
 
-                if (!terpTaskCancel)
+                if (!terpTaskCancel && !fatalError)
                 {
                     terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
                     Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
@@ -1073,7 +1166,7 @@ namespace Ticketník
                     }
                 }
 
-                if (!terpTaskCancel)
+                if (!terpTaskCancel && !fatalError)
                 {
                     terpFile.SaveToFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ticketnik\\terpTask", NbtCompression.GZip);
                     Logni("TerpTask soubor aktualizován", Form1.LogMessage.INFO);
@@ -1184,6 +1277,47 @@ namespace Ticketník
         {
             terpTaskFailedRetry.Stop();
             AktualizujTerpyTasky();
+        }
+
+        private async void UpdateWebDriver(string url)
+        {
+            try
+            {
+                using (System.Net.Http.HttpClient hc = new System.Net.Http.HttpClient(new System.Net.Http.HttpClientHandler()
+                {
+                    AllowAutoRedirect = true
+                }))
+                {
+                    using (var result = await hc.GetAsync(url).ConfigureAwait(false))
+                    {
+                        using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"), FileMode.Create))
+                        {
+
+                            await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                        }
+                    }
+                }
+                Logni("Stahuji nový Edge WebDriver z " + url, LogMessage.INFO);
+            }
+            catch (Exception e)
+            {
+                Logni("Stažení Edge WebDriver selhalo.\r\n" + e.Message, LogMessage.WARNING);
+            }
+
+            try
+            {
+                if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                    File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe"));
+                Logni("Rozbaluiji Edge WebDriver.", LogMessage.INFO);
+                System.IO.Compression.ZipFile.ExtractToDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"), System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""));
+                Directory.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Driver_Notes"), true);
+                File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"));
+            }
+            catch (Exception e)
+            {
+                Logni("Rozbalení Edge WebDriver selhalo.\r\n" + e.Message, LogMessage.WARNING);
+            }
         }
     }
 

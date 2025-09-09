@@ -1,3 +1,8 @@
+2.2.0.12 (9.9.2025)
+
+- Opravena chyba mizení terpů a tasků při selhání připojení k MyTime
+- Přidáno stažení Edge WebDriver v případě, že Selenium nemá dostupnou aktuální verzi.
+-----------------------------------
 2.2.0.11 (1.8.2025)
 
 - Opravena chyba #25-001
