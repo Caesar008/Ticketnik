@@ -1,3 +1,7 @@
+2.2.0.13 (9.9.2025)
+
+- Oprava případného neupdatování terpTask souboru
+-----------------------------------
 2.2.0.12 (9.9.2025)
 
 - Opravena chyba mizení terpů a tasků při selhání připojení k MyTime

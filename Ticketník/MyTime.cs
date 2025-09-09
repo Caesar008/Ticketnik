@@ -137,6 +137,7 @@ namespace Ticketník
                         edge.Manage().Window.Minimize();
                     }
                     catch { }
+                    fatalError = false;
                 }
                 catch (Exception e)
                 {
@@ -229,6 +230,7 @@ namespace Ticketník
                     edge.Manage().Window.Minimize();
                 }
                 catch { }
+                fatalError = false;
             }
             catch (Exception e)
             {
@@ -334,6 +336,7 @@ namespace Ticketník
                         edge.Manage().Window.Minimize();
                     }
                     catch { }
+                    fatalError = false;
                 }
                 catch (Exception e)
                 {
@@ -423,6 +426,7 @@ namespace Ticketník
                     edge.Manage().Window.Minimize();
                 }
                 catch { }
+                fatalError = false;
             }
             catch (Exception e)
             {
@@ -510,6 +514,7 @@ namespace Ticketník
                     edge.Manage().Window.Minimize();
                 }
                 catch { }
+                fatalError = false;
             }
             catch (Exception e)
             {
@@ -591,6 +596,7 @@ namespace Ticketník
                     edge.Manage().Window.Minimize();
                 }
                 catch { }
+                fatalError = false;
             }
             catch (Exception e)
             {
