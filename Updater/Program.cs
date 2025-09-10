@@ -48,7 +48,15 @@ namespace Updater
                         System.Threading.Thread.Sleep(1000);
                         File.Copy(file, System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", fileName), true);
                     }
-                    Directory.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", "Update"), true);
+                    System.Threading.Thread.Sleep(1000);
+                    try
+                    {
+                        Directory.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Updater.exe", "Update"), true);
+                    }
+                    catch
+                    {
+
+                    }
                     System.Diagnostics.Process.Start(args[0]);
                     System.Diagnostics.Process.GetCurrentProcess().Kill();
                 }
