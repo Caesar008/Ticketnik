@@ -81,7 +81,14 @@ namespace Ticketník
                     if (edge == null || edge.SessionId == null)
                     {
                         Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                        service = EdgeDriverService.CreateDefaultService();
+                        if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                        {
+                            service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                        }
+                        else
+                        {
+                            service = EdgeDriverService.CreateDefaultService();
+                        }
                         service.HideCommandPromptWindow = true;
                         try
                         {
@@ -174,7 +181,14 @@ namespace Ticketník
                 {
 
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService();
+                    if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                    {
+                        service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                    }
+                    else
+                    {
+                        service = EdgeDriverService.CreateDefaultService();
+                    }
                     service.HideCommandPromptWindow = true;
                     try
                     {
@@ -283,7 +297,14 @@ namespace Ticketník
                     if (edge == null || edge.SessionId == null)
                     {
                         Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                        service = EdgeDriverService.CreateDefaultService();
+                        if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                        {
+                            service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                        }
+                        else
+                        {
+                            service = EdgeDriverService.CreateDefaultService();
+                        }
                         service.HideCommandPromptWindow = true;
                         try
                         {
@@ -373,7 +394,14 @@ namespace Ticketník
                 if (edge == null || edge.SessionId == null)
                 {
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService();
+                    if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                    {
+                        service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                    }
+                    else
+                    {
+                        service = EdgeDriverService.CreateDefaultService();
+                    }
                     service.HideCommandPromptWindow = true;
                     try
                     {
@@ -461,7 +489,14 @@ namespace Ticketník
                 if (edge == null || edge.SessionId == null)
                 {
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService();
+                    if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                    {
+                        service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                    }
+                    else
+                    {
+                        service = EdgeDriverService.CreateDefaultService();
+                    }
                     service.HideCommandPromptWindow = true;
                     try
                     {
@@ -543,7 +578,14 @@ namespace Ticketník
                 if (edge == null || edge.SessionId == null)
                 {
                     Logni("Startuji Selenium Edge pro přihlášení k MyTime", LogMessage.INFO);
-                    service = EdgeDriverService.CreateDefaultService();
+                    if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                    {
+                        service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                    }
+                    else
+                    {
+                        service = EdgeDriverService.CreateDefaultService();
+                    }
                     service.HideCommandPromptWindow = true;
                     try
                     {

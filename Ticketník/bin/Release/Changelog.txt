@@ -1,3 +1,7 @@
+2.2.0.14 (10.9.2025)
+
+- Vylepšeno načítání Edge WebDriver
+-----------------------------------
 2.2.0.13 (9.9.2025)
 
 - Oprava případného neupdatování terpTask souboru
