@@ -102,6 +102,7 @@ namespace Ticketník
                                 string version = regex.Match(invo.Message).Value;
                                 string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
                                 UpdateWebDriver(updateUrl);
+                                service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
                                 edge = new EdgeDriver(service, options);
                             }
                         }
@@ -202,6 +203,7 @@ namespace Ticketník
                             string version = regex.Match(invo.Message).Value;
                             string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
                             UpdateWebDriver(updateUrl);
+                            service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
                             edge = new EdgeDriver(service, options);
                         }
                     }
@@ -318,6 +320,7 @@ namespace Ticketník
                                 string version = regex.Match(invo.Message).Value;
                                 string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
                                 UpdateWebDriver(updateUrl);
+                                service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
                                 edge = new EdgeDriver(service, options);
                             }
                         }
@@ -415,6 +418,7 @@ namespace Ticketník
                             string version = regex.Match(invo.Message).Value;
                             string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
                             UpdateWebDriver(updateUrl);
+                            service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
                             edge = new EdgeDriver(service, options);
                         }
                     }
@@ -510,6 +514,7 @@ namespace Ticketník
                             string version = regex.Match(invo.Message).Value;
                             string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
                             UpdateWebDriver(updateUrl);
+                            service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
                             edge = new EdgeDriver(service, options);
                         }
                     }
@@ -599,6 +604,7 @@ namespace Ticketník
                             string version = regex.Match(invo.Message).Value;
                             string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
                             UpdateWebDriver(updateUrl);
+                            service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
                             edge = new EdgeDriver(service, options);
                         }
                     }
