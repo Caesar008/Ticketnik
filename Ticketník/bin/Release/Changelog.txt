@@ -1,3 +1,7 @@
+2.2.0.1 (12.9.2025)
+
+- Opravena chyba při exportu
+-----------------------------------
 2.2.0.16 (10.9.2025)
 
 - Opravena chyba v Updater.exe

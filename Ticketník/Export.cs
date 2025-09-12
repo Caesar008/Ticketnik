@@ -46,6 +46,47 @@ namespace Ticketník
             Motiv.SetMotiv(this);
         }
 
+        private async void UpdateWebDriver(string url)
+        {
+            try
+            {
+                using (System.Net.Http.HttpClient hc = new System.Net.Http.HttpClient(new System.Net.Http.HttpClientHandler()
+                {
+                    AllowAutoRedirect = true
+                }))
+                {
+                    using (var result = await hc.GetAsync(url).ConfigureAwait(false))
+                    {
+                        using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"), FileMode.Create))
+                        {
+
+                            await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                        }
+                    }
+                }
+                form.Logni("Stahuji nový Edge WebDriver z " + url, Form1.LogMessage.INFO);
+            }
+            catch (Exception e)
+            {
+                form.Logni("Stažení Edge WebDriver selhalo.\r\n" + e.Message, Form1.LogMessage.WARNING);
+            }
+
+            try
+            {
+                if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                    File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe"));
+                form.Logni("Rozbaluiji Edge WebDriver.", Form1.LogMessage.INFO);
+                System.IO.Compression.ZipFile.ExtractToDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"), System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""));
+                Directory.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Driver_Notes"), true);
+                File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"));
+            }
+            catch (Exception e)
+            {
+                form.Logni("Rozbalení Edge WebDriver selhalo.\r\n" + e.Message, Form1.LogMessage.WARNING);
+            }
+        }
+
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked || radioButton2.Checked)
@@ -116,9 +157,31 @@ namespace Ticketník
                         if (form.edge == null || form.edge.SessionId == null)
                         {
                             form.Logni("Startuji Selenium Edge pro přihlášení k MyTime", Form1.LogMessage.INFO);
-                            form.service = EdgeDriverService.CreateDefaultService();
+                            if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                            {
+                                form.service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                            }
+                            else
+                            {
+                                form.service = EdgeDriverService.CreateDefaultService();
+                            }
                             form.service.HideCommandPromptWindow = true;
-                            form.edge = new EdgeDriver(form.service, form.options);
+                            try
+                            {
+                                form.edge = new EdgeDriver(form.service, form.options);
+                            }
+                            catch (InvalidOperationException invo)
+                            {
+                                if (invo.Message.Contains("session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version "))
+                                {
+                                    System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+                                    string version = regex.Match(invo.Message).Value;
+                                    string updateUrl = "https://msedgedriver.microsoft.com/" + version + "/edgedriver_win64.zip";
+                                    UpdateWebDriver(updateUrl);
+                                    form.service = EdgeDriverService.CreateDefaultService(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""), "msedgedriver.exe");
+                                    form.edge = new EdgeDriver(form.service, form.options);
+                                }
+                            }
                             form.edge.Manage().Window.Minimize();
                             form.edge.Manage().Timeouts().PageLoad.Add(TimeSpan.FromMinutes(5));
                         }
