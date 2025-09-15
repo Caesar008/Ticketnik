@@ -1333,7 +1333,7 @@ namespace Ticketník
             AktualizujTerpyTasky();
         }
 
-        private async void UpdateWebDriver(string url)
+        internal async void UpdateWebDriver(string url)
         {
             try
             {
