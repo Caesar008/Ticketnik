@@ -238,6 +238,10 @@ namespace Ticketník
                 }
                
             }
+            else if (e.KeyCode == Keys.K && e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                //okno KIR
+            }
         }
     }
 }

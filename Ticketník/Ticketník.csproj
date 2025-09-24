@@ -200,6 +200,12 @@
     </Compile>
     <Compile Include="Jazyk.cs" />
     <Compile Include="JednaInstalnce.cs" />
+    <Compile Include="KIR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KIR.Designer.cs">
+      <DependentUpon>KIR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Motiv.cs" />
     <Compile Include="MyTime.cs">
       <SubType>Form</SubType>
@@ -509,6 +515,7 @@
     <Content Include="bin\Release\Help.xml" />
     <Content Include="bin\Release\HtmlAgilityPack.dll" />
     <Content Include="bin\Release\jazyky.xml" />
+    <Content Include="bin\Release\KIR.xml" />
     <Content Include="bin\Release\known_errors.txt" />
     <Content Include="bin\Release\Microsoft.Bcl.AsyncInterfaces.dll" />
     <Content Include="bin\Release\System.Buffers.dll" />

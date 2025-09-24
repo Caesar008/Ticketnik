@@ -14,9 +14,9 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.2.0.9
-    - Opravy zachycení chyb
-    - Opravena chyba #24-005
+    /*interní changelog 2.3.0.0
+    - Implementován systém KIR (Known Issue Rollback)
+    - Online stažení updateru (udělat)
     */
 
     public partial class Form1 : Form
@@ -26,7 +26,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 9;
-        internal readonly int program = 2020017;
+        internal readonly int program = 2030000;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -108,6 +108,8 @@ namespace Ticketník
                 this.Size = Properties.Settings.Default.velikost;
             this.WindowState = Properties.Settings.Default.maximized ? FormWindowState.Maximized : FormWindowState.Normal;
             jmenoSouboru = Properties.Settings.Default.filePath;
+
+            KIR.Zpracuj(this);
 
             try
             {

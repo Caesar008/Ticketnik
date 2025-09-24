@@ -314,6 +314,7 @@ namespace Ticketník
                 {
                     if (DialogResult.Yes == CustomControls.MessageBox.Show(jazyk.Message_NovaVerze, jazyk.Message_Aktualizace, MessageBoxButtons.YesNo))
                     {
+                        //tady udělat stažení, a v případě failu rozbalení
                         Logni("Rozbaluji Updater.exe", LogMessage.INFO);
                         File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"), Resources.Updater);
                         if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Update")))
