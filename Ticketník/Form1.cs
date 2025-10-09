@@ -17,6 +17,7 @@ namespace Ticketník
     /*interní changelog 2.3.0.0
     - Implementován systém KIR (Known Issue Rollback)
     - Online stažení updateru (udělat)
+    - Opraveno ukotvení prvků v okně příloh
     */
 
     public partial class Form1 : Form
