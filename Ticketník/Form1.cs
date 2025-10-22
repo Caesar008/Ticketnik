@@ -18,6 +18,7 @@ namespace Ticketník
     - Implementován systém KIR (Known Issue Rollback)
     - Online stažení updateru (udělat)
     - Opraveno ukotvení prvků v okně příloh
+    - Přidána položka "Logy" v meun programu (udělat)
     */
 
     public partial class Form1 : Form
