@@ -303,6 +303,13 @@ namespace Ticketník
                 return ReturnPreklad("MainMenuItems/UpdateTerpOnline");
             }
         }
+        internal string Menu_Logs
+        {
+            get
+            {
+                return ReturnPreklad("MainMenuItems/Logs");
+            }
+        }
         #endregion
 
         #region Side Menu
@@ -2215,6 +2222,7 @@ namespace Ticketník
             form.plányDoBudoucnaToolStripMenuItem.Text = form.jazyk.Menu_Plany;
             form.dokumentaceToolStripMenuItem.Text = form.jazyk.Menu_Dokumentace;
             form.nahlásitProblémToolStripMenuItem.Text = form.jazyk.Menu_ReportIssue;
+            form.logyToolStripMenuItem.Text = form.jazyk.Menu_Logs;
             form.oProgramuToolStripMenuItem.Text = form.jazyk.Menu_About;
             form.toolStripMenu_Napoveda.Text = form.jazyk.Menu_Help;
             form.toolStripMenu_Napoveda.ToolTipText = form.jazyk.Menu_Help;

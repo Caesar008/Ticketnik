@@ -23,6 +23,7 @@ namespace Ticketník
         internal EdgeDriverService service;
         internal EdgeDriver edge;
         bool fatalError = false;
+        bool preventedgeDriverStart = false;
 
         string result = "";
         internal NbtFile terpFile;
@@ -70,6 +71,8 @@ namespace Ticketník
 
         public async Task<List<MyTimeTerp>> GetAllMyTerps()
         {
+            if (preventedgeDriverStart)
+                return null;
             int page = 1;
             result = "";
             List<MyTimeTerp> myTimeTerpList = new List<MyTimeTerp>();
@@ -174,6 +177,8 @@ namespace Ticketník
 
         public async Task<MyTimeTerp> GetTerpData(string terpID)
         {
+            if (preventedgeDriverStart)
+                return null;
             if (terpTaskCancel)
                 return null;
             try
@@ -288,6 +293,8 @@ namespace Ticketník
 
         public async Task<List<MyTimeTask>> GetTerpTasks(string terpID)
         {
+            if (preventedgeDriverStart)
+                return null;
             int page = 1;
             List<MyTimeTask> myTimeTaskList = new List<MyTimeTask>();
             List <Task> taskList = null;
@@ -390,6 +397,8 @@ namespace Ticketník
 
         public async Task<MyTimeTask> GetTerpTaskData(string terpID, string taskID)
         {
+            if (preventedgeDriverStart)
+                return null;
             if (terpTaskCancel)
                 return null;
             try
@@ -486,6 +495,8 @@ namespace Ticketník
 
         public async Task<List<string>> GetTerpTaskTypes(string terpID, string taskID)
         {
+            if (preventedgeDriverStart)
+                return null;
             if (terpTaskCancel)
                 return null;
             try
@@ -576,6 +587,8 @@ namespace Ticketník
 
         public async Task<string> GetTerpTaskTypeData(string terpID, string taskID, string typeLabel)
         {
+            if (preventedgeDriverStart)
+                return null;
             if (terpTaskCancel)
                 return null;
             try
@@ -1362,15 +1375,33 @@ namespace Ticketník
             try
             {
                 if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+                {
+                    preventedgeDriverStart = true;
+                    try
+                    {
+                        Logni("Zastavuji msedgedriver.exe", LogMessage.INFO);
+                        if(edge != null)
+                            edge.Close();
+                        foreach (var process in Process.GetProcessesByName("msedgedriver"))
+                        {
+                            process.Kill();
+                        }
+                    }
+                    catch { }
                     File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe"));
+                }
                 Logni("Rozbaluiji Edge WebDriver.", LogMessage.INFO);
+                if(Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Driver_Notes")))
+                    Directory.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Driver_Notes"), true);
                 System.IO.Compression.ZipFile.ExtractToDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"), System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""));
                 Directory.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Driver_Notes"), true);
                 File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "EdgeDriver.zip"));
+                preventedgeDriverStart = false;
             }
             catch (Exception e)
             {
                 Logni("Rozbalení Edge WebDriver selhalo.\r\n" + e.Message, LogMessage.WARNING);
+                preventedgeDriverStart = false;
             }
         }
     }

@@ -315,12 +315,32 @@ namespace Ticketník
                     if (DialogResult.Yes == CustomControls.MessageBox.Show(jazyk.Message_NovaVerze, jazyk.Message_Aktualizace, MessageBoxButtons.YesNo))
                     {
                         //tady udělat stažení, a v případě failu rozbalení
-                        Logni("Rozbaluji Updater.exe", LogMessage.INFO);
-                        File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"), Resources.Updater);
+                        try
+                        {
+                            Logni("Stahuji Updater.exe", LogMessage.INFO);
+                            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+                            {
+                                AllowAutoRedirect = true
+                            }))
+                            {
+                                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/Updater.exe").ConfigureAwait(false))
+                                {
+                                    using (FileStream fs = new FileStream(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"), FileMode.Create))
+                                    {
+                                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+
+                                    }
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            Logni("Stažení Updateru selhalo.", LogMessage.WARNING);
+                            Logni("Rozbaluji Updater.exe", LogMessage.INFO);
+                            File.WriteAllBytes(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Updater.exe"), Resources.Updater);
+                        }
                         if (!Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Update")))
                             Directory.CreateDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Update"));
-
-
 
                         //dll
                         XmlNode dllList = updates.DocumentElement.SelectSingleNode("Knihovny");

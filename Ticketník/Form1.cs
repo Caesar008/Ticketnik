@@ -16,9 +16,10 @@ namespace Ticketník
 {
     /*interní changelog 2.3.0.0
     - Implementován systém KIR (Known Issue Rollback)
-    - Online stažení updateru (udělat)
+    - Online stažení updateru
     - Opraveno ukotvení prvků v okně příloh
-    - Přidána položka "Logy" v meun programu (udělat)
+    - Přidána položka "Logy" v meun programu
+    - Opravena chyba zacyklení kvůli zamčenému msedgedriver.exe
     */
 
     public partial class Form1 : Form
@@ -27,8 +28,8 @@ namespace Ticketník
         //Skryté věci - Report + skryté nastavení
         internal bool devtest = false;
 
-        internal readonly int saveFileVersion = 10101, langVersion = 9;
-        internal readonly int program = 2030000;
+        internal readonly int saveFileVersion = 10101, langVersion = 10;
+        internal readonly int program = 2010000;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -3091,6 +3092,7 @@ namespace Ticketník
             this.oProgramuToolStripMenuItem.Text = jazyk.Menu_About;
             this.toolStripMenu_Napoveda.Text = jazyk.Menu_Help;
             this.nahlásitProblémToolStripMenuItem.Text = jazyk.Menu_ReportIssue;
+            this.logyToolStripMenuItem.Text = jazyk.Menu_Logs;
             this.toolStripMenu_Napoveda.ToolTipText = jazyk.Menu_Help;
             this.toolStripButton1.Text = jazyk.SideMenu_PridatZaznam;
             this.toolStripButton2.Text = jazyk.SideMenu_UpravitZaznam;
@@ -3353,6 +3355,11 @@ namespace Ticketník
         private void nahlásitProblémToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/Caesar008/Ticketnik/issues/new");
+        }
+
+        private void logyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(appdata + "\\Ticketnik\\Logs");
         }
 
         private void vyhledatAktualizaceToolStripMenuItem_Click(object sender, EventArgs e)

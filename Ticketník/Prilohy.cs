@@ -21,7 +21,7 @@ namespace Ticketník
             listView1.FullRowSelect = true;
             listView1.SelectedIndexChanged += ListView1_SelectedIndexChanged;
             richTextBox1.Text = "";
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             Motiv.SetMotiv(this);
             this.Text = form.jazyk.Windows_Prilohy_Prilohy;
             this.addBtn.Text = form.jazyk.Windows_Prilohy_Pridat;

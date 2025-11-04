@@ -69,6 +69,7 @@
             this.aktualizovatVšechnyTerpyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dělitelToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.nahlásitProblémToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenu_Napoveda = new System.Windows.Forms.ToolStripMenuItem();
             this.infoBox = new System.Windows.Forms.ToolStripLabel();
@@ -386,7 +387,8 @@
             this.vyhledatAktualizaceToolStripMenuItem,
             this.aktualizovatVšechnyTerpyToolStripMenuItem,
             this.dělitelToolStripMenuItem,
-            this.nahlásitProblémToolStripMenuItem});
+            this.nahlásitProblémToolStripMenuItem,
+            this.logyToolStripMenuItem});
             this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
             this.sourceToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.sourceToolStripMenuItem.Text = "Source";
@@ -456,6 +458,13 @@
             this.nahlásitProblémToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
             this.nahlásitProblémToolStripMenuItem.Text = "Nahlásit problém";
             this.nahlásitProblémToolStripMenuItem.Click += new System.EventHandler(this.nahlásitProblémToolStripMenuItem_Click);
+            // 
+            // logyToolStripMenuItem
+            // 
+            this.logyToolStripMenuItem.Name = "logyToolStripMenuItem";
+            this.logyToolStripMenuItem.Size = new System.Drawing.Size(216, 20);
+            this.logyToolStripMenuItem.Text = "Logy";
+            this.logyToolStripMenuItem.Click += new System.EventHandler(this.logyToolStripMenuItem_Click);
             // 
             // oProgramuToolStripMenuItem
             // 
@@ -1406,6 +1415,7 @@
         internal System.Windows.Forms.ToolStripMenuItem aktualizovatVšechnyTerpyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator dělitelToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem nahlásitProblémToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem logyToolStripMenuItem;
         internal CustomControls.ComboBox rokVyber;
     }
 }

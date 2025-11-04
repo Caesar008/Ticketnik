@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language name="Čeština" shortcut="CZ" international="Czech" version="9" revision="1">
+<Language name="Čeština" shortcut="CZ" international="Czech" version="10" revision="0">
 	<MainMenuItems>
 		<File en="File">Soubor</File>
 		<Options en="Options">Možnosti</Options>
@@ -30,6 +30,7 @@
 		<SearchForUpdates en="Search for updates">Vyhledat aktualizace</SearchForUpdates>
 		<UpdateTerpOnline en="Update all Terps">Aktualizovat všechny Terpy</UpdateTerpOnline>
 		<ReportIssue en="Report issue">Nahlásit problém</ReportIssue>
+		<Logs en="Logs">Logy</Logs>
 	</MainMenuItems>
 	<SideMenuItems>
 		<AddRecord en="Add record">Přidat záznam</AddRecord>

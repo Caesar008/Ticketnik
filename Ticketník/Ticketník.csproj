@@ -541,6 +541,7 @@
     <None Include="ikony\about.png" />
     <None Include="ikony\priloha.png" />
     <None Include="Resources\Updater.exe" />
+    <Content Include="bin\Release\Updater.exe" />
     <Content Include="bin\Release\WebDriver.dll" />
     <Content Include="ticket-256.ico" />
   </ItemGroup>
