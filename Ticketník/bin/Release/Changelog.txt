@@ -1,3 +1,11 @@
+2.3.0.0 (4.11.2025)
+
+- Implementován systém KIR (Known Issue Rollback)
+- Online stažení updateru
+- Opraveno ukotvení prvků v okně příloh
+- Přidána položka "Logy" v meun programu
+- Opravena chyba zacyklení kvůli zamčenému msedgedriver.exe
+-----------------------------------
 2.2.0.17 (12.9.2025)
 
 - Opravena chyba při exportu
