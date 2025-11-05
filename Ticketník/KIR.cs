@@ -25,7 +25,7 @@ namespace Ticketník
         public static readonly string RegistryKey = "SOFTWARE\\Caesar\\Ticketnik\\KIR";
         public static readonly Dictionary<string, string> KIRList = new Dictionary<string, string>()
         {
-
+            { "ReturnPreklad", "Oprava pádu programu při aktualizaci jazyka, když je zároveň dostupná aktualizace programu" }
         };
 
         public static void Zpracuj(Form1 form)
@@ -58,6 +58,7 @@ namespace Ticketník
                     if(KIRList.ContainsKey(node.InnerText) && (int)Registry.CurrentUser.OpenSubKey(RegistryKey).GetValue(node.InnerText, 1) == 1)
                     {
                         Registry.CurrentUser.OpenSubKey(RegistryKey).SetValue(node.InnerText, 1, RegistryValueKind.DWord);
+                        form.Logni("KIR: Používám rollback na " + node.InnerText, Form1.LogMessage.INFO);
                     }
                 }
             }
@@ -65,6 +66,11 @@ namespace Ticketník
             {
                 form.Logni("Nebylo možno stáhnout KIR data.", Form1.LogMessage.WARNING);
             }
+        }
+
+        internal static bool RollbackActive(string id)
+        {
+            return (int)Registry.CurrentUser.OpenSubKey(RegistryKey).GetValue(id, 0) == 1;
         }
 
         private static async void StahniKIR()

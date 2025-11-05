@@ -1,3 +1,7 @@
+2.3.0.1 (5.11.2025)
+
+- Opravena chyba pádu programu při aktualizaci souboru jazyka, když je dostupná zároveň nová verze programu
+-----------------------------------
 2.3.0.0 (4.11.2025)
 
 - Implementován systém KIR (Known Issue Rollback)

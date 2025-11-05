@@ -276,6 +276,7 @@ namespace Ticketník
                             (int.Parse(preklad.DocumentElement.Attributes.GetNamedItem("version").InnerText) == int.Parse(jverze[0]) &&
                             int.Parse(preklad.DocumentElement.Attributes.GetNamedItem("revision").InnerText) < int.Parse(jverze[1])))
                         {
+                            jazyk.aktualizaceJazykaBezi = true;
                             //download z netu
                             try
                             {
@@ -299,7 +300,8 @@ namespace Ticketník
                             {
                                 Logni("Stažení aktualizací jazyka selhalo.\r\n" + e.Message, LogMessage.WARNING);
                             }
-                            
+
+                            jazyk.aktualizaceJazykaBezi = false;
                             jazyk = new Jazyk();
                             if (!InvokeRequired)
                                 jazyk.Reload(this);
