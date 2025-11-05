@@ -4,7 +4,7 @@
 	<App>2030002</App>
 	<Help>8</Help>
 	<Lang>
-		<CZ>10.0</CZ>
+		<CZ>11.0</CZ>
 	</Lang>
 	<Knihovny>
 		<Dll version="1.3.0.0" remove="true">FastMember.Signed.dll</Dll>
