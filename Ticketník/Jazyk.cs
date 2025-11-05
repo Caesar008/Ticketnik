@@ -11,7 +11,6 @@ namespace Ticketník
     {
         private static string jazyk = Properties.Settings.Default.Jazyk;
         private static string cesta = Properties.Settings.Default.JazykCesta;
-        internal bool aktualizaceJazykaBezi = false;
 
         static XmlDocument preklad = new XmlDocument();
 
@@ -2178,16 +2177,10 @@ namespace Ticketník
 
         string ReturnPreklad(string text)
         {
-            //pokud není KIR aktivovaný, čekej na proměnnou
-            if (!KIR.RollbackActive("ReturnPreklad"))
+            //původní kód
+            if (KIR.RollbackActive("ReturnPreklad"))
             {
-                while (aktualizaceJazykaBezi)
-                { 
-                    Thread.Sleep(100);
-                }
-            }
-
-            if (jazyk == string.Empty || jazyk == "EN")
+                if (jazyk == string.Empty || jazyk == "EN")
                     return preklad.DocumentElement.SelectSingleNode(text).Attributes.GetNamedItem("en").InnerText;
                 else
                 {
@@ -2205,6 +2198,42 @@ namespace Ticketník
                         return tmpPreklad.DocumentElement.SelectSingleNode(text).Attributes.GetNamedItem("en").InnerText;
                     }
                 }
+            }
+            //nový kód
+            else
+            {
+                int retry = 0;
+                while (retry < 50 )
+                {
+                    try
+                    {
+                        if (jazyk == string.Empty || jazyk == "EN")
+                            return preklad.DocumentElement.SelectSingleNode(text).Attributes.GetNamedItem("en").InnerText;
+                        else
+                        {
+                            try
+                            {
+                                if (preklad.DocumentElement.SelectSingleNode(text).InnerText != "")
+                                    return preklad.DocumentElement.SelectSingleNode(text).InnerText;
+                                else
+                                    return preklad.DocumentElement.SelectSingleNode(text).Attributes.GetNamedItem("en").InnerText;
+                            }
+                            catch
+                            {
+                                XmlDocument tmpPreklad = new XmlDocument();
+                                tmpPreklad.Load(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("_Ticketnik.exe", "").Replace("Ticketnik.exe", "") + "lang\\CZ.xml");
+                                return tmpPreklad.DocumentElement.SelectSingleNode(text).Attributes.GetNamedItem("en").InnerText;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        retry++;
+                    }
+                }
+                return null;
+            }
+            
         }
 
         internal void Reload(Form1 form)
