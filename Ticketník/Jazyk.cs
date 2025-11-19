@@ -2228,6 +2228,7 @@ namespace Ticketník
                     }
                     catch
                     {
+                        Thread.Sleep(100);
                         retry++;
                     }
                 }
