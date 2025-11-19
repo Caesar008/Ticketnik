@@ -80,7 +80,6 @@ namespace Ticketník
             menu.Renderer = new ToolStripProfessionalRenderer(new Paleta());
             tool.Renderer = new MySR(new Paleta());
             infoBox.Text = "";
-            KIR.Zpracuj(this);
             SetJazyk();
 
             //schování tlačítek v menu

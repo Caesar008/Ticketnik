@@ -70,6 +70,10 @@ namespace Ticketník
 
         internal static bool RollbackActive(string id)
         {
+            if (Registry.CurrentUser.OpenSubKey(RegistryKey) == null)
+            {
+                Registry.CurrentUser.CreateSubKey(RegistryKey).Close();
+            }
             return (int)Registry.CurrentUser.OpenSubKey(RegistryKey).GetValue(id, 0) == 1;
         }
 
