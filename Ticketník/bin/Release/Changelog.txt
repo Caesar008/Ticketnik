@@ -1,3 +1,7 @@
+2.3.0.3 (19.11.2025)
+
+- Üpraven kód KIR
+-----------------------------------
 2.3.0.2 (19.11.2025)
 
 - Opravena chyba pádu programu když chyběl klíč KIR v registrech

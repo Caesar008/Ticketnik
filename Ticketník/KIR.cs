@@ -28,11 +28,15 @@ namespace Ticketník
             { "ReturnPreklad", "Oprava pádu programu při aktualizaci jazyka, když je zároveň dostupná aktualizace programu" }
         };
 
-        public static void Zpracuj(Form1 form)
+        public static void Zpracuj()
         {
+            string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            DateTime dt;
             if (Registry.CurrentUser.OpenSubKey(RegistryKey) == null)
             {
-                form.Logni("Vytvářím registry KIR klíč " + RegistryKey, Form1.LogMessage.INFO);
+                dt = DateTime.Now;
+                string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond.ToString("000");
+                File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "] [INFO] Vytvářím registry KIR klíč " + RegistryKey + "\r\n");
                 Registry.CurrentUser.CreateSubKey(RegistryKey).Close();
             }
             RegistryKey kir = Registry.CurrentUser.OpenSubKey(RegistryKey);
@@ -41,14 +45,18 @@ namespace Ticketník
             {
                 if (!KIRList.ContainsKey(name))
                 {
-                    form.Logni("Odebírám zastaralý KIR klíč " + name, Form1.LogMessage.INFO);
+                    dt = DateTime.Now;
+                    string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond.ToString("000");
+                    File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "] [INFO] Odebírám zastaralý KIR klíč " + name + "\r\n");
                     Registry.CurrentUser.OpenSubKey(RegistryKey).DeleteValue(name, false);
                 }
             }
 
             try
             {
-                form.Logni("Stahuji KIR data z " + Properties.Settings.Default.ZalozniUpdate + "/KIR.xml", Form1.LogMessage.INFO);
+                dt = DateTime.Now;
+                string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond.ToString("000");
+                File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "] [INFO] Stahuji KIR data z " + Properties.Settings.Default.ZalozniUpdate + "/KIR.xml\r\n");
                 StahniKIR();
                 XmlDocument kirXml = new XmlDocument();
                 kirXml.Load(Path.GetTempPath() + "\\KIR.xml");
@@ -58,13 +66,17 @@ namespace Ticketník
                     if(KIRList.ContainsKey(node.InnerText) && (int)Registry.CurrentUser.OpenSubKey(RegistryKey).GetValue(node.InnerText, 1) == 1)
                     {
                         Registry.CurrentUser.OpenSubKey(RegistryKey).SetValue(node.InnerText, 1, RegistryValueKind.DWord);
-                        form.Logni("KIR: Používám rollback na " + node.InnerText, Form1.LogMessage.INFO);
+                        dt = DateTime.Now;
+                        dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond.ToString("000");
+                        File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "] [INFO] KIR: Používám rollback na " + node.InnerText + "\r\n");
                     }
                 }
             }
             catch
             {
-                form.Logni("Nebylo možno stáhnout KIR data.", Form1.LogMessage.WARNING);
+                dt = DateTime.Now;
+                string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond.ToString("000");
+                File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "] [INFO] Nebylo možno stáhnout KIR data.\r\n");
             }
         }
 
@@ -72,7 +84,7 @@ namespace Ticketník
         {
             if (Registry.CurrentUser.OpenSubKey(RegistryKey) == null)
             {
-                Registry.CurrentUser.CreateSubKey(RegistryKey).Close();
+                Zpracuj();
             }
             return (int)Registry.CurrentUser.OpenSubKey(RegistryKey).GetValue(id, 0) == 1;
         }
