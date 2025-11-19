@@ -29,7 +29,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 10;
-        internal readonly int program = 2030001;
+        internal readonly int program = 2030002;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
@@ -80,6 +80,7 @@ namespace Ticketník
             menu.Renderer = new ToolStripProfessionalRenderer(new Paleta());
             tool.Renderer = new MySR(new Paleta());
             infoBox.Text = "";
+            KIR.Zpracuj(this);
             SetJazyk();
 
             //schování tlačítek v menu
@@ -111,8 +112,6 @@ namespace Ticketník
                 this.Size = Properties.Settings.Default.velikost;
             this.WindowState = Properties.Settings.Default.maximized ? FormWindowState.Maximized : FormWindowState.Normal;
             jmenoSouboru = Properties.Settings.Default.filePath;
-
-            KIR.Zpracuj(this);
 
             try
             {
