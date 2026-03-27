@@ -1,6 +1,10 @@
+2.3.0.4 (27.3.2026)
+
+- Opravena chyba pádu programu pokud neexistovala složka Logs
+-----------------------------------
 2.3.0.3 (19.11.2025)
 
-- Üpraven kód KIR
+- Upraven kód KIR
 -----------------------------------
 2.3.0.2 (19.11.2025)
 
