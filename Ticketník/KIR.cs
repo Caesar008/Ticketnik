@@ -32,6 +32,10 @@ namespace Ticketník
         {
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             DateTime dt;
+            if (!Directory.Exists(appdata + "\\Ticketnik"))
+                Directory.CreateDirectory(appdata + "\\Ticketnik");
+            if (!Directory.Exists(appdata + "\\Ticketnik\\Logs"))
+                Directory.CreateDirectory(appdata + "\\Ticketnik\\Logs");
             if (Registry.CurrentUser.OpenSubKey(RegistryKey) == null)
             {
                 dt = DateTime.Now;

@@ -3,6 +3,10 @@
 - Opravena chyba nedetekování horní řady číselných kláves v DateTimePicker
 - Opraven pád programu pokud se v DateTimePicker zadala hodina větší než 23
 -----------------------------------
+2.3.0.4 (27.3.2026)
+
+- Opravena chyba pádu programu pokud neexistovala složka Logs
+-----------------------------------
 2.3.0.3 (19.11.2025)
 
 - Upraven kód KIR
