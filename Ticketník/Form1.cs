@@ -14,14 +14,11 @@ using System.Reflection;
 
 namespace Ticketník
 {
-    /*interní changelog 2.3.0.0
-    - Implementován systém KIR (Known Issue Rollback)
-    - Online stažení updateru
-    - Opraveno ukotvení prvků v okně příloh
-    - Přidána položka "Logy" v meun programu
-    - Opravena chyba zacyklení kvůli zamčenému msedgedriver.exe
+    /*interní changelog 2.3.0.4
+    - Opravena chyba nedetekování horní řady číselných kláves v DateTimePicker
+    - Opraven pád programu pokud se v DateTimePicker zadala hodina větší než 23
     */
-
+    
     public partial class Form1 : Form
     {
         internal Jazyk jazyk = new Jazyk();
@@ -29,7 +26,7 @@ namespace Ticketník
         internal bool devtest = false;
 
         internal readonly int saveFileVersion = 10101, langVersion = 10;
-        internal readonly int program = 2030003;
+        internal readonly int program = 2030005;
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         internal string jmenoSouboru = "";
         internal string zakaznik = "";
