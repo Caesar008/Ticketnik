@@ -10,6 +10,7 @@ using System.Net.Http;
 using Ticketník.Properties;
 using System.Security.Cryptography;
 using System.IO.Compression;
+using Microsoft.Win32;
 
 namespace Ticketník
 {
@@ -42,6 +43,22 @@ namespace Ticketník
                         ZipFile.ExtractToDirectory(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "selenium-manager.zip"), System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", ""));
                     }
                     catch { Logni("Rozbalení Selenium selhalo", LogMessage.WARNING); }
+                }
+            }
+
+            //kontrola existence msedgedriver.exe
+            if (!File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
+            {
+                Logni("Msedgedriver.exe nebyl nalezen. Stahuji nový podle instalované verze Edge.", LogMessage.WARNING);
+                //pokud neexistuje, stáhni
+                RegistryKey regEdgeVersion = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Edge\BLBeacon");
+                if (regEdgeVersion != null && regEdgeVersion.GetValue("version") != null)
+                {
+                    UpdateWebDriver((string)regEdgeVersion.GetValue("version"));
+                }
+                else
+                {
+                    Logni("Nepodařilo se zjistit verzi Edge. Stáhni msedgedriver (x64) z developer.microsoft.com/cs-cz/microsoft-edge/tools/webdriver.", LogMessage.WARNING);
                 }
             }
 

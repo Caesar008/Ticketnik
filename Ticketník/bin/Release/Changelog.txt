@@ -1,3 +1,7 @@
+2.3.0.6 (16.6.2026)
+
+- Přidána detekce existence msedgedriver.exe a jeho stažení když neexistuje
+-----------------------------------
 2.3.0.5 (7.4.2026)
 
 - Opravena chyba nedetekování horní řady číselných kláves v DateTimePicker
