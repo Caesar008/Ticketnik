@@ -1,16 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using fNbt;
-using System.Threading;
+﻿using fNbt;
+using Microsoft.Win32;
+using System;
 using System.Diagnostics;
-using System.Xml;
+using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
-using Ticketník.Properties;
 using System.Security.Cryptography;
-using System.IO.Compression;
-using Microsoft.Win32;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml;
+using Ticketník.Properties;
 
 namespace Ticketník
 {
@@ -54,7 +54,7 @@ namespace Ticketník
                 RegistryKey regEdgeVersion = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Edge\BLBeacon");
                 if (regEdgeVersion != null && regEdgeVersion.GetValue("version") != null)
                 {
-                    UpdateWebDriver((string)regEdgeVersion.GetValue("version"));
+                    UpdateWebDriver("https://msedgedriver.microsoft.com/" + (string)regEdgeVersion.GetValue("version") + "/edgedriver_win64.zip");
                 }
                 else
                 {
