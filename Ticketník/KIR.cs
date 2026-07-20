@@ -95,19 +95,30 @@ namespace Ticketník
 
         private static async void StahniKIR()
         {
-            using (HttpClient hc = new HttpClient(new HttpClientHandler()
+            try
             {
-                AllowAutoRedirect = true
-            }))
-            {
-                using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/KIR.xml").ConfigureAwait(false))
+                using (HttpClient hc = new HttpClient(new HttpClientHandler()
                 {
-                    using (FileStream fs = new FileStream(Path.GetTempPath() + "\\KIR.xml", FileMode.Create))
+                    AllowAutoRedirect = true
+                }))
+                {
+                    using (var result = await hc.GetAsync(Properties.Settings.Default.ZalozniUpdate + "/KIR.xml").ConfigureAwait(false))
                     {
-                        await result.Content.CopyToAsync(fs).ConfigureAwait(false);
+                        using (FileStream fs = new FileStream(Path.GetTempPath() + "\\KIR.xml", FileMode.Create))
+                        {
+                            await result.Content.CopyToAsync(fs).ConfigureAwait(false);
 
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                DateTime dt = DateTime.Now;
+                string dat = dt.ToString("dd.MM.yyyy H:mm:ss.") + dt.Millisecond.ToString("000");
+                File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Ticketnik.log", "[" + dat + "] [WARNING] Během pokusu o stažení KIR dat došlo k chybě.\r\n\r\n" + e.Message + "\r\n");
+                File.AppendAllText(appdata + "\\Ticketnik\\Logs\\Error.log", "[" + dat + "] [ERROR] Během pokusu o stažení KIR dat došlo k chybě.\r\n\r\n" + e.Message + "\r\n\r\n" + e.StackTrace + "\r\n");
             }
         }
     }

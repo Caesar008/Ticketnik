@@ -1,3 +1,7 @@
+2.3.0.8 (20.7.2026)
+
+- opraven pád programu pokud nebyl dostupný github během pokusu o stažení KIR dat
+-----------------------------------
 2.3.0.7 (16.6.2026)
 
 - opravena chybná url
