@@ -1377,18 +1377,47 @@ namespace Ticketník
                 if (File.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe")))
                 {
                     preventedgeDriverStart = true;
+
                     try
                     {
                         Logni("Zastavuji msedgedriver.exe", LogMessage.INFO);
-                        if(edge != null)
+                        if (edge != null)
                             edge.Close();
+
                         foreach (var process in Process.GetProcessesByName("msedgedriver"))
                         {
-                            process.Kill();
+                            int retryKillMSEdge = 0;
+                            while (retryKillMSEdge < 10)
+                            {
+                                try
+                                {
+                                    process.Kill();
+                                    break;
+                                }
+                                catch
+                                {
+                                    retryKillMSEdge++;
+                                    Thread.Sleep(1000);
+                                }
+                            }
                         }
                     }
                     catch { }
-                    File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe"));
+                    Thread.Sleep(1000);
+                    int retryDeleteMSEdge = 0;
+                    while (retryDeleteMSEdge < 10)
+                    {
+                        try
+                        {
+                            File.Delete(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "msedgedriver.exe"));
+                            break;
+                        }
+                        catch
+                        {
+                            retryDeleteMSEdge++;
+                            Thread.Sleep(1000);
+                        }
+                    }
                 }
                 Logni("Rozbaluiji Edge WebDriver.", LogMessage.INFO);
                 if(Directory.Exists(System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Ticketnik.exe", "Driver_Notes")))
@@ -1403,6 +1432,7 @@ namespace Ticketník
                 Logni("Rozbalení Edge WebDriver selhalo.\r\n" + e.Message, LogMessage.WARNING);
                 preventedgeDriverStart = false;
             }
+            Thread.Sleep(2000);
         }
     }
 

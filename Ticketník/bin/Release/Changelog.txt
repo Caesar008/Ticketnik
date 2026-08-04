@@ -1,3 +1,7 @@
+2.3.0.9 (4.8.2026)
+
+- Opraveno zacyklené stažení a rozbalení msedgedriver.exe pokud byl spuštěn proces msedgedriver.exe a nebylo možné jej ukončit.
+-----------------------------------
 2.3.0.8 (20.7.2026)
 
 - opraven pád programu pokud nebyl dostupný github během pokusu o stažení KIR dat
